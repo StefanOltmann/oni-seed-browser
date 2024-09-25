@@ -13,16 +13,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
       - name: Run Gradle Tasks
-        run: ./gradlew wasmJsBrowserDistribution
+        run: |
+          chmod +x gradlew
+          ./gradlew wasmJsBrowserDistribution
       - name: Fix permissions
         run: |
-          chmod -v -R +rX "composeApp/build/dist/wasmJs/productionExecutable/" | while read line; do
+          chmod -v -R +rX "app/build/dist/wasmJs/productionExecutable/" | while read line; do
             echo "::warning title=Invalid file permissions automatically fixed::$line"
           done
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: composeApp/build/dist/wasmJs/productionExecutable/
+          path: app/build/dist/wasmJs/productionExecutable/
   deploy:
     needs: build
     permissions:

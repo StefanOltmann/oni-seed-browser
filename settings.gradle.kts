@@ -1,4 +1,4 @@
-rootProject.name = "compose-example"
+rootProject.name = "oni-seed-browser"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {
