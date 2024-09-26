@@ -20,11 +20,19 @@
 package model
 
 data class Geyser(
+    val name: String,
     val type: GeyserType,
-    val locationX: Int,
-    val locationY: Int
+    val posX: Int,
+    val posY: Int,
+    val temperature: Float,
+    val emitRate: Float,
+    val avgEmission: Float,
+    val yearOffDuration: Int,
+    val yearOnDuration: Int,
+    val iterationLength: Int,
+    val onDuration: Int
 ) {
 
     override fun toString(): String =
-        "${type.displayName} @ $locationX,$locationY"
+        "${type.displayName} @ $posX,$posY"
 }
