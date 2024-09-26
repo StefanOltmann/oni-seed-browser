@@ -1,0 +1,45 @@
+{
+  "worlds": [
+    {
+      "seed": 233578862,
+      "cluster": "BAD-A",
+      "dlcIds": [
+        "SpacedOut",
+        "FrostyPlanet"
+      ],
+      "asteroids": [
+            {
+                "type": "TERRA",
+                "isStartWorld": true,
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 100,
+                "height": 150,
+                      "worldTraits": [
+                        "IrregularOil",
+                        "BouldersMixed"
+                      ],
+                "geysers": [
+                {
+                    "name": "Cool Steam whatever",
+                    "type": "CoolSteam",
+                    "posX": 50,
+                    "poxY": 75,
+                    "temperature": 88.0,
+                    "emitRate": 123.0,
+                    "avgEmission": 123.0,
+                    "yearOffDuration": 23231,
+                    "yearOnDuration": 2322,
+                    "iterationLength": 1233,
+                    "onDuration": 4123
+                    }
+                ]
+            }
+      ],
+    }
+  ],
+  "page": 0,
+  "pageSize": 10,
+  "totalPages": 1926,
+  "totalResults": 19253
+}
