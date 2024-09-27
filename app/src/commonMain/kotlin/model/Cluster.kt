@@ -54,7 +54,7 @@ enum class Cluster(
         clusterId = "clusters/ForestLush",
         prefix = "LUSH-A"
     ),
-    BASE_Arboria(
+    BASE_ARBORIA(
         displayName = "Arboria",
         clusterId = "clusters/ForestDefault",
         prefix = "FRST-A"
