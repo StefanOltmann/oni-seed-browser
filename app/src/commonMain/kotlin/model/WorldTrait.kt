@@ -19,109 +19,85 @@
 
 package model
 
+import kotlinx.serialization.Serializable
+
 /*
  * See https://oxygennotincluded.fandom.com/wiki/World_Trait
  */
+
+@Serializable
 enum class WorldTrait(
-    val displayName: String,
-    val traitId: String
+    val displayName: String
 ) {
 
-    /*
-     * Warning: Do not sort or delete items here!
-     * Ordinals must be kept stable for use in database.
-     */
-
-    LARGE_BOULDERS(
-        displayName = "Large Boulders",
-        traitId = "BouldersLarge"
+    BouldersLarge(
+        displayName = "Large Boulders"
     ),
-    MEDIUM_BOULDERS(
-        displayName = "Medium Boulders",
-        traitId = "BouldersMedium"
+    BouldersMedium(
+        displayName = "Medium Boulders"
     ),
-    MIXED_BOULDERS(
-        displayName = "Mixed Boulders",
-        traitId = "BouldersMixed"
+    BouldersMixed(
+        displayName = "Mixed Boulders"
     ),
-    SMALL_BOULDERS(
-        displayName = "Small Boulders",
-        traitId = "BouldersSmall"
+    BouldersSmall(
+        displayName = "Small Boulders"
     ),
-    TRAPPED_OIL(
-        displayName = "Trapped Oil",
-        traitId = "DeepOil"
+    DeepOil(
+        displayName = "Trapped Oil"
     ),
-    FROZEN_CORE(
-        displayName = "Frozen Core",
-        traitId = "FrozenCore"
+    FrozenCore(
+        displayName = "Frozen Core"
     ),
-    GEOACTIVE(
-        displayName = "Geoactive",
-        traitId = "GeoActive"
+    GeoActive(
+        displayName = "Geoactive"
     ),
-    GEODES(
-        displayName = "Geodes",
-        traitId = "Geodes"
+    Geodes(
+        displayName = "Geodes"
     ),
-    GEODORMANT(
-        displayName = "Geodormant",
-        traitId = "GeoDormant"
+    GeoDormant(
+        displayName = "Geodormant"
     ),
-    LARGE_GLACIERS(
-        displayName = "Large Glaciers",
-        traitId = "GlaciersLarge"
+    GlaciersLarge(
+        displayName = "Large Glaciers"
     ),
-    IRREGULAR_OIL(
-        displayName = "Irregular Oil",
-        traitId = "IrregularOil"
+    IrregularOil(
+        displayName = "Irregular Oil"
     ),
-    MAGMA_CHANNELS(
-        displayName = "Magma Channels",
-        traitId = "MagmaVents"
+    MagmaVents(
+        displayName = "Magma Channels"
     ),
-    METAL_POOR(
-        displayName = "Metal Poor",
-        traitId = "MetalPoor"
+    MetalPoor(
+        displayName = "Metal Poor"
     ),
-    METAL_RICH(
-        displayName = "Metal Rich",
-        traitId = "MetalRich"
+    MetalRich(
+        displayName = "Metal Rich"
     ),
-    ALTERNATE_POD_LOCATION(
-        displayName = "Alternate Pod Location",
-        traitId = "MisalignedStart"
+    MisalignedStart(
+        displayName = "Alternate Pod Location"
     ),
-    SLIME_MOLDS(
-        displayName = "Slime Molds",
-        traitId = "SlimeSplats"
+    SlimeSplats(
+        displayName = "Slime Molds"
     ),
-    SUBSURFACE_OCEAN(
-        displayName = "Subsurface Ocean",
-        traitId = "SubsurfaceOcean"
+    SubsurfaceOcean(
+        displayName = "Subsurface Ocean"
     ),
-    VOLCANOES(
-        displayName = "Volcanoes",
-        traitId = "Volcanoes"
+    Volcanoes(
+        displayName = "Volcanoes"
     ),
-    CRASHED_SATELLITES(
-        displayName = "Crashed Satellites",
-        traitId = "CrashedSatellites"
+    CrashedSatellites(
+        displayName = "Crashed Satellites"
     ),
-    FROZEN_FRIEND(
-        displayName = "Frozen Friend",
-        traitId = "DistressSignal"
+    DistressSignal(
+        displayName = "Frozen Friend"
     ),
-    LUSH_CORE(
-        displayName = "Lush Core",
-        traitId = "LushCore"
+    LushCore(
+        displayName = "Lush Core"
     ),
-    METALLIC_CAVES(
-        displayName = "Metallic Caves",
-        traitId = "MetalCaves"
+    MetalCaves(
+        displayName = "Metallic Caves"
     ),
-    RADIOACTIVE_CRUST(
-        displayName = "Radioactive Crust",
-        traitId = "RadioactiveCrust"
+    RadioactiveCrust(
+        displayName = "Radioactive Crust"
     )
 }
+

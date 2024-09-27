@@ -5,9 +5,8 @@
   "totalResults": 19253,
   "worlds": [
     {
-      "seed": 233578862,
+      "coordinate": "BAD-A-233578862-0-0",
       "cluster": "BAD-A",
-      "fullCoordinate": "BAD-A-233578862-0-0",
       "dlcs": [
         "SpacedOut",
         "FrostyPlanet"
@@ -157,7 +156,7 @@
           "sizeX": 128,
           "sizeY": 153,
           "worldTraits": [
-            "traits/Geodes"
+            "Geodes"
           ],
           "pointsOfInterest": [],
           "geysers": [
@@ -270,8 +269,8 @@
           "sizeX": 128,
           "sizeY": 153,
           "worldTraits": [
-            "expansion1::traits/CrashedSatellites",
-            "traits/DeepOil"
+            "CrashedSatellites",
+            "DeepOil"
           ],
           "pointsOfInterest": [
             {
@@ -440,7 +439,7 @@
           "sizeX": 64,
           "sizeY": 128,
           "worldTraits": [
-            "expansion1::traits/SubsurfaceOcean"
+            "SubsurfaceOcean"
           ],
           "pointsOfInterest": [],
           "geysers": [
@@ -493,7 +492,7 @@
           "sizeX": 64,
           "sizeY": 96,
           "worldTraits": [
-            "traits/MetalPoor"
+            "MetalPoor"
           ],
           "pointsOfInterest": [
             {
@@ -640,7 +639,7 @@
           "sizeX": 160,
           "sizeY": 96,
           "worldTraits": [
-            "traits/MetalRich"
+            "MetalRich"
           ],
           "pointsOfInterest": [
             {
@@ -673,7 +672,7 @@
           ]
         }
       ],
-      "starMapEntriesVanilla": null,
+      "starMapEntriesVanilla": [],
       "starMapEntriesSpacedOut": [
         {
           "q": 0,

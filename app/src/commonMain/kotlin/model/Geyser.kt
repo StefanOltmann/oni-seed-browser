@@ -19,20 +19,25 @@
 
 package model
 
+import kotlinx.serialization.Serializable
+import serializer.GeyserTypeSerializer
+
+@Serializable
 data class Geyser(
-    val name: String,
-    val type: GeyserType,
+
+    @Serializable(with = GeyserTypeSerializer::class)
+    val id: GeyserType,
+
     val posX: Int,
     val posY: Int,
-    val temperature: Float,
+
     val emitRate: Float,
-    val avgEmission: Float,
-    val yearOffDuration: Int,
-    val yearOnDuration: Int,
-    val iterationLength: Int,
-    val onDuration: Int
+    val idleTime: Float,
+    val eruptionTime: Float,
+    val dormancyCycles: Float,
+    val activeCycles: Float
 ) {
 
     override fun toString(): String =
-        "${type.displayName} @ $posX,$posY"
+        "${id.displayName} @ $posX,$posY"
 }

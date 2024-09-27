@@ -19,6 +19,9 @@
 
 package model
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 enum class Cluster(
     val displayName: String,
     val clusterId: String,
@@ -34,138 +37,138 @@ enum class Cluster(
     BASE_TERRA(
         displayName = "Terra",
         clusterId = "clusters/SandstoneDefault",
-        prefix = "SNDST-A-"
+        prefix = "SNDST-A"
     ),
     BASE_OCEANIA(
         displayName = "Oceania",
         clusterId = "clusters/Oceania",
-        prefix = "OCAN-A-"
+        prefix = "OCAN-A"
     ),
     BASE_RIME(
         displayName = "Rime",
         clusterId = "clusters/SandstoneFrozen",
-        prefix = "S-FRZ-"
+        prefix = "S-FRZ"
     ),
     BASE_VERDANTE(
         displayName = "Verdante",
         clusterId = "clusters/ForestLush",
-        prefix = "LUSH-A-"
+        prefix = "LUSH-A"
     ),
     BASE_Arboria(
         displayName = "Arboria",
         clusterId = "clusters/ForestDefault",
-        prefix = "FRST-A-"
+        prefix = "FRST-A"
     ),
     BASE_VOLCANEA(
         displayName = "Volcanea",
         clusterId = "clusters/Volcanic",
-        prefix = "VOLCA-"
+        prefix = "VOLCA"
     ),
     BASE_THE_BADLANDS(
         displayName = "The Badlands",
         clusterId = "clusters/Badlands",
-        prefix = "BAD-A-"
+        prefix = "BAD-A"
     ),
     BASE_ARIDIO(
         displayName = "Aridio",
         clusterId = "clusters/ForestHot",
-        prefix = "HTFST-A-"
+        prefix = "HTFST-A"
     ),
     BASE_OASISSE(
         displayName = "Oasisse",
         clusterId = "clusters/Oasis",
-        prefix = "OASIS-A-"
+        prefix = "OASIS-A"
     ),
 
     /* DLC */
     DLC_TERRA(
         displayName = "Terra",
         clusterId = "expansion1::clusters/VanillaSandstoneCluster",
-        prefix = "V-SNDST-C-"
+        prefix = "V-SNDST-C"
     ),
     DLC_OCEANIA(
         displayName = "Oceania",
         clusterId = "expansion1::clusters/VanillaOceaniaCluster",
-        prefix = "V-OCAN-C-"
+        prefix = "V-OCAN-C"
     ),
     DLC_SQUELCHY(
         displayName = "Squelchy",
         clusterId = "expansion1::clusters/VanillaSwampCluster",
-        prefix = "V-SWMP-C-"
+        prefix = "V-SWMP-C"
     ),
     DLC_RIME(
         displayName = "Rime",
         clusterId = "expansion1::clusters/VanillaSandstoneFrozenCluster",
-        prefix = "V-SFRZ-C-"
+        prefix = "V-SFRZ-C"
     ),
     DLC_VERDANTE(
         displayName = "Verdante",
         clusterId = "expansion1::clusters/VanillaForestCluster",
-        prefix = "V-LUSH-C-"
+        prefix = "V-LUSH-C"
     ),
     DLC_ARBORIA(
         displayName = "Arboria",
         clusterId = "expansion1::clusters/VanillaArboriaCluster",
-        prefix = "V-FRST-C-"
+        prefix = "V-FRST-C"
     ),
     DLC_VOLCANEA(
         displayName = "Volcanea",
         clusterId = "expansion1::clusters/VanillaVolcanicCluster",
-        prefix = "V-VOLCA-C-"
+        prefix = "V-VOLCA-C"
     ),
     DLC_THE_BADLANDS(
         displayName = "The Badlands",
         clusterId = "expansion1::clusters/VanillaBadlandsCluster",
-        prefix = "V-BAD-C-"
+        prefix = "V-BAD-C"
     ),
     DLC_ARIDIO(
         displayName = "Aridio",
         clusterId = "expansion1::clusters/VanillaAridioCluster",
-        prefix = "V-HTFST-C-"
+        prefix = "V-HTFST-C"
     ),
     DLC_OASISSE(
         displayName = "Oasisse",
         clusterId = "expansion1::clusters/VanillaOasisCluster",
-        prefix = "V-OASIS-C-"
+        prefix = "V-OASIS-C"
     ),
     DLC_TERRANIA(
         displayName = "Terrania",
         clusterId = "expansion1::clusters/SandstoneStartCluster",
-        prefix = "SNDST-C-"
+        prefix = "SNDST-C"
     ),
     DLC_FOLIA(
         displayName = "Folia",
         clusterId = "expansion1::clusters/ForestStartCluster",
-        prefix = "FRST-C-"
+        prefix = "FRST-C"
     ),
     DLC_QUAGMIRIS(
         displayName = "Quagmiris",
         clusterId = "expansion1::clusters/SwampStartCluster",
-        prefix = "SWMP-C-"
+        prefix = "SWMP-C"
     ),
     DLC_METALLIC_SWAMPY_MOONLET(
         displayName = "Metallic Swampy Moonlet",
         clusterId = "expansion1::clusters/MiniClusterMetallicSwampyStart",
-        prefix = "M-SWMP-C-"
+        prefix = "M-SWMP-C"
     ),
     DLC_THE_DESOLANDS_MOONLET(
         displayName = "The Desolands Moonlet",
         clusterId = "expansion1::clusters/MiniClusterBadlandsStart",
-        prefix = "M-BAD-C-"
+        prefix = "M-BAD-C"
     ),
     DLC_FROZEN_FOREST_MOONLET(
         displayName = "Frozen Forest Moonlet",
         clusterId = "expansion1::clusters/MiniClusterForestFrozenStart",
-        prefix = "M-FRZ-C-"
+        prefix = "M-FRZ-C"
     ),
     DLC_FLIPPED_MOONLET(
         displayName = "Flipped Moonlet",
         clusterId = "expansion1::clusters/MiniClusterFlippedStart",
-        prefix = "M-FLIP-C-"
+        prefix = "M-FLIP-C"
     ),
     DLC_RADIOACTIVE_OCEAN_MOONLET(
         displayName = "Radioactive Ocean Moonlet",
         clusterId = "expansion1::clusters/MiniClusterRadioactiveOceanStart",
-        prefix = "M-RAD-C-"
+        prefix = "M-RAD-C"
     )
 }

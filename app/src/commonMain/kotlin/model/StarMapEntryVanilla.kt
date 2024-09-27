@@ -22,18 +22,7 @@ package model
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Asteroid(
-
+data class StarMapEntryVanilla(
     val id: String,
-
-    val offsetX: Int,
-    val offsetY: Int,
-
-    val sizeX: Int,
-    val sizeY: Int,
-
-    val worldTraits: List<WorldTrait>,
-
-    val pointsOfInterest: List<PointOfInterest>,
-    val geysers: List<Geyser>
+    val distance: Int
 )

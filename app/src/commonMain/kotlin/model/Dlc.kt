@@ -17,23 +17,15 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package model
+package model;
 
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Asteroid(
+enum class Dlc(
+    val displayName: String
+) {
 
-    val id: String,
-
-    val offsetX: Int,
-    val offsetY: Int,
-
-    val sizeX: Int,
-    val sizeY: Int,
-
-    val worldTraits: List<WorldTrait>,
-
-    val pointsOfInterest: List<PointOfInterest>,
-    val geysers: List<Geyser>
-)
+    SpacedOut("Spaced Out"),
+    FrostyPlanet("Frosty Planet");
+}

@@ -1,19 +1,5 @@
 import kotlinx.serialization.Serializable;
-
-@Serializable
-data class Save(
-    val seed: Long,
-    val coordinates: String,
-    val gameVersion: String,
-    val worldId: String,
-    val vanilla: Boolean,
-    val spacedOut: Boolean,
-    val frostyPlanet: Boolean,
-    val worldTraits: List<String>,
-    val createdAt: String,
-    val updatedAt: String,
-    val fileId: Int
-)
+import model.World
 
 @Serializable
 data class SearchRequest(
@@ -25,9 +11,9 @@ data class SearchRequest(
 
 @Serializable
 data class SearchResponse(
-    val saves: List<Save>,
     val page: Int,
     val pageSize: Int,
     val totalPages: Int,
-    val totalResults: Int
+    val totalResults: Int,
+    val worlds: List<World>
 )

@@ -17,17 +17,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package model;
+package model
 
-enum class DlcId(
-    val displayName: String
-) {
+import kotlinx.serialization.Serializable
 
-    /*
-     * Warning: Do not sort or delete items here!
-     * Ordinals must be kept stable for use in database.
-     */
-
-    SPACED_OUT("Spaced Out"),
-    FROSTY_PLANET("Frosty Planet");
-}
+@Serializable
+data class StarMapEntrySpacedOut(
+    val id: String,
+    val q: Int,
+    val r: Int
+)

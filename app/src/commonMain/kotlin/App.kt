@@ -86,7 +86,7 @@ fun App() {
 
             if (response != null) {
 
-                for (save in response.saves) {
+                for (save in response.worlds) {
 
                     Text(save.toString())
 

@@ -19,13 +19,22 @@
 
 package model
 
-data class World(
-    val cluster: Cluster,
-    val seed: Int,
-    val asteroids: List<Asteroid>,
-    val dlcIds: List<DlcId>
-) {
+import kotlinx.serialization.Serializable
+import serializer.ClusterSerializer
 
-    val seedDisplay =
-        cluster.prefix + seed + "-0-0"
-}
+@Serializable
+data class World(
+
+    val coordinate: String,
+
+    @Serializable(with = ClusterSerializer::class)
+    val cluster: Cluster,
+
+    val dlcs: List<Dlc>,
+
+    val asteroids: List<Asteroid>,
+
+    val starMapEntriesVanilla: List<StarMapEntryVanilla>,
+
+    val starMapEntriesSpacedOut: List<StarMapEntrySpacedOut>
+)

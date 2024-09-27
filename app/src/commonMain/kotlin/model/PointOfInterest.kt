@@ -17,23 +17,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package model
+package model;
 
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Asteroid(
-
+data class PointOfInterest(
     val id: String,
-
-    val offsetX: Int,
-    val offsetY: Int,
-
-    val sizeX: Int,
-    val sizeY: Int,
-
-    val worldTraits: List<WorldTrait>,
-
-    val pointsOfInterest: List<PointOfInterest>,
-    val geysers: List<Geyser>
+    val posX: Int,
+    val posY: Int,
 )
