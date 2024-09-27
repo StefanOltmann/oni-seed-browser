@@ -5,6 +5,6 @@ import SearchResponse
 
 interface WebClient {
 
-    fun search(searchRequest: SearchRequest): SearchResponse
+    suspend fun search(searchRequest: SearchRequest): SearchResponse
 
 }

@@ -17,10 +17,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.VerticalScrollbar
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.rememberScrollbarAdapter
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -28,18 +29,7 @@ import androidx.compose.runtime.produceState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import io.ktor.client.HttpClient
-import io.ktor.client.call.body
-import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
-import io.ktor.client.request.post
-import io.ktor.client.request.setBody
-import io.ktor.http.ContentType
-import io.ktor.http.contentType
-import io.ktor.serialization.kotlinx.json.json
-import kotlinx.serialization.json.Json
-
-const val BASE_API_URL = "https://api.mapsnotincluded.org"
-const val SEARCH_URL = "$BASE_API_URL/saves/search"
+import service.DummyWebClient
 
 @Composable
 fun App() {
@@ -47,52 +37,46 @@ fun App() {
 
         val string = produceState<SearchResponse?>(null) {
 
-            val httpClient = HttpClient {
-
-                install(ContentNegotiation) {
-                    json(
-                        Json {
-                            ignoreUnknownKeys = true
-                        }
-                    )
-                }
-            }
-
-            val response: SearchResponse = httpClient.post(SEARCH_URL) {
-                contentType(ContentType.Application.Json)
-                setBody(
-                    SearchRequest(
-                        selectedWorld = "null",
-                        worldTraits = emptyList(),
-                        page = 0,
-                        vanilla = true
-                    )
+            value = DummyWebClient.search(
+                SearchRequest(
+                    selectedWorld = "null",
+                    worldTraits = emptyList(),
+                    page = 0,
+                    vanilla = true
                 )
-            }.body()
-
-            println(response)
-
-            value = response
+            )
         }
 
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.fillMaxSize(),
-        ) {
+        Box {
 
-            Text("The ONI Seed Browser is a work in progress!")
+            val scrollState = rememberScrollState()
 
-            val response = string.value
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .verticalScroll(scrollState)
+            ) {
 
-            if (response != null) {
+                Text("The ONI Seed Browser is a work in progress!")
 
-                for (save in response.worlds) {
+                val response = string.value
 
-                    Text(save.toString())
+                if (response != null) {
 
-                    Spacer(Modifier.height(8.dp))
+                    for (save in response.worlds) {
+
+                        Text(save.toString())
+
+                        Spacer(Modifier.height(8.dp))
+                    }
                 }
             }
+
+            VerticalScrollbar(
+                adapter = rememberScrollbarAdapter(scrollState),
+                modifier = Modifier.fillMaxHeight().align(Alignment.CenterEnd)
+            )
         }
     }
 }
