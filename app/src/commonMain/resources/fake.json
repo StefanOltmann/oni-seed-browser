@@ -1,4 +1,8 @@
 {
+  "page": 0,
+  "pageSize": 10,
+  "totalPages": 1926,
+  "totalResults": 19253,
   "worlds": [
     {
       "seed": 233578862,
@@ -848,9 +852,5 @@
         }
       ]
     }
-  ],
-  "page": 0,
-  "pageSize": 10,
-  "totalPages": 1926,
-  "totalResults": 19253
+  ]
 }
