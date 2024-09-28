@@ -21,11 +21,21 @@ package service
 
 import SearchRequest
 import SearchResponse
+import model.WorldSummary
 import kotlinx.serialization.json.Json
 
 object DummyWebClient : WebClient {
 
     override suspend fun search(searchRequest: SearchRequest): SearchResponse {
-        return Json.decodeFromString<SearchResponse>(fakeJsonSearchResponse)
+
+        val worldSummaries = Json.decodeFromString<List<WorldSummary>>(fakeJsonSearchResponse)
+
+        return SearchResponse(
+            page = 1,
+            pageSize = 1,
+            totalPages = 1,
+            totalResults = 25,
+            summaries = worldSummaries
+        )
     }
 }

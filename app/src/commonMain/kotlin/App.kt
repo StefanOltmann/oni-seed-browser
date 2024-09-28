@@ -64,7 +64,11 @@ fun App() {
 
                 if (response != null) {
 
-                    for (save in response.worlds) {
+                    Text("Got ${response.summaries.size} results!")
+
+                    Spacer(Modifier.height(8.dp))
+
+                    for (save in response.summaries) {
 
                         Text(save.toString())
 

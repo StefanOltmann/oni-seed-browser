@@ -17,22 +17,42 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import model.WorldSummary
+package model
+
 import kotlinx.serialization.Serializable
+import model.Cluster
+import model.Dlc
+import model.GeyserType
+import model.WorldTrait
+import serializer.ClusterSerializer
 
+@Suppress("UNUSED")
 @Serializable
-data class SearchRequest(
-    val selectedWorld: String,
-    val worldTraits: List<String>,
-    val page: Int,
-    val vanilla: Boolean
-)
+data class WorldSummary(
 
-@Serializable
-data class SearchResponse(
-    val page: Int,
-    val pageSize: Int,
-    val totalPages: Int,
-    val totalResults: Int,
-    val summaries: List<WorldSummary>
+    val coordinate: String,
+
+    @Serializable(with = ClusterSerializer::class)
+    val cluster: Cluster,
+
+    /**
+     * Number of DLCs activated.
+     * Empty list means vanilla.
+     */
+    val dlcs: List<Dlc>,
+
+    /**
+     * Traits of the starting Asteroid
+     */
+    val worldTraitsOfStarter: List<WorldTrait>,
+
+    /**
+     * Counts of the starting Asteroid geysers (including Oil Wells)
+     */
+    val geysersCountOfStarter: Map<GeyserType, Int>,
+
+    /**
+     * Counts of the Star POIs
+     */
+    val starMapEntryCounts: Map<String, Int>
 )
