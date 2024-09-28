@@ -21,6 +21,7 @@ package model
 
 import kotlinx.serialization.Serializable
 
+@Suppress("UNUSED")
 @Serializable
 enum class Dlc(
     val displayName: String

@@ -25,6 +25,7 @@ import kotlinx.serialization.Serializable
  * See https://oxygennotincluded.fandom.com/wiki/World_Trait
  */
 
+@Suppress("UNUSED")
 @Serializable
 enum class WorldTrait(
     val displayName: String

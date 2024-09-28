@@ -21,6 +21,7 @@ package model
 
 import kotlinx.serialization.Serializable
 
+@Suppress("UNUSED")
 @Serializable
 data class PointOfInterest(
     val id: String,

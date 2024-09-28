@@ -22,6 +22,7 @@ package model
 import kotlinx.serialization.Serializable
 import serializer.ClusterSerializer
 
+@Suppress("UNUSED")
 @Serializable
 data class World(
 

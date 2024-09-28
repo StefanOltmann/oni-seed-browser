@@ -21,17 +21,13 @@ package model
 
 import kotlinx.serialization.Serializable
 
+@Suppress("UNUSED")
 @Serializable
 enum class Cluster(
     val displayName: String,
     val clusterId: String,
     val prefix: String
 ) {
-
-    /*
-     * Warning: Do not sort or delete items here!
-     * Ordinals must be kept stable for use in database.
-     */
 
     /* Base game */
     BASE_TERRA(
