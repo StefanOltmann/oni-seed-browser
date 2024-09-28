@@ -18,9 +18,14 @@
  */
 
 import androidx.compose.foundation.VerticalScrollbar
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.rememberScrollbarAdapter
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -28,7 +33,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.produceState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import model.WorldSummary
 import service.DummyWebClient
 
 @Composable
@@ -47,40 +56,55 @@ fun App() {
             )
         }
 
-        Box {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
 
-            val scrollState = rememberScrollState()
+            Text(
+                text = "ONI Seed Browser",
+                fontSize = 24.sp,
+                fontWeight = FontWeight.Bold
+            )
 
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier
-                    .fillMaxSize()
-                    .verticalScroll(scrollState)
-            ) {
+            Box {
 
-                Text("The ONI Seed Browser is a work in progress!")
+                val lazyListState = rememberLazyListState()
 
                 val response = string.value
 
                 if (response != null) {
 
-                    Text("Got ${response.summaries.size} results!")
+                    LazyColumn(
+                        state = lazyListState,
+                        contentPadding = PaddingValues(defaultSpacing),
+                        verticalArrangement = Arrangement.spacedBy(doubleSpacing),
+                        modifier = Modifier.padding(defaultSpacing)
+                    ) {
 
-                    Spacer(Modifier.height(8.dp))
+                        items(response.summaries) { summary ->
 
-                    for (save in response.summaries) {
-
-                        Text(save.toString())
-
-                        Spacer(Modifier.height(8.dp))
+                            WorldSummaryView(summary)
+                        }
                     }
                 }
-            }
 
-            VerticalScrollbar(
-                adapter = rememberScrollbarAdapter(scrollState),
-                modifier = Modifier.fillMaxHeight().align(Alignment.CenterEnd)
-            )
+                VerticalScrollbar(
+                    adapter = rememberScrollbarAdapter(lazyListState),
+                    modifier = Modifier.fillMaxHeight().align(Alignment.CenterEnd)
+                )
+            }
         }
+    }
+
+}
+
+@Composable
+fun WorldSummaryView(summary: WorldSummary) {
+
+
+    Box(Modifier.background(Color.LightGray, defaultRoundedCornerShape)) {
+
+        Text(summary.toString())
+
     }
 }
