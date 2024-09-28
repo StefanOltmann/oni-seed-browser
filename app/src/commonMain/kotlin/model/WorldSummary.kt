@@ -20,10 +20,6 @@
 package model
 
 import kotlinx.serialization.Serializable
-import model.Cluster
-import model.Dlc
-import model.GeyserType
-import model.WorldTrait
 import serializer.ClusterSerializer
 
 @Suppress("UNUSED")

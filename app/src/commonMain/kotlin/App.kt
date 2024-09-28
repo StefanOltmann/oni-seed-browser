@@ -25,6 +25,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollbarAdapter
+import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -36,7 +37,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import model.WorldSummary
 import oni_seed_browser.app.generated.resources.Res
-import oni_seed_browser.app.generated.resources.cluster_oasis
+import oni_seed_browser.app.generated.resources.cluster_base_terra
 import oni_seed_browser.app.generated.resources.oni_logo
 import org.jetbrains.compose.resources.painterResource
 import service.DummyWebClient
@@ -63,8 +64,7 @@ fun App() {
 
             Text(
                 text = "ONI Seed Browser",
-                fontSize = 24.sp,
-                fontWeight = FontWeight.Bold
+                style = MaterialTheme.typography.h3
             )
 
             Image(
@@ -109,14 +109,44 @@ fun WorldSummaryView(summary: WorldSummary) {
 
     Box(Modifier.background(Color.LightGray, defaultRoundedCornerShape)) {
 
-        Column {
+        Row {
 
-            Image(
-                painter = painterResource(Res.drawable.cluster_oasis),
-                contentDescription = null
+            Box(
+                contentAlignment = Alignment.Center
+            ) {
+
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+
+                    Image(
+                        painter = painterResource(Res.drawable.cluster_base_terra),
+                        contentDescription = null
+                    )
+
+                    SelectionContainer {
+
+                        Text(
+                            text = summary.coordinate,
+                            style = MaterialTheme.typography.body2,
+                            fontWeight = FontWeight.Bold
+                        )
+                    }
+
+                    for (trait in summary.worldTraitsOfStarter) {
+
+                        Text(
+                            text = trait.displayName,
+                            style = MaterialTheme.typography.body2
+                        )
+                    }
+                }
+            }
+
+            Text(
+                summary.toString(),
+                style = MaterialTheme.typography.body1
             )
-
-            Text(summary.toString())
         }
     }
 }
