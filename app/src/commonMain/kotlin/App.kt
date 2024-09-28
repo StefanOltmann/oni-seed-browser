@@ -17,16 +17,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.VerticalScrollbar
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.rememberScrollbarAdapter
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -35,9 +33,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import model.WorldSummary
+import oni_seed_browser.app.generated.resources.Res
+import oni_seed_browser.app.generated.resources.cluster_oasis
+import oni_seed_browser.app.generated.resources.oni_logo
+import org.jetbrains.compose.resources.painterResource
 import service.DummyWebClient
 
 @Composable
@@ -64,6 +65,11 @@ fun App() {
                 text = "ONI Seed Browser",
                 fontSize = 24.sp,
                 fontWeight = FontWeight.Bold
+            )
+
+            Image(
+                painter = painterResource(Res.drawable.oni_logo),
+                contentDescription = null
             )
 
             Box {
@@ -101,10 +107,16 @@ fun App() {
 @Composable
 fun WorldSummaryView(summary: WorldSummary) {
 
-
     Box(Modifier.background(Color.LightGray, defaultRoundedCornerShape)) {
 
-        Text(summary.toString())
+        Column {
 
+            Image(
+                painter = painterResource(Res.drawable.cluster_oasis),
+                contentDescription = null
+            )
+
+            Text(summary.toString())
+        }
     }
 }
