@@ -25,6 +25,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollbarAdapter
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -34,10 +35,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import model.GeyserType
 import model.WorldSummary
 import oni_seed_browser.app.generated.resources.Res
 import oni_seed_browser.app.generated.resources.cluster_base_terra
+import oni_seed_browser.app.generated.resources.cluster_spacedout_terrania
 import oni_seed_browser.app.generated.resources.oni_logo
 import org.jetbrains.compose.resources.painterResource
 import service.DummyWebClient
@@ -116,11 +120,12 @@ fun WorldSummaryView(summary: WorldSummary) {
             ) {
 
                 Column(
-                    horizontalAlignment = Alignment.CenterHorizontally
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier.fillMaxHeight()
                 ) {
 
                     Image(
-                        painter = painterResource(Res.drawable.cluster_base_terra),
+                        painter = painterResource(Res.drawable.cluster_spacedout_terrania),
                         contentDescription = null
                     )
 
@@ -143,10 +148,49 @@ fun WorldSummaryView(summary: WorldSummary) {
                 }
             }
 
-            Text(
-                summary.toString(),
-                style = MaterialTheme.typography.body1
-            )
+            Column (
+                modifier = Modifier.weight(1F)
+            ) {
+
+                for (geyserType in GeyserType.entries) {
+
+                    val count = summary.geysersCountOfStarter[geyserType] ?: 0
+
+                    if (count == 0)
+                        continue
+
+                    Row(
+                        modifier = Modifier
+                            .padding(4.dp)
+                            .width(250.dp)
+                            .background(Color.DarkGray, defaultRoundedCornerShape)
+                    ) {
+
+                        Text(
+                            text = geyserType.displayName,
+                            style = MaterialTheme.typography.body1,
+                            color = Color.White,
+                            modifier = Modifier.weight(1F)
+                        )
+
+                        Box(
+                            contentAlignment = Alignment.Center,
+                            modifier = Modifier
+                                .padding(4.dp)
+                                .size(32.dp)
+                                .background(Color.Blue, CircleShape)
+                        ) {
+
+                            Text(
+                                text = count.toString(),
+                                style = MaterialTheme.typography.body1,
+                                color = Color.White
+                            )
+                        }
+                    }
+                }
+
+            }
         }
     }
 }
