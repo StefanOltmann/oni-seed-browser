@@ -353,7 +353,7 @@ fun WorldSummaryView(
                                 Text(
                                     text = worldTrait.displayName,
                                     style = MaterialTheme.typography.bodyLarge,
-                                    color = MaterialTheme.colorScheme.onBackground,
+                                    color = worldTrait.color,
                                     modifier = Modifier.offset(y = -2.dp)
                                 )
                             }

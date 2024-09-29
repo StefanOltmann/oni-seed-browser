@@ -19,6 +19,7 @@
 
 package model
 
+import androidx.compose.ui.graphics.Color
 import kotlinx.serialization.Serializable
 
 /*
@@ -28,77 +29,101 @@ import kotlinx.serialization.Serializable
 @Suppress("UNUSED")
 @Serializable
 enum class WorldTrait(
-    val displayName: String
+    val displayName: String,
+    val color: Color
 ) {
 
     BouldersLarge(
-        displayName = "Large Boulders"
+        displayName = "Large Boulders",
+        color = Color(0xFFBDBDBD)
     ),
     BouldersMedium(
-        displayName = "Medium Boulders"
+        displayName = "Medium Boulders",
+        color = Color(0xFFBDBDBD)
     ),
     BouldersMixed(
-        displayName = "Mixed Boulders"
+        displayName = "Mixed Boulders",
+        color = Color(0xFFBDBDBD)
     ),
     BouldersSmall(
-        displayName = "Small Boulders"
+        displayName = "Small Boulders",
+        color = Color(0xFFBDBDBD)
     ),
     DeepOil(
-        displayName = "Trapped Oil"
+        displayName = "Trapped Oil",
+        color = Color(0xFF6E6E6E)
     ),
     FrozenCore(
-        displayName = "Frozen Core"
+        displayName = "Frozen Core",
+        color = Color(0xFFA1D6ED)
     ),
     GeoActive(
-        displayName = "Geoactive"
+        displayName = "Geoactive",
+        color = Color(0xFFECA6E9)
     ),
     Geodes(
-        displayName = "Geodes"
+        displayName = "Geodes",
+        color = Color(0xFFC47BF4)
     ),
     GeoDormant(
-        displayName = "Geodormant"
+        displayName = "Geodormant",
+        color = Color(0xFF8895A1)
     ),
     GlaciersLarge(
-        displayName = "Large Glaciers"
+        displayName = "Large Glaciers",
+        color = Color(0xFFA1D6ED)
     ),
     IrregularOil(
-        displayName = "Irregular Oil"
+        displayName = "Irregular Oil",
+        color = Color(0xFF6C6C6C)
     ),
     MagmaVents(
-        displayName = "Magma Channels"
+        displayName = "Magma Channels",
+        color = Color(0xFFE7544D)
     ),
     MetalPoor(
-        displayName = "Metal Poor"
+        displayName = "Metal Poor",
+        color = Color(0xFF8794A0)
     ),
     MetalRich(
-        displayName = "Metal Rich"
+        displayName = "Metal Rich",
+        color = Color(0xFFD2AB4B)
     ),
     MisalignedStart(
-        displayName = "Alternate Pod Location"
+        displayName = "Alternate Pod Location",
+        color = Color(0xFFE7DC93)
     ),
     SlimeSplats(
-        displayName = "Slime Molds"
+        displayName = "Slime Molds",
+        color = Color(0xFF8EB542)
     ),
     SubsurfaceOcean(
-        displayName = "Subsurface Ocean"
+        displayName = "Subsurface Ocean",
+        color = Color(0xFF61CEF0)
     ),
     Volcanoes(
-        displayName = "Volcanoes"
+        displayName = "Volcanoes",
+        color = Color(0xFFE7544D)
     ),
     CrashedSatellites(
-        displayName = "Crashed Satellites"
+        displayName = "Crashed Satellites",
+        color = Color(0xFF7ED360)
     ),
     DistressSignal(
-        displayName = "Frozen Friend"
+        displayName = "Frozen Friend",
+        color = Color(0xFF8794A0)
     ),
     LushCore(
-        displayName = "Lush Core"
+        displayName = "Lush Core",
+        color = Color(0xFF66A052)
     ),
     MetalCaves(
-        displayName = "Metallic Caves"
+        displayName = "Metallic Caves",
+        color = Color(0xFFD2AB4B)
     ),
     RadioactiveCrust(
-        displayName = "Radioactive Crust"
+        displayName = "Radioactive Crust",
+        color = Color(0xFF7ED360)
     )
 }
 
