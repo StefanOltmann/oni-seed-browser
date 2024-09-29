@@ -58,6 +58,7 @@ import androidx.compose.ui.unit.dp
 import model.Cluster
 import model.GeyserType
 import model.WorldSummary
+import model.WorldTrait
 import oni_seed_browser.app.generated.resources.Res
 import oni_seed_browser.app.generated.resources.cluster_base_arboria
 import oni_seed_browser.app.generated.resources.cluster_base_aridio
@@ -115,6 +116,29 @@ import oni_seed_browser.app.generated.resources.geyser_tungsten_volcano
 import oni_seed_browser.app.generated.resources.geyser_volcano
 import oni_seed_browser.app.generated.resources.geyser_water
 import oni_seed_browser.app.generated.resources.oni_logo
+import oni_seed_browser.app.generated.resources.worldtrait_boulders_large
+import oni_seed_browser.app.generated.resources.worldtrait_boulders_medium
+import oni_seed_browser.app.generated.resources.worldtrait_boulders_mixed
+import oni_seed_browser.app.generated.resources.worldtrait_boulders_small
+import oni_seed_browser.app.generated.resources.worldtrait_crashed_satellites
+import oni_seed_browser.app.generated.resources.worldtrait_deep_oil
+import oni_seed_browser.app.generated.resources.worldtrait_distress_signal
+import oni_seed_browser.app.generated.resources.worldtrait_frozen_core
+import oni_seed_browser.app.generated.resources.worldtrait_geoactive
+import oni_seed_browser.app.generated.resources.worldtrait_geodes
+import oni_seed_browser.app.generated.resources.worldtrait_geodormant
+import oni_seed_browser.app.generated.resources.worldtrait_glaciers_large
+import oni_seed_browser.app.generated.resources.worldtrait_irregular_oil
+import oni_seed_browser.app.generated.resources.worldtrait_lush_core
+import oni_seed_browser.app.generated.resources.worldtrait_magma_vents
+import oni_seed_browser.app.generated.resources.worldtrait_metal_caves
+import oni_seed_browser.app.generated.resources.worldtrait_metal_poor
+import oni_seed_browser.app.generated.resources.worldtrait_metal_rich
+import oni_seed_browser.app.generated.resources.worldtrait_misaligned_start
+import oni_seed_browser.app.generated.resources.worldtrait_radioactive_crust
+import oni_seed_browser.app.generated.resources.worldtrait_slime_splats
+import oni_seed_browser.app.generated.resources.worldtrait_subsurface_ocean
+import oni_seed_browser.app.generated.resources.worldtrait_volcanoes
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 import service.DummyWebClient
@@ -308,13 +332,32 @@ fun WorldSummaryView(
 
                     DefaultSpacer()
 
-                    for (trait in summary.worldTraitsOfStarter) {
+                    Column(
+                        verticalArrangement = Arrangement.spacedBy(defaultSpacing)
+                    ) {
 
-                        Text(
-                            text = trait.displayName,
-                            style = MaterialTheme.typography.bodyLarge,
-                            color = MaterialTheme.colorScheme.onBackground
-                        )
+                        for (worldTrait in summary.worldTraitsOfStarter) {
+
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+
+                                Image(
+                                    painter = painterResource(getWorldTraitDrawable(worldTrait)),
+                                    contentDescription = null,
+                                    modifier = Modifier.size(24.dp)
+                                )
+
+                                DefaultSpacer()
+
+                                Text(
+                                    text = worldTrait.displayName,
+                                    style = MaterialTheme.typography.bodyLarge,
+                                    color = MaterialTheme.colorScheme.onBackground,
+                                    modifier = Modifier.offset(y = -2.dp)
+                                )
+                            }
+                        }
                     }
                 }
             }
@@ -389,6 +432,33 @@ fun WorldSummaryView(
     }
 }
 
+fun getWorldTraitDrawable(worldTrait: WorldTrait): DrawableResource =
+    when (worldTrait) {
+        WorldTrait.BouldersLarge -> Res.drawable.worldtrait_boulders_large
+        WorldTrait.BouldersMedium -> Res.drawable.worldtrait_boulders_medium
+        WorldTrait.BouldersMixed -> Res.drawable.worldtrait_boulders_mixed
+        WorldTrait.BouldersSmall -> Res.drawable.worldtrait_boulders_small
+        WorldTrait.DeepOil -> Res.drawable.worldtrait_deep_oil
+        WorldTrait.FrozenCore -> Res.drawable.worldtrait_frozen_core
+        WorldTrait.GeoActive -> Res.drawable.worldtrait_geoactive
+        WorldTrait.Geodes -> Res.drawable.worldtrait_geodes
+        WorldTrait.GeoDormant -> Res.drawable.worldtrait_geodormant
+        WorldTrait.GlaciersLarge -> Res.drawable.worldtrait_glaciers_large
+        WorldTrait.IrregularOil -> Res.drawable.worldtrait_irregular_oil
+        WorldTrait.MagmaVents -> Res.drawable.worldtrait_magma_vents
+        WorldTrait.MetalPoor -> Res.drawable.worldtrait_metal_poor
+        WorldTrait.MetalRich -> Res.drawable.worldtrait_metal_rich
+        WorldTrait.MisalignedStart -> Res.drawable.worldtrait_misaligned_start
+        WorldTrait.SlimeSplats -> Res.drawable.worldtrait_slime_splats
+        WorldTrait.SubsurfaceOcean -> Res.drawable.worldtrait_subsurface_ocean
+        WorldTrait.Volcanoes -> Res.drawable.worldtrait_volcanoes
+        WorldTrait.CrashedSatellites -> Res.drawable.worldtrait_crashed_satellites
+        WorldTrait.DistressSignal -> Res.drawable.worldtrait_distress_signal
+        WorldTrait.LushCore -> Res.drawable.worldtrait_lush_core
+        WorldTrait.MetalCaves -> Res.drawable.worldtrait_metal_caves
+        WorldTrait.RadioactiveCrust -> Res.drawable.worldtrait_radioactive_crust
+    }
+
 fun getGeyserDrawable(geyserType: GeyserType): DrawableResource =
     when (geyserType) {
         GeyserType.COOL_STEAM -> Res.drawable.geyser_cool_steam_vent
@@ -421,7 +491,7 @@ fun getGeyserDrawable(geyserType: GeyserType): DrawableResource =
 
 @Composable
 fun getClusterDrawable(cluster: Cluster): DrawableResource =
-    when(cluster) {
+    when (cluster) {
         Cluster.BASE_TERRA -> Res.drawable.cluster_base_terra
         Cluster.BASE_OCEANIA -> Res.drawable.cluster_base_oceania
         Cluster.BASE_RIME -> Res.drawable.cluster_base_rime
