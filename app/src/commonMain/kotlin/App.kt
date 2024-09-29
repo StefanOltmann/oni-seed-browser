@@ -23,6 +23,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -253,6 +255,7 @@ fun App() {
 
 }
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun WorldSummaryView(
     summary: WorldSummary,
@@ -309,7 +312,7 @@ fun WorldSummaryView(
                 }
             }
 
-            Column (
+            FlowRow(
                 modifier = Modifier
                     .weight(1F)
                     .defaultPadding()
@@ -354,12 +357,6 @@ fun WorldSummaryView(
                         Box(
                             contentAlignment = Alignment.Center,
                             modifier = Modifier
-                                .padding(
-                                    start = 2.dp,
-                                    top = 2.dp,
-                                    end = 4.dp,
-                                    bottom = 2.dp
-                                )
                                 .size(26.dp)
                                 .background(
                                     color = if (count > 0) darkGreen else darkRed,
@@ -375,6 +372,8 @@ fun WorldSummaryView(
                                 modifier = Modifier.offset(y = -2.dp)
                             )
                         }
+
+                        Spacer(modifier = Modifier.width(4.dp))
                     }
                 }
 
