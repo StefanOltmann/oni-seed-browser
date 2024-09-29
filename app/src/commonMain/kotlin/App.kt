@@ -36,8 +36,8 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollbarAdapter
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.selection.SelectionContainer
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.produceState
 import androidx.compose.ui.Alignment
@@ -83,12 +83,14 @@ import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 import service.DummyWebClient
 import theme.AppTypography
+import theme.appColorScheme
 
 val logoIconHeight = 80.dp
 
 @Composable
 fun App() {
     MaterialTheme(
+        colorScheme = appColorScheme,
         typography = AppTypography()
     ) {
 
@@ -111,12 +113,12 @@ fun App() {
 
             Text(
                 text = "ONI Map Explorer",
-                style = MaterialTheme.typography.h3
+                style = MaterialTheme.typography.headlineLarge
             )
 
             Text(
                 text = "This is a non-functional work-in-progress version.",
-                style = MaterialTheme.typography.h6,
+                style = MaterialTheme.typography.headlineSmall,
                 color = Color.Red
             )
 
@@ -202,7 +204,7 @@ fun WorldSummaryView(summary: WorldSummary) {
 
                         Text(
                             text = summary.coordinate,
-                            style = MaterialTheme.typography.body2,
+                            style = MaterialTheme.typography.bodyMedium,
                             fontWeight = FontWeight.Bold
                         )
                     }
@@ -211,7 +213,7 @@ fun WorldSummaryView(summary: WorldSummary) {
 
                         Text(
                             text = trait.displayName,
-                            style = MaterialTheme.typography.body2
+                            style = MaterialTheme.typography.bodyMedium
                         )
                     }
                 }
@@ -237,7 +239,7 @@ fun WorldSummaryView(summary: WorldSummary) {
 
                         Text(
                             text = geyserType.displayName,
-                            style = MaterialTheme.typography.body1,
+                            style = MaterialTheme.typography.bodyLarge,
                             color = Color.White,
                             modifier = Modifier.weight(1F)
                         )
@@ -252,7 +254,7 @@ fun WorldSummaryView(summary: WorldSummary) {
 
                             Text(
                                 text = count.toString(),
-                                style = MaterialTheme.typography.body1,
+                                style = MaterialTheme.typography.bodyLarge,
                                 color = Color.White
                             )
                         }
