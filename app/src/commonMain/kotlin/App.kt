@@ -26,6 +26,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -75,11 +76,15 @@ import oni_seed_browser.app.generated.resources.cluster_spacedout_the_badlands
 import oni_seed_browser.app.generated.resources.cluster_spacedout_the_desolands_moonlet
 import oni_seed_browser.app.generated.resources.cluster_spacedout_verdante
 import oni_seed_browser.app.generated.resources.cluster_spacedout_volcanea
+import oni_seed_browser.app.generated.resources.dlc_frosty_planet
+import oni_seed_browser.app.generated.resources.dlc_spaced_out
 import oni_seed_browser.app.generated.resources.oni_logo
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 import service.DummyWebClient
 import theme.AppTypography
+
+val logoIconHeight = 80.dp
 
 @Composable
 fun App() {
@@ -100,18 +105,45 @@ fun App() {
         }
 
         Column(
-            horizontalAlignment = Alignment.CenterHorizontally
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(defaultSpacing)
         ) {
 
             Text(
-                text = "ONI Seed Browser",
+                text = "ONI Map Explorer",
                 style = MaterialTheme.typography.h3
             )
 
-            Image(
-                painter = painterResource(Res.drawable.oni_logo),
-                contentDescription = null
+            Text(
+                text = "This is a non-functional work-in-progress version.",
+                style = MaterialTheme.typography.h6,
+                color = Color.Red
             )
+
+            Row(
+                modifier = Modifier.padding(defaultSpacing),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(64.dp)
+            ) {
+
+                Image(
+                    painter = painterResource(Res.drawable.oni_logo),
+                    contentDescription = null,
+                    modifier = Modifier.height(logoIconHeight)
+                )
+
+                Image(
+                    painter = painterResource(Res.drawable.dlc_spaced_out),
+                    contentDescription = null,
+                    modifier = Modifier.height(logoIconHeight)
+                )
+
+                Image(
+                    painter = painterResource(Res.drawable.dlc_frosty_planet),
+                    contentDescription = null,
+                    modifier = Modifier.height(logoIconHeight)
+                )
+            }
 
             Box {
 
