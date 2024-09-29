@@ -83,7 +83,12 @@ import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 import service.DummyWebClient
 import theme.AppTypography
+import theme.DefaultSpacer
 import theme.appColorScheme
+import theme.defaultPadding
+import theme.defaultRoundedCornerShape
+import theme.defaultSpacing
+import theme.doubleSpacing
 
 val logoIconHeight = 80.dp
 
@@ -115,8 +120,9 @@ fun App() {
 
             Text(
                 text = "ONI Map Explorer",
-                style = MaterialTheme.typography.headlineLarge,
-                color = MaterialTheme.colorScheme.onBackground
+                style = MaterialTheme.typography.displayLarge,
+                color = MaterialTheme.colorScheme.onBackground,
+                modifier = Modifier.defaultPadding()
             )
 
             Text(
@@ -126,7 +132,7 @@ fun App() {
             )
 
             Row(
-                modifier = Modifier.padding(defaultSpacing),
+                modifier = Modifier.defaultPadding(),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(64.dp)
             ) {
@@ -162,7 +168,7 @@ fun App() {
                         state = lazyListState,
                         contentPadding = PaddingValues(defaultSpacing),
                         verticalArrangement = Arrangement.spacedBy(doubleSpacing),
-                        modifier = Modifier.padding(defaultSpacing)
+                        modifier = Modifier.defaultPadding()
                     ) {
 
                         items(response.summaries) { summary ->
@@ -185,12 +191,18 @@ fun App() {
 @Composable
 fun WorldSummaryView(summary: WorldSummary) {
 
-    Box(Modifier.background(MaterialTheme.colorScheme.surfaceVariant, defaultRoundedCornerShape)) {
+    Box(
+        modifier = Modifier
+            .background(MaterialTheme.colorScheme.surface, defaultRoundedCornerShape)
+    ) {
 
-        Row {
+        Row(
+            modifier = Modifier.defaultPadding()
+        ) {
 
             Box(
-                contentAlignment = Alignment.Center
+                contentAlignment = Alignment.Center,
+                modifier = Modifier.width(200.dp)
             ) {
 
                 Column(
@@ -200,24 +212,27 @@ fun WorldSummaryView(summary: WorldSummary) {
 
                     Image(
                         painter = painterResource(getClusterDrawable(summary.cluster)),
-                        contentDescription = null
+                        contentDescription = null,
+                        modifier = Modifier.defaultPadding()
                     )
 
                     SelectionContainer {
 
                         Text(
                             text = summary.coordinate,
-                            style = MaterialTheme.typography.bodyMedium,
+                            style = MaterialTheme.typography.bodyLarge,
                             fontWeight = FontWeight.Bold,
                             color = MaterialTheme.colorScheme.onBackground
                         )
                     }
 
+                    DefaultSpacer()
+
                     for (trait in summary.worldTraitsOfStarter) {
 
                         Text(
                             text = trait.displayName,
-                            style = MaterialTheme.typography.bodyMedium,
+                            style = MaterialTheme.typography.bodyLarge,
                             color = MaterialTheme.colorScheme.onBackground
                         )
                     }
@@ -225,7 +240,9 @@ fun WorldSummaryView(summary: WorldSummary) {
             }
 
             Column (
-                modifier = Modifier.weight(1F)
+                modifier = Modifier
+                    .weight(1F)
+                    .defaultPadding()
             ) {
 
                 for (geyserType in GeyserType.entries) {
@@ -236,10 +253,11 @@ fun WorldSummaryView(summary: WorldSummary) {
                         continue
 
                     Row(
+                        verticalAlignment = Alignment.CenterVertically,
                         modifier = Modifier
                             .padding(4.dp)
                             .width(250.dp)
-                            .background(Color.DarkGray, defaultRoundedCornerShape)
+                            .background(MaterialTheme.colorScheme.surfaceVariant, defaultRoundedCornerShape)
                     ) {
 
                         Text(
