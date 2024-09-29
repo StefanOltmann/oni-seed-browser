@@ -52,6 +52,24 @@ import oni_seed_browser.app.generated.resources.cluster_base_terra
 import oni_seed_browser.app.generated.resources.cluster_base_the_badlands
 import oni_seed_browser.app.generated.resources.cluster_base_verdante
 import oni_seed_browser.app.generated.resources.cluster_base_volcanea
+import oni_seed_browser.app.generated.resources.cluster_spacedout_arboria
+import oni_seed_browser.app.generated.resources.cluster_spacedout_aridio
+import oni_seed_browser.app.generated.resources.cluster_spacedout_flipped_moonlet
+import oni_seed_browser.app.generated.resources.cluster_spacedout_folia
+import oni_seed_browser.app.generated.resources.cluster_spacedout_frozen_forest_moonlet
+import oni_seed_browser.app.generated.resources.cluster_spacedout_metallic_swampy_moonlet
+import oni_seed_browser.app.generated.resources.cluster_spacedout_oasisse
+import oni_seed_browser.app.generated.resources.cluster_spacedout_oceania
+import oni_seed_browser.app.generated.resources.cluster_spacedout_quagmiris
+import oni_seed_browser.app.generated.resources.cluster_spacedout_radioactive_ocean_moonlet
+import oni_seed_browser.app.generated.resources.cluster_spacedout_rime
+import oni_seed_browser.app.generated.resources.cluster_spacedout_squelchy
+import oni_seed_browser.app.generated.resources.cluster_spacedout_terra
+import oni_seed_browser.app.generated.resources.cluster_spacedout_terrania
+import oni_seed_browser.app.generated.resources.cluster_spacedout_the_badlands
+import oni_seed_browser.app.generated.resources.cluster_spacedout_the_desolands_moonlet
+import oni_seed_browser.app.generated.resources.cluster_spacedout_verdante
+import oni_seed_browser.app.generated.resources.cluster_spacedout_volcanea
 import oni_seed_browser.app.generated.resources.oni_logo
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
@@ -137,7 +155,7 @@ fun WorldSummaryView(summary: WorldSummary) {
                 ) {
 
                     Image(
-                        painter = painterResource(Res.drawable.asteroid_terrania),
+                        painter = painterResource(getClusterDrawable(summary.cluster)),
                         contentDescription = null
                     )
 
@@ -209,7 +227,7 @@ fun WorldSummaryView(summary: WorldSummary) {
 
 @Composable
 fun getClusterDrawable(cluster: Cluster): DrawableResource =
-    return when(cluster) {
+    when(cluster) {
         Cluster.BASE_TERRA -> Res.drawable.cluster_base_terra
         Cluster.BASE_OCEANIA -> Res.drawable.cluster_base_oceania
         Cluster.BASE_RIME -> Res.drawable.cluster_base_rime
@@ -219,22 +237,22 @@ fun getClusterDrawable(cluster: Cluster): DrawableResource =
         Cluster.BASE_THE_BADLANDS -> Res.drawable.cluster_base_the_badlands
         Cluster.BASE_ARIDIO -> Res.drawable.cluster_base_aridio
         Cluster.BASE_OASISSE -> Res.drawable.cluster_base_oasisse
-        Cluster.DLC_TERRA -> Res.drawable.asteroid_terrania
-        Cluster.DLC_OCEANIA -> Res.drawable.asteroid_water
-        Cluster.DLC_SQUELCHY -> TODO()
-        Cluster.DLC_RIME -> TODO()
-        Cluster.DLC_VERDANTE -> TODO()
-        Cluster.DLC_ARBORIA -> TODO()
-        Cluster.DLC_VOLCANEA -> TODO()
-        Cluster.DLC_THE_BADLANDS -> TODO()
-        Cluster.DLC_ARIDIO -> TODO()
-        Cluster.DLC_OASISSE -> TODO()
-        Cluster.DLC_TERRANIA -> TODO()
-        Cluster.DLC_FOLIA -> TODO()
-        Cluster.DLC_QUAGMIRIS -> TODO()
-        Cluster.DLC_METALLIC_SWAMPY_MOONLET -> TODO()
-        Cluster.DLC_THE_DESOLANDS_MOONLET -> TODO()
-        Cluster.DLC_FROZEN_FOREST_MOONLET -> TODO()
-        Cluster.DLC_FLIPPED_MOONLET -> TODO()
-        Cluster.DLC_RADIOACTIVE_OCEAN_MOONLET -> TODO()
+        Cluster.DLC_TERRA -> Res.drawable.cluster_spacedout_terra
+        Cluster.DLC_OCEANIA -> Res.drawable.cluster_spacedout_oceania
+        Cluster.DLC_SQUELCHY -> Res.drawable.cluster_spacedout_squelchy
+        Cluster.DLC_RIME -> Res.drawable.cluster_spacedout_rime
+        Cluster.DLC_VERDANTE -> Res.drawable.cluster_spacedout_verdante
+        Cluster.DLC_ARBORIA -> Res.drawable.cluster_spacedout_arboria
+        Cluster.DLC_VOLCANEA -> Res.drawable.cluster_spacedout_volcanea
+        Cluster.DLC_THE_BADLANDS -> Res.drawable.cluster_spacedout_the_badlands
+        Cluster.DLC_ARIDIO -> Res.drawable.cluster_spacedout_aridio
+        Cluster.DLC_OASISSE -> Res.drawable.cluster_spacedout_oasisse
+        Cluster.DLC_TERRANIA -> Res.drawable.cluster_spacedout_terrania
+        Cluster.DLC_FOLIA -> Res.drawable.cluster_spacedout_folia
+        Cluster.DLC_QUAGMIRIS -> Res.drawable.cluster_spacedout_quagmiris
+        Cluster.DLC_METALLIC_SWAMPY_MOONLET -> Res.drawable.cluster_spacedout_metallic_swampy_moonlet
+        Cluster.DLC_THE_DESOLANDS_MOONLET -> Res.drawable.cluster_spacedout_the_desolands_moonlet
+        Cluster.DLC_FROZEN_FOREST_MOONLET -> Res.drawable.cluster_spacedout_frozen_forest_moonlet
+        Cluster.DLC_FLIPPED_MOONLET -> Res.drawable.cluster_spacedout_flipped_moonlet
+        Cluster.DLC_RADIOACTIVE_OCEAN_MOONLET -> Res.drawable.cluster_spacedout_radioactive_ocean_moonlet
     }
