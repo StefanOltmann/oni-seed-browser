@@ -12,8 +12,15 @@ val defaultRoundedCornerShape = RoundedCornerShape(8.dp)
 
 val defaultSpacing = 8.dp
 val doubleSpacing = defaultSpacing * 2
+val halfSpacing = defaultSpacing / 2
 
 fun Modifier.defaultPadding() = this.padding(defaultSpacing)
 
 @Composable
+fun HalfSpacer() = Spacer(Modifier.size(halfSpacing))
+
+@Composable
 fun DefaultSpacer() = Spacer(Modifier.size(defaultSpacing))
+
+@Composable
+fun DoubleSpacer() = Spacer(Modifier.size(doubleSpacing))
