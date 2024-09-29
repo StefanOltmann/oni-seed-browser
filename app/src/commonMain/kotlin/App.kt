@@ -166,9 +166,10 @@ fun App() {
             )
 
             Text(
-                text = "This is a non-functional work-in-progress version.",
+                text = "This is a non-functional work-in-progress prototype.",
                 style = MaterialTheme.typography.headlineSmall,
-                color = MaterialTheme.colorScheme.error
+                color = MaterialTheme.colorScheme.error,
+                fontWeight = FontWeight.Bold
             )
 
             DefaultSpacer()
