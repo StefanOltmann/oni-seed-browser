@@ -20,6 +20,7 @@
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.VerticalScrollbar
 import androidx.compose.foundation.background
+import androidx.compose.foundation.defaultScrollbarStyle
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -126,6 +127,7 @@ import theme.defaultPadding
 import theme.defaultRoundedCornerShape
 import theme.defaultSpacing
 import theme.doubleSpacing
+import theme.white
 
 val logoIconHeight = 80.dp
 
@@ -247,7 +249,11 @@ fun App() {
 
                 VerticalScrollbar(
                     adapter = rememberScrollbarAdapter(lazyListState),
-                    modifier = Modifier.fillMaxHeight().align(Alignment.CenterEnd)
+                    modifier = Modifier.fillMaxHeight().align(Alignment.CenterEnd),
+                    style = defaultScrollbarStyle().copy(
+                        unhoverColor = white.copy(alpha = 0.4f),
+                        hoverColor = white
+                    ),
                 )
             }
         }
