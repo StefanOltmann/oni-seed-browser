@@ -20,7 +20,15 @@
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.VerticalScrollbar
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -36,13 +44,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import model.Cluster
 import model.GeyserType
 import model.WorldSummary
 import oni_seed_browser.app.generated.resources.Res
-import oni_seed_browser.app.generated.resources.asteroid_terrania
-import oni_seed_browser.app.generated.resources.asteroid_water
 import oni_seed_browser.app.generated.resources.cluster_base_arboria
 import oni_seed_browser.app.generated.resources.cluster_base_aridio
 import oni_seed_browser.app.generated.resources.cluster_base_oasisse
@@ -73,12 +78,14 @@ import oni_seed_browser.app.generated.resources.cluster_spacedout_volcanea
 import oni_seed_browser.app.generated.resources.oni_logo
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
-import org.jetbrains.skia.Image
 import service.DummyWebClient
+import theme.AppTypography
 
 @Composable
 fun App() {
-    MaterialTheme {
+    MaterialTheme(
+        typography = AppTypography()
+    ) {
 
         val string = produceState<SearchResponse?>(null) {
 
