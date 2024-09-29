@@ -40,8 +40,7 @@ import androidx.compose.ui.unit.sp
 import model.GeyserType
 import model.WorldSummary
 import oni_seed_browser.app.generated.resources.Res
-import oni_seed_browser.app.generated.resources.cluster_base_terra
-import oni_seed_browser.app.generated.resources.cluster_spacedout_terrania
+import oni_seed_browser.app.generated.resources.asteroid_terrania
 import oni_seed_browser.app.generated.resources.oni_logo
 import org.jetbrains.compose.resources.painterResource
 import service.DummyWebClient
@@ -125,7 +124,7 @@ fun WorldSummaryView(summary: WorldSummary) {
                 ) {
 
                     Image(
-                        painter = painterResource(Res.drawable.cluster_spacedout_terrania),
+                        painter = painterResource(Res.drawable.asteroid_terrania),
                         contentDescription = null
                     )
 
