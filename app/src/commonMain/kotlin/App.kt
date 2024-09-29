@@ -37,12 +37,25 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import model.Cluster
 import model.GeyserType
 import model.WorldSummary
 import oni_seed_browser.app.generated.resources.Res
 import oni_seed_browser.app.generated.resources.asteroid_terrania
+import oni_seed_browser.app.generated.resources.asteroid_water
+import oni_seed_browser.app.generated.resources.cluster_base_arboria
+import oni_seed_browser.app.generated.resources.cluster_base_aridio
+import oni_seed_browser.app.generated.resources.cluster_base_oasisse
+import oni_seed_browser.app.generated.resources.cluster_base_oceania
+import oni_seed_browser.app.generated.resources.cluster_base_rime
+import oni_seed_browser.app.generated.resources.cluster_base_terra
+import oni_seed_browser.app.generated.resources.cluster_base_the_badlands
+import oni_seed_browser.app.generated.resources.cluster_base_verdante
+import oni_seed_browser.app.generated.resources.cluster_base_volcanea
 import oni_seed_browser.app.generated.resources.oni_logo
+import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.skia.Image
 import service.DummyWebClient
 
 @Composable
@@ -193,3 +206,35 @@ fun WorldSummaryView(summary: WorldSummary) {
         }
     }
 }
+
+@Composable
+fun getClusterDrawable(cluster: Cluster): DrawableResource =
+    return when(cluster) {
+        Cluster.BASE_TERRA -> Res.drawable.cluster_base_terra
+        Cluster.BASE_OCEANIA -> Res.drawable.cluster_base_oceania
+        Cluster.BASE_RIME -> Res.drawable.cluster_base_rime
+        Cluster.BASE_VERDANTE -> Res.drawable.cluster_base_verdante
+        Cluster.BASE_ARBORIA -> Res.drawable.cluster_base_arboria
+        Cluster.BASE_VOLCANEA -> Res.drawable.cluster_base_volcanea
+        Cluster.BASE_THE_BADLANDS -> Res.drawable.cluster_base_the_badlands
+        Cluster.BASE_ARIDIO -> Res.drawable.cluster_base_aridio
+        Cluster.BASE_OASISSE -> Res.drawable.cluster_base_oasisse
+        Cluster.DLC_TERRA -> Res.drawable.asteroid_terrania
+        Cluster.DLC_OCEANIA -> Res.drawable.asteroid_water
+        Cluster.DLC_SQUELCHY -> TODO()
+        Cluster.DLC_RIME -> TODO()
+        Cluster.DLC_VERDANTE -> TODO()
+        Cluster.DLC_ARBORIA -> TODO()
+        Cluster.DLC_VOLCANEA -> TODO()
+        Cluster.DLC_THE_BADLANDS -> TODO()
+        Cluster.DLC_ARIDIO -> TODO()
+        Cluster.DLC_OASISSE -> TODO()
+        Cluster.DLC_TERRANIA -> TODO()
+        Cluster.DLC_FOLIA -> TODO()
+        Cluster.DLC_QUAGMIRIS -> TODO()
+        Cluster.DLC_METALLIC_SWAMPY_MOONLET -> TODO()
+        Cluster.DLC_THE_DESOLANDS_MOONLET -> TODO()
+        Cluster.DLC_FROZEN_FOREST_MOONLET -> TODO()
+        Cluster.DLC_FLIPPED_MOONLET -> TODO()
+        Cluster.DLC_RADIOACTIVE_OCEAN_MOONLET -> TODO()
+    }
