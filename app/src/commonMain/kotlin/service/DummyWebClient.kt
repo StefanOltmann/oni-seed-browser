@@ -28,13 +28,13 @@ object DummyWebClient : WebClient {
 
     override suspend fun search(searchRequest: SearchRequest): SearchResponse {
 
-        val worldSummaries = Json.decodeFromString<List<WorldSummary>>(fakeJsonSearchResponse)
+        val worldSummaries = Json.decodeFromString<List<WorldSummary>>(jsonSampleSearchResponse)
 
         return SearchResponse(
             page = 1,
-            pageSize = 1,
+            pageSize = 50,
             totalPages = 1,
-            totalResults = 25,
+            totalResults = 30,
             summaries = worldSummaries
         )
     }

@@ -22,8 +22,283 @@ package service
 /**
  * 25 entries
  */
-val fakeJsonSearchResponse: String = """
+val jsonSampleSearchResponse: String = """
       [
+      {
+        "coordinate": "M-BAD-C-638010066-0-0-0",
+        "cluster": "M-BAD-C",
+        "dlcs": [
+          "FrostyPlanet",
+          "SpacedOut"
+        ],
+        "worldTraitsOfStarter": [
+          "MagmaVents",
+          "DistressSignal"
+        ],
+        "geysersCountOfStarter": {
+          "OIL_WELL": 4,
+          "COOL_STEAM": 1,
+          "NATURAL_GAS": 1,
+          "HOT_CO2": 1,
+          "LEAKY_OIL_FISSURE": 1,
+          "MINOR_VOLCANO": 1
+        },
+        "starMapEntryCounts": {
+          "MiniBadlandsStart": 1,
+          "MiniRadioactiveOceanWarp": 1,
+          "MiniMetallicSwampy": 1,
+          "MiniForestFrozen": 1,
+          "MiniFlipped": 1,
+          "TundraMoonlet": 1,
+          "MarshyMoonlet": 1,
+          "MooMoonlet": 1,
+          "WaterMoonlet": 1,
+          "NiobiumMoonlet": 1,
+          "RegolithMoonlet": 1,
+          "TemporalTear": 1,
+          "HarvestableSpacePOI_SwampyOreField": 1,
+          "HarvestableSpacePOI_OrganicMassField": 2,
+          "HarvestableSpacePOI_FrozenOreField": 1,
+          "HarvestableSpacePOI_GlimmeringAsteroidField": 1,
+          "HarvestableSpacePOI_HeliumCloud": 1,
+          "HarvestableSpacePOI_GildedAsteroidField": 1,
+          "HarvestableSpacePOI_OilyAsteroidField": 3,
+          "HarvestableSpacePOI_RadioactiveGasCloud": 4,
+          "HarvestableSpacePOI_RadioactiveAsteroidField": 1,
+          "HarvestableSpacePOI_InterstellarOcean": 4,
+          "HarvestableSpacePOI_ChlorineCloud": 2,
+          "HarvestableSpacePOI_SatelliteField": 1,
+          "HarvestableSpacePOI_CarbonAsteroidField": 1,
+          "HarvestableSpacePOI_GasGiantCloud": 1,
+          "ArtifactSpacePOI_RussellsTeapot": 1,
+          "ArtifactSpacePOI_GravitasSpaceStation8": 1,
+          "ArtifactSpacePOI_GravitasSpaceStation3": 1,
+          "ArtifactSpacePOI_GravitasSpaceStation7": 1,
+          "ArtifactSpacePOI_GravitasSpaceStation2": 1
+        }
+      },
+      {
+        "coordinate": "M-BAD-C-1900407801-0-0-0",
+        "cluster": "M-BAD-C",
+        "dlcs": [
+          "FrostyPlanet",
+          "SpacedOut"
+        ],
+        "worldTraitsOfStarter": [
+          "SlimeSplats"
+        ],
+        "geysersCountOfStarter": {
+          "OIL_WELL": 5,
+          "COOL_STEAM": 1,
+          "CHLORINE": 1,
+          "MINOR_VOLCANO": 1,
+          "HOT_CO2": 1,
+          "HOT_POLLUTED_O2": 1
+        },
+        "starMapEntryCounts": {
+          "MiniBadlandsStart": 1,
+          "MiniRadioactiveOceanWarp": 1,
+          "MiniMetallicSwampy": 1,
+          "MiniForestFrozen": 1,
+          "MiniFlipped": 1,
+          "TundraMoonlet": 1,
+          "MarshyMoonlet": 1,
+          "MooMoonlet": 1,
+          "WaterMoonlet": 1,
+          "NiobiumMoonlet": 1,
+          "RegolithMoonlet": 1,
+          "TemporalTear": 1,
+          "HarvestableSpacePOI_SwampyOreField": 1,
+          "HarvestableSpacePOI_OrganicMassField": 1,
+          "HarvestableSpacePOI_GildedAsteroidField": 3,
+          "HarvestableSpacePOI_GlimmeringAsteroidField": 2,
+          "HarvestableSpacePOI_FrozenOreField": 1,
+          "HarvestableSpacePOI_HeliumCloud": 1,
+          "HarvestableSpacePOI_OilyAsteroidField": 3,
+          "HarvestableSpacePOI_RadioactiveGasCloud": 1,
+          "HarvestableSpacePOI_RadioactiveAsteroidField": 1,
+          "HarvestableSpacePOI_RockyAsteroidField": 2,
+          "HarvestableSpacePOI_InterstellarIceField": 1,
+          "HarvestableSpacePOI_InterstellarOcean": 1,
+          "HarvestableSpacePOI_ForestyOreField": 1,
+          "HarvestableSpacePOI_OxidizedAsteroidField": 1,
+          "HarvestableSpacePOI_OxygenRichAsteroidField": 1,
+          "HarvestableSpacePOI_IceAsteroidField": 2,
+          "HarvestableSpacePOI_MetallicAsteroidField": 1,
+          "ArtifactSpacePOI_GravitasSpaceStation6": 1,
+          "ArtifactSpacePOI_RussellsTeapot": 1,
+          "ArtifactSpacePOI_GravitasSpaceStation5": 1,
+          "ArtifactSpacePOI_GravitasSpaceStation8": 1,
+          "ArtifactSpacePOI_GravitasSpaceStation2": 1,
+          "ArtifactSpacePOI_GravitasSpaceStation7": 1
+        }
+      },
+      {
+        "coordinate": "M-BAD-C-1046768072-0-0-0",
+        "cluster": "M-BAD-C",
+        "dlcs": [
+          "FrostyPlanet",
+          "SpacedOut"
+        ],
+        "worldTraitsOfStarter": [
+          "MetalPoor",
+          "RadioactiveCrust"
+        ],
+        "geysersCountOfStarter": {
+          "OIL_WELL": 5,
+          "COOL_STEAM": 1,
+          "NATURAL_GAS": 1,
+          "HOT_CO2": 1,
+          "HYDROGEN": 1,
+          "INFECTIOUS_POLLUTED_O2": 1
+        },
+        "starMapEntryCounts": {
+          "MiniBadlandsStart": 1,
+          "MiniRadioactiveOceanWarp": 1,
+          "MiniMetallicSwampy": 1,
+          "MiniForestFrozen": 1,
+          "MiniFlipped": 1,
+          "TundraMoonlet": 1,
+          "MarshyMoonlet": 1,
+          "MooMoonlet": 1,
+          "WaterMoonlet": 1,
+          "NiobiumMoonlet": 1,
+          "RegolithMoonlet": 1,
+          "TemporalTear": 1,
+          "HarvestableSpacePOI_SwampyOreField": 1,
+          "HarvestableSpacePOI_OrganicMassField": 3,
+          "HarvestableSpacePOI_FrozenOreField": 2,
+          "HarvestableSpacePOI_GlimmeringAsteroidField": 1,
+          "HarvestableSpacePOI_OilyAsteroidField": 2,
+          "HarvestableSpacePOI_HeliumCloud": 1,
+          "HarvestableSpacePOI_GildedAsteroidField": 1,
+          "HarvestableSpacePOI_RadioactiveGasCloud": 2,
+          "HarvestableSpacePOI_RadioactiveAsteroidField": 3,
+          "HarvestableSpacePOI_RockyAsteroidField": 1,
+          "HarvestableSpacePOI_ForestyOreField": 2,
+          "HarvestableSpacePOI_CarbonAsteroidField": 1,
+          "HarvestableSpacePOI_ChlorineCloud": 1,
+          "HarvestableSpacePOI_OxidizedAsteroidField": 1,
+          "HarvestableSpacePOI_SaltyAsteroidField": 1,
+          "HarvestableSpacePOI_IceAsteroidField": 1,
+          "ArtifactSpacePOI_GravitasSpaceStation6": 1,
+          "ArtifactSpacePOI_RussellsTeapot": 1,
+          "ArtifactSpacePOI_GravitasSpaceStation5": 1,
+          "ArtifactSpacePOI_GravitasSpaceStation8": 1,
+          "ArtifactSpacePOI_GravitasSpaceStation2": 1,
+          "ArtifactSpacePOI_GravitasSpaceStation3": 1
+        }
+      },
+      {
+        "coordinate": "M-BAD-C-187201784-0-0-0",
+        "cluster": "M-BAD-C",
+        "dlcs": [
+          "FrostyPlanet",
+          "SpacedOut"
+        ],
+        "worldTraitsOfStarter": [
+          "MetalRich",
+          "SlimeSplats"
+        ],
+        "geysersCountOfStarter": {
+          "OIL_WELL": 5,
+          "COOL_STEAM": 1,
+          "CHLORINE": 2,
+          "LEAKY_OIL_FISSURE": 1,
+          "HOT_CO2": 1
+        },
+        "starMapEntryCounts": {
+          "MiniBadlandsStart": 1,
+          "MiniRadioactiveOceanWarp": 1,
+          "MiniMetallicSwampy": 1,
+          "MiniForestFrozen": 1,
+          "MiniFlipped": 1,
+          "TundraMoonlet": 1,
+          "MarshyMoonlet": 1,
+          "MooMoonlet": 1,
+          "WaterMoonlet": 1,
+          "NiobiumMoonlet": 1,
+          "RegolithMoonlet": 1,
+          "TemporalTear": 1,
+          "HarvestableSpacePOI_SwampyOreField": 1,
+          "HarvestableSpacePOI_OrganicMassField": 1,
+          "HarvestableSpacePOI_HeliumCloud": 1,
+          "HarvestableSpacePOI_OilyAsteroidField": 1,
+          "HarvestableSpacePOI_GildedAsteroidField": 2,
+          "HarvestableSpacePOI_GlimmeringAsteroidField": 1,
+          "HarvestableSpacePOI_FrozenOreField": 2,
+          "HarvestableSpacePOI_RadioactiveAsteroidField": 3,
+          "HarvestableSpacePOI_RadioactiveGasCloud": 2,
+          "HarvestableSpacePOI_RockyAsteroidField": 2,
+          "HarvestableSpacePOI_InterstellarIceField": 1,
+          "HarvestableSpacePOI_ForestyOreField": 1,
+          "HarvestableSpacePOI_CarbonAsteroidField": 1,
+          "HarvestableSpacePOI_SaltyAsteroidField": 1,
+          "HarvestableSpacePOI_MetallicAsteroidField": 1,
+          "HarvestableSpacePOI_ChlorineCloud": 1,
+          "HarvestableSpacePOI_OxidizedAsteroidField": 1,
+          "ArtifactSpacePOI_GravitasSpaceStation6": 1,
+          "ArtifactSpacePOI_RussellsTeapot": 1,
+          "ArtifactSpacePOI_GravitasSpaceStation2": 1,
+          "ArtifactSpacePOI_GravitasSpaceStation3": 1
+        }
+      },
+      {
+        "coordinate": "M-BAD-C-1518279474-0-0-0",
+        "cluster": "M-BAD-C",
+        "dlcs": [
+          "FrostyPlanet",
+          "SpacedOut"
+        ],
+        "worldTraitsOfStarter": [
+          "DeepOil",
+          "Geodes"
+        ],
+        "geysersCountOfStarter": {
+          "OIL_WELL": 14,
+          "COOL_STEAM": 1,
+          "CHLORINE": 1,
+          "HOT_CO2": 1,
+          "NATURAL_GAS": 1,
+          "INFECTIOUS_POLLUTED_O2": 1
+        },
+        "starMapEntryCounts": {
+          "MiniBadlandsStart": 1,
+          "MiniRadioactiveOceanWarp": 1,
+          "MiniMetallicSwampy": 1,
+          "MiniForestFrozen": 1,
+          "MiniFlipped": 1,
+          "TundraMoonlet": 1,
+          "MarshyMoonlet": 1,
+          "MooMoonlet": 1,
+          "WaterMoonlet": 1,
+          "NiobiumMoonlet": 1,
+          "RegolithMoonlet": 1,
+          "TemporalTear": 1,
+          "HarvestableSpacePOI_SwampyOreField": 1,
+          "HarvestableSpacePOI_OrganicMassField": 4,
+          "HarvestableSpacePOI_GlimmeringAsteroidField": 1,
+          "HarvestableSpacePOI_HeliumCloud": 1,
+          "HarvestableSpacePOI_FrozenOreField": 1,
+          "HarvestableSpacePOI_OilyAsteroidField": 2,
+          "HarvestableSpacePOI_GildedAsteroidField": 2,
+          "HarvestableSpacePOI_RadioactiveGasCloud": 1,
+          "HarvestableSpacePOI_RadioactiveAsteroidField": 1,
+          "HarvestableSpacePOI_SandyOreField": 1,
+          "HarvestableSpacePOI_InterstellarOcean": 1,
+          "HarvestableSpacePOI_SatelliteField": 2,
+          "HarvestableSpacePOI_IceAsteroidField": 3,
+          "HarvestableSpacePOI_GasGiantCloud": 1,
+          "HarvestableSpacePOI_MetallicAsteroidField": 1,
+          "HarvestableSpacePOI_OxidizedAsteroidField": 1,
+          "ArtifactSpacePOI_GravitasSpaceStation4": 1,
+          "ArtifactSpacePOI_RussellsTeapot": 1,
+          "ArtifactSpacePOI_GravitasSpaceStation5": 1,
+          "ArtifactSpacePOI_GravitasSpaceStation8": 1,
+          "ArtifactSpacePOI_GravitasSpaceStation7": 1,
+          "ArtifactSpacePOI_GravitasSpaceStation2": 1
+        }
+      },
         {
           "coordinate": "SNDST-C-971302415-0-0-0",
           "cluster": "SNDST-C",
