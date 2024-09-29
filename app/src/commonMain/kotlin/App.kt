@@ -82,6 +82,32 @@ import oni_seed_browser.app.generated.resources.cluster_spacedout_verdante
 import oni_seed_browser.app.generated.resources.cluster_spacedout_volcanea
 import oni_seed_browser.app.generated.resources.dlc_frosty_planet
 import oni_seed_browser.app.generated.resources.dlc_spaced_out
+import oni_seed_browser.app.generated.resources.geyser_aluminum_volcano
+import oni_seed_browser.app.generated.resources.geyser_carbon_dioxide
+import oni_seed_browser.app.generated.resources.geyser_carbon_dioxide_vent
+import oni_seed_browser.app.generated.resources.geyser_chlorine_gas_vent
+import oni_seed_browser.app.generated.resources.geyser_cobalt_volcano
+import oni_seed_browser.app.generated.resources.geyser_cool_salt_slush_geyser
+import oni_seed_browser.app.generated.resources.geyser_cool_slush_geyser
+import oni_seed_browser.app.generated.resources.geyser_cool_steam_vent
+import oni_seed_browser.app.generated.resources.geyser_copper_volcano
+import oni_seed_browser.app.generated.resources.geyser_gold_volcano
+import oni_seed_browser.app.generated.resources.geyser_hot_polluted_oxygen_vent
+import oni_seed_browser.app.generated.resources.geyser_hydrogen_vent
+import oni_seed_browser.app.generated.resources.geyser_infectious_polluted_oxygen_vent
+import oni_seed_browser.app.generated.resources.geyser_iron_volcano
+import oni_seed_browser.app.generated.resources.geyser_leaky_oil_fissure
+import oni_seed_browser.app.generated.resources.geyser_liquid_sulfur_geyser
+import oni_seed_browser.app.generated.resources.geyser_minor_volcano
+import oni_seed_browser.app.generated.resources.geyser_natural_gas_geyser
+import oni_seed_browser.app.generated.resources.geyser_niobium_volcano
+import oni_seed_browser.app.generated.resources.geyser_oil_reservoir
+import oni_seed_browser.app.generated.resources.geyser_polluted_water_vent
+import oni_seed_browser.app.generated.resources.geyser_salt_water
+import oni_seed_browser.app.generated.resources.geyser_steam_vent
+import oni_seed_browser.app.generated.resources.geyser_tungsten_volcano
+import oni_seed_browser.app.generated.resources.geyser_volcano
+import oni_seed_browser.app.generated.resources.geyser_water
 import oni_seed_browser.app.generated.resources.oni_logo
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
@@ -299,6 +325,12 @@ fun WorldSummaryView(
                             .background(MaterialTheme.colorScheme.surfaceVariant, defaultRoundedCornerShape)
                     ) {
 
+                        Image(
+                            painter = painterResource(getGeyserDrawable(geyserType)),
+                            contentDescription = null,
+                            modifier = Modifier.defaultPadding()
+                        )
+
                         Text(
                             text = geyserType.displayName,
                             style = MaterialTheme.typography.bodyLarge,
@@ -332,6 +364,36 @@ fun WorldSummaryView(
         }
     }
 }
+
+fun getGeyserDrawable(geyserType: GeyserType): DrawableResource =
+    when (geyserType) {
+        GeyserType.COOL_STEAM -> Res.drawable.geyser_cool_steam_vent
+        GeyserType.HOT_STEAM -> Res.drawable.geyser_steam_vent
+        GeyserType.WATER -> Res.drawable.geyser_water
+        GeyserType.COOL_SLUSH_WATER -> Res.drawable.geyser_cool_slush_geyser
+        GeyserType.POLLUTED_WATER -> Res.drawable.geyser_polluted_water_vent
+        GeyserType.COOL_SALT_WATER -> Res.drawable.geyser_cool_salt_slush_geyser
+        GeyserType.HOT_SALT_WATER -> Res.drawable.geyser_salt_water
+        GeyserType.MINOR_VOLCANO -> Res.drawable.geyser_minor_volcano
+        GeyserType.VOLCANO -> Res.drawable.geyser_volcano
+        GeyserType.LIQUID_CO2 -> Res.drawable.geyser_carbon_dioxide
+        GeyserType.HOT_CO2 -> Res.drawable.geyser_carbon_dioxide_vent
+        GeyserType.HYDROGEN -> Res.drawable.geyser_hydrogen_vent
+        GeyserType.HOT_POLLUTED_O2 -> Res.drawable.geyser_hot_polluted_oxygen_vent
+        GeyserType.INFECTIOUS_POLLUTED_O2 -> Res.drawable.geyser_infectious_polluted_oxygen_vent
+        GeyserType.CHLORINE -> Res.drawable.geyser_chlorine_gas_vent
+        GeyserType.NATURAL_GAS -> Res.drawable.geyser_natural_gas_geyser
+        GeyserType.COPPER_VOLCANO -> Res.drawable.geyser_copper_volcano
+        GeyserType.IRON_VOLCANO -> Res.drawable.geyser_iron_volcano
+        GeyserType.GOLD_VOLCANO -> Res.drawable.geyser_gold_volcano
+        GeyserType.LEAKY_OIL_FISSURE -> Res.drawable.geyser_leaky_oil_fissure
+        GeyserType.ALUMINIUM_VOLCANO -> Res.drawable.geyser_aluminum_volcano
+        GeyserType.COBALT_VOLCANO -> Res.drawable.geyser_cobalt_volcano
+        GeyserType.SULFUR_GEYSER -> Res.drawable.geyser_liquid_sulfur_geyser
+        GeyserType.TUNGSTEN_VOLCANO -> Res.drawable.geyser_tungsten_volcano
+        GeyserType.NIOBIUM_VOLCANO -> Res.drawable.geyser_niobium_volcano
+        GeyserType.OIL_WELL -> Res.drawable.geyser_oil_reservoir
+    }
 
 @Composable
 fun getClusterDrawable(cluster: Cluster): DrawableResource =
