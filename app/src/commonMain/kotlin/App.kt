@@ -37,6 +37,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollbarAdapter
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Switch
@@ -47,6 +48,8 @@ import androidx.compose.runtime.produceState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import model.Cluster
@@ -267,7 +270,7 @@ fun WorldSummaryView(
 
             Box(
                 contentAlignment = Alignment.Center,
-                modifier = Modifier.width(200.dp)
+                modifier = Modifier.width(180.dp)
             ) {
 
                 Column(
@@ -278,7 +281,9 @@ fun WorldSummaryView(
                     Image(
                         painter = painterResource(getClusterDrawable(summary.cluster)),
                         contentDescription = null,
-                        modifier = Modifier.defaultPadding()
+                        modifier = Modifier
+                            .defaultPadding()
+                            .size(100.dp)
                     )
 
                     SelectionContainer {
@@ -322,14 +327,22 @@ fun WorldSummaryView(
                         modifier = Modifier
                             .padding(4.dp)
                             .width(250.dp)
-                            .background(MaterialTheme.colorScheme.surfaceVariant, defaultRoundedCornerShape)
+                            .background(
+                                color = MaterialTheme.colorScheme.surfaceVariant,
+                                shape = RoundedCornerShape(16.dp)
+                            )
                     ) {
 
                         Image(
                             painter = painterResource(getGeyserDrawable(geyserType)),
                             contentDescription = null,
-                            modifier = Modifier.defaultPadding()
+                            modifier = Modifier
+                                .size(32.dp)
+                                .clip(CircleShape)
+                                .scale(1.2f)
                         )
+
+                        DefaultSpacer()
 
                         Text(
                             text = geyserType.displayName,
@@ -341,8 +354,13 @@ fun WorldSummaryView(
                         Box(
                             contentAlignment = Alignment.Center,
                             modifier = Modifier
-                                .padding(2.dp)
-                                .size(28.dp)
+                                .padding(
+                                    start = 2.dp,
+                                    top = 2.dp,
+                                    end = 4.dp,
+                                    bottom = 2.dp
+                                )
+                                .size(26.dp)
                                 .background(
                                     color = if (count > 0) darkGreen else darkRed,
                                     shape = CircleShape
@@ -354,7 +372,7 @@ fun WorldSummaryView(
                                 style = MaterialTheme.typography.bodyLarge,
                                 fontWeight = FontWeight.Bold,
                                 color = MaterialTheme.colorScheme.onBackground,
-                                modifier = Modifier.offset(y = -1.dp)
+                                modifier = Modifier.offset(y = -2.dp)
                             )
                         }
                     }
