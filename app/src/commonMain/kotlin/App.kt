@@ -25,8 +25,10 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -37,12 +39,14 @@ import androidx.compose.foundation.rememberScrollbarAdapter
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.produceState
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import model.Cluster
@@ -85,6 +89,8 @@ import service.DummyWebClient
 import theme.AppTypography
 import theme.DefaultSpacer
 import theme.appColorScheme
+import theme.darkGreen
+import theme.darkRed
 import theme.defaultPadding
 import theme.defaultRoundedCornerShape
 import theme.defaultSpacing
@@ -98,6 +104,8 @@ fun App() {
         colorScheme = appColorScheme,
         typography = AppTypography()
     ) {
+
+        val showTypesNotPresentOnMap = remember { mutableStateOf(false) }
 
         val string = produceState<SearchResponse?>(null) {
 
@@ -113,7 +121,6 @@ fun App() {
 
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(defaultSpacing),
             modifier = Modifier
                 .background(MaterialTheme.colorScheme.background)
         ) {
@@ -130,6 +137,8 @@ fun App() {
                 style = MaterialTheme.typography.headlineSmall,
                 color = MaterialTheme.colorScheme.error
             )
+
+            DefaultSpacer()
 
             Row(
                 modifier = Modifier.defaultPadding(),
@@ -156,6 +165,33 @@ fun App() {
                 )
             }
 
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+
+                Spacer(
+                    modifier = Modifier.width(32.dp)
+                )
+
+                Text(
+                    text = "Show types not present on the map",
+                    style = MaterialTheme.typography.bodyLarge,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.onBackground
+                )
+
+                DefaultSpacer()
+
+                Switch(
+                    checked = showTypesNotPresentOnMap.value,
+                    onCheckedChange = { showTypesNotPresentOnMap.value = it }
+                )
+
+                Spacer(
+                    modifier = Modifier.weight(1F)
+                )
+            }
+
             Box {
 
                 val lazyListState = rememberLazyListState()
@@ -173,7 +209,7 @@ fun App() {
 
                         items(response.summaries) { summary ->
 
-                            WorldSummaryView(summary)
+                            WorldSummaryView(summary, showTypesNotPresentOnMap.value)
                         }
                     }
                 }
@@ -189,7 +225,10 @@ fun App() {
 }
 
 @Composable
-fun WorldSummaryView(summary: WorldSummary) {
+fun WorldSummaryView(
+    summary: WorldSummary,
+    showTypesNotPresentOnMap: Boolean
+) {
 
     Box(
         modifier = Modifier
@@ -249,7 +288,7 @@ fun WorldSummaryView(summary: WorldSummary) {
 
                     val count = summary.geysersCountOfStarter[geyserType] ?: 0
 
-                    if (count == 0)
+                    if (!showTypesNotPresentOnMap && count == 0)
                         continue
 
                     Row(
@@ -270,15 +309,20 @@ fun WorldSummaryView(summary: WorldSummary) {
                         Box(
                             contentAlignment = Alignment.Center,
                             modifier = Modifier
-                                .padding(4.dp)
-                                .size(32.dp)
-                                .background(Color.Blue, CircleShape)
+                                .padding(2.dp)
+                                .size(28.dp)
+                                .background(
+                                    color = if (count > 0) darkGreen else darkRed,
+                                    shape = CircleShape
+                                )
                         ) {
 
                             Text(
                                 text = count.toString(),
                                 style = MaterialTheme.typography.bodyLarge,
-                                color = MaterialTheme.colorScheme.onBackground
+                                fontWeight = FontWeight.Bold,
+                                color = MaterialTheme.colorScheme.onBackground,
+                                modifier = Modifier.offset(y = -1.dp)
                             )
                         }
                     }
