@@ -59,7 +59,7 @@ enum class WorldTrait(
     ),
     GeoActive(
         displayName = "Geoactive",
-        color = Color(0xFFECA6E9)
+        color = Color(0xFFECA649)
     ),
     Geodes(
         displayName = "Geodes",
