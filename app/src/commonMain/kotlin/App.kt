@@ -108,18 +108,21 @@ fun App() {
 
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(defaultSpacing)
+            verticalArrangement = Arrangement.spacedBy(defaultSpacing),
+            modifier = Modifier
+                .background(MaterialTheme.colorScheme.background)
         ) {
 
             Text(
                 text = "ONI Map Explorer",
-                style = MaterialTheme.typography.headlineLarge
+                style = MaterialTheme.typography.headlineLarge,
+                color = MaterialTheme.colorScheme.onBackground
             )
 
             Text(
                 text = "This is a non-functional work-in-progress version.",
                 style = MaterialTheme.typography.headlineSmall,
-                color = Color.Red
+                color = MaterialTheme.colorScheme.error
             )
 
             Row(
@@ -182,7 +185,7 @@ fun App() {
 @Composable
 fun WorldSummaryView(summary: WorldSummary) {
 
-    Box(Modifier.background(Color.LightGray, defaultRoundedCornerShape)) {
+    Box(Modifier.background(MaterialTheme.colorScheme.surfaceVariant, defaultRoundedCornerShape)) {
 
         Row {
 
@@ -205,7 +208,8 @@ fun WorldSummaryView(summary: WorldSummary) {
                         Text(
                             text = summary.coordinate,
                             style = MaterialTheme.typography.bodyMedium,
-                            fontWeight = FontWeight.Bold
+                            fontWeight = FontWeight.Bold,
+                            color = MaterialTheme.colorScheme.onBackground
                         )
                     }
 
@@ -213,7 +217,8 @@ fun WorldSummaryView(summary: WorldSummary) {
 
                         Text(
                             text = trait.displayName,
-                            style = MaterialTheme.typography.bodyMedium
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onBackground
                         )
                     }
                 }
@@ -240,7 +245,7 @@ fun WorldSummaryView(summary: WorldSummary) {
                         Text(
                             text = geyserType.displayName,
                             style = MaterialTheme.typography.bodyLarge,
-                            color = Color.White,
+                            color = MaterialTheme.colorScheme.onBackground,
                             modifier = Modifier.weight(1F)
                         )
 
@@ -255,7 +260,7 @@ fun WorldSummaryView(summary: WorldSummary) {
                             Text(
                                 text = count.toString(),
                                 style = MaterialTheme.typography.bodyLarge,
-                                color = Color.White
+                                color = MaterialTheme.colorScheme.onBackground
                             )
                         }
                     }
