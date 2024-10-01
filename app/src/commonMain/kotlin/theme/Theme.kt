@@ -1,5 +1,7 @@
 package theme
 
+import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -24,3 +26,9 @@ fun DefaultSpacer() = Spacer(Modifier.size(defaultSpacing))
 
 @Composable
 fun DoubleSpacer() = Spacer(Modifier.size(doubleSpacing))
+
+@Composable
+fun ColumnScope.FillSpacer() = Spacer(Modifier.weight(1F))
+
+@Composable
+fun RowScope.FillSpacer() = Spacer(Modifier.weight(1F))

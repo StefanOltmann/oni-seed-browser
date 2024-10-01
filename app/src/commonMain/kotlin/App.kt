@@ -20,6 +20,7 @@
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.VerticalScrollbar
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.defaultScrollbarStyle
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -52,6 +53,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import model.Cluster
@@ -144,6 +146,7 @@ import org.jetbrains.compose.resources.painterResource
 import service.DummyWebClient
 import theme.AppTypography
 import theme.DefaultSpacer
+import theme.FillSpacer
 import theme.appColorScheme
 import theme.darkGreen
 import theme.darkRed
@@ -269,7 +272,8 @@ fun WorldView(
     ) {
 
         Column(
-            modifier = Modifier.defaultPadding()
+            modifier = Modifier.defaultPadding(),
+            verticalArrangement = Arrangement.spacedBy(doubleSpacing)
         ) {
 
             ClusterTypeHeaderRow(
@@ -277,7 +281,88 @@ fun WorldView(
                 coordinate = world.coordinate
             )
 
+            for (asteroid in world.asteroids) {
 
+                Row(
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+
+                    Box(
+                        modifier = Modifier
+                            .size(96.dp)
+                            .border(1.dp, Color.Red)
+                    )
+
+                    DefaultSpacer()
+
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.Start,
+                            modifier = Modifier.height(32.dp)
+                        ) {
+
+                            Text(
+                                text = asteroid.id,
+                                style = MaterialTheme.typography.bodyLarge,
+                                color = MaterialTheme.colorScheme.onBackground
+                            )
+
+                            for (worldTrait in asteroid.worldTraits) {
+
+                                DefaultSpacer()
+
+                                Image(
+                                    painter = painterResource(getWorldTraitDrawable(worldTrait)),
+                                    contentDescription = null,
+                                    modifier = Modifier.size(18.dp)
+                                )
+                            }
+
+                            FillSpacer()
+                        }
+
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            modifier = Modifier.height(32.dp)
+                        ) {
+
+                            for (geyser in asteroid.geysers.sortedBy { it.id }) {
+
+                                Image(
+                                    painter = painterResource(getGeyserDrawable(geyser.id)),
+                                    contentDescription = null,
+                                    modifier = Modifier.size(32.dp)
+                                )
+                            }
+
+                            FillSpacer()
+                        }
+
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            modifier = Modifier.height(32.dp)
+                        ) {
+
+                            for (poi in asteroid.pointsOfInterest) {
+
+                                Box(
+                                    modifier = Modifier
+                                        .size(32.dp)
+                                        .background(Color.Black, CircleShape)
+                                )
+                            }
+
+                            FillSpacer()
+                        }
+                    }
+                }
+
+
+            }
         }
     }
 }
