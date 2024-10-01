@@ -219,28 +219,6 @@ fun App() {
                 )
             }
 
-            Row(
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-
-                Spacer(
-                    modifier = Modifier.width(32.dp)
-                )
-
-                Text(
-                    text = "Show types not present on the map",
-                    style = MaterialTheme.typography.bodyLarge,
-                    fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.onBackground
-                )
-
-                DefaultSpacer()
-
-                Spacer(
-                    modifier = Modifier.weight(1F)
-                )
-            }
-
             Box {
 
                 val lazyListState = rememberLazyListState()
