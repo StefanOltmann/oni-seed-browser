@@ -24,6 +24,7 @@ import androidx.compose.foundation.defaultScrollbarStyle
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.PaddingValues
@@ -54,6 +55,7 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import model.Cluster
+import model.Geyser
 import model.GeyserType
 import model.World
 import model.WorldTrait
@@ -270,107 +272,124 @@ fun WorldView(
             modifier = Modifier.defaultPadding()
         ) {
 
+            ClusterTypeHeaderRow(
+                cluster = world.cluster,
+                coordinate = world.coordinate
+            )
+
+
+        }
+    }
+}
+
+@Composable
+fun ClusterTypeHeaderRow(
+    cluster: Cluster,
+    coordinate: String
+) {
+
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Center,
+        modifier = Modifier.fillMaxWidth()
+    ) {
+
+        Text(
+            text = cluster.displayName.uppercase(),
+            style = MaterialTheme.typography.bodyLarge,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.colorScheme.onBackground
+        )
+
+        Image(
+            painter = painterResource(getClusterDrawable(cluster)),
+            contentDescription = null,
+            modifier = Modifier
+                .defaultPadding()
+                .size(44.dp)
+        )
+
+        SelectionContainer {
+
+            Text(
+                text = coordinate,
+                style = MaterialTheme.typography.bodyLarge,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.onBackground
+            )
+        }
+    }
+}
+
+@OptIn(ExperimentalLayoutApi::class)
+@Composable
+fun ColumnScope.GeysersView(geysers: List<Geyser>) {
+
+    FlowRow(
+        modifier = Modifier
+            .weight(1F)
+            .defaultPadding()
+    ) {
+
+        val geysersCountOfStarter =
+            geysers.groupBy { it.id }.mapValues { (_, value) -> value.size }
+
+        for (geyserType in GeyserType.entries) {
+
+            val count = geysersCountOfStarter[geyserType] ?: 0
+
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center,
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier
+                    .padding(4.dp)
+                    .width(250.dp)
+                    .background(
+                        color = MaterialTheme.colorScheme.surfaceVariant,
+                        shape = RoundedCornerShape(16.dp)
+                    )
             ) {
-
-                Text(
-                    text = world.cluster.displayName.uppercase(),
-                    style = MaterialTheme.typography.bodyLarge,
-                    fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.onBackground
-                )
 
                 Image(
-                    painter = painterResource(getClusterDrawable(world.cluster)),
+                    painter = painterResource(getGeyserDrawable(geyserType)),
                     contentDescription = null,
                     modifier = Modifier
-                        .defaultPadding()
-                        .size(44.dp)
+                        .size(32.dp)
+                        .clip(CircleShape)
+                        .scale(1.2f)
                 )
 
-                SelectionContainer {
+                DefaultSpacer()
+
+                Text(
+                    text = geyserType.displayName,
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = MaterialTheme.colorScheme.onBackground,
+                    modifier = Modifier.weight(1F)
+                )
+
+                Box(
+                    contentAlignment = Alignment.Center,
+                    modifier = Modifier
+                        .size(26.dp)
+                        .background(
+                            color = if (count > 0) darkGreen else darkRed,
+                            shape = CircleShape
+                        )
+                ) {
 
                     Text(
-                        text = world.coordinate,
+                        text = count.toString(),
                         style = MaterialTheme.typography.bodyLarge,
                         fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.onBackground
+                        color = MaterialTheme.colorScheme.onBackground,
+                        modifier = Modifier.offset(y = -2.dp)
                     )
                 }
-            }
 
-            FlowRow(
-                modifier = Modifier
-                    .weight(1F)
-                    .defaultPadding()
-            ) {
-
-                val geysers = world.asteroids.first().geysers
-
-                val geysersCountOfStarter =
-                    geysers.groupBy { it.id }.mapValues { (_, value) -> value.size }
-
-                for (geyserType in GeyserType.entries) {
-
-                    val count = geysersCountOfStarter[geyserType] ?: 0
-
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        modifier = Modifier
-                            .padding(4.dp)
-                            .width(250.dp)
-                            .background(
-                                color = MaterialTheme.colorScheme.surfaceVariant,
-                                shape = RoundedCornerShape(16.dp)
-                            )
-                    ) {
-
-                        Image(
-                            painter = painterResource(getGeyserDrawable(geyserType)),
-                            contentDescription = null,
-                            modifier = Modifier
-                                .size(32.dp)
-                                .clip(CircleShape)
-                                .scale(1.2f)
-                        )
-
-                        DefaultSpacer()
-
-                        Text(
-                            text = geyserType.displayName,
-                            style = MaterialTheme.typography.bodyLarge,
-                            color = MaterialTheme.colorScheme.onBackground,
-                            modifier = Modifier.weight(1F)
-                        )
-
-                        Box(
-                            contentAlignment = Alignment.Center,
-                            modifier = Modifier
-                                .size(26.dp)
-                                .background(
-                                    color = if (count > 0) darkGreen else darkRed,
-                                    shape = CircleShape
-                                )
-                        ) {
-
-                            Text(
-                                text = count.toString(),
-                                style = MaterialTheme.typography.bodyLarge,
-                                fontWeight = FontWeight.Bold,
-                                color = MaterialTheme.colorScheme.onBackground,
-                                modifier = Modifier.offset(y = -2.dp)
-                            )
-                        }
-
-                        Spacer(modifier = Modifier.width(4.dp))
-                    }
-                }
-
+                Spacer(modifier = Modifier.width(4.dp))
             }
         }
+
     }
 }
 
