@@ -20,7 +20,6 @@
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.VerticalScrollbar
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.defaultScrollbarStyle
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -56,12 +55,25 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import model.AsteroidType
 import model.Cluster
 import model.Geyser
 import model.GeyserType
 import model.World
 import model.WorldTrait
 import oni_seed_browser.app.generated.resources.Res
+import oni_seed_browser.app.generated.resources.asteroid_folia
+import oni_seed_browser.app.generated.resources.asteroid_glowood_wasteland
+import oni_seed_browser.app.generated.resources.asteroid_marshy
+import oni_seed_browser.app.generated.resources.asteroid_moo
+import oni_seed_browser.app.generated.resources.asteroid_quagmiris
+import oni_seed_browser.app.generated.resources.asteroid_radioactive_forest
+import oni_seed_browser.app.generated.resources.asteroid_radioactive_swamp
+import oni_seed_browser.app.generated.resources.asteroid_radioactive_terra
+import oni_seed_browser.app.generated.resources.asteroid_superconductive
+import oni_seed_browser.app.generated.resources.asteroid_terrania
+import oni_seed_browser.app.generated.resources.asteroid_tundra
+import oni_seed_browser.app.generated.resources.asteroid_water
 import oni_seed_browser.app.generated.resources.cluster_base_arboria
 import oni_seed_browser.app.generated.resources.cluster_base_aridio
 import oni_seed_browser.app.generated.resources.cluster_base_oasisse
@@ -146,7 +158,9 @@ import org.jetbrains.compose.resources.painterResource
 import service.DummyWebClient
 import theme.AppTypography
 import theme.DefaultSpacer
+import theme.DoubleSpacer
 import theme.FillSpacer
+import theme.HalfSpacer
 import theme.appColorScheme
 import theme.darkGreen
 import theme.darkRed
@@ -283,17 +297,21 @@ fun WorldView(
 
             for (asteroid in world.asteroids) {
 
+                val asteroidType = AsteroidType.of(asteroid.id)
+
                 Row(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
 
-                    Box(
-                        modifier = Modifier
-                            .size(96.dp)
-                            .border(1.dp, Color.Red)
+                    DoubleSpacer()
+
+                    Image(
+                        painter = painterResource(getAsteroidTypeDrawable(asteroidType)),
+                        contentDescription = null,
+                        modifier = Modifier.size(104.dp)
                     )
 
-                    DefaultSpacer()
+                    DoubleSpacer()
 
                     Column(
                         horizontalAlignment = Alignment.CenterHorizontally
@@ -306,7 +324,7 @@ fun WorldView(
                         ) {
 
                             Text(
-                                text = asteroid.id,
+                                text = asteroidType.displayName,
                                 style = MaterialTheme.typography.bodyLarge,
                                 color = MaterialTheme.colorScheme.onBackground
                             )
@@ -325,6 +343,8 @@ fun WorldView(
                             FillSpacer()
                         }
 
+                        HalfSpacer()
+
                         Row(
                             verticalAlignment = Alignment.CenterVertically,
                             modifier = Modifier.height(32.dp)
@@ -341,6 +361,8 @@ fun WorldView(
 
                             FillSpacer()
                         }
+
+                        HalfSpacer()
 
                         Row(
                             verticalAlignment = Alignment.CenterVertically,
@@ -565,4 +587,58 @@ fun getClusterDrawable(cluster: Cluster): DrawableResource =
         Cluster.DLC_FROZEN_FOREST_MOONLET -> Res.drawable.cluster_spacedout_frozen_forest_moonlet
         Cluster.DLC_FLIPPED_MOONLET -> Res.drawable.cluster_spacedout_flipped_moonlet
         Cluster.DLC_RADIOACTIVE_OCEAN_MOONLET -> Res.drawable.cluster_spacedout_radioactive_ocean_moonlet
+    }
+
+@Composable
+fun getAsteroidTypeDrawable(asteroidType: AsteroidType): DrawableResource =
+    when (asteroidType) {
+
+        // TODO Correct?
+        AsteroidType.TERRA -> Res.drawable.cluster_base_terra
+        AsteroidType.OCEANIA -> Res.drawable.cluster_base_oceania
+        AsteroidType.RIME -> Res.drawable.cluster_base_rime
+        AsteroidType.VERDANTE -> Res.drawable.cluster_base_verdante
+        AsteroidType.ARBORIA -> Res.drawable.cluster_base_arboria
+        AsteroidType.VOLCANEA -> Res.drawable.cluster_base_volcanea
+        AsteroidType.THE_BADLANDS -> Res.drawable.cluster_base_the_badlands
+        AsteroidType.ARIDIO -> Res.drawable.cluster_base_aridio
+        AsteroidType.OASISSE -> Res.drawable.cluster_base_oasisse
+        AsteroidType.SQUELCHY -> Res.drawable.cluster_spacedout_squelchy
+
+        AsteroidType.TERRANIA -> Res.drawable.asteroid_terrania
+        AsteroidType.FOLIA -> Res.drawable.asteroid_folia
+        AsteroidType.QUAGMIRIS -> Res.drawable.asteroid_quagmiris
+        AsteroidType.METALLIC_SWAMPY -> Res.drawable.cluster_spacedout_metallic_swampy_moonlet
+        AsteroidType.THE_DESOLANDS -> Res.drawable.cluster_spacedout_the_desolands_moonlet
+        AsteroidType.FROZEN_FOREST -> Res.drawable.cluster_spacedout_frozen_forest_moonlet
+        AsteroidType.FLIPPED -> Res.drawable.cluster_spacedout_flipped_moonlet
+        AsteroidType.RADIOACTIVE_OCEAN -> Res.drawable.cluster_spacedout_radioactive_ocean_moonlet
+        AsteroidType.RADIOACTIVE_SWAMP -> Res.drawable.asteroid_radioactive_swamp
+        AsteroidType.GLOWOOD_WASTELAND -> Res.drawable.asteroid_glowood_wasteland
+        AsteroidType.RADIOACTIVE_FOREST -> Res.drawable.asteroid_radioactive_forest
+
+        // FIXME
+        AsteroidType.STINKO_SWAMP -> Res.drawable.asteroid_radioactive_swamp
+
+        AsteroidType.RADIOACTIVE_TERRA -> Res.drawable.asteroid_radioactive_terra
+
+        // FIXME
+        AsteroidType.RADIOACTIVE_TERRABOG_ASTEROID -> Res.drawable.asteroid_terrania
+
+        // FIXME
+        AsteroidType.OILY_SWAMP -> Res.drawable.asteroid_terrania
+
+        AsteroidType.RUSTY_OIL -> Res.drawable.asteroid_terrania // FIXME
+        AsteroidType.IRRADIATED_FOREST -> Res.drawable.asteroid_terrania // FIXME
+        AsteroidType.IRRADIATED_SWAMPY -> Res.drawable.asteroid_terrania // FIXME
+        AsteroidType.IRRADIATED_MARSH_ASTEROID -> Res.drawable.asteroid_terrania // FIXME
+        AsteroidType.TUNDRA -> Res.drawable.asteroid_tundra
+        AsteroidType.MARSHY -> Res.drawable.asteroid_marshy
+        AsteroidType.SUPERCONDUCTIVE -> Res.drawable.asteroid_superconductive
+
+        AsteroidType.MOO -> Res.drawable.asteroid_moo
+
+        AsteroidType.WATER -> Res.drawable.asteroid_water
+
+        AsteroidType.REGOLITH -> Res.drawable.asteroid_water // FIXME
     }
