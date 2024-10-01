@@ -57,7 +57,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import model.Cluster
 import model.GeyserType
-import model.WorldSummary
+import model.World
 import model.WorldTrait
 import oni_seed_browser.app.generated.resources.Res
 import oni_seed_browser.app.generated.resources.cluster_base_arboria
@@ -265,9 +265,9 @@ fun App() {
                         modifier = Modifier.defaultPadding()
                     ) {
 
-                        items(response.summaries) { summary ->
+                        items(response.worlds) { summary ->
 
-                            WorldSummaryView(summary, showTypesNotPresentOnMap.value)
+                            WorldView(summary, showTypesNotPresentOnMap.value)
                         }
                     }
                 }
@@ -288,8 +288,8 @@ fun App() {
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-fun WorldSummaryView(
-    summary: WorldSummary,
+fun WorldView(
+    world: World,
     showTypesNotPresentOnMap: Boolean
 ) {
 
@@ -313,7 +313,7 @@ fun WorldSummaryView(
                 ) {
 
                     Image(
-                        painter = painterResource(getClusterDrawable(summary.cluster)),
+                        painter = painterResource(getClusterDrawable(world.cluster)),
                         contentDescription = null,
                         modifier = Modifier
                             .defaultPadding()
@@ -323,7 +323,7 @@ fun WorldSummaryView(
                     SelectionContainer {
 
                         Text(
-                            text = summary.coordinate,
+                            text = world.coordinate,
                             style = MaterialTheme.typography.bodyLarge,
                             fontWeight = FontWeight.Bold,
                             color = MaterialTheme.colorScheme.onBackground
@@ -336,7 +336,7 @@ fun WorldSummaryView(
                         verticalArrangement = Arrangement.spacedBy(defaultSpacing)
                     ) {
 
-                        for (worldTrait in summary.worldTraitsOfStarter) {
+                        for (worldTrait in world.asteroids.first().worldTraits) {
 
                             Row(
                                 verticalAlignment = Alignment.CenterVertically
@@ -368,9 +368,14 @@ fun WorldSummaryView(
                     .defaultPadding()
             ) {
 
+                val geysers = world.asteroids.first().geysers
+
+                val geysersCountOfStarter =
+                    geysers.groupBy { it.id }.mapValues { (_, value) -> value.size }
+
                 for (geyserType in GeyserType.entries) {
 
-                    val count = summary.geysersCountOfStarter[geyserType] ?: 0
+                    val count = geysersCountOfStarter[geyserType] ?: 0
 
                     if (!showTypesNotPresentOnMap && count == 0)
                         continue

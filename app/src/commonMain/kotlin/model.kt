@@ -17,8 +17,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import model.WorldSummary
 import kotlinx.serialization.Serializable
+import model.World
 
 @Serializable
 data class SearchRequest(
@@ -34,5 +34,5 @@ data class SearchResponse(
     val pageSize: Int,
     val totalPages: Int,
     val totalResults: Int,
-    val summaries: List<WorldSummary>
+    val worlds: List<World>
 )
