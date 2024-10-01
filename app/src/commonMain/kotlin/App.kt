@@ -30,6 +30,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
@@ -43,12 +44,9 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.produceState
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -162,8 +160,6 @@ fun App() {
         typography = AppTypography()
     ) {
 
-        val showTypesNotPresentOnMap = remember { mutableStateOf(false) }
-
         val string = produceState<SearchResponse?>(null) {
 
             value = DummyWebClient.search(
@@ -240,11 +236,6 @@ fun App() {
 
                 DefaultSpacer()
 
-                Switch(
-                    checked = showTypesNotPresentOnMap.value,
-                    onCheckedChange = { showTypesNotPresentOnMap.value = it }
-                )
-
                 Spacer(
                     modifier = Modifier.weight(1F)
                 )
@@ -265,9 +256,9 @@ fun App() {
                         modifier = Modifier.defaultPadding()
                     ) {
 
-                        items(response.worlds) { summary ->
+                        items(response.worlds) { world ->
 
-                            WorldView(summary, showTypesNotPresentOnMap.value)
+                            WorldView(world)
                         }
                     }
                 }
@@ -289,8 +280,7 @@ fun App() {
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun WorldView(
-    world: World,
-    showTypesNotPresentOnMap: Boolean
+    world: World
 ) {
 
     Box(
@@ -298,67 +288,39 @@ fun WorldView(
             .background(MaterialTheme.colorScheme.surface, defaultRoundedCornerShape)
     ) {
 
-        Row(
+        Column(
             modifier = Modifier.defaultPadding()
         ) {
 
-            Box(
-                contentAlignment = Alignment.Center,
-                modifier = Modifier.width(180.dp)
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Center,
+                modifier = Modifier.fillMaxWidth()
             ) {
 
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    modifier = Modifier.fillMaxHeight()
-                ) {
+                Text(
+                    text = world.cluster.displayName.uppercase(),
+                    style = MaterialTheme.typography.bodyLarge,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.onBackground
+                )
 
-                    Image(
-                        painter = painterResource(getClusterDrawable(world.cluster)),
-                        contentDescription = null,
-                        modifier = Modifier
-                            .defaultPadding()
-                            .size(100.dp)
+                Image(
+                    painter = painterResource(getClusterDrawable(world.cluster)),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .defaultPadding()
+                        .size(44.dp)
+                )
+
+                SelectionContainer {
+
+                    Text(
+                        text = world.coordinate,
+                        style = MaterialTheme.typography.bodyLarge,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.onBackground
                     )
-
-                    SelectionContainer {
-
-                        Text(
-                            text = world.coordinate,
-                            style = MaterialTheme.typography.bodyLarge,
-                            fontWeight = FontWeight.Bold,
-                            color = MaterialTheme.colorScheme.onBackground
-                        )
-                    }
-
-                    DefaultSpacer()
-
-                    Column(
-                        verticalArrangement = Arrangement.spacedBy(defaultSpacing)
-                    ) {
-
-                        for (worldTrait in world.asteroids.first().worldTraits) {
-
-                            Row(
-                                verticalAlignment = Alignment.CenterVertically
-                            ) {
-
-                                Image(
-                                    painter = painterResource(getWorldTraitDrawable(worldTrait)),
-                                    contentDescription = null,
-                                    modifier = Modifier.size(24.dp)
-                                )
-
-                                DefaultSpacer()
-
-                                Text(
-                                    text = worldTrait.displayName,
-                                    style = MaterialTheme.typography.bodyLarge,
-                                    color = worldTrait.color,
-                                    modifier = Modifier.offset(y = -2.dp)
-                                )
-                            }
-                        }
-                    }
                 }
             }
 
@@ -376,9 +338,6 @@ fun WorldView(
                 for (geyserType in GeyserType.entries) {
 
                     val count = geysersCountOfStarter[geyserType] ?: 0
-
-                    if (!showTypesNotPresentOnMap && count == 0)
-                        continue
 
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
