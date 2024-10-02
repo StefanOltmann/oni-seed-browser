@@ -306,12 +306,7 @@ fun WorldView(
             .background(MaterialTheme.colorScheme.surface, defaultRoundedCornerShape)
     ) {
 
-        val gridLayoutColumnCount: Int =
-            when {
-                maxWidth > 1200.dp -> 3
-                maxWidth > 800.dp -> 2
-                else -> 1
-            }
+        val gridLayoutColumnCount = maxWidth.div(450.dp).toInt()
 
         Column(
             modifier = Modifier.defaultPadding(),
