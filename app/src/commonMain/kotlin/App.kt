@@ -20,6 +20,7 @@
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.VerticalScrollbar
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.defaultScrollbarStyle
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -281,7 +282,6 @@ fun App() {
 
 }
 
-@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun WorldView(
     world: World
@@ -294,7 +294,7 @@ fun WorldView(
 
         Column(
             modifier = Modifier.defaultPadding(),
-            verticalArrangement = Arrangement.spacedBy(doubleSpacing)
+            verticalArrangement = Arrangement.spacedBy(defaultSpacing)
         ) {
 
             Box(
@@ -313,7 +313,11 @@ fun WorldView(
                 }
             }
 
+            val firstAsteroid = world.asteroids.first()
+
             for (asteroid in world.asteroids) {
+
+                val isStarterAstroid = firstAsteroid == asteroid
 
                 val asteroidType = AsteroidType.of(asteroid.id)
 
@@ -321,6 +325,10 @@ fun WorldView(
                     verticalAlignment = Alignment.CenterVertically,
                     modifier = Modifier.background(
                         MaterialTheme.colorScheme.surfaceVariant,
+                        defaultRoundedCornerShape
+                    ).border(
+                        if (isStarterAstroid) 2.dp else 0.dp,
+                        Color.Black,
                         defaultRoundedCornerShape
                     ).defaultPadding()
                 ) {
