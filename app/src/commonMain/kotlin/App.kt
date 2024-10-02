@@ -20,6 +20,7 @@
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.VerticalScrollbar
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.defaultScrollbarStyle
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -166,7 +167,6 @@ import org.jetbrains.compose.resources.painterResource
 import service.DummyWebClient
 import theme.AppTypography
 import theme.DefaultSpacer
-import theme.DoubleSpacer
 import theme.FillSpacer
 import theme.HalfSpacer
 import theme.appColorScheme
@@ -298,64 +298,96 @@ fun WorldView(
             verticalArrangement = Arrangement.spacedBy(doubleSpacing)
         ) {
 
-            ClusterTypeHeaderRow(
-                cluster = world.cluster,
-                coordinate = world.coordinate
-            )
+            Box(
+                contentAlignment = Alignment.Center,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+
+                SelectionContainer {
+
+                    Text(
+                        text = world.coordinate,
+                        style = MaterialTheme.typography.headlineLarge,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.onBackground
+                    )
+                }
+            }
 
             for (asteroid in world.asteroids) {
 
                 val asteroidType = AsteroidType.of(asteroid.id)
 
                 Row(
-                    verticalAlignment = Alignment.CenterVertically
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.background(
+                        MaterialTheme.colorScheme.surfaceVariant,
+                        defaultRoundedCornerShape
+                    ).defaultPadding()
                 ) {
 
-                    DoubleSpacer()
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.spacedBy(defaultSpacing),
+                        modifier = Modifier
+                            .width(192.dp)
+                            .border(1.dp, Color.Red)
+                    ) {
 
-                    Image(
-                        painter = painterResource(getAsteroidTypeDrawable(asteroidType)),
-                        contentDescription = null,
-                        modifier = Modifier.size(104.dp)
-                    )
+                        Text(
+                            text = asteroidType.displayName,
+                            style = MaterialTheme.typography.bodyLarge,
+                            color = MaterialTheme.colorScheme.onBackground,
+                            modifier = Modifier
+                                .height(32.dp)
+                                .border(1.dp, Color.Green)
+                        )
 
-                    DoubleSpacer()
+                        Image(
+                            painter = painterResource(getAsteroidTypeDrawable(asteroidType)),
+                            contentDescription = null,
+                            modifier = Modifier.size(64.dp)
+                        )
+
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(defaultSpacing),
+                            modifier = Modifier
+                                .height(32.dp)
+                                .border(1.dp, Color.Green)
+                        ) {
+
+                            if (asteroid.worldTraits.isEmpty()) {
+
+                                Text(
+                                    text = "No traits",
+                                    style = MaterialTheme.typography.bodyLarge,
+                                    color = MaterialTheme.colorScheme.onBackground
+                                )
+
+                            } else {
+
+                                for (worldTrait in asteroid.worldTraits) {
+
+                                    Image(
+                                        painter = painterResource(getWorldTraitDrawable(worldTrait)),
+                                        contentDescription = null,
+                                        modifier = Modifier.size(24.dp)
+                                    )
+                                }
+                            }
+                        }
+                    }
 
                     Column(
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
 
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.Start,
-                            modifier = Modifier.height(32.dp)
-                        ) {
-
-                            Text(
-                                text = asteroidType.displayName,
-                                style = MaterialTheme.typography.bodyLarge,
-                                color = MaterialTheme.colorScheme.onBackground
-                            )
-
-                            for (worldTrait in asteroid.worldTraits) {
-
-                                DefaultSpacer()
-
-                                Image(
-                                    painter = painterResource(getWorldTraitDrawable(worldTrait)),
-                                    contentDescription = null,
-                                    modifier = Modifier.size(18.dp)
-                                )
-                            }
-
-                            FillSpacer()
-                        }
-
                         HalfSpacer()
 
                         Row(
                             verticalAlignment = Alignment.CenterVertically,
-                            modifier = Modifier.height(32.dp)
+                            modifier = Modifier.height(64.dp)
                         ) {
 
                             val geyserByTypeMap = asteroid.geysers.groupBy { it.id }
@@ -367,7 +399,7 @@ fun WorldView(
                                 Image(
                                     painter = painterResource(getGeyserDrawable(geyserType)),
                                     contentDescription = null,
-                                    modifier = Modifier.size(32.dp)
+                                    modifier = Modifier.size(48.dp)
                                 )
                             }
 
@@ -378,14 +410,14 @@ fun WorldView(
 
                         Row(
                             verticalAlignment = Alignment.CenterVertically,
-                            modifier = Modifier.height(32.dp)
+                            modifier = Modifier.height(64.dp)
                         ) {
 
                             for (poi in asteroid.pointsOfInterest) {
 
                                 Box(
                                     modifier = Modifier
-                                        .size(32.dp)
+                                        .size(48.dp)
                                         .background(Color.Black, CircleShape)
                                 )
                             }
@@ -397,45 +429,6 @@ fun WorldView(
 
 
             }
-        }
-    }
-}
-
-@Composable
-fun ClusterTypeHeaderRow(
-    cluster: Cluster,
-    coordinate: String
-) {
-
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.Center,
-        modifier = Modifier.fillMaxWidth()
-    ) {
-
-        Text(
-            text = cluster.displayName.uppercase(),
-            style = MaterialTheme.typography.bodyLarge,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colorScheme.onBackground
-        )
-
-        Image(
-            painter = painterResource(getClusterDrawable(cluster)),
-            contentDescription = null,
-            modifier = Modifier
-                .defaultPadding()
-                .size(44.dp)
-        )
-
-        SelectionContainer {
-
-            Text(
-                text = coordinate,
-                style = MaterialTheme.typography.bodyLarge,
-                fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.onBackground
-            )
         }
     }
 }
