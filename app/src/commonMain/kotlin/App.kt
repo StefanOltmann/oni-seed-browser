@@ -386,7 +386,7 @@ fun WorldView(
                         HalfSpacer()
 
                         Row(
-                            verticalAlignment = Alignment.CenterVertically,
+                            verticalAlignment = Alignment.Bottom,
                             modifier = Modifier.height(64.dp)
                         ) {
 
@@ -396,9 +396,21 @@ fun WorldView(
 
                             for (geyserType in sortedGeyserTypes) {
 
+                                val count = geyserByTypeMap[geyserType]!!.size
+
+                                if (count > 1) {
+
+                                    Text(
+                                        text = "${count}x",
+                                        style = MaterialTheme.typography.bodyLarge,
+                                        color = MaterialTheme.colorScheme.onBackground
+                                    )
+                                }
+
                                 Image(
                                     painter = painterResource(getGeyserDrawable(geyserType)),
                                     contentDescription = null,
+                                    alignment = Alignment.BottomCenter,
                                     modifier = Modifier.size(48.dp)
                                 )
                             }
