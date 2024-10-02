@@ -20,11 +20,15 @@
 package model
 
 import kotlinx.serialization.Serializable
+import serializer.PointOfInterestTypeSerializer
 
 @Suppress("UNUSED")
 @Serializable
 data class PointOfInterest(
-    val id: String,
+
+    @Serializable(with = PointOfInterestTypeSerializer::class)
+    val id: PointOfInterestType,
+
     val posX: Int,
     val posY: Int,
 )

@@ -61,6 +61,7 @@ import model.AsteroidType
 import model.Cluster
 import model.Geyser
 import model.GeyserType
+import model.PointOfInterestType
 import model.World
 import model.WorldTrait
 import oni_seed_browser.app.generated.resources.Res
@@ -84,6 +85,14 @@ import oni_seed_browser.app.generated.resources.asteroid_superconductive
 import oni_seed_browser.app.generated.resources.asteroid_terrania
 import oni_seed_browser.app.generated.resources.asteroid_tundra
 import oni_seed_browser.app.generated.resources.asteroid_water
+import oni_seed_browser.app.generated.resources.building_anti_entropy_thermo_nullifier
+import oni_seed_browser.app.generated.resources.building_neural_vacillator
+import oni_seed_browser.app.generated.resources.building_printing_pod
+import oni_seed_browser.app.generated.resources.building_sap_tree
+import oni_seed_browser.app.generated.resources.building_supply_teleporter_input
+import oni_seed_browser.app.generated.resources.building_supply_teleporter_output
+import oni_seed_browser.app.generated.resources.building_teleporter_receiver
+import oni_seed_browser.app.generated.resources.building_teleporter_transmitter
 import oni_seed_browser.app.generated.resources.cluster_base_arboria
 import oni_seed_browser.app.generated.resources.cluster_base_aridio
 import oni_seed_browser.app.generated.resources.cluster_base_oasisse
@@ -473,12 +482,28 @@ fun AsteroidDisplay(
                 modifier = Modifier.height(64.dp)
             ) {
 
-                for (poi in asteroid.pointsOfInterest) {
+                val poisByTypeMap = asteroid.pointsOfInterest.groupBy { it.id }
 
-                    Box(
-                        modifier = Modifier
-                            .size(48.dp)
-                            .background(Color.Black, CircleShape)
+                val sortedPoiTypes = poisByTypeMap.keys.sorted()
+
+                for (poiType in sortedPoiTypes) {
+
+                    val count = poisByTypeMap[poiType]!!.size
+
+                    if (count > 1) {
+
+                        Text(
+                            text = "${count}x",
+                            style = MaterialTheme.typography.bodyLarge,
+                            color = MaterialTheme.colorScheme.onBackground
+                        )
+                    }
+
+                    Image(
+                        painter = painterResource(getPointOfInterestDrawable(poiType)),
+                        contentDescription = null,
+                        alignment = Alignment.BottomCenter,
+                        modifier = Modifier.size(48.dp)
                     )
                 }
 
@@ -616,6 +641,18 @@ fun getGeyserDrawable(geyserType: GeyserType): DrawableResource =
         GeyserType.TUNGSTEN_VOLCANO -> Res.drawable.geyser_tungsten_volcano
         GeyserType.NIOBIUM_VOLCANO -> Res.drawable.geyser_niobium_volcano
         GeyserType.OIL_WELL -> Res.drawable.geyser_oil_reservoir
+    }
+
+fun getPointOfInterestDrawable(pointOfInterestType: PointOfInterestType): DrawableResource =
+    when (pointOfInterestType) {
+        PointOfInterestType.PRINTING_POD -> Res.drawable.building_printing_pod
+        PointOfInterestType.SUPPLY_TELEPORTER_INPUT -> Res.drawable.building_supply_teleporter_input
+        PointOfInterestType.SUPPLY_TELEPORTER_OUTPUT -> Res.drawable.building_supply_teleporter_output
+        PointOfInterestType.TELEPORTER_TRANSMITTER -> Res.drawable.building_teleporter_transmitter
+        PointOfInterestType.TELEPORTER_RECEIVER -> Res.drawable.building_teleporter_receiver
+        PointOfInterestType.NEURAL_VACILLATOR -> Res.drawable.building_neural_vacillator
+        PointOfInterestType.ANTI_ENTROPY_THERMO_NULLIFIER -> Res.drawable.building_anti_entropy_thermo_nullifier
+        PointOfInterestType.EXPERIMENT_52B -> Res.drawable.building_sap_tree
     }
 
 @Composable
