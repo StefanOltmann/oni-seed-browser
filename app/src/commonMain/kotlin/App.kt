@@ -358,10 +358,14 @@ fun WorldView(
                             modifier = Modifier.height(32.dp)
                         ) {
 
-                            for (geyser in asteroid.geysers.sortedBy { it.id }) {
+                            val geyserByTypeMap = asteroid.geysers.groupBy { it.id }
+
+                            val sortedGeyserTypes = geyserByTypeMap.keys.sorted()
+
+                            for (geyserType in sortedGeyserTypes) {
 
                                 Image(
-                                    painter = painterResource(getGeyserDrawable(geyser.id)),
+                                    painter = painterResource(getGeyserDrawable(geyserType)),
                                     contentDescription = null,
                                     modifier = Modifier.size(32.dp)
                                 )

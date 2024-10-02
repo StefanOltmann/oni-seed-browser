@@ -28,13 +28,41 @@ enum class GeyserType(
     val displayName: String
 ) {
 
+    /*
+     * Sorted by order to be displayed
+     */
+
     COOL_STEAM(
         type = "steam",
         displayName = "Cool Steam Vent"
     ),
+    HYDROGEN(
+        type = "hot_hydrogen",
+        displayName = "Hydrogen Vent"
+    ),
+    NATURAL_GAS(
+        type = "methane",
+        displayName = "Natural Gas Geyser"
+    ),
+    CHLORINE(
+        type = "chlorine_gas",
+        displayName = "Chlorine Gas Vent"
+    ),
     HOT_STEAM(
         type = "hot_steam",
         displayName = "Steam Vent"
+    ),
+    HOT_CO2(
+        type = "hot_co2",
+        displayName = "Carbon Dioxide Vent"
+    ),
+    HOT_POLLUTED_O2(
+        type = "hot_po2",
+        displayName = "Hot Polluted Oxygen Vent"
+    ),
+    INFECTIOUS_POLLUTED_O2(
+        type = "slimy_po2",
+        displayName = "Infectious Polluted Oxygen Vent"
     ),
     WATER(
         type = "hot_water",
@@ -56,57 +84,29 @@ enum class GeyserType(
         type = "salt_water",
         displayName = "Salt Water Geyser"
     ),
-    MINOR_VOLCANO(
-        type = "small_volcano",
-        displayName = "Minor Volcano"
-    ),
-    VOLCANO(
-        type = "big_volcano",
-        displayName = "Valcano"
-    ),
     LIQUID_CO2(
         type = "liquid_co2",
         displayName = "Carbon Dioxide Geyser"
     ),
-    HOT_CO2(
-        type = "hot_co2",
-        displayName = "Carbon Dioxide Vent"
+    LEAKY_OIL_FISSURE(
+        type = "oil_drip",
+        displayName = "Leaky Oil Fissure"
     ),
-    HYDROGEN(
-        type = "hot_hydrogen",
-        displayName = "Hydrogen Vent"
-    ),
-    HOT_POLLUTED_O2(
-        type = "hot_po2",
-        displayName = "Hot Polluted Oxygen Vent"
-    ),
-    INFECTIOUS_POLLUTED_O2(
-        type = "slimy_po2",
-        displayName = "Infectious Polluted Oxygen Vent"
-    ),
-    CHLORINE(
-        type = "chlorine_gas",
-        displayName = "Chlorine Gas Vent"
-    ),
-    NATURAL_GAS(
-        type = "methane",
-        displayName = "Natural Gas Geyser"
-    ),
-    COPPER_VOLCANO(
-        type = "molten_copper",
-        displayName = "Copper Volcano"
+    SULFUR_GEYSER(
+        type = "liquid_sulfur",
+        displayName = "Sulfur Geyser"
     ),
     IRON_VOLCANO(
         type = "molten_iron",
         displayName = "Iron Volcano"
     ),
+    COPPER_VOLCANO(
+        type = "molten_copper",
+        displayName = "Copper Volcano"
+    ),
     GOLD_VOLCANO(
         type = "molten_gold",
         displayName = "Gold Volcano"
-    ),
-    LEAKY_OIL_FISSURE(
-        type = "oil_drip",
-        displayName = "Leaky Oil Fissure"
     ),
     ALUMINIUM_VOLCANO(
         type = "molten_aluminum",
@@ -116,10 +116,6 @@ enum class GeyserType(
         type = "molten_cobalt",
         displayName = "Cobalt Volcano"
     ),
-    SULFUR_GEYSER(
-        type = "liquid_sulfur",
-        displayName = "Sulfur Geyser"
-    ),
     TUNGSTEN_VOLCANO(
         type = "molten_tungsten",
         displayName = "Tungsten Volcano"
@@ -127,6 +123,14 @@ enum class GeyserType(
     NIOBIUM_VOLCANO(
         type = "molten_niobium",
         displayName = "Niobium Volcano"
+    ),
+    VOLCANO(
+        type = "big_volcano",
+        displayName = "Valcano"
+    ),
+    MINOR_VOLCANO(
+        type = "small_volcano",
+        displayName = "Minor Volcano"
     ),
     OIL_WELL(
         type = "OilWell",
