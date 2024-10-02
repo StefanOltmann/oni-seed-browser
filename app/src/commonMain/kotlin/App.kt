@@ -479,6 +479,7 @@ fun AsteroidDisplay(
 
             Row(
                 verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(2.dp),
                 modifier = Modifier.height(64.dp)
             ) {
 
@@ -499,12 +500,22 @@ fun AsteroidDisplay(
                         )
                     }
 
-                    Image(
-                        painter = painterResource(getPointOfInterestDrawable(poiType)),
-                        contentDescription = null,
-                        alignment = Alignment.BottomCenter,
-                        modifier = Modifier.size(48.dp)
-                    )
+                    Box(
+                        contentAlignment = Alignment.Center,
+                        modifier = Modifier
+                            .size(48.dp)
+                            .background(
+                                MaterialTheme.colorScheme.surface,
+                                CircleShape
+                            )
+                    ) {
+
+                        Image(
+                            painter = painterResource(getPointOfInterestDrawable(poiType)),
+                            contentDescription = null,
+                            modifier = Modifier.padding(defaultSpacing)
+                        )
+                    }
                 }
 
                 if (isStarterAstroid)
