@@ -191,6 +191,10 @@ import theme.white
 
 val logoIconHeight = 80.dp
 
+val overLapping = -16.dp
+
+const val GRID_LAYOUT_COLUMN_COUNT = 3
+
 @Composable
 fun App() {
     MaterialTheme(
@@ -335,18 +339,32 @@ fun WorldView(
 
             val remainingAsteroids = world.asteroids.drop(1)
 
-            FlowRow(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(defaultSpacing),
-                verticalArrangement = Arrangement.spacedBy(defaultSpacing)
-            ) {
+            val asteroidsPerColumn = remainingAsteroids.chunked(GRID_LAYOUT_COLUMN_COUNT)
 
-                for (asteroid in remainingAsteroids) {
+            for (asteroidsInColumn in asteroidsPerColumn) {
 
-                    AsteroidDisplay(
-                        asteroid = asteroid,
-                        isStarterAstroid = false
-                    )
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(defaultSpacing)
+                ) {
+
+                    for (asteroid in asteroidsInColumn) {
+
+                        Box(
+                            modifier = Modifier.weight(1F)
+                        ) {
+
+                            AsteroidDisplay(
+                                asteroid = asteroid,
+                                isStarterAstroid = false
+                            )
+                        }
+                    }
+
+                    val requiredSpacerCount = GRID_LAYOUT_COLUMN_COUNT - asteroidsInColumn.size
+
+                    repeat(requiredSpacerCount) {
+                        FillSpacer()
+                    }
                 }
             }
         }
@@ -368,7 +386,7 @@ fun AsteroidDisplay(
             if (isStarterAstroid) 2.dp else 0.dp,
             Color.Black,
             defaultRoundedCornerShape
-        ).defaultPadding()
+        ).defaultPadding().fillMaxWidth()
     ) {
 
         val asteroidType = AsteroidType.of(asteroid.id)
@@ -419,7 +437,7 @@ fun AsteroidDisplay(
 
             Row(
                 verticalAlignment = Alignment.Bottom,
-                horizontalArrangement = Arrangement.spacedBy(2.dp),
+                horizontalArrangement = Arrangement.spacedBy(overLapping),
                 modifier = Modifier.height(48.dp)
             ) {
 
@@ -448,6 +466,11 @@ fun AsteroidDisplay(
                                 MaterialTheme.colorScheme.surface,
                                 CircleShape
                             )
+                            .border(
+                                1.dp,
+                                Color.Black,
+                                CircleShape
+                            )
                     ) {
 
                         Image(
@@ -467,7 +490,7 @@ fun AsteroidDisplay(
 
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(2.dp),
+                horizontalArrangement = Arrangement.spacedBy(overLapping),
                 modifier = Modifier.height(48.dp)
             ) {
 
@@ -508,6 +531,11 @@ fun AsteroidDisplay(
                                 .size(48.dp)
                                 .background(
                                     MaterialTheme.colorScheme.surface,
+                                    CircleShape
+                                )
+                                .border(
+                                    1.dp,
+                                    Color.Black,
                                     CircleShape
                                 )
                         ) {
