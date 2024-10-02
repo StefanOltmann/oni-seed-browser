@@ -64,12 +64,20 @@ import model.WorldTrait
 import oni_seed_browser.app.generated.resources.Res
 import oni_seed_browser.app.generated.resources.asteroid_folia
 import oni_seed_browser.app.generated.resources.asteroid_glowood_wasteland
+import oni_seed_browser.app.generated.resources.asteroid_irradiated_forest
+import oni_seed_browser.app.generated.resources.asteroid_irradiated_marsh
+import oni_seed_browser.app.generated.resources.asteroid_irradiated_swampy
 import oni_seed_browser.app.generated.resources.asteroid_marshy
 import oni_seed_browser.app.generated.resources.asteroid_moo
+import oni_seed_browser.app.generated.resources.asteroid_oily_swamp
 import oni_seed_browser.app.generated.resources.asteroid_quagmiris
 import oni_seed_browser.app.generated.resources.asteroid_radioactive_forest
 import oni_seed_browser.app.generated.resources.asteroid_radioactive_swamp
 import oni_seed_browser.app.generated.resources.asteroid_radioactive_terra
+import oni_seed_browser.app.generated.resources.asteroid_radioactive_terrabog
+import oni_seed_browser.app.generated.resources.asteroid_regolith
+import oni_seed_browser.app.generated.resources.asteroid_rusty_oil
+import oni_seed_browser.app.generated.resources.asteroid_stinko_swamp
 import oni_seed_browser.app.generated.resources.asteroid_superconductive
 import oni_seed_browser.app.generated.resources.asteroid_terrania
 import oni_seed_browser.app.generated.resources.asteroid_tundra
@@ -616,29 +624,18 @@ fun getAsteroidTypeDrawable(asteroidType: AsteroidType): DrawableResource =
         AsteroidType.RADIOACTIVE_SWAMP -> Res.drawable.asteroid_radioactive_swamp
         AsteroidType.GLOWOOD_WASTELAND -> Res.drawable.asteroid_glowood_wasteland
         AsteroidType.RADIOACTIVE_FOREST -> Res.drawable.asteroid_radioactive_forest
-
-        // FIXME
-        AsteroidType.STINKO_SWAMP -> Res.drawable.asteroid_radioactive_swamp
-
+        AsteroidType.STINKO_SWAMP -> Res.drawable.asteroid_stinko_swamp
         AsteroidType.RADIOACTIVE_TERRA -> Res.drawable.asteroid_radioactive_terra
-
-        // FIXME
-        AsteroidType.RADIOACTIVE_TERRABOG_ASTEROID -> Res.drawable.asteroid_terrania
-
-        // FIXME
-        AsteroidType.OILY_SWAMP -> Res.drawable.asteroid_terrania
-
-        AsteroidType.RUSTY_OIL -> Res.drawable.asteroid_terrania // FIXME
-        AsteroidType.IRRADIATED_FOREST -> Res.drawable.asteroid_terrania // FIXME
-        AsteroidType.IRRADIATED_SWAMPY -> Res.drawable.asteroid_terrania // FIXME
-        AsteroidType.IRRADIATED_MARSH_ASTEROID -> Res.drawable.asteroid_terrania // FIXME
+        AsteroidType.RADIOACTIVE_TERRABOG_ASTEROID -> Res.drawable.asteroid_radioactive_terrabog
+        AsteroidType.OILY_SWAMP -> Res.drawable.asteroid_oily_swamp
+        AsteroidType.RUSTY_OIL -> Res.drawable.asteroid_rusty_oil
+        AsteroidType.IRRADIATED_FOREST -> Res.drawable.asteroid_irradiated_forest
+        AsteroidType.IRRADIATED_SWAMPY -> Res.drawable.asteroid_irradiated_swampy
+        AsteroidType.IRRADIATED_MARSH_ASTEROID -> Res.drawable.asteroid_irradiated_marsh
         AsteroidType.TUNDRA -> Res.drawable.asteroid_tundra
         AsteroidType.MARSHY -> Res.drawable.asteroid_marshy
         AsteroidType.SUPERCONDUCTIVE -> Res.drawable.asteroid_superconductive
-
         AsteroidType.MOO -> Res.drawable.asteroid_moo
-
         AsteroidType.WATER -> Res.drawable.asteroid_water
-
-        AsteroidType.REGOLITH -> Res.drawable.asteroid_water // FIXME
+        AsteroidType.REGOLITH -> Res.drawable.asteroid_regolith
     }
