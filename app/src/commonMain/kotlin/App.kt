@@ -387,11 +387,19 @@ fun AsteroidDisplay(
                 )
             }
 
-            Image(
-                painter = painterResource(getAsteroidTypeDrawable(asteroidType)),
-                contentDescription = null,
-                modifier = Modifier.size(64.dp)
-            )
+            Box(
+                contentAlignment = Alignment.Center,
+                modifier = Modifier
+                    .background(Color.Black, CircleShape)
+                    .size(64.dp)
+            ) {
+
+                Image(
+                    painter = painterResource(getAsteroidTypeDrawable(asteroidType)),
+                    contentDescription = null,
+                    modifier = Modifier.defaultPadding()
+                )
+            }
 
             Row(
                 verticalAlignment = Alignment.CenterVertically,
@@ -404,7 +412,8 @@ fun AsteroidDisplay(
                     Text(
                         text = "No traits",
                         style = MaterialTheme.typography.bodyLarge,
-                        color = MaterialTheme.colorScheme.onBackground
+                        color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.5F),
+                        modifier = Modifier.offset(y = -4.dp)
                     )
 
                 } else {
