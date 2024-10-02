@@ -20,7 +20,6 @@
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.VerticalScrollbar
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.defaultScrollbarStyle
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -329,19 +328,26 @@ fun WorldView(
                     Column(
                         horizontalAlignment = Alignment.CenterHorizontally,
                         verticalArrangement = Arrangement.spacedBy(defaultSpacing),
-                        modifier = Modifier
-                            .width(192.dp)
-                            .border(1.dp, Color.Red)
+                        modifier = Modifier.width(120.dp) // 4 x 24dp traits + spacing
                     ) {
 
-                        Text(
-                            text = asteroidType.displayName,
-                            style = MaterialTheme.typography.bodyLarge,
-                            color = MaterialTheme.colorScheme.onBackground,
-                            modifier = Modifier
-                                .height(32.dp)
-                                .border(1.dp, Color.Green)
-                        )
+                        Column(
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            modifier = Modifier.height(48.dp)
+                        ) {
+
+                            Text(
+                                text = asteroidType.displayName.substringBefore(" Asteroid"),
+                                style = MaterialTheme.typography.bodyLarge,
+                                color = MaterialTheme.colorScheme.onBackground
+                            )
+
+                            Text(
+                                text = "Asteroid",
+                                style = MaterialTheme.typography.bodyLarge,
+                                color = MaterialTheme.colorScheme.onBackground
+                            )
+                        }
 
                         Image(
                             painter = painterResource(getAsteroidTypeDrawable(asteroidType)),
@@ -352,9 +358,7 @@ fun WorldView(
                         Row(
                             verticalAlignment = Alignment.CenterVertically,
                             horizontalArrangement = Arrangement.spacedBy(defaultSpacing),
-                            modifier = Modifier
-                                .height(32.dp)
-                                .border(1.dp, Color.Green)
+                            modifier = Modifier.height(32.dp)
                         ) {
 
                             if (asteroid.worldTraits.isEmpty()) {
@@ -378,6 +382,8 @@ fun WorldView(
                             }
                         }
                     }
+
+                    DefaultSpacer()
 
                     Column(
                         horizontalAlignment = Alignment.CenterHorizontally
