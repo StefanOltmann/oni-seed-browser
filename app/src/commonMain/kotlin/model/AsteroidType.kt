@@ -31,7 +31,7 @@ enum class AsteroidType(
     RIME("Rime Asteroid"),
     VERDANTE("Verdante Asteroid"),
     ARBORIA("Arboria Asteroid"),
-    VOLCANEA("Volcanea Astroid"),
+    VOLCANEA("Volcanea Asteroid"),
     THE_BADLANDS("The Badlands Asteroid"),
     ARIDIO("Aridio Asteroid"),
     OASISSE("Oasisse Asteroid"),
