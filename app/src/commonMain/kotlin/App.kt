@@ -24,6 +24,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.defaultScrollbarStyle
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
@@ -193,8 +194,6 @@ val logoIconHeight = 80.dp
 
 val overLapping = -16.dp
 
-const val GRID_LAYOUT_COLUMN_COUNT = 3
-
 @Composable
 fun App() {
     MaterialTheme(
@@ -297,16 +296,22 @@ fun App() {
 
 }
 
-@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun WorldView(
     world: World
 ) {
 
-    Box(
+    BoxWithConstraints(
         modifier = Modifier
             .background(MaterialTheme.colorScheme.surface, defaultRoundedCornerShape)
     ) {
+
+        val gridLayoutColumnCount: Int =
+            when {
+                maxWidth > 1200.dp -> 3
+                maxWidth > 800.dp -> 2
+                else -> 1
+            }
 
         Column(
             modifier = Modifier.defaultPadding(),
@@ -339,7 +344,7 @@ fun WorldView(
 
             val remainingAsteroids = world.asteroids.drop(1)
 
-            val asteroidsPerColumn = remainingAsteroids.chunked(GRID_LAYOUT_COLUMN_COUNT)
+            val asteroidsPerColumn = remainingAsteroids.chunked(gridLayoutColumnCount)
 
             for (asteroidsInColumn in asteroidsPerColumn) {
 
@@ -360,7 +365,7 @@ fun WorldView(
                         }
                     }
 
-                    val requiredSpacerCount = GRID_LAYOUT_COLUMN_COUNT - asteroidsInColumn.size
+                    val requiredSpacerCount = gridLayoutColumnCount - asteroidsInColumn.size
 
                     repeat(requiredSpacerCount) {
                         FillSpacer()
