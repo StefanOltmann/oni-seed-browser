@@ -56,6 +56,7 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import model.Asteroid
 import model.AsteroidType
 import model.Cluster
 import model.Geyser
@@ -282,6 +283,7 @@ fun App() {
 
 }
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun WorldView(
     world: World
@@ -315,145 +317,170 @@ fun WorldView(
 
             val firstAsteroid = world.asteroids.first()
 
-            for (asteroid in world.asteroids) {
+            /* First Asteroid should span the whole column. */
+            AsteroidDisplay(
+                asteroid = firstAsteroid,
+                isStarterAstroid = true
+            )
 
-                val isStarterAstroid = firstAsteroid == asteroid
+            val remainingAsteroids = world.asteroids.drop(1)
 
-                val asteroidType = AsteroidType.of(asteroid.id)
+            FlowRow(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(defaultSpacing),
+                verticalArrangement = Arrangement.spacedBy(defaultSpacing)
+            ) {
 
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier.background(
-                        MaterialTheme.colorScheme.surfaceVariant,
-                        defaultRoundedCornerShape
-                    ).border(
-                        if (isStarterAstroid) 2.dp else 0.dp,
-                        Color.Black,
-                        defaultRoundedCornerShape
-                    ).defaultPadding()
-                ) {
+                for (asteroid in remainingAsteroids) {
 
-                    Column(
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.spacedBy(defaultSpacing),
-                        modifier = Modifier.width(120.dp) // 4 x 24dp traits + spacing
-                    ) {
+                    AsteroidDisplay(
+                        asteroid = asteroid,
+                        isStarterAstroid = false
+                    )
+                }
+            }
+        }
+    }
+}
 
-                        Column(
-                            horizontalAlignment = Alignment.CenterHorizontally,
-                            modifier = Modifier.height(48.dp)
-                        ) {
+@Composable
+fun AsteroidDisplay(
+    asteroid: Asteroid,
+    isStarterAstroid: Boolean
+) {
 
-                            Text(
-                                text = asteroidType.displayName.substringBefore(" Asteroid"),
-                                style = MaterialTheme.typography.bodyLarge,
-                                color = MaterialTheme.colorScheme.onBackground
-                            )
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier.background(
+            MaterialTheme.colorScheme.surfaceVariant,
+            defaultRoundedCornerShape
+        ).border(
+            if (isStarterAstroid) 2.dp else 0.dp,
+            Color.Black,
+            defaultRoundedCornerShape
+        ).defaultPadding()
+    ) {
 
-                            Text(
-                                text = "Asteroid",
-                                style = MaterialTheme.typography.bodyLarge,
-                                color = MaterialTheme.colorScheme.onBackground
-                            )
-                        }
+        val asteroidType = AsteroidType.of(asteroid.id)
+
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(defaultSpacing),
+            modifier = Modifier.width(120.dp) // 4 x 24dp traits + spacing
+        ) {
+
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.height(48.dp)
+            ) {
+
+                Text(
+                    text = asteroidType.displayName.substringBefore(" Asteroid"),
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = MaterialTheme.colorScheme.onBackground
+                )
+
+                Text(
+                    text = "Asteroid",
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = MaterialTheme.colorScheme.onBackground
+                )
+            }
+
+            Image(
+                painter = painterResource(getAsteroidTypeDrawable(asteroidType)),
+                contentDescription = null,
+                modifier = Modifier.size(64.dp)
+            )
+
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(defaultSpacing),
+                modifier = Modifier.height(32.dp)
+            ) {
+
+                if (asteroid.worldTraits.isEmpty()) {
+
+                    Text(
+                        text = "No traits",
+                        style = MaterialTheme.typography.bodyLarge,
+                        color = MaterialTheme.colorScheme.onBackground
+                    )
+
+                } else {
+
+                    for (worldTrait in asteroid.worldTraits) {
 
                         Image(
-                            painter = painterResource(getAsteroidTypeDrawable(asteroidType)),
+                            painter = painterResource(getWorldTraitDrawable(worldTrait)),
                             contentDescription = null,
-                            modifier = Modifier.size(64.dp)
+                            modifier = Modifier.size(24.dp)
                         )
-
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.spacedBy(defaultSpacing),
-                            modifier = Modifier.height(32.dp)
-                        ) {
-
-                            if (asteroid.worldTraits.isEmpty()) {
-
-                                Text(
-                                    text = "No traits",
-                                    style = MaterialTheme.typography.bodyLarge,
-                                    color = MaterialTheme.colorScheme.onBackground
-                                )
-
-                            } else {
-
-                                for (worldTrait in asteroid.worldTraits) {
-
-                                    Image(
-                                        painter = painterResource(getWorldTraitDrawable(worldTrait)),
-                                        contentDescription = null,
-                                        modifier = Modifier.size(24.dp)
-                                    )
-                                }
-                            }
-                        }
-                    }
-
-                    DefaultSpacer()
-
-                    Column(
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-
-                        HalfSpacer()
-
-                        Row(
-                            verticalAlignment = Alignment.Bottom,
-                            modifier = Modifier.height(64.dp)
-                        ) {
-
-                            val geyserByTypeMap = asteroid.geysers.groupBy { it.id }
-
-                            val sortedGeyserTypes = geyserByTypeMap.keys.sorted()
-
-                            for (geyserType in sortedGeyserTypes) {
-
-                                val count = geyserByTypeMap[geyserType]!!.size
-
-                                if (count > 1) {
-
-                                    Text(
-                                        text = "${count}x",
-                                        style = MaterialTheme.typography.bodyLarge,
-                                        color = MaterialTheme.colorScheme.onBackground
-                                    )
-                                }
-
-                                Image(
-                                    painter = painterResource(getGeyserDrawable(geyserType)),
-                                    contentDescription = null,
-                                    alignment = Alignment.BottomCenter,
-                                    modifier = Modifier.size(48.dp)
-                                )
-                            }
-
-                            FillSpacer()
-                        }
-
-                        HalfSpacer()
-
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically,
-                            modifier = Modifier.height(64.dp)
-                        ) {
-
-                            for (poi in asteroid.pointsOfInterest) {
-
-                                Box(
-                                    modifier = Modifier
-                                        .size(48.dp)
-                                        .background(Color.Black, CircleShape)
-                                )
-                            }
-
-                            FillSpacer()
-                        }
                     }
                 }
+            }
+        }
 
+        DefaultSpacer()
 
+        Column(
+            horizontalAlignment = Alignment.Start
+        ) {
+
+            HalfSpacer()
+
+            Row(
+                verticalAlignment = Alignment.Bottom,
+                modifier = Modifier.height(64.dp)
+            ) {
+
+                val geyserByTypeMap = asteroid.geysers.groupBy { it.id }
+
+                val sortedGeyserTypes = geyserByTypeMap.keys.sorted()
+
+                for (geyserType in sortedGeyserTypes) {
+
+                    val count = geyserByTypeMap[geyserType]!!.size
+
+                    if (count > 1) {
+
+                        Text(
+                            text = "${count}x",
+                            style = MaterialTheme.typography.bodyLarge,
+                            color = MaterialTheme.colorScheme.onBackground
+                        )
+                    }
+
+                    Image(
+                        painter = painterResource(getGeyserDrawable(geyserType)),
+                        contentDescription = null,
+                        alignment = Alignment.BottomCenter,
+                        modifier = Modifier.size(48.dp)
+                    )
+                }
+
+                if (isStarterAstroid)
+                    FillSpacer()
+            }
+
+            HalfSpacer()
+
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.height(64.dp)
+            ) {
+
+                for (poi in asteroid.pointsOfInterest) {
+
+                    Box(
+                        modifier = Modifier
+                            .size(48.dp)
+                            .background(Color.Black, CircleShape)
+                    )
+                }
+
+                if (isStarterAstroid)
+                    FillSpacer()
             }
         }
     }
