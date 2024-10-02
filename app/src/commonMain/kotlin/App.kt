@@ -371,17 +371,11 @@ fun AsteroidDisplay(
 
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier.height(48.dp)
+                modifier = Modifier.height(24.dp)
             ) {
 
                 Text(
                     text = asteroidType.displayName.substringBefore(" Asteroid"),
-                    style = MaterialTheme.typography.bodyLarge,
-                    color = MaterialTheme.colorScheme.onBackground
-                )
-
-                Text(
-                    text = "Asteroid",
                     style = MaterialTheme.typography.bodyLarge,
                     color = MaterialTheme.colorScheme.onBackground
                 )
@@ -404,7 +398,7 @@ fun AsteroidDisplay(
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(defaultSpacing),
-                modifier = Modifier.height(32.dp)
+                modifier = Modifier.height(24.dp)
             ) {
 
                 if (asteroid.worldTraits.isEmpty()) {
@@ -423,7 +417,7 @@ fun AsteroidDisplay(
                         Image(
                             painter = painterResource(getWorldTraitDrawable(worldTrait)),
                             contentDescription = null,
-                            modifier = Modifier.size(24.dp)
+                            modifier = Modifier.size(20.dp)
                         )
                     }
                 }
