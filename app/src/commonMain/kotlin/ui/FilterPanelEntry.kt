@@ -36,7 +36,8 @@ import ui.theme.defaultPadding
 import ui.theme.defaultRoundedCornerShape
 
 @Composable
-fun FilterPanelEntry() {
+fun FilterPanelEntry(
+) {
 
     Row(
         verticalAlignment = Alignment.CenterVertically,

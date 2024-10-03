@@ -22,8 +22,10 @@ package ui
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -53,14 +55,16 @@ import org.jetbrains.compose.resources.painterResource
 import ui.theme.DefaultSpacer
 import ui.theme.DoubleSpacer
 import ui.theme.FillSpacer
+import ui.theme.ctaColor
 import ui.theme.defaultPadding
 import ui.theme.defaultRoundedCornerShape
 import ui.theme.doubleSpacing
+import ui.theme.halfSpacing
 
 @Composable
 fun FilterPanel() {
 
-    val filterPanelOpen = remember { mutableStateOf(false) }
+    val filterPanelOpen = remember { mutableStateOf(true) }
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -147,8 +151,151 @@ fun FilterPanel() {
 
                 DefaultSpacer()
 
-                FilterPanelEntry()
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.defaultPadding()
+                ) {
+
+                    FilterPanelEntry()
+
+                    AddRuleButton(
+                        text = "OR",
+                        onClick = { println("add OR rule") }
+                    )
+                }
+
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.defaultPadding()
+                ) {
+
+                    AddRuleButton(
+                        text = "AND",
+                        onClick = { println("add rule") }
+                    )
+
+                    FillSpacer()
+
+                    ResetButton(
+                        onClick = { println("reset") }
+                    )
+
+                    DefaultSpacer()
+
+                    SearchButton(
+                        onClick = { println("Search") }
+                    )
+                }
             }
         }
+    }
+}
+
+@Composable
+private fun AddRuleButton(
+    text: String,
+    onClick: () -> Unit
+) {
+
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(halfSpacing, Alignment.CenterHorizontally),
+        modifier = Modifier
+            .border(
+                1.dp,
+                MaterialTheme.colorScheme.onBackground,
+                defaultRoundedCornerShape
+            )
+            .size(120.dp, 48.dp)
+            .clickable { onClick() }
+    ) {
+
+        Text(
+            text = "ADD",
+            style = MaterialTheme.typography.bodyLarge,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.colorScheme.onBackground
+        )
+
+        Box(
+            modifier = Modifier
+                .padding()
+                .background(
+                    ctaColor,
+                    defaultRoundedCornerShape
+                )
+        ) {
+
+            Text(
+                text = text,
+                style = MaterialTheme.typography.bodyLarge,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.onBackground,
+                modifier = Modifier.padding(halfSpacing)
+            )
+        }
+
+        Text(
+            text = "RULE",
+            style = MaterialTheme.typography.bodyLarge,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.colorScheme.onBackground
+        )
+    }
+}
+
+@Composable
+private fun ResetButton(
+    onClick: () -> Unit
+) {
+
+    Box(
+        contentAlignment = Alignment.Center,
+        modifier = Modifier
+            .border(
+                1.dp,
+                MaterialTheme.colorScheme.onBackground,
+                defaultRoundedCornerShape
+            )
+            .size(120.dp, 48.dp)
+            .clickable { onClick() }
+    ) {
+
+        Text(
+            text = "RESET",
+            style = MaterialTheme.typography.bodyLarge,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.colorScheme.onBackground
+        )
+    }
+}
+
+@Composable
+private fun SearchButton(
+    onClick: () -> Unit
+) {
+
+    Box(
+        contentAlignment = Alignment.Center,
+        modifier = Modifier
+            .border(
+                1.dp,
+                MaterialTheme.colorScheme.onBackground,
+                defaultRoundedCornerShape
+            )
+            .background(
+                ctaColor,
+                defaultRoundedCornerShape
+            )
+            .size(120.dp, 48.dp)
+            .clickable { onClick() }
+    ) {
+
+        Text(
+            text = "SEARCH",
+            style = MaterialTheme.typography.bodyLarge,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.colorScheme.onBackground
+        )
     }
 }

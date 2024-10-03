@@ -31,7 +31,7 @@ val surfaceVariantColor = Color(0xFF424346)
 val darkRed = Color(0xFFA62D2D)
 val darkGreen = Color(0xFF437E3D)
 
-val ctaColor = Color(0xFF72bcd4)
+val ctaColor = Color.Blue
 
 val appColorScheme = darkColorScheme(
     background = anthracite,

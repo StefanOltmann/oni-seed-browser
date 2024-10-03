@@ -132,8 +132,6 @@ fun App() {
                         fontWeight = FontWeight.Bold,
                     )
                 }
-
-
             }
 
             Text(
