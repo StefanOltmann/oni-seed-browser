@@ -20,6 +20,7 @@
 package ui
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Row
@@ -33,6 +34,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.unit.dp
 import ui.icons.GithubMark
 import ui.theme.halfSpacing
@@ -40,6 +42,8 @@ import ui.theme.white
 
 @Composable
 fun Footer() {
+
+    val uriHandler = LocalUriHandler.current
 
     BoxWithConstraints {
 
@@ -57,7 +61,11 @@ fun Footer() {
                 text = "Oxygen Not Included",
                 style = MaterialTheme.typography.bodyLarge,
                 color = white,
-                modifier = Modifier.offset(y = -2.dp)
+                modifier = Modifier
+                    .offset(y = -2.dp)
+                    .clickable {
+                        uriHandler.openUri("https://www.klei.com/games/oxygen-not-included")
+                    }
             )
 
             Text(
@@ -71,7 +79,11 @@ fun Footer() {
                 text = "Klei Entertainment",
                 style = MaterialTheme.typography.bodyLarge,
                 color = white,
-                modifier = Modifier.offset(y = -2.dp)
+                modifier = Modifier
+                    .offset(y = -2.dp)
+                    .clickable {
+                        uriHandler.openUri("https://www.klei.com")
+                    }
             )
 
             if (showLink) {
@@ -94,7 +106,11 @@ fun Footer() {
                     text = "https://github.com/StefanOltmann/oni-seed-browser",
                     style = MaterialTheme.typography.bodyLarge,
                     color = white,
-                    modifier = Modifier.offset(y = -2.dp)
+                    modifier = Modifier
+                        .offset(y = -2.dp)
+                        .clickable {
+                            uriHandler.openUri("https://github.com/StefanOltmann/oni-seed-browser")
+                        }
                 )
             }
         }
