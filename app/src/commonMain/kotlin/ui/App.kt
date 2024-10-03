@@ -85,6 +85,14 @@ fun App() {
 
             val searchResponse = string.value
 
+            val worldCount = searchResponse?.worlds?.size ?: 0
+
+            Text(
+                text = "Showing $worldCount worlds",
+                style = MaterialTheme.typography.headlineSmall,
+                color = MaterialTheme.colorScheme.onBackground
+            )
+
             Box(
                 modifier = Modifier.weight(1F)
             ) {
