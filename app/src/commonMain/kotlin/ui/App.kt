@@ -26,6 +26,9 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
@@ -58,6 +61,8 @@ fun App() {
 
         val isGettingNewResults = remember { mutableStateOf(false) }
 
+        val errorMessage = remember { mutableStateOf<String?>(null) }
+
         val string = produceState<SearchResponse?>(null, demoMode.value) {
 
             val webClient = if (demoMode.value)
@@ -68,6 +73,8 @@ fun App() {
             isGettingNewResults.value = true
 
             try {
+
+                errorMessage.value = null
 
                 /* Reset the data */
                 value = null
@@ -80,6 +87,12 @@ fun App() {
                         vanilla = true
                     )
                 )
+
+            } catch (ex: Exception) {
+
+                ex.printStackTrace()
+
+                errorMessage.value = ex.stackTraceToString()
 
             } finally {
                 isGettingNewResults.value = false
@@ -98,6 +111,30 @@ fun App() {
                 color = MaterialTheme.colorScheme.onBackground,
                 modifier = Modifier.defaultPadding()
             )
+
+            errorMessage.value?.let {
+
+                Column(
+                    modifier = Modifier
+                        .defaultPadding()
+                        .height(128.dp)
+                        .verticalScroll(rememberScrollState())
+                        .background(
+                            MaterialTheme.colorScheme.errorContainer,
+                            defaultRoundedCornerShape
+                        )
+                ) {
+
+                    Text(
+                        text = it,
+                        style = MaterialTheme.typography.headlineSmall,
+                        color = MaterialTheme.colorScheme.onErrorContainer,
+                        fontWeight = FontWeight.Bold,
+                    )
+                }
+
+
+            }
 
             Text(
                 text = "This is a non-functional work-in-progress prototype.",
