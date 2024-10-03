@@ -116,34 +116,39 @@ fun FilterPanel() {
 
         AnimatedVisibility(filterPanelOpen.value) {
 
-            DefaultSpacer()
+            Column {
 
-            Row(
-                modifier = Modifier.defaultPadding(),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(64.dp)
-            ) {
+                DefaultSpacer()
 
-                Image(
-                    painter = painterResource(Res.drawable.oni_logo),
-                    contentDescription = null,
-                    modifier = Modifier.height(logoIconHeight)
-                )
+                Row(
+                    modifier = Modifier.defaultPadding(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(64.dp)
+                ) {
 
-                Image(
-                    painter = painterResource(Res.drawable.dlc_spaced_out),
-                    contentDescription = null,
-                    modifier = Modifier.height(logoIconHeight)
-                )
+                    Image(
+                        painter = painterResource(Res.drawable.oni_logo),
+                        contentDescription = null,
+                        modifier = Modifier.height(logoIconHeight)
+                    )
 
-                Image(
-                    painter = painterResource(Res.drawable.dlc_frosty_planet),
-                    contentDescription = null,
-                    modifier = Modifier.height(logoIconHeight)
-                )
+                    Image(
+                        painter = painterResource(Res.drawable.dlc_spaced_out),
+                        contentDescription = null,
+                        modifier = Modifier.height(logoIconHeight)
+                    )
+
+                    Image(
+                        painter = painterResource(Res.drawable.dlc_frosty_planet),
+                        contentDescription = null,
+                        modifier = Modifier.height(logoIconHeight)
+                    )
+                }
+
+                DefaultSpacer()
+
+                FilterPanelEntry()
             }
-
-            DefaultSpacer()
         }
     }
 }
