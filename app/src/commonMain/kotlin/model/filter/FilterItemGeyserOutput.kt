@@ -21,9 +21,12 @@ package model.filter
 
 import kotlinx.serialization.Serializable
 import model.GeyserType
+import serializer.GeyserTypeSerializer
 
 @Serializable
 data class FilterItemGeyserOutput(
+
+    @Serializable(with = GeyserTypeSerializer::class)
     val geyserId: GeyserType,
     val numericalRelation: FilterNumericalRelation,
     val outputInKgPerSecond: Double

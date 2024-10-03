@@ -21,10 +21,12 @@ package model.filter
 
 import kotlinx.serialization.Serializable
 import model.Cluster
+import serializer.ClusterSerializer
 
 @Serializable
 data class FilterQuery(
 
+    @Serializable(with = ClusterSerializer::class)
     val cluster: Cluster,
 
     val andRules: List<FilterRule>
