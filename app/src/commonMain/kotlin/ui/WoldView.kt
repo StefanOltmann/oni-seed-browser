@@ -35,10 +35,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import model.World
-import theme.FillSpacer
-import theme.defaultPadding
-import theme.defaultRoundedCornerShape
-import theme.defaultSpacing
+import ui.theme.FillSpacer
+import ui.theme.defaultPadding
+import ui.theme.defaultRoundedCornerShape
+import ui.theme.defaultSpacing
 
 val overLapping = -16.dp
 

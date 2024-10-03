@@ -33,10 +33,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import model.World
-import theme.defaultPadding
-import theme.defaultSpacing
-import theme.doubleSpacing
-import theme.white
+import ui.theme.defaultPadding
+import ui.theme.defaultSpacing
+import ui.theme.doubleSpacing
+import ui.theme.white
 
 @Composable
 fun WorldViewList(

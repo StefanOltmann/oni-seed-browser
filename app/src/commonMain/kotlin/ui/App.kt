@@ -22,6 +22,7 @@ package ui
 import SearchRequest
 import SearchResponse
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -32,10 +33,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import service.DummyWebClient
-import theme.AppTypography
-import theme.DefaultSpacer
-import theme.appColorScheme
-import theme.defaultPadding
+import ui.theme.AppTypography
+import ui.theme.DefaultSpacer
+import ui.theme.appColorScheme
+import ui.theme.defaultPadding
 
 val logoIconHeight = 80.dp
 
@@ -84,8 +85,15 @@ fun App() {
 
             val searchResponse = string.value
 
-            if (searchResponse != null)
-                WorldViewList(searchResponse.worlds)
+            Box(
+                modifier = Modifier.weight(1F)
+            ) {
+
+                if (searchResponse != null)
+                    WorldViewList(searchResponse.worlds)
+            }
+
+            Footer()
         }
     }
 }

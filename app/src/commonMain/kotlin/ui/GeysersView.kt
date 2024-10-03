@@ -26,7 +26,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import model.Geyser
 import model.GeyserType
-import theme.defaultPadding
+import ui.theme.defaultPadding
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable

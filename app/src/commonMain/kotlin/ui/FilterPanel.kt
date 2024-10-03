@@ -50,12 +50,12 @@ import oni_seed_browser.app.generated.resources.dlc_frosty_planet
 import oni_seed_browser.app.generated.resources.dlc_spaced_out
 import oni_seed_browser.app.generated.resources.oni_logo
 import org.jetbrains.compose.resources.painterResource
-import theme.DefaultSpacer
-import theme.DoubleSpacer
-import theme.FillSpacer
-import theme.defaultPadding
-import theme.defaultRoundedCornerShape
-import theme.doubleSpacing
+import ui.theme.DefaultSpacer
+import ui.theme.DoubleSpacer
+import ui.theme.FillSpacer
+import ui.theme.defaultPadding
+import ui.theme.defaultRoundedCornerShape
+import ui.theme.doubleSpacing
 
 @Composable
 fun FilterPanel() {

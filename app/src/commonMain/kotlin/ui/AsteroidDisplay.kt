@@ -46,13 +46,13 @@ import androidx.compose.ui.unit.dp
 import model.Asteroid
 import model.AsteroidType
 import org.jetbrains.compose.resources.painterResource
-import theme.DefaultSpacer
-import theme.DoubleSpacer
-import theme.FillSpacer
-import theme.HalfSpacer
-import theme.defaultPadding
-import theme.defaultRoundedCornerShape
-import theme.defaultSpacing
+import ui.theme.DefaultSpacer
+import ui.theme.DoubleSpacer
+import ui.theme.FillSpacer
+import ui.theme.HalfSpacer
+import ui.theme.defaultPadding
+import ui.theme.defaultRoundedCornerShape
+import ui.theme.defaultSpacing
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable

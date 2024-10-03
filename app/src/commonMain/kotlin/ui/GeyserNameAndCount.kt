@@ -41,9 +41,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import model.GeyserType
 import org.jetbrains.compose.resources.painterResource
-import theme.DefaultSpacer
-import theme.darkGreen
-import theme.darkRed
+import ui.theme.DefaultSpacer
+import ui.theme.darkGreen
+import ui.theme.darkRed
 
 @Composable
 fun GeyserCountAndName(
