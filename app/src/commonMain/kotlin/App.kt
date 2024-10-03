@@ -302,6 +302,8 @@ fun App() {
 
                 AnimatedVisibility(filterPanelOpen.value) {
 
+                    DefaultSpacer()
+
                     Row(
                         modifier = Modifier.defaultPadding(),
                         verticalAlignment = Alignment.CenterVertically,
@@ -326,6 +328,10 @@ fun App() {
                             modifier = Modifier.height(logoIconHeight)
                         )
                     }
+
+                    DefaultSpacer()
+
+
                 }
             }
 
