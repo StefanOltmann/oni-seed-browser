@@ -66,7 +66,7 @@ fun App() {
         ) {
 
             Text(
-                text = "ONI Map Explorer",
+                text = "ONI Seed Browser",
                 style = MaterialTheme.typography.displayLarge,
                 color = MaterialTheme.colorScheme.onBackground,
                 modifier = Modifier.defaultPadding()

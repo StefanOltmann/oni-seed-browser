@@ -84,7 +84,7 @@ fun Footer() {
         )
 
         Text(
-            text = "https://github.com/stefanoltmann/oni-seed-browser",
+            text = "https://github.com/StefanOltmann/oni-seed-browser",
             style = MaterialTheme.typography.bodyLarge,
             color = white,
             modifier = Modifier.offset(y = -2.dp)
