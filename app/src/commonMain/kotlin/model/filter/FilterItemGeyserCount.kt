@@ -29,6 +29,6 @@ data class FilterItemGeyserCount(
     @Serializable(with = GeyserTypeSerializer::class)
     val geyserId: GeyserType,
 
-    val numericalRelation: FilterNumericalRelation,
+    val condition: FilterCondition,
     val count: Int
 )

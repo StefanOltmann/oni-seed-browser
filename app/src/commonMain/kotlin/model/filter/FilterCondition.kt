@@ -22,7 +22,7 @@ package model.filter
 import kotlinx.serialization.Serializable
 
 @Serializable
-enum class FilterNumericalRelation {
+enum class FilterCondition {
 
     EXACTLY,
     AT_LEAST,

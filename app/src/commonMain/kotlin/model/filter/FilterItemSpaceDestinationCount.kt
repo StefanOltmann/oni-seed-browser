@@ -27,6 +27,6 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class FilterItemSpaceDestinationCount(
     val poi: String,
-    val numericalRelation: FilterNumericalRelation,
+    val condition: FilterCondition,
     val count: Int
 )

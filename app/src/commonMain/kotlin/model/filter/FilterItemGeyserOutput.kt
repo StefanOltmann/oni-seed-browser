@@ -28,6 +28,6 @@ data class FilterItemGeyserOutput(
 
     @Serializable(with = GeyserTypeSerializer::class)
     val geyserId: GeyserType,
-    val numericalRelation: FilterNumericalRelation,
+    val condition: FilterCondition,
     val outputInKgPerSecond: Double
 )

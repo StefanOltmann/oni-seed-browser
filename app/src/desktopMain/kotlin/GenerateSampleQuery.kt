@@ -3,11 +3,11 @@ import kotlinx.serialization.json.Json
 import model.Cluster
 import model.GeyserType
 import model.WorldTrait
+import model.filter.FilterCondition
 import model.filter.FilterItemGeyserCount
 import model.filter.FilterItemGeyserOutput
 import model.filter.FilterItemSpaceDestinationCount
 import model.filter.FilterItemWorldTrait
-import model.filter.FilterNumericalRelation
 import model.filter.FilterQuery
 import model.filter.FilterRule
 
@@ -42,7 +42,7 @@ fun main() {
         worldTrait = null,
         geyserCount = FilterItemGeyserCount(
             geyserId = GeyserType.HYDROGEN,
-            numericalRelation = FilterNumericalRelation.AT_LEAST,
+            condition = FilterCondition.AT_LEAST,
             count = 1
         ),
         geyserOutput = null,
@@ -56,7 +56,7 @@ fun main() {
         geyserCount = null,
         geyserOutput = FilterItemGeyserOutput(
             geyserId = GeyserType.WATER,
-            numericalRelation = FilterNumericalRelation.EXACTLY,
+            condition = FilterCondition.EXACTLY,
             outputInKgPerSecond = 1337.0
         ),
         spaceDestinationCount = null,
@@ -69,7 +69,7 @@ fun main() {
                 geyserOutput = null,
                 spaceDestinationCount = FilterItemSpaceDestinationCount(
                     poi = "RockyAsteroid",
-                    numericalRelation = FilterNumericalRelation.AT_MOST,
+                    condition = FilterCondition.AT_MOST,
                     count = 5
                 ),
                 orRules = emptyList()
