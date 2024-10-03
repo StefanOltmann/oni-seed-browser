@@ -137,6 +137,7 @@ fun App() {
             if (isGettingNewResults.value) {
 
                 Box(
+                    contentAlignment = Alignment.Center,
                     modifier = Modifier.weight(1F)
                 ) {
 
