@@ -49,12 +49,17 @@ import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.produceState
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.PointerEventType
+import androidx.compose.ui.input.pointer.onPointerEvent
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import model.Asteroid
@@ -371,6 +376,7 @@ fun WorldView(
     }
 }
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun AsteroidDisplay(
     asteroid: Asteroid,
@@ -482,12 +488,17 @@ fun AsteroidDisplay(
 //                        )
 //                    }
 
+                    val hovered = remember { mutableStateOf(false) }
+
                     Box(
                         contentAlignment = Alignment.Center,
                         modifier = Modifier
                             .size(48.dp)
                             .background(
-                                MaterialTheme.colorScheme.surface,
+                                if (hovered.value)
+                                    MaterialTheme.colorScheme.surfaceVariant
+                                else
+                                    MaterialTheme.colorScheme.surface,
                                 CircleShape
                             )
                             .border(
@@ -495,6 +506,12 @@ fun AsteroidDisplay(
                                 Color.Black,
                                 CircleShape
                             )
+                            .onPointerEvent(PointerEventType.Enter) {
+                                hovered.value = true
+                            }
+                            .onPointerEvent(PointerEventType.Exit) {
+                                hovered.value = false
+                            }
                     ) {
 
                         Image(
