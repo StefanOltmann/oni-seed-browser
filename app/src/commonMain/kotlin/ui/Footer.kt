@@ -21,6 +21,7 @@ package ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
@@ -40,54 +41,62 @@ import ui.theme.white
 @Composable
 fun Footer() {
 
-    Row(
-        horizontalArrangement = Arrangement.spacedBy(halfSpacing, Alignment.CenterHorizontally),
-        verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(Color.Black)
-    ) {
+    BoxWithConstraints {
 
-        Text(
-            text = "Oxygen Not Included",
-            style = MaterialTheme.typography.bodyLarge,
-            color = white,
-            modifier = Modifier.offset(y = -2.dp)
-        )
+        val showLink = maxWidth > 600.dp
 
-        Text(
-            text = "©",
-            style = MaterialTheme.typography.bodyLarge,
-            color = white,
-            modifier = Modifier.offset(y = -2.dp)
-        )
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(halfSpacing, Alignment.CenterHorizontally),
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(Color.Black)
+        ) {
 
-        Text(
-            text = "Klei Entertainment",
-            style = MaterialTheme.typography.bodyLarge,
-            color = white,
-            modifier = Modifier.offset(y = -2.dp)
-        )
+            Text(
+                text = "Oxygen Not Included",
+                style = MaterialTheme.typography.bodyLarge,
+                color = white,
+                modifier = Modifier.offset(y = -2.dp)
+            )
 
-        Text(
-            text = "|",
-            style = MaterialTheme.typography.bodyLarge,
-            color = white,
-            modifier = Modifier.offset(y = -2.dp)
-        )
+            Text(
+                text = "©",
+                style = MaterialTheme.typography.bodyLarge,
+                color = white,
+                modifier = Modifier.offset(y = -2.dp)
+            )
 
-        Icon(
-            imageVector = GithubMark,
-            tint = white,
-            contentDescription = null,
-            modifier = Modifier.size(16.dp)
-        )
+            Text(
+                text = "Klei Entertainment",
+                style = MaterialTheme.typography.bodyLarge,
+                color = white,
+                modifier = Modifier.offset(y = -2.dp)
+            )
 
-        Text(
-            text = "https://github.com/StefanOltmann/oni-seed-browser",
-            style = MaterialTheme.typography.bodyLarge,
-            color = white,
-            modifier = Modifier.offset(y = -2.dp)
-        )
+            if (showLink) {
+
+                Text(
+                    text = "|",
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = white,
+                    modifier = Modifier.offset(y = -2.dp)
+                )
+
+                Icon(
+                    imageVector = GithubMark,
+                    tint = white,
+                    contentDescription = null,
+                    modifier = Modifier.size(16.dp)
+                )
+
+                Text(
+                    text = "https://github.com/StefanOltmann/oni-seed-browser",
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = white,
+                    modifier = Modifier.offset(y = -2.dp)
+                )
+            }
+        }
     }
 }
