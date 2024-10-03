@@ -30,7 +30,9 @@ data class FilterRule(
     val geyserCount: FilterItemGeyserCount?,
     val geyserOutput: FilterItemGeyserOutput?,
     val worldTrait: FilterItemWorldTrait?,
-    val spaceDestinationOutput: FilterItemSpaceDestinationOutput?,
+
+    /* Only for base game, not for Spaced Out */
+    val spaceDestinationDistance: FilterItemSpaceDestinationDistance?,
 
     /* OR-connected rules (only to be set for the root rules) */
     val orRules: List<FilterRule>

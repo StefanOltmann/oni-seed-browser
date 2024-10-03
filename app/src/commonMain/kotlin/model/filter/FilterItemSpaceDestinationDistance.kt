@@ -19,10 +19,10 @@
 
 package model.filter
 
-import model.GeyserType
-
-data class FilterItemSpaceDestinationOutput(
-    val geyserId: GeyserType,
+/**
+ * Vanilla-only filter
+ */
+data class FilterItemSpaceDestinationDistance(
     val numericalRelation: FilterNumericalRelation,
-    val output: Int
+    val distance: Int
 )

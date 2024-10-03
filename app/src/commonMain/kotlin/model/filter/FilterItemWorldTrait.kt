@@ -19,11 +19,13 @@
 
 package model.filter
 
+import model.WorldTrait
+
 data class FilterItemWorldTrait(
 
     /** True, if condition is positive */
     val has: Boolean,
 
-    val outputInKgPerSecond: Double
+    val worldTrait: WorldTrait
 
 )
