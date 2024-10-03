@@ -34,7 +34,7 @@ object DummyWebClient : WebClient {
             page = 1,
             pageSize = 50,
             totalPages = 1,
-            totalResults = 30,
+            totalResults = worlds.size,
             worlds = worlds
         )
     }

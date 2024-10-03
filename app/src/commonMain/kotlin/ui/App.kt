@@ -22,21 +22,28 @@ package ui
 import SearchRequest
 import SearchResponse
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.produceState
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import service.DefaultWebClient
 import service.DummyWebClient
 import ui.theme.AppTypography
 import ui.theme.DefaultSpacer
 import ui.theme.appColorScheme
 import ui.theme.defaultPadding
+import ui.theme.defaultRoundedCornerShape
 
 val logoIconHeight = 80.dp
 
@@ -47,16 +54,36 @@ fun App() {
         typography = AppTypography()
     ) {
 
-        val string = produceState<SearchResponse?>(null) {
+        val demoMode = remember { mutableStateOf(true) }
 
-            value = DummyWebClient.search(
-                SearchRequest(
-                    selectedWorld = "null",
-                    worldTraits = emptyList(),
-                    page = 0,
-                    vanilla = true
+        val isGettingNewResults = remember { mutableStateOf(false) }
+
+        val string = produceState<SearchResponse?>(null, demoMode.value) {
+
+            val webClient = if (demoMode.value)
+                DummyWebClient
+            else
+                DefaultWebClient
+
+            isGettingNewResults.value = true
+
+            try {
+
+                /* Reset the data */
+                value = null
+
+                value = webClient.search(
+                    SearchRequest(
+                        selectedWorld = "null",
+                        worldTraits = emptyList(),
+                        page = 0,
+                        vanilla = true
+                    )
                 )
-            )
+
+            } finally {
+                isGettingNewResults.value = false
+            }
         }
 
         Column(
@@ -83,22 +110,62 @@ fun App() {
 
             FilterPanel()
 
-            val searchResponse = string.value
-
-            val worldCount = searchResponse?.worlds?.size ?: 0
-
-            Text(
-                text = "Showing $worldCount worlds",
-                style = MaterialTheme.typography.headlineSmall,
-                color = MaterialTheme.colorScheme.onBackground
-            )
-
-            Box(
-                modifier = Modifier.weight(1F)
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier
+                    .defaultPadding()
+                    .border(1.dp, MaterialTheme.colorScheme.onBackground, defaultRoundedCornerShape)
             ) {
 
-                if (searchResponse != null)
-                    WorldViewList(searchResponse.worlds)
+                DefaultSpacer()
+
+                Switch(
+                    checked = demoMode.value,
+                    onCheckedChange = { demoMode.value = it }
+                )
+
+                DefaultSpacer()
+
+                Text(
+                    text = "Demo Mode",
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = MaterialTheme.colorScheme.onBackground,
+                    modifier = Modifier.defaultPadding()
+                )
+            }
+
+            if (isGettingNewResults.value) {
+
+                Box(
+                    modifier = Modifier.weight(1F)
+                ) {
+
+                    Text(
+                        text = "Calling webservice...",
+                        style = MaterialTheme.typography.headlineSmall,
+                        color = MaterialTheme.colorScheme.onBackground
+                    )
+                }
+
+            } else {
+
+                val searchResponse = string.value
+
+                val worldCount = searchResponse?.worlds?.size ?: 0
+
+                Text(
+                    text = "Showing $worldCount worlds",
+                    style = MaterialTheme.typography.headlineSmall,
+                    color = MaterialTheme.colorScheme.onBackground
+                )
+
+                Box(
+                    modifier = Modifier.weight(1F)
+                ) {
+
+                    if (searchResponse != null)
+                        WorldViewList(searchResponse.worlds)
+                }
             }
 
             Footer()

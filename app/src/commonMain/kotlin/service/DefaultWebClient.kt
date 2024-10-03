@@ -21,16 +21,18 @@ package service
 
 import SearchRequest
 import SearchResponse
-import io.ktor.client.*
-import io.ktor.client.call.*
-import io.ktor.client.plugins.contentnegotiation.*
-import io.ktor.client.request.*
-import io.ktor.http.*
-import io.ktor.serialization.kotlinx.json.*
+import io.ktor.client.HttpClient
+import io.ktor.client.call.body
+import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.client.request.get
+import io.ktor.http.ContentType
+import io.ktor.http.contentType
+import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
+import model.World
 
-const val BASE_API_URL = "https://api.mapsnotincluded.org"
-const val SEARCH_URL = "$BASE_API_URL/saves/search"
+const val BASE_API_URL = "https://oni-seed-uploader-stefan-oltmann.koyeb.app"
+const val SEARCH_URL = "$BASE_API_URL/all"
 
 object DefaultWebClient : WebClient {
 
@@ -47,18 +49,28 @@ object DefaultWebClient : WebClient {
 
     override suspend fun search(searchRequest: SearchRequest): SearchResponse {
 
-        val response: SearchResponse = httpClient.post(SEARCH_URL) {
+//        val response: SearchResponse = httpClient.post(SEARCH_URL) {
+//            contentType(ContentType.Application.Json)
+//            setBody(
+//                SearchRequest(
+//                    selectedWorld = "null",
+//                    worldTraits = emptyList(),
+//                    page = 0,
+//                    vanilla = true
+//                )
+//            )
+//        }.body()
+
+        val worlds: List<World> = httpClient.get(SEARCH_URL) {
             contentType(ContentType.Application.Json)
-            setBody(
-                SearchRequest(
-                    selectedWorld = "null",
-                    worldTraits = emptyList(),
-                    page = 0,
-                    vanilla = true
-                )
-            )
         }.body()
 
-        return response
+        return SearchResponse(
+            page = 1,
+            pageSize = 50,
+            totalPages = 1,
+            totalResults = worlds.size,
+            worlds = worlds
+        )
     }
 }
