@@ -17,10 +17,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.VerticalScrollbar
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.defaultScrollbarStyle
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -46,6 +48,10 @@ import androidx.compose.foundation.rememberScrollbarAdapter
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.selection.SelectionContainer
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.material.icons.filled.KeyboardArrowUp
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -240,30 +246,89 @@ fun App() {
 
             DefaultSpacer()
 
-            Row(
-                modifier = Modifier.defaultPadding(),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(64.dp)
+            val filterPanelOpen = remember { mutableStateOf(false) }
+
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = doubleSpacing)
+                    .background(MaterialTheme.colorScheme.surface, defaultRoundedCornerShape)
             ) {
 
-                Image(
-                    painter = painterResource(Res.drawable.oni_logo),
-                    contentDescription = null,
-                    modifier = Modifier.height(logoIconHeight)
-                )
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier
+                        .height(48.dp)
+                        .fillMaxWidth()
+                        .background(
+                            Color.Black,
+                            if (filterPanelOpen.value)
+                                RoundedCornerShape(
+                                    topStart = 8.dp,
+                                    topEnd = 8.dp
+                                )
+                            else
+                                defaultRoundedCornerShape
+                        )
+                        .clickable {
+                            filterPanelOpen.value = !filterPanelOpen.value
+                        }
+                ) {
 
-                Image(
-                    painter = painterResource(Res.drawable.dlc_spaced_out),
-                    contentDescription = null,
-                    modifier = Modifier.height(logoIconHeight)
-                )
+                    DoubleSpacer()
 
-                Image(
-                    painter = painterResource(Res.drawable.dlc_frosty_planet),
-                    contentDescription = null,
-                    modifier = Modifier.height(logoIconHeight)
-                )
+                    Text(
+                        text = "Filter",
+                        style = MaterialTheme.typography.headlineMedium,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.onBackground
+                    )
+
+                    FillSpacer()
+
+                    Icon(
+                        imageVector = if (filterPanelOpen.value)
+                            Icons.Default.KeyboardArrowUp
+                        else
+                            Icons.Default.KeyboardArrowDown,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.onBackground,
+                        modifier = Modifier.size(48.dp)
+                    )
+
+                    DefaultSpacer()
+                }
+
+                AnimatedVisibility(filterPanelOpen.value) {
+
+                    Row(
+                        modifier = Modifier.defaultPadding(),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(64.dp)
+                    ) {
+
+                        Image(
+                            painter = painterResource(Res.drawable.oni_logo),
+                            contentDescription = null,
+                            modifier = Modifier.height(logoIconHeight)
+                        )
+
+                        Image(
+                            painter = painterResource(Res.drawable.dlc_spaced_out),
+                            contentDescription = null,
+                            modifier = Modifier.height(logoIconHeight)
+                        )
+
+                        Image(
+                            painter = painterResource(Res.drawable.dlc_frosty_planet),
+                            contentDescription = null,
+                            modifier = Modifier.height(logoIconHeight)
+                        )
+                    }
+                }
             }
+
 
             Box {
 
