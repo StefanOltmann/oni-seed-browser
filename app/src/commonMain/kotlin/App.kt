@@ -397,52 +397,18 @@ fun AsteroidDisplay(
 
         val asteroidType = AsteroidType.of(asteroid.id)
 
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
+        Box(
+            contentAlignment = Alignment.Center,
             modifier = Modifier
                 .size(124.dp)
                 .background(Color.Black, defaultRoundedCornerShape)
         ) {
 
-            HalfSpacer()
-
             Image(
                 painter = painterResource(getAsteroidTypeDrawable(asteroidType)),
                 contentDescription = null,
-                modifier = Modifier.weight(1F)
+                modifier = Modifier.defaultPadding()
             )
-
-            HalfSpacer()
-
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(defaultSpacing, Alignment.CenterHorizontally),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(32.dp)
-            ) {
-
-                if (asteroid.worldTraits.isEmpty()) {
-
-                    Text(
-                        text = "No traits",
-                        style = MaterialTheme.typography.bodyLarge,
-                        color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.5F),
-                        modifier = Modifier.offset(y = -4.dp)
-                    )
-
-                } else {
-
-                    for (worldTrait in asteroid.worldTraits) {
-
-                        Image(
-                            painter = painterResource(getWorldTraitDrawable(worldTrait)),
-                            contentDescription = null,
-                            modifier = Modifier.size(24.dp)
-                        )
-                    }
-                }
-            }
         }
 
         DefaultSpacer()
@@ -453,6 +419,7 @@ fun AsteroidDisplay(
 
             Row(
                 verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(defaultSpacing),
                 modifier = Modifier.height(24.dp)
             ) {
 
@@ -461,6 +428,15 @@ fun AsteroidDisplay(
                     style = MaterialTheme.typography.bodyLarge,
                     color = MaterialTheme.colorScheme.onBackground,
                 )
+
+                for (worldTrait in asteroid.worldTraits) {
+
+                    Image(
+                        painter = painterResource(getWorldTraitDrawable(worldTrait)),
+                        contentDescription = null,
+                        modifier = Modifier.size(20.dp)
+                    )
+                }
             }
 
             HalfSpacer()
