@@ -19,8 +19,10 @@
 
 package model.filter
 
+import kotlinx.serialization.Serializable
 import model.AsteroidType
 
+@Serializable
 data class FilterRule(
 
     /* NULL = All asteroids */
@@ -32,7 +34,7 @@ data class FilterRule(
     val worldTrait: FilterItemWorldTrait?,
 
     /* Only for base game, not for Spaced Out */
-    val spaceDestinationDistance: FilterItemSpaceDestinationDistance?,
+    val spaceDestinationCount: FilterItemSpaceDestinationCount?,
 
     /* OR-connected rules (only to be set for the root rules) */
     val orRules: List<FilterRule>

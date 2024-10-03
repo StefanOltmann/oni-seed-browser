@@ -19,8 +19,10 @@
 
 package model.filter
 
+import kotlinx.serialization.Serializable
 import model.WorldTrait
 
+@Serializable
 data class FilterItemWorldTrait(
 
     /** True, if condition is positive */

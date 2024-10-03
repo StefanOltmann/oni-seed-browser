@@ -19,8 +19,10 @@
 
 package model.filter
 
+import kotlinx.serialization.Serializable
 import model.Cluster
 
+@Serializable
 data class FilterQuery(
 
     val cluster: Cluster,

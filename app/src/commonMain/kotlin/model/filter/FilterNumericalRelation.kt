@@ -19,9 +19,12 @@
 
 package model.filter
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 enum class FilterNumericalRelation {
 
     EXACTLY,
-    GREATER_THAN,
-    LOWER_THAN
+    AT_LEAST,
+    AT_MOST
 }

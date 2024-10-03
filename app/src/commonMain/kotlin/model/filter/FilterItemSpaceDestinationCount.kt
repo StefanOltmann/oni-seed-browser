@@ -19,10 +19,14 @@
 
 package model.filter
 
+import kotlinx.serialization.Serializable
+
 /**
  * Vanilla-only filter
  */
-data class FilterItemSpaceDestinationDistance(
+@Serializable
+data class FilterItemSpaceDestinationCount(
+    val poi: String,
     val numericalRelation: FilterNumericalRelation,
-    val distance: Int
+    val count: Int
 )

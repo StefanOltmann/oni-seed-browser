@@ -19,8 +19,10 @@
 
 package model.filter
 
+import kotlinx.serialization.Serializable
 import model.GeyserType
 
+@Serializable
 data class FilterItemGeyserCount(
     val geyserId: GeyserType,
     val numericalRelation: FilterNumericalRelation,
