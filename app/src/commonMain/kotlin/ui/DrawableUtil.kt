@@ -26,7 +26,6 @@ import model.GeyserType
 import model.PointOfInterestType
 import model.WorldTrait
 import oni_seed_browser.app.generated.resources.Res
-import oni_seed_browser.app.generated.resources.asteroid_ceres
 import oni_seed_browser.app.generated.resources.asteroid_folia
 import oni_seed_browser.app.generated.resources.asteroid_glowood_wasteland
 import oni_seed_browser.app.generated.resources.asteroid_irradiated_forest
@@ -59,6 +58,7 @@ import oni_seed_browser.app.generated.resources.building_teleporter_receiver
 import oni_seed_browser.app.generated.resources.building_teleporter_transmitter
 import oni_seed_browser.app.generated.resources.cluster_base_arboria
 import oni_seed_browser.app.generated.resources.cluster_base_aridio
+import oni_seed_browser.app.generated.resources.cluster_base_ceres
 import oni_seed_browser.app.generated.resources.cluster_base_oasisse
 import oni_seed_browser.app.generated.resources.cluster_base_oceania
 import oni_seed_browser.app.generated.resources.cluster_base_rime
@@ -208,7 +208,7 @@ fun getPointOfInterestDrawable(pointOfInterestType: PointOfInterestType): Drawab
 fun getClusterDrawable(cluster: Cluster): DrawableResource =
     when (cluster) {
         Cluster.BASE_TERRA -> Res.drawable.cluster_base_terra
-        Cluster.BASE_CERES -> Res.drawable.asteroid_ceres
+        Cluster.BASE_CERES -> Res.drawable.cluster_base_ceres
         Cluster.BASE_OCEANIA -> Res.drawable.cluster_base_oceania
         Cluster.BASE_RIME -> Res.drawable.cluster_base_rime
         Cluster.BASE_VERDANTE -> Res.drawable.cluster_base_verdante
@@ -243,8 +243,8 @@ fun getClusterDrawable(cluster: Cluster): DrawableResource =
 fun getAsteroidTypeDrawable(asteroidType: AsteroidType): DrawableResource =
     when (asteroidType) {
 
-        // TODO Correct?
         AsteroidType.TERRA -> Res.drawable.cluster_base_terra
+        AsteroidType.CERES -> Res.drawable.cluster_base_ceres
         AsteroidType.OCEANIA -> Res.drawable.cluster_base_oceania
         AsteroidType.RIME -> Res.drawable.cluster_base_rime
         AsteroidType.VERDANTE -> Res.drawable.cluster_base_verdante
@@ -256,6 +256,8 @@ fun getAsteroidTypeDrawable(asteroidType: AsteroidType): DrawableResource =
         AsteroidType.SQUELCHY -> Res.drawable.cluster_spacedout_squelchy
 
         AsteroidType.TERRANIA -> Res.drawable.asteroid_terrania
+        AsteroidType.CERES_VANILLA -> Res.drawable.asteroid_spacedout_ceres
+        AsteroidType.CERES_MINOR -> Res.drawable.asteroid_spacedout_ceres_minor
         AsteroidType.FOLIA -> Res.drawable.asteroid_folia
         AsteroidType.QUAGMIRIS -> Res.drawable.asteroid_quagmiris
         AsteroidType.METALLIC_SWAMPY -> Res.drawable.cluster_spacedout_metallic_swampy_moonlet

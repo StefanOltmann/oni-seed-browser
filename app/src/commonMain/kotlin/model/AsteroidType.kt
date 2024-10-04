@@ -27,6 +27,9 @@ enum class AsteroidType(
 ) {
 
     TERRA("Terra Asteroid"),
+    CERES("Ceres Asteroid"),
+    CERES_VANILLA("Ceres Asteroid"),
+    CERES_MINOR("Ceres Minor Asteroid"),
     OCEANIA("Oceania Asteroid"),
     RIME("Rime Asteroid"),
     VERDANTE("Verdante Asteroid"),
@@ -120,6 +123,9 @@ enum class AsteroidType(
             "WaterMoonlet" -> WATER
             "RegolithMoonlet" -> REGOLITH
             "MiniRegolithMoonlet" -> REGOLITH
+            "CeresBaseGameAsteroid" -> CERES
+            "CeresClassicAsteroid" -> CERES_VANILLA
+            "CeresSpacedOutAsteroid" -> CERES_MINOR
             else -> error("Unknown world: $worldName")
         }
     }
