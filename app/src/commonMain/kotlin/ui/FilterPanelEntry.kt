@@ -54,7 +54,7 @@ fun FilterPanelEntry(
 
         Text(
             text = "Cluster",
-            style = MaterialTheme.typography.headlineMedium,
+            style = MaterialTheme.typography.headlineSmall,
             color = MaterialTheme.colorScheme.onBackground
         )
 
@@ -62,7 +62,7 @@ fun FilterPanelEntry(
 
         Text(
             text = "Geyser",
-            style = MaterialTheme.typography.headlineMedium,
+            style = MaterialTheme.typography.headlineSmall,
             color = MaterialTheme.colorScheme.onBackground
         )
 
@@ -70,7 +70,7 @@ fun FilterPanelEntry(
 
         Text(
             text = "at least",
-            style = MaterialTheme.typography.headlineMedium,
+            style = MaterialTheme.typography.headlineSmall,
             color = MaterialTheme.colorScheme.onBackground
         )
 
