@@ -49,6 +49,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -159,7 +160,7 @@ fun FilterPanel() {
 
                     Image(
                         painter = painterResource(
-                            if (!spacedOutDlcSelected.value || baseGameLogoHovered.value)
+                            if (!spacedOutDlcSelected.value)
                                 Res.drawable.logo_oni
                             else
                                 Res.drawable.logo_oni_gray
@@ -169,11 +170,12 @@ fun FilterPanel() {
                             .height(logoIconHeight)
                             .onHover(baseGameLogoHovered)
                             .noRippleClickable { spacedOutDlcSelected.value = false }
+                            .scale(if (baseGameLogoHovered.value) 1.2F else 1F)
                     )
 
                     Image(
                         painter = painterResource(
-                            if (spacedOutDlcSelected.value || spacedOutLogoHovered.value)
+                            if (spacedOutDlcSelected.value)
                                 Res.drawable.logo_spaced_out
                             else
                                 Res.drawable.logo_spaced_out_gray
@@ -183,6 +185,7 @@ fun FilterPanel() {
                             .height(logoIconHeight)
                             .onHover(spacedOutLogoHovered)
                             .noRippleClickable { spacedOutDlcSelected.value = true }
+                            .scale(if (spacedOutLogoHovered.value) 1.2F else 1F)
                     )
                 }
 
