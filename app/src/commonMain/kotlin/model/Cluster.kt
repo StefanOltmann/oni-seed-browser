@@ -33,6 +33,10 @@ enum class Cluster(
         prefix = "SNDST-A",
         displayName = "Terra"
     ),
+    BASE_CERES(
+        prefix = "CER-A",
+        displayName = "Ceres"
+    ),
     BASE_OCEANIA(
         prefix = "OCAN-A",
         displayName = "Oceania"
@@ -70,6 +74,10 @@ enum class Cluster(
     DLC_TERRA(
         prefix = "V-SNDST-C",
         displayName = "Terra"
+    ),
+    DLC_CERES(
+        prefix = "V-CER-C",
+        displayName = "Ceres"
     ),
     DLC_OCEANIA(
         prefix = "V-OCAN-C",
@@ -110,6 +118,10 @@ enum class Cluster(
     DLC_TERRANIA(
         prefix = "SNDST-C",
         displayName = "Terrania"
+    ),
+    DLC_CERES_MINOR(
+        prefix = "CER-C",
+        displayName = "Ceres Minor"
     ),
     DLC_FOLIA(
         prefix = "FRST-C",
