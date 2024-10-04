@@ -49,7 +49,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import oni_seed_browser.app.generated.resources.Res
 import oni_seed_browser.app.generated.resources.logo_oni
+import oni_seed_browser.app.generated.resources.logo_oni_gray
 import oni_seed_browser.app.generated.resources.logo_spaced_out
+import oni_seed_browser.app.generated.resources.logo_spaced_out_gray
 import org.jetbrains.compose.resources.painterResource
 import ui.theme.DefaultSpacer
 import ui.theme.DoubleSpacer
@@ -125,6 +127,8 @@ fun FilterPanel() {
 
                 DefaultSpacer()
 
+                val spacedOutDlcSelected = remember { mutableStateOf(false) }
+
                 Row(
                     modifier = Modifier.defaultPadding(),
                     verticalAlignment = Alignment.CenterVertically,
@@ -132,15 +136,33 @@ fun FilterPanel() {
                 ) {
 
                     Image(
-                        painter = painterResource(Res.drawable.logo_oni),
+                        painter = painterResource(
+                            if (spacedOutDlcSelected.value)
+                                Res.drawable.logo_oni_gray
+                            else
+                                Res.drawable.logo_oni
+                        ),
                         contentDescription = null,
-                        modifier = Modifier.height(logoIconHeight)
+                        modifier = Modifier
+                            .height(logoIconHeight)
+                            .clickable {
+                                spacedOutDlcSelected.value = false
+                            }
                     )
 
                     Image(
-                        painter = painterResource(Res.drawable.logo_spaced_out),
+                        painter = painterResource(
+                            if (spacedOutDlcSelected.value)
+                                Res.drawable.logo_spaced_out
+                            else
+                                Res.drawable.logo_spaced_out_gray
+                        ),
                         contentDescription = null,
-                        modifier = Modifier.height(logoIconHeight)
+                        modifier = Modifier
+                            .height(logoIconHeight)
+                            .clickable {
+                                spacedOutDlcSelected.value = true
+                            }
                     )
                 }
 
