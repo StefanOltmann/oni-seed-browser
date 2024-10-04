@@ -42,8 +42,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.input.pointer.PointerEventType
-import androidx.compose.ui.input.pointer.onPointerEvent
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -186,12 +184,7 @@ private fun GeysersRow(
                         Color.Black,
                         CircleShape
                     )
-                    .onPointerEvent(PointerEventType.Enter) {
-                        hovered.value = true
-                    }
-                    .onPointerEvent(PointerEventType.Exit) {
-                        hovered.value = false
-                    }
+                    .onHover(hovered)
             ) {
 
                 Image(

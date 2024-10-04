@@ -135,24 +135,26 @@ fun FilterPanel() {
                     horizontalArrangement = Arrangement.spacedBy(64.dp)
                 ) {
 
+                    val baseGameLogoHovered = remember { mutableStateOf(false) }
+                    val spacedOutLogoHovered = remember { mutableStateOf(false) }
+
                     Image(
                         painter = painterResource(
-                            if (spacedOutDlcSelected.value)
-                                Res.drawable.logo_oni_gray
-                            else
+                            if (!spacedOutDlcSelected.value || baseGameLogoHovered.value)
                                 Res.drawable.logo_oni
+                            else
+                                Res.drawable.logo_oni_gray
                         ),
                         contentDescription = null,
                         modifier = Modifier
                             .height(logoIconHeight)
-                            .clickable {
-                                spacedOutDlcSelected.value = false
-                            }
+                            .onHover(baseGameLogoHovered)
+                            .noRippleClickable { spacedOutDlcSelected.value = false }
                     )
 
                     Image(
                         painter = painterResource(
-                            if (spacedOutDlcSelected.value)
+                            if (spacedOutDlcSelected.value || spacedOutLogoHovered.value)
                                 Res.drawable.logo_spaced_out
                             else
                                 Res.drawable.logo_spaced_out_gray
@@ -160,9 +162,8 @@ fun FilterPanel() {
                         contentDescription = null,
                         modifier = Modifier
                             .height(logoIconHeight)
-                            .clickable {
-                                spacedOutDlcSelected.value = true
-                            }
+                            .onHover(spacedOutLogoHovered)
+                            .noRippleClickable { spacedOutDlcSelected.value = true }
                     )
                 }
 
