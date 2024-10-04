@@ -30,11 +30,14 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
@@ -75,12 +78,19 @@ fun FilterPanel() {
 
     val filterPanelOpen = remember { mutableStateOf(false) }
 
+    val maxSizeModifier = if (filterPanelOpen.value)
+        Modifier.fillMaxSize()
+    else
+        Modifier
+
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = doubleSpacing)
+            .padding(bottom = doubleSpacing)
             .background(MaterialTheme.colorScheme.surface, defaultRoundedCornerShape)
+            .then(maxSizeModifier)
     ) {
 
         Row(
@@ -132,7 +142,8 @@ fun FilterPanel() {
             val spacedOutDlcSelected = remember { mutableStateOf(false) }
 
             Column(
-                horizontalAlignment = Alignment.CenterHorizontally
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier
             ) {
 
                 DefaultSpacer()
@@ -177,62 +188,69 @@ fun FilterPanel() {
 
                 HorizontalSeparator()
 
-                val clusters = if (spacedOutDlcSelected.value)
-                    Cluster.spacedOutCluster
-                else
-                    Cluster.baseGameCluster
-
-                FlowRow(
-                    maxItemsInEachRow = max(10, clusters.size / 2)
+                Column(
+                    modifier = Modifier
+                        .weight(1F)
+                        .verticalScroll(rememberScrollState())
                 ) {
 
-                    for (cluster in clusters) {
+                    val clusters = if (spacedOutDlcSelected.value)
+                        Cluster.spacedOutCluster
+                    else
+                        Cluster.baseGameCluster
 
-                        Column(
-                            horizontalAlignment = Alignment.CenterHorizontally,
-                            modifier = Modifier.halfPadding()
-                        ) {
+                    FlowRow(
+                        maxItemsInEachRow = max(10, clusters.size / 2)
+                    ) {
 
-                            Image(
-                                painter = painterResource(
-                                    getClusterDrawable(cluster)
-                                ),
-                                contentDescription = null,
-                                modifier = Modifier.size(100.dp)
-                            )
+                        for (cluster in clusters) {
 
-                            Text(
-                                text = cluster.displayName,
-                                style = MaterialTheme.typography.bodyLarge,
-                                color = MaterialTheme.colorScheme.onBackground,
-                                textAlign = TextAlign.Center,
-                                overflow = TextOverflow.Ellipsis,
-                                maxLines = 2,
-                                modifier = Modifier.size(100.dp, 48.dp)
-                            )
+                            Column(
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                                modifier = Modifier.halfPadding()
+                            ) {
 
+                                Image(
+                                    painter = painterResource(
+                                        getClusterDrawable(cluster)
+                                    ),
+                                    contentDescription = null,
+                                    modifier = Modifier.size(100.dp)
+                                )
+
+                                Text(
+                                    text = cluster.displayName,
+                                    style = MaterialTheme.typography.bodyLarge,
+                                    color = MaterialTheme.colorScheme.onBackground,
+                                    textAlign = TextAlign.Center,
+                                    overflow = TextOverflow.Ellipsis,
+                                    maxLines = 2,
+                                    modifier = Modifier.size(100.dp, 48.dp)
+                                )
+
+                            }
                         }
                     }
+
+                    HorizontalSeparator()
+
+                    DefaultSpacer()
+
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier.defaultPadding()
+                    ) {
+
+                        FilterPanelEntry()
+
+                        AddRuleButton(
+                            text = "OR",
+                            onClick = { println("add OR rule") }
+                        )
+                    }
+
+                    HorizontalSeparator()
                 }
-
-                HorizontalSeparator()
-
-                DefaultSpacer()
-
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier.defaultPadding()
-                ) {
-
-                    FilterPanelEntry()
-
-                    AddRuleButton(
-                        text = "OR",
-                        onClick = { println("add OR rule") }
-                    )
-                }
-
-                HorizontalSeparator()
 
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
