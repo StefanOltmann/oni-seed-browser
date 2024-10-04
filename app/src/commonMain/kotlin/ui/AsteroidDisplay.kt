@@ -29,6 +29,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
@@ -43,6 +44,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.PointerEventType
 import androidx.compose.ui.input.pointer.onPointerEvent
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.min
@@ -166,16 +168,7 @@ private fun GeysersRow(
 
         for (geyserType in sortedGeyserTypes) {
 
-//            val count = geyserByTypeMap[geyserType]!!.size
-//
-//                    if (count > 1) {
-//
-//                        Text(
-//                            text = "${count}x",
-//                            style = MaterialTheme.typography.bodyLarge,
-//                            color = MaterialTheme.colorScheme.onBackground
-//                        )
-//                    }
+            val count = geyserByTypeMap[geyserType]!!.size
 
             val hovered = remember { mutableStateOf(false) }
 
@@ -209,6 +202,17 @@ private fun GeysersRow(
                     alignment = Alignment.BottomCenter,
                     modifier = Modifier.padding()
                 )
+
+                if (count > 1) {
+
+                    Text(
+                        text = "$count",
+                        style = MaterialTheme.typography.bodyLarge,
+                        color = MaterialTheme.colorScheme.onBackground,
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.offset(y = 12.dp)
+                    )
+                }
             }
         }
 
@@ -262,16 +266,7 @@ private fun PointOfInterestsRow(
 
         for (poiType in sortedPoiTypes) {
 
-//            val count = poisByTypeMap[poiType]!!.size
-//
-//                    if (count > 1) {
-//
-//                        Text(
-//                            text = "${count}x",
-//                            style = MaterialTheme.typography.bodyLarge,
-//                            color = MaterialTheme.colorScheme.onBackground
-//                        )
-//                    }
+            val count = poisByTypeMap[poiType]!!.size
 
             Box(
                 contentAlignment = Alignment.Center,
@@ -293,6 +288,17 @@ private fun PointOfInterestsRow(
                     contentDescription = null,
                     modifier = Modifier.padding(defaultSpacing)
                 )
+
+                if (count > 1) {
+
+                    Text(
+                        text = "$count",
+                        style = MaterialTheme.typography.bodyLarge,
+                        color = MaterialTheme.colorScheme.onBackground,
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.offset(y = 12.dp)
+                    )
+                }
             }
         }
 
