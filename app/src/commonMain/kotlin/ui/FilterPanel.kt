@@ -167,7 +167,7 @@ fun FilterPanel() {
                             .height(logoIconHeight)
                             .onHover(baseGameLogoHovered)
                             .noRippleClickable { spacedOutDlcSelected.value = false }
-                            .scale(if (baseGameLogoHovered.value) 1.2F else 1F)
+                            .scale(if (baseGameLogoHovered.value) 1.1F else 1F)
                     )
 
                     Image(
@@ -182,7 +182,7 @@ fun FilterPanel() {
                             .height(logoIconHeight)
                             .onHover(spacedOutLogoHovered)
                             .noRippleClickable { spacedOutDlcSelected.value = true }
-                            .scale(if (spacedOutLogoHovered.value) 1.2F else 1F)
+                            .scale(if (spacedOutLogoHovered.value) 1.1F else 1F)
                     )
                 }
 
@@ -224,7 +224,9 @@ fun FilterPanel() {
                                         null
                                     else
                                         grayScaleFilter,
-                                    modifier = Modifier.size(100.dp)
+                                    modifier = Modifier
+                                        .size(100.dp)
+                                        .scale(if (clusterHovered.value) 1.1F else 1F)
                                 )
 
                                 Text(
