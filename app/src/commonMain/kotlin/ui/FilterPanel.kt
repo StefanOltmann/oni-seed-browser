@@ -189,6 +189,7 @@ fun FilterPanel() {
                 HorizontalSeparator()
 
                 Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier
                         .weight(1F)
                         .verticalScroll(rememberScrollState())
