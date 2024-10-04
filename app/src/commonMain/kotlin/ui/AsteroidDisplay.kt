@@ -24,6 +24,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -42,9 +43,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.PointerEventType
 import androidx.compose.ui.input.pointer.onPointerEvent
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.min
+import androidx.compose.ui.unit.times
 import model.Asteroid
 import model.AsteroidType
+import model.Geyser
+import model.PointOfInterest
 import org.jetbrains.compose.resources.painterResource
 import ui.theme.DefaultSpacer
 import ui.theme.DoubleSpacer
@@ -53,8 +59,8 @@ import ui.theme.HalfSpacer
 import ui.theme.defaultPadding
 import ui.theme.defaultRoundedCornerShape
 import ui.theme.defaultSpacing
+import ui.theme.halfSpacing
 
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun AsteroidDisplay(
     asteroid: Asteroid,
@@ -91,126 +97,77 @@ fun AsteroidDisplay(
 
         DefaultSpacer()
 
-        Column(
-            horizontalAlignment = Alignment.Start
-        ) {
+        BoxWithConstraints {
 
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(defaultSpacing),
-                modifier = Modifier.height(24.dp)
+            println("Max width: $maxWidth")
+
+            val maxWidth = maxWidth
+
+            Column(
+                horizontalAlignment = Alignment.Start
             ) {
 
-                Text(
-                    text = asteroidType.displayName,
-                    style = MaterialTheme.typography.bodyLarge,
-                    color = MaterialTheme.colorScheme.onBackground,
-                )
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(defaultSpacing),
+                    modifier = Modifier.height(24.dp)
+                ) {
 
-                for (worldTrait in asteroid.worldTraits) {
-
-                    Image(
-                        painter = painterResource(getWorldTraitDrawable(worldTrait)),
-                        contentDescription = null,
-                        modifier = Modifier.size(20.dp)
+                    Text(
+                        text = asteroidType.displayName,
+                        style = MaterialTheme.typography.bodyLarge,
+                        color = MaterialTheme.colorScheme.onBackground,
                     )
-                }
-            }
 
-            HalfSpacer()
-
-            Row(
-                verticalAlignment = Alignment.Bottom,
-                horizontalArrangement = Arrangement.spacedBy(overLapping),
-                modifier = Modifier.height(48.dp)
-            ) {
-
-                val geyserByTypeMap = asteroid.geysers.groupBy { it.id }
-
-                val sortedGeyserTypes = geyserByTypeMap.keys.sorted()
-
-                for (geyserType in sortedGeyserTypes) {
-
-                    val count = geyserByTypeMap[geyserType]!!.size
-
-//                    if (count > 1) {
-//
-//                        Text(
-//                            text = "${count}x",
-//                            style = MaterialTheme.typography.bodyLarge,
-//                            color = MaterialTheme.colorScheme.onBackground
-//                        )
-//                    }
-
-                    val hovered = remember { mutableStateOf(false) }
-
-                    Box(
-                        contentAlignment = Alignment.Center,
-                        modifier = Modifier
-                            .size(48.dp)
-                            .background(
-                                if (hovered.value)
-                                    MaterialTheme.colorScheme.surfaceVariant
-                                else
-                                    MaterialTheme.colorScheme.surface,
-                                CircleShape
-                            )
-                            .border(
-                                1.dp,
-                                Color.Black,
-                                CircleShape
-                            )
-                            .onPointerEvent(PointerEventType.Enter) {
-                                hovered.value = true
-                            }
-                            .onPointerEvent(PointerEventType.Exit) {
-                                hovered.value = false
-                            }
-                    ) {
+                    for (worldTrait in asteroid.worldTraits) {
 
                         Image(
-                            painter = painterResource(getGeyserDrawable(geyserType)),
+                            painter = painterResource(getWorldTraitDrawable(worldTrait)),
                             contentDescription = null,
-                            alignment = Alignment.BottomCenter,
-                            modifier = Modifier.padding()
+                            modifier = Modifier.size(20.dp)
                         )
                     }
                 }
 
-                if (isStarterAstroid)
-                    FillSpacer()
+                HalfSpacer()
+
+                GeysersRow(asteroid.geysers, maxWidth, isStarterAstroid)
+
+                HalfSpacer()
+
+                PointOfInterestsRow(asteroid.pointsOfInterest, maxWidth, isStarterAstroid)
             }
+        }
+    }
+}
 
-            HalfSpacer()
+@OptIn(ExperimentalComposeUiApi::class)
+@Composable
+private fun GeysersRow(
+    geysers: List<Geyser>,
+    maxWidth: Dp,
+    isStarterAstroid: Boolean
+) {
 
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(overLapping),
-                modifier = Modifier.height(48.dp)
-            ) {
+    val geyserByTypeMap = geysers.groupBy { it.id }
 
-                if (asteroid.pointsOfInterest.isEmpty()) {
+    val sortedGeyserTypes = geyserByTypeMap.keys.sorted()
 
-                    DoubleSpacer()
+    val spacingPerGeyser = min(
+        (maxWidth - sortedGeyserTypes.size.times(48.dp)) / (sortedGeyserTypes.size - 1),
+        halfSpacing
+    )
 
-                    Text(
-                        text = "No POIs",
-                        style = MaterialTheme.typography.bodyLarge,
-                        color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.5F)
-                    )
+    Row(
+        verticalAlignment = Alignment.Bottom,
+        horizontalArrangement = Arrangement.spacedBy(spacingPerGeyser),
+        modifier = Modifier.height(48.dp)
+    ) {
 
-                    DoubleSpacer()
+        for (geyserType in sortedGeyserTypes) {
 
-                } else {
-
-                    val poisByTypeMap = asteroid.pointsOfInterest.groupBy { it.id }
-
-                    val sortedPoiTypes = poisByTypeMap.keys.sorted()
-
-                    for (poiType in sortedPoiTypes) {
-
-                        val count = poisByTypeMap[poiType]!!.size
-
+//            val count = geyserByTypeMap[geyserType]!!.size
+//
 //                    if (count > 1) {
 //
 //                        Text(
@@ -220,33 +177,126 @@ fun AsteroidDisplay(
 //                        )
 //                    }
 
-                        Box(
-                            contentAlignment = Alignment.Center,
-                            modifier = Modifier
-                                .size(48.dp)
-                                .background(
-                                    MaterialTheme.colorScheme.surface,
-                                    CircleShape
-                                )
-                                .border(
-                                    1.dp,
-                                    Color.Black,
-                                    CircleShape
-                                )
-                        ) {
+            val hovered = remember { mutableStateOf(false) }
 
-                            Image(
-                                painter = painterResource(getPointOfInterestDrawable(poiType)),
-                                contentDescription = null,
-                                modifier = Modifier.padding(defaultSpacing)
-                            )
-                        }
+            Box(
+                contentAlignment = Alignment.Center,
+                modifier = Modifier
+                    .size(48.dp)
+                    .background(
+                        if (hovered.value)
+                            MaterialTheme.colorScheme.surfaceVariant
+                        else
+                            MaterialTheme.colorScheme.surface,
+                        CircleShape
+                    )
+                    .border(
+                        1.dp,
+                        Color.Black,
+                        CircleShape
+                    )
+                    .onPointerEvent(PointerEventType.Enter) {
+                        hovered.value = true
                     }
+                    .onPointerEvent(PointerEventType.Exit) {
+                        hovered.value = false
+                    }
+            ) {
 
-                    if (isStarterAstroid)
-                        FillSpacer()
-                }
+                Image(
+                    painter = painterResource(getGeyserDrawable(geyserType)),
+                    contentDescription = null,
+                    alignment = Alignment.BottomCenter,
+                    modifier = Modifier.padding()
+                )
             }
         }
+
+        if (isStarterAstroid)
+            FillSpacer()
+    }
+}
+
+@Composable
+private fun PointOfInterestsRow(
+    pointsOfInterest: List<PointOfInterest>,
+    maxWidth: Dp,
+    isStarterAstroid: Boolean
+) {
+
+    if (pointsOfInterest.isEmpty()) {
+
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.height(48.dp)
+        ) {
+
+            DoubleSpacer()
+
+            Text(
+                text = "No POIs",
+                style = MaterialTheme.typography.bodyLarge,
+                color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.5F)
+            )
+
+            DoubleSpacer()
+        }
+
+        return
+    }
+
+    val poisByTypeMap = pointsOfInterest.groupBy { it.id }
+
+    val sortedPoiTypes = poisByTypeMap.keys.sorted()
+
+    val spacingPerPoi = min(
+        (maxWidth - sortedPoiTypes.size.times(48.dp)) / (sortedPoiTypes.size - 1),
+        halfSpacing
+    )
+
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(spacingPerPoi),
+        modifier = Modifier.height(48.dp)
+    ) {
+
+        for (poiType in sortedPoiTypes) {
+
+//            val count = poisByTypeMap[poiType]!!.size
+//
+//                    if (count > 1) {
+//
+//                        Text(
+//                            text = "${count}x",
+//                            style = MaterialTheme.typography.bodyLarge,
+//                            color = MaterialTheme.colorScheme.onBackground
+//                        )
+//                    }
+
+            Box(
+                contentAlignment = Alignment.Center,
+                modifier = Modifier
+                    .size(48.dp)
+                    .background(
+                        MaterialTheme.colorScheme.surface,
+                        CircleShape
+                    )
+                    .border(
+                        1.dp,
+                        Color.Black,
+                        CircleShape
+                    )
+            ) {
+
+                Image(
+                    painter = painterResource(getPointOfInterestDrawable(poiType)),
+                    contentDescription = null,
+                    modifier = Modifier.padding(defaultSpacing)
+                )
+            }
+        }
+
+        if (isStarterAstroid)
+            FillSpacer()
     }
 }

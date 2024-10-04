@@ -39,8 +39,7 @@ import ui.theme.FillSpacer
 import ui.theme.defaultPadding
 import ui.theme.defaultRoundedCornerShape
 import ui.theme.defaultSpacing
-
-val overLapping = -16.dp
+import kotlin.math.max
 
 @Composable
 fun WorldView(
@@ -52,7 +51,10 @@ fun WorldView(
             .background(MaterialTheme.colorScheme.surface, defaultRoundedCornerShape)
     ) {
 
-        val gridLayoutColumnCount = maxWidth.div(450.dp).toInt()
+        val gridLayoutColumnCount = max(
+            maxWidth.div(400.dp).toInt(),
+            1
+        )
 
         Column(
             modifier = Modifier.defaultPadding(),
