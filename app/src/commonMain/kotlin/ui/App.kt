@@ -50,6 +50,8 @@ import ui.theme.defaultRoundedCornerShape
 
 val logoIconHeight = 80.dp
 
+const val SHOW_FILTER_PANEL = false
+
 const val ALLOW_WEB_CALLS = false
 
 @Composable
@@ -145,7 +147,8 @@ fun App() {
 
             DefaultSpacer()
 
-            FilterPanel()
+            if (SHOW_FILTER_PANEL)
+                FilterPanel()
 
             if (ALLOW_WEB_CALLS) {
 

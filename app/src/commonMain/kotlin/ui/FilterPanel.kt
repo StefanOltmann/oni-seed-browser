@@ -64,7 +64,7 @@ import ui.theme.halfSpacing
 @Composable
 fun FilterPanel() {
 
-    val filterPanelOpen = remember { mutableStateOf(false) }
+    val filterPanelOpen = remember { mutableStateOf(true) }
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
