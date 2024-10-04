@@ -101,8 +101,6 @@ fun AsteroidDisplay(
 
         BoxWithConstraints {
 
-            println("Max width: $maxWidth")
-
             val maxWidth = maxWidth
 
             Column(
