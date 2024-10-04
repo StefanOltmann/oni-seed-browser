@@ -132,7 +132,7 @@ fun FilterPanel() {
                 Row(
                     modifier = Modifier.defaultPadding(),
                     verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(64.dp)
+                    horizontalArrangement = Arrangement.spacedBy(32.dp, Alignment.CenterHorizontally)
                 ) {
 
                     val baseGameLogoHovered = remember { mutableStateOf(false) }
@@ -167,6 +167,8 @@ fun FilterPanel() {
                     )
                 }
 
+                HorizontalLine()
+
                 DefaultSpacer()
 
                 Row(
@@ -181,6 +183,8 @@ fun FilterPanel() {
                         onClick = { println("add OR rule") }
                     )
                 }
+
+                HorizontalLine()
 
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
@@ -207,6 +211,18 @@ fun FilterPanel() {
             }
         }
     }
+}
+
+@Composable
+private fun HorizontalLine() {
+
+    Box(
+        modifier = Modifier
+            .defaultPadding()
+            .background(MaterialTheme.colorScheme.background)
+            .fillMaxWidth()
+            .height(2.dp)
+    )
 }
 
 @Composable
