@@ -50,7 +50,7 @@ import ui.theme.defaultRoundedCornerShape
 
 val logoIconHeight = 80.dp
 
-const val SHOW_FILTER_PANEL = false
+const val SHOW_FILTER_PANEL = true
 
 const val ALLOW_WEB_CALLS = false
 

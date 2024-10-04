@@ -73,7 +73,7 @@ import kotlin.math.max
 @Composable
 fun FilterPanel() {
 
-    val filterPanelOpen = remember { mutableStateOf(true) }
+    val filterPanelOpen = remember { mutableStateOf(false) }
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
