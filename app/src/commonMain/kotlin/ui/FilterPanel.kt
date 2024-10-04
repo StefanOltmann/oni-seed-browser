@@ -213,6 +213,7 @@ fun FilterPanel() {
                                 modifier = Modifier
                                     .halfPadding()
                                     .onHover(clusterHovered)
+                                    .scale(if (clusterHovered.value) 1.1F else 1F)
                             ) {
 
                                 Image(
@@ -224,9 +225,7 @@ fun FilterPanel() {
                                         null
                                     else
                                         grayScaleFilter,
-                                    modifier = Modifier
-                                        .size(100.dp)
-                                        .scale(if (clusterHovered.value) 1.1F else 1F)
+                                    modifier = Modifier.size(100.dp)
                                 )
 
                                 Text(
