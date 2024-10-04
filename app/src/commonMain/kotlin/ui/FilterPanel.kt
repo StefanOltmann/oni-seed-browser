@@ -58,9 +58,7 @@ import androidx.compose.ui.unit.dp
 import model.Cluster
 import oni_seed_browser.app.generated.resources.Res
 import oni_seed_browser.app.generated.resources.logo_oni
-import oni_seed_browser.app.generated.resources.logo_oni_gray
 import oni_seed_browser.app.generated.resources.logo_spaced_out
-import oni_seed_browser.app.generated.resources.logo_spaced_out_gray
 import org.jetbrains.compose.resources.painterResource
 import ui.theme.DefaultSpacer
 import ui.theme.DoubleSpacer
@@ -159,13 +157,12 @@ fun FilterPanel() {
                     val spacedOutLogoHovered = remember { mutableStateOf(false) }
 
                     Image(
-                        painter = painterResource(
-                            if (!spacedOutDlcSelected.value)
-                                Res.drawable.logo_oni
-                            else
-                                Res.drawable.logo_oni_gray
-                        ),
+                        painter = painterResource(Res.drawable.logo_oni),
                         contentDescription = null,
+                        colorFilter = if (!spacedOutDlcSelected.value || baseGameLogoHovered.value)
+                            null
+                        else
+                            grayScaleFilter,
                         modifier = Modifier
                             .height(logoIconHeight)
                             .onHover(baseGameLogoHovered)
@@ -174,13 +171,13 @@ fun FilterPanel() {
                     )
 
                     Image(
-                        painter = painterResource(
-                            if (spacedOutDlcSelected.value)
-                                Res.drawable.logo_spaced_out
-                            else
-                                Res.drawable.logo_spaced_out_gray
-                        ),
+                        painter = painterResource(Res.drawable.logo_spaced_out),
                         contentDescription = null,
+                        colorFilter = if
+                                          (spacedOutDlcSelected.value || spacedOutLogoHovered.value)
+                            null
+                        else
+                            grayScaleFilter,
                         modifier = Modifier
                             .height(logoIconHeight)
                             .onHover(spacedOutLogoHovered)
@@ -208,9 +205,13 @@ fun FilterPanel() {
 
                         for (cluster in clusters) {
 
+                            val clusterHovered = remember { mutableStateOf(false) }
+
                             Column(
                                 horizontalAlignment = Alignment.CenterHorizontally,
-                                modifier = Modifier.halfPadding()
+                                modifier = Modifier
+                                    .halfPadding()
+                                    .onHover(clusterHovered)
                             ) {
 
                                 Image(
@@ -218,6 +219,10 @@ fun FilterPanel() {
                                         getClusterDrawable(cluster)
                                     ),
                                     contentDescription = null,
+                                    colorFilter = if (clusterHovered.value)
+                                        null
+                                    else
+                                        grayScaleFilter,
                                     modifier = Modifier.size(100.dp)
                                 )
 
