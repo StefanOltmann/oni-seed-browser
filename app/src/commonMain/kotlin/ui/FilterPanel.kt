@@ -48,9 +48,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import oni_seed_browser.app.generated.resources.Res
-import oni_seed_browser.app.generated.resources.dlc_frosty_planet
-import oni_seed_browser.app.generated.resources.dlc_spaced_out
-import oni_seed_browser.app.generated.resources.oni_logo
+import oni_seed_browser.app.generated.resources.logo_oni
+import oni_seed_browser.app.generated.resources.logo_spaced_out
 import org.jetbrains.compose.resources.painterResource
 import ui.theme.DefaultSpacer
 import ui.theme.DoubleSpacer
@@ -120,7 +119,9 @@ fun FilterPanel() {
 
         AnimatedVisibility(filterPanelOpen.value) {
 
-            Column {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
 
                 DefaultSpacer()
 
@@ -131,19 +132,13 @@ fun FilterPanel() {
                 ) {
 
                     Image(
-                        painter = painterResource(Res.drawable.oni_logo),
+                        painter = painterResource(Res.drawable.logo_oni),
                         contentDescription = null,
                         modifier = Modifier.height(logoIconHeight)
                     )
 
                     Image(
-                        painter = painterResource(Res.drawable.dlc_spaced_out),
-                        contentDescription = null,
-                        modifier = Modifier.height(logoIconHeight)
-                    )
-
-                    Image(
-                        painter = painterResource(Res.drawable.dlc_frosty_planet),
+                        painter = painterResource(Res.drawable.logo_spaced_out),
                         contentDescription = null,
                         modifier = Modifier.height(logoIconHeight)
                     )
