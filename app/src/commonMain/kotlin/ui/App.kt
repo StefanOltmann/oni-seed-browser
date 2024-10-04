@@ -50,6 +50,8 @@ import ui.theme.defaultRoundedCornerShape
 
 val logoIconHeight = 80.dp
 
+const val ALLOW_WEB_CALLS = false
+
 @Composable
 fun App() {
     MaterialTheme(
@@ -145,28 +147,31 @@ fun App() {
 
             FilterPanel()
 
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier
-                    .defaultPadding()
-                    .border(1.dp, MaterialTheme.colorScheme.onBackground, defaultRoundedCornerShape)
-            ) {
+            if (ALLOW_WEB_CALLS) {
 
-                DefaultSpacer()
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier
+                        .defaultPadding()
+                        .border(1.dp, MaterialTheme.colorScheme.onBackground, defaultRoundedCornerShape)
+                ) {
 
-                Switch(
-                    checked = demoMode.value,
-                    onCheckedChange = { demoMode.value = it }
-                )
+                    DefaultSpacer()
 
-                DefaultSpacer()
+                    Switch(
+                        checked = demoMode.value,
+                        onCheckedChange = { demoMode.value = it }
+                    )
 
-                Text(
-                    text = "Demo Mode",
-                    style = MaterialTheme.typography.bodyLarge,
-                    color = MaterialTheme.colorScheme.onBackground,
-                    modifier = Modifier.defaultPadding()
-                )
+                    DefaultSpacer()
+
+                    Text(
+                        text = "Demo Mode",
+                        style = MaterialTheme.typography.bodyLarge,
+                        color = MaterialTheme.colorScheme.onBackground,
+                        modifier = Modifier.defaultPadding()
+                    )
+                }
             }
 
             if (isGettingNewResults.value) {
