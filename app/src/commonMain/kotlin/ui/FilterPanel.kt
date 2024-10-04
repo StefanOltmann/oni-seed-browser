@@ -27,6 +27,8 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -46,7 +48,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import model.Cluster
 import oni_seed_browser.app.generated.resources.Res
 import oni_seed_browser.app.generated.resources.logo_oni
 import oni_seed_browser.app.generated.resources.logo_oni_gray
@@ -60,8 +65,11 @@ import ui.theme.ctaColor
 import ui.theme.defaultPadding
 import ui.theme.defaultRoundedCornerShape
 import ui.theme.doubleSpacing
+import ui.theme.halfPadding
 import ui.theme.halfSpacing
+import kotlin.math.max
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun FilterPanel() {
 
@@ -121,13 +129,13 @@ fun FilterPanel() {
 
         AnimatedVisibility(filterPanelOpen.value) {
 
+            val spacedOutDlcSelected = remember { mutableStateOf(false) }
+
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
 
                 DefaultSpacer()
-
-                val spacedOutDlcSelected = remember { mutableStateOf(false) }
 
                 Row(
                     modifier = Modifier.defaultPadding(),
@@ -165,6 +173,46 @@ fun FilterPanel() {
                             .onHover(spacedOutLogoHovered)
                             .noRippleClickable { spacedOutDlcSelected.value = true }
                     )
+                }
+
+                HorizontalSeparator()
+
+                val clusters = if (spacedOutDlcSelected.value)
+                    Cluster.spacedOutCluster
+                else
+                    Cluster.baseGameCluster
+
+                FlowRow(
+                    maxItemsInEachRow = max(9, clusters.size / 2)
+                ) {
+
+                    for (cluster in clusters) {
+
+                        Column(
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            modifier = Modifier.halfPadding()
+                        ) {
+
+                            Image(
+                                painter = painterResource(
+                                    getClusterDrawable(cluster)
+                                ),
+                                contentDescription = null,
+                                modifier = Modifier.size(100.dp)
+                            )
+
+                            Text(
+                                text = cluster.displayName,
+                                style = MaterialTheme.typography.bodyLarge,
+                                color = MaterialTheme.colorScheme.onBackground,
+                                textAlign = TextAlign.Center,
+                                overflow = TextOverflow.Ellipsis,
+                                maxLines = 2,
+                                modifier = Modifier.size(100.dp, 48.dp)
+                            )
+
+                        }
+                    }
                 }
 
                 HorizontalSeparator()

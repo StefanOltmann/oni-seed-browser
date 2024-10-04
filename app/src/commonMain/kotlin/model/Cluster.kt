@@ -138,5 +138,20 @@ enum class Cluster(
     DLC_RADIOACTIVE_OCEAN_MOONLET(
         prefix = "M-RAD-C",
         displayName = "Radioactive Ocean Moonlet"
-    )
+    );
+
+    companion object {
+
+        val baseGameCluster = listOf(
+            BASE_TERRA, BASE_OCEANIA, BASE_RIME, BASE_VERDANTE, BASE_ARBORIA,
+            BASE_VOLCANEA, BASE_THE_BADLANDS, BASE_ARIDIO, BASE_OASISSE
+        )
+
+        val spacedOutCluster = listOf(
+            DLC_TERRA, DLC_OCEANIA, DLC_SQUELCHY, DLC_RIME, DLC_VERDANTE, DLC_ARBORIA,
+            DLC_VOLCANEA, DLC_THE_BADLANDS, DLC_ARIDIO, DLC_OASISSE, DLC_TERRANIA,
+            DLC_FOLIA, DLC_QUAGMIRIS, DLC_METALLIC_SWAMPY_MOONLET, DLC_THE_DESOLANDS_MOONLET,
+            DLC_FROZEN_FOREST_MOONLET, DLC_FLIPPED_MOONLET, DLC_RADIOACTIVE_OCEAN_MOONLET
+        )
+    }
 }

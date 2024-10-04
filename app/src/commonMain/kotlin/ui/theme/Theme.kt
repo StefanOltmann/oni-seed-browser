@@ -35,6 +35,8 @@ val defaultSpacing = 8.dp
 val doubleSpacing = defaultSpacing * 2
 val halfSpacing = defaultSpacing / 2
 
+fun Modifier.halfPadding() = this.padding(halfSpacing)
+
 fun Modifier.defaultPadding() = this.padding(defaultSpacing)
 
 @Composable
