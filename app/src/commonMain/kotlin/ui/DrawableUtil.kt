@@ -26,6 +26,7 @@ import model.GeyserType
 import model.PointOfInterestType
 import model.WorldTrait
 import oni_seed_browser.app.generated.resources.Res
+import oni_seed_browser.app.generated.resources.asteroid_ceres
 import oni_seed_browser.app.generated.resources.asteroid_folia
 import oni_seed_browser.app.generated.resources.asteroid_glowood_wasteland
 import oni_seed_browser.app.generated.resources.asteroid_irradiated_forest
@@ -41,6 +42,8 @@ import oni_seed_browser.app.generated.resources.asteroid_radioactive_terra
 import oni_seed_browser.app.generated.resources.asteroid_radioactive_terrabog
 import oni_seed_browser.app.generated.resources.asteroid_regolith
 import oni_seed_browser.app.generated.resources.asteroid_rusty_oil
+import oni_seed_browser.app.generated.resources.asteroid_spacedout_ceres
+import oni_seed_browser.app.generated.resources.asteroid_spacedout_ceres_minor
 import oni_seed_browser.app.generated.resources.asteroid_stinko_swamp
 import oni_seed_browser.app.generated.resources.asteroid_superconductive
 import oni_seed_browser.app.generated.resources.asteroid_terrania
@@ -205,6 +208,7 @@ fun getPointOfInterestDrawable(pointOfInterestType: PointOfInterestType): Drawab
 fun getClusterDrawable(cluster: Cluster): DrawableResource =
     when (cluster) {
         Cluster.BASE_TERRA -> Res.drawable.cluster_base_terra
+        Cluster.BASE_CERES -> Res.drawable.asteroid_ceres
         Cluster.BASE_OCEANIA -> Res.drawable.cluster_base_oceania
         Cluster.BASE_RIME -> Res.drawable.cluster_base_rime
         Cluster.BASE_VERDANTE -> Res.drawable.cluster_base_verdante
@@ -214,6 +218,8 @@ fun getClusterDrawable(cluster: Cluster): DrawableResource =
         Cluster.BASE_ARIDIO -> Res.drawable.cluster_base_aridio
         Cluster.BASE_OASISSE -> Res.drawable.cluster_base_oasisse
         Cluster.DLC_TERRA -> Res.drawable.cluster_spacedout_terra
+        Cluster.DLC_CERES -> Res.drawable.asteroid_spacedout_ceres
+        Cluster.DLC_CERES_MINOR -> Res.drawable.asteroid_spacedout_ceres_minor
         Cluster.DLC_OCEANIA -> Res.drawable.cluster_spacedout_oceania
         Cluster.DLC_SQUELCHY -> Res.drawable.cluster_spacedout_squelchy
         Cluster.DLC_RIME -> Res.drawable.cluster_spacedout_rime

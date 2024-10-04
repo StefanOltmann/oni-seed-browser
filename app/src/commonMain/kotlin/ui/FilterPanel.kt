@@ -183,7 +183,7 @@ fun FilterPanel() {
                     Cluster.baseGameCluster
 
                 FlowRow(
-                    maxItemsInEachRow = max(9, clusters.size / 2)
+                    maxItemsInEachRow = max(10, clusters.size / 2)
                 ) {
 
                     for (cluster in clusters) {
