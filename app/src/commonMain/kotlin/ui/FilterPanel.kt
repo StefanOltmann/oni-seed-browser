@@ -167,7 +167,7 @@ fun FilterPanel() {
                     )
                 }
 
-                HorizontalLine()
+                HorizontalSeparator()
 
                 DefaultSpacer()
 
@@ -184,7 +184,7 @@ fun FilterPanel() {
                     )
                 }
 
-                HorizontalLine()
+                HorizontalSeparator()
 
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
@@ -214,7 +214,7 @@ fun FilterPanel() {
 }
 
 @Composable
-private fun HorizontalLine() {
+private fun HorizontalSeparator() {
 
     Box(
         modifier = Modifier

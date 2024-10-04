@@ -19,11 +19,16 @@
 
 package ui
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -43,6 +48,7 @@ fun FilterPanelEntry(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
             .defaultPadding()
+            .height(48.dp)
             .border(1.dp, Color.White, defaultRoundedCornerShape)
     ) {
 
@@ -52,11 +58,15 @@ fun FilterPanelEntry(
             color = MaterialTheme.colorScheme.onBackground
         )
 
+        VerticalSeparator()
+
         Text(
             text = "Geyser",
             style = MaterialTheme.typography.headlineMedium,
             color = MaterialTheme.colorScheme.onBackground
         )
+
+        VerticalSeparator()
 
         Text(
             text = "at least",
@@ -64,11 +74,13 @@ fun FilterPanelEntry(
             color = MaterialTheme.colorScheme.onBackground
         )
 
+        VerticalSeparator()
+
         val textFieldValue = remember {
             mutableStateOf(TextFieldValue(text = ""))
         }
 
-        TextField(
+        BasicTextField(
             value = textFieldValue.value,
             onValueChange = {
                 textFieldValue.value = it
@@ -76,4 +88,15 @@ fun FilterPanelEntry(
         )
 
     }
+}
+
+@Composable
+private fun VerticalSeparator() {
+
+    Box(
+        modifier = Modifier
+            .width(1.dp)
+            .fillMaxHeight()
+            .background(MaterialTheme.colorScheme.onBackground)
+    )
 }
