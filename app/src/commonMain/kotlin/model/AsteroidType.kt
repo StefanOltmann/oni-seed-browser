@@ -26,10 +26,9 @@ enum class AsteroidType(
     val displayName: String
 ) {
 
+    /* Base game */
     TERRA("Terra Asteroid"),
     CERES("Ceres Asteroid"),
-    CERES_VANILLA("Ceres Asteroid"),
-    CERES_MINOR("Ceres Minor Asteroid"),
     OCEANIA("Oceania Asteroid"),
     RIME("Rime Asteroid"),
     VERDANTE("Verdante Asteroid"),
@@ -38,8 +37,17 @@ enum class AsteroidType(
     THE_BADLANDS("The Badlands Asteroid"),
     ARIDIO("Aridio Asteroid"),
     OASISSE("Oasisse Asteroid"),
-    SQUELCHY("Squelchy Asteroid"),
+
+    /* DLC Classic */
+    SPACEDOUT_TERRA("Terra Asteroid"),
+    SPACEDOUT_CERES("Ceres Asteroid"),
+    SPACEDOUT_OCEANIA("Oceania Asteroid"),
+    SPACEDOUT_RIME("Rime Asteroid"),
+
+    /* DLC Moonlets */
     TERRANIA("Terrania Asteroid"),
+    SQUELCHY("Squelchy Asteroid"),
+    CERES_MINOR("Ceres Minor Asteroid"),
     FOLIA("Folia Asteroid"),
     QUAGMIRIS("Quagmiris Asteroid"),
     METALLIC_SWAMPY("Metallic Swampy Asteroid"),
@@ -69,28 +77,37 @@ enum class AsteroidType(
 
         @Suppress("CyclomaticComplexMethod", "kotlin:S1479")
         fun of(worldName: String): AsteroidType = when (worldName) {
+
+            /* Base game */
             "SandstoneDefault" -> TERRA
-            "VanillaSandstoneDefault" -> TERRA
             "Oceania" -> OCEANIA
-            "VanillaOceania" -> OCEANIA
-            "VanillaSwampDefault" -> SQUELCHY
             "SandstoneFrozen" -> RIME
-            "VanillaSandstoneFrozen" -> RIME
             "ForestLush" -> VERDANTE
-            "VanillaForestDefault" -> VERDANTE
             "ForestDefault" -> ARBORIA
             "VanillaArboria" -> ARBORIA
-            "Volcanic" -> VOLCANEA
-            "VanillaVolcanic" -> VOLCANEA
             "Badlands" -> THE_BADLANDS
-            "VanillaBadlands" -> THE_BADLANDS
             "ForestHot" -> ARIDIO
+            "Volcanic" -> VOLCANEA
+
+            // FIXME Bring in order
+
+            /* DLC classic */
+            "VanillaSandstoneDefault" -> SPACEDOUT_TERRA
+            "VanillaOceania" -> SPACEDOUT_OCEANIA
             "VanillaAridio" -> ARIDIO
-            "Oasis" -> OASISSE
             "VanillaOasis" -> OASISSE
+            "Oasis" -> OASISSE
+            "VanillaSwampDefault" -> SQUELCHY
+            "VanillaSandstoneFrozen" -> RIME
+            "VanillaForestDefault" -> VERDANTE
+            "VanillaVolcanic" -> VOLCANEA
+            "VanillaBadlands" -> THE_BADLANDS
+
+            /* DLC moonlets */
             "TerraMoonlet" -> TERRANIA
             "ForestMoonlet" -> FOLIA
             "SwampMoonlet" -> QUAGMIRIS
+
             "MiniMetallicSwampyStart" -> METALLIC_SWAMPY
             "MiniMetallicSwampy" -> METALLIC_SWAMPY
             "MiniBadlands" -> THE_DESOLANDS
@@ -124,7 +141,7 @@ enum class AsteroidType(
             "RegolithMoonlet" -> REGOLITH
             "MiniRegolithMoonlet" -> REGOLITH
             "CeresBaseGameAsteroid" -> CERES
-            "CeresClassicAsteroid" -> CERES_VANILLA
+            "CeresClassicAsteroid" -> SPACEDOUT_CERES
             "CeresSpacedOutAsteroid" -> CERES_MINOR
             else -> error("Unknown world: $worldName")
         }

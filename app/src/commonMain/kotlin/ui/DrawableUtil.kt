@@ -43,6 +43,9 @@ import oni_seed_browser.app.generated.resources.asteroid_regolith
 import oni_seed_browser.app.generated.resources.asteroid_rusty_oil
 import oni_seed_browser.app.generated.resources.asteroid_spacedout_ceres
 import oni_seed_browser.app.generated.resources.asteroid_spacedout_ceres_minor
+import oni_seed_browser.app.generated.resources.asteroid_spacedout_oceania
+import oni_seed_browser.app.generated.resources.asteroid_spacedout_rime
+import oni_seed_browser.app.generated.resources.asteroid_spacedout_terra
 import oni_seed_browser.app.generated.resources.asteroid_stinko_swamp
 import oni_seed_browser.app.generated.resources.asteroid_superconductive
 import oni_seed_browser.app.generated.resources.asteroid_terrania
@@ -243,6 +246,7 @@ fun getClusterDrawable(cluster: Cluster): DrawableResource =
 fun getAsteroidTypeDrawable(asteroidType: AsteroidType): DrawableResource =
     when (asteroidType) {
 
+        /* Base game */
         AsteroidType.TERRA -> Res.drawable.cluster_base_terra
         AsteroidType.CERES -> Res.drawable.cluster_base_ceres
         AsteroidType.OCEANIA -> Res.drawable.cluster_base_oceania
@@ -255,8 +259,15 @@ fun getAsteroidTypeDrawable(asteroidType: AsteroidType): DrawableResource =
         AsteroidType.OASISSE -> Res.drawable.cluster_base_oasisse
         AsteroidType.SQUELCHY -> Res.drawable.cluster_spacedout_squelchy
 
+        /* DLC classic */
+        AsteroidType.SPACEDOUT_TERRA -> Res.drawable.asteroid_spacedout_terra
+        AsteroidType.SPACEDOUT_CERES -> Res.drawable.asteroid_spacedout_ceres
+        AsteroidType.SPACEDOUT_OCEANIA -> Res.drawable.asteroid_spacedout_oceania
+        AsteroidType.SPACEDOUT_RIME -> Res.drawable.asteroid_spacedout_rime
+        // FIXME Correct the remaining
+
+        /* DLC moonlets */
         AsteroidType.TERRANIA -> Res.drawable.asteroid_terrania
-        AsteroidType.CERES_VANILLA -> Res.drawable.asteroid_spacedout_ceres
         AsteroidType.CERES_MINOR -> Res.drawable.asteroid_spacedout_ceres_minor
         AsteroidType.FOLIA -> Res.drawable.asteroid_folia
         AsteroidType.QUAGMIRIS -> Res.drawable.asteroid_quagmiris
