@@ -30,12 +30,14 @@ object DummyWebClient : WebClient {
 
         val worlds = Json.decodeFromString<List<World>>(sampleWorldsJson)
 
+        val sortedWorlds = worlds.sortedBy { it.cluster }
+
         return SearchResponse(
             page = 1,
             pageSize = 50,
             totalPages = 1,
             totalResults = worlds.size,
-            worlds = worlds
+            worlds = sortedWorlds
         )
     }
 }
