@@ -1,6 +1,7 @@
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import model.Cluster
+import model.Dlc
 import model.GeyserType
 import model.WorldTrait
 import model.filter.FilterCondition
@@ -80,6 +81,7 @@ fun main() {
     val query = FilterQuery(
 
         cluster = Cluster.BASE_TERRA,
+        dlcs = listOf(Dlc.FrostyPlanet),
         andRules = listOf(firstRule, secondRule, thirdRule)
     )
 
