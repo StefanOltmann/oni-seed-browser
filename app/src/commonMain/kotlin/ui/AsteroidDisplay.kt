@@ -109,7 +109,7 @@ fun AsteroidDisplay(
                 ) {
 
                     Text(
-                        text = asteroid.id.name,
+                        text = asteroid.id.displayName,
                         style = MaterialTheme.typography.bodyLarge,
                         color = MaterialTheme.colorScheme.onBackground,
                     )
