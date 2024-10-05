@@ -152,6 +152,9 @@ enum class Cluster(
         displayName = "Radioactive Ocean Moonlet"
     );
 
+    fun isFrostyPlanet(): Boolean =
+        this == BASE_CERES || this == DLC_CERES || this == DLC_CERES_MINOR
+
     companion object {
 
         val baseGameCluster = listOf(

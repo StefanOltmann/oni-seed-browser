@@ -43,6 +43,7 @@ import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -57,6 +58,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import model.Cluster
 import oni_seed_browser.app.generated.resources.Res
+import oni_seed_browser.app.generated.resources.logo_frosty_planet_banner
 import oni_seed_browser.app.generated.resources.logo_oni
 import oni_seed_browser.app.generated.resources.logo_spaced_out
 import org.jetbrains.compose.resources.painterResource
@@ -76,6 +78,8 @@ import kotlin.math.max
 fun FilterPanel() {
 
     val filterPanelOpen = remember { mutableStateOf(false) }
+
+    val enableFrostyPlanet = remember { mutableStateOf(true) }
 
     val maxSizeModifier = if (filterPanelOpen.value)
         Modifier.fillMaxSize()
@@ -148,9 +152,9 @@ fun FilterPanel() {
                 DefaultSpacer()
 
                 Row(
-                    modifier = Modifier.defaultPadding(),
                     verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(32.dp, Alignment.CenterHorizontally)
+                    horizontalArrangement = Arrangement.spacedBy(32.dp, Alignment.CenterHorizontally),
+                    modifier = Modifier.defaultPadding()
                 ) {
 
                     val baseGameLogoHovered = remember { mutableStateOf(false) }
@@ -173,8 +177,7 @@ fun FilterPanel() {
                     Image(
                         painter = painterResource(Res.drawable.logo_spaced_out),
                         contentDescription = null,
-                        colorFilter = if
-                                          (spacedOutDlcSelected.value || spacedOutLogoHovered.value)
+                        colorFilter = if (spacedOutDlcSelected.value || spacedOutLogoHovered.value)
                             null
                         else
                             grayScaleFilter,
@@ -183,6 +186,29 @@ fun FilterPanel() {
                             .onHover(spacedOutLogoHovered)
                             .noRippleClickable { spacedOutDlcSelected.value = true }
                             .scale(if (spacedOutLogoHovered.value) 1.1F else 1F)
+                    )
+                }
+
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(doubleSpacing, Alignment.CenterHorizontally)
+                ) {
+
+                    Switch(
+                        checked = enableFrostyPlanet.value,
+                        onCheckedChange = { enableFrostyPlanet.value = it }
+                    )
+
+                    Image(
+                        painter = painterResource(Res.drawable.logo_frosty_planet_banner),
+                        contentDescription = null,
+                        colorFilter = if (enableFrostyPlanet.value)
+                            null
+                        else
+                            grayScaleFilter,
+                        modifier = Modifier.noRippleClickable {
+                            enableFrostyPlanet.value = !enableFrostyPlanet.value
+                        }
                     )
                 }
 
@@ -200,11 +226,18 @@ fun FilterPanel() {
                     else
                         Cluster.baseGameCluster
 
+                    val filteredClusters = clusters.filterNot {
+                        !enableFrostyPlanet.value && it.isFrostyPlanet()
+                    }
+
                     FlowRow(
-                        maxItemsInEachRow = max(10, clusters.size / 2)
+                        maxItemsInEachRow = max(
+                            if (enableFrostyPlanet.value) 10 else 9,
+                            filteredClusters.size / 2
+                        )
                     ) {
 
-                        for (cluster in clusters) {
+                        for (cluster in filteredClusters) {
 
                             val clusterHovered = remember { mutableStateOf(false) }
 
