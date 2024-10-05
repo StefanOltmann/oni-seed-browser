@@ -39,12 +39,15 @@ enum class AsteroidType(
     OASISSE("Oasisse Asteroid"),
 
     /* DLC Classic */
-    SPACEDOUT_TERRA("Terra Asteroid"),
-    SPACEDOUT_CERES("Ceres Asteroid"),
-    SPACEDOUT_OCEANIA("Oceania Asteroid"),
-    SPACEDOUT_RIME("Rime Asteroid"),
+    TERRA_SPACEDOUT("Terra Asteroid"),
+    CERES_SPACEDOUT("Ceres Asteroid"),
+    OCEANIA_SPACEDOUT("Oceania Asteroid"),
+    RIME_SPACEDOUT("Rime Asteroid"),
 
     /* DLC Moonlets */
+
+    BLASTED_CERES("Blasted Ceres Asteroid"),
+
     TERRANIA("Terrania Asteroid"),
     SQUELCHY("Squelchy Asteroid"),
     CERES_MINOR("Ceres Minor Asteroid"),
@@ -80,6 +83,7 @@ enum class AsteroidType(
 
             /* Base game */
             "SandstoneDefault" -> TERRA
+            "CeresBaseGameAsteroid" -> CERES
             "Oceania" -> OCEANIA
             "SandstoneFrozen" -> RIME
             "ForestLush" -> VERDANTE
@@ -92,8 +96,8 @@ enum class AsteroidType(
             // FIXME Bring in order
 
             /* DLC classic */
-            "VanillaSandstoneDefault" -> SPACEDOUT_TERRA
-            "VanillaOceania" -> SPACEDOUT_OCEANIA
+            "VanillaSandstoneDefault" -> TERRA_SPACEDOUT
+            "VanillaOceania" -> OCEANIA_SPACEDOUT
             "VanillaAridio" -> ARIDIO
             "VanillaOasis" -> OASISSE
             "Oasis" -> OASISSE
@@ -105,6 +109,10 @@ enum class AsteroidType(
 
             /* DLC moonlets */
             "TerraMoonlet" -> TERRANIA
+
+            "CeresClassicAsteroid" -> CERES_SPACEDOUT
+            "CeresSpacedOutAsteroid" -> CERES_MINOR
+            "MixingCeresAsteroid" -> BLASTED_CERES
             "ForestMoonlet" -> FOLIA
             "SwampMoonlet" -> QUAGMIRIS
 
@@ -140,9 +148,7 @@ enum class AsteroidType(
             "WaterMoonlet" -> WATER
             "RegolithMoonlet" -> REGOLITH
             "MiniRegolithMoonlet" -> REGOLITH
-            "CeresBaseGameAsteroid" -> CERES
-            "CeresClassicAsteroid" -> SPACEDOUT_CERES
-            "CeresSpacedOutAsteroid" -> CERES_MINOR
+
             else -> error("Unknown world: $worldName")
         }
     }

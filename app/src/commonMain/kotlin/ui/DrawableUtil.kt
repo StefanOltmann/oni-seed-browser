@@ -26,6 +26,7 @@ import model.GeyserType
 import model.PointOfInterestType
 import model.WorldTrait
 import oni_seed_browser.app.generated.resources.Res
+import oni_seed_browser.app.generated.resources.asteroid_blasted_ceres
 import oni_seed_browser.app.generated.resources.asteroid_folia
 import oni_seed_browser.app.generated.resources.asteroid_glowood_wasteland
 import oni_seed_browser.app.generated.resources.asteroid_irradiated_forest
@@ -260,15 +261,16 @@ fun getAsteroidTypeDrawable(asteroidType: AsteroidType): DrawableResource =
         AsteroidType.SQUELCHY -> Res.drawable.cluster_spacedout_squelchy
 
         /* DLC classic */
-        AsteroidType.SPACEDOUT_TERRA -> Res.drawable.asteroid_spacedout_terra
-        AsteroidType.SPACEDOUT_CERES -> Res.drawable.asteroid_spacedout_ceres
-        AsteroidType.SPACEDOUT_OCEANIA -> Res.drawable.asteroid_spacedout_oceania
-        AsteroidType.SPACEDOUT_RIME -> Res.drawable.asteroid_spacedout_rime
+        AsteroidType.TERRA_SPACEDOUT -> Res.drawable.asteroid_spacedout_terra
+        AsteroidType.CERES_SPACEDOUT -> Res.drawable.asteroid_spacedout_ceres
+        AsteroidType.OCEANIA_SPACEDOUT -> Res.drawable.asteroid_spacedout_oceania
+        AsteroidType.RIME_SPACEDOUT -> Res.drawable.asteroid_spacedout_rime
         // FIXME Correct the remaining
 
         /* DLC moonlets */
         AsteroidType.TERRANIA -> Res.drawable.asteroid_terrania
         AsteroidType.CERES_MINOR -> Res.drawable.asteroid_spacedout_ceres_minor
+        AsteroidType.BLASTED_CERES -> Res.drawable.asteroid_blasted_ceres
         AsteroidType.FOLIA -> Res.drawable.asteroid_folia
         AsteroidType.QUAGMIRIS -> Res.drawable.asteroid_quagmiris
         AsteroidType.METALLIC_SWAMPY -> Res.drawable.cluster_spacedout_metallic_swampy_moonlet
