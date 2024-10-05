@@ -124,9 +124,9 @@ enum class AsteroidType(
 
             "MiniMetallicSwampyStart" -> METALLIC_SWAMPY
             "MiniMetallicSwampy" -> METALLIC_SWAMPY
-            "MiniBadlands" -> THE_DESOLANDS
+            "MiniBadlands" -> METALLIC_SWAMPY
             "MiniBadlandsStart" -> THE_DESOLANDS
-            "MiniBadlandsWarp" -> THE_DESOLANDS
+            "MiniBadlandsWarp" -> METALLIC_SWAMPY
             "MiniForestFrozen" -> FROZEN_FOREST
             "MiniForestFrozenStart" -> FROZEN_FOREST
             "MiniForestFrozenWarp" -> FROZEN_FOREST
