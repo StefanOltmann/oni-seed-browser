@@ -20,12 +20,14 @@
 package model
 
 import kotlinx.serialization.Serializable
+import serializer.AsteroidTypeSerializer
 
 @Suppress("UNUSED")
 @Serializable
 data class Asteroid(
 
-    val id: String,
+    @Serializable(with = AsteroidTypeSerializer::class)
+    val id: AsteroidType,
 
     val offsetX: Int,
     val offsetY: Int,

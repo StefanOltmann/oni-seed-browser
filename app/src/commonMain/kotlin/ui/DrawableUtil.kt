@@ -26,7 +26,6 @@ import model.GeyserType
 import model.PointOfInterestType
 import model.WorldTrait
 import oni_seed_browser.app.generated.resources.Res
-import oni_seed_browser.app.generated.resources.asteroid_blasted_ceres
 import oni_seed_browser.app.generated.resources.asteroid_glowood_wasteland
 import oni_seed_browser.app.generated.resources.asteroid_irradiated_forest
 import oni_seed_browser.app.generated.resources.asteroid_irradiated_marsh
@@ -242,62 +241,61 @@ fun getClusterDrawable(cluster: Cluster): DrawableResource =
 @Composable
 fun getAsteroidTypeDrawable(asteroidType: AsteroidType): DrawableResource =
     when (asteroidType) {
-
-        /* Base game starters */
-        AsteroidType.TERRA -> Res.drawable.cluster_base_terra
-        AsteroidType.CERES -> Res.drawable.cluster_base_ceres
-        AsteroidType.OCEANIA -> Res.drawable.cluster_base_oceania
-        AsteroidType.RIME -> Res.drawable.cluster_base_rime
-        AsteroidType.VERDANTE -> Res.drawable.cluster_base_verdante
-        AsteroidType.ARBORIA -> Res.drawable.cluster_base_arboria
-        AsteroidType.VOLCANEA -> Res.drawable.cluster_base_volcanea
-        AsteroidType.THE_BADLANDS -> Res.drawable.cluster_base_the_badlands
-        AsteroidType.ARIDIO -> Res.drawable.cluster_base_aridio
-        AsteroidType.OASISSE -> Res.drawable.cluster_base_oasisse
-
-        /* DLC classic starters */
-        AsteroidType.TERRA_SPACEDOUT -> Res.drawable.cluster_spacedout_terra
-        AsteroidType.CERES_SPACEDOUT -> Res.drawable.cluster_spacedout_ceres
-        AsteroidType.OCEANIA_SPACEDOUT -> Res.drawable.cluster_spacedout_oceania
-        AsteroidType.SQUELCHY -> Res.drawable.cluster_spacedout_squelchy
-        AsteroidType.RIME_SPACEDOUT -> Res.drawable.cluster_spacedout_rime
-        AsteroidType.VERDANTE_SPACEDOUT -> Res.drawable.cluster_spacedout_verdante
-        AsteroidType.ARBORIA_SPACEDOUT -> Res.drawable.cluster_spacedout_arboria
-        AsteroidType.VOLCANEA_SPACEDOUT -> Res.drawable.cluster_spacedout_volcanea
-        AsteroidType.THE_BADLANDS_SPACEDOUT -> Res.drawable.cluster_spacedout_the_badlands
-        AsteroidType.ARIDIO_SPACEDOUT -> Res.drawable.cluster_spacedout_aridio
-        AsteroidType.OASISSE_SPACEDOUT -> Res.drawable.cluster_spacedout_oasisse
-
-        /* DLC asteroid starters */
-        AsteroidType.TERRANIA -> Res.drawable.cluster_spacedout_terrania
-        AsteroidType.CERES_MINOR -> Res.drawable.cluster_spacedout_ceres_minor
-        AsteroidType.FOLIA -> Res.drawable.cluster_spacedout_folia
-        AsteroidType.QUAGMIRIS -> Res.drawable.cluster_spacedout_quagmiris
-        AsteroidType.METALLIC_SWAMPY -> Res.drawable.cluster_spacedout_metallic_swampy_moonlet
-        AsteroidType.THE_DESOLANDS -> Res.drawable.cluster_spacedout_the_desolands_moonlet
-        AsteroidType.FROZEN_FOREST -> Res.drawable.cluster_spacedout_frozen_forest_moonlet
-        AsteroidType.FLIPPED -> Res.drawable.cluster_spacedout_flipped_moonlet
-        AsteroidType.RADIOACTIVE_OCEAN -> Res.drawable.cluster_spacedout_radioactive_ocean_moonlet
-
-        /* Other asteroids */
-        AsteroidType.RADIOACTIVE_SWAMP -> Res.drawable.asteroid_radioactive_swamp
-        AsteroidType.GLOWOOD_WASTELAND -> Res.drawable.asteroid_glowood_wasteland
-        AsteroidType.RADIOACTIVE_FOREST -> Res.drawable.asteroid_radioactive_forest
-        AsteroidType.STINKO_SWAMP -> Res.drawable.asteroid_stinko_swamp
-        AsteroidType.RADIOACTIVE_TERRA -> Res.drawable.asteroid_radioactive_terra
-        AsteroidType.RADIOACTIVE_TERRABOG_ASTEROID -> Res.drawable.asteroid_radioactive_terrabog
-        AsteroidType.OILY_SWAMP -> Res.drawable.asteroid_oily_swamp
-        AsteroidType.RUSTY_OIL -> Res.drawable.asteroid_rusty_oil
-        AsteroidType.IRRADIATED_FOREST -> Res.drawable.asteroid_irradiated_forest
-        AsteroidType.IRRADIATED_SWAMPY -> Res.drawable.asteroid_irradiated_swampy
-        AsteroidType.IRRADIATED_MARSH_ASTEROID -> Res.drawable.asteroid_irradiated_marsh
-        AsteroidType.TUNDRA -> Res.drawable.asteroid_tundra
-        AsteroidType.MARSHY -> Res.drawable.asteroid_marshy
-        AsteroidType.SUPERCONDUCTIVE -> Res.drawable.asteroid_superconductive
-        AsteroidType.MOO -> Res.drawable.asteroid_moo
-        AsteroidType.WATER -> Res.drawable.asteroid_water
-        AsteroidType.REGOLITH -> Res.drawable.asteroid_regolith
-
-        /* Mixing */
-        AsteroidType.BLASTED_CERES -> Res.drawable.asteroid_blasted_ceres
+        AsteroidType.TerraMoonlet -> Res.drawable.cluster_spacedout_terrania
+        AsteroidType.IdealLandingSite -> Res.drawable.asteroid_irradiated_forest
+        AsteroidType.WarpOilySwamp -> Res.drawable.asteroid_oily_swamp
+        AsteroidType.TundraMoonlet -> Res.drawable.asteroid_tundra
+        AsteroidType.MarshyMoonlet -> Res.drawable.asteroid_marshy
+        AsteroidType.MooMoonlet -> Res.drawable.asteroid_moo
+        AsteroidType.WaterMoonlet -> Res.drawable.asteroid_water
+        AsteroidType.NiobiumMoonlet -> Res.drawable.asteroid_superconductive
+        AsteroidType.RegolithMoonlet -> Res.drawable.asteroid_regolith
+        AsteroidType.MiniBadlandsStart -> Res.drawable.cluster_spacedout_the_desolands_moonlet
+        AsteroidType.MiniRadioactiveOceanWarp -> Res.drawable.cluster_spacedout_radioactive_ocean_moonlet
+        AsteroidType.MiniMetallicSwampy -> Res.drawable.cluster_spacedout_metallic_swampy_moonlet
+        AsteroidType.MiniForestFrozen -> Res.drawable.cluster_spacedout_frozen_forest_moonlet
+        AsteroidType.MiniFlipped -> Res.drawable.cluster_spacedout_flipped_moonlet
+        AsteroidType.SandstoneDefault -> Res.drawable.cluster_base_terra
+        AsteroidType.Badlands -> Res.drawable.cluster_base_the_badlands
+        AsteroidType.MiniBadlandsWarp -> Res.drawable.cluster_spacedout_metallic_swampy_moonlet
+        AsteroidType.MiniForestFrozenStart -> Res.drawable.cluster_spacedout_frozen_forest_moonlet
+        AsteroidType.MiniRadioactiveOcean -> Res.drawable.cluster_spacedout_radioactive_ocean_moonlet
+        AsteroidType.SwampMoonlet -> Res.drawable.cluster_spacedout_quagmiris
+        AsteroidType.MetalHeavyLandingSite -> Res.drawable.asteroid_irradiated_marsh
+        AsteroidType.OilRichWarpTarget -> Res.drawable.asteroid_rusty_oil
+        AsteroidType.VanillaForestDefault -> Res.drawable.cluster_spacedout_verdante
+        AsteroidType.MediumSandyRadioactiveVanillaWarpPlanet -> Res.drawable.asteroid_radioactive_terra
+        AsteroidType.MiniRegolithMoonlet -> Res.drawable.asteroid_regolith
+        AsteroidType.VanillaSandstoneDefault -> Res.drawable.cluster_spacedout_terra
+        AsteroidType.MediumRadioactiveVanillaWarpPlanet -> Res.drawable.asteroid_radioactive_swamp
+        AsteroidType.VanillaSwampDefault -> Res.drawable.cluster_spacedout_squelchy
+        AsteroidType.MediumForestyRadioactiveVanillaWarpPlanet -> Res.drawable.asteroid_radioactive_forest
+        AsteroidType.VanillaOceania -> Res.drawable.cluster_spacedout_oceania
+        AsteroidType.MediumForestyWasteland -> Res.drawable.asteroid_glowood_wasteland
+        AsteroidType.MiniBadlands -> Res.drawable.cluster_spacedout_metallic_swampy_moonlet
+        AsteroidType.MiniRadioactiveOceanStart -> Res.drawable.cluster_spacedout_radioactive_ocean_moonlet
+        AsteroidType.MiniFlippedWarp -> Res.drawable.cluster_spacedout_flipped_moonlet
+        AsteroidType.VanillaAridio -> Res.drawable.cluster_spacedout_aridio
+        AsteroidType.MediumSandySwamp -> Res.drawable.asteroid_radioactive_terrabog
+        AsteroidType.VanillaVolcanic -> Res.drawable.cluster_spacedout_volcanea
+        AsteroidType.MiniFlippedStart -> Res.drawable.cluster_spacedout_flipped_moonlet
+        AsteroidType.VanillaArboria -> Res.drawable.cluster_spacedout_arboria
+        AsteroidType.VanillaSandstoneFrozen -> Res.drawable.cluster_spacedout_rime
+        AsteroidType.MediumSwampy -> Res.drawable.asteroid_stinko_swamp
+        AsteroidType.MiniMetallicSwampyStart -> Res.drawable.cluster_spacedout_metallic_swampy_moonlet
+        AsteroidType.MiniForestFrozenWarp -> Res.drawable.cluster_spacedout_frozen_forest_moonlet
+        AsteroidType.ForestMoonlet -> Res.drawable.cluster_spacedout_folia
+        AsteroidType.SwampyLandingSite -> Res.drawable.asteroid_irradiated_swampy
+        AsteroidType.VanillaBadlands -> Res.drawable.cluster_spacedout_the_badlands
+        AsteroidType.ForestLush -> Res.drawable.cluster_base_verdante
+        AsteroidType.Oceania -> Res.drawable.cluster_base_oceania
+        AsteroidType.ForestDefault -> Res.drawable.cluster_base_arboria
+        AsteroidType.ForestHot -> Res.drawable.cluster_base_aridio
+        AsteroidType.SandstoneFrozen -> Res.drawable.cluster_base_rime
+        AsteroidType.Oasis -> Res.drawable.cluster_base_oasisse
+        AsteroidType.CeresSpacedOutAsteroid -> Res.drawable.cluster_spacedout_ceres_minor
+        AsteroidType.CeresClassicAsteroid -> Res.drawable.cluster_spacedout_ceres
+        AsteroidType.CeresBaseGameAsteroid -> Res.drawable.cluster_base_ceres
+        AsteroidType.Volcanic -> Res.drawable.cluster_base_volcanea
+        AsteroidType.VanillaOasis -> Res.drawable.cluster_spacedout_oasisse
     }

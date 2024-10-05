@@ -48,7 +48,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.min
 import androidx.compose.ui.unit.times
 import model.Asteroid
-import model.AsteroidType
 import model.Geyser
 import model.PointOfInterest
 import org.jetbrains.compose.resources.painterResource
@@ -79,8 +78,6 @@ fun AsteroidDisplay(
         ).defaultPadding().fillMaxWidth()
     ) {
 
-        val asteroidType = AsteroidType.of(asteroid.id)
-
         Box(
             contentAlignment = Alignment.Center,
             modifier = Modifier
@@ -89,7 +86,7 @@ fun AsteroidDisplay(
         ) {
 
             Image(
-                painter = painterResource(getAsteroidTypeDrawable(asteroidType)),
+                painter = painterResource(getAsteroidTypeDrawable(asteroid.id)),
                 contentDescription = null,
                 modifier = Modifier.defaultPadding()
             )
@@ -112,7 +109,7 @@ fun AsteroidDisplay(
                 ) {
 
                     Text(
-                        text = asteroidType.displayName,
+                        text = asteroid.id.displayName,
                         style = MaterialTheme.typography.bodyLarge,
                         color = MaterialTheme.colorScheme.onBackground,
                     )

@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package model
+package model;
 
 /**
  * See https://oxygennotincluded.fandom.com/wiki/Planetoid_Clusters
@@ -26,136 +26,174 @@ enum class AsteroidType(
     val displayName: String
 ) {
 
-    /* Base game starters */
-    TERRA("Terra Asteroid"),
-    CERES("Ceres Asteroid"),
-    OCEANIA("Oceania Asteroid"),
-    RIME("Rime Asteroid"),
-    VERDANTE("Verdante Asteroid"),
-    ARBORIA("Arboria Asteroid"),
-    VOLCANEA("Volcanea Asteroid"),
-    THE_BADLANDS("The Badlands Asteroid"),
-    ARIDIO("Aridio Asteroid"),
-    OASISSE("Oasisse Asteroid"),
+    /** Terrania Asteroid */
+    TerraMoonlet("Terrania Asteroid"),
 
-    /* DLC classic starters */
-    TERRA_SPACEDOUT("Terra Asteroid"),
-    CERES_SPACEDOUT("Ceres Asteroid"),
-    OCEANIA_SPACEDOUT("Oceania Asteroid"),
-    SQUELCHY("Squelchy Asteroid"),
-    RIME_SPACEDOUT("Rime Asteroid"),
-    VERDANTE_SPACEDOUT("Verdante Asteroid"),
-    ARBORIA_SPACEDOUT("Arboria Asteroid"),
-    VOLCANEA_SPACEDOUT("Volcanea Asteroid"),
-    THE_BADLANDS_SPACEDOUT("The Badlands Asteroid"),
-    ARIDIO_SPACEDOUT("Aridio Asteroid"),
-    OASISSE_SPACEDOUT("Oasisse Asteroid"),
+    /** Irradiated Forest Asteroid */
+    IdealLandingSite("Irradiated Forest Asteroid"),
 
-    /* DLC asteroid starters */
-    TERRANIA("Terrania Asteroid"),
-    CERES_MINOR("Ceres Minor Asteroid"),
-    FOLIA("Folia Asteroid"),
-    QUAGMIRIS("Quagmiris Asteroid"),
-    METALLIC_SWAMPY("Metallic Swampy Asteroid"),
-    THE_DESOLANDS("The Desolands Asteroid"),
-    FROZEN_FOREST("Frozen Forest Asteroid"),
-    FLIPPED("Flipped Asteroid"),
-    RADIOACTIVE_OCEAN("Radioactive Ocean Asteroid"),
+    /** Oily Swamp Asteroid */
+    WarpOilySwamp("Oily Swamp Asteroid"),
 
-    /* Other asteroids */
-    RADIOACTIVE_SWAMP("Radioactive Swamp Asteroid"),
-    GLOWOOD_WASTELAND("Glowood Wasteland Asteroid"),
-    RADIOACTIVE_FOREST("Radioactive Forest Asteroid"),
-    STINKO_SWAMP("Stinko Swamp Asteroid"),
-    RADIOACTIVE_TERRA("Radioactive Terra Asteroid"),
-    RADIOACTIVE_TERRABOG_ASTEROID("Radioactive Terrabog Asteroid"),
-    OILY_SWAMP("Oily Swamp Asteroid"),
-    RUSTY_OIL("Rusty Oil Asteroid"),
-    IRRADIATED_FOREST("Irradiated Forest Asteroid"),
-    IRRADIATED_SWAMPY("Irradiated Swampy Asteroid"),
-    IRRADIATED_MARSH_ASTEROID("Irradiated Marsh Asteroid"),
-    TUNDRA("Tundra Asteroid"),
-    MARSHY("Marshy Asteroid"),
-    SUPERCONDUCTIVE("Superconductive Asteroid"),
-    MOO("Moo Asteroid"),
-    WATER("Water Asteroid"),
-    REGOLITH("Regolith Asteroid"),
+    /** Tundra Asteroid */
+    TundraMoonlet("Tundra Asteroid"),
 
-    /* Mixing */
-    BLASTED_CERES("Blasted Ceres Asteroid");
+    /** Marshy Asteroid */
+    MarshyMoonlet("Marshy Asteroid"),
 
-    companion object {
+    /** Moo Asteroid */
+    MooMoonlet("Moo Asteroid"),
 
-        @Suppress("CyclomaticComplexMethod", "kotlin:S1479")
-        fun of(worldName: String): AsteroidType = when (worldName) {
+    /** Water Asteroid */
+    WaterMoonlet("Water Asteroid"),
 
-            /* Base game */
-            "SandstoneDefault" -> TERRA
-            "CeresBaseGameAsteroid" -> CERES
-            "Oceania" -> OCEANIA
-            "SandstoneFrozen" -> RIME
-            "ForestLush" -> VERDANTE
-            "ForestDefault" -> ARBORIA
-            "Volcanic" -> VOLCANEA
-            "Badlands" -> THE_BADLANDS
-            "ForestHot" -> ARIDIO
-            "Oasis" -> OASISSE
+    /** Superconductive Asteroid */
+    NiobiumMoonlet("Superconductive Asteroid"),
 
-            /* DLC classic */
-            "VanillaSandstoneDefault" -> TERRA_SPACEDOUT
-            "VanillaOceania" -> OCEANIA_SPACEDOUT
-            "VanillaArboria" -> ARBORIA_SPACEDOUT
-            "VanillaAridio" -> ARIDIO_SPACEDOUT
-            "VanillaOasis" -> OASISSE_SPACEDOUT
-            "VanillaSwampDefault" -> SQUELCHY
-            "VanillaSandstoneFrozen" -> RIME_SPACEDOUT
-            "VanillaForestDefault" -> VERDANTE_SPACEDOUT
-            "VanillaVolcanic" -> VOLCANEA_SPACEDOUT
-            "VanillaBadlands" -> THE_BADLANDS_SPACEDOUT
+    /** Regolith Asteroid */
+    RegolithMoonlet("Regolith Asteroid"),
 
-            /* DLC moonlets */
-            "TerraMoonlet" -> TERRANIA
+    /** The Desolands Asteroid */
+    MiniBadlandsStart("The Desolands Asteroid"),
 
-            "CeresClassicAsteroid" -> CERES_SPACEDOUT
-            "CeresSpacedOutAsteroid" -> CERES_MINOR
-            "MixingCeresAsteroid" -> BLASTED_CERES
-            "ForestMoonlet" -> FOLIA
-            "SwampMoonlet" -> QUAGMIRIS
+    /** Radioactive Ocean Asteroid */
+    MiniRadioactiveOceanWarp("Radioactive Ocean Asteroid"),
 
-            "MiniMetallicSwampyStart" -> METALLIC_SWAMPY
-            "MiniMetallicSwampy" -> METALLIC_SWAMPY
-            "MiniBadlands" -> METALLIC_SWAMPY
-            "MiniBadlandsStart" -> THE_DESOLANDS
-            "MiniBadlandsWarp" -> METALLIC_SWAMPY
-            "MiniForestFrozen" -> FROZEN_FOREST
-            "MiniForestFrozenStart" -> FROZEN_FOREST
-            "MiniForestFrozenWarp" -> FROZEN_FOREST
-            "MiniFlipped" -> FLIPPED
-            "MiniFlippedStart" -> FLIPPED
-            "MiniFlippedWarp" -> FLIPPED
-            "MiniRadioactiveOcean" -> RADIOACTIVE_OCEAN
-            "MiniRadioactiveOceanStart" -> RADIOACTIVE_OCEAN
-            "MiniRadioactiveOceanWarp" -> RADIOACTIVE_OCEAN
-            "MediumRadioactiveVanillaWarpPlanet" -> RADIOACTIVE_SWAMP
-            "MediumForestyWasteland" -> GLOWOOD_WASTELAND
-            "MediumForestyRadioactiveVanillaWarpPlanet" -> RADIOACTIVE_FOREST
-            "MediumSwampy" -> STINKO_SWAMP
-            "MediumSandyRadioactiveVanillaWarpPlanet" -> RADIOACTIVE_TERRA
-            "MediumSandySwamp" -> RADIOACTIVE_TERRABOG_ASTEROID
-            "WarpOilySwamp" -> OILY_SWAMP
-            "OilRichWarpTarget" -> RUSTY_OIL
-            "IdealLandingSite" -> IRRADIATED_FOREST
-            "SwampyLandingSite" -> IRRADIATED_SWAMPY
-            "MetalHeavyLandingSite" -> IRRADIATED_MARSH_ASTEROID
-            "TundraMoonlet" -> TUNDRA
-            "MarshyMoonlet" -> MARSHY
-            "NiobiumMoonlet" -> SUPERCONDUCTIVE
-            "MooMoonlet" -> MOO
-            "WaterMoonlet" -> WATER
-            "RegolithMoonlet" -> REGOLITH
-            "MiniRegolithMoonlet" -> REGOLITH
+    /** Metallic Swampy Asteroid */
+    MiniMetallicSwampy("Metallic Swampy Asteroid"),
 
-            else -> error("Unknown world: $worldName")
-        }
-    }
+    /** Frozen Forest Asteroid */
+    MiniForestFrozen("Frozen Forest Asteroid"),
+
+    /** Flipped Asteroid */
+    MiniFlipped("Flipped Asteroid"),
+
+    /** Terra Asteroid */
+    SandstoneDefault("Terra Asteroid"),
+
+    /** The Badlands Asteroid */
+    Badlands("The Badlands Asteroid"),
+
+    /** Metallic Swampy Asteroid */
+    MiniBadlandsWarp("Metallic Swampy Asteroid"),
+
+    /** Frozen Forest Asteroid */
+    MiniForestFrozenStart("Frozen Forest Asteroid"),
+
+    /** Radioactive Ocean Asteroid */
+    MiniRadioactiveOcean("Radioactive Ocean Asteroid"),
+
+    /** Quagmiris Asteroid */
+    SwampMoonlet("Quagmiris Asteroid"),
+
+    /** Irradiated Marsh Asteroid */
+    MetalHeavyLandingSite("Irradiated Marsh Asteroid"),
+
+    /** Rusty Oil Asteroid */
+    OilRichWarpTarget("Rusty Oil Asteroid"),
+
+    /** Verdante Asteroid */
+    VanillaForestDefault("Verdante Asteroid"),
+
+    /** Radioactive Terra Asteroid */
+    MediumSandyRadioactiveVanillaWarpPlanet("Radioactive Terra Asteroid"),
+
+    /** Regolith Asteroid */
+    MiniRegolithMoonlet("Regolith Asteroid"),
+
+    /** Terra Asteroid */
+    VanillaSandstoneDefault("Terra Asteroid"),
+
+    /** Radioactive Swamp Asteroid */
+    MediumRadioactiveVanillaWarpPlanet("Radioactive Swamp Asteroid"),
+
+    /** Squelchy Asteroid */
+    VanillaSwampDefault("Squelchy Asteroid"),
+
+    /** Radioactive Forest Asteroid */
+    MediumForestyRadioactiveVanillaWarpPlanet("Radioactive Forest Asteroid"),
+
+    /** Oceania Asteroid */
+    VanillaOceania("Oceania Asteroid"),
+
+    /** Glowood Wasteland Asteroid */
+    MediumForestyWasteland("Glowood Wasteland Asteroid"),
+
+    /** Metallic Swampy Asteroid */
+    MiniBadlands("Metallic Swampy Asteroid"),
+
+    /** Radioactive Ocean Asteroid */
+    MiniRadioactiveOceanStart("Radioactive Ocean Asteroid"),
+
+    /** Flipped Asteroid */
+    MiniFlippedWarp("Flipped Asteroid"),
+
+    /** Aridio Asteroid */
+    VanillaAridio("Aridio Asteroid"),
+
+    /** Radioactive Terrabog Asteroid */
+    MediumSandySwamp("Radioactive Terrabog Asteroid"),
+
+    /** Volcanea Asteroid */
+    VanillaVolcanic("Volcanea Asteroid"),
+
+    /** Flipped Asteroid */
+    MiniFlippedStart("Flipped Asteroid"),
+
+    /** Arboria Asteroid */
+    VanillaArboria("Arboria Asteroid"),
+
+    /** Rime Asteroid */
+    VanillaSandstoneFrozen("Rime Asteroid"),
+
+    /** Stinko Swamp Asteroid */
+    MediumSwampy("Stinko Swamp Asteroid"),
+
+    /** Metallic Swampy Asteroid */
+    MiniMetallicSwampyStart("Metallic Swampy Asteroid"),
+
+    /** Frozen Forest Asteroid */
+    MiniForestFrozenWarp("Frozen Forest Asteroid"),
+
+    /** Folia Asteroid */
+    ForestMoonlet("Folia Asteroid"),
+
+    /** Irradiated Swampy Asteroid */
+    SwampyLandingSite("Irradiated Swampy Asteroid"),
+
+    /** The Badlands Asteroid */
+    VanillaBadlands("The Badlands Asteroid"),
+
+    /** Verdante Asteroid */
+    ForestLush("Verdante Asteroid"),
+
+    /** Oceania Asteroid */
+    Oceania("Oceania Asteroid"),
+
+    /** Arboria Asteroid */
+    ForestDefault("Arboria Asteroid"),
+
+    /** Aridio Asteroid */
+    ForestHot("Aridio Asteroid"),
+
+    /** Rime Asteroid */
+    SandstoneFrozen("Rime Asteroid"),
+
+    /** Oasisse Asteroid */
+    Oasis("Oasisse Asteroid"),
+
+    /** Ceres Minor Asteroid */
+    CeresSpacedOutAsteroid("Ceres Minor Asteroid"),
+
+    /** Ceres Asteroid */
+    CeresClassicAsteroid("Ceres Asteroid"),
+
+    /** Ceres Asteroid */
+    CeresBaseGameAsteroid("Ceres Asteroid"),
+
+    /** Volcanea Asteroid */
+    Volcanic("Volcanea Asteroid"),
+
+    /** Oasisse Asteroid */
+    VanillaOasis("Oasisse Asteroid")
 }
