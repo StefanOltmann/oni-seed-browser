@@ -27,7 +27,6 @@ import model.PointOfInterestType
 import model.WorldTrait
 import oni_seed_browser.app.generated.resources.Res
 import oni_seed_browser.app.generated.resources.asteroid_blasted_ceres
-import oni_seed_browser.app.generated.resources.asteroid_folia
 import oni_seed_browser.app.generated.resources.asteroid_glowood_wasteland
 import oni_seed_browser.app.generated.resources.asteroid_irradiated_forest
 import oni_seed_browser.app.generated.resources.asteroid_irradiated_marsh
@@ -35,7 +34,6 @@ import oni_seed_browser.app.generated.resources.asteroid_irradiated_swampy
 import oni_seed_browser.app.generated.resources.asteroid_marshy
 import oni_seed_browser.app.generated.resources.asteroid_moo
 import oni_seed_browser.app.generated.resources.asteroid_oily_swamp
-import oni_seed_browser.app.generated.resources.asteroid_quagmiris
 import oni_seed_browser.app.generated.resources.asteroid_radioactive_forest
 import oni_seed_browser.app.generated.resources.asteroid_radioactive_swamp
 import oni_seed_browser.app.generated.resources.asteroid_radioactive_terra
@@ -44,12 +42,8 @@ import oni_seed_browser.app.generated.resources.asteroid_regolith
 import oni_seed_browser.app.generated.resources.asteroid_rusty_oil
 import oni_seed_browser.app.generated.resources.asteroid_spacedout_ceres
 import oni_seed_browser.app.generated.resources.asteroid_spacedout_ceres_minor
-import oni_seed_browser.app.generated.resources.asteroid_spacedout_oceania
-import oni_seed_browser.app.generated.resources.asteroid_spacedout_rime
-import oni_seed_browser.app.generated.resources.asteroid_spacedout_terra
 import oni_seed_browser.app.generated.resources.asteroid_stinko_swamp
 import oni_seed_browser.app.generated.resources.asteroid_superconductive
-import oni_seed_browser.app.generated.resources.asteroid_terrania
 import oni_seed_browser.app.generated.resources.asteroid_tundra
 import oni_seed_browser.app.generated.resources.asteroid_water
 import oni_seed_browser.app.generated.resources.building_anti_entropy_thermo_nullifier
@@ -72,6 +66,8 @@ import oni_seed_browser.app.generated.resources.cluster_base_verdante
 import oni_seed_browser.app.generated.resources.cluster_base_volcanea
 import oni_seed_browser.app.generated.resources.cluster_spacedout_arboria
 import oni_seed_browser.app.generated.resources.cluster_spacedout_aridio
+import oni_seed_browser.app.generated.resources.cluster_spacedout_ceres
+import oni_seed_browser.app.generated.resources.cluster_spacedout_ceres_minor
 import oni_seed_browser.app.generated.resources.cluster_spacedout_flipped_moonlet
 import oni_seed_browser.app.generated.resources.cluster_spacedout_folia
 import oni_seed_browser.app.generated.resources.cluster_spacedout_frozen_forest_moonlet
@@ -247,7 +243,7 @@ fun getClusterDrawable(cluster: Cluster): DrawableResource =
 fun getAsteroidTypeDrawable(asteroidType: AsteroidType): DrawableResource =
     when (asteroidType) {
 
-        /* Base game */
+        /* Base game starters */
         AsteroidType.TERRA -> Res.drawable.cluster_base_terra
         AsteroidType.CERES -> Res.drawable.cluster_base_ceres
         AsteroidType.OCEANIA -> Res.drawable.cluster_base_oceania
@@ -258,26 +254,32 @@ fun getAsteroidTypeDrawable(asteroidType: AsteroidType): DrawableResource =
         AsteroidType.THE_BADLANDS -> Res.drawable.cluster_base_the_badlands
         AsteroidType.ARIDIO -> Res.drawable.cluster_base_aridio
         AsteroidType.OASISSE -> Res.drawable.cluster_base_oasisse
+
+        /* DLC classic starters */
+        AsteroidType.TERRA_SPACEDOUT -> Res.drawable.cluster_spacedout_terra
+        AsteroidType.CERES_SPACEDOUT -> Res.drawable.cluster_spacedout_ceres
+        AsteroidType.OCEANIA_SPACEDOUT -> Res.drawable.cluster_spacedout_oceania
         AsteroidType.SQUELCHY -> Res.drawable.cluster_spacedout_squelchy
+        AsteroidType.RIME_SPACEDOUT -> Res.drawable.cluster_spacedout_rime
+        AsteroidType.VERDANTE_SPACEDOUT -> Res.drawable.cluster_spacedout_verdante
+        AsteroidType.ARBORIA_SPACEDOUT -> Res.drawable.cluster_spacedout_arboria
+        AsteroidType.VOLCANEA_SPACEDOUT -> Res.drawable.cluster_spacedout_volcanea
+        AsteroidType.THE_BADLANDS_SPACEDOUT -> Res.drawable.cluster_spacedout_the_badlands
+        AsteroidType.ARIDIO_SPACEDOUT -> Res.drawable.cluster_spacedout_aridio
+        AsteroidType.OASISSE_SPACEDOUT -> Res.drawable.cluster_spacedout_oasisse
 
-        /* DLC classic */
-        AsteroidType.TERRA_SPACEDOUT -> Res.drawable.asteroid_spacedout_terra
-        AsteroidType.CERES_SPACEDOUT -> Res.drawable.asteroid_spacedout_ceres
-        AsteroidType.OCEANIA_SPACEDOUT -> Res.drawable.asteroid_spacedout_oceania
-        AsteroidType.RIME_SPACEDOUT -> Res.drawable.asteroid_spacedout_rime
-        // FIXME Correct the remaining
-
-        /* DLC moonlets */
-        AsteroidType.TERRANIA -> Res.drawable.asteroid_terrania
-        AsteroidType.CERES_MINOR -> Res.drawable.asteroid_spacedout_ceres_minor
-        AsteroidType.BLASTED_CERES -> Res.drawable.asteroid_blasted_ceres
-        AsteroidType.FOLIA -> Res.drawable.asteroid_folia
-        AsteroidType.QUAGMIRIS -> Res.drawable.asteroid_quagmiris
+        /* DLC asteroid starters */
+        AsteroidType.TERRANIA -> Res.drawable.cluster_spacedout_terrania
+        AsteroidType.CERES_MINOR -> Res.drawable.cluster_spacedout_ceres_minor
+        AsteroidType.FOLIA -> Res.drawable.cluster_spacedout_folia
+        AsteroidType.QUAGMIRIS -> Res.drawable.cluster_spacedout_quagmiris
         AsteroidType.METALLIC_SWAMPY -> Res.drawable.cluster_spacedout_metallic_swampy_moonlet
         AsteroidType.THE_DESOLANDS -> Res.drawable.cluster_spacedout_the_desolands_moonlet
         AsteroidType.FROZEN_FOREST -> Res.drawable.cluster_spacedout_frozen_forest_moonlet
         AsteroidType.FLIPPED -> Res.drawable.cluster_spacedout_flipped_moonlet
         AsteroidType.RADIOACTIVE_OCEAN -> Res.drawable.cluster_spacedout_radioactive_ocean_moonlet
+
+        /* Other asteroids */
         AsteroidType.RADIOACTIVE_SWAMP -> Res.drawable.asteroid_radioactive_swamp
         AsteroidType.GLOWOOD_WASTELAND -> Res.drawable.asteroid_glowood_wasteland
         AsteroidType.RADIOACTIVE_FOREST -> Res.drawable.asteroid_radioactive_forest
@@ -295,4 +297,7 @@ fun getAsteroidTypeDrawable(asteroidType: AsteroidType): DrawableResource =
         AsteroidType.MOO -> Res.drawable.asteroid_moo
         AsteroidType.WATER -> Res.drawable.asteroid_water
         AsteroidType.REGOLITH -> Res.drawable.asteroid_regolith
+
+        /* Mixing */
+        AsteroidType.BLASTED_CERES -> Res.drawable.asteroid_blasted_ceres
     }

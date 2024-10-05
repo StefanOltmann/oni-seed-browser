@@ -26,7 +26,7 @@ enum class AsteroidType(
     val displayName: String
 ) {
 
-    /* Base game */
+    /* Base game starters */
     TERRA("Terra Asteroid"),
     CERES("Ceres Asteroid"),
     OCEANIA("Oceania Asteroid"),
@@ -38,18 +38,21 @@ enum class AsteroidType(
     ARIDIO("Aridio Asteroid"),
     OASISSE("Oasisse Asteroid"),
 
-    /* DLC Classic */
+    /* DLC classic starters */
     TERRA_SPACEDOUT("Terra Asteroid"),
     CERES_SPACEDOUT("Ceres Asteroid"),
     OCEANIA_SPACEDOUT("Oceania Asteroid"),
-    RIME_SPACEDOUT("Rime Asteroid"),
-
-    /* DLC Moonlets */
-
-    BLASTED_CERES("Blasted Ceres Asteroid"),
-
-    TERRANIA("Terrania Asteroid"),
     SQUELCHY("Squelchy Asteroid"),
+    RIME_SPACEDOUT("Rime Asteroid"),
+    VERDANTE_SPACEDOUT("Verdante Asteroid"),
+    ARBORIA_SPACEDOUT("Arboria Asteroid"),
+    VOLCANEA_SPACEDOUT("Volcanea Asteroid"),
+    THE_BADLANDS_SPACEDOUT("The Badlands Asteroid"),
+    ARIDIO_SPACEDOUT("Aridio Asteroid"),
+    OASISSE_SPACEDOUT("Oasisse Asteroid"),
+
+    /* DLC asteroid starters */
+    TERRANIA("Terrania Asteroid"),
     CERES_MINOR("Ceres Minor Asteroid"),
     FOLIA("Folia Asteroid"),
     QUAGMIRIS("Quagmiris Asteroid"),
@@ -58,6 +61,8 @@ enum class AsteroidType(
     FROZEN_FOREST("Frozen Forest Asteroid"),
     FLIPPED("Flipped Asteroid"),
     RADIOACTIVE_OCEAN("Radioactive Ocean Asteroid"),
+
+    /* Other asteroids */
     RADIOACTIVE_SWAMP("Radioactive Swamp Asteroid"),
     GLOWOOD_WASTELAND("Glowood Wasteland Asteroid"),
     RADIOACTIVE_FOREST("Radioactive Forest Asteroid"),
@@ -74,7 +79,10 @@ enum class AsteroidType(
     SUPERCONDUCTIVE("Superconductive Asteroid"),
     MOO("Moo Asteroid"),
     WATER("Water Asteroid"),
-    REGOLITH("Regolith Asteroid");
+    REGOLITH("Regolith Asteroid"),
+
+    /* Mixing */
+    BLASTED_CERES("Blasted Ceres Asteroid");
 
     companion object {
 
@@ -88,24 +96,22 @@ enum class AsteroidType(
             "SandstoneFrozen" -> RIME
             "ForestLush" -> VERDANTE
             "ForestDefault" -> ARBORIA
-            "VanillaArboria" -> ARBORIA
+            "Volcanic" -> VOLCANEA
             "Badlands" -> THE_BADLANDS
             "ForestHot" -> ARIDIO
-            "Volcanic" -> VOLCANEA
-
-            // FIXME Bring in order
+            "Oasis" -> OASISSE
 
             /* DLC classic */
             "VanillaSandstoneDefault" -> TERRA_SPACEDOUT
             "VanillaOceania" -> OCEANIA_SPACEDOUT
-            "VanillaAridio" -> ARIDIO
-            "VanillaOasis" -> OASISSE
-            "Oasis" -> OASISSE
+            "VanillaArboria" -> ARBORIA_SPACEDOUT
+            "VanillaAridio" -> ARIDIO_SPACEDOUT
+            "VanillaOasis" -> OASISSE_SPACEDOUT
             "VanillaSwampDefault" -> SQUELCHY
-            "VanillaSandstoneFrozen" -> RIME
-            "VanillaForestDefault" -> VERDANTE
-            "VanillaVolcanic" -> VOLCANEA
-            "VanillaBadlands" -> THE_BADLANDS
+            "VanillaSandstoneFrozen" -> RIME_SPACEDOUT
+            "VanillaForestDefault" -> VERDANTE_SPACEDOUT
+            "VanillaVolcanic" -> VOLCANEA_SPACEDOUT
+            "VanillaBadlands" -> THE_BADLANDS_SPACEDOUT
 
             /* DLC moonlets */
             "TerraMoonlet" -> TERRANIA
