@@ -2453,6 +2453,96 @@ val sampleWorldsJson: String = """
       "SpacedOut"
     ],
     "asteroids": [
+    {
+        "id": "MiniForestFrozenStart",
+        "offsetX": 212,
+        "offsetY": 0,
+        "sizeX": 128,
+        "sizeY": 153,
+        "worldTraits": [
+          "RadioactiveCrust",
+          "DistressSignal"
+        ],
+        "pointsOfInterest": [
+          {
+            "id": "Headquarters",
+            "posX": 270,
+            "posY": 74
+          },
+          {
+            "id": "WarpConduitSender",
+            "posX": 292,
+            "posY": 39
+          },
+          {
+            "id": "WarpConduitReceiver",
+            "posX": 303,
+            "posY": 79
+          },
+          {
+            "id": "WarpReceiver",
+            "posX": 254,
+            "posY": 30
+          },
+          {
+            "id": "WarpPortal",
+            "posX": 254,
+            "posY": 35
+          }
+        ],
+        "geysers": [
+          {
+            "id": "chlorine_gas",
+            "posX": 317,
+            "posY": 81,
+            "emitRate": 364.1439,
+            "idleTime": 301.0734,
+            "eruptionTime": 234.32254,
+            "dormancyCycles": 47.24442,
+            "activeCycles": 72.290535
+          },
+          {
+            "id": "slush_water",
+            "posX": 307,
+            "posY": 43,
+            "emitRate": 3853.837,
+            "idleTime": 216.40913,
+            "eruptionTime": 281.90726,
+            "dormancyCycles": 33.575443,
+            "activeCycles": 65.546974
+          },
+          {
+            "id": "liquid_sulfur",
+            "posX": 235,
+            "posY": 50,
+            "emitRate": 5063.757,
+            "idleTime": 255.86224,
+            "eruptionTime": 202.91687,
+            "dormancyCycles": 44.096073,
+            "activeCycles": 66.80519
+          },
+          {
+            "id": "small_volcano",
+            "posX": 287,
+            "posY": 104,
+            "emitRate": 137033.33,
+            "idleTime": 8451.074,
+            "eruptionTime": 62.240047,
+            "dormancyCycles": 69.284065,
+            "activeCycles": 96.91433
+          },
+          {
+            "id": "methane",
+            "posX": 323,
+            "posY": 43,
+            "emitRate": 263.9975,
+            "idleTime": 289.8608,
+            "eruptionTime": 550.7729,
+            "dormancyCycles": 62.441746,
+            "activeCycles": 68.46858
+          }
+        ]
+      },
       {
         "id": "MiniBadlandsWarp",
         "offsetX": 82,
@@ -2589,96 +2679,6 @@ val sampleWorldsJson: String = """
             "eruptionTime": 174.61389,
             "dormancyCycles": 81.86877,
             "activeCycles": 116.60864
-          }
-        ]
-      },
-      {
-        "id": "MiniForestFrozenStart",
-        "offsetX": 212,
-        "offsetY": 0,
-        "sizeX": 128,
-        "sizeY": 153,
-        "worldTraits": [
-          "RadioactiveCrust",
-          "DistressSignal"
-        ],
-        "pointsOfInterest": [
-          {
-            "id": "Headquarters",
-            "posX": 270,
-            "posY": 74
-          },
-          {
-            "id": "WarpConduitSender",
-            "posX": 292,
-            "posY": 39
-          },
-          {
-            "id": "WarpConduitReceiver",
-            "posX": 303,
-            "posY": 79
-          },
-          {
-            "id": "WarpReceiver",
-            "posX": 254,
-            "posY": 30
-          },
-          {
-            "id": "WarpPortal",
-            "posX": 254,
-            "posY": 35
-          }
-        ],
-        "geysers": [
-          {
-            "id": "chlorine_gas",
-            "posX": 317,
-            "posY": 81,
-            "emitRate": 364.1439,
-            "idleTime": 301.0734,
-            "eruptionTime": 234.32254,
-            "dormancyCycles": 47.24442,
-            "activeCycles": 72.290535
-          },
-          {
-            "id": "slush_water",
-            "posX": 307,
-            "posY": 43,
-            "emitRate": 3853.837,
-            "idleTime": 216.40913,
-            "eruptionTime": 281.90726,
-            "dormancyCycles": 33.575443,
-            "activeCycles": 65.546974
-          },
-          {
-            "id": "liquid_sulfur",
-            "posX": 235,
-            "posY": 50,
-            "emitRate": 5063.757,
-            "idleTime": 255.86224,
-            "eruptionTime": 202.91687,
-            "dormancyCycles": 44.096073,
-            "activeCycles": 66.80519
-          },
-          {
-            "id": "small_volcano",
-            "posX": 287,
-            "posY": 104,
-            "emitRate": 137033.33,
-            "idleTime": 8451.074,
-            "eruptionTime": 62.240047,
-            "dormancyCycles": 69.284065,
-            "activeCycles": 96.91433
-          },
-          {
-            "id": "methane",
-            "posX": 323,
-            "posY": 43,
-            "emitRate": 263.9975,
-            "idleTime": 289.8608,
-            "eruptionTime": 550.7729,
-            "dormancyCycles": 62.441746,
-            "activeCycles": 68.46858
           }
         ]
       },
@@ -7822,6 +7822,86 @@ val sampleWorldsJson: String = """
       "SpacedOut"
     ],
     "asteroids": [
+    {
+        "id": "MiniRadioactiveOceanStart",
+        "offsetX": 212,
+        "offsetY": 0,
+        "sizeX": 128,
+        "sizeY": 153,
+        "worldTraits": [
+          "MetalRich",
+          "SlimeSplats"
+        ],
+        "pointsOfInterest": [
+          {
+            "id": "Headquarters",
+            "posX": 278,
+            "posY": 66
+          },
+          {
+            "id": "WarpConduitSender",
+            "posX": 257,
+            "posY": 51
+          },
+          {
+            "id": "WarpConduitReceiver",
+            "posX": 295,
+            "posY": 46
+          },
+          {
+            "id": "WarpReceiver",
+            "posX": 303,
+            "posY": 76
+          },
+          {
+            "id": "WarpPortal",
+            "posX": 303,
+            "posY": 81
+          }
+        ],
+        "geysers": [
+          {
+            "id": "salt_water",
+            "posX": 240,
+            "posY": 93,
+            "emitRate": 9243.586,
+            "idleTime": 364.81653,
+            "eruptionTime": 382.4145,
+            "dormancyCycles": 66.95169,
+            "activeCycles": 74.74722
+          },
+          {
+            "id": "slush_water",
+            "posX": 240,
+            "posY": 43,
+            "emitRate": 4307.868,
+            "idleTime": 216.8032,
+            "eruptionTime": 240.08363,
+            "dormancyCycles": 31.686087,
+            "activeCycles": 48.21276
+          },
+          {
+            "id": "slush_salt_water",
+            "posX": 328,
+            "posY": 69,
+            "emitRate": 5999.1875,
+            "idleTime": 361.78433,
+            "eruptionTime": 281.0781,
+            "dormancyCycles": 27.827448,
+            "activeCycles": 89.95978
+          },
+          {
+            "id": "slush_water",
+            "posX": 260,
+            "posY": 36,
+            "emitRate": 5244.116,
+            "idleTime": 426.6881,
+            "eruptionTime": 522.5607,
+            "dormancyCycles": 62.884785,
+            "activeCycles": 88.96434
+          }
+        ]
+      },
       {
         "id": "MiniBadlands",
         "offsetX": 82,
@@ -8023,86 +8103,6 @@ val sampleWorldsJson: String = """
             "eruptionTime": 1,
             "dormancyCycles": 0,
             "activeCycles": 1
-          }
-        ]
-      },
-      {
-        "id": "MiniRadioactiveOceanStart",
-        "offsetX": 212,
-        "offsetY": 0,
-        "sizeX": 128,
-        "sizeY": 153,
-        "worldTraits": [
-          "MetalRich",
-          "SlimeSplats"
-        ],
-        "pointsOfInterest": [
-          {
-            "id": "Headquarters",
-            "posX": 278,
-            "posY": 66
-          },
-          {
-            "id": "WarpConduitSender",
-            "posX": 257,
-            "posY": 51
-          },
-          {
-            "id": "WarpConduitReceiver",
-            "posX": 295,
-            "posY": 46
-          },
-          {
-            "id": "WarpReceiver",
-            "posX": 303,
-            "posY": 76
-          },
-          {
-            "id": "WarpPortal",
-            "posX": 303,
-            "posY": 81
-          }
-        ],
-        "geysers": [
-          {
-            "id": "salt_water",
-            "posX": 240,
-            "posY": 93,
-            "emitRate": 9243.586,
-            "idleTime": 364.81653,
-            "eruptionTime": 382.4145,
-            "dormancyCycles": 66.95169,
-            "activeCycles": 74.74722
-          },
-          {
-            "id": "slush_water",
-            "posX": 240,
-            "posY": 43,
-            "emitRate": 4307.868,
-            "idleTime": 216.8032,
-            "eruptionTime": 240.08363,
-            "dormancyCycles": 31.686087,
-            "activeCycles": 48.21276
-          },
-          {
-            "id": "slush_salt_water",
-            "posX": 328,
-            "posY": 69,
-            "emitRate": 5999.1875,
-            "idleTime": 361.78433,
-            "eruptionTime": 281.0781,
-            "dormancyCycles": 27.827448,
-            "activeCycles": 89.95978
-          },
-          {
-            "id": "slush_water",
-            "posX": 260,
-            "posY": 36,
-            "emitRate": 5244.116,
-            "idleTime": 426.6881,
-            "eruptionTime": 522.5607,
-            "dormancyCycles": 62.884785,
-            "activeCycles": 88.96434
           }
         ]
       },
@@ -10797,6 +10797,101 @@ val sampleWorldsJson: String = """
       "SpacedOut"
     ],
     "asteroids": [
+    {
+        "id": "MiniFlippedStart",
+        "offsetX": 212,
+        "offsetY": 0,
+        "sizeX": 128,
+        "sizeY": 153,
+        "worldTraits": [
+          "DistressSignal",
+          "Geodes"
+        ],
+        "pointsOfInterest": [
+          {
+            "id": "Headquarters",
+            "posX": 276,
+            "posY": 41
+          },
+          {
+            "id": "MassiveHeatSink",
+            "posX": 239,
+            "posY": 22
+          },
+          {
+            "id": "MassiveHeatSink",
+            "posX": 293,
+            "posY": 23
+          },
+          {
+            "id": "MassiveHeatSink",
+            "posX": 240,
+            "posY": 58
+          },
+          {
+            "id": "WarpConduitReceiver",
+            "posX": 274,
+            "posY": 24
+          },
+          {
+            "id": "WarpConduitSender",
+            "posX": 275,
+            "posY": 71
+          },
+          {
+            "id": "WarpReceiver",
+            "posX": 260,
+            "posY": 54
+          },
+          {
+            "id": "WarpPortal",
+            "posX": 260,
+            "posY": 59
+          }
+        ],
+        "geysers": [
+          {
+            "id": "liquid_sulfur",
+            "posX": 264,
+            "posY": 101,
+            "emitRate": 3979.1194,
+            "idleTime": 247.03021,
+            "eruptionTime": 388.64484,
+            "dormancyCycles": 51.409325,
+            "activeCycles": 79.99447
+          },
+          {
+            "id": "steam",
+            "posX": 295,
+            "posY": 40,
+            "emitRate": 4176.6084,
+            "idleTime": 268.53366,
+            "eruptionTime": 453.05185,
+            "dormancyCycles": 53.061855,
+            "activeCycles": 48.158257
+          },
+          {
+            "id": "methane",
+            "posX": 239,
+            "posY": 39,
+            "emitRate": 722.9454,
+            "idleTime": 268.6685,
+            "eruptionTime": 102.60807,
+            "dormancyCycles": 28.390944,
+            "activeCycles": 37.596043
+          },
+          {
+            "id": "hot_steam",
+            "posX": 310,
+            "posY": 68,
+            "emitRate": 1702.8184,
+            "idleTime": 187.28114,
+            "eruptionTime": 381.14355,
+            "dormancyCycles": 47.480934,
+            "activeCycles": 68.703415
+          }
+        ]
+      },
       {
         "id": "MiniBadlandsWarp",
         "offsetX": 82,
@@ -10928,101 +11023,6 @@ val sampleWorldsJson: String = """
             "eruptionTime": 612.6901,
             "dormancyCycles": 48.457706,
             "activeCycles": 69.87952
-          }
-        ]
-      },
-      {
-        "id": "MiniFlippedStart",
-        "offsetX": 212,
-        "offsetY": 0,
-        "sizeX": 128,
-        "sizeY": 153,
-        "worldTraits": [
-          "DistressSignal",
-          "Geodes"
-        ],
-        "pointsOfInterest": [
-          {
-            "id": "Headquarters",
-            "posX": 276,
-            "posY": 41
-          },
-          {
-            "id": "MassiveHeatSink",
-            "posX": 239,
-            "posY": 22
-          },
-          {
-            "id": "MassiveHeatSink",
-            "posX": 293,
-            "posY": 23
-          },
-          {
-            "id": "MassiveHeatSink",
-            "posX": 240,
-            "posY": 58
-          },
-          {
-            "id": "WarpConduitReceiver",
-            "posX": 274,
-            "posY": 24
-          },
-          {
-            "id": "WarpConduitSender",
-            "posX": 275,
-            "posY": 71
-          },
-          {
-            "id": "WarpReceiver",
-            "posX": 260,
-            "posY": 54
-          },
-          {
-            "id": "WarpPortal",
-            "posX": 260,
-            "posY": 59
-          }
-        ],
-        "geysers": [
-          {
-            "id": "liquid_sulfur",
-            "posX": 264,
-            "posY": 101,
-            "emitRate": 3979.1194,
-            "idleTime": 247.03021,
-            "eruptionTime": 388.64484,
-            "dormancyCycles": 51.409325,
-            "activeCycles": 79.99447
-          },
-          {
-            "id": "steam",
-            "posX": 295,
-            "posY": 40,
-            "emitRate": 4176.6084,
-            "idleTime": 268.53366,
-            "eruptionTime": 453.05185,
-            "dormancyCycles": 53.061855,
-            "activeCycles": 48.158257
-          },
-          {
-            "id": "methane",
-            "posX": 239,
-            "posY": 39,
-            "emitRate": 722.9454,
-            "idleTime": 268.6685,
-            "eruptionTime": 102.60807,
-            "dormancyCycles": 28.390944,
-            "activeCycles": 37.596043
-          },
-          {
-            "id": "hot_steam",
-            "posX": 310,
-            "posY": 68,
-            "emitRate": 1702.8184,
-            "idleTime": 187.28114,
-            "eruptionTime": 381.14355,
-            "dormancyCycles": 47.480934,
-            "activeCycles": 68.703415
           }
         ]
       },
@@ -13387,121 +13387,7 @@ val sampleWorldsJson: String = """
       "SpacedOut"
     ],
     "asteroids": [
-      {
-        "id": "MiniBadlands",
-        "offsetX": 82,
-        "offsetY": 0,
-        "sizeX": 128,
-        "sizeY": 153,
-        "worldTraits": [
-          "BouldersMedium",
-          "Geodes"
-        ],
-        "pointsOfInterest": [],
-        "geysers": [
-          {
-            "id": "OilWell",
-            "posX": 140,
-            "posY": 39,
-            "emitRate": 3333.33,
-            "idleTime": 0,
-            "eruptionTime": 1,
-            "dormancyCycles": 0,
-            "activeCycles": 1
-          },
-          {
-            "id": "OilWell",
-            "posX": 171,
-            "posY": 62,
-            "emitRate": 3333.33,
-            "idleTime": 0,
-            "eruptionTime": 1,
-            "dormancyCycles": 0,
-            "activeCycles": 1
-          },
-          {
-            "id": "OilWell",
-            "posX": 142,
-            "posY": 79,
-            "emitRate": 3333.33,
-            "idleTime": 0,
-            "eruptionTime": 1,
-            "dormancyCycles": 0,
-            "activeCycles": 1
-          },
-          {
-            "id": "OilWell",
-            "posX": 97,
-            "posY": 45,
-            "emitRate": 3333.33,
-            "idleTime": 0,
-            "eruptionTime": 1,
-            "dormancyCycles": 0,
-            "activeCycles": 1
-          },
-          {
-            "id": "OilWell",
-            "posX": 129,
-            "posY": 76,
-            "emitRate": 3333.33,
-            "idleTime": 0,
-            "eruptionTime": 1,
-            "dormancyCycles": 0,
-            "activeCycles": 1
-          },
-          {
-            "id": "steam",
-            "posX": 174,
-            "posY": 84,
-            "emitRate": 5639.2197,
-            "idleTime": 303.60046,
-            "eruptionTime": 354.57544,
-            "dormancyCycles": 46.25009,
-            "activeCycles": 62.90355
-          },
-          {
-            "id": "chlorine_gas",
-            "posX": 107,
-            "posY": 61,
-            "emitRate": 363.8255,
-            "idleTime": 217.12346,
-            "eruptionTime": 284.25998,
-            "dormancyCycles": 30.514023,
-            "activeCycles": 51.349323
-          },
-          {
-            "id": "hot_hydrogen",
-            "posX": 184,
-            "posY": 27,
-            "emitRate": 293.06534,
-            "idleTime": 316.2435,
-            "eruptionTime": 450.53366,
-            "dormancyCycles": 49.969105,
-            "activeCycles": 56.458984
-          },
-          {
-            "id": "filthy_water",
-            "posX": 141,
-            "posY": 26,
-            "emitRate": 17528.713,
-            "idleTime": 626.59265,
-            "eruptionTime": 245.52567,
-            "dormancyCycles": 67.50005,
-            "activeCycles": 86.7482
-          },
-          {
-            "id": "small_volcano",
-            "posX": 112,
-            "posY": 83,
-            "emitRate": 111675.33,
-            "idleTime": 8155.43,
-            "eruptionTime": 63.101856,
-            "dormancyCycles": 50.33699,
-            "activeCycles": 100.98262
-          }
-        ]
-      },
-      {
+    {
         "id": "MiniMetallicSwampyStart",
         "offsetX": 212,
         "offsetY": 0,
@@ -13617,6 +13503,120 @@ val sampleWorldsJson: String = """
             "eruptionTime": 256.21002,
             "dormancyCycles": 30.350935,
             "activeCycles": 52.661514
+          }
+        ]
+      },
+      {
+        "id": "MiniBadlands",
+        "offsetX": 82,
+        "offsetY": 0,
+        "sizeX": 128,
+        "sizeY": 153,
+        "worldTraits": [
+          "BouldersMedium",
+          "Geodes"
+        ],
+        "pointsOfInterest": [],
+        "geysers": [
+          {
+            "id": "OilWell",
+            "posX": 140,
+            "posY": 39,
+            "emitRate": 3333.33,
+            "idleTime": 0,
+            "eruptionTime": 1,
+            "dormancyCycles": 0,
+            "activeCycles": 1
+          },
+          {
+            "id": "OilWell",
+            "posX": 171,
+            "posY": 62,
+            "emitRate": 3333.33,
+            "idleTime": 0,
+            "eruptionTime": 1,
+            "dormancyCycles": 0,
+            "activeCycles": 1
+          },
+          {
+            "id": "OilWell",
+            "posX": 142,
+            "posY": 79,
+            "emitRate": 3333.33,
+            "idleTime": 0,
+            "eruptionTime": 1,
+            "dormancyCycles": 0,
+            "activeCycles": 1
+          },
+          {
+            "id": "OilWell",
+            "posX": 97,
+            "posY": 45,
+            "emitRate": 3333.33,
+            "idleTime": 0,
+            "eruptionTime": 1,
+            "dormancyCycles": 0,
+            "activeCycles": 1
+          },
+          {
+            "id": "OilWell",
+            "posX": 129,
+            "posY": 76,
+            "emitRate": 3333.33,
+            "idleTime": 0,
+            "eruptionTime": 1,
+            "dormancyCycles": 0,
+            "activeCycles": 1
+          },
+          {
+            "id": "steam",
+            "posX": 174,
+            "posY": 84,
+            "emitRate": 5639.2197,
+            "idleTime": 303.60046,
+            "eruptionTime": 354.57544,
+            "dormancyCycles": 46.25009,
+            "activeCycles": 62.90355
+          },
+          {
+            "id": "chlorine_gas",
+            "posX": 107,
+            "posY": 61,
+            "emitRate": 363.8255,
+            "idleTime": 217.12346,
+            "eruptionTime": 284.25998,
+            "dormancyCycles": 30.514023,
+            "activeCycles": 51.349323
+          },
+          {
+            "id": "hot_hydrogen",
+            "posX": 184,
+            "posY": 27,
+            "emitRate": 293.06534,
+            "idleTime": 316.2435,
+            "eruptionTime": 450.53366,
+            "dormancyCycles": 49.969105,
+            "activeCycles": 56.458984
+          },
+          {
+            "id": "filthy_water",
+            "posX": 141,
+            "posY": 26,
+            "emitRate": 17528.713,
+            "idleTime": 626.59265,
+            "eruptionTime": 245.52567,
+            "dormancyCycles": 67.50005,
+            "activeCycles": 86.7482
+          },
+          {
+            "id": "small_volcano",
+            "posX": 112,
+            "posY": 83,
+            "emitRate": 111675.33,
+            "idleTime": 8155.43,
+            "eruptionTime": 63.101856,
+            "dormancyCycles": 50.33699,
+            "activeCycles": 100.98262
           }
         ]
       },
