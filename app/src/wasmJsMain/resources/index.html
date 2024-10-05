@@ -5,8 +5,43 @@
     <title>ONI Seed Browser</title>
     <script type="application/javascript" src="skiko.js"></script>
     <script type="application/javascript" src="app.js"></script>
+    <style>
+        #warning {
+            background-color: yellow;
+            font-size: small;
+            display: none;
+            padding: 1em;
+            margin: 1em;
+        }
+    </style>
 </head>
 <body>
+
+<div style="font-size: medium; text-align: center;">
+    <div id="warning">⚠️ Sorry, your browser is not supported. ⚠️</div>
+</div>
+
 <canvas id="ComposeTarget"></canvas>
+
+<script type="application/javascript">
+
+    const unhandledError = (event, error) => {
+
+        if (error instanceof WebAssembly.CompileError) {
+
+            document.getElementById("warning").style.display = "initial";
+
+            // Hide the Webpack overlay
+            const webpackOverlay = document.getElementById("webpack-dev-server-client-overlay");
+            if (webpackOverlay != null)
+                webpackOverlay.style.display = "none";
+        }
+    }
+
+    addEventListener("error", (event) => unhandledError(event, event.error));
+    addEventListener("unhandledrejection", (event) => unhandledError(event, event.reason));
+
+</script>
+
 </body>
 </html>
