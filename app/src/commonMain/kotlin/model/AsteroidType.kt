@@ -62,24 +62,6 @@ enum class AsteroidType(
     /** Radioactive Swamp Asteroid */
     MediumRadioactiveVanillaWarpPlanet("Radioactive Swamp Asteroid"),
 
-    /** Tundra Asteroid */
-    TundraMoonlet("Tundra Asteroid"),
-
-    /** Marshy Asteroid */
-    MarshyMoonlet("Marshy Asteroid"),
-
-    /** Superconductive Asteroid */
-    NiobiumMoonlet("Superconductive Asteroid"),
-
-    /** Moo Asteroid */
-    MooMoonlet("Moo Asteroid"),
-
-    /** Water Asteroid */
-    WaterMoonlet("Water Asteroid"),
-
-    /** Regolith Asteroid */
-    MiniRegolithMoonlet("Regolith Asteroid"),
-
     /** Ceres Asteroid */
     CeresClassicAsteroid("Ceres Asteroid"),
 
@@ -195,5 +177,27 @@ enum class AsteroidType(
     MiniRadioactiveOceanStart("Radioactive Ocean Asteroid"),
 
     /** Flipped Asteroid */
-    MiniFlippedWarp("Flipped Asteroid")
+    MiniFlippedWarp("Flipped Asteroid"),
+
+    /**
+     * Common outer asteroids
+     */
+
+    /** Tundra Asteroid */
+    TundraMoonlet("Tundra Asteroid"),
+
+    /** Marshy Asteroid */
+    MarshyMoonlet("Marshy Asteroid"),
+
+    /** Superconductive Asteroid */
+    NiobiumMoonlet("Superconductive Asteroid"),
+
+    /** Moo Asteroid */
+    MooMoonlet("Moo Asteroid"),
+
+    /** Water Asteroid */
+    WaterMoonlet("Water Asteroid"),
+
+    /** Regolith Asteroid */
+    MiniRegolithMoonlet("Regolith Asteroid"),
 }
