@@ -368,8 +368,8 @@ enum class Cluster(
         prefix = "M-SWMP-C",
         displayName = "Metallic Swampy Moonlet",
         asteroidTypes = listOf(
-            AsteroidType.MiniBadlands,
             AsteroidType.MiniMetallicSwampyStart,
+            AsteroidType.MiniBadlands,
             AsteroidType.MiniForestFrozenWarp,
             AsteroidType.MiniFlipped,
             AsteroidType.MiniRadioactiveOcean,
@@ -406,8 +406,8 @@ enum class Cluster(
         prefix = "M-FRZ-C",
         displayName = "Frozen Forest Moonlet",
         asteroidTypes = listOf(
-            AsteroidType.MiniBadlandsWarp,
             AsteroidType.MiniForestFrozenStart,
+            AsteroidType.MiniBadlandsWarp,
             AsteroidType.MiniMetallicSwampy,
             AsteroidType.MiniFlipped,
             AsteroidType.MiniRadioactiveOcean,
@@ -425,8 +425,8 @@ enum class Cluster(
         prefix = "M-FLIP-C",
         displayName = "Flipped Moonlet",
         asteroidTypes = listOf(
-            AsteroidType.MiniBadlandsWarp,
             AsteroidType.MiniFlippedStart,
+            AsteroidType.MiniBadlandsWarp,
             AsteroidType.MiniMetallicSwampy,
             AsteroidType.MiniForestFrozen,
             AsteroidType.MiniRadioactiveOcean,
@@ -444,8 +444,8 @@ enum class Cluster(
         prefix = "M-RAD-C",
         displayName = "Radioactive Ocean Moonlet",
         asteroidTypes = listOf(
-            AsteroidType.MiniBadlands,
             AsteroidType.MiniRadioactiveOceanStart,
+            AsteroidType.MiniBadlands,
             AsteroidType.MiniFlippedWarp,
             AsteroidType.MiniMetallicSwampy,
             AsteroidType.MiniForestFrozen,

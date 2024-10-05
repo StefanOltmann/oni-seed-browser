@@ -256,8 +256,8 @@ fun getAsteroidTypeDrawable(asteroidType: AsteroidType): DrawableResource =
         AsteroidType.MiniForestFrozen -> Res.drawable.cluster_spacedout_frozen_forest_moonlet
         AsteroidType.MiniFlipped -> Res.drawable.cluster_spacedout_flipped_moonlet
         AsteroidType.SandstoneDefault -> Res.drawable.cluster_base_terra
-        AsteroidType.Badlands -> Res.drawable.cluster_base_the_badlands
-        AsteroidType.MiniBadlandsWarp -> Res.drawable.cluster_spacedout_metallic_swampy_moonlet
+        AsteroidType.Badlands -> Res.drawable.cluster_spacedout_the_desolands_moonlet
+        AsteroidType.MiniBadlandsWarp -> Res.drawable.cluster_spacedout_the_desolands_moonlet
         AsteroidType.MiniForestFrozenStart -> Res.drawable.cluster_spacedout_frozen_forest_moonlet
         AsteroidType.MiniRadioactiveOcean -> Res.drawable.cluster_spacedout_radioactive_ocean_moonlet
         AsteroidType.SwampMoonlet -> Res.drawable.cluster_spacedout_quagmiris
@@ -272,7 +272,7 @@ fun getAsteroidTypeDrawable(asteroidType: AsteroidType): DrawableResource =
         AsteroidType.MediumForestyRadioactiveVanillaWarpPlanet -> Res.drawable.asteroid_radioactive_forest
         AsteroidType.VanillaOceania -> Res.drawable.cluster_spacedout_oceania
         AsteroidType.MediumForestyWasteland -> Res.drawable.asteroid_glowood_wasteland
-        AsteroidType.MiniBadlands -> Res.drawable.cluster_spacedout_metallic_swampy_moonlet
+        AsteroidType.MiniBadlands -> Res.drawable.cluster_spacedout_the_desolands_moonlet
         AsteroidType.MiniRadioactiveOceanStart -> Res.drawable.cluster_spacedout_radioactive_ocean_moonlet
         AsteroidType.MiniFlippedWarp -> Res.drawable.cluster_spacedout_flipped_moonlet
         AsteroidType.VanillaAridio -> Res.drawable.cluster_spacedout_aridio

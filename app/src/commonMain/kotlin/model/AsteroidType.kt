@@ -137,11 +137,11 @@ enum class AsteroidType(
     /** Irradiated Marsh Asteroid */
     MetalHeavyLandingSite("Irradiated Marsh Asteroid"),
 
-    /** Metallic Swampy Asteroid */
-    MiniBadlands("Metallic Swampy Asteroid"),
+    /** The Desolands Asteroid */
+    MiniBadlands("The Desolands Asteroid"),
 
     /** Metallic Swampy Asteroid */
-    MiniMetallicSwampyStart("Metallic Swampy Asteroid"),
+    MiniMetallicSwampyStart("Metallic Swampy Asteroid (Start)"),
 
     /** Frozen Forest Asteroid */
     MiniForestFrozenWarp("Frozen Forest Asteroid"),
