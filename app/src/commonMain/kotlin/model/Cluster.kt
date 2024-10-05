@@ -28,125 +28,181 @@ enum class Cluster(
     val displayName: String
 ) {
 
-    /* Base game */
+    /** Terra */
     BASE_TERRA(
         prefix = "SNDST-A",
         displayName = "Terra"
     ),
+
+    /** Ceres */
     BASE_CERES(
         prefix = "CER-A",
         displayName = "Ceres"
     ),
+
+    /** Oceania */
     BASE_OCEANIA(
         prefix = "OCAN-A",
         displayName = "Oceania"
     ),
+
+    /** Rime */
     BASE_RIME(
         prefix = "S-FRZ",
         displayName = "Rime"
     ),
+
+    /** Verdante */
     BASE_VERDANTE(
         prefix = "LUSH-A",
         displayName = "Verdante"
     ),
+
+    /** Arboria */
     BASE_ARBORIA(
         prefix = "FRST-A",
         displayName = "Arboria"
     ),
+
+    /** Volcanea */
     BASE_VOLCANEA(
         prefix = "VOLCA",
         displayName = "Volcanea"
     ),
+
+    /** The Badlands */
     BASE_THE_BADLANDS(
         prefix = "BAD-A",
         displayName = "The Badlands"
     ),
+
+    /** Aridio */
     BASE_ARIDIO(
         prefix = "HTFST-A",
         displayName = "Aridio"
     ),
+
+    /** Oasisse */
     BASE_OASISSE(
         prefix = "OASIS-A",
         displayName = "Oasisse"
     ),
 
-    /* DLC */
+    /** Terra */
     DLC_TERRA(
         prefix = "V-SNDST-C",
         displayName = "Terra"
     ),
+
+    /** Ceres */
     DLC_CERES(
         prefix = "V-CER-C",
         displayName = "Ceres"
     ),
+
+    /** Oceania */
     DLC_OCEANIA(
         prefix = "V-OCAN-C",
         displayName = "Oceania"
     ),
+
+    /** Squelchy */
     DLC_SQUELCHY(
         prefix = "V-SWMP-C",
         displayName = "Squelchy"
     ),
+
+    /** Rime */
     DLC_RIME(
         prefix = "V-SFRZ-C",
         displayName = "Rime"
     ),
+
+    /** Verdante */
     DLC_VERDANTE(
         prefix = "V-LUSH-C",
         displayName = "Verdante"
     ),
+
+    /** Arboria */
     DLC_ARBORIA(
         prefix = "V-FRST-C",
         displayName = "Arboria"
     ),
+
+    /** Volcanea */
     DLC_VOLCANEA(
         prefix = "V-VOLCA-C",
         displayName = "Volcanea"
     ),
+
+    /** The Badlands */
     DLC_THE_BADLANDS(
         prefix = "V-BAD-C",
         displayName = "The Badlands"
     ),
+
+    /** Aridio */
     DLC_ARIDIO(
         prefix = "V-HTFST-C",
         displayName = "Aridio"
     ),
+
+    /** Oasisse */
     DLC_OASISSE(
         prefix = "V-OASIS-C",
         displayName = "Oasisse"
     ),
+
+    /** Terrania */
     DLC_TERRANIA(
         prefix = "SNDST-C",
         displayName = "Terrania"
     ),
+
+    /** Ceres Minor */
     DLC_CERES_MINOR(
         prefix = "CER-C",
         displayName = "Ceres Minor"
     ),
+
+    /** Folia */
     DLC_FOLIA(
         prefix = "FRST-C",
         displayName = "Folia"
     ),
+
+    /** Quagmiris */
     DLC_QUAGMIRIS(
         prefix = "SWMP-C",
         displayName = "Quagmiris"
     ),
+
+    /** Metallic Swampy Moonlet */
     DLC_METALLIC_SWAMPY_MOONLET(
         prefix = "M-SWMP-C",
         displayName = "Metallic Swampy Moonlet"
     ),
+
+    /** The Desolands Moonlet */
     DLC_THE_DESOLANDS_MOONLET(
         prefix = "M-BAD-C",
         displayName = "The Desolands Moonlet"
     ),
+
+    /** Frozen Forest Moonlet */
     DLC_FROZEN_FOREST_MOONLET(
         prefix = "M-FRZ-C",
         displayName = "Frozen Forest Moonlet"
     ),
+
+    /** Flipped Moonlet */
     DLC_FLIPPED_MOONLET(
         prefix = "M-FLIP-C",
         displayName = "Flipped Moonlet"
     ),
+
+    /** Radioactive Ocean Moonlet */
     DLC_RADIOACTIVE_OCEAN_MOONLET(
         prefix = "M-RAD-C",
         displayName = "Radioactive Ocean Moonlet"
