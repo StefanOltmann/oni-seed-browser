@@ -46,6 +46,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -73,7 +75,6 @@ import ui.theme.halfPadding
 import ui.theme.halfSpacing
 import kotlin.math.max
 
-@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun FilterPanel() {
 
@@ -96,229 +97,282 @@ fun FilterPanel() {
             .then(maxSizeModifier)
     ) {
 
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier
-                .height(48.dp)
-                .fillMaxWidth()
-                .background(
-                    Color.Black,
-                    if (filterPanelOpen.value)
-                        RoundedCornerShape(
-                            topStart = 8.dp,
-                            topEnd = 8.dp
-                        )
-                    else
-                        defaultRoundedCornerShape
-                )
-                .clickable {
-                    filterPanelOpen.value = !filterPanelOpen.value
-                }
-        ) {
-
-            DoubleSpacer()
-
-            Text(
-                text = "Filter",
-                style = MaterialTheme.typography.headlineMedium,
-                fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.onBackground
-            )
-
-            FillSpacer()
-
-            Icon(
-                imageVector = if (filterPanelOpen.value)
-                    Icons.Default.KeyboardArrowUp
-                else
-                    Icons.Default.KeyboardArrowDown,
-                contentDescription = null,
-                tint = MaterialTheme.colorScheme.onBackground,
-                modifier = Modifier.size(48.dp)
-            )
-
-            DefaultSpacer()
-        }
+        FilterHeader(filterPanelOpen)
 
         AnimatedVisibility(filterPanelOpen.value) {
 
             val spacedOutDlcSelected = remember { mutableStateOf(false) }
 
             Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
-
-                DefaultSpacer()
-
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(32.dp, Alignment.CenterHorizontally),
-                    modifier = Modifier.defaultPadding()
-                ) {
-
-                    val baseGameLogoHovered = remember { mutableStateOf(false) }
-                    val spacedOutLogoHovered = remember { mutableStateOf(false) }
-
-                    Image(
-                        painter = painterResource(Res.drawable.logo_oni),
-                        contentDescription = null,
-                        colorFilter = if (!spacedOutDlcSelected.value || baseGameLogoHovered.value)
-                            null
-                        else
-                            grayScaleFilter,
-                        modifier = Modifier
-                            .height(logoIconHeight)
-                            .onHover(baseGameLogoHovered)
-                            .noRippleClickable { spacedOutDlcSelected.value = false }
-                            .scale(if (baseGameLogoHovered.value) 1.1F else 1F)
-                    )
-
-                    Image(
-                        painter = painterResource(Res.drawable.logo_spaced_out),
-                        contentDescription = null,
-                        colorFilter = if (spacedOutDlcSelected.value || spacedOutLogoHovered.value)
-                            null
-                        else
-                            grayScaleFilter,
-                        modifier = Modifier
-                            .height(logoIconHeight)
-                            .onHover(spacedOutLogoHovered)
-                            .noRippleClickable { spacedOutDlcSelected.value = true }
-                            .scale(if (spacedOutLogoHovered.value) 1.1F else 1F)
-                    )
-                }
-
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(doubleSpacing, Alignment.CenterHorizontally)
-                ) {
-
-                    Switch(
-                        checked = enableFrostyPlanet.value,
-                        onCheckedChange = { enableFrostyPlanet.value = it }
-                    )
-
-                    Image(
-                        painter = painterResource(Res.drawable.logo_frosty_planet_banner),
-                        contentDescription = null,
-                        colorFilter = if (enableFrostyPlanet.value)
-                            null
-                        else
-                            grayScaleFilter,
-                        modifier = Modifier.noRippleClickable {
-                            enableFrostyPlanet.value = !enableFrostyPlanet.value
-                        }
-                    )
-                }
-
-                HorizontalSeparator()
 
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier
+                        .fillMaxWidth()
                         .weight(1F)
                         .verticalScroll(rememberScrollState())
                 ) {
 
-                    val clusters = if (spacedOutDlcSelected.value)
-                        Cluster.spacedOutCluster
-                    else
-                        Cluster.baseGameCluster
+                    DefaultSpacer()
 
-                    val filteredClusters = clusters.filterNot {
-                        !enableFrostyPlanet.value && it.isFrostyPlanet()
-                    }
+                    GameVersionSelection(
+                        spacedOutDlcSelected = spacedOutDlcSelected
+                    )
 
-                    FlowRow(
-                        maxItemsInEachRow = max(
-                            if (enableFrostyPlanet.value) 10 else 9,
-                            filteredClusters.size / 2
-                        )
-                    ) {
+                    DlcSelection(
+                        enableFrostyPlanet = enableFrostyPlanet
+                    )
 
-                        for (cluster in filteredClusters) {
+                    HorizontalSeparator()
 
-                            val clusterHovered = remember { mutableStateOf(false) }
-
-                            Column(
-                                horizontalAlignment = Alignment.CenterHorizontally,
-                                modifier = Modifier
-                                    .halfPadding()
-                                    .onHover(clusterHovered)
-                                    .scale(if (clusterHovered.value) 1.1F else 1F)
-                            ) {
-
-                                Image(
-                                    painter = painterResource(
-                                        getClusterDrawable(cluster)
-                                    ),
-                                    contentDescription = null,
-                                    colorFilter = if (clusterHovered.value)
-                                        null
-                                    else
-                                        grayScaleFilter,
-                                    modifier = Modifier.size(100.dp)
-                                )
-
-                                Text(
-                                    text = cluster.displayName,
-                                    style = MaterialTheme.typography.bodyLarge,
-                                    color = MaterialTheme.colorScheme.onBackground,
-                                    textAlign = TextAlign.Center,
-                                    overflow = TextOverflow.Ellipsis,
-                                    maxLines = 2,
-                                    modifier = Modifier.size(100.dp, 48.dp)
-                                )
-
-                            }
-                        }
-                    }
+                    ClusterSelection(
+                        spacedOutDlcSelected = spacedOutDlcSelected,
+                        enableFrostyPlanet = enableFrostyPlanet
+                    )
 
                     HorizontalSeparator()
 
                     DefaultSpacer()
 
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        modifier = Modifier.defaultPadding()
-                    ) {
-
-                        FilterPanelEntry()
-
-                        AddRuleButton(
-                            text = "OR",
-                            onClick = { println("add OR rule") }
-                        )
-                    }
-
-                    HorizontalSeparator()
+                    RuleEditor()
                 }
 
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier.defaultPadding()
-                ) {
+                HorizontalSeparator()
 
-                    AddRuleButton(
-                        text = "AND",
-                        onClick = { println("add rule") }
-                    )
-
-                    FillSpacer()
-
-                    ResetButton(
-                        onClick = { println("reset") }
-                    )
-
-                    DefaultSpacer()
-
-                    SearchButton(
-                        onClick = { println("Search") }
-                    )
-                }
+                ControlsRow()
             }
         }
+    }
+}
+
+@Composable
+private fun FilterHeader(
+    filterPanelOpen: MutableState<Boolean>
+) {
+
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier
+            .height(48.dp)
+            .fillMaxWidth()
+            .background(
+                Color.Black,
+                if (filterPanelOpen.value)
+                    RoundedCornerShape(
+                        topStart = 8.dp,
+                        topEnd = 8.dp
+                    )
+                else
+                    defaultRoundedCornerShape
+            )
+            .clickable {
+                filterPanelOpen.value = !filterPanelOpen.value
+            }
+    ) {
+
+        DoubleSpacer()
+
+        Text(
+            text = "Filter",
+            style = MaterialTheme.typography.headlineMedium,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.colorScheme.onBackground
+        )
+
+        FillSpacer()
+
+        Icon(
+            imageVector = if (filterPanelOpen.value)
+                Icons.Default.KeyboardArrowUp
+            else
+                Icons.Default.KeyboardArrowDown,
+            contentDescription = null,
+            tint = MaterialTheme.colorScheme.onBackground,
+            modifier = Modifier.size(48.dp)
+        )
+
+        DefaultSpacer()
+    }
+}
+
+@Composable
+private fun GameVersionSelection(
+    spacedOutDlcSelected: MutableState<Boolean>
+) {
+
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(32.dp, Alignment.CenterHorizontally),
+        modifier = Modifier.defaultPadding()
+    ) {
+
+        val baseGameLogoHovered = remember { mutableStateOf(false) }
+        val spacedOutLogoHovered = remember { mutableStateOf(false) }
+
+        Image(
+            painter = painterResource(Res.drawable.logo_oni),
+            contentDescription = null,
+            colorFilter = if (!spacedOutDlcSelected.value || baseGameLogoHovered.value)
+                null
+            else
+                grayScaleFilter,
+            modifier = Modifier
+                .height(logoIconHeight)
+                .onHover(baseGameLogoHovered)
+                .noRippleClickable { spacedOutDlcSelected.value = false }
+                .scale(if (baseGameLogoHovered.value) 1.1F else 1F)
+        )
+
+        Image(
+            painter = painterResource(Res.drawable.logo_spaced_out),
+            contentDescription = null,
+            colorFilter = if (spacedOutDlcSelected.value || spacedOutLogoHovered.value)
+                null
+            else
+                grayScaleFilter,
+            modifier = Modifier
+                .height(logoIconHeight)
+                .onHover(spacedOutLogoHovered)
+                .noRippleClickable { spacedOutDlcSelected.value = true }
+                .scale(if (spacedOutLogoHovered.value) 1.1F else 1F)
+        )
+    }
+}
+
+@Composable
+private fun DlcSelection(
+    enableFrostyPlanet: MutableState<Boolean>
+) {
+
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(doubleSpacing, Alignment.CenterHorizontally)
+    ) {
+
+        Switch(
+            checked = enableFrostyPlanet.value,
+            onCheckedChange = { enableFrostyPlanet.value = it }
+        )
+
+        Image(
+            painter = painterResource(Res.drawable.logo_frosty_planet_banner),
+            contentDescription = null,
+            colorFilter = if (enableFrostyPlanet.value)
+                null
+            else
+                grayScaleFilter,
+            modifier = Modifier.noRippleClickable {
+                enableFrostyPlanet.value = !enableFrostyPlanet.value
+            }
+        )
+    }
+}
+
+@OptIn(ExperimentalLayoutApi::class)
+@Composable
+private fun ClusterSelection(
+    spacedOutDlcSelected: State<Boolean>,
+    enableFrostyPlanet: State<Boolean>
+) {
+
+    val clusters = if (spacedOutDlcSelected.value)
+        Cluster.spacedOutCluster
+    else
+        Cluster.baseGameCluster
+
+    val filteredClusters = clusters.filterNot {
+        !enableFrostyPlanet.value && it.isFrostyPlanet()
+    }
+
+    FlowRow(
+        maxItemsInEachRow = max(
+            if (enableFrostyPlanet.value) 10 else 9,
+            filteredClusters.size / 2
+        )
+    ) {
+
+        for (cluster in filteredClusters) {
+
+            val clusterHovered = remember { mutableStateOf(false) }
+
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier
+                    .halfPadding()
+                    .onHover(clusterHovered)
+                    .scale(if (clusterHovered.value) 1.1F else 1F)
+            ) {
+
+                Image(
+                    painter = painterResource(
+                        getClusterDrawable(cluster)
+                    ),
+                    contentDescription = null,
+                    colorFilter = if (clusterHovered.value)
+                        null
+                    else
+                        grayScaleFilter,
+                    modifier = Modifier.size(100.dp)
+                )
+
+                Text(
+                    text = cluster.displayName,
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = MaterialTheme.colorScheme.onBackground,
+                    textAlign = TextAlign.Center,
+                    overflow = TextOverflow.Ellipsis,
+                    maxLines = 2,
+                    modifier = Modifier.size(100.dp, 48.dp)
+                )
+
+            }
+        }
+    }
+}
+
+@Composable
+private fun RuleEditor() {
+
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier.defaultPadding()
+    ) {
+
+        FilterPanelEntry()
+
+        AddRuleButton(
+            text = "OR",
+            onClick = { println("add OR rule") }
+        )
+    }
+}
+
+@Composable
+private fun ControlsRow() {
+
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier.defaultPadding()
+    ) {
+
+        AddRuleButton(
+            text = "AND",
+            onClick = { println("add rule") }
+        )
+
+        FillSpacer()
+
+        ResetButton(
+            onClick = { println("reset") }
+        )
+
+        DefaultSpacer()
+
+        SearchButton(
+            onClick = { println("Search") }
+        )
     }
 }
 
