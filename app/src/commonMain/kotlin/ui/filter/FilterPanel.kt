@@ -35,6 +35,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -55,11 +56,7 @@ fun FilterPanel() {
 
     val filterQueryState = remember { mutableStateOf(FilterQuery.ALL) }
 
-    println(filterQueryState.value)
-
     val filterPanelOpen = remember { mutableStateOf(false) }
-
-    val enableFrostyPlanet = remember { mutableStateOf(true) }
 
     val maxSizeModifier = if (filterPanelOpen.value)
         Modifier.fillMaxSize()
@@ -99,14 +96,13 @@ fun FilterPanel() {
                     )
 
                     DlcSelection(
-                        enableFrostyPlanet = enableFrostyPlanet
+                        filterQueryState = filterQueryState
                     )
 
                     HorizontalSeparator()
 
                     ClusterSelection(
                         spacedOutDlcSelected = spacedOutDlcSelected,
-                        enableFrostyPlanet = enableFrostyPlanet,
                         filterQueryState = filterQueryState
                     )
 
@@ -119,14 +115,16 @@ fun FilterPanel() {
 
                 HorizontalSeparator()
 
-                ControlsRow()
+                ControlsRow(filterQueryState)
             }
         }
     }
 }
 
 @Composable
-private fun ControlsRow() {
+private fun ControlsRow(
+    filterQueryState: MutableState<FilterQuery>
+) {
 
     Row(
         verticalAlignment = Alignment.CenterVertically,
@@ -136,7 +134,9 @@ private fun ControlsRow() {
         FillSpacer()
 
         ResetButton(
-            onClick = { println("reset") }
+            onClick = {
+                filterQueryState.value = FilterQuery.ALL
+            }
         )
 
         DefaultSpacer()

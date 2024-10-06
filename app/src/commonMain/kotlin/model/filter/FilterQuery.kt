@@ -40,7 +40,7 @@ data class FilterQuery(
 
         val ALL = FilterQuery(
             cluster = null,
-            dlcs = emptyList(),
+            dlcs = listOf(Dlc.FrostyPlanet),
             andRules = emptyList()
         )
     }

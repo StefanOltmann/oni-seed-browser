@@ -27,6 +27,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import model.Dlc
+import model.filter.FilterQuery
 import oni_seed_browser.app.generated.resources.Res
 import oni_seed_browser.app.generated.resources.logo_frosty_planet_banner
 import org.jetbrains.compose.resources.painterResource
@@ -36,7 +38,7 @@ import ui.theme.doubleSpacing
 
 @Composable
 fun DlcSelection(
-    enableFrostyPlanet: MutableState<Boolean>
+    filterQueryState: MutableState<FilterQuery>
 ) {
 
     Row(
@@ -44,21 +46,36 @@ fun DlcSelection(
         horizontalArrangement = Arrangement.spacedBy(doubleSpacing, Alignment.CenterHorizontally)
     ) {
 
+        val dlcActivated = filterQueryState.value.dlcs.contains(Dlc.FrostyPlanet)
+
+        val action: () -> Unit = {
+
+            if (dlcActivated) {
+
+                filterQueryState.value = filterQueryState.value.copy(
+                    dlcs = filterQueryState.value.dlcs - Dlc.FrostyPlanet
+                )
+
+            } else {
+
+                filterQueryState.value = filterQueryState.value.copy(
+                    dlcs = filterQueryState.value.dlcs + Dlc.FrostyPlanet
+                )
+            }
+        }
+
         Switch(
-            checked = enableFrostyPlanet.value,
-            onCheckedChange = { enableFrostyPlanet.value = it }
+            checked = dlcActivated,
+            onCheckedChange = {
+                action()
+            }
         )
 
         Image(
             painter = painterResource(Res.drawable.logo_frosty_planet_banner),
             contentDescription = null,
-            colorFilter = if (enableFrostyPlanet.value)
-                null
-            else
-                grayScaleFilter,
-            modifier = Modifier.noRippleClickable {
-                enableFrostyPlanet.value = !enableFrostyPlanet.value
-            }
+            colorFilter = if (dlcActivated) null else grayScaleFilter,
+            modifier = Modifier.noRippleClickable(action)
         )
     }
 }
