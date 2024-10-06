@@ -90,6 +90,7 @@ fun RuleEditor(
                     FilterPanelEntry(
                         onDeleteClicked = {
 
+                            filterQueryState.value = query.removeRule(rulesIndex, ruleIndex)
 
                         }
                     )

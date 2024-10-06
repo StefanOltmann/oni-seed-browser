@@ -34,9 +34,9 @@ data class FilterRule(
     val worldTrait: FilterItemWorldTrait?,
 
     /* Only for base game, not for Spaced Out */
-    val spaceDestinationCount: FilterItemSpaceDestinationCount?,
+    val spaceDestinationCount: FilterItemSpaceDestinationCount?
 
-    ) {
+) {
 
     companion object {
 

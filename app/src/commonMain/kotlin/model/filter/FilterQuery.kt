@@ -69,6 +69,43 @@ data class FilterQuery(
         )
     }
 
+    fun removeRule(rulesIndex: Int, ruleIndex: Int): FilterQuery {
+
+        val newRules = mutableListOf<List<FilterRule>>()
+
+        for ((index, list) in rules.withIndex()) {
+
+            /*
+             * If the rule is in the list, we need to add
+             * a copy with the rule removed.
+             */
+            if (index == rulesIndex) {
+
+                val listCopy = list.toMutableList()
+
+                listCopy.removeAt(ruleIndex)
+
+                /*
+                 * Add the list, but only if it's not empty
+                 * after removing the rule.
+                 */
+                if (listCopy.isNotEmpty())
+                    newRules.add(listCopy)
+
+            } else {
+
+                /*
+                 * Otherwise we copy the list as is.
+                 */
+                newRules.add(list)
+            }
+        }
+
+        return copy(
+            rules = newRules
+        )
+    }
+
     companion object {
 
         val ALL = FilterQuery(
