@@ -42,6 +42,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import service.DefaultWebClient
 import service.DummyWebClient
+import ui.filter.FilterPanel
 import ui.theme.AppTypography
 import ui.theme.DefaultSpacer
 import ui.theme.appColorScheme

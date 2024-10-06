@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package ui
+package ui.filter
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -41,6 +41,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
+import ui.noRippleClickable
+import ui.onHover
 import ui.theme.DefaultSpacer
 import ui.theme.defaultRoundedCornerShape
 
