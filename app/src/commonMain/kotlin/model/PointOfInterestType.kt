@@ -34,7 +34,13 @@ enum class PointOfInterestType(
     TELEPORTER_RECEIVER("WarpReceiver", "Teleporter Receiver"),
     NEURAL_VACILLATOR("GeneShuffler", "Neural Vacillator"),
     ANTI_ENTROPY_THERMO_NULLIFIER("MassiveHeatSink", "Anti Entropy Thermo-Nullifier"),
-    EXPERIMENT_52B("SapTree", "Experiment 52B");
+    EXPERIMENT_52B("SapTree", "Experiment 52B"),
+    ARTIFACT("GravitasPedestal", "Artifact"),
+    CRASHED_SATELLITE("PropSurfaceSatellite1", "Crashed Satellite"),
+    WRECKED_SATELLITE("PropSurfaceSatellite2", "Wrecked Satellite"),
+    CRUSHED_SATELLITE("PropSurfaceSatellite3", "Crushed Satellite"),
+    TEMPORAL_TEAR_OPENER("TemporalTearOpener", "Temporal Tear Opener")
+    ;
 
     companion object {
 

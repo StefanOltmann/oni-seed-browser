@@ -53,6 +53,7 @@ import oni_seed_browser.app.generated.resources.building_supply_teleporter_input
 import oni_seed_browser.app.generated.resources.building_supply_teleporter_output
 import oni_seed_browser.app.generated.resources.building_teleporter_receiver
 import oni_seed_browser.app.generated.resources.building_teleporter_transmitter
+import oni_seed_browser.app.generated.resources.building_temporal_tear_opener
 import oni_seed_browser.app.generated.resources.cluster_base_arboria
 import oni_seed_browser.app.generated.resources.cluster_base_aridio
 import oni_seed_browser.app.generated.resources.cluster_base_ceres
@@ -109,6 +110,10 @@ import oni_seed_browser.app.generated.resources.geyser_steam_vent
 import oni_seed_browser.app.generated.resources.geyser_tungsten_volcano
 import oni_seed_browser.app.generated.resources.geyser_volcano
 import oni_seed_browser.app.generated.resources.geyser_water
+import oni_seed_browser.app.generated.resources.poi_artifact
+import oni_seed_browser.app.generated.resources.poi_crashed_satellite
+import oni_seed_browser.app.generated.resources.poi_crushed_satellite
+import oni_seed_browser.app.generated.resources.poi_wrecked_satellite
 import oni_seed_browser.app.generated.resources.worldtrait_boulders_large
 import oni_seed_browser.app.generated.resources.worldtrait_boulders_medium
 import oni_seed_browser.app.generated.resources.worldtrait_boulders_mixed
@@ -201,6 +206,11 @@ fun getPointOfInterestDrawable(pointOfInterestType: PointOfInterestType): Drawab
         PointOfInterestType.NEURAL_VACILLATOR -> Res.drawable.building_neural_vacillator
         PointOfInterestType.ANTI_ENTROPY_THERMO_NULLIFIER -> Res.drawable.building_anti_entropy_thermo_nullifier
         PointOfInterestType.EXPERIMENT_52B -> Res.drawable.building_sap_tree
+        PointOfInterestType.ARTIFACT -> Res.drawable.poi_artifact
+        PointOfInterestType.CRASHED_SATELLITE -> Res.drawable.poi_crashed_satellite
+        PointOfInterestType.WRECKED_SATELLITE -> Res.drawable.poi_wrecked_satellite
+        PointOfInterestType.CRUSHED_SATELLITE -> Res.drawable.poi_crushed_satellite
+        PointOfInterestType.TEMPORAL_TEAR_OPENER -> Res.drawable.building_temporal_tear_opener
     }
 
 @Composable
