@@ -75,11 +75,18 @@ fun RuleEditor(
 
     Column {
 
-        for ((index, orConnectedRules) in query.rules.withIndex()) {
+        for ((rulesIndex, orConnectedRules) in query.rules.withIndex()) {
 
-            for (rule in orConnectedRules) {
+            for ((ruleIndex, rule) in orConnectedRules.withIndex()) {
 
-                RuleEditorRow(null) {
+                val text = if (rulesIndex == 0 && ruleIndex == 0)
+                    null
+                else if (ruleIndex == 0)
+                    "AND"
+                else
+                    "OR"
+
+                RuleEditorRow(text) {
 
                     FilterPanelEntry()
                 }
@@ -93,11 +100,11 @@ fun RuleEditor(
 
                         val rulesCopy = query.rules.toMutableList()
 
-                        val newRules = query.rules[index].toMutableList()
+                        val newRules = query.rules[rulesIndex].toMutableList()
 
                         newRules.add(EMPTY)
 
-                        rulesCopy.set(index, newRules)
+                        rulesCopy.set(rulesIndex, newRules)
 
                         filterQueryState.value = query.copy(
                             rules = rulesCopy
