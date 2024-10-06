@@ -36,20 +36,16 @@ data class FilterRule(
     /* Only for base game, not for Spaced Out */
     val spaceDestinationCount: FilterItemSpaceDestinationCount?,
 
-    /* OR-connected rules (only to be set for the root rules) */
-    val orRules: List<FilterRule>
-
 ) {
 
     companion object {
 
-        val EMPTY = FilterRule(
+        val EMPTY: FilterRule = FilterRule(
             asteroidId = null,
             geyserCount = null,
             geyserOutput = null,
             worldTrait = null,
-            spaceDestinationCount = null,
-            orRules = emptyList()
+            spaceDestinationCount = null
         )
     }
 }

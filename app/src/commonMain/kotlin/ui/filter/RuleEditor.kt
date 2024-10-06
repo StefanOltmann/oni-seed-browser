@@ -44,7 +44,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import model.filter.FilterQuery
-import model.filter.FilterRule
+import model.filter.FilterRule.Companion.EMPTY
 import ui.HorizontalSeparator
 import ui.theme.FillSpacer
 import ui.theme.ctaColor
@@ -75,7 +75,7 @@ fun RuleEditor(
 
     Column {
 
-        for (andRule in query.andRules) {
+        for (andRule in query.rules) {
 
             RuleEditorRow(null) {
 
@@ -105,8 +105,12 @@ fun RuleEditor(
                 text = "AND",
                 onClick = {
 
+                    val newRules = query.rules.toMutableList()
+
+                    newRules.add(listOf(EMPTY))
+
                     filterQueryState.value = query.copy(
-                        andRules = query.andRules + FilterRule.EMPTY
+                        rules = newRules
                     )
                 }
             )

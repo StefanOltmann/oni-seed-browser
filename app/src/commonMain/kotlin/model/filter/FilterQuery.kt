@@ -32,7 +32,13 @@ data class FilterQuery(
 
     val dlcs: List<Dlc>,
 
-    val andRules: List<FilterRule>
+    /**
+     * List of connected OR-rules.
+     *
+     * All rules in a list are connected with an OR-condition,
+     * while all collections of rules lists are connected with AND.
+     */
+    val rules: List<List<FilterRule>>
 
 ) {
 
@@ -41,7 +47,7 @@ data class FilterQuery(
         val ALL = FilterQuery(
             cluster = null,
             dlcs = listOf(Dlc.FrostyPlanet),
-            andRules = emptyList()
+            rules = emptyList()
         )
     }
 }
