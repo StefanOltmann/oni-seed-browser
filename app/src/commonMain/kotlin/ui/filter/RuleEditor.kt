@@ -88,7 +88,12 @@ fun RuleEditor(
 
                 RuleEditorRow(text) {
 
-                    FilterPanelEntry()
+                    FilterPanelEntry(
+                        onDeleteClicked = {
+
+
+                        }
+                    )
                 }
             }
 
@@ -121,14 +126,7 @@ fun RuleEditor(
             AddRuleButton(
                 text = "AND",
                 onClick = {
-
-                    val newRules = query.rules.toMutableList()
-
-                    newRules.add(listOf(EMPTY))
-
-                    filterQueryState.value = query.copy(
-                        rules = newRules
-                    )
+                    filterQueryState.value = query.addEmptyAndRule()
                 }
             )
         }

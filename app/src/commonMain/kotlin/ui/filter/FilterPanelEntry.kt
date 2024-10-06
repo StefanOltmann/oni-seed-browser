@@ -48,6 +48,7 @@ import ui.theme.defaultRoundedCornerShape
 
 @Composable
 fun FilterPanelEntry(
+    onDeleteClicked: () -> Unit
 ) {
 
     Row {
@@ -104,9 +105,7 @@ fun FilterPanelEntry(
             modifier = Modifier
                 .size(48.dp)
                 .onHover(deleteButtonHovered)
-                .noRippleClickable {
-                    println("Delete")
-                }
+                .noRippleClickable(onDeleteClicked)
         ) {
 
             Icon(

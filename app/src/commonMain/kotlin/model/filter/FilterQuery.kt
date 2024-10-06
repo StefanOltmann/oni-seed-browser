@@ -22,6 +22,7 @@ package model.filter
 import kotlinx.serialization.Serializable
 import model.Cluster
 import model.Dlc
+import model.filter.FilterRule.Companion.EMPTY
 import serializer.ClusterSerializer
 
 @Serializable
@@ -41,6 +42,17 @@ data class FilterQuery(
     val rules: List<List<FilterRule>>
 
 ) {
+
+    fun addEmptyAndRule(): FilterQuery {
+
+        val newRules = rules.toMutableList()
+
+        newRules.add(listOf(EMPTY))
+
+        return copy(
+            rules = newRules
+        )
+    }
 
     companion object {
 
