@@ -75,28 +75,38 @@ fun RuleEditor(
 
     Column {
 
-        for (andRule in query.rules) {
+        for ((index, orConnectedRules) in query.rules.withIndex()) {
 
-            RuleEditorRow(null) {
+            for (rule in orConnectedRules) {
 
-                FilterPanelEntry()
-            }
+                RuleEditorRow(null) {
 
-            RuleEditorRow("OR") {
-
-                FilterPanelEntry()
+                    FilterPanelEntry()
+                }
             }
 
             RuleEditorRow(null) {
 
                 AddRuleButton(
                     text = "OR",
-                    onClick = { println("add OR rule") }
+                    onClick = {
+
+                        val rulesCopy = query.rules.toMutableList()
+
+                        val newRules = query.rules[index].toMutableList()
+
+                        newRules.add(EMPTY)
+
+                        rulesCopy.set(index, newRules)
+
+                        filterQueryState.value = query.copy(
+                            rules = rulesCopy
+                        )
+                    }
                 )
             }
 
             HorizontalSeparator(Modifier.padding(horizontal = defaultSpacing))
-
         }
 
         RuleEditorRow(null) {
