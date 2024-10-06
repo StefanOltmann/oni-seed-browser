@@ -41,6 +41,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import model.filter.FilterQuery
 import ui.HorizontalSeparator
 import ui.theme.DefaultSpacer
 import ui.theme.FillSpacer
@@ -51,6 +52,10 @@ import ui.theme.doubleSpacing
 
 @Composable
 fun FilterPanel() {
+
+    val filterQueryState = remember { mutableStateOf(FilterQuery.ALL) }
+
+    println(filterQueryState.value)
 
     val filterPanelOpen = remember { mutableStateOf(false) }
 
@@ -101,7 +106,8 @@ fun FilterPanel() {
 
                     ClusterSelection(
                         spacedOutDlcSelected = spacedOutDlcSelected,
-                        enableFrostyPlanet = enableFrostyPlanet
+                        enableFrostyPlanet = enableFrostyPlanet,
+                        filterQueryState = filterQueryState
                     )
 
                     HorizontalSeparator()

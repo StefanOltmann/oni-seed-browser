@@ -28,9 +28,20 @@ import serializer.ClusterSerializer
 data class FilterQuery(
 
     @Serializable(with = ClusterSerializer::class)
-    val cluster: Cluster,
+    val cluster: Cluster?,
 
     val dlcs: List<Dlc>,
 
     val andRules: List<FilterRule>
-)
+
+) {
+
+    companion object {
+
+        val ALL = FilterQuery(
+            cluster = null,
+            dlcs = emptyList(),
+            andRules = emptyList()
+        )
+    }
+}

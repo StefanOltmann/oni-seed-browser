@@ -27,19 +27,23 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import model.Cluster
+import model.filter.FilterQuery
 import org.jetbrains.compose.resources.painterResource
 import ui.getClusterDrawable
 import ui.grayScaleFilter
+import ui.noRippleClickable
 import ui.onHover
 import ui.theme.halfPadding
 import kotlin.math.max
@@ -48,8 +52,11 @@ import kotlin.math.max
 @Composable
 fun ClusterSelection(
     spacedOutDlcSelected: State<Boolean>,
-    enableFrostyPlanet: State<Boolean>
+    enableFrostyPlanet: State<Boolean>,
+    filterQueryState: MutableState<FilterQuery>
 ) {
+
+    val currentSelectedCluster: Cluster? = filterQueryState.value.cluster
 
     val clusters = if (spacedOutDlcSelected.value)
         Cluster.spacedOutCluster
@@ -69,6 +76,8 @@ fun ClusterSelection(
 
         for (cluster in filteredClusters) {
 
+            val isSelected = currentSelectedCluster == cluster
+
             val clusterHovered = remember { mutableStateOf(false) }
 
             Column(
@@ -77,6 +86,14 @@ fun ClusterSelection(
                     .halfPadding()
                     .onHover(clusterHovered)
                     .scale(if (clusterHovered.value) 1.1F else 1F)
+                    .noRippleClickable {
+
+                        /* Update the state */
+                        filterQueryState.value =
+                            filterQueryState.value.copy(
+                                cluster = if (isSelected) null else cluster
+                            )
+                    }
             ) {
 
                 Image(
@@ -84,7 +101,7 @@ fun ClusterSelection(
                         getClusterDrawable(cluster)
                     ),
                     contentDescription = null,
-                    colorFilter = if (clusterHovered.value)
+                    colorFilter = if (clusterHovered.value || isSelected)
                         null
                     else
                         grayScaleFilter,
@@ -95,12 +112,12 @@ fun ClusterSelection(
                     text = cluster.displayName,
                     style = MaterialTheme.typography.bodyLarge,
                     color = MaterialTheme.colorScheme.onBackground,
+                    fontWeight = if (isSelected) FontWeight.Bold else null,
                     textAlign = TextAlign.Center,
                     overflow = TextOverflow.Ellipsis,
                     maxLines = 2,
                     modifier = Modifier.size(100.dp, 48.dp)
                 )
-
             }
         }
     }
