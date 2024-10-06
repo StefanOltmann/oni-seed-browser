@@ -95,7 +95,12 @@ fun ClusterSelection(
                         /* Update the state */
                         filterQueryState.value =
                             filterQueryState.value.copy(
-                                cluster = if (isSelected) null else cluster
+
+                                /* Select the cluster or deselect everything */
+                                cluster = if (isSelected) null else cluster,
+
+                                /* Reset the filter rules */
+                                rules = FilterQuery.ALL.rules
                             )
                     }
             ) {
