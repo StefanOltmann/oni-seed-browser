@@ -54,6 +54,21 @@ data class FilterQuery(
         )
     }
 
+    fun addEmptyOrRule(rulesIndex: Int): FilterQuery {
+
+        val rulesCopy = rules.toMutableList()
+
+        val newRules = rules[rulesIndex].toMutableList()
+
+        newRules.add(EMPTY)
+
+        rulesCopy.set(rulesIndex, newRules)
+
+        return copy(
+            rules = rulesCopy
+        )
+    }
+
     companion object {
 
         val ALL = FilterQuery(

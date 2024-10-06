@@ -44,7 +44,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import model.filter.FilterQuery
-import model.filter.FilterRule.Companion.EMPTY
 import ui.HorizontalSeparator
 import ui.theme.FillSpacer
 import ui.theme.ctaColor
@@ -102,18 +101,7 @@ fun RuleEditor(
                 AddRuleButton(
                     text = "OR",
                     onClick = {
-
-                        val rulesCopy = query.rules.toMutableList()
-
-                        val newRules = query.rules[rulesIndex].toMutableList()
-
-                        newRules.add(EMPTY)
-
-                        rulesCopy.set(rulesIndex, newRules)
-
-                        filterQueryState.value = query.copy(
-                            rules = rulesCopy
-                        )
+                        filterQueryState.value = query.addEmptyOrRule(rulesIndex)
                     }
                 )
             }
