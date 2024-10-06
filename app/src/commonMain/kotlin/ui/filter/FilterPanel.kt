@@ -115,7 +115,10 @@ fun FilterPanel() {
 
                 HorizontalSeparator()
 
-                ControlsRow(filterQueryState)
+                ControlsRow(
+                    filterQueryState = filterQueryState,
+                    filterPanelOpen = filterPanelOpen
+                )
             }
         }
     }
@@ -123,7 +126,8 @@ fun FilterPanel() {
 
 @Composable
 private fun ControlsRow(
-    filterQueryState: MutableState<FilterQuery>
+    filterQueryState: MutableState<FilterQuery>,
+    filterPanelOpen: MutableState<Boolean>
 ) {
 
     Row(
@@ -142,7 +146,14 @@ private fun ControlsRow(
         DefaultSpacer()
 
         SearchButton(
-            onClick = { println("Search") }
+            onClick = {
+
+                // TODO Send to server
+                println("Search")
+
+                /* Close the panel, so the user can see the results. */
+                filterPanelOpen.value = false
+            }
         )
     }
 }
