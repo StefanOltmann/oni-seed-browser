@@ -32,12 +32,18 @@ object DummyWebClient : WebClient {
 
         val sortedWorlds = worlds.sortedBy { it.cluster }
 
+        // Temporary code to move a world with SVG info at first. Will be removed later.
+        val firstWorld = sortedWorlds.find { it.coordinate == "V-VOLCA-C-478948923-0-0-OL" }!!
+        val sortedWorldsManipulated = sortedWorlds.toMutableList()
+        sortedWorldsManipulated.remove(firstWorld)
+        sortedWorldsManipulated.add(0, firstWorld)
+
         return SearchResponse(
             page = 1,
             pageSize = 50,
             totalPages = 1,
             totalResults = worlds.size,
-            worlds = sortedWorlds
+            worlds = sortedWorldsManipulated
         )
     }
 }

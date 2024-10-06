@@ -21,6 +21,988 @@ package service
 
 val sampleWorldsJson: String = """
 [
+{
+    "coordinate": "V-VOLCA-C-478948923-0-0-OL",
+    "cluster": "V-VOLCA-C",
+    "dlcs": [
+      "FrostyPlanet",
+      "SpacedOut"
+    ],
+    "asteroids": [
+      {
+        "id": "VanillaVolcanic",
+        "offsetX": 0,
+        "offsetY": 0,
+        "sizeX": 240,
+        "sizeY": 380,
+        "worldTraits": [
+          "MisalignedStart",
+          "Volcanoes"
+        ],
+        "biomesSVG": "\u003Csvg height=\"760\" width=\"480\" viewBox=\"0 0 240 380\" xmlns=\"http://www.w3.org/2000/svg\"\u003E\r\n    \u003Cstyle\u003Epolygon{stroke-width:0.5}.zone3{fill:#F2BB47FF;stroke:#F2BB47FF;}.zone5{fill:#DE5A3BFF;stroke:#DE5A3BFF;}.zone6{fill:#3F1C05FF;stroke:#3F1C05FF;}.zone0{fill:#9DC9D6FF;stroke:#9DC9D6FF;}.zone8{fill:#D39898FF;stroke:#D39898FF;}.zone4{fill:#CB95A3FF;stroke:#CB95A3FF;}.zone20{fill:#A2CDA4FF;stroke:#A2CDA4FF;}.zone16{fill:#F2BB47FF;stroke:#F2BB47FF;}.zone7{fill:#242424FF;stroke:#242424FF;}.zone19{fill:#CDA2C7FF;stroke:#CDA2C7FF;}.zone11{fill:#4AE458FF;stroke:#4AE458FF;}.zone18{fill:#ABCFEAFF;stroke:#ABCFEAFF;}.zone2{fill:#7B974BFF;stroke:#7B974BFF;}.zone13{fill:#CC3636FF;stroke:#CC3636FF;}\u003C/style\u003E\r\n    \u003Cg\u003E\r\n    \u003Cpath class=\"zone3\" d=\"M155.7,148.6 163.6,136.2 163.2,121.6 152.9,108.6 133.6,107.3 121.9,115.4 117.0,129.8 127.0,149.3 133.1,152.3z\"/\u003E\u003Cpath class=\"zone5\" d=\"M26.7,354.5 12.8,343.9 0.0,344.6 0.0,380.0 24.0,380.0z\"/\u003E\u003Cpath class=\"zone5\" d=\"M12.8,343.9 25.3,324.2 18.4,312.3 0.0,311.4 0.0,344.6z\"/\u003E\u003Cpath class=\"zone6\" d=\"M30.7,294.5 11.0,274.7 0.0,274.5 0.0,311.4 18.4,312.3z\"/\u003E\u003Cpath class=\"zone0\" d=\"M31.7,255.0 20.4,239.9 0.0,239.6 0.0,274.5 11.0,274.7z\"/\u003E\u003Cpath class=\"zone8\" d=\"M30.6,220.4 20.2,207.6 0.0,207.7 0.0,239.6 20.4,239.9z\"/\u003E\u003Cpath class=\"zone0\" d=\"M20.2,207.6 30.0,187.3 22.8,176.1 0.0,175.6 0.0,207.7z\"/\u003E\u003Cpath class=\"zone4\" d=\"M31.0,158.7 21.8,145.9 0.0,145.8 0.0,175.6 22.8,176.1z\"/\u003E\u003Cpath class=\"zone20\" d=\"M31.2,126.0 25.1,116.2 0.0,116.2 0.0,145.8 21.8,145.9z\"/\u003E\u003Cpath class=\"zone0\" d=\"M31.1,99.7 20.1,86.7 0.0,86.7 0.0,116.2 25.1,116.2z\"/\u003E\u003Cpath class=\"zone16\" d=\"M20.1,86.7 32.5,61.7 25.4,55.7 0.0,56.5 0.0,86.7z\"/\u003E\u003Cpath class=\"zone7\" d=\"M25.4,55.7 26.6,26.8 0.0,23.6 0.0,56.5z\"/\u003E\u003Cpath class=\"zone7\" d=\"M31.9,22.8 32.0,0.0 0.0,0.0 0.0,23.6 26.6,26.8z\"/\u003E\u003Cpath class=\"zone5\" d=\"M43.9,347.9 42.8,328.4 25.3,324.2 12.8,343.9 26.7,354.5z\"/\u003E\u003Cpath class=\"zone6\" d=\"M51.6,322.1 52.5,305.5 39.1,293.2 30.7,294.5 18.4,312.3 25.3,324.2 42.8,328.4z\"/\u003E\u003Cpath class=\"zone8\" d=\"M39.1,293.2 48.2,274.4 35.1,255.7 31.7,255.0 11.0,274.7 30.7,294.5z\"/\u003E\u003Cpath class=\"zone19\" d=\"M56.9,239.2 57.3,235.3 43.7,220.2 30.6,220.4 20.4,239.9 31.7,255.0 35.1,255.7z\"/\u003E\u003Cpath class=\"zone8\" d=\"M43.7,220.2 55.3,198.0 50.2,189.2 30.0,187.3 20.2,207.6 30.6,220.4z\"/\u003E\u003Cpath class=\"zone0\" d=\"M58.0,172.2 47.5,157.9 31.0,158.7 22.8,176.1 30.0,187.3 50.2,189.2z\"/\u003E\u003Cpath class=\"zone19\" d=\"M47.5,157.9 55.7,141.8 48.3,128.1 31.2,126.0 21.8,145.9 31.0,158.7z\"/\u003E\u003Cpath class=\"zone11\" d=\"M72.3,139.3 73.7,130.6 59.0,117.1 48.3,128.1 55.7,141.8z\"/\u003E\u003Cpath class=\"zone8\" d=\"M59.0,117.1 59.2,107.1 48.8,96.5 31.1,99.7 25.1,116.2 31.2,126.0 48.3,128.1z\"/\u003E\u003Cpath class=\"zone16\" d=\"M48.8,96.5 53.2,78.6 36.2,61.8 32.5,61.7 20.1,86.7 31.1,99.7z\"/\u003E\u003Cpath class=\"zone7\" d=\"M54.4,44.1 51.7,29.6 31.9,22.8 26.6,26.8 25.4,55.7 32.5,61.7 36.2,61.8z\"/\u003E\u003Cpath class=\"zone7\" d=\"M64.8,17.3 64.6,0.0 32.0,0.0 31.9,22.8 51.7,29.6z\"/\u003E\u003Cpath class=\"zone5\" d=\"M53.8,353.5 43.9,347.9 26.7,354.5 24.0,380.0 55.2,380.0z\"/\u003E\u003Cpath class=\"zone5\" d=\"M70.7,345.5 69.4,331.3 51.6,322.1 42.8,328.4 43.9,347.9 53.8,353.5z\"/\u003E\u003Cpath class=\"zone18\" d=\"M78.3,294.5 78.5,294.2 66.6,272.5 48.2,274.4 39.1,293.2 52.5,305.5z\"/\u003E\u003Cpath class=\"zone19\" d=\"M66.6,272.5 73.9,259.2 56.9,239.2 35.1,255.7 48.2,274.4z\"/\u003E\u003Cpath class=\"zone8\" d=\"M76.3,224.2 75.1,202.4 55.3,198.0 43.7,220.2 57.3,235.3z\"/\u003E\u003Cpath class=\"zone18\" d=\"M81.7,197.2 83.2,178.8 75.5,170.5 58.0,172.2 50.2,189.2 55.3,198.0 75.1,202.4z\"/\u003E\u003Cpath class=\"zone4\" d=\"M75.5,170.5 80.8,150.2 72.3,139.3 55.7,141.8 47.5,157.9 58.0,172.2z\"/\u003E\u003Cpath class=\"zone2\" d=\"M102.7,148.5 108.6,131.3 96.2,117.4 73.7,130.6 72.3,139.3 80.8,150.2z\"/\u003E\u003Cpath class=\"zone2\" d=\"M96.2,117.4 97.1,112.3 82.5,95.7 59.2,107.1 59.0,117.1 73.7,130.6z\"/\u003E\u003Cpath class=\"zone19\" d=\"M82.5,95.7 83.9,83.5 71.7,72.7 53.2,78.6 48.8,96.5 59.2,107.1z\"/\u003E\u003Cpath class=\"zone16\" d=\"M71.7,72.7 74.1,53.1 54.4,44.1 36.2,61.8 53.2,78.6z\"/\u003E\u003Cpath class=\"zone7\" d=\"M84.2,47.0 86.4,29.9 64.8,17.3 51.7,29.6 54.4,44.1 74.1,53.1z\"/\u003E\u003Cpath class=\"zone5\" d=\"M82.0,352.5 70.7,345.5 53.8,353.5 55.2,380.0 81.3,380.0z\"/\u003E\u003Cpath class=\"zone6\" d=\"M86.7,317.4 78.3,294.5 52.5,305.5 51.6,322.1 69.4,331.3z\"/\u003E\u003Cpath class=\"zone18\" d=\"M98.2,285.3 101.0,270.1 84.9,256.7 73.9,259.2 66.6,272.5 78.5,294.2z\"/\u003E\u003Cpath class=\"zone8\" d=\"M84.9,256.7 94.5,233.6 76.3,224.2 57.3,235.3 56.9,239.2 73.9,259.2z\"/\u003E\u003Cpath class=\"zone4\" d=\"M116.1,182.6 107.6,173.1 83.2,178.8 81.7,197.2 107.8,206.3z\"/\u003E\u003Cpath class=\"zone13\" d=\"M107.6,173.1 109.7,156.1 102.7,148.5 80.8,150.2 75.5,170.5 83.2,178.8z\"/\u003E\u003Cpath class=\"zone3\" d=\"M127.0,149.3 117.0,129.8 108.6,131.3 102.7,148.5 109.7,156.1z\"/\u003E\u003Cpath class=\"zone3\" d=\"M117.0,129.8 121.9,115.4 110.2,107.1 97.1,112.3 96.2,117.4 108.6,131.3z\"/\u003E\u003Cpath class=\"zone4\" d=\"M110.2,107.1 117.3,87.8 101.5,75.8 83.9,83.5 82.5,95.7 97.1,112.3z\"/\u003E\u003Cpath class=\"zone16\" d=\"M101.5,75.8 104.1,57.7 84.2,47.0 74.1,53.1 71.7,72.7 83.9,83.5z\"/\u003E\u003Cpath class=\"zone7\" d=\"M99.1,21.4 99.6,0.0 64.6,0.0 64.8,17.3 86.4,29.9z\"/\u003E\u003Cpath class=\"zone5\" d=\"M109.5,353.1 99.4,347.0 82.0,352.5 81.3,380.0 109.8,380.0z\"/\u003E\u003Cpath class=\"zone6\" d=\"M99.4,347.0 101.6,322.2 86.7,317.4 69.4,331.3 70.7,345.5 82.0,352.5z\"/\u003E\u003Cpath class=\"zone2\" d=\"M103.3,321.4 115.7,300.5 115.7,299.7 98.2,285.3 78.5,294.2 78.3,294.5 86.7,317.4 101.6,322.2z\"/\u003E\u003Cpath class=\"zone4\" d=\"M117.9,262.4 118.4,243.6 96.3,233.0 94.5,233.6 84.9,256.7 101.0,270.1z\"/\u003E\u003Cpath class=\"zone4\" d=\"M96.3,233.0 108.5,207.8 107.8,206.3 81.7,197.2 75.1,202.4 76.3,224.2 94.5,233.6z\"/\u003E\u003Cpath class=\"zone13\" d=\"M130.7,181.7 139.0,170.5 133.1,152.3 127.0,149.3 109.7,156.1 107.6,173.1 116.1,182.6z\"/\u003E\u003Cpath class=\"zone3\" d=\"M133.6,107.3 125.2,86.7 117.3,87.8 110.2,107.1 121.9,115.4z\"/\u003E\u003Cpath class=\"zone7\" d=\"M116.5,50.8 115.9,30.6 99.1,21.4 86.4,29.9 84.2,47.0 104.1,57.7z\"/\u003E\u003Cpath class=\"zone5\" d=\"M127.4,345.8 123.9,326.0 103.3,321.4 101.6,322.2 99.4,347.0 109.5,353.1z\"/\u003E\u003Cpath class=\"zone5\" d=\"M131.8,315.8 115.7,300.5 103.3,321.4 123.9,326.0z\"/\u003E\u003Cpath class=\"zone20\" d=\"M130.7,289.8 129.9,270.1 117.9,262.4 101.0,270.1 98.2,285.3 115.7,299.7z\"/\u003E\u003Cpath class=\"zone20\" d=\"M131.8,234.5 126.5,213.9 108.5,207.8 96.3,233.0 118.4,243.6z\"/\u003E\u003Cpath class=\"zone0\" d=\"M138.0,207.7 140.7,192.1 130.7,181.7 116.1,182.6 107.8,206.3 108.5,207.8 126.5,213.9z\"/\u003E\u003Cpath class=\"zone16\" d=\"M125.2,86.7 133.4,77.6 128.8,56.4 116.5,50.8 104.1,57.7 101.5,75.8 117.3,87.8z\"/\u003E\u003Cpath class=\"zone7\" d=\"M131.9,20.7 132.5,0.0 99.6,0.0 99.1,21.4 115.9,30.6z\"/\u003E\u003Cpath class=\"zone5\" d=\"M136.0,350.1 127.4,345.8 109.5,353.1 109.8,380.0 138.3,380.0z\"/\u003E\u003Cpath class=\"zone6\" d=\"M155.8,343.4 156.0,326.5 137.2,314.1 131.8,315.8 123.9,326.0 127.4,345.8 136.0,350.1z\"/\u003E\u003Cpath class=\"zone5\" d=\"M137.2,314.1 141.6,296.9 130.7,289.8 115.7,299.7 115.7,300.5 131.8,315.8z\"/\u003E\u003Cpath class=\"zone20\" d=\"M150.6,260.7 151.6,252.6 135.3,234.9 131.8,234.5 118.4,243.6 117.9,262.4 129.9,270.1z\"/\u003E\u003Cpath class=\"zone11\" d=\"M150.8,219.5 138.0,207.7 126.5,213.9 131.8,234.5 135.3,234.9z\"/\u003E\u003Cpath class=\"zone3\" d=\"M158.9,154.9 155.7,148.6 133.1,152.3 139.0,170.5 147.6,171.9z\"/\u003E\u003Cpath class=\"zone16\" d=\"M161.6,90.4 154.9,79.5 133.4,77.6 125.2,86.7 133.6,107.3 152.9,108.6z\"/\u003E\u003Cpath class=\"zone7\" d=\"M149.4,44.2 150.1,32.9 131.9,20.7 115.9,30.6 116.5,50.8 128.8,56.4z\"/\u003E\u003Cpath class=\"zone5\" d=\"M162.7,348.5 155.8,343.4 136.0,350.1 138.3,380.0 161.1,380.0z\"/\u003E\u003Cpath class=\"zone6\" d=\"M175.6,313.3 175.5,308.1 156.5,291.8 141.6,296.9 137.2,314.1 156.0,326.5z\"/\u003E\u003Cpath class=\"zone18\" d=\"M156.5,291.8 162.0,273.3 150.6,260.7 129.9,270.1 130.7,289.8 141.6,296.9z\"/\u003E\u003Cpath class=\"zone5\" d=\"M167.0,240.9 157.7,219.8 150.8,219.5 135.3,234.9 151.6,252.6z\"/\u003E\u003Cpath class=\"zone5\" d=\"M153.3,185.4 147.6,171.9 139.0,170.5 130.7,181.7 140.7,192.1z\"/\u003E\u003Cpath class=\"zone16\" d=\"M164.2,58.3 149.4,44.2 128.8,56.4 133.4,77.6 154.9,79.5z\"/\u003E\u003Cpath class=\"zone7\" d=\"M164.7,22.8 163.3,0.0 132.5,0.0 131.9,20.7 150.1,32.9z\"/\u003E\u003Cpath class=\"zone5\" d=\"M187.0,346.9 186.1,346.2 162.7,348.5 161.1,380.0 188.2,380.0z\"/\u003E\u003Cpath class=\"zone6\" d=\"M186.1,346.2 187.1,323.9 175.6,313.3 156.0,326.5 155.8,343.4 162.7,348.5z\"/\u003E\u003Cpath class=\"zone18\" d=\"M191.8,291.7 181.3,270.2 162.0,273.3 156.5,291.8 175.5,308.1z\"/\u003E\u003Cpath class=\"zone4\" d=\"M181.3,270.2 186.9,260.9 179.6,243.2 167.0,240.9 151.6,252.6 150.6,260.7 162.0,273.3z\"/\u003E\u003Cpath class=\"zone2\" d=\"M169.9,208.4 163.8,189.1 153.3,185.4 140.7,192.1 138.0,207.7 150.8,219.5 157.7,219.8z\"/\u003E\u003Cpath class=\"zone13\" d=\"M182.1,175.8 175.2,158.0 158.9,154.9 147.6,171.9 153.3,185.4 163.8,189.1z\"/\u003E\u003Cpath class=\"zone16\" d=\"M185.4,118.1 188.9,108.6 180.1,91.0 161.6,90.4 152.9,108.6 163.2,121.6z\"/\u003E\u003Cpath class=\"zone7\" d=\"M178.2,56.1 184.8,46.0 180.1,30.3 164.7,22.8 150.1,32.9 149.4,44.2 164.2,58.3z\"/\u003E\u003Cpath class=\"zone5\" d=\"M211.3,346.5 213.9,326.7 208.7,319.7 187.1,323.9 186.1,346.2 187.0,346.9z\"/\u003E\u003Cpath class=\"zone6\" d=\"M208.7,319.7 212.2,304.4 205.9,293.5 191.8,291.7 175.5,308.1 175.6,313.3 187.1,323.9z\"/\u003E\u003Cpath class=\"zone19\" d=\"M216.3,275.8 208.0,259.9 186.9,260.9 181.3,270.2 191.8,291.7 205.9,293.5z\"/\u003E\u003Cpath class=\"zone2\" d=\"M191.8,229.7 184.2,210.9 169.9,208.4 157.7,219.8 167.0,240.9 179.6,243.2z\"/\u003E\u003Cpath class=\"zone0\" d=\"M197.9,197.3 188.2,177.6 182.1,175.8 163.8,189.1 169.9,208.4 184.2,210.9z\"/\u003E\u003Cpath class=\"zone3\" d=\"M182.0,148.2 179.5,140.9 163.6,136.2 155.7,148.6 158.9,154.9 175.2,158.0z\"/\u003E\u003Cpath class=\"zone3\" d=\"M187.4,122.0 185.4,118.1 163.2,121.6 163.6,136.2 179.5,140.9z\"/\u003E\u003Cpath class=\"zone16\" d=\"M189.7,77.0 178.2,56.1 164.2,58.3 154.9,79.5 161.6,90.4 180.1,91.0z\"/\u003E\u003Cpath class=\"zone7\" d=\"M202.5,10.0 202.6,0.0 163.3,0.0 164.7,22.8 180.1,30.3z\"/\u003E\u003Cpath class=\"zone5\" d=\"M213.8,349.2 211.3,346.5 187.0,346.9 188.2,380.0 211.7,380.0z\"/\u003E\u003Cpath class=\"zone5\" d=\"M240.0,325.2 213.9,326.7 211.3,346.5 213.8,349.2 240.0,349.2z\"/\u003E\u003Cpath class=\"zone8\" d=\"M240.0,304.1 240.0,276.7 216.3,275.8 205.9,293.5 212.2,304.4z\"/\u003E\u003Cpath class=\"zone20\" d=\"M208.0,259.9 215.1,247.0 208.0,231.6 191.8,229.7 179.6,243.2 186.9,260.9z\"/\u003E\u003Cpath class=\"zone0\" d=\"M217.9,217.9 209.0,198.9 197.9,197.3 184.2,210.9 191.8,229.7 208.0,231.6z\"/\u003E\u003Cpath class=\"zone2\" d=\"M221.7,186.5 219.8,172.7 206.0,163.0 188.2,177.6 197.9,197.3 209.0,198.9z\"/\u003E\u003Cpath class=\"zone5\" d=\"M206.0,163.0 204.8,154.6 182.0,148.2 175.2,158.0 182.1,175.8 188.2,177.6z\"/\u003E\u003Cpath class=\"zone13\" d=\"M212.7,143.5 208.1,123.9 187.4,122.0 179.5,140.9 182.0,148.2 204.8,154.6z\"/\u003E\u003Cpath class=\"zone5\" d=\"M211.6,117.7 207.3,108.1 188.9,108.6 185.4,118.1 187.4,122.0 208.1,123.9z\"/\u003E\u003Cpath class=\"zone18\" d=\"M207.3,108.1 215.2,89.1 207.2,76.7 189.7,77.0 180.1,91.0 188.9,108.6z\"/\u003E\u003Cpath class=\"zone16\" d=\"M207.2,76.7 215.9,58.7 208.8,47.0 184.8,46.0 178.2,56.1 189.7,77.0z\"/\u003E\u003Cpath class=\"zone7\" d=\"M216.7,28.2 202.5,10.0 180.1,30.3 184.8,46.0 208.8,47.0z\"/\u003E\u003Cpath class=\"zone5\" d=\"M240.0,349.2 213.8,349.2 211.7,380.0 240.0,380.0z\"/\u003E\u003Cpath class=\"zone5\" d=\"M240.0,325.2 240.0,304.1 212.2,304.4 208.7,319.7 213.9,326.7z\"/\u003E\u003Cpath class=\"zone20\" d=\"M240.0,247.0 215.1,247.0 208.0,259.9 216.3,275.8 240.0,276.7z\"/\u003E\u003Cpath class=\"zone18\" d=\"M240.0,218.4 217.9,217.9 208.0,231.6 215.1,247.0 240.0,247.0z\"/\u003E\u003Cpath class=\"zone20\" d=\"M240.0,189.9 221.7,186.5 209.0,198.9 217.9,217.9 240.0,218.4z\"/\u003E\u003Cpath class=\"zone11\" d=\"M240.0,164.8 219.8,172.7 221.7,186.5 240.0,189.9z\"/\u003E\u003Cpath class=\"zone13\" d=\"M240.0,164.8 240.0,145.9 212.7,143.5 204.8,154.6 206.0,163.0 219.8,172.7z\"/\u003E\u003Cpath class=\"zone20\" d=\"M240.0,117.5 211.6,117.7 208.1,123.9 212.7,143.5 240.0,145.9z\"/\u003E\u003Cpath class=\"zone0\" d=\"M240.0,117.5 240.0,89.4 215.2,89.1 207.3,108.1 211.6,117.7z\"/\u003E\u003Cpath class=\"zone16\" d=\"M240.0,59.4 215.9,58.7 207.2,76.7 215.2,89.1 240.0,89.4z\"/\u003E\u003Cpath class=\"zone7\" d=\"M240.0,25.4 216.7,28.2 208.8,47.0 215.9,58.7 240.0,59.4z\"/\u003E\u003Cpath class=\"zone7\" d=\"M240.0,25.4 240.0,0.0 202.6,0.0 202.5,10.0 216.7,28.2z\"/\u003E\r\n    \u003C/g\u003E\r\n\u003C/svg\u003E",
+        "pointsOfInterest": [
+          {
+            "id": "Headquarters",
+            "posX": 141,
+            "posY": 246
+          },
+          {
+            "id": "MassiveHeatSink",
+            "posX": 181,
+            "posY": 186
+          },
+          {
+            "id": "MassiveHeatSink",
+            "posX": 205,
+            "posY": 148
+          },
+          {
+            "id": "MassiveHeatSink",
+            "posX": 220,
+            "posY": 282
+          },
+          {
+            "id": "WarpConduitReceiver",
+            "posX": 79,
+            "posY": 291
+          },
+          {
+            "id": "WarpConduitSender",
+            "posX": 53,
+            "posY": 151
+          },
+          {
+            "id": "GravitasPedestal",
+            "posX": 62,
+            "posY": 197
+          },
+          {
+            "id": "WarpReceiver",
+            "posX": 32,
+            "posY": 225
+          },
+          {
+            "id": "WarpPortal",
+            "posX": 31,
+            "posY": 231
+          },
+          {
+            "id": "GeneShuffler",
+            "posX": 88,
+            "posY": 54
+          }
+        ],
+        "geysers": [
+          {
+            "id": "OilWell",
+            "posX": 172,
+            "posY": 51,
+            "emitRate": 3333.33,
+            "idleTime": 0,
+            "eruptionTime": 1,
+            "dormancyCycles": 0,
+            "activeCycles": 1
+          },
+          {
+            "id": "OilWell",
+            "posX": 140,
+            "posY": 44,
+            "emitRate": 3333.33,
+            "idleTime": 0,
+            "eruptionTime": 1,
+            "dormancyCycles": 0,
+            "activeCycles": 1
+          },
+          {
+            "id": "OilWell",
+            "posX": 72,
+            "posY": 63,
+            "emitRate": 3333.33,
+            "idleTime": 0,
+            "eruptionTime": 1,
+            "dormancyCycles": 0,
+            "activeCycles": 1
+          },
+          {
+            "id": "salt_water",
+            "posX": 36,
+            "posY": 179,
+            "emitRate": 11972.496,
+            "idleTime": 451.3581,
+            "eruptionTime": 296.21167,
+            "dormancyCycles": 59.70707,
+            "activeCycles": 76.90957
+          },
+          {
+            "id": "steam",
+            "posX": 78,
+            "posY": 180,
+            "emitRate": 6315.9556,
+            "idleTime": 339.11594,
+            "eruptionTime": 245.1422,
+            "dormancyCycles": 57.914185,
+            "activeCycles": 95.31128
+          },
+          {
+            "id": "steam",
+            "posX": 104,
+            "posY": 238,
+            "emitRate": 3754.9768,
+            "idleTime": 128.09207,
+            "eruptionTime": 279.33005,
+            "dormancyCycles": 56.557453,
+            "activeCycles": 88.98306
+          },
+          {
+            "id": "chlorine_gas",
+            "posX": 53,
+            "posY": 229,
+            "emitRate": 969.8322,
+            "idleTime": 496.67593,
+            "eruptionTime": 102.68423,
+            "dormancyCycles": 72.55568,
+            "activeCycles": 108.5891
+          },
+          {
+            "id": "methane",
+            "posX": 71,
+            "posY": 257,
+            "emitRate": 430.4301,
+            "idleTime": 638.8232,
+            "eruptionTime": 407.36993,
+            "dormancyCycles": 63.649357,
+            "activeCycles": 83.03211
+          },
+          {
+            "id": "big_volcano",
+            "posX": 130,
+            "posY": 77,
+            "emitRate": 230930.88,
+            "idleTime": 8915.125,
+            "eruptionTime": 68.58955,
+            "dormancyCycles": 67.692955,
+            "activeCycles": 109.64853
+          },
+          {
+            "id": "big_volcano",
+            "posX": 198,
+            "posY": 264,
+            "emitRate": 235782.8,
+            "idleTime": 8540.346,
+            "eruptionTime": 70.04161,
+            "dormancyCycles": 42.43959,
+            "activeCycles": 75.056755
+          },
+          {
+            "id": "big_volcano",
+            "posX": 142,
+            "posY": 198,
+            "emitRate": 269081.25,
+            "idleTime": 8964.398,
+            "eruptionTime": 68.43771,
+            "dormancyCycles": 42.955822,
+            "activeCycles": 71.68794
+          },
+          {
+            "id": "big_volcano",
+            "posX": 117,
+            "posY": 64,
+            "emitRate": 273603.16,
+            "idleTime": 9839.595,
+            "eruptionTime": 72.795204,
+            "dormancyCycles": 39.163097,
+            "activeCycles": 79.89018
+          },
+          {
+            "id": "big_volcano",
+            "posX": 219,
+            "posY": 111,
+            "emitRate": 255158.97,
+            "idleTime": 9095.693,
+            "eruptionTime": 69.596695,
+            "dormancyCycles": 46.890926,
+            "activeCycles": 56.594467
+          },
+          {
+            "id": "slush_salt_water",
+            "posX": 36,
+            "posY": 133,
+            "emitRate": 9577.438,
+            "idleTime": 408.55823,
+            "eruptionTime": 132.82288,
+            "dormancyCycles": 61.92086,
+            "activeCycles": 91.76137
+          },
+          {
+            "id": "liquid_sulfur",
+            "posX": 196,
+            "posY": 72,
+            "emitRate": 7171.279,
+            "idleTime": 327.23712,
+            "eruptionTime": 232.84337,
+            "dormancyCycles": 85.110374,
+            "activeCycles": 103.484505
+          },
+          {
+            "id": "molten_iron",
+            "posX": 38,
+            "posY": 153,
+            "emitRate": 9553.44,
+            "idleTime": 800.95496,
+            "eruptionTime": 47.011414,
+            "dormancyCycles": 52.749416,
+            "activeCycles": 75.292206
+          },
+          {
+            "id": "hot_co2",
+            "posX": 201,
+            "posY": 177,
+            "emitRate": 479.12268,
+            "idleTime": 423.4552,
+            "eruptionTime": 238.48763,
+            "dormancyCycles": 42.257393,
+            "activeCycles": 80.053604
+          },
+          {
+            "id": "steam",
+            "posX": 130,
+            "posY": 117,
+            "emitRate": 3363.2412,
+            "idleTime": 240.35814,
+            "eruptionTime": 250.84535,
+            "dormancyCycles": 46.57171,
+            "activeCycles": 78.33066
+          },
+          {
+            "id": "liquid_sulfur",
+            "posX": 192,
+            "posY": 99,
+            "emitRate": 6972.639,
+            "idleTime": 243.76321,
+            "eruptionTime": 193.43253,
+            "dormancyCycles": 62.54808,
+            "activeCycles": 96.974655
+          },
+          {
+            "id": "molten_gold",
+            "posX": 54,
+            "posY": 252,
+            "emitRate": 8088.485,
+            "idleTime": 735.16516,
+            "eruptionTime": 52.864384,
+            "dormancyCycles": 36.89608,
+            "activeCycles": 50.27891
+          },
+          {
+            "id": "molten_copper",
+            "posX": 151,
+            "posY": 61,
+            "emitRate": 12772.282,
+            "idleTime": 896.23395,
+            "eruptionTime": 38.461964,
+            "dormancyCycles": 22.220009,
+            "activeCycles": 45.049904
+          },
+          {
+            "id": "liquid_co2",
+            "posX": 15,
+            "posY": 116,
+            "emitRate": 500.0621,
+            "idleTime": 241.09897,
+            "eruptionTime": 230.44748,
+            "dormancyCycles": 60.423462,
+            "activeCycles": 81.83358
+          },
+          {
+            "id": "slush_water",
+            "posX": 125,
+            "posY": 151,
+            "emitRate": 3793.9124,
+            "idleTime": 279.53754,
+            "eruptionTime": 412.9818,
+            "dormancyCycles": 49.275135,
+            "activeCycles": 88.8613
+          },
+          {
+            "id": "hot_water",
+            "posX": 50,
+            "posY": 113,
+            "emitRate": 7374.4316,
+            "idleTime": 250.0653,
+            "eruptionTime": 379.35236,
+            "dormancyCycles": 46.683758,
+            "activeCycles": 82.94438
+          }
+        ]
+      },
+      {
+        "id": "MediumRadioactiveVanillaWarpPlanet",
+        "offsetX": 242,
+        "offsetY": 0,
+        "sizeX": 160,
+        "sizeY": 176,
+        "worldTraits": [
+          "Volcanoes",
+          "CrashedSatellites"
+        ],
+        "biomesSVG": "\u003Csvg height=\"352\" width=\"320\" viewBox=\"0 0 160 176\" xmlns=\"http://www.w3.org/2000/svg\"\u003E\r\n    \u003Cstyle\u003Epolygon{stroke-width:0.5}.zone12{fill:#EB9B3FFF;stroke:#EB9B3FFF;}.zone7{fill:#242424FF;stroke:#242424FF;}.zone19{fill:#CDA2C7FF;stroke:#CDA2C7FF;}.zone0{fill:#9DC9D6FF;stroke:#9DC9D6FF;}.zone2{fill:#7B974BFF;stroke:#7B974BFF;}.zone5{fill:#DE5A3BFF;stroke:#DE5A3BFF;}.zone10{fill:#8EC039FF;stroke:#8EC039FF;}.zone20{fill:#A2CDA4FF;stroke:#A2CDA4FF;}.zone9{fill:#FFA007FF;stroke:#FFA007FF;}.zone11{fill:#4AE458FF;stroke:#4AE458FF;}\u003C/style\u003E\r\n    \u003Cg\u003E\r\n    \u003Cpath class=\"zone12\" d=\"M98.4,92.9 86.7,79.6 78.5,81.3 71.7,93.9 84.0,108.2 90.4,108.3z\"/\u003E\u003Cpath class=\"zone7\" d=\"M117.9,54.3 125.4,42.9 116.9,27.6 106.9,28.1 99.6,43.0 110.9,55.6z\"/\u003E\u003Cpath class=\"zone19\" d=\"M136.4,68.0 145.5,51.3 138.2,42.5 125.4,42.9 117.9,54.3 131.7,68.9z\"/\u003E\u003Cpath class=\"zone0\" d=\"M104.0,67.1 110.9,55.6 99.6,43.0 88.3,44.9 82.9,54.1 93.0,68.9z\"/\u003E\u003Cpath class=\"zone7\" d=\"M116.9,27.6 122.5,20.9 117.5,0.0 105.3,0.0 100.3,21.0 106.9,28.1z\"/\u003E\u003Cpath class=\"zone2\" d=\"M127.1,77.9 131.7,68.9 117.9,54.3 110.9,55.6 104.0,67.1 114.4,81.6z\"/\u003E\u003Cpath class=\"zone7\" d=\"M138.2,42.5 145.0,26.0 140.4,20.9 122.5,20.9 116.9,27.6 125.4,42.9z\"/\u003E\u003Cpath class=\"zone7\" d=\"M160.0,26.3 145.0,26.0 138.2,42.5 145.5,51.3 160.0,51.7z\"/\u003E\u003Cpath class=\"zone5\" d=\"M142.5,86.4 145.3,76.8 136.4,68.0 131.7,68.9 127.1,77.9 138.1,88.8z\"/\u003E\u003Cpath class=\"zone5\" d=\"M160.0,74.8 145.3,76.8 142.5,86.4 160.0,91.7z\"/\u003E\u003Cpath class=\"zone2\" d=\"M86.7,79.6 93.0,68.9 82.9,54.1 70.8,56.3 66.1,69.1 78.5,81.3z\"/\u003E\u003Cpath class=\"zone12\" d=\"M110.1,91.1 114.4,81.6 104.0,67.1 93.0,68.9 86.7,79.6 98.4,92.9z\"/\u003E\u003Cpath class=\"zone7\" d=\"M160.0,0.0 144.1,0.0 140.4,20.9 145.0,26.0 160.0,26.3z\"/\u003E\u003Cpath class=\"zone19\" d=\"M160.0,74.8 160.0,51.7 145.5,51.3 136.4,68.0 145.3,76.8z\"/\u003E\u003Cpath class=\"zone7\" d=\"M99.6,43.0 106.9,28.1 100.3,21.0 83.9,21.8 78.1,28.8 88.3,44.9z\"/\u003E\u003Cpath class=\"zone0\" d=\"M66.1,69.1 70.8,56.3 62.1,46.9 50.2,47.6 44.3,63.2 47.2,68.6 55.3,72.4z\"/\u003E\u003Cpath class=\"zone7\" d=\"M82.9,54.1 88.3,44.9 78.1,28.8 69.8,29.5 62.1,46.9 70.8,56.3z\"/\u003E\u003Cpath class=\"zone10\" d=\"M134.2,100.1 138.1,88.8 127.1,77.9 114.4,81.6 110.1,91.1 118.2,102.7z\"/\u003E\u003Cpath class=\"zone12\" d=\"M71.7,93.9 78.5,81.3 66.1,69.1 55.3,72.4 52.0,87.1 61.8,95.8z\"/\u003E\u003Cpath class=\"zone7\" d=\"M100.3,21.0 105.3,0.0 77.7,0.0 83.9,21.8z\"/\u003E\u003Cpath class=\"zone7\" d=\"M78.1,28.8 83.9,21.8 77.7,0.0 66.7,0.0 61.8,22.8 69.8,29.5z\"/\u003E\u003Cpath class=\"zone10\" d=\"M136.0,122.9 140.9,110.1 134.2,100.1 118.2,102.7 114.3,113.6 121.4,124.6z\"/\u003E\u003Cpath class=\"zone20\" d=\"M160.0,108.5 160.0,91.7 142.5,86.4 138.1,88.8 134.2,100.1 140.9,110.1z\"/\u003E\u003Cpath class=\"zone7\" d=\"M62.1,46.9 69.8,29.5 61.8,22.8 46.8,24.1 44.2,40.5 50.2,47.6z\"/\u003E\u003Cpath class=\"zone10\" d=\"M56.0,111.5 61.8,95.8 52.0,87.1 42.0,87.5 37.0,106.9 46.4,114.3z\"/\u003E\u003Cpath class=\"zone0\" d=\"M50.2,47.6 44.2,40.5 23.6,43.0 22.9,43.9 24.8,60.5 44.3,63.2z\"/\u003E\u003Cpath class=\"zone9\" d=\"M42.5,131.3 46.4,114.3 37.0,106.9 22.6,109.5 23.3,128.4 40.6,132.4z\"/\u003E\u003Cpath class=\"zone9\" d=\"M47.2,68.6 44.3,63.2 24.8,60.5 21.0,65.0 23.5,82.3 39.7,84.9z\"/\u003E\u003Cpath class=\"zone10\" d=\"M37.0,106.9 42.0,87.5 39.7,84.9 23.5,82.3 18.5,87.0 22.2,109.2 22.6,109.5z\"/\u003E\u003Cpath class=\"zone10\" d=\"M71.1,127.3 70.7,123.0 56.0,111.5 46.4,114.3 42.5,131.3 58.7,137.1z\"/\u003E\u003Cpath class=\"zone2\" d=\"M22.2,109.2 18.5,87.0 0.0,86.1 0.0,111.0z\"/\u003E\u003Cpath class=\"zone12\" d=\"M84.0,108.2 71.7,93.9 61.8,95.8 56.0,111.5 70.7,123.0z\"/\u003E\u003Cpath class=\"zone7\" d=\"M61.8,22.8 66.7,0.0 43.9,0.0 43.2,20.4 46.8,24.1z\"/\u003E\u003Cpath class=\"zone5\" d=\"M52.0,87.1 55.3,72.4 47.2,68.6 39.7,84.9 42.0,87.5z\"/\u003E\u003Cpath class=\"zone10\" d=\"M160.0,108.5 140.9,110.1 136.0,122.9 143.1,132.1 160.0,132.4z\"/\u003E\u003Cpath class=\"zone7\" d=\"M44.2,40.5 46.8,24.1 43.2,20.4 21.8,21.8 21.5,22.2 23.6,43.0z\"/\u003E\u003Cpath class=\"zone7\" d=\"M43.2,20.4 43.9,0.0 21.0,0.0 21.8,21.8z\"/\u003E\u003Cpath class=\"zone12\" d=\"M114.3,113.6 118.2,102.7 110.1,91.1 98.4,92.9 90.4,108.3 97.1,115.9z\"/\u003E\u003Cpath class=\"zone9\" d=\"M117.1,134.3 121.4,124.6 114.3,113.6 97.1,115.9 94.6,130.6 103.0,138.0z\"/\u003E\u003Cpath class=\"zone7\" d=\"M21.5,22.2 21.8,21.8 21.0,0.0 0.0,0.0 0.0,22.7z\"/\u003E\u003Cpath class=\"zone11\" d=\"M143.1,132.1 136.0,122.9 121.4,124.6 117.1,134.3 128.5,150.4 134.4,151.1z\"/\u003E\u003Cpath class=\"zone11\" d=\"M128.5,150.4 117.1,134.3 103.0,138.0 100.5,153.2 114.8,161.5z\"/\u003E\u003Cpath class=\"zone12\" d=\"M94.6,130.6 97.1,115.9 90.4,108.3 84.0,108.2 70.7,123.0 71.1,127.3 81.1,134.3z\"/\u003E\u003Cpath class=\"zone7\" d=\"M22.9,43.9 23.6,43.0 21.5,22.2 0.0,22.7 0.0,44.9z\"/\u003E\u003Cpath class=\"zone11\" d=\"M79.7,151.8 81.1,134.3 71.1,127.3 58.7,137.1 60.8,152.5 68.0,156.5z\"/\u003E\u003Cpath class=\"zone11\" d=\"M100.5,153.2 103.0,138.0 94.6,130.6 81.1,134.3 79.7,151.8 90.9,158.1z\"/\u003E\u003Cpath class=\"zone11\" d=\"M20.1,154.6 18.8,131.9 0.0,130.0 0.0,156.2z\"/\u003E\u003Cpath class=\"zone11\" d=\"M37.0,153.1 40.6,132.4 23.3,128.4 18.8,131.9 20.1,154.6 22.3,156.2z\"/\u003E\u003Cpath class=\"zone11\" d=\"M60.8,152.5 58.7,137.1 42.5,131.3 40.6,132.4 37.0,153.1 45.5,159.2z\"/\u003E\u003Cpath class=\"zone0\" d=\"M114.8,161.5 100.5,153.2 90.9,158.1 89.9,176.0 115.8,176.0z\"/\u003E\u003Cpath class=\"zone11\" d=\"M68.0,156.5 60.8,152.5 45.5,159.2 45.4,176.0 68.5,176.0z\"/\u003E\u003Cpath class=\"zone0\" d=\"M45.5,159.2 37.0,153.1 22.3,156.2 22.4,176.0 45.4,176.0z\"/\u003E\u003Cpath class=\"zone11\" d=\"M90.9,158.1 79.7,151.8 68.0,156.5 68.5,176.0 89.9,176.0z\"/\u003E\u003Cpath class=\"zone7\" d=\"M140.4,20.9 144.1,0.0 117.5,0.0 122.5,20.9z\"/\u003E\u003Cpath class=\"zone19\" d=\"M22.3,156.2 20.1,154.6 0.0,156.2 0.0,176.0 22.4,176.0z\"/\u003E\u003Cpath class=\"zone11\" d=\"M137.5,154.4 134.4,151.1 128.5,150.4 114.8,161.5 115.8,176.0 136.7,176.0z\"/\u003E\u003Cpath class=\"zone9\" d=\"M23.3,128.4 22.6,109.5 22.2,109.2 0.0,111.0 0.0,130.0 18.8,131.9z\"/\u003E\u003Cpath class=\"zone9\" d=\"M23.5,82.3 21.0,65.0 0.0,63.9 0.0,86.1 18.5,87.0z\"/\u003E\u003Cpath class=\"zone11\" d=\"M160.0,132.4 143.1,132.1 134.4,151.1 137.5,154.4 160.0,155.0z\"/\u003E\u003Cpath class=\"zone20\" d=\"M24.8,60.5 22.9,43.9 0.0,44.9 0.0,63.9 21.0,65.0z\"/\u003E\u003Cpath class=\"zone11\" d=\"M160.0,155.0 137.5,154.4 136.7,176.0 160.0,176.0z\"/\u003E\r\n    \u003C/g\u003E\r\n\u003C/svg\u003E",
+        "pointsOfInterest": [
+          {
+            "id": "MassiveHeatSink",
+            "posX": 279,
+            "posY": 120
+          },
+          {
+            "id": "WarpConduitSender",
+            "posX": 355,
+            "posY": 49
+          },
+          {
+            "id": "WarpConduitReceiver",
+            "posX": 289,
+            "posY": 64
+          },
+          {
+            "id": "WarpReceiver",
+            "posX": 339,
+            "posY": 80
+          },
+          {
+            "id": "WarpPortal",
+            "posX": 317,
+            "posY": 80
+          },
+          {
+            "id": "PropSurfaceSatellite1",
+            "posX": 257,
+            "posY": 108
+          },
+          {
+            "id": "PropSurfaceSatellite2",
+            "posX": 261,
+            "posY": 92
+          },
+          {
+            "id": "PropSurfaceSatellite2",
+            "posX": 384,
+            "posY": 111
+          }
+        ],
+        "geysers": [
+          {
+            "id": "liquid_co2",
+            "posX": 322,
+            "posY": 21,
+            "emitRate": 420.23157,
+            "idleTime": 259.29202,
+            "eruptionTime": 303.18747,
+            "dormancyCycles": 99.71055,
+            "activeCycles": 96.97903
+          },
+          {
+            "id": "liquid_co2",
+            "posX": 383,
+            "posY": 19,
+            "emitRate": 474.49234,
+            "idleTime": 248.87947,
+            "eruptionTime": 430.5791,
+            "dormancyCycles": 49.05356,
+            "activeCycles": 81.44759
+          },
+          {
+            "id": "slush_salt_water",
+            "posX": 309,
+            "posY": 119,
+            "emitRate": 8027.996,
+            "idleTime": 369.28934,
+            "eruptionTime": 170.26578,
+            "dormancyCycles": 38.62808,
+            "activeCycles": 55.20214
+          },
+          {
+            "id": "slush_water",
+            "posX": 347,
+            "posY": 118,
+            "emitRate": 4219.8394,
+            "idleTime": 160.42033,
+            "eruptionTime": 312.16574,
+            "dormancyCycles": 31.656126,
+            "activeCycles": 36.201916
+          },
+          {
+            "id": "steam",
+            "posX": 328,
+            "posY": 100,
+            "emitRate": 8027.996,
+            "idleTime": 369.28934,
+            "eruptionTime": 170.26578,
+            "dormancyCycles": 38.62808,
+            "activeCycles": 55.20214
+          },
+          {
+            "id": "salt_water",
+            "posX": 382,
+            "posY": 30,
+            "emitRate": 7361.8926,
+            "idleTime": 243.06311,
+            "eruptionTime": 409.474,
+            "dormancyCycles": 62.91575,
+            "activeCycles": 77.45839
+          },
+          {
+            "id": "molten_aluminum",
+            "posX": 275,
+            "posY": 33,
+            "emitRate": 11549.973,
+            "idleTime": 651.7622,
+            "eruptionTime": 32.720505,
+            "dormancyCycles": 55.438244,
+            "activeCycles": 70.79268
+          },
+          {
+            "id": "molten_aluminum",
+            "posX": 387,
+            "posY": 39,
+            "emitRate": 7977.904,
+            "idleTime": 782.24097,
+            "eruptionTime": 52.491467,
+            "dormancyCycles": 55.586967,
+            "activeCycles": 83.83736
+          },
+          {
+            "id": "hot_water",
+            "posX": 328,
+            "posY": 40,
+            "emitRate": 12651.318,
+            "idleTime": 436.83643,
+            "eruptionTime": 253.16724,
+            "dormancyCycles": 47.915073,
+            "activeCycles": 64.978455
+          },
+          {
+            "id": "liquid_co2",
+            "posX": 334,
+            "posY": 29,
+            "emitRate": 479.59836,
+            "idleTime": 237.47586,
+            "eruptionTime": 271.3036,
+            "dormancyCycles": 52.35169,
+            "activeCycles": 55.137924
+          },
+          {
+            "id": "hot_co2",
+            "posX": 386,
+            "posY": 49,
+            "emitRate": 234.6134,
+            "idleTime": 172.00197,
+            "eruptionTime": 388.42032,
+            "dormancyCycles": 52.10357,
+            "activeCycles": 81.4228
+          },
+          {
+            "id": "big_volcano",
+            "posX": 378,
+            "posY": 98,
+            "emitRate": 268386.78,
+            "idleTime": 8774.402,
+            "eruptionTime": 67.93241,
+            "dormancyCycles": 55.847942,
+            "activeCycles": 60.820663
+          },
+          {
+            "id": "big_volcano",
+            "posX": 289,
+            "posY": 96,
+            "emitRate": 345451.84,
+            "idleTime": 9422.291,
+            "eruptionTime": 48.060303,
+            "dormancyCycles": 36.950035,
+            "activeCycles": 137.6252
+          }
+        ]
+      },
+      {
+        "id": "TundraMoonlet",
+        "offsetX": 324,
+        "offsetY": 178,
+        "sizeX": 64,
+        "sizeY": 128,
+        "worldTraits": [
+          "SlimeSplats"
+        ],
+        "biomesSVG": "\u003Csvg height=\"256\" width=\"128\" viewBox=\"0 0 64 128\" xmlns=\"http://www.w3.org/2000/svg\"\u003E\r\n    \u003Cstyle\u003Epolygon{stroke-width:0.5}.zone0{fill:#9DC9D6FF;stroke:#9DC9D6FF;}.zone7{fill:#242424FF;stroke:#242424FF;}\u003C/style\u003E\r\n    \u003Cg\u003E\r\n    \u003Cpath class=\"zone0\" d=\"M49.1,39.5 43.5,34.6 34.7,36.5 28.9,47.1 33.2,54.8 46.6,56.1z\"/\u003E\u003Cpath class=\"zone0\" d=\"M27.7,86.5 33.4,74.3 27.0,65.8 18.5,66.0 12.4,74.8 20.1,87.5z\"/\u003E\u003Cpath class=\"zone0\" d=\"M34.7,36.5 22.8,24.6 13.4,35.9 18.0,46.1 28.9,47.1z\"/\u003E\u003Cpath class=\"zone7\" d=\"M64.0,38.0 64.0,20.8 48.0,18.8 46.3,19.9 43.5,34.6 49.1,39.5z\"/\u003E\u003Cpath class=\"zone0\" d=\"M27.0,65.8 33.2,54.8 28.9,47.1 18.0,46.1 11.3,55.1 18.5,66.0z\"/\u003E\u003Cpath class=\"zone0\" d=\"M64.0,76.9 64.0,58.5 48.0,57.7 45.3,73.8 48.9,77.6z\"/\u003E\u003Cpath class=\"zone0\" d=\"M64.0,38.0 49.1,39.5 46.6,56.1 48.0,57.7 64.0,58.5z\"/\u003E\u003Cpath class=\"zone7\" d=\"M43.5,34.6 46.3,19.9 33.2,15.5 22.8,23.0 22.8,24.6 34.7,36.5z\"/\u003E\u003Cpath class=\"zone0\" d=\"M11.3,55.1 18.0,46.1 13.4,35.9 0.0,34.1 0.0,55.1z\"/\u003E\u003Cpath class=\"zone0\" d=\"M15.8,93.2 20.1,87.5 12.4,74.8 0.0,75.5 0.0,93.3z\"/\u003E\u003Cpath class=\"zone7\" d=\"M22.8,24.6 22.8,23.0 15.5,16.4 0.0,18.3 0.0,34.1 13.4,35.9z\"/\u003E\u003Cpath class=\"zone0\" d=\"M45.3,73.8 48.0,57.7 46.6,56.1 33.2,54.8 27.0,65.8 33.4,74.3z\"/\u003E\u003Cpath class=\"zone7\" d=\"M33.2,15.5 32.0,0.0 17.0,0.0 15.5,16.4 22.8,23.0z\"/\u003E\u003Cpath class=\"zone0\" d=\"M64.0,96.2 64.0,76.9 48.9,77.6 46.2,91.3 52.7,97.0z\"/\u003E\u003Cpath class=\"zone0\" d=\"M46.2,91.3 48.9,77.6 45.3,73.8 33.4,74.3 27.7,86.5 35.7,93.7z\"/\u003E\u003Cpath class=\"zone0\" d=\"M47.6,111.6 52.7,97.0 46.2,91.3 35.7,93.7 32.8,107.0 45.4,112.7z\"/\u003E\u003Cpath class=\"zone7\" d=\"M48.0,18.8 49.7,0.0 32.0,0.0 33.2,15.5 46.3,19.9z\"/\u003E\u003Cpath class=\"zone7\" d=\"M64.0,0.0 49.7,0.0 48.0,18.8 64.0,20.8z\"/\u003E\u003Cpath class=\"zone7\" d=\"M15.5,16.4 17.0,0.0 0.0,0.0 0.0,18.3z\"/\u003E\u003Cpath class=\"zone0\" d=\"M32.8,107.0 35.7,93.7 27.7,86.5 20.1,87.5 15.8,93.2 18.9,106.8 28.2,109.2z\"/\u003E\u003Cpath class=\"zone0\" d=\"M12.4,74.8 18.5,66.0 11.3,55.1 0.0,55.1 0.0,75.5z\"/\u003E\u003Cpath class=\"zone0\" d=\"M18.9,106.8 15.8,93.2 0.0,93.3 0.0,109.5 13.2,111.0z\"/\u003E\u003Cpath class=\"zone0\" d=\"M64.0,116.6 47.6,111.6 45.4,112.7 42.8,128.0 64.0,128.0z\"/\u003E\u003Cpath class=\"zone0\" d=\"M28.2,109.2 18.9,106.8 13.2,111.0 14.5,128.0 28.0,128.0z\"/\u003E\u003Cpath class=\"zone0\" d=\"M13.2,111.0 0.0,109.5 0.0,128.0 14.5,128.0z\"/\u003E\u003Cpath class=\"zone0\" d=\"M45.4,112.7 32.8,107.0 28.2,109.2 28.0,128.0 42.8,128.0z\"/\u003E\u003Cpath class=\"zone0\" d=\"M64.0,96.2 52.7,97.0 47.6,111.6 64.0,116.6z\"/\u003E\r\n    \u003C/g\u003E\r\n\u003C/svg\u003E",
+        "pointsOfInterest": [
+          {
+            "id": "TemporalTearOpener",
+            "posX": 343,
+            "posY": 267
+          },
+          {
+            "id": "GravitasPedestal",
+            "posX": 357,
+            "posY": 212
+          }
+        ],
+        "geysers": [
+          {
+            "id": "molten_iron",
+            "posX": 340,
+            "posY": 193,
+            "emitRate": 8609.981,
+            "idleTime": 653.0465,
+            "eruptionTime": 39.449078,
+            "dormancyCycles": 44.76417,
+            "activeCycles": 83.10911
+          },
+          {
+            "id": "molten_iron",
+            "posX": 346,
+            "posY": 248,
+            "emitRate": 11198.626,
+            "idleTime": 602.94366,
+            "eruptionTime": 26.664951,
+            "dormancyCycles": 54.1615,
+            "activeCycles": 75.05502
+          },
+          {
+            "id": "molten_iron",
+            "posX": 375,
+            "posY": 195,
+            "emitRate": 10007.619,
+            "idleTime": 490.24973,
+            "eruptionTime": 27.389563,
+            "dormancyCycles": 48.033394,
+            "activeCycles": 73.00733
+          },
+          {
+            "id": "molten_iron",
+            "posX": 375,
+            "posY": 243,
+            "emitRate": 7622.1187,
+            "idleTime": 616.46014,
+            "eruptionTime": 47.19048,
+            "dormancyCycles": 61.64825,
+            "activeCycles": 76.29429
+          }
+        ]
+      },
+      {
+        "id": "MarshyMoonlet",
+        "offsetX": 324,
+        "offsetY": 308,
+        "sizeX": 64,
+        "sizeY": 96,
+        "worldTraits": [
+          "DistressSignal"
+        ],
+        "biomesSVG": "\u003Csvg height=\"192\" width=\"128\" viewBox=\"0 0 64 96\" xmlns=\"http://www.w3.org/2000/svg\"\u003E\r\n    \u003Cstyle\u003Epolygon{stroke-width:0.5}.zone2{fill:#7B974BFF;stroke:#7B974BFF;}.zone4{fill:#CB95A3FF;stroke:#CB95A3FF;}.zone7{fill:#242424FF;stroke:#242424FF;}.zone5{fill:#DE5A3BFF;stroke:#DE5A3BFF;}\u003C/style\u003E\r\n    \u003Cg\u003E\r\n    \u003Cpath class=\"zone2\" d=\"M34.5,49.9 36.3,36.9 33.5,34.4 18.2,35.8 17.6,51.2 26.3,54.6z\"/\u003E\u003Cpath class=\"zone2\" d=\"M64.0,28.4 51.9,28.0 46.3,36.0 53.4,46.6 64.0,46.6z\"/\u003E\u003Cpath class=\"zone4\" d=\"M64.0,46.6 53.4,46.6 46.0,56.2 47.0,61.9 64.0,65.9z\"/\u003E\u003Cpath class=\"zone7\" d=\"M64.0,7.7 64.0,0.0 39.6,0.0 41.1,14.4 46.5,16.8z\"/\u003E\u003Cpath class=\"zone7\" d=\"M46.3,36.0 51.9,28.0 46.5,16.8 41.1,14.4 33.6,19.3 33.5,34.4 36.3,36.9z\"/\u003E\u003Cpath class=\"zone2\" d=\"M53.4,46.6 46.3,36.0 36.3,36.9 34.5,49.9 46.0,56.2z\"/\u003E\u003Cpath class=\"zone7\" d=\"M64.0,7.7 46.5,16.8 51.9,28.0 64.0,28.4z\"/\u003E\u003Cpath class=\"zone4\" d=\"M47.0,61.9 46.0,56.2 34.5,49.9 26.3,54.6 28.6,65.6 42.3,68.6z\"/\u003E\u003Cpath class=\"zone7\" d=\"M33.5,34.4 33.6,19.3 19.9,15.4 17.9,17.1 16.0,33.6 18.2,35.8z\"/\u003E\u003Cpath class=\"zone4\" d=\"M43.6,77.4 42.3,68.6 28.6,65.6 20.7,75.1 31.8,83.9z\"/\u003E\u003Cpath class=\"zone4\" d=\"M64.0,77.2 64.0,65.9 47.0,61.9 42.3,68.6 43.6,77.4 48.2,80.8z\"/\u003E\u003Cpath class=\"zone5\" d=\"M31.8,83.9 20.7,75.1 16.9,75.6 13.4,96.0 31.1,96.0z\"/\u003E\u003Cpath class=\"zone5\" d=\"M64.0,77.2 48.2,80.8 49.0,96.0 64.0,96.0z\"/\u003E\u003Cpath class=\"zone4\" d=\"M20.7,75.1 28.6,65.6 26.3,54.6 17.6,51.2 12.6,53.8 13.0,73.5 16.9,75.6z\"/\u003E\u003Cpath class=\"zone5\" d=\"M48.2,80.8 43.6,77.4 31.8,83.9 31.1,96.0 49.0,96.0z\"/\u003E\u003Cpath class=\"zone2\" d=\"M17.6,51.2 18.2,35.8 16.0,33.6 0.0,33.9 0.0,52.0 12.6,53.8z\"/\u003E\u003Cpath class=\"zone5\" d=\"M16.9,75.6 13.0,73.5 0.0,74.4 0.0,96.0 13.4,96.0z\"/\u003E\u003Cpath class=\"zone7\" d=\"M16.0,33.6 17.9,17.1 0.0,15.3 0.0,33.9z\"/\u003E\u003Cpath class=\"zone7\" d=\"M41.1,14.4 39.6,0.0 20.6,0.0 19.9,15.4 33.6,19.3z\"/\u003E\u003Cpath class=\"zone7\" d=\"M19.9,15.4 20.6,0.0 0.0,0.0 0.0,15.3 17.9,17.1z\"/\u003E\u003Cpath class=\"zone4\" d=\"M13.0,73.5 12.6,53.8 0.0,52.0 0.0,74.4z\"/\u003E\r\n    \u003C/g\u003E\r\n\u003C/svg\u003E",
+        "pointsOfInterest": [
+          {
+            "id": "GravitasPedestal",
+            "posX": 357,
+            "posY": 358
+          },
+          {
+            "id": "GravitasPedestal",
+            "posX": 343,
+            "posY": 358
+          },
+          {
+            "id": "SapTree",
+            "posX": 350,
+            "posY": 358
+          }
+        ],
+        "geysers": [
+          {
+            "id": "molten_tungsten",
+            "posX": 331,
+            "posY": 315,
+            "emitRate": 8739.018,
+            "idleTime": 696.7096,
+            "eruptionTime": 41.77191,
+            "dormancyCycles": 47.103172,
+            "activeCycles": 89.05992
+          },
+          {
+            "id": "molten_tungsten",
+            "posX": 376,
+            "posY": 313,
+            "emitRate": 9712.213,
+            "idleTime": 848.1053,
+            "eruptionTime": 52.348145,
+            "dormancyCycles": 66.51973,
+            "activeCycles": 85.94696
+          },
+          {
+            "id": "molten_tungsten",
+            "posX": 365,
+            "posY": 313,
+            "emitRate": 6692.88,
+            "idleTime": 764.416,
+            "eruptionTime": 55.83259,
+            "dormancyCycles": 53.609074,
+            "activeCycles": 70.888824
+          },
+          {
+            "id": "hot_po2",
+            "posX": 380,
+            "posY": 345,
+            "emitRate": 339.17868,
+            "idleTime": 271.40463,
+            "eruptionTime": 322.38187,
+            "dormancyCycles": 50.57483,
+            "activeCycles": 76.03504
+          },
+          {
+            "id": "hot_hydrogen",
+            "posX": 330,
+            "posY": 340,
+            "emitRate": 521.51636,
+            "idleTime": 318.39072,
+            "eruptionTime": 224.07266,
+            "dormancyCycles": 55.08278,
+            "activeCycles": 91.35152
+          }
+        ]
+      },
+      {
+        "id": "NiobiumMoonlet",
+        "offsetX": 390,
+        "offsetY": 178,
+        "sizeX": 64,
+        "sizeY": 96,
+        "worldTraits": [],
+        "biomesSVG": "\u003Csvg height=\"192\" width=\"128\" viewBox=\"0 0 64 96\" xmlns=\"http://www.w3.org/2000/svg\"\u003E\r\n    \u003Cstyle\u003Epolygon{stroke-width:0.5}.zone7{fill:#242424FF;stroke:#242424FF;}.zone5{fill:#DE5A3BFF;stroke:#DE5A3BFF;}.zone6{fill:#3F1C05FF;stroke:#3F1C05FF;}\u003C/style\u003E\r\n    \u003Cg\u003E\r\n    \u003Cpath class=\"zone7\" d=\"M64.0,37.9 64.0,21.4 49.2,19.2 43.3,23.1 42.6,34.1 49.2,39.6z\"/\u003E\u003Cpath class=\"zone7\" d=\"M49.2,19.2 48.5,0.0 34.1,0.0 32.8,17.6 43.3,23.1z\"/\u003E\u003Cpath class=\"zone7\" d=\"M64.0,0.0 48.5,0.0 49.2,19.2 64.0,21.4z\"/\u003E\u003Cpath class=\"zone5\" d=\"M46.3,55.8 49.2,39.6 42.6,34.1 31.5,38.8 31.8,56.1 32.2,56.4z\"/\u003E\u003Cpath class=\"zone7\" d=\"M16.6,15.1 17.6,0.0 0.0,0.0 0.0,18.6z\"/\u003E\u003Cpath class=\"zone5\" d=\"M31.8,56.1 31.5,38.8 20.5,33.6 20.1,33.8 13.4,48.3 19.6,56.8z\"/\u003E\u003Cpath class=\"zone5\" d=\"M13.4,48.3 20.1,33.8 0.0,29.3 0.0,48.5z\"/\u003E\u003Cpath class=\"zone5\" d=\"M32.0,75.5 32.2,56.4 31.8,56.1 19.6,56.8 14.5,65.6 21.3,79.5z\"/\u003E\u003Cpath class=\"zone6\" d=\"M46.9,77.4 49.4,58.5 46.3,55.8 32.2,56.4 32.0,75.5 42.5,80.0z\"/\u003E\u003Cpath class=\"zone5\" d=\"M64.0,58.2 64.0,37.9 49.2,39.6 46.3,55.8 49.4,58.5z\"/\u003E\u003Cpath class=\"zone5\" d=\"M21.1,79.8 21.3,79.5 14.5,65.6 0.0,66.1 0.0,83.5z\"/\u003E\u003Cpath class=\"zone7\" d=\"M42.6,34.1 43.3,23.1 32.8,17.6 22.9,21.1 20.5,33.6 31.5,38.8z\"/\u003E\u003Cpath class=\"zone7\" d=\"M20.5,33.6 22.9,21.1 16.6,15.1 0.0,18.6 0.0,29.3 20.1,33.8z\"/\u003E\u003Cpath class=\"zone7\" d=\"M32.8,17.6 34.1,0.0 17.6,0.0 16.6,15.1 22.9,21.1z\"/\u003E\u003Cpath class=\"zone5\" d=\"M21.1,79.8 0.0,83.5 0.0,96.0 23.0,96.0z\"/\u003E\u003Cpath class=\"zone5\" d=\"M42.5,80.0 32.0,75.5 21.3,79.5 21.1,79.8 23.0,96.0 41.7,96.0z\"/\u003E\u003Cpath class=\"zone5\" d=\"M14.5,65.6 19.6,56.8 13.4,48.3 0.0,48.5 0.0,66.1z\"/\u003E\u003Cpath class=\"zone6\" d=\"M64.0,80.6 46.9,77.4 42.5,80.0 41.7,96.0 64.0,96.0z\"/\u003E\u003Cpath class=\"zone6\" d=\"M64.0,58.2 49.4,58.5 46.9,77.4 64.0,80.6z\"/\u003E\r\n    \u003C/g\u003E\r\n\u003C/svg\u003E",
+        "pointsOfInterest": [
+          {
+            "id": "GravitasPedestal",
+            "posX": 441,
+            "posY": 202
+          }
+        ],
+        "geysers": [
+          {
+            "id": "molten_niobium",
+            "posX": 425,
+            "posY": 202,
+            "emitRate": 295570.06,
+            "idleTime": 9423.97,
+            "eruptionTime": 64.52741,
+            "dormancyCycles": 57.494816,
+            "activeCycles": 74.70257
+          }
+        ]
+      },
+      {
+        "id": "MooMoonlet",
+        "offsetX": 404,
+        "offsetY": 0,
+        "sizeX": 96,
+        "sizeY": 80,
+        "worldTraits": [],
+        "biomesSVG": "\u003Csvg height=\"160\" width=\"192\" viewBox=\"0 0 96 80\" xmlns=\"http://www.w3.org/2000/svg\"\u003E\r\n    \u003Cstyle\u003Epolygon{stroke-width:0.5}.zone7{fill:#242424FF;stroke:#242424FF;}.zone17{fill:#8EC039FF;stroke:#8EC039FF;}.zone0{fill:#9DC9D6FF;stroke:#9DC9D6FF;}\u003C/style\u003E\r\n    \u003Cg\u003E\r\n    \u003Cpath class=\"zone7\" d=\"M67.6,28.3 59.1,18.9 50.8,19.6 46.8,37.4 61.1,41.4z\"/\u003E\u003Cpath class=\"zone7\" d=\"M76.7,27.2 81.3,17.7 69.3,1.6 59.1,18.9 67.6,28.3z\"/\u003E\u003Cpath class=\"zone7\" d=\"M84.8,37.6 76.7,27.2 67.6,28.3 61.1,41.4 63.2,45.5 77.1,48.2z\"/\u003E\u003Cpath class=\"zone7\" d=\"M59.1,18.9 69.3,1.6 69.3,0.0 43.8,0.0 44.0,14.5 50.8,19.6z\"/\u003E\u003Cpath class=\"zone7\" d=\"M44.0,14.5 43.8,0.0 22.3,0.0 22.0,14.8 31.9,19.9z\"/\u003E\u003Cpath class=\"zone7\" d=\"M46.8,37.4 50.8,19.6 44.0,14.5 31.9,19.9 32.5,33.6 44.1,38.7z\"/\u003E\u003Cpath class=\"zone7\" d=\"M96.0,14.7 96.0,0.0 69.3,0.0 69.3,1.6 81.3,17.7z\"/\u003E\u003Cpath class=\"zone17\" d=\"M57.2,60.5 63.2,45.5 61.1,41.4 46.8,37.4 44.1,38.7 40.2,55.6 55.6,61.3z\"/\u003E\u003Cpath class=\"zone7\" d=\"M96.0,14.7 81.3,17.7 76.7,27.2 84.8,37.6 96.0,37.6z\"/\u003E\u003Cpath class=\"zone7\" d=\"M32.5,33.6 31.9,19.9 22.0,14.8 16.0,18.7 14.8,35.5 20.8,40.1z\"/\u003E\u003Cpath class=\"zone17\" d=\"M40.2,55.6 44.1,38.7 32.5,33.6 20.8,40.1 21.1,45.1 36.1,57.6z\"/\u003E\u003Cpath class=\"zone17\" d=\"M81.2,58.9 77.1,48.2 63.2,45.5 57.2,60.5 74.1,67.0z\"/\u003E\u003Cpath class=\"zone0\" d=\"M55.6,61.3 40.2,55.6 36.1,57.6 33.7,62.4 38.4,80.0 51.7,80.0z\"/\u003E\u003Cpath class=\"zone7\" d=\"M22.0,14.8 22.3,0.0 0.0,0.0 0.0,15.3 16.0,18.7z\"/\u003E\u003Cpath class=\"zone17\" d=\"M96.0,37.6 84.8,37.6 77.1,48.2 81.2,58.9 96.0,60.7z\"/\u003E\u003Cpath class=\"zone0\" d=\"M33.7,62.4 18.4,66.6 16.0,80.0 38.4,80.0z\"/\u003E\u003Cpath class=\"zone0\" d=\"M74.1,67.0 57.2,60.5 55.6,61.3 51.7,80.0 75.1,80.0z\"/\u003E\u003Cpath class=\"zone17\" d=\"M33.7,62.4 36.1,57.6 21.1,45.1 10.9,57.6 18.4,66.6z\"/\u003E\u003Cpath class=\"zone7\" d=\"M14.8,35.5 16.0,18.7 0.0,15.3 0.0,36.7z\"/\u003E\u003Cpath class=\"zone0\" d=\"M18.4,66.6 10.9,57.6 0.0,57.1 0.0,80.0 16.0,80.0z\"/\u003E\u003Cpath class=\"zone0\" d=\"M96.0,60.7 81.2,58.9 74.1,67.0 75.1,80.0 96.0,80.0z\"/\u003E\u003Cpath class=\"zone17\" d=\"M21.1,45.1 20.8,40.1 14.8,35.5 0.0,36.7 0.0,57.1 10.9,57.6z\"/\u003E\r\n    \u003C/g\u003E\r\n\u003C/svg\u003E",
+        "pointsOfInterest": [
+          {
+            "id": "GravitasPedestal",
+            "posX": 438,
+            "posY": 34
+          },
+          {
+            "id": "GravitasPedestal",
+            "posX": 431,
+            "posY": 34
+          }
+        ],
+        "geysers": [
+          {
+            "id": "chlorine_gas",
+            "posX": 455,
+            "posY": 30,
+            "emitRate": 261.45776,
+            "idleTime": 127.65191,
+            "eruptionTime": 231.43906,
+            "dormancyCycles": 50.744854,
+            "activeCycles": 60.049706
+          }
+        ]
+      },
+      {
+        "id": "WaterMoonlet",
+        "offsetX": 242,
+        "offsetY": 178,
+        "sizeX": 80,
+        "sizeY": 174,
+        "worldTraits": [],
+        "biomesSVG": "\u003Csvg height=\"348\" width=\"160\" viewBox=\"0 0 80 174\" xmlns=\"http://www.w3.org/2000/svg\"\u003E\r\n    \u003Cstyle\u003Epolygon{stroke-width:0.5}.zone16{fill:#F2BB47FF;stroke:#F2BB47FF;}.zone18{fill:#ABCFEAFF;stroke:#ABCFEAFF;}.zone7{fill:#242424FF;stroke:#242424FF;}.zone12{fill:#EB9B3FFF;stroke:#EB9B3FFF;}\u003C/style\u003E\r\n    \u003Cg\u003E\r\n    \u003Cpath class=\"zone16\" d=\"M61.0,84.8 64.0,70.4 58.3,64.2 41.4,74.5 41.5,82.7 43.8,85.2z\"/\u003E\u003Cpath class=\"zone16\" d=\"M80.0,70.0 80.0,48.9 70.2,48.3 58.1,61.9 58.3,64.2 64.0,70.4z\"/\u003E\u003Cpath class=\"zone16\" d=\"M58.3,64.2 58.1,61.9 47.9,52.6 37.8,54.7 34.1,66.2 41.4,74.5z\"/\u003E\u003Cpath class=\"zone16\" d=\"M64.6,89.6 61.0,84.8 43.8,85.2 44.3,100.2 59.9,103.7z\"/\u003E\u003Cpath class=\"zone16\" d=\"M80.0,89.9 64.6,89.6 59.9,103.7 61.6,107.0 80.0,108.6z\"/\u003E\u003Cpath class=\"zone16\" d=\"M80.0,70.0 64.0,70.4 61.0,84.8 64.6,89.6 80.0,89.9z\"/\u003E\u003Cpath class=\"zone16\" d=\"M61.6,107.0 59.9,103.7 44.3,100.2 38.7,105.5 39.8,116.2 57.4,120.6z\"/\u003E\u003Cpath class=\"zone16\" d=\"M39.8,116.2 38.7,105.5 24.4,101.0 19.5,105.4 18.1,118.2 20.6,121.5 34.6,122.8z\"/\u003E\u003Cpath class=\"zone16\" d=\"M41.5,82.7 41.4,74.5 34.1,66.2 21.5,67.9 18.3,73.2 20.7,85.4 23.5,87.9z\"/\u003E\u003Cpath class=\"zone16\" d=\"M44.3,100.2 43.8,85.2 41.5,82.7 23.5,87.9 24.4,101.0 38.7,105.5z\"/\u003E\u003Cpath class=\"zone16\" d=\"M80.0,108.6 61.6,107.0 57.4,120.6 58.5,123.2 80.0,124.8z\"/\u003E\u003Cpath class=\"zone16\" d=\"M56.7,130.7 58.5,123.2 57.4,120.6 39.8,116.2 34.6,122.8 38.8,136.7z\"/\u003E\u003Cpath class=\"zone18\" d=\"M80.0,137.1 80.0,124.8 58.5,123.2 56.7,130.7 62.6,142.1z\"/\u003E\u003Cpath class=\"zone16\" d=\"M70.2,48.3 61.2,38.1 51.8,39.0 47.9,52.6 58.1,61.9z\"/\u003E\u003Cpath class=\"zone7\" d=\"M80.0,24.9 68.1,24.6 61.2,38.1 70.2,48.3 80.0,48.9z\"/\u003E\u003Cpath class=\"zone7\" d=\"M61.2,38.1 68.1,24.6 63.4,19.3 52.0,17.4 47.5,20.4 46.4,34.0 51.8,39.0z\"/\u003E\u003Cpath class=\"zone7\" d=\"M80.0,0.0 69.6,0.0 63.4,19.3 68.1,24.6 80.0,24.9z\"/\u003E\u003Cpath class=\"zone16\" d=\"M47.9,52.6 51.8,39.0 46.4,34.0 33.6,36.4 30.5,46.8 37.8,54.7z\"/\u003E\u003Cpath class=\"zone12\" d=\"M80.0,137.1 62.6,142.1 62.3,142.9 68.2,156.6 80.0,158.4z\"/\u003E\u003Cpath class=\"zone18\" d=\"M62.3,142.9 62.6,142.1 56.7,130.7 38.8,136.7 38.7,136.9 47.8,151.5z\"/\u003E\u003Cpath class=\"zone7\" d=\"M52.0,17.4 50.8,0.0 36.6,0.0 34.4,15.8 47.5,20.4z\"/\u003E\u003Cpath class=\"zone7\" d=\"M46.4,34.0 47.5,20.4 34.4,15.8 31.7,17.4 27.9,29.5 33.6,36.4z\"/\u003E\u003Cpath class=\"zone16\" d=\"M24.4,101.0 23.5,87.9 20.7,85.4 0.0,91.4 0.0,99.6 19.5,105.4z\"/\u003E\u003Cpath class=\"zone16\" d=\"M21.5,67.9 16.0,55.3 0.0,56.9 0.0,72.2 18.3,73.2z\"/\u003E\u003Cpath class=\"zone16\" d=\"M34.1,66.2 37.8,54.7 30.5,46.8 19.2,49.1 16.0,55.3 21.5,67.9z\"/\u003E\u003Cpath class=\"zone16\" d=\"M20.6,121.5 18.1,118.2 0.0,118.9 0.0,134.6 16.1,136.7z\"/\u003E\u003Cpath class=\"zone18\" d=\"M38.7,136.9 38.8,136.7 34.6,122.8 20.6,121.5 16.1,136.7 17.5,138.8 28.4,142.6z\"/\u003E\u003Cpath class=\"zone12\" d=\"M47.1,154.7 47.8,151.5 38.7,136.9 28.4,142.6 29.0,156.0 38.2,160.6z\"/\u003E\u003Cpath class=\"zone16\" d=\"M30.5,46.8 33.6,36.4 27.9,29.5 17.0,30.5 12.4,37.5 19.2,49.1z\"/\u003E\u003Cpath class=\"zone7\" d=\"M27.9,29.5 31.7,17.4 18.1,11.8 11.3,18.7 17.0,30.5z\"/\u003E\u003Cpath class=\"zone7\" d=\"M69.6,0.0 50.8,0.0 52.0,17.4 63.4,19.3z\"/\u003E\u003Cpath class=\"zone16\" d=\"M38.2,160.6 29.0,156.0 19.0,160.9 18.1,174.0 38.3,174.0z\"/\u003E\u003Cpath class=\"zone16\" d=\"M19.0,160.9 10.9,154.5 0.0,155.4 0.0,174.0 18.1,174.0z\"/\u003E\u003Cpath class=\"zone12\" d=\"M29.0,156.0 28.4,142.6 17.5,138.8 10.9,154.5 19.0,160.9z\"/\u003E\u003Cpath class=\"zone16\" d=\"M59.1,165.2 47.1,154.7 38.2,160.6 38.3,174.0 59.0,174.0z\"/\u003E\u003Cpath class=\"zone16\" d=\"M16.0,55.3 19.2,49.1 12.4,37.5 0.0,38.2 0.0,56.9z\"/\u003E\u003Cpath class=\"zone7\" d=\"M12.4,37.5 17.0,30.5 11.3,18.7 0.0,17.9 0.0,38.2z\"/\u003E\u003Cpath class=\"zone16\" d=\"M18.1,118.2 19.5,105.4 0.0,99.6 0.0,118.9z\"/\u003E\u003Cpath class=\"zone12\" d=\"M68.2,156.6 62.3,142.9 47.8,151.5 47.1,154.7 59.1,165.2z\"/\u003E\u003Cpath class=\"zone12\" d=\"M10.9,154.5 17.5,138.8 16.1,136.7 0.0,134.6 0.0,155.4z\"/\u003E\u003Cpath class=\"zone7\" d=\"M34.4,15.8 36.6,0.0 17.2,0.0 18.1,11.8 31.7,17.4z\"/\u003E\u003Cpath class=\"zone16\" d=\"M80.0,158.4 68.2,156.6 59.1,165.2 59.0,174.0 80.0,174.0z\"/\u003E\u003Cpath class=\"zone7\" d=\"M18.1,11.8 17.2,0.0 0.0,0.0 0.0,17.9 11.3,18.7z\"/\u003E\u003Cpath class=\"zone16\" d=\"M20.7,85.4 18.3,73.2 0.0,72.2 0.0,91.4z\"/\u003E\r\n    \u003C/g\u003E\r\n\u003C/svg\u003E",
+        "pointsOfInterest": [
+          {
+            "id": "GravitasPedestal",
+            "posX": 268,
+            "posY": 197
+          },
+          {
+            "id": "GravitasPedestal",
+            "posX": 270,
+            "posY": 197
+          }
+        ],
+        "geysers": [
+          {
+            "id": "filthy_water",
+            "posX": 269,
+            "posY": 274,
+            "emitRate": 10653.009,
+            "idleTime": 197.70016,
+            "eruptionTime": 185.55966,
+            "dormancyCycles": 58.074036,
+            "activeCycles": 79.24112
+          },
+          {
+            "id": "slush_water",
+            "posX": 258,
+            "posY": 244,
+            "emitRate": 3976.721,
+            "idleTime": 141.0917,
+            "eruptionTime": 198.59775,
+            "dormancyCycles": 58.215965,
+            "activeCycles": 108.50422
+          }
+        ]
+      },
+      {
+        "id": "MiniRegolithMoonlet",
+        "offsetX": 390,
+        "offsetY": 276,
+        "sizeX": 96,
+        "sizeY": 96,
+        "worldTraits": [],
+        "biomesSVG": "\u003Csvg height=\"192\" width=\"192\" viewBox=\"0 0 96 96\" xmlns=\"http://www.w3.org/2000/svg\"\u003E\r\n    \u003Cstyle\u003Epolygon{stroke-width:0.5}.zone7{fill:#242424FF;stroke:#242424FF;}.zone3{fill:#F2BB47FF;stroke:#F2BB47FF;}.zone16{fill:#F2BB47FF;stroke:#F2BB47FF;}.zone0{fill:#9DC9D6FF;stroke:#9DC9D6FF;}\u003C/style\u003E\r\n    \u003Cg\u003E\r\n    \u003Cpath class=\"zone7\" d=\"M96.0,0.0 77.6,0.0 77.9,14.9 96.0,16.9z\"/\u003E\u003Cpath class=\"zone7\" d=\"M74.2,26.4 74.1,19.1 59.0,13.5 52.1,19.8 53.3,29.8 61.5,34.6z\"/\u003E\u003Cpath class=\"zone7\" d=\"M96.0,30.3 96.0,16.9 77.9,14.9 74.1,19.1 74.2,26.4 81.2,32.9z\"/\u003E\u003Cpath class=\"zone7\" d=\"M77.9,14.9 77.6,0.0 58.6,0.0 59.0,13.5 74.1,19.1z\"/\u003E\u003Cpath class=\"zone7\" d=\"M53.3,29.8 52.1,19.8 39.1,15.0 34.2,18.5 32.8,32.0 40.4,38.6z\"/\u003E\u003Cpath class=\"zone7\" d=\"M78.6,48.3 81.2,32.9 74.2,26.4 61.5,34.6 63.1,44.1 78.5,48.4z\"/\u003E\u003Cpath class=\"zone7\" d=\"M63.1,44.1 61.5,34.6 53.3,29.8 40.4,38.6 40.7,42.9 55.2,53.1z\"/\u003E\u003Cpath class=\"zone7\" d=\"M96.0,30.3 81.2,32.9 78.6,48.3 96.0,50.1z\"/\u003E\u003Cpath class=\"zone3\" d=\"M63.2,76.4 67.1,64.2 55.3,55.1 47.0,64.5 53.2,78.7z\"/\u003E\u003Cpath class=\"zone7\" d=\"M40.7,42.9 40.4,38.6 32.8,32.0 19.6,35.1 16.6,40.6 21.7,52.4 31.6,53.6z\"/\u003E\u003Cpath class=\"zone3\" d=\"M55.3,55.1 55.2,53.1 40.7,42.9 31.6,53.6 37.1,64.0 47.0,64.5z\"/\u003E\u003Cpath class=\"zone16\" d=\"M76.0,61.4 78.5,48.4 63.1,44.1 55.2,53.1 55.3,55.1 67.1,64.2z\"/\u003E\u003Cpath class=\"zone16\" d=\"M96.0,64.8 96.0,50.1 78.6,48.3 78.5,48.4 76.0,61.4 82.2,67.0z\"/\u003E\u003Cpath class=\"zone7\" d=\"M59.0,13.5 58.6,0.0 39.7,0.0 39.1,15.0 52.1,19.8z\"/\u003E\u003Cpath class=\"zone16\" d=\"M96.0,64.8 82.2,67.0 80.0,80.0 96.0,86.5z\"/\u003E\u003Cpath class=\"zone7\" d=\"M32.8,32.0 34.2,18.5 19.8,13.8 13.2,20.8 19.6,35.1z\"/\u003E\u003Cpath class=\"zone7\" d=\"M21.7,52.4 16.6,40.6 0.0,41.7 0.0,59.6 15.5,60.3z\"/\u003E\u003Cpath class=\"zone7\" d=\"M16.6,40.6 19.6,35.1 13.2,20.8 0.0,20.4 0.0,41.7z\"/\u003E\u003Cpath class=\"zone7\" d=\"M39.1,15.0 39.7,0.0 18.4,0.0 19.8,13.8 34.2,18.5z\"/\u003E\u003Cpath class=\"zone16\" d=\"M37.1,64.0 31.6,53.6 21.7,52.4 15.5,60.3 20.1,74.1 30.3,74.7z\"/\u003E\u003Cpath class=\"zone3\" d=\"M51.6,81.0 53.2,78.7 47.0,64.5 37.1,64.0 30.3,74.7 34.8,81.5z\"/\u003E\u003Cpath class=\"zone16\" d=\"M80.0,80.0 82.2,67.0 76.0,61.4 67.1,64.2 63.2,76.4 73.1,84.1z\"/\u003E\u003Cpath class=\"zone0\" d=\"M34.8,81.5 30.3,74.7 20.1,74.1 15.6,78.7 18.1,96.0 31.5,96.0z\"/\u003E\u003Cpath class=\"zone16\" d=\"M20.1,74.1 15.5,60.3 0.0,59.6 0.0,78.2 15.6,78.7z\"/\u003E\u003Cpath class=\"zone0\" d=\"M51.6,81.0 34.8,81.5 31.5,96.0 53.2,96.0z\"/\u003E\u003Cpath class=\"zone7\" d=\"M19.8,13.8 18.4,0.0 0.0,0.0 0.0,20.4 13.2,20.8z\"/\u003E\u003Cpath class=\"zone0\" d=\"M15.6,78.7 0.0,78.2 0.0,96.0 18.1,96.0z\"/\u003E\u003Cpath class=\"zone0\" d=\"M73.1,84.1 63.2,76.4 53.2,78.7 51.6,81.0 53.2,96.0 71.8,96.0z\"/\u003E\u003Cpath class=\"zone0\" d=\"M96.0,86.5 80.0,80.0 73.1,84.1 71.8,96.0 96.0,96.0z\"/\u003E\r\n    \u003C/g\u003E\r\n\u003C/svg\u003E",
+        "pointsOfInterest": [
+          {
+            "id": "GravitasPedestal",
+            "posX": 402,
+            "posY": 296
+          },
+          {
+            "id": "GravitasPedestal",
+            "posX": 406,
+            "posY": 296
+          },
+          {
+            "id": "GeneShuffler",
+            "posX": 404,
+            "posY": 302
+          }
+        ],
+        "geysers": [
+          {
+            "id": "hot_steam",
+            "posX": 449,
+            "posY": 289,
+            "emitRate": 2197.0632,
+            "idleTime": 224.62909,
+            "eruptionTime": 298.30127,
+            "dormancyCycles": 46.254272,
+            "activeCycles": 64.62418
+          },
+          {
+            "id": "hot_steam",
+            "posX": 433,
+            "posY": 287,
+            "emitRate": 2826.0024,
+            "idleTime": 146.09198,
+            "eruptionTime": 93.79473,
+            "dormancyCycles": 53.374924,
+            "activeCycles": 68.7679
+          }
+        ]
+      }
+    ],
+    "starMapEntriesVanilla": null,
+    "starMapEntriesSpacedOut": [
+      {
+        "id": "VanillaVolcanic",
+        "q": 0,
+        "r": 0
+      },
+      {
+        "id": "MediumRadioactiveVanillaWarpPlanet",
+        "q": 3,
+        "r": -3
+      },
+      {
+        "id": "TundraMoonlet",
+        "q": -4,
+        "r": -1
+      },
+      {
+        "id": "MarshyMoonlet",
+        "q": 2,
+        "r": 3
+      },
+      {
+        "id": "NiobiumMoonlet",
+        "q": -5,
+        "r": 4
+      },
+      {
+        "id": "MooMoonlet",
+        "q": 1,
+        "r": -7
+      },
+      {
+        "id": "WaterMoonlet",
+        "q": 7,
+        "r": -1
+      },
+      {
+        "id": "MiniRegolithMoonlet",
+        "q": 7,
+        "r": -8
+      },
+      {
+        "id": "TemporalTear",
+        "q": -1,
+        "r": -8
+      },
+      {
+        "id": "HarvestableSpacePOI_SandyOreField",
+        "q": -1,
+        "r": -2
+      },
+      {
+        "id": "HarvestableSpacePOI_OrganicMassField",
+        "q": -3,
+        "r": 7
+      },
+      {
+        "id": "HarvestableSpacePOI_OilyAsteroidField",
+        "q": 0,
+        "r": 8
+      },
+      {
+        "id": "HarvestableSpacePOI_HeliumCloud",
+        "q": 9,
+        "r": -11
+      },
+      {
+        "id": "HarvestableSpacePOI_FrozenOreField",
+        "q": 3,
+        "r": -10
+      },
+      {
+        "id": "HarvestableSpacePOI_GildedAsteroidField",
+        "q": 4,
+        "r": -11
+      },
+      {
+        "id": "HarvestableSpacePOI_GlimmeringAsteroidField",
+        "q": 11,
+        "r": -8
+      },
+      {
+        "id": "HarvestableSpacePOI_RadioactiveGasCloud",
+        "q": -10,
+        "r": 7
+      },
+      {
+        "id": "HarvestableSpacePOI_RadioactiveAsteroidField",
+        "q": -9,
+        "r": 10
+      },
+      {
+        "id": "HarvestableSpacePOI_SwampyOreField",
+        "q": 4,
+        "r": -7
+      },
+      {
+        "id": "HarvestableSpacePOI_ForestyOreField",
+        "q": 6,
+        "r": -3
+      },
+      {
+        "id": "HarvestableSpacePOI_RockyAsteroidField",
+        "q": 5,
+        "r": 2
+      },
+      {
+        "id": "HarvestableSpacePOI_RockyAsteroidField",
+        "q": -3,
+        "r": -4
+      },
+      {
+        "id": "HarvestableSpacePOI_InterstellarIceField",
+        "q": -7,
+        "r": 3
+      },
+      {
+        "id": "HarvestableSpacePOI_OxidizedAsteroidField",
+        "q": 6,
+        "r": 5
+      },
+      {
+        "id": "HarvestableSpacePOI_GlimmeringAsteroidField",
+        "q": 6,
+        "r": 4
+      },
+      {
+        "id": "HarvestableSpacePOI_RadioactiveAsteroidField",
+        "q": 7,
+        "r": 3
+      },
+      {
+        "id": "HarvestableSpacePOI_OxidizedAsteroidField",
+        "q": 5,
+        "r": 6
+      },
+      {
+        "id": "HarvestableSpacePOI_OilyAsteroidField",
+        "q": -10,
+        "r": 1
+      },
+      {
+        "id": "HarvestableSpacePOI_GildedAsteroidField",
+        "q": -9,
+        "r": 0
+      },
+      {
+        "id": "HarvestableSpacePOI_SatelliteField",
+        "q": 10,
+        "r": -4
+      },
+      {
+        "id": "HarvestableSpacePOI_GlimmeringAsteroidField",
+        "q": 11,
+        "r": 0
+      },
+      {
+        "id": "HarvestableSpacePOI_OilyAsteroidField",
+        "q": 10,
+        "r": 0
+      },
+      {
+        "id": "HarvestableSpacePOI_HeliumCloud",
+        "q": -4,
+        "r": 11
+      },
+      {
+        "id": "ArtifactSpacePOI_GravitasSpaceStation1",
+        "q": -1,
+        "r": 3
+      },
+      {
+        "id": "ArtifactSpacePOI_RussellsTeapot",
+        "q": -6,
+        "r": -5
+      },
+      {
+        "id": "HarvestableSpacePOI_DLC2CeresField",
+        "q": 8,
+        "r": 1
+      }
+    ]
+  },
   {
     "coordinate": "SNDST-C-971302415-0-0-0",
     "cluster": "SNDST-C",
