@@ -72,7 +72,6 @@ import ui.theme.defaultPadding
 import ui.theme.defaultRoundedCornerShape
 import ui.theme.doubleSpacing
 import ui.theme.halfPadding
-import ui.theme.halfSpacing
 import kotlin.math.max
 
 @Composable
@@ -103,9 +102,7 @@ fun FilterPanel() {
 
             val spacedOutDlcSelected = remember { mutableStateOf(false) }
 
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
+            Column {
 
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
@@ -333,34 +330,12 @@ private fun ClusterSelection(
 }
 
 @Composable
-private fun RuleEditor() {
-
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.defaultPadding()
-    ) {
-
-        FilterPanelEntry()
-
-        AddRuleButton(
-            text = "OR",
-            onClick = { println("add OR rule") }
-        )
-    }
-}
-
-@Composable
 private fun ControlsRow() {
 
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier.defaultPadding()
     ) {
-
-        AddRuleButton(
-            text = "AND",
-            onClick = { println("add rule") }
-        )
 
         FillSpacer()
 
@@ -372,71 +347,6 @@ private fun ControlsRow() {
 
         SearchButton(
             onClick = { println("Search") }
-        )
-    }
-}
-
-@Composable
-private fun HorizontalSeparator() {
-
-    Box(
-        modifier = Modifier
-            .defaultPadding()
-            .background(MaterialTheme.colorScheme.background)
-            .fillMaxWidth()
-            .height(2.dp)
-    )
-}
-
-@Composable
-private fun AddRuleButton(
-    text: String,
-    onClick: () -> Unit
-) {
-
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(halfSpacing, Alignment.CenterHorizontally),
-        modifier = Modifier
-            .border(
-                1.dp,
-                MaterialTheme.colorScheme.onBackground,
-                defaultRoundedCornerShape
-            )
-            .size(120.dp, 48.dp)
-            .clickable { onClick() }
-    ) {
-
-        Text(
-            text = "ADD",
-            style = MaterialTheme.typography.bodyLarge,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colorScheme.onBackground
-        )
-
-        Box(
-            modifier = Modifier
-                .padding()
-                .background(
-                    ctaColor,
-                    defaultRoundedCornerShape
-                )
-        ) {
-
-            Text(
-                text = text,
-                style = MaterialTheme.typography.bodyLarge,
-                fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.onBackground,
-                modifier = Modifier.padding(halfSpacing)
-            )
-        }
-
-        Text(
-            text = "RULE",
-            style = MaterialTheme.typography.bodyLarge,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colorScheme.onBackground
         )
     }
 }

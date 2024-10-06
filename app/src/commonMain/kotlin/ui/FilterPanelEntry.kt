@@ -25,8 +25,12 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -37,56 +41,82 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
-import ui.theme.defaultPadding
+import ui.theme.DefaultSpacer
 import ui.theme.defaultRoundedCornerShape
 
 @Composable
 fun FilterPanelEntry(
 ) {
 
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier
-            .defaultPadding()
-            .height(48.dp)
-            .border(1.dp, Color.White, defaultRoundedCornerShape)
-    ) {
+    Row {
 
-        Text(
-            text = "Cluster",
-            style = MaterialTheme.typography.headlineSmall,
-            color = MaterialTheme.colorScheme.onBackground
-        )
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier
+                .height(48.dp)
+                .border(1.dp, Color.White, defaultRoundedCornerShape)
+        ) {
 
-        VerticalSeparator()
+            Text(
+                text = "Cluster",
+                style = MaterialTheme.typography.headlineSmall,
+                color = MaterialTheme.colorScheme.onBackground
+            )
 
-        Text(
-            text = "Geyser",
-            style = MaterialTheme.typography.headlineSmall,
-            color = MaterialTheme.colorScheme.onBackground
-        )
+            VerticalSeparator()
 
-        VerticalSeparator()
+            Text(
+                text = "Geyser",
+                style = MaterialTheme.typography.headlineSmall,
+                color = MaterialTheme.colorScheme.onBackground
+            )
 
-        Text(
-            text = "at least",
-            style = MaterialTheme.typography.headlineSmall,
-            color = MaterialTheme.colorScheme.onBackground
-        )
+            VerticalSeparator()
 
-        VerticalSeparator()
+            Text(
+                text = "at least",
+                style = MaterialTheme.typography.headlineSmall,
+                color = MaterialTheme.colorScheme.onBackground
+            )
 
-        val textFieldValue = remember {
-            mutableStateOf(TextFieldValue(text = ""))
+            VerticalSeparator()
+
+            val textFieldValue = remember {
+                mutableStateOf(TextFieldValue(text = ""))
+            }
+
+            BasicTextField(
+                value = textFieldValue.value,
+                onValueChange = {
+                    textFieldValue.value = it
+                }
+            )
         }
 
-        BasicTextField(
-            value = textFieldValue.value,
-            onValueChange = {
-                textFieldValue.value = it
-            }
-        )
+        DefaultSpacer()
 
+        val deleteButtonHovered = remember { mutableStateOf(false) }
+
+        Box(
+            contentAlignment = Alignment.Center,
+            modifier = Modifier
+                .size(48.dp)
+                .onHover(deleteButtonHovered)
+                .noRippleClickable {
+                    println("Delete")
+                }
+        ) {
+
+            Icon(
+                imageVector = Icons.Default.Delete,
+                contentDescription = null,
+                tint = if (deleteButtonHovered.value)
+                    Color.Red
+                else
+                    MaterialTheme.colorScheme.onBackground,
+                modifier = Modifier.size(32.dp)
+            )
+        }
     }
 }
 
