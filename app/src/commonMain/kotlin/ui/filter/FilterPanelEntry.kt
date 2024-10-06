@@ -30,6 +30,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -39,7 +40,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import ui.noRippleClickable
 import ui.onHover
@@ -60,39 +63,96 @@ fun FilterPanelEntry(
                 .border(1.dp, Color.White, defaultRoundedCornerShape)
         ) {
 
-            Text(
-                text = "Cluster",
-                style = MaterialTheme.typography.headlineSmall,
-                color = MaterialTheme.colorScheme.onBackground
+            DefaultSpacer()
+
+            Box(
+                contentAlignment = Alignment.Center,
+                modifier = Modifier.width(40.dp)
+            ) {
+
+                Text(
+                    text = "SUM",
+                    style = MaterialTheme.typography.headlineSmall,
+                    color = MaterialTheme.colorScheme.onBackground
+                )
+            }
+
+            Icon(
+                imageVector = Icons.Default.KeyboardArrowDown,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.onBackground,
+                modifier = Modifier.size(24.dp)
             )
 
             VerticalSeparator()
 
-            Text(
-                text = "Geyser",
-                style = MaterialTheme.typography.headlineSmall,
-                color = MaterialTheme.colorScheme.onBackground
+            DefaultSpacer()
+
+            Box(
+                modifier = Modifier.width(200.dp)
+            ) {
+
+                Text(
+                    text = "Output: Water geyser",
+                    style = MaterialTheme.typography.headlineSmall,
+                    color = MaterialTheme.colorScheme.onBackground,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
+                )
+            }
+
+            Icon(
+                imageVector = Icons.Default.KeyboardArrowDown,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.onBackground,
+                modifier = Modifier.size(24.dp)
             )
 
             VerticalSeparator()
 
-            Text(
-                text = "at least",
-                style = MaterialTheme.typography.headlineSmall,
-                color = MaterialTheme.colorScheme.onBackground
+            DefaultSpacer()
+
+            Box(
+                modifier = Modifier.width(70.dp)
+            ) {
+
+                Text(
+                    text = "at least",
+                    style = MaterialTheme.typography.headlineSmall,
+                    color = MaterialTheme.colorScheme.onBackground
+                )
+            }
+
+            Icon(
+                imageVector = Icons.Default.KeyboardArrowDown,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.onBackground,
+                modifier = Modifier.size(24.dp)
             )
 
             VerticalSeparator()
+
+            DefaultSpacer()
 
             val textFieldValue = remember {
-                mutableStateOf(TextFieldValue(text = ""))
+                mutableStateOf(TextFieldValue(text = "0"))
             }
 
             BasicTextField(
                 value = textFieldValue.value,
                 onValueChange = {
-                    textFieldValue.value = it
-                }
+
+                    if (it.text.all(Char::isDigit))
+                        textFieldValue.value = it
+                },
+                cursorBrush = SolidColor(MaterialTheme.colorScheme.onBackground),
+                singleLine = true,
+                textStyle = MaterialTheme.typography.headlineSmall.copy(
+                    color = MaterialTheme.colorScheme.onBackground
+                ),
+                modifier = Modifier
+                    .background(MaterialTheme.colorScheme.surface)
+                    .width(60.dp)
             )
         }
 
