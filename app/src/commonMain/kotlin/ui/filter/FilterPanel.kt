@@ -110,7 +110,9 @@ fun FilterPanel() {
 
                     DefaultSpacer()
 
-                    RuleEditor()
+                    RuleEditor(
+                        filterQueryState = filterQueryState
+                    )
                 }
 
                 HorizontalSeparator()

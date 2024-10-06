@@ -26,12 +26,14 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
@@ -41,6 +43,8 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import model.filter.FilterQuery
+import model.filter.FilterRule
 import ui.HorizontalSeparator
 import ui.theme.FillSpacer
 import ui.theme.ctaColor
@@ -50,35 +54,61 @@ import ui.theme.defaultSpacing
 import ui.theme.halfSpacing
 
 @Composable
-fun RuleEditor() {
+fun RuleEditor(
+    filterQueryState: MutableState<FilterQuery>
+) {
+
+    val query = filterQueryState.value
+
+    if (query.cluster == null) {
+
+        Text(
+            text = "Please select an cluster to define rules.",
+            style = MaterialTheme.typography.headlineSmall,
+            color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.7F),
+            textAlign = TextAlign.Center,
+            modifier = Modifier.height(48.dp)
+        )
+
+        return
+    }
 
     Column {
 
-        RuleEditorRow(null) {
+        for (andRule in query.andRules) {
 
-            FilterPanelEntry()
+            RuleEditorRow(null) {
+
+                FilterPanelEntry()
+            }
+
+            RuleEditorRow("OR") {
+
+                FilterPanelEntry()
+            }
+
+            RuleEditorRow(null) {
+
+                AddRuleButton(
+                    text = "OR",
+                    onClick = { println("add OR rule") }
+                )
+            }
+
+            HorizontalSeparator(Modifier.padding(horizontal = defaultSpacing))
+
         }
-
-        RuleEditorRow("OR") {
-
-            FilterPanelEntry()
-        }
-
-        RuleEditorRow(null) {
-
-            AddRuleButton(
-                text = "OR",
-                onClick = { println("add OR rule") }
-            )
-        }
-
-        HorizontalSeparator(Modifier.padding(horizontal = defaultSpacing))
 
         RuleEditorRow(null) {
 
             AddRuleButton(
                 text = "AND",
-                onClick = { println("add AND rule") }
+                onClick = {
+
+                    filterQueryState.value = query.copy(
+                        andRules = query.andRules + FilterRule.EMPTY
+                    )
+                }
             )
         }
     }

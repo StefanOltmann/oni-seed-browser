@@ -38,4 +38,18 @@ data class FilterRule(
 
     /* OR-connected rules (only to be set for the root rules) */
     val orRules: List<FilterRule>
-)
+
+) {
+
+    companion object {
+
+        val EMPTY = FilterRule(
+            asteroidId = null,
+            geyserCount = null,
+            geyserOutput = null,
+            worldTrait = null,
+            spaceDestinationCount = null,
+            orRules = emptyList()
+        )
+    }
+}
