@@ -20,6 +20,7 @@
 package model.filter
 
 import kotlinx.serialization.Serializable
+import model.AsteroidType
 import model.Cluster
 import model.Dlc
 import model.filter.FilterRule.Companion.EMPTY
@@ -42,6 +43,38 @@ data class FilterQuery(
     val rules: List<List<FilterRule>>
 
 ) {
+
+    fun setAsteroid(rule: FilterRule, asteroidType: AsteroidType?): FilterQuery {
+
+        val newRules = mutableListOf<List<FilterRule>>()
+
+        for (rules in rules) {
+
+            val copy = mutableListOf<FilterRule>()
+
+            for (orRule in rules) {
+
+                if (rule == orRule) {
+
+                    val modifiedRule = rule.copy(
+                        asteroid = asteroidType
+                    )
+
+                    copy.add(modifiedRule)
+
+                } else {
+
+                    copy.add(orRule)
+                }
+            }
+
+            newRules.add(copy)
+        }
+
+        return copy(
+            rules = newRules
+        )
+    }
 
     fun addEmptyAndRule(): FilterQuery {
 

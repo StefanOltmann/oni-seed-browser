@@ -224,6 +224,12 @@ private fun OverlayContent(
                         text = asteroidType.displayName,
                         onClick = {
 
+                            /* Update the query */
+                            filterQueryState.value = filterQueryState.value.setAsteroid(
+                                rule = filterSelectionValue.rule,
+                                asteroidType = asteroidType
+                            )
+
                             /* Close pop-up */
                             filterSelection.value = null
                         }
