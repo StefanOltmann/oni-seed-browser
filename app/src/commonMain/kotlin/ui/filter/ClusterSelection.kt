@@ -47,6 +47,7 @@ import ui.grayScaleFilter
 import ui.noRippleClickable
 import ui.onHover
 import ui.theme.halfPadding
+import ui.theme.hoverColor
 import kotlin.math.max
 
 @OptIn(ExperimentalLayoutApi::class)
@@ -120,7 +121,10 @@ fun ClusterSelection(
                 Text(
                     text = cluster.displayName,
                     style = MaterialTheme.typography.bodyLarge,
-                    color = MaterialTheme.colorScheme.onBackground,
+                    color = if (clusterHovered.value)
+                        hoverColor
+                    else
+                        MaterialTheme.colorScheme.onBackground,
                     fontWeight = if (isSelected) FontWeight.Bold else null,
                     textAlign = TextAlign.Center,
                     overflow = TextOverflow.Ellipsis,

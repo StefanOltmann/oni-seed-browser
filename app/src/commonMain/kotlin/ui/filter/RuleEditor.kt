@@ -43,7 +43,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import model.filter.FilterQuery
-import model.filter.FilterRule
 import ui.HorizontalSeparator
 import ui.noRippleClickable
 import ui.onHover
@@ -56,7 +55,7 @@ import ui.theme.hoverColor
 @Composable
 fun RuleEditor(
     filterQueryState: MutableState<FilterQuery>,
-    dropDownFilterRule: MutableState<FilterRule?>
+    filterSelection: MutableState<FilterSelection?>
 ) {
 
     val query = filterQueryState.value
@@ -91,13 +90,25 @@ fun RuleEditor(
 
                     FilterPanelEntry(
                         onAsteroidFilterClicked = {
-                            dropDownFilterRule.value = rule
+
+                            filterSelection.value = FilterSelection(
+                                rule,
+                                FilterSelectionType.ASTEROID
+                            )
                         },
                         onItemFilterClicked = {
-                            dropDownFilterRule.value = rule
+
+                            filterSelection.value = FilterSelection(
+                                rule,
+                                FilterSelectionType.ITEM
+                            )
                         },
                         onConditionFilterClicked = {
-                            dropDownFilterRule.value = rule
+
+                            filterSelection.value = FilterSelection(
+                                rule,
+                                FilterSelectionType.CONDITION
+                            )
                         },
                         onDeleteClicked = {
                             filterQueryState.value = query.removeRule(rulesIndex, ruleIndex)

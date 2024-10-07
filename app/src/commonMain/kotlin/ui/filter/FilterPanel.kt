@@ -56,6 +56,17 @@ import ui.theme.defaultPadding
 import ui.theme.defaultRoundedCornerShape
 import ui.theme.doubleSpacing
 
+enum class FilterSelectionType {
+    ASTEROID,
+    ITEM,
+    CONDITION
+}
+
+data class FilterSelection(
+    val rule: FilterRule,
+    val type: FilterSelectionType
+)
+
 @Composable
 fun FilterPanel() {
 
@@ -63,7 +74,7 @@ fun FilterPanel() {
 
     val filterPanelOpen = remember { mutableStateOf(false) }
 
-    val dropDownFilterRule = remember { mutableStateOf<FilterRule?>(null) }
+    val filterSelection = remember { mutableStateOf<FilterSelection?>(null) }
 
     val maxSizeModifier = if (filterPanelOpen.value)
         Modifier.fillMaxSize()
@@ -90,7 +101,7 @@ fun FilterPanel() {
 
                 Column(
                     modifier = Modifier.alpha(
-                        if (dropDownFilterRule.value == null) 1.0f else 0.2f
+                        if (filterSelection.value == null) 1.0f else 0.2f
                     )
                 ) {
 
@@ -125,7 +136,7 @@ fun FilterPanel() {
 
                         RuleEditor(
                             filterQueryState = filterQueryState,
-                            dropDownFilterRule = dropDownFilterRule
+                            filterSelection = filterSelection
                         )
                     }
 
@@ -137,21 +148,15 @@ fun FilterPanel() {
                     )
                 }
 
-                if (dropDownFilterRule.value != null) {
+                if (filterSelection.value != null) {
 
                     Box(
                         contentAlignment = Alignment.Center,
                         modifier = Modifier
-                            // .padding(bottom = 80.dp)
-//                            .background(
-//                                color = Color.White.copy(alpha = 0.3F),
-//                                shape = RoundedCornerShape(
-//                                    bottomStart = 8.dp,
-//                                    bottomEnd = 8.dp
-//                                )
-//                            )
                             .noRippleClickable {
-                                /* Catch all clicks */
+
+                                /* Close pop-up */
+                                filterSelection.value = null
                             }
                             .fillMaxSize()
                     ) {
@@ -183,7 +188,7 @@ fun FilterPanel() {
                                             .clickable {
 
                                                 /* Close pop-up */
-                                                dropDownFilterRule.value = null
+                                                filterSelection.value = null
                                             }
                                     ) {
 
