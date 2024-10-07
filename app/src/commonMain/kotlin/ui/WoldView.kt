@@ -33,6 +33,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import model.World
 import ui.theme.FillSpacer
@@ -40,6 +41,8 @@ import ui.theme.defaultPadding
 import ui.theme.defaultRoundedCornerShape
 import ui.theme.defaultSpacing
 import kotlin.math.max
+
+val widthPerWorld: Dp = 380.dp
 
 @Composable
 fun WorldView(
@@ -52,7 +55,7 @@ fun WorldView(
     ) {
 
         val gridLayoutColumnCount = max(
-            maxWidth.div(400.dp).toInt(),
+            maxWidth.div(widthPerWorld).toInt(),
             1
         )
 
