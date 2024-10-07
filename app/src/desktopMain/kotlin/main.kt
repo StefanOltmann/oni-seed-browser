@@ -27,7 +27,7 @@ import ui.App
 fun main() = application {
     Window(
         state = rememberWindowState(
-            size = DpSize(1200.dp, 700.dp)
+            size = DpSize(1200.dp, 800.dp)
         ),
         title = "ONI Seed Browser",
         onCloseRequest = ::exitApplication
