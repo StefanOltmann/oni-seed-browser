@@ -194,7 +194,7 @@ private fun AddRuleButton(
                     )
                 )
             }
-            .size(120.dp, 48.dp)
+            .size(120.dp, 40.dp)
             .clickable { onClick() }
     ) {
 

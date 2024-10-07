@@ -21,7 +21,6 @@ package ui.filter
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -42,6 +41,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -63,82 +63,104 @@ fun FilterPanelEntry(
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
-                .height(48.dp)
                 .border(1.dp, Color.White, defaultRoundedCornerShape)
+                .height(40.dp)
         ) {
 
-            DefaultSpacer()
-
-            Box(
-                contentAlignment = Alignment.Center,
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier
-                    .width(40.dp)
-                    .clickable { onAsteroidFilterClicked() }
+                    .fillMaxHeight()
+                    .noRippleClickable(onAsteroidFilterClicked)
             ) {
 
-                Text(
-                    text = "SUM",
-                    style = MaterialTheme.typography.headlineSmall,
-                    color = MaterialTheme.colorScheme.onBackground
+                DefaultSpacer()
+
+                Box(
+                    contentAlignment = Alignment.Center,
+                    modifier = Modifier.width(40.dp)
+                ) {
+
+                    Text(
+                        text = "SUM",
+                        style = MaterialTheme.typography.bodyLarge,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.onBackground
+                    )
+                }
+
+                Icon(
+                    imageVector = Icons.Default.KeyboardArrowDown,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.onBackground,
+                    modifier = Modifier.size(24.dp)
                 )
             }
-
-            Icon(
-                imageVector = Icons.Default.KeyboardArrowDown,
-                contentDescription = null,
-                tint = MaterialTheme.colorScheme.onBackground,
-                modifier = Modifier.size(24.dp)
-            )
 
             VerticalSeparator()
 
-            DefaultSpacer()
-
-            Box(
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier
-                    .width(200.dp)
-                    .clickable { onItemFilterClicked() }
+                    .fillMaxHeight()
+                    .noRippleClickable(onItemFilterClicked)
             ) {
 
-                Text(
-                    text = "Output: Water geyser",
-                    style = MaterialTheme.typography.headlineSmall,
-                    color = MaterialTheme.colorScheme.onBackground,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
+                DefaultSpacer()
+
+                Box(
+                    modifier = Modifier.width(160.dp)
+                ) {
+
+                    Text(
+                        text = "Output: Water geyser",
+                        style = MaterialTheme.typography.bodyLarge,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.onBackground,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                }
+
+                Icon(
+                    imageVector = Icons.Default.KeyboardArrowDown,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.onBackground,
+                    modifier = Modifier.size(24.dp)
                 )
             }
-
-            Icon(
-                imageVector = Icons.Default.KeyboardArrowDown,
-                contentDescription = null,
-                tint = MaterialTheme.colorScheme.onBackground,
-                modifier = Modifier.size(24.dp)
-            )
 
             VerticalSeparator()
 
-            DefaultSpacer()
-
-            Box(
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier
-                    .width(70.dp)
-                    .clickable { onConditionFilterClicked() }
+                    .fillMaxHeight()
+                    .noRippleClickable(onConditionFilterClicked)
             ) {
 
-                Text(
-                    text = "at least",
-                    style = MaterialTheme.typography.headlineSmall,
-                    color = MaterialTheme.colorScheme.onBackground
+                DefaultSpacer()
+
+                Box(
+                    modifier = Modifier
+                        .width(40.dp)
+                ) {
+
+                    Text(
+                        text = "hasn't",
+                        style = MaterialTheme.typography.bodyLarge,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.onBackground
+                    )
+                }
+
+                Icon(
+                    imageVector = Icons.Default.KeyboardArrowDown,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.onBackground,
+                    modifier = Modifier.size(24.dp)
                 )
             }
-
-            Icon(
-                imageVector = Icons.Default.KeyboardArrowDown,
-                contentDescription = null,
-                tint = MaterialTheme.colorScheme.onBackground,
-                modifier = Modifier.size(24.dp)
-            )
 
             VerticalSeparator()
 
@@ -157,7 +179,7 @@ fun FilterPanelEntry(
                 },
                 cursorBrush = SolidColor(MaterialTheme.colorScheme.onBackground),
                 singleLine = true,
-                textStyle = MaterialTheme.typography.headlineSmall.copy(
+                textStyle = MaterialTheme.typography.bodyLarge.copy(
                     color = MaterialTheme.colorScheme.onBackground
                 ),
                 modifier = Modifier
@@ -173,7 +195,7 @@ fun FilterPanelEntry(
         Box(
             contentAlignment = Alignment.Center,
             modifier = Modifier
-                .size(48.dp)
+                .size(40.dp)
                 .onHover(deleteButtonHovered)
                 .noRippleClickable(onDeleteClicked)
         ) {
