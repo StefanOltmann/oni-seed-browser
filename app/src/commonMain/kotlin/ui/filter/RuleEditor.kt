@@ -19,9 +19,7 @@
 
 package ui.filter
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -33,6 +31,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
@@ -46,12 +46,12 @@ import model.filter.FilterQuery
 import model.filter.FilterRule
 import ui.HorizontalSeparator
 import ui.noRippleClickable
+import ui.onHover
 import ui.theme.FillSpacer
-import ui.theme.ctaColor
 import ui.theme.defaultPadding
-import ui.theme.defaultRoundedCornerShape
 import ui.theme.defaultSpacing
 import ui.theme.halfSpacing
+import ui.theme.hoverColor
 
 @Composable
 fun RuleEditor(
@@ -171,10 +171,13 @@ private fun AddRuleButton(
 
     val fontColor = MaterialTheme.colorScheme.onBackground
 
+    val hovered = remember { mutableStateOf(false) }
+
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(halfSpacing, Alignment.CenterHorizontally),
         modifier = Modifier
+            .onHover(hovered)
             .drawBehind {
 
                 val dashLength = 8.dp.toPx()
@@ -199,35 +202,13 @@ private fun AddRuleButton(
     ) {
 
         Text(
-            text = "ADD",
+            text = "ADD '$text' RULE",
             style = MaterialTheme.typography.bodyLarge,
             fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colorScheme.onBackground
-        )
-
-        Box(
-            modifier = Modifier
-                .padding()
-                .background(
-                    ctaColor,
-                    defaultRoundedCornerShape
-                )
-        ) {
-
-            Text(
-                text = text,
-                style = MaterialTheme.typography.bodyLarge,
-                fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.onBackground,
-                modifier = Modifier.padding(halfSpacing)
-            )
-        }
-
-        Text(
-            text = "RULE",
-            style = MaterialTheme.typography.bodyLarge,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colorScheme.onBackground
+            color = if (hovered.value)
+                hoverColor
+            else
+                MaterialTheme.colorScheme.onBackground
         )
     }
 }
