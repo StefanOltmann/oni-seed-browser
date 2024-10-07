@@ -20,13 +20,13 @@
 package model.filter
 
 import kotlinx.serialization.Serializable
+import model.AsteroidType
 
 @Serializable
 data class FilterRule(
 
     /* NULL = All asteroids */
-    // FIXME Craft a serializer for that
-    val asteroidId: String?,
+    val asteroid: AsteroidType?,
 
     /* Items */
     val geyserCount: FilterItemGeyserCount?,
@@ -41,7 +41,7 @@ data class FilterRule(
     companion object {
 
         val EMPTY: FilterRule = FilterRule(
-            asteroidId = null,
+            asteroid = null,
             geyserCount = null,
             geyserOutput = null,
             worldTrait = null,

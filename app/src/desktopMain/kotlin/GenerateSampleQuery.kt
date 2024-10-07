@@ -1,5 +1,6 @@
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
+import model.AsteroidType
 import model.Cluster
 import model.Dlc
 import model.GeyserType
@@ -22,7 +23,7 @@ fun main() {
     val firstRuleGroup = mutableListOf<FilterRule>()
 
     val firstRule = FilterRule(
-        asteroidId = "SandstoneDefault",
+        asteroid = AsteroidType.SandstoneDefault,
         worldTrait = hasWorldTraitGood,
         geyserCount = null,
         geyserOutput = null,
@@ -30,7 +31,7 @@ fun main() {
     )
 
     val firstRuleOr = FilterRule(
-        asteroidId = "WarpOilySwamp",
+        asteroid = AsteroidType.WarpOilySwamp,
         worldTrait = hasWorldTraitGood,
         geyserCount = null,
         geyserOutput = null,
@@ -41,7 +42,7 @@ fun main() {
     firstRuleGroup.add(firstRuleOr)
 
     val secondRule = FilterRule(
-        asteroidId = "SandstoneDefault",
+        asteroid = AsteroidType.SandstoneDefault,
         worldTrait = null,
         geyserCount = FilterItemGeyserCount(
             geyserId = GeyserType.HYDROGEN,
@@ -55,7 +56,7 @@ fun main() {
     val thirdRuleGroup = mutableListOf<FilterRule>()
 
     val thirdRule = FilterRule(
-        asteroidId = null,
+        asteroid = null,
         worldTrait = null,
         geyserCount = null,
         geyserOutput = FilterItemGeyserOutput(
@@ -67,7 +68,7 @@ fun main() {
     )
 
     val thirdRuleOr = FilterRule(
-        asteroidId = null,
+        asteroid = null,
         worldTrait = null,
         geyserCount = null,
         geyserOutput = null,
