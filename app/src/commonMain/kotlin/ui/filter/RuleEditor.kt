@@ -20,7 +20,6 @@
 package ui.filter
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -46,6 +45,7 @@ import androidx.compose.ui.unit.dp
 import model.filter.FilterQuery
 import model.filter.FilterRule
 import ui.HorizontalSeparator
+import ui.noRippleClickable
 import ui.theme.FillSpacer
 import ui.theme.ctaColor
 import ui.theme.defaultPadding
@@ -195,7 +195,7 @@ private fun AddRuleButton(
                 )
             }
             .size(120.dp, 40.dp)
-            .clickable { onClick() }
+            .noRippleClickable(onClick)
     ) {
 
         Text(

@@ -33,6 +33,8 @@ val darkGreen = Color(0xFF437E3D)
 
 val ctaColor = Color.Blue
 
+val hoverColor = Color.Yellow
+
 val appColorScheme = darkColorScheme(
     background = anthracite,
     surface = surfaceColor,

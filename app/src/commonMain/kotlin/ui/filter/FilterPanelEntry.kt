@@ -25,12 +25,12 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -49,6 +49,8 @@ import ui.noRippleClickable
 import ui.onHover
 import ui.theme.DefaultSpacer
 import ui.theme.defaultRoundedCornerShape
+import ui.theme.defaultSpacing
+import ui.theme.hoverColor
 
 @Composable
 fun FilterPanelEntry(
@@ -67,14 +69,16 @@ fun FilterPanelEntry(
                 .height(40.dp)
         ) {
 
+            val hoveredAsteroid = remember { mutableStateOf(false) }
+
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier
+                    .padding(horizontal = defaultSpacing)
                     .fillMaxHeight()
+                    .onHover(hoveredAsteroid)
                     .noRippleClickable(onAsteroidFilterClicked)
             ) {
-
-                DefaultSpacer()
 
                 Box(
                     contentAlignment = Alignment.Center,
@@ -85,28 +89,26 @@ fun FilterPanelEntry(
                         text = "SUM",
                         style = MaterialTheme.typography.bodyLarge,
                         fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.onBackground
+                        color = if (hoveredAsteroid.value)
+                            hoverColor
+                        else
+                            MaterialTheme.colorScheme.onBackground
                     )
                 }
-
-                Icon(
-                    imageVector = Icons.Default.KeyboardArrowDown,
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.onBackground,
-                    modifier = Modifier.size(24.dp)
-                )
             }
 
             VerticalSeparator()
 
+            val hoveredItem = remember { mutableStateOf(false) }
+
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier
+                    .padding(horizontal = defaultSpacing)
                     .fillMaxHeight()
+                    .onHover(hoveredItem)
                     .noRippleClickable(onItemFilterClicked)
             ) {
-
-                DefaultSpacer()
 
                 Box(
                     modifier = Modifier.width(160.dp)
@@ -116,50 +118,44 @@ fun FilterPanelEntry(
                         text = "Output: Water geyser",
                         style = MaterialTheme.typography.bodyLarge,
                         fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.onBackground,
+                        color = if (hoveredItem.value)
+                            hoverColor
+                        else
+                            MaterialTheme.colorScheme.onBackground,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
                 }
-
-                Icon(
-                    imageVector = Icons.Default.KeyboardArrowDown,
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.onBackground,
-                    modifier = Modifier.size(24.dp)
-                )
             }
 
             VerticalSeparator()
 
+            val hoveredCondition = remember { mutableStateOf(false) }
+
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier
+                    .padding(horizontal = defaultSpacing)
                     .fillMaxHeight()
+                    .onHover(hoveredCondition)
                     .noRippleClickable(onConditionFilterClicked)
             ) {
 
-                DefaultSpacer()
-
                 Box(
-                    modifier = Modifier
-                        .width(40.dp)
+                    contentAlignment = Alignment.Center,
+                    modifier = Modifier.width(40.dp)
                 ) {
 
                     Text(
                         text = "hasn't",
                         style = MaterialTheme.typography.bodyLarge,
                         fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.onBackground
+                        color = if (hoveredCondition.value)
+                            hoverColor
+                        else
+                            MaterialTheme.colorScheme.onBackground
                     )
                 }
-
-                Icon(
-                    imageVector = Icons.Default.KeyboardArrowDown,
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.onBackground,
-                    modifier = Modifier.size(24.dp)
-                )
             }
 
             VerticalSeparator()
@@ -186,6 +182,8 @@ fun FilterPanelEntry(
                     .background(MaterialTheme.colorScheme.surface)
                     .width(60.dp)
             )
+
+            DefaultSpacer()
         }
 
         DefaultSpacer()
