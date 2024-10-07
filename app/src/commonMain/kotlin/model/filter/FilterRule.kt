@@ -38,6 +38,24 @@ data class FilterRule(
 
 ) {
 
+    fun getItemDescription(): String =
+        when {
+            geyserCount != null -> "Geyser: ${geyserCount.geyserId.displayName}"
+            geyserOutput != null -> "Output: ${geyserOutput.geyserId.displayName}"
+            worldTrait != null -> "World Trait"
+            spaceDestinationCount != null -> "Space destination: ${spaceDestinationCount.poi}"
+            else -> "-/-"
+        }
+
+    fun getConditionDescription(): String =
+        when {
+            geyserCount != null -> geyserCount.condition.displayString
+            geyserOutput != null -> geyserOutput.condition.displayString
+            worldTrait != null -> if (worldTrait.has) "has" else "hasn't"
+            spaceDestinationCount != null -> "Space destination: ${spaceDestinationCount.poi}"
+            else -> "-/-"
+        }
+
     companion object {
 
         val EMPTY: FilterRule = FilterRule(

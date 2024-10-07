@@ -45,6 +45,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import model.filter.FilterRule
 import ui.noRippleClickable
 import ui.onHover
 import ui.theme.DefaultSpacer
@@ -54,6 +55,7 @@ import ui.theme.hoverColor
 
 @Composable
 fun FilterPanelEntry(
+    rule: FilterRule,
     onAsteroidFilterClicked: () -> Unit,
     onItemFilterClicked: () -> Unit,
     onConditionFilterClicked: () -> Unit,
@@ -86,7 +88,10 @@ fun FilterPanelEntry(
                 ) {
 
                     Text(
-                        text = "SUM",
+                        text = if (rule.asteroid == null)
+                            "SUM"
+                        else
+                            rule.asteroid.displayName,
                         style = MaterialTheme.typography.bodyLarge,
                         fontWeight = FontWeight.Bold,
                         color = if (hoveredAsteroid.value)
@@ -115,7 +120,7 @@ fun FilterPanelEntry(
                 ) {
 
                     Text(
-                        text = "Output: Water geyser",
+                        text = rule.getItemDescription(),
                         style = MaterialTheme.typography.bodyLarge,
                         fontWeight = FontWeight.Bold,
                         color = if (hoveredItem.value)
@@ -147,7 +152,7 @@ fun FilterPanelEntry(
                 ) {
 
                     Text(
-                        text = "hasn't",
+                        text = rule.getConditionDescription(),
                         style = MaterialTheme.typography.bodyLarge,
                         fontWeight = FontWeight.Bold,
                         color = if (hoveredCondition.value)

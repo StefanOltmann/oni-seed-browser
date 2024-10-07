@@ -89,6 +89,7 @@ fun RuleEditor(
                 RuleEditorRow(text) {
 
                     FilterPanelEntry(
+                        rule = rule,
                         onAsteroidFilterClicked = {
 
                             filterSelection.value = FilterSelection(
