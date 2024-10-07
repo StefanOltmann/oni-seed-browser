@@ -146,15 +146,15 @@ private fun RuleEditorRow(
 
             Text(
                 text = text,
-                style = MaterialTheme.typography.headlineSmall,
+                style = MaterialTheme.typography.bodyLarge,
                 color = MaterialTheme.colorScheme.onBackground,
                 textAlign = TextAlign.Center,
-                modifier = Modifier.width(60.dp)
+                modifier = Modifier.width(40.dp)
             )
 
         } else {
 
-            Spacer(modifier = Modifier.width(60.dp))
+            Spacer(modifier = Modifier.width(40.dp))
         }
 
         content()
