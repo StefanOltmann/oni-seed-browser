@@ -20,6 +20,7 @@
 package ui.filter
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -47,14 +48,21 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import model.filter.FilterQuery
 import model.filter.FilterRule
+import org.jetbrains.compose.resources.DrawableResource
+import org.jetbrains.compose.resources.painterResource
 import ui.HorizontalSeparator
+import ui.getAsteroidTypeDrawable
 import ui.noRippleClickable
+import ui.onHover
 import ui.theme.DefaultSpacer
 import ui.theme.FillSpacer
 import ui.theme.ctaColor
 import ui.theme.defaultPadding
 import ui.theme.defaultRoundedCornerShape
+import ui.theme.defaultSpacing
 import ui.theme.doubleSpacing
+import ui.theme.halfSpacing
+import ui.theme.hoverColor
 
 enum class FilterSelectionType {
     ASTEROID,
@@ -116,7 +124,8 @@ fun FilterPanel() {
                         DefaultSpacer()
 
                         GameVersionSelection(
-                            spacedOutDlcSelected = spacedOutDlcSelected
+                            spacedOutDlcSelected = spacedOutDlcSelected,
+                            filterQueryState = filterQueryState
                         )
 
                         DlcSelection(
@@ -161,51 +170,125 @@ fun FilterPanel() {
                             .fillMaxSize()
                     ) {
 
-                        /*
-                         * For overlay components
-                         */
-
-                        Box(
-                            modifier = Modifier
-                                .defaultPadding()
-                                .background(
-                                    MaterialTheme.colorScheme.background,
-                                    defaultRoundedCornerShape
-                                )
-                        ) {
-
-                            Column(
-                                modifier = Modifier.verticalScroll(rememberScrollState())
-                            ) {
-
-                                for (each in 1..5) {
-
-                                    Box(
-                                        contentAlignment = Alignment.CenterStart,
-                                        modifier = Modifier
-                                            .height(48.dp)
-                                            .sizeIn(minWidth = 200.dp, maxWidth = 400.dp)
-                                            .clickable {
-
-                                                /* Close pop-up */
-                                                filterSelection.value = null
-                                            }
-                                    ) {
-
-                                        Text(
-                                            text = "Test item ",
-                                            style = MaterialTheme.typography.bodyLarge,
-                                            color = MaterialTheme.colorScheme.onBackground,
-                                            modifier = Modifier.defaultPadding()
-                                        )
-                                    }
-                                }
-                            }
-                        }
+                        OverlayContent(
+                            filterQueryState = filterQueryState,
+                            filterSelection = filterSelection
+                        )
                     }
                 }
             }
         }
+    }
+}
+
+@Composable
+private fun OverlayContent(
+    filterQueryState: MutableState<FilterQuery>,
+    filterSelection: MutableState<FilterSelection?>
+) {
+
+    val filterSelectionValue = filterSelection.value
+        ?: return
+
+    val cluster = filterQueryState.value.cluster
+        ?: return
+
+    Box(
+        modifier = Modifier
+            .defaultPadding()
+            .background(
+                MaterialTheme.colorScheme.background,
+                defaultRoundedCornerShape
+            )
+    ) {
+
+        Column(
+            modifier = Modifier.verticalScroll(rememberScrollState())
+        ) {
+
+            if (filterSelectionValue.type == FilterSelectionType.ASTEROID) {
+
+                FilterSelectionEntryItem(
+                    text = "Sum of all asteroids",
+                    onClick = {
+
+                        /* Close pop-up */
+                        filterSelection.value = null
+                    }
+                )
+
+                for (asteroidType in cluster.asteroidTypes) {
+
+                    FilterSelectionEntryItem(
+                        image = getAsteroidTypeDrawable(asteroidType),
+                        text = asteroidType.displayName,
+                        onClick = {
+
+                            /* Close pop-up */
+                            filterSelection.value = null
+                        }
+                    )
+                }
+
+            } else {
+
+
+                for (each in 1..5) {
+
+                    FilterSelectionEntryItem(
+                        text = "Test item $each",
+                        onClick = {
+
+                            /* Close pop-up */
+                            filterSelection.value = null
+                        }
+                    )
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun FilterSelectionEntryItem(
+    image: DrawableResource? = null,
+    text: String,
+    onClick: () -> Unit
+) {
+
+    val hovered = remember { mutableStateOf(false) }
+
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier
+            .onHover(hovered)
+            .padding(
+                horizontal = defaultSpacing,
+                vertical = halfSpacing
+            )
+            .height(40.dp)
+            .sizeIn(minWidth = 200.dp, maxWidth = 400.dp)
+            .noRippleClickable(onClick)
+    ) {
+
+        if (image != null) {
+
+            Image(
+                painter = painterResource(image),
+                contentDescription = null,
+                modifier = Modifier.size(40.dp)
+            )
+        }
+
+        Text(
+            text = text,
+            style = MaterialTheme.typography.bodyLarge,
+            color = if (hovered.value)
+                hoverColor
+            else
+                MaterialTheme.colorScheme.onBackground,
+            modifier = Modifier.defaultPadding()
+        )
     }
 }
 

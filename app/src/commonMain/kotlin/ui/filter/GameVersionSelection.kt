@@ -31,6 +31,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.unit.dp
+import model.filter.FilterQuery
 import oni_seed_browser.app.generated.resources.Res
 import oni_seed_browser.app.generated.resources.logo_oni
 import oni_seed_browser.app.generated.resources.logo_spaced_out
@@ -43,7 +44,8 @@ import ui.theme.defaultPadding
 
 @Composable
 fun GameVersionSelection(
-    spacedOutDlcSelected: MutableState<Boolean>
+    spacedOutDlcSelected: MutableState<Boolean>,
+    filterQueryState: MutableState<FilterQuery>
 ) {
 
     Row(
@@ -65,7 +67,18 @@ fun GameVersionSelection(
             modifier = Modifier
                 .height(logoIconHeight)
                 .onHover(baseGameLogoHovered)
-                .noRippleClickable { spacedOutDlcSelected.value = false }
+                .noRippleClickable {
+
+                    if (!spacedOutDlcSelected.value)
+                        return@noRippleClickable
+
+                    spacedOutDlcSelected.value = false
+
+                    filterQueryState.value = filterQueryState.value.copy(
+                        cluster = null,
+                        rules = emptyList()
+                    )
+                }
                 .scale(if (baseGameLogoHovered.value) 1.1F else 1F)
         )
 
@@ -79,7 +92,18 @@ fun GameVersionSelection(
             modifier = Modifier
                 .height(logoIconHeight)
                 .onHover(spacedOutLogoHovered)
-                .noRippleClickable { spacedOutDlcSelected.value = true }
+                .noRippleClickable {
+
+                    if (spacedOutDlcSelected.value)
+                        return@noRippleClickable
+
+                    spacedOutDlcSelected.value = true
+
+                    filterQueryState.value = filterQueryState.value.copy(
+                        cluster = null,
+                        rules = emptyList()
+                    )
+                }
                 .scale(if (spacedOutLogoHovered.value) 1.1F else 1F)
         )
     }
