@@ -79,48 +79,63 @@ fun FilterPanel() {
 
             val spacedOutDlcSelected = remember { mutableStateOf(false) }
 
-            Column {
+            Box {
 
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
+                Box(
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .weight(1F)
-                        .verticalScroll(rememberScrollState())
+                        .padding(top = 8.dp, bottom = 80.dp)
+                        .fillMaxSize()
                 ) {
 
-                    DefaultSpacer()
+                    /*
+                     * For overlay components
+                     */
 
-                    GameVersionSelection(
-                        spacedOutDlcSelected = spacedOutDlcSelected
-                    )
-
-                    DlcSelection(
-                        filterQueryState = filterQueryState
-                    )
-
-                    HorizontalSeparator()
-
-                    ClusterSelection(
-                        spacedOutDlcSelected = spacedOutDlcSelected,
-                        filterQueryState = filterQueryState
-                    )
-
-                    HorizontalSeparator()
-
-                    DefaultSpacer()
-
-                    RuleEditor(
-                        filterQueryState = filterQueryState
-                    )
                 }
 
-                HorizontalSeparator()
+                Column {
 
-                ControlsRow(
-                    filterQueryState = filterQueryState,
-                    filterPanelOpen = filterPanelOpen
-                )
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .weight(1F)
+                            .verticalScroll(rememberScrollState())
+                    ) {
+
+                        DefaultSpacer()
+
+                        GameVersionSelection(
+                            spacedOutDlcSelected = spacedOutDlcSelected
+                        )
+
+                        DlcSelection(
+                            filterQueryState = filterQueryState
+                        )
+
+                        HorizontalSeparator()
+
+                        ClusterSelection(
+                            spacedOutDlcSelected = spacedOutDlcSelected,
+                            filterQueryState = filterQueryState
+                        )
+
+                        HorizontalSeparator()
+
+                        DefaultSpacer()
+
+                        RuleEditor(
+                            filterQueryState = filterQueryState
+                        )
+                    }
+
+                    HorizontalSeparator()
+
+                    ControlsRow(
+                        filterQueryState = filterQueryState,
+                        filterPanelOpen = filterPanelOpen
+                    )
+                }
             }
         }
     }
