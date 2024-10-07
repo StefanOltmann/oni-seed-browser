@@ -28,8 +28,10 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
@@ -40,10 +42,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import model.filter.FilterQuery
+import model.filter.FilterRule
 import ui.HorizontalSeparator
+import ui.noRippleClickable
 import ui.theme.DefaultSpacer
 import ui.theme.FillSpacer
 import ui.theme.ctaColor
@@ -57,6 +62,8 @@ fun FilterPanel() {
     val filterQueryState = remember { mutableStateOf(FilterQuery.ALL) }
 
     val filterPanelOpen = remember { mutableStateOf(false) }
+
+    val dropDownFilterRule = remember { mutableStateOf<FilterRule?>(null) }
 
     val maxSizeModifier = if (filterPanelOpen.value)
         Modifier.fillMaxSize()
@@ -81,19 +88,11 @@ fun FilterPanel() {
 
             Box {
 
-                Box(
-                    modifier = Modifier
-                        .padding(top = 8.dp, bottom = 80.dp)
-                        .fillMaxSize()
+                Column(
+                    modifier = Modifier.alpha(
+                        if (dropDownFilterRule.value == null) 1.0f else 0.2f
+                    )
                 ) {
-
-                    /*
-                     * For overlay components
-                     */
-
-                }
-
-                Column {
 
                     Column(
                         horizontalAlignment = Alignment.CenterHorizontally,
@@ -125,7 +124,8 @@ fun FilterPanel() {
                         DefaultSpacer()
 
                         RuleEditor(
-                            filterQueryState = filterQueryState
+                            filterQueryState = filterQueryState,
+                            dropDownFilterRule = dropDownFilterRule
                         )
                     }
 
@@ -135,6 +135,69 @@ fun FilterPanel() {
                         filterQueryState = filterQueryState,
                         filterPanelOpen = filterPanelOpen
                     )
+                }
+
+                if (dropDownFilterRule.value != null) {
+
+                    Box(
+                        contentAlignment = Alignment.Center,
+                        modifier = Modifier
+                            // .padding(bottom = 80.dp)
+//                            .background(
+//                                color = Color.White.copy(alpha = 0.3F),
+//                                shape = RoundedCornerShape(
+//                                    bottomStart = 8.dp,
+//                                    bottomEnd = 8.dp
+//                                )
+//                            )
+                            .noRippleClickable {
+                                /* Catch all clicks */
+                            }
+                            .fillMaxSize()
+                    ) {
+
+                        /*
+                         * For overlay components
+                         */
+
+                        Box(
+                            modifier = Modifier
+                                .defaultPadding()
+                                .background(
+                                    MaterialTheme.colorScheme.background,
+                                    defaultRoundedCornerShape
+                                )
+                        ) {
+
+                            Column(
+                                modifier = Modifier.verticalScroll(rememberScrollState())
+                            ) {
+
+                                for (each in 1..5) {
+
+                                    Box(
+                                        contentAlignment = Alignment.CenterStart,
+                                        modifier = Modifier
+                                            .height(48.dp)
+                                            .sizeIn(minWidth = 200.dp, maxWidth = 400.dp)
+                                            .clickable {
+
+                                                /* Close pop-up */
+                                                dropDownFilterRule.value = null
+                                            }
+                                    ) {
+
+                                        Text(
+                                            text = "Test item ",
+                                            style = MaterialTheme.typography.bodyLarge,
+                                            color = MaterialTheme.colorScheme.onBackground,
+                                            modifier = Modifier.defaultPadding()
+                                        )
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }

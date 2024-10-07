@@ -21,6 +21,7 @@ package ui.filter
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -51,6 +52,9 @@ import ui.theme.defaultRoundedCornerShape
 
 @Composable
 fun FilterPanelEntry(
+    onAsteroidFilterClicked: () -> Unit,
+    onItemFilterClicked: () -> Unit,
+    onConditionFilterClicked: () -> Unit,
     onDeleteClicked: () -> Unit
 ) {
 
@@ -67,7 +71,9 @@ fun FilterPanelEntry(
 
             Box(
                 contentAlignment = Alignment.Center,
-                modifier = Modifier.width(40.dp)
+                modifier = Modifier
+                    .width(40.dp)
+                    .clickable { onAsteroidFilterClicked() }
             ) {
 
                 Text(
@@ -89,7 +95,9 @@ fun FilterPanelEntry(
             DefaultSpacer()
 
             Box(
-                modifier = Modifier.width(200.dp)
+                modifier = Modifier
+                    .width(200.dp)
+                    .clickable { onItemFilterClicked() }
             ) {
 
                 Text(
@@ -113,7 +121,9 @@ fun FilterPanelEntry(
             DefaultSpacer()
 
             Box(
-                modifier = Modifier.width(70.dp)
+                modifier = Modifier
+                    .width(70.dp)
+                    .clickable { onConditionFilterClicked() }
             ) {
 
                 Text(

@@ -44,6 +44,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import model.filter.FilterQuery
+import model.filter.FilterRule
 import ui.HorizontalSeparator
 import ui.theme.FillSpacer
 import ui.theme.ctaColor
@@ -54,7 +55,8 @@ import ui.theme.halfSpacing
 
 @Composable
 fun RuleEditor(
-    filterQueryState: MutableState<FilterQuery>
+    filterQueryState: MutableState<FilterQuery>,
+    dropDownFilterRule: MutableState<FilterRule?>
 ) {
 
     val query = filterQueryState.value
@@ -88,10 +90,17 @@ fun RuleEditor(
                 RuleEditorRow(text) {
 
                     FilterPanelEntry(
+                        onAsteroidFilterClicked = {
+                            dropDownFilterRule.value = rule
+                        },
+                        onItemFilterClicked = {
+                            dropDownFilterRule.value = rule
+                        },
+                        onConditionFilterClicked = {
+                            dropDownFilterRule.value = rule
+                        },
                         onDeleteClicked = {
-
                             filterQueryState.value = query.removeRule(rulesIndex, ruleIndex)
-
                         }
                     )
                 }
