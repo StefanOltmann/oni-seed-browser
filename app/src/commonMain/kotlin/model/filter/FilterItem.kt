@@ -19,16 +19,4 @@
 
 package model.filter
 
-import kotlinx.serialization.Serializable
-import model.GeyserType
-import serializer.GeyserTypeSerializer
-
-@Serializable
-data class FilterItemGeyserCount(
-
-    @Serializable(with = GeyserTypeSerializer::class)
-    val geyserId: GeyserType,
-
-    val condition: FilterCondition,
-    val count: Int
-) : FilterItem
+interface FilterItem

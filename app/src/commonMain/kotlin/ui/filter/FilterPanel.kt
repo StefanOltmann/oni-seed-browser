@@ -47,7 +47,6 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import model.filter.FilterQuery
-import model.filter.FilterRule
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 import ui.HorizontalSeparator
@@ -71,7 +70,8 @@ enum class FilterSelectionType {
 }
 
 data class FilterSelection(
-    val rule: FilterRule,
+    val rulesIndex: Int,
+    val ruleIndex: Int,
     val type: FilterSelectionType
 )
 
@@ -212,6 +212,13 @@ private fun OverlayContent(
                     text = "Sum of all asteroids",
                     onClick = {
 
+                        /* Update the query */
+                        filterQueryState.value = filterQueryState.value.setAsteroid(
+                            rulesIndex = filterSelectionValue.rulesIndex,
+                            ruleIndex = filterSelectionValue.ruleIndex,
+                            asteroidType = null
+                        )
+
                         /* Close pop-up */
                         filterSelection.value = null
                     }
@@ -226,7 +233,8 @@ private fun OverlayContent(
 
                             /* Update the query */
                             filterQueryState.value = filterQueryState.value.setAsteroid(
-                                rule = filterSelectionValue.rule,
+                                rulesIndex = filterSelectionValue.rulesIndex,
+                                ruleIndex = filterSelectionValue.ruleIndex,
                                 asteroidType = asteroidType
                             )
 

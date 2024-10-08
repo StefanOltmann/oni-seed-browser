@@ -30,4 +30,4 @@ data class FilterItemWorldTrait(
 
     val worldTrait: WorldTrait
 
-)
+) : FilterItem

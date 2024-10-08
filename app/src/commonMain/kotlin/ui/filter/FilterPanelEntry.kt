@@ -19,6 +19,7 @@
 
 package ui.filter
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
@@ -46,6 +47,8 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import model.filter.FilterRule
+import org.jetbrains.compose.resources.painterResource
+import ui.getAsteroidTypeDrawable
 import ui.noRippleClickable
 import ui.onHover
 import ui.theme.DefaultSpacer
@@ -87,18 +90,26 @@ fun FilterPanelEntry(
                     modifier = Modifier.width(40.dp)
                 ) {
 
-                    Text(
-                        text = if (rule.asteroid == null)
-                            "SUM"
-                        else
-                            rule.asteroid.displayName,
-                        style = MaterialTheme.typography.bodyLarge,
-                        fontWeight = FontWeight.Bold,
-                        color = if (hoveredAsteroid.value)
-                            hoverColor
-                        else
-                            MaterialTheme.colorScheme.onBackground
-                    )
+                    if (rule.asteroid == null) {
+
+                        Text(
+                            text = "SUM",
+                            style = MaterialTheme.typography.bodyLarge,
+                            fontWeight = FontWeight.Bold,
+                            color = if (hoveredAsteroid.value)
+                                hoverColor
+                            else
+                                MaterialTheme.colorScheme.onBackground
+                        )
+
+                    } else {
+
+                        Image(
+                            painter = painterResource(getAsteroidTypeDrawable(rule.asteroid)),
+                            contentDescription = null,
+                            modifier = Modifier.size(30.dp)
+                        )
+                    }
                 }
             }
 

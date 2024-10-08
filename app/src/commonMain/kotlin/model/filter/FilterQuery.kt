@@ -44,32 +44,37 @@ data class FilterQuery(
 
 ) {
 
-    fun setAsteroid(rule: FilterRule, asteroidType: AsteroidType?): FilterQuery {
+    fun setAsteroid(rulesIndex: Int, ruleIndex: Int, asteroidType: AsteroidType?): FilterQuery {
 
-        val newRules = mutableListOf<List<FilterRule>>()
+        val newRules = rules.toMutableList()
 
-        for (rules in rules) {
+        val subRules = newRules[rulesIndex].toMutableList()
 
-            val copy = mutableListOf<FilterRule>()
+        newRules[rulesIndex] = subRules
 
-            for (orRule in rules) {
+        subRules[ruleIndex] = subRules[ruleIndex].copy(
+            asteroid = asteroidType
+        )
 
-                if (rule == orRule) {
+        return copy(
+            rules = newRules
+        )
+    }
 
-                    val modifiedRule = rule.copy(
-                        asteroid = asteroidType
-                    )
+    fun setFilterItem(rulesIndex: Int, ruleIndex: Int, filterItem: FilterItem): FilterQuery {
 
-                    copy.add(modifiedRule)
+        val newRules = rules.toMutableList()
 
-                } else {
+        val subRules = newRules[rulesIndex].toMutableList()
 
-                    copy.add(orRule)
-                }
-            }
+        newRules[rulesIndex] = subRules
 
-            newRules.add(copy)
-        }
+        subRules[ruleIndex] = subRules[ruleIndex].copy(
+            geyserCount = filterItem as? FilterItemGeyserCount,
+            geyserOutput = filterItem as? FilterItemGeyserOutput,
+            worldTrait = filterItem as? FilterItemWorldTrait,
+            spaceDestinationCount = filterItem as? FilterItemSpaceDestinationCount
+        )
 
         return copy(
             rules = newRules

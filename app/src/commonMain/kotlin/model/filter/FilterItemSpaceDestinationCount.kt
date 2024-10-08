@@ -29,4 +29,4 @@ data class FilterItemSpaceDestinationCount(
     val poi: String,
     val condition: FilterCondition,
     val count: Int
-)
+) : FilterItem

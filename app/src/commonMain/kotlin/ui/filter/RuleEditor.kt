@@ -93,21 +93,24 @@ fun RuleEditor(
                         onAsteroidFilterClicked = {
 
                             filterSelection.value = FilterSelection(
-                                rule,
+                                rulesIndex,
+                                ruleIndex,
                                 FilterSelectionType.ASTEROID
                             )
                         },
                         onItemFilterClicked = {
 
                             filterSelection.value = FilterSelection(
-                                rule,
+                                rulesIndex,
+                                ruleIndex,
                                 FilterSelectionType.ITEM
                             )
                         },
                         onConditionFilterClicked = {
 
                             filterSelection.value = FilterSelection(
-                                rule,
+                                rulesIndex,
+                                ruleIndex,
                                 FilterSelectionType.CONDITION
                             )
                         },
