@@ -26,6 +26,7 @@ import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -37,7 +38,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import model.World
 import ui.theme.FillSpacer
-import ui.theme.defaultPadding
 import ui.theme.defaultRoundedCornerShape
 import ui.theme.defaultSpacing
 import kotlin.math.max
@@ -49,9 +49,54 @@ fun WorldView(
     world: World
 ) {
 
-    BoxWithConstraints(
+    Column(
+        verticalArrangement = Arrangement.spacedBy(defaultSpacing),
         modifier = Modifier
-            .background(MaterialTheme.colorScheme.surface, defaultRoundedCornerShape)
+            .background(
+                MaterialTheme.colorScheme.surface,
+                defaultRoundedCornerShape
+            )
+    ) {
+
+        CoordinateBox(world.coordinate)
+
+        AsteroidsGrid(world)
+    }
+}
+
+@Composable
+private fun CoordinateBox(
+    coordinate: String
+) {
+
+    Box(
+        contentAlignment = Alignment.Center,
+        modifier = Modifier.fillMaxWidth()
+    ) {
+
+        SelectionContainer {
+
+            Text(
+                text = coordinate,
+                style = MaterialTheme.typography.headlineLarge,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.onBackground
+            )
+        }
+    }
+}
+
+@Composable
+private fun AsteroidsGrid(
+    world: World
+) {
+
+    BoxWithConstraints(
+        modifier = Modifier.padding(
+            start = defaultSpacing,
+            end = defaultSpacing,
+            bottom = defaultSpacing
+        )
     ) {
 
         val gridLayoutColumnCount = max(
@@ -60,25 +105,8 @@ fun WorldView(
         )
 
         Column(
-            modifier = Modifier.defaultPadding(),
             verticalArrangement = Arrangement.spacedBy(defaultSpacing)
         ) {
-
-            Box(
-                contentAlignment = Alignment.Center,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-
-                SelectionContainer {
-
-                    Text(
-                        text = world.coordinate,
-                        style = MaterialTheme.typography.headlineLarge,
-                        fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.onBackground
-                    )
-                }
-            }
 
             val firstAsteroid = world.asteroids.first()
 

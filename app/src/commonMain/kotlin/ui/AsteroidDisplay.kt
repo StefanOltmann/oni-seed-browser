@@ -33,6 +33,9 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Search
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -48,6 +51,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.min
 import androidx.compose.ui.unit.times
 import model.Asteroid
+import model.AsteroidType
 import model.Geyser
 import model.PointOfInterest
 import org.jetbrains.compose.resources.painterResource
@@ -58,13 +62,17 @@ import ui.theme.HalfSpacer
 import ui.theme.defaultPadding
 import ui.theme.defaultRoundedCornerShape
 import ui.theme.defaultSpacing
+import ui.theme.halfPadding
 import ui.theme.halfSpacing
+import ui.theme.hoverColor
 
 @Composable
 fun AsteroidDisplay(
     asteroid: Asteroid,
     isStarterAstroid: Boolean
 ) {
+
+    val canShowMap = asteroid.biomesSVG != null && asteroid.id == AsteroidType.VanillaVolcanic
 
     Row(
         verticalAlignment = Alignment.CenterVertically,
@@ -90,6 +98,33 @@ fun AsteroidDisplay(
                 contentDescription = null,
                 modifier = Modifier.defaultPadding()
             )
+
+            if (canShowMap) {
+
+                val hovered = remember { mutableStateOf(false) }
+
+                Icon(
+                    imageVector = Icons.Default.Search,
+                    contentDescription = null,
+                    tint = if (hovered.value)
+                        hoverColor
+                    else
+                        MaterialTheme.colorScheme.onBackground,
+                    modifier = Modifier
+                        .onHover(hovered)
+                        .halfPadding()
+                        .size(24.dp)
+                        .border(
+                            1.dp,
+                            if (hovered.value)
+                                hoverColor
+                            else
+                                MaterialTheme.colorScheme.onBackground,
+                            defaultRoundedCornerShape
+                        )
+                        .align(Alignment.BottomEnd)
+                )
+            }
         }
 
         DefaultSpacer()
