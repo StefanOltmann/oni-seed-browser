@@ -53,9 +53,9 @@ fun MapView(
 
             val density = LocalDensity.current
 
-            println("max height: " + maxHeight)
+            val maxHeightInPixels = maxHeight.div(density.density).value
 
-            println("Asteroid height: " + asteroid.sizeY)
+            val scale = maxHeightInPixels / asteroid.sizeY
 
             Image(
                 painter = loadSvgPainter(testSvg.encodeToByteArray(), density),
@@ -70,8 +70,8 @@ fun MapView(
                     contentDescription = null,
                     modifier = Modifier
                         .offset(
-                            x = poi.posX.dp.times(density.density),
-                            y = poi.posY.dp.times(density.density)
+                            x = poi.posX.dp.times(density.density).times(scale),
+                            y = poi.posY.dp.times(density.density).times(scale)
                         )
                         .size(32.dp)
                 )
@@ -84,8 +84,8 @@ fun MapView(
                     contentDescription = null,
                     modifier = Modifier
                         .offset(
-                            x = geyser.posX.dp.times(density.density),
-                            y = geyser.posY.dp.times(density.density)
+                            x = geyser.posX.dp.times(density.density).times(scale),
+                            y = geyser.posY.dp.times(density.density).times(scale)
                         )
                         .size(32.dp)
                 )
