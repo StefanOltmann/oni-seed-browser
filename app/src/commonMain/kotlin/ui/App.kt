@@ -38,8 +38,10 @@ import androidx.compose.runtime.produceState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import model.Asteroid
 import service.DefaultWebClient
 import service.DummyWebClient
 import ui.filter.FilterPanel
@@ -55,10 +57,13 @@ const val ALLOW_WEB_CALLS = false
 
 @Composable
 fun App() {
+
     MaterialTheme(
         colorScheme = appColorScheme,
         typography = AppTypography()
     ) {
+
+        val showMapAsteroid = remember { mutableStateOf<Asteroid?>(null) }
 
         val demoMode = remember { mutableStateOf(true) }
 
@@ -100,6 +105,34 @@ fun App() {
             } finally {
                 isGettingNewResults.value = false
             }
+        }
+
+        val asteroid = showMapAsteroid.value
+
+        if (asteroid != null) {
+
+            Box(
+                modifier = Modifier
+                    .background(Color.Black)
+                    .noRippleClickable {
+                        showMapAsteroid.value = null
+                    }
+            ) {
+
+                CloseButton(
+                    onClick = { showMapAsteroid.value = null }
+                )
+
+                Column {
+
+                    CoordinateBox(asteroid.id.displayName)
+
+                    MapView(asteroid)
+                }
+
+            }
+
+            return@MaterialTheme
         }
 
         Column(
@@ -206,7 +239,10 @@ fun App() {
                 ) {
 
                     if (searchResponse != null)
-                        WorldViewList(searchResponse.worlds)
+                        WorldViewList(
+                            searchResponse.worlds,
+                            showMapAsteroid
+                        )
                 }
             }
 

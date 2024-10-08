@@ -30,8 +30,10 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollbarAdapter
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import model.Asteroid
 import model.World
 import ui.theme.defaultPadding
 import ui.theme.defaultSpacing
@@ -40,7 +42,8 @@ import ui.theme.white
 
 @Composable
 fun WorldViewList(
-    worlds: List<World>
+    worlds: List<World>,
+    showMapAsteroid: MutableState<Asteroid?>
 ) {
 
     Box {
@@ -56,7 +59,10 @@ fun WorldViewList(
 
             items(worlds) { world ->
 
-                WorldView(world)
+                WorldView(
+                    world,
+                    showMapAsteroid
+                )
             }
         }
 

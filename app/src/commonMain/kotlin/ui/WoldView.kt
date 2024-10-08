@@ -27,24 +27,15 @@ import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.text.selection.SelectionContainer
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Close
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import model.Asteroid
@@ -56,14 +47,14 @@ import ui.theme.FillSpacer
 import ui.theme.defaultPadding
 import ui.theme.defaultRoundedCornerShape
 import ui.theme.defaultSpacing
-import ui.theme.hoverColor
 import kotlin.math.max
 
 val widthPerWorld: Dp = 380.dp
 
 @Composable
 fun WorldView(
-    world: World
+    world: World,
+    showMapAsteroid: MutableState<Asteroid?>
 ) {
 
     Column(
@@ -75,41 +66,7 @@ fun WorldView(
             )
     ) {
 
-        val showMapAsteroid = remember { mutableStateOf<Asteroid?>(null) }
-
-        Box {
-
-            CoordinateBox(world.coordinate)
-
-            if (showMapAsteroid.value != null) {
-
-                Box(
-                    contentAlignment = Alignment.CenterEnd,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(40.dp)
-                ) {
-
-                    val hovered = remember { mutableStateOf(false) }
-
-                    Icon(
-                        imageVector = Icons.Default.Close,
-                        contentDescription = null,
-                        tint = if (hovered.value)
-                            hoverColor
-                        else
-                            MaterialTheme.colorScheme.onBackground,
-                        modifier = Modifier
-                            .onHover(hovered)
-                            .padding(horizontal = defaultSpacing)
-                            .size(40.dp)
-                            .noRippleClickable {
-                                showMapAsteroid.value = null
-                            }
-                    )
-                }
-            }
-        }
+        CoordinateBox(world.coordinate)
 
         val asteroid = showMapAsteroid.value
 
@@ -167,30 +124,6 @@ fun WorldView(
                     }
                 }
             }
-        }
-    }
-}
-
-@Composable
-private fun CoordinateBox(
-    coordinate: String
-) {
-
-    Box(
-        contentAlignment = Alignment.Center,
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(40.dp)
-    ) {
-
-        SelectionContainer {
-
-            Text(
-                text = coordinate,
-                style = MaterialTheme.typography.headlineLarge,
-                fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.onBackground
-            )
         }
     }
 }
