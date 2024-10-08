@@ -19,6 +19,7 @@
 
 package ui
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -26,20 +27,34 @@ import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.selection.SelectionContainer
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Close
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import model.Asteroid
 import model.World
+import org.jetbrains.compose.resources.loadSvgPainter
+import service.testSvg
 import ui.theme.FillSpacer
+import ui.theme.defaultPadding
 import ui.theme.defaultRoundedCornerShape
 import ui.theme.defaultSpacing
+import ui.theme.hoverColor
 import kotlin.math.max
 
 val widthPerWorld: Dp = 380.dp
@@ -58,9 +73,64 @@ fun WorldView(
             )
     ) {
 
-        CoordinateBox(world.coordinate)
+        val showMapAsteroid = remember { mutableStateOf<Asteroid?>(null) }
 
-        AsteroidsGrid(world)
+        Box {
+
+            CoordinateBox(world.coordinate)
+
+            if (showMapAsteroid.value != null) {
+
+                Box(
+                    contentAlignment = Alignment.CenterEnd,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(40.dp)
+                ) {
+
+                    val hovered = remember { mutableStateOf(false) }
+
+                    Icon(
+                        imageVector = Icons.Default.Close,
+                        contentDescription = null,
+                        tint = if (hovered.value)
+                            hoverColor
+                        else
+                            MaterialTheme.colorScheme.onBackground,
+                        modifier = Modifier
+                            .onHover(hovered)
+                            .padding(horizontal = defaultSpacing)
+                            .size(40.dp)
+                            .noRippleClickable {
+                                showMapAsteroid.value = null
+                            }
+                    )
+                }
+            }
+        }
+
+        if (showMapAsteroid.value == null) {
+
+            AsteroidsGrid(
+                world,
+                showMapAsteroid
+            )
+
+        } else {
+
+            Box(
+                contentAlignment = Alignment.Center,
+                modifier = Modifier
+                    .defaultPadding()
+                    .fillMaxWidth()
+            ) {
+
+                Image(
+                    painter = loadSvgPainter(testSvg.encodeToByteArray(), LocalDensity.current),
+                    contentDescription = null
+                )
+            }
+        }
     }
 }
 
@@ -71,7 +141,9 @@ private fun CoordinateBox(
 
     Box(
         contentAlignment = Alignment.Center,
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(40.dp)
     ) {
 
         SelectionContainer {
@@ -88,7 +160,8 @@ private fun CoordinateBox(
 
 @Composable
 private fun AsteroidsGrid(
-    world: World
+    world: World,
+    showMapAsteroid: MutableState<Asteroid?>
 ) {
 
     BoxWithConstraints(
@@ -113,7 +186,10 @@ private fun AsteroidsGrid(
             /* First Asteroid should span the whole column. */
             AsteroidDisplay(
                 asteroid = firstAsteroid,
-                isStarterAstroid = true
+                isStarterAstroid = true,
+                showMap = {
+                    showMapAsteroid.value = firstAsteroid
+                }
             )
 
             val remainingAsteroids = world.asteroids.drop(1)
@@ -134,7 +210,10 @@ private fun AsteroidsGrid(
 
                             AsteroidDisplay(
                                 asteroid = asteroid,
-                                isStarterAstroid = false
+                                isStarterAstroid = false,
+                                showMap = {
+                                    showMapAsteroid.value = asteroid
+                                }
                             )
                         }
                     }

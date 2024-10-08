@@ -69,7 +69,8 @@ import ui.theme.hoverColor
 @Composable
 fun AsteroidDisplay(
     asteroid: Asteroid,
-    isStarterAstroid: Boolean
+    isStarterAstroid: Boolean,
+    showMap: () -> Unit
 ) {
 
     val canShowMap = asteroid.biomesSVG != null && asteroid.id == AsteroidType.VanillaVolcanic
@@ -123,6 +124,7 @@ fun AsteroidDisplay(
                             defaultRoundedCornerShape
                         )
                         .align(Alignment.BottomEnd)
+                        .noRippleClickable(showMap)
                 )
             }
         }
