@@ -28,6 +28,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.selection.SelectionContainer
@@ -49,6 +50,7 @@ import androidx.compose.ui.unit.dp
 import model.Asteroid
 import model.World
 import org.jetbrains.compose.resources.loadSvgPainter
+import org.jetbrains.compose.resources.painterResource
 import service.testSvg
 import ui.theme.FillSpacer
 import ui.theme.defaultPadding
@@ -109,7 +111,9 @@ fun WorldView(
             }
         }
 
-        if (showMapAsteroid.value == null) {
+        val asteroid = showMapAsteroid.value
+
+        if (asteroid == null) {
 
             AsteroidsGrid(
                 world,
@@ -125,10 +129,43 @@ fun WorldView(
                     .fillMaxWidth()
             ) {
 
-                Image(
-                    painter = loadSvgPainter(testSvg.encodeToByteArray(), LocalDensity.current),
-                    contentDescription = null
-                )
+                Box {
+
+                    val density = LocalDensity.current
+
+                    Image(
+                        painter = loadSvgPainter(testSvg.encodeToByteArray(), density),
+                        contentDescription = null
+                    )
+
+                    for (poi in asteroid.pointsOfInterest) {
+
+                        Image(
+                            painter = painterResource(getPointOfInterestDrawable(poi.id)),
+                            contentDescription = null,
+                            modifier = Modifier
+                                .offset(
+                                    x = poi.posX.dp.times(density.density),
+                                    y = poi.posY.dp.times(density.density)
+                                )
+                                .size(32.dp)
+                        )
+                    }
+
+                    for (geyser in asteroid.geysers) {
+
+                        Image(
+                            painter = painterResource(getGeyserDrawable(geyser.id)),
+                            contentDescription = null,
+                            modifier = Modifier
+                                .offset(
+                                    x = geyser.posX.dp.times(density.density),
+                                    y = geyser.posY.dp.times(density.density)
+                                )
+                                .size(32.dp)
+                        )
+                    }
+                }
             }
         }
     }
