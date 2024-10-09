@@ -63,8 +63,6 @@ fun MapView(
 
             val viewScale = maxHeightInPixels / asteroid.sizeY
 
-            println(viewScale)
-
             val biomePaths = asteroid.biomePaths.split('\n')
 
             Canvas(
@@ -77,9 +75,6 @@ fun MapView(
             ) {
 
                 for (biomeEntry in biomePaths) {
-
-                    if (biomeEntry.isBlank())
-                        continue
 
                     val bioEntryArray = biomeEntry.split(':')
 
