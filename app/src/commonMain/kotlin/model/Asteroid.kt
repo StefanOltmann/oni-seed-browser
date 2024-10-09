@@ -37,6 +37,7 @@ data class Asteroid(
 
     val worldTraits: List<WorldTrait>,
     val biomesSVG: String? = null,
+    val biomePaths: String? = null,
 
     val pointsOfInterest: List<PointOfInterest>,
     val geysers: List<Geyser>
