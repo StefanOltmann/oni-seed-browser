@@ -207,14 +207,11 @@ private fun GeysersRow(
                 modifier = Modifier
                     .size(48.dp)
                     .background(
-                        if (hovered.value)
-                            MaterialTheme.colorScheme.surfaceVariant
-                        else
-                            MaterialTheme.colorScheme.surface,
+                        MaterialTheme.colorScheme.surface,
                         CircleShape
                     )
                     .border(
-                        1.dp,
+                        if (hovered.value) 2.dp else 1.dp,
                         Color.Black,
                         CircleShape
                     )
