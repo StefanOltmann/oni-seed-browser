@@ -26,6 +26,7 @@ import model.GeyserType
 import model.PointOfInterestType
 import model.WorldTrait
 import oni_seed_browser.app.generated.resources.Res
+import oni_seed_browser.app.generated.resources.asteroid_blasted_ceres
 import oni_seed_browser.app.generated.resources.asteroid_glowood_wasteland
 import oni_seed_browser.app.generated.resources.asteroid_irradiated_forest
 import oni_seed_browser.app.generated.resources.asteroid_irradiated_marsh
@@ -308,4 +309,5 @@ fun getAsteroidTypeDrawable(asteroidType: AsteroidType): DrawableResource =
         AsteroidType.CeresBaseGameAsteroid -> Res.drawable.cluster_base_ceres
         AsteroidType.Volcanic -> Res.drawable.cluster_base_volcanea
         AsteroidType.VanillaOasis -> Res.drawable.cluster_spacedout_oasisse
+        AsteroidType.MixingCeresAsteroid -> Res.drawable.asteroid_blasted_ceres
     }
