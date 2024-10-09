@@ -44,7 +44,6 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.LayoutCoordinates
@@ -71,6 +70,8 @@ import ui.theme.defaultSpacing
 import ui.theme.halfPadding
 import ui.theme.halfSpacing
 import ui.theme.hoverColor
+
+val countBackground = Color.Black.copy(alpha = 0.3F)
 
 @Composable
 fun AsteroidDisplay(
@@ -180,7 +181,6 @@ fun AsteroidDisplay(
     }
 }
 
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 private fun GeysersRow(
     geysers: List<Geyser>,
@@ -264,13 +264,25 @@ private fun GeysersRow(
 
                 if (count > 1) {
 
-                    Text(
-                        text = "$count",
-                        style = MaterialTheme.typography.bodyLarge,
-                        color = MaterialTheme.colorScheme.onBackground,
-                        fontWeight = FontWeight.Bold,
-                        modifier = Modifier.offset(y = 12.dp)
-                    )
+                    Box(
+                        contentAlignment = Alignment.Center,
+                        modifier = Modifier
+                            .size(20.dp)
+                            .offset(y = 14.dp)
+                            .background(
+                                countBackground,
+                                CircleShape
+                            )
+                    ) {
+
+                        Text(
+                            text = "$count",
+                            style = MaterialTheme.typography.bodyLarge,
+                            color = MaterialTheme.colorScheme.onBackground,
+                            fontWeight = FontWeight.Bold,
+                            modifier = Modifier.offset(y = -4.dp)
+                        )
+                    }
                 }
             }
         }
@@ -350,13 +362,25 @@ private fun PointOfInterestsRow(
 
                 if (count > 1) {
 
-                    Text(
-                        text = "$count",
-                        style = MaterialTheme.typography.bodyLarge,
-                        color = MaterialTheme.colorScheme.onBackground,
-                        fontWeight = FontWeight.Bold,
-                        modifier = Modifier.offset(y = 12.dp)
-                    )
+                    Box(
+                        contentAlignment = Alignment.Center,
+                        modifier = Modifier
+                            .size(20.dp)
+                            .offset(y = 14.dp)
+                            .background(
+                                countBackground,
+                                CircleShape
+                            )
+                    ) {
+
+                        Text(
+                            text = "$count",
+                            style = MaterialTheme.typography.bodyLarge,
+                            color = MaterialTheme.colorScheme.onBackground,
+                            fontWeight = FontWeight.Bold,
+                            modifier = Modifier.offset(y = -4.dp)
+                        )
+                    }
                 }
             }
         }
