@@ -20,20 +20,21 @@
 package ui
 
 import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.border
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
 import model.Asteroid
 import model.ZoneType
+import org.jetbrains.compose.resources.painterResource
 import ui.theme.defaultPadding
 
 @Composable
@@ -71,7 +72,6 @@ fun MapView(
                         asteroid.sizeX.times(scale).dp,
                         asteroid.sizeY.times(scale).dp
                     )
-                    .border(1.dp, Color.Green)
             ) {
 
                 for (biomeEntry in biomePaths) {
@@ -119,51 +119,44 @@ fun MapView(
                         )
                     }
                 }
-
-//                for (poi in asteroid.pointsOfInterest) {
-//
-//
-//
-//                }
-
             }
 
-//            Box(
-//                modifier = Modifier
-//                    .size(
-//                        asteroid.sizeX.dp.times(density.density * scale),
-//                        asteroid.sizeY.dp.times(density.density * scale)
-//                    )
-//            ) {
-//
-//                for (poi in asteroid.pointsOfInterest) {
-//
-//                    Image(
-//                        painter = painterResource(getPointOfInterestDrawable(poi.id)),
-//                        contentDescription = null,
-//                        modifier = Modifier
-//                            .offset(
-//                                x = poi.posX.dp.times(density.density * scale),
-//                                y = poi.posY.dp.times(density.density * scale)
-//                            )
-//                            .size(32.dp)
-//                    )
-//                }
-//
-//                for (geyser in asteroid.geysers) {
-//
-//                    Image(
-//                        painter = painterResource(getGeyserDrawable(geyser.id)),
-//                        contentDescription = null,
-//                        modifier = Modifier
-//                            .offset(
-//                                x = geyser.posX.dp.times(density.density * scale),
-//                                y = geyser.posY.dp.times(density.density * scale)
-//                            )
-//                            .size(32.dp)
-//                    )
-//                }
-//            }
+            Box(
+                modifier = Modifier
+                    .size(
+                        asteroid.sizeX.times(scale).dp,
+                        asteroid.sizeY.times(scale).dp
+                    )
+            ) {
+
+                for (poi in asteroid.pointsOfInterest) {
+
+                    Image(
+                        painter = painterResource(getPointOfInterestDrawable(poi.id)),
+                        contentDescription = null,
+                        modifier = Modifier
+                            .offset(
+                                x = poi.posX.dp.times(scale),
+                                y = poi.posY.dp.times(scale)
+                            )
+                            .size(32.dp)
+                    )
+                }
+
+                for (geyser in asteroid.geysers) {
+
+                    Image(
+                        painter = painterResource(getGeyserDrawable(geyser.id)),
+                        contentDescription = null,
+                        modifier = Modifier
+                            .offset(
+                                x = geyser.posX.dp.times(scale),
+                                y = geyser.posY.dp.times(scale)
+                            )
+                            .size(32.dp)
+                    )
+                }
+            }
         }
     }
 }
