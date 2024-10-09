@@ -25,6 +25,35 @@ data class BiomePaths(
 
 ) {
 
+    fun serialize(): String =
+        buildString {
+
+            for ((zoneType, pointsLists) in polygonMap) {
+
+                append(zoneType)
+                append(':')
+
+                for (points in pointsLists) {
+
+                    for ((pointIndex, point) in points.withIndex()) {
+
+                        if (pointIndex > 0)
+                            append(" ")
+
+                        append("${point.x},${point.y}")
+                    }
+
+                    append(';')
+                }
+
+                removeSuffix(";")
+
+                append('\n')
+            }
+
+            removeSuffix("\n")
+        }
+
     companion object {
 
         fun parse(biomePaths: String): BiomePaths {
