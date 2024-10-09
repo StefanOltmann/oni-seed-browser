@@ -33,7 +33,7 @@ import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
 import model.Asteroid
-import model.ZoneType
+import model.BiomePaths
 import org.jetbrains.compose.resources.painterResource
 import ui.theme.defaultPadding
 
@@ -61,7 +61,7 @@ fun MapView(
 
             val viewScale = maxHeightInPixels / asteroid.sizeY
 
-            val biomePaths = asteroid.biomePaths.split('\n')
+            val biomePaths = BiomePaths.parse(asteroid.biomePaths)
 
             Canvas(
                 modifier = Modifier
@@ -71,46 +71,33 @@ fun MapView(
                     )
             ) {
 
-                for (biomeEntry in biomePaths) {
-
-                    val bioEntryArray = biomeEntry.split(':')
-
-                    val zoneType = ZoneType.valueOf(bioEntryArray[0])
-
-                    val pointsLists = bioEntryArray[1].split(';')
+                for ((zoneType, pointsLists) in biomePaths.polygonMap) {
 
                     for (points in pointsLists) {
 
                         val path = Path()
 
-                        val pairs = points.split(' ')
-
-                        val startingPoint = pairs.first().split(',')
+                        val startingPoint = points.first()
 
                         path.moveTo(
-                            startingPoint[0].toFloat() * viewScale * density,
-                            startingPoint[1].toFloat() * viewScale * density
+                            startingPoint.x * viewScale * density,
+                            startingPoint.y * viewScale * density
                         )
 
-                        for (pair in pairs.drop(1)) {
-
-                            val point = pair.split(',')
+                        for (point in points.drop(1)) {
 
                             path.lineTo(
-                                point[0].toFloat() * viewScale * density,
-                                point[1].toFloat() * viewScale * density
+                                point.x * viewScale * density,
+                                point.y * viewScale * density
                             )
                         }
 
                         path.lineTo(
-                            startingPoint[0].toFloat() * viewScale * density,
-                            startingPoint[1].toFloat() * viewScale * density
+                            startingPoint.x * viewScale * density,
+                            startingPoint.y * viewScale * density
                         )
 
-                        drawPath(
-                            path,
-                            zoneType.color
-                        )
+                        drawPath(path, zoneType.color)
                     }
                 }
             }
