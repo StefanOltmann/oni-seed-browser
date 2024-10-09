@@ -24,9 +24,11 @@ import SearchResponse
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
@@ -40,6 +42,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import model.Asteroid
 import service.DefaultWebClient
@@ -55,6 +58,11 @@ val logoIconHeight = 80.dp
 
 const val ALLOW_WEB_CALLS = false
 
+data class Tooltip(
+    val position: DpOffset,
+    val content: @Composable BoxScope.() -> Unit
+)
+
 @Composable
 fun App() {
 
@@ -64,6 +72,8 @@ fun App() {
     ) {
 
         val showMapAsteroid = remember { mutableStateOf<Asteroid?>(null) }
+
+        val showTooltip = remember { mutableStateOf<Tooltip?>(null) }
 
         val demoMode = remember { mutableStateOf(true) }
 
@@ -135,118 +145,133 @@ fun App() {
             return@MaterialTheme
         }
 
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier
-                .background(MaterialTheme.colorScheme.background)
-        ) {
+        Box {
 
-            Text(
-                text = "ONI Seed Browser",
-                style = MaterialTheme.typography.displayLarge,
-                color = MaterialTheme.colorScheme.onBackground,
-                modifier = Modifier.defaultPadding()
-            )
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier
+                    .background(MaterialTheme.colorScheme.background)
+            ) {
 
-            errorMessage.value?.let {
+                Text(
+                    text = "ONI Seed Browser",
+                    style = MaterialTheme.typography.displayLarge,
+                    color = MaterialTheme.colorScheme.onBackground,
+                    modifier = Modifier.defaultPadding()
+                )
 
-                Column(
-                    modifier = Modifier
-                        .defaultPadding()
-                        .height(128.dp)
-                        .verticalScroll(rememberScrollState())
-                        .background(
-                            MaterialTheme.colorScheme.errorContainer,
-                            defaultRoundedCornerShape
+                errorMessage.value?.let {
+
+                    Column(
+                        modifier = Modifier
+                            .defaultPadding()
+                            .height(128.dp)
+                            .verticalScroll(rememberScrollState())
+                            .background(
+                                MaterialTheme.colorScheme.errorContainer,
+                                defaultRoundedCornerShape
+                            )
+                    ) {
+
+                        Text(
+                            text = it,
+                            style = MaterialTheme.typography.headlineSmall,
+                            color = MaterialTheme.colorScheme.onErrorContainer,
+                            fontWeight = FontWeight.Bold,
                         )
-                ) {
-
-                    Text(
-                        text = it,
-                        style = MaterialTheme.typography.headlineSmall,
-                        color = MaterialTheme.colorScheme.onErrorContainer,
-                        fontWeight = FontWeight.Bold,
-                    )
+                    }
                 }
-            }
 
-            Text(
-                text = "This is a non-functional work-in-progress prototype.",
-                style = MaterialTheme.typography.headlineSmall,
-                color = MaterialTheme.colorScheme.error,
-                fontWeight = FontWeight.Bold
-            )
+                Text(
+                    text = "This is a non-functional work-in-progress prototype.",
+                    style = MaterialTheme.typography.headlineSmall,
+                    color = MaterialTheme.colorScheme.error,
+                    fontWeight = FontWeight.Bold
+                )
 
-            DefaultSpacer()
+                DefaultSpacer()
 
-            FilterPanel()
+                FilterPanel()
 
-            if (ALLOW_WEB_CALLS) {
+                if (ALLOW_WEB_CALLS) {
 
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier
-                        .defaultPadding()
-                        .border(1.dp, MaterialTheme.colorScheme.onBackground, defaultRoundedCornerShape)
-                ) {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier
+                            .defaultPadding()
+                            .border(1.dp, MaterialTheme.colorScheme.onBackground, defaultRoundedCornerShape)
+                    ) {
 
-                    DefaultSpacer()
+                        DefaultSpacer()
 
-                    Switch(
-                        checked = demoMode.value,
-                        onCheckedChange = { demoMode.value = it }
-                    )
+                        Switch(
+                            checked = demoMode.value,
+                            onCheckedChange = { demoMode.value = it }
+                        )
 
-                    DefaultSpacer()
+                        DefaultSpacer()
 
-                    Text(
-                        text = "Demo Mode",
-                        style = MaterialTheme.typography.bodyLarge,
-                        color = MaterialTheme.colorScheme.onBackground,
-                        modifier = Modifier.defaultPadding()
-                    )
+                        Text(
+                            text = "Demo Mode",
+                            style = MaterialTheme.typography.bodyLarge,
+                            color = MaterialTheme.colorScheme.onBackground,
+                            modifier = Modifier.defaultPadding()
+                        )
+                    }
                 }
-            }
 
-            if (isGettingNewResults.value) {
+                if (isGettingNewResults.value) {
 
-                Box(
-                    contentAlignment = Alignment.Center,
-                    modifier = Modifier.weight(1F)
-                ) {
+                    Box(
+                        contentAlignment = Alignment.Center,
+                        modifier = Modifier.weight(1F)
+                    ) {
+
+                        Text(
+                            text = "Calling webservice...",
+                            style = MaterialTheme.typography.headlineSmall,
+                            color = MaterialTheme.colorScheme.onBackground
+                        )
+                    }
+
+                } else {
+
+                    val searchResponse = string.value
+
+                    val worldCount = searchResponse?.worlds?.size ?: 0
 
                     Text(
-                        text = "Calling webservice...",
+                        text = "Showing $worldCount worlds",
                         style = MaterialTheme.typography.headlineSmall,
                         color = MaterialTheme.colorScheme.onBackground
                     )
+
+                    Box(
+                        modifier = Modifier.weight(1F)
+                    ) {
+
+                        if (searchResponse != null)
+                            WorldViewList(
+                                searchResponse.worlds,
+                                showMapAsteroid,
+                                showTooltip
+                            )
+                    }
                 }
 
-            } else {
-
-                val searchResponse = string.value
-
-                val worldCount = searchResponse?.worlds?.size ?: 0
-
-                Text(
-                    text = "Showing $worldCount worlds",
-                    style = MaterialTheme.typography.headlineSmall,
-                    color = MaterialTheme.colorScheme.onBackground
-                )
-
-                Box(
-                    modifier = Modifier.weight(1F)
-                ) {
-
-                    if (searchResponse != null)
-                        WorldViewList(
-                            searchResponse.worlds,
-                            showMapAsteroid
-                        )
-                }
+                Footer()
             }
+        }
 
-            Footer()
+        val toolTip = showTooltip.value
+
+        if (toolTip != null) {
+
+            Box(
+                modifier = Modifier
+                    .offset(toolTip.position.x, toolTip.position.y),
+                content = toolTip.content
+            )
         }
     }
 }

@@ -43,7 +43,8 @@ import ui.theme.white
 @Composable
 fun WorldViewList(
     worlds: List<World>,
-    showMapAsteroid: MutableState<Asteroid?>
+    showMapAsteroid: MutableState<Asteroid?>,
+    showTooltip: MutableState<Tooltip?>
 ) {
 
     Box {
@@ -61,7 +62,8 @@ fun WorldViewList(
 
                 WorldView(
                     world,
-                    showMapAsteroid
+                    showMapAsteroid,
+                    showTooltip
                 )
             }
         }

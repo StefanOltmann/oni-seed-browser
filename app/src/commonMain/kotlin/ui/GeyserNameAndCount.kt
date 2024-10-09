@@ -21,13 +21,10 @@ package ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
@@ -36,14 +33,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.scale
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import model.GeyserType
 import org.jetbrains.compose.resources.painterResource
 import ui.theme.DefaultSpacer
-import ui.theme.darkGreen
-import ui.theme.darkRed
+import ui.theme.HalfSpacer
 
 @Composable
 fun GeyserCountAndName(
@@ -55,12 +49,29 @@ fun GeyserCountAndName(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
             .padding(4.dp)
-            .width(250.dp)
             .background(
                 color = MaterialTheme.colorScheme.surfaceVariant,
                 shape = RoundedCornerShape(16.dp)
             )
+            .border(
+                width = 2.dp,
+                color = MaterialTheme.colorScheme.background,
+                shape = RoundedCornerShape(16.dp)
+            )
     ) {
+
+        HalfSpacer()
+
+        if (count > 1) {
+
+            DefaultSpacer()
+
+            Text(
+                text = count.toString() + "x",
+                style = MaterialTheme.typography.bodyLarge,
+                color = MaterialTheme.colorScheme.onBackground
+            )
+        }
 
         Image(
             painter = painterResource(getGeyserDrawable(geyserType)),
@@ -68,37 +79,16 @@ fun GeyserCountAndName(
             modifier = Modifier
                 .size(32.dp)
                 .clip(CircleShape)
-                .scale(1.2f)
         )
 
-        DefaultSpacer()
+        HalfSpacer()
 
         Text(
             text = geyserType.displayName,
             style = MaterialTheme.typography.bodyLarge,
-            color = MaterialTheme.colorScheme.onBackground,
-            modifier = Modifier.weight(1F)
+            color = MaterialTheme.colorScheme.onBackground
         )
 
-        Box(
-            contentAlignment = Alignment.Center,
-            modifier = Modifier
-                .size(26.dp)
-                .background(
-                    color = if (count > 0) darkGreen else darkRed,
-                    shape = CircleShape
-                )
-        ) {
-
-            Text(
-                text = count.toString(),
-                style = MaterialTheme.typography.bodyLarge,
-                fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.onBackground,
-                modifier = Modifier.offset(y = -2.dp)
-            )
-        }
-
-        Spacer(modifier = Modifier.width(4.dp))
+        DefaultSpacer()
     }
 }

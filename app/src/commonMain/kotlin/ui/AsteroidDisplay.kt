@@ -39,14 +39,21 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.LayoutCoordinates
+import androidx.compose.ui.layout.onPlaced
+import androidx.compose.ui.layout.positionInRoot
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.min
 import androidx.compose.ui.unit.times
@@ -70,6 +77,7 @@ import ui.theme.hoverColor
 fun AsteroidDisplay(
     asteroid: Asteroid,
     isStarterAstroid: Boolean,
+    showTooltip: MutableState<Tooltip?>,
     showMap: () -> Unit
 ) {
 
@@ -163,7 +171,7 @@ fun AsteroidDisplay(
 
                 HalfSpacer()
 
-                GeysersRow(asteroid.geysers, maxWidth, isStarterAstroid)
+                GeysersRow(asteroid.geysers, maxWidth, isStarterAstroid, showTooltip)
 
                 HalfSpacer()
 
@@ -178,7 +186,8 @@ fun AsteroidDisplay(
 private fun GeysersRow(
     geysers: List<Geyser>,
     maxWidth: Dp,
-    isStarterAstroid: Boolean
+    isStarterAstroid: Boolean,
+    showTooltip: MutableState<Tooltip?>
 ) {
 
     val geyserByTypeMap = geysers.groupBy { it.id }
@@ -202,6 +211,32 @@ private fun GeysersRow(
 
             val hovered = remember { mutableStateOf(false) }
 
+            val coordinates = remember { mutableStateOf<LayoutCoordinates?>(null) }
+
+            val posInRoot = coordinates.value?.positionInRoot()
+
+            val density = LocalDensity.current.density
+
+            LaunchedEffect(hovered.value) {
+
+                if (hovered.value && posInRoot != null) {
+
+                    showTooltip.value = Tooltip(
+                        position = DpOffset(
+                            posInRoot.x.dp.div(density).plus(24.dp),
+                            posInRoot.y.dp.div(density).plus(24.dp)
+                        ),
+                        content = {
+
+                            GeyserCountAndName(geyserType, count)
+                        }
+                    )
+                }
+
+                if (!hovered.value)
+                    showTooltip.value = null
+            }
+
             Box(
                 contentAlignment = Alignment.Center,
                 modifier = Modifier
@@ -215,6 +250,9 @@ private fun GeysersRow(
                         Color.Black,
                         CircleShape
                     )
+                    .onPlaced {
+                        coordinates.value = it
+                    }
                     .onHover(hovered)
             ) {
 

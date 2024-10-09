@@ -54,7 +54,8 @@ val widthPerWorld: Dp = 380.dp
 @Composable
 fun WorldView(
     world: World,
-    showMapAsteroid: MutableState<Asteroid?>
+    showMapAsteroid: MutableState<Asteroid?>,
+    showTooltip: MutableState<Tooltip?>
 ) {
 
     Column(
@@ -74,7 +75,8 @@ fun WorldView(
 
             AsteroidsGrid(
                 world,
-                showMapAsteroid
+                showMapAsteroid,
+                showTooltip
             )
 
         } else {
@@ -131,7 +133,8 @@ fun WorldView(
 @Composable
 private fun AsteroidsGrid(
     world: World,
-    showMapAsteroid: MutableState<Asteroid?>
+    showMapAsteroid: MutableState<Asteroid?>,
+    showTooltip: MutableState<Tooltip?>
 ) {
 
     BoxWithConstraints(
@@ -157,6 +160,7 @@ private fun AsteroidsGrid(
             AsteroidDisplay(
                 asteroid = firstAsteroid,
                 isStarterAstroid = true,
+                showTooltip = showTooltip,
                 showMap = {
                     showMapAsteroid.value = firstAsteroid
                 }
@@ -181,6 +185,7 @@ private fun AsteroidsGrid(
                             AsteroidDisplay(
                                 asteroid = asteroid,
                                 isStarterAstroid = false,
+                                showTooltip = showTooltip,
                                 showMap = {
                                     showMapAsteroid.value = asteroid
                                 }
