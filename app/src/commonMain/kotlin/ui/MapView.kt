@@ -21,14 +21,16 @@ package ui
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
@@ -47,31 +49,31 @@ fun MapView(
 
     Box(
         contentAlignment = Alignment.Center,
-        modifier = Modifier
-            .defaultPadding()
-            .fillMaxWidth()
+        modifier = Modifier.defaultPadding()
     ) {
 
         BoxWithConstraints(
-            contentAlignment = Alignment.Center
+            contentAlignment = Alignment.Center,
+            modifier = Modifier.fillMaxSize()
         ) {
 
-            val density = LocalDensity.current
+            val density = LocalDensity.current.density
 
-            val maxHeightInPixels = maxHeight.div(density.density).value
+            val maxHeightInPixels = maxHeight.value
 
             val viewScale = maxHeightInPixels / asteroid.sizeY
 
-            val scale = viewScale * density.density
+            println(viewScale)
 
             val biomePaths = asteroid.biomePaths.split('\n')
 
             Canvas(
                 modifier = Modifier
                     .size(
-                        asteroid.sizeX.times(scale).dp,
-                        asteroid.sizeY.times(scale).dp
+                        width = (asteroid.sizeX * viewScale).dp,
+                        height = (asteroid.sizeY * viewScale).dp,
                     )
+                    .border(1.dp, Color.Green)
             ) {
 
                 for (biomeEntry in biomePaths) {
@@ -94,8 +96,8 @@ fun MapView(
                         val startingPoint = pairs.first().split(',')
 
                         path.moveTo(
-                            startingPoint[0].toFloat() * scale * density.density,
-                            startingPoint[1].toFloat() * scale * density.density
+                            startingPoint[0].toFloat() * viewScale * density,
+                            startingPoint[1].toFloat() * viewScale * density
                         )
 
                         for (pair in pairs.drop(1)) {
@@ -103,14 +105,14 @@ fun MapView(
                             val point = pair.split(',')
 
                             path.lineTo(
-                                point[0].toFloat() * scale * density.density,
-                                point[1].toFloat() * scale * density.density
+                                point[0].toFloat() * viewScale * density,
+                                point[1].toFloat() * viewScale * density
                             )
                         }
 
                         path.lineTo(
-                            startingPoint[0].toFloat() * scale * density.density,
-                            startingPoint[1].toFloat() * scale * density.density
+                            startingPoint[0].toFloat() * viewScale * density,
+                            startingPoint[1].toFloat() * viewScale * density
                         )
 
                         drawPath(
@@ -124,8 +126,8 @@ fun MapView(
             Box(
                 modifier = Modifier
                     .size(
-                        asteroid.sizeX.times(scale).dp,
-                        asteroid.sizeY.times(scale).dp
+                        width = (asteroid.sizeX * viewScale).dp,
+                        height = (asteroid.sizeY * viewScale).dp,
                     )
             ) {
 
@@ -136,8 +138,8 @@ fun MapView(
                         contentDescription = null,
                         modifier = Modifier
                             .offset(
-                                x = poi.posX.dp.times(scale),
-                                y = poi.posY.dp.times(scale)
+                                x = poi.posX.dp,
+                                y = poi.posY.dp
                             )
                             .size(32.dp)
                     )
@@ -150,8 +152,8 @@ fun MapView(
                         contentDescription = null,
                         modifier = Modifier
                             .offset(
-                                x = geyser.posX.dp.times(scale),
-                                y = geyser.posY.dp.times(scale)
+                                x = geyser.posX.dp,
+                                y = geyser.posY.dp
                             )
                             .size(32.dp)
                     )
