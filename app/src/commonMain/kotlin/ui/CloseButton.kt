@@ -34,7 +34,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import ui.theme.defaultSpacing
+import ui.theme.halfSpacing
 import ui.theme.hoverColor
 
 @Composable
@@ -60,7 +60,7 @@ fun CloseButton(
                 MaterialTheme.colorScheme.onBackground,
             modifier = Modifier
                 .onHover(hovered)
-                .padding(horizontal = defaultSpacing)
+                .padding(horizontal = halfSpacing)
                 .size(40.dp)
                 .noRippleClickable(onClick)
         )
