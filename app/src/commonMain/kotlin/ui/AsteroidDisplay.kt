@@ -58,7 +58,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.min
 import androidx.compose.ui.unit.times
 import model.Asteroid
-import model.AsteroidType
 import model.Geyser
 import model.PointOfInterest
 import org.jetbrains.compose.resources.painterResource
@@ -81,7 +80,7 @@ fun AsteroidDisplay(
     showMap: () -> Unit
 ) {
 
-    val canShowMap = asteroid.biomesSVG != null && asteroid.id == AsteroidType.VanillaVolcanic
+    val canShowMap = asteroid.biomePaths != null
 
     Row(
         verticalAlignment = Alignment.CenterVertically,

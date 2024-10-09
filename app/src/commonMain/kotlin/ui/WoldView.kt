@@ -19,32 +19,22 @@
 
 package ui
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import model.Asteroid
 import model.World
-import org.jetbrains.compose.resources.loadSvgPainter
-import org.jetbrains.compose.resources.painterResource
-import service.testSvg
 import ui.theme.FillSpacer
-import ui.theme.defaultPadding
 import ui.theme.defaultRoundedCornerShape
 import ui.theme.defaultSpacing
 import kotlin.math.max
@@ -78,54 +68,6 @@ fun WorldView(
                 showMapAsteroid,
                 showTooltip
             )
-
-        } else {
-
-            Box(
-                contentAlignment = Alignment.Center,
-                modifier = Modifier
-                    .defaultPadding()
-                    .fillMaxWidth()
-            ) {
-
-                Box {
-
-                    val density = LocalDensity.current
-
-                    Image(
-                        painter = loadSvgPainter(testSvg.encodeToByteArray(), density),
-                        contentDescription = null
-                    )
-
-                    for (poi in asteroid.pointsOfInterest) {
-
-                        Image(
-                            painter = painterResource(getPointOfInterestDrawable(poi.id)),
-                            contentDescription = null,
-                            modifier = Modifier
-                                .offset(
-                                    x = poi.posX.dp.times(density.density),
-                                    y = poi.posY.dp.times(density.density)
-                                )
-                                .size(32.dp)
-                        )
-                    }
-
-                    for (geyser in asteroid.geysers) {
-
-                        Image(
-                            painter = painterResource(getGeyserDrawable(geyser.id)),
-                            contentDescription = null,
-                            modifier = Modifier
-                                .offset(
-                                    x = geyser.posX.dp.times(density.density),
-                                    y = geyser.posY.dp.times(density.density)
-                                )
-                                .size(32.dp)
-                        )
-                    }
-                }
-            }
         }
     }
 }
