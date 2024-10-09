@@ -19,31 +19,35 @@
 
 package model
 
+import androidx.compose.ui.graphics.Color
 import kotlinx.serialization.Serializable
 
 @Suppress("UNUSED")
 @Serializable
-enum class ZoneType {
+enum class ZoneType(
+    val id: Int,
+    val color: Color
+) {
 
-    Barren,
-    BoggyMarsh,
-    CarrotQuarry,
-    CrystalCaverns,
-    Forest,
-    FrozenWastes,
-    IceCaves,
-    MagmaCore,
-    Metallic,
-    Moo,
-    Ocean,
-    OilField,
-    Radioactive,
-    RocketInterior,
-    Rust,
-    Sandstone,
-    Space,
-    SugarWoods,
-    Swamp,
-    ToxicJungle,
-    Wasteland
+    FrozenWastes(0, Color(0xFF9DC9D6)),
+    CrystalCaverns(1, Color(0xFFAC72C1)),
+    BoggyMarsh(2, Color(0xFF7B974B)),
+    Sandstone(3, Color(0xFFF2BB47)),
+    ToxicJungle(4, Color(0xFFCB95A3)),
+    MagmaCore(5, Color(0xFFDE5A3B)),
+    OilField(6, Color(0xFF3F1C05)),
+    Space(7, Color(0xFF242424)),
+    Ocean(8, Color(0xFFD39898)),
+    Rust(9, Color(0xFFFFA007)),
+    Forest(10, Color(0xFF8EC039)),
+    Radioactive(11, Color(0xFF4AE458)),
+    Swamp(12, Color(0xFFEB9B3F)),
+    Wasteland(13, Color(0xFFCC3636)),
+    RocketInterior(14, Color(0xFF9E48DF)),
+    Metallic(15, Color(0xFFFFA007)),
+    Barren(16, Color(0xFFF2BB47)),
+    Moo(17, Color(0xFF8EC039)),
+    IceCaves(18, Color(0xFFABCFEA)),
+    CarrotQuarry(19, Color(0xFFCDA2C7)),
+    SugarWoods(20, Color(0xFFA2CDA4))
 }

@@ -19,22 +19,25 @@
 
 package ui
 
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
 import model.Asteroid
-import org.jetbrains.compose.resources.loadSvgPainter
+import model.ZoneType
 import org.jetbrains.compose.resources.painterResource
-import service.testSvg
+import service.testPaths
 import ui.theme.defaultPadding
 
 @Composable
@@ -59,11 +62,66 @@ fun MapView(
 
             val scale = maxHeightInPixels / asteroid.sizeY
 
-            Image(
-                painter = loadSvgPainter(testSvg.encodeToByteArray(), density),
-                contentDescription = null,
-                modifier = Modifier.fillMaxSize()
-            )
+            val biomePaths = testPaths.split('\n')
+
+            Canvas(
+                modifier = Modifier
+                    .size(
+                        asteroid.sizeX.times(density.density).dp,
+                        asteroid.sizeY.times(density.density).dp
+                    )
+                    .border(1.dp, Color.Green)
+            ) {
+
+                for (biomeEntry in biomePaths) {
+
+                    val bioEntryArray = biomeEntry.split(':')
+
+                    val zoneType = ZoneType.valueOf(bioEntryArray[0])
+
+                    val pointsLists = bioEntryArray[1].split(';')
+
+                    for (points in pointsLists) {
+
+                        val path = Path()
+
+                        val pairs = points.split(' ')
+
+                        val startingPoint = pairs.first().split(',')
+
+                        path.moveTo(
+                            startingPoint[0].toFloat(),
+                            startingPoint[1].toFloat()
+                        )
+
+                        for (pair in pairs.drop(1)) {
+
+                            val point = pair.split(',')
+
+                            path.lineTo(
+                                point[0].toFloat(),
+                                point[1].toFloat()
+                            )
+                        }
+
+                        path.lineTo(
+                            startingPoint[0].toFloat(),
+                            startingPoint[1].toFloat()
+                        )
+
+                        drawPath(
+                            path,
+                            zoneType.color
+                        )
+                    }
+                }
+            }
+
+//            Image(
+//                painter = loadSvgPainter(testSvg.encodeToByteArray(), density),
+//                contentDescription = null,
+//                modifier = Modifier.fillMaxSize()
+//            )
 
             Box(
                 modifier = Modifier
