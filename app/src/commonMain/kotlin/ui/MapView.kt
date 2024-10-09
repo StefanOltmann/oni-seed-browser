@@ -22,14 +22,13 @@ package ui
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
-import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
 import model.Asteroid
@@ -50,7 +49,9 @@ fun MapView(
             .fillMaxWidth()
     ) {
 
-        BoxWithConstraints {
+        BoxWithConstraints(
+            contentAlignment = Alignment.Center
+        ) {
 
             val density = LocalDensity.current
 
@@ -61,36 +62,44 @@ fun MapView(
             Image(
                 painter = loadSvgPainter(testSvg.encodeToByteArray(), density),
                 contentDescription = null,
-                contentScale = ContentScale.FillHeight,
-                modifier = Modifier.fillMaxHeight()
+                modifier = Modifier.fillMaxSize()
             )
 
-            for (poi in asteroid.pointsOfInterest) {
+            Box(
+                modifier = Modifier
+                    .size(
+                        asteroid.sizeX.dp.times(density.density * scale),
+                        asteroid.sizeY.dp.times(density.density * scale)
+                    )
+            ) {
 
-                Image(
-                    painter = painterResource(getPointOfInterestDrawable(poi.id)),
-                    contentDescription = null,
-                    modifier = Modifier
-                        .offset(
-                            x = poi.posX.dp.times(density.density).times(scale),
-                            y = poi.posY.dp.times(density.density).times(scale)
-                        )
-                        .size(32.dp)
-                )
-            }
+                for (poi in asteroid.pointsOfInterest) {
 
-            for (geyser in asteroid.geysers) {
+                    Image(
+                        painter = painterResource(getPointOfInterestDrawable(poi.id)),
+                        contentDescription = null,
+                        modifier = Modifier
+                            .offset(
+                                x = poi.posX.dp.times(density.density * scale),
+                                y = poi.posY.dp.times(density.density * scale)
+                            )
+                            .size(32.dp)
+                    )
+                }
 
-                Image(
-                    painter = painterResource(getGeyserDrawable(geyser.id)),
-                    contentDescription = null,
-                    modifier = Modifier
-                        .offset(
-                            x = geyser.posX.dp.times(density.density).times(scale),
-                            y = geyser.posY.dp.times(density.density).times(scale)
-                        )
-                        .size(32.dp)
-                )
+                for (geyser in asteroid.geysers) {
+
+                    Image(
+                        painter = painterResource(getGeyserDrawable(geyser.id)),
+                        contentDescription = null,
+                        modifier = Modifier
+                            .offset(
+                                x = geyser.posX.dp.times(density.density * scale),
+                                y = geyser.posY.dp.times(density.density * scale)
+                            )
+                            .size(32.dp)
+                    )
+                }
             }
         }
     }

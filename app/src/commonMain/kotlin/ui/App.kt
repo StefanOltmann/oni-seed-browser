@@ -115,7 +115,7 @@ fun App() {
                 modifier = Modifier
                     .background(Color.Black)
                     .noRippleClickable {
-                        showMapAsteroid.value = null
+                        /* Ignore clicks */
                     }
             ) {
 
