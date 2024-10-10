@@ -29,6 +29,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
@@ -70,6 +71,8 @@ fun App() {
         colorScheme = appColorScheme,
         typography = AppTypography()
     ) {
+
+        val lazyListState = rememberLazyListState()
 
         val showMapAsteroid = remember { mutableStateOf<Asteroid?>(null) }
 
@@ -252,6 +255,7 @@ fun App() {
 
                         if (searchResponse != null)
                             WorldViewList(
+                                lazyListState,
                                 searchResponse.worlds,
                                 showMapAsteroid,
                                 showTooltip
