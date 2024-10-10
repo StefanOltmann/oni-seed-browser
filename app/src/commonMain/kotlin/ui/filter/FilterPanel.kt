@@ -20,48 +20,27 @@
 package ui.filter
 
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
 import model.filter.FilterQuery
-import org.jetbrains.compose.resources.DrawableResource
-import org.jetbrains.compose.resources.painterResource
 import ui.HorizontalSeparator
-import ui.getAsteroidTypeDrawable
 import ui.noRippleClickable
-import ui.onHover
 import ui.theme.DefaultSpacer
-import ui.theme.FillSpacer
-import ui.theme.ctaColor
-import ui.theme.defaultPadding
 import ui.theme.defaultRoundedCornerShape
-import ui.theme.defaultSpacing
 import ui.theme.doubleSpacing
-import ui.theme.halfSpacing
-import ui.theme.hoverColor
 
 enum class FilterSelectionType {
     ASTEROID,
@@ -178,220 +157,5 @@ fun FilterPanel() {
                 }
             }
         }
-    }
-}
-
-@Composable
-private fun OverlayContent(
-    filterQueryState: MutableState<FilterQuery>,
-    filterSelection: MutableState<FilterSelection?>
-) {
-
-    val filterSelectionValue = filterSelection.value
-        ?: return
-
-    val cluster = filterQueryState.value.cluster
-        ?: return
-
-    Box(
-        modifier = Modifier
-            .defaultPadding()
-            .background(
-                MaterialTheme.colorScheme.background,
-                defaultRoundedCornerShape
-            )
-    ) {
-
-        Column(
-            modifier = Modifier.verticalScroll(rememberScrollState())
-        ) {
-
-            if (filterSelectionValue.type == FilterSelectionType.ASTEROID) {
-
-                FilterSelectionEntryItem(
-                    text = "Sum of all asteroids",
-                    onClick = {
-
-                        /* Update the query */
-                        filterQueryState.value = filterQueryState.value.setAsteroid(
-                            rulesIndex = filterSelectionValue.rulesIndex,
-                            ruleIndex = filterSelectionValue.ruleIndex,
-                            asteroidType = null
-                        )
-
-                        /* Close pop-up */
-                        filterSelection.value = null
-                    }
-                )
-
-                for (asteroidType in cluster.asteroidTypes) {
-
-                    FilterSelectionEntryItem(
-                        image = getAsteroidTypeDrawable(asteroidType),
-                        text = asteroidType.displayName,
-                        onClick = {
-
-                            /* Update the query */
-                            filterQueryState.value = filterQueryState.value.setAsteroid(
-                                rulesIndex = filterSelectionValue.rulesIndex,
-                                ruleIndex = filterSelectionValue.ruleIndex,
-                                asteroidType = asteroidType
-                            )
-
-                            /* Close pop-up */
-                            filterSelection.value = null
-                        }
-                    )
-                }
-
-            } else {
-
-
-                for (each in 1..5) {
-
-                    FilterSelectionEntryItem(
-                        text = "Test item $each",
-                        onClick = {
-
-                            /* Close pop-up */
-                            filterSelection.value = null
-                        }
-                    )
-                }
-            }
-        }
-    }
-}
-
-@Composable
-private fun FilterSelectionEntryItem(
-    image: DrawableResource? = null,
-    text: String,
-    onClick: () -> Unit
-) {
-
-    val hovered = remember { mutableStateOf(false) }
-
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier
-            .onHover(hovered)
-            .padding(
-                horizontal = defaultSpacing,
-                vertical = halfSpacing
-            )
-            .height(40.dp)
-            .sizeIn(minWidth = 200.dp, maxWidth = 400.dp)
-            .noRippleClickable(onClick)
-    ) {
-
-        if (image != null) {
-
-            Image(
-                painter = painterResource(image),
-                contentDescription = null,
-                modifier = Modifier.size(40.dp)
-            )
-        }
-
-        Text(
-            text = text,
-            style = MaterialTheme.typography.bodyLarge,
-            color = if (hovered.value)
-                hoverColor
-            else
-                MaterialTheme.colorScheme.onBackground,
-            modifier = Modifier.defaultPadding()
-        )
-    }
-}
-
-@Composable
-private fun ControlsRow(
-    filterQueryState: MutableState<FilterQuery>,
-    filterPanelOpen: MutableState<Boolean>
-) {
-
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.defaultPadding()
-    ) {
-
-        FillSpacer()
-
-        ResetButton(
-            onClick = {
-                filterQueryState.value = FilterQuery.ALL
-            }
-        )
-
-        DefaultSpacer()
-
-        SearchButton(
-            onClick = {
-
-                // TODO Send to server
-                println("Search")
-
-                /* Close the panel, so the user can see the results. */
-                filterPanelOpen.value = false
-            }
-        )
-    }
-}
-
-@Composable
-private fun ResetButton(
-    onClick: () -> Unit
-) {
-
-    Box(
-        contentAlignment = Alignment.Center,
-        modifier = Modifier
-            .border(
-                1.dp,
-                MaterialTheme.colorScheme.onBackground,
-                defaultRoundedCornerShape
-            )
-            .size(120.dp, 48.dp)
-            .clickable { onClick() }
-    ) {
-
-        Text(
-            text = "RESET",
-            style = MaterialTheme.typography.bodyLarge,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colorScheme.onBackground
-        )
-    }
-}
-
-@Composable
-private fun SearchButton(
-    onClick: () -> Unit
-) {
-
-    Box(
-        contentAlignment = Alignment.Center,
-        modifier = Modifier
-            .border(
-                1.dp,
-                MaterialTheme.colorScheme.onBackground,
-                defaultRoundedCornerShape
-            )
-            .background(
-                ctaColor,
-                defaultRoundedCornerShape
-            )
-            .size(120.dp, 48.dp)
-            .clickable { onClick() }
-    ) {
-
-        Text(
-            text = "SEARCH",
-            style = MaterialTheme.typography.bodyLarge,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colorScheme.onBackground
-        )
     }
 }
