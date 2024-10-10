@@ -20,13 +20,21 @@
 package model.filter
 
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 /**
- * Vanilla-only filter
+ * Basegame-only filter
  */
 @Serializable
 data class FilterItemSpaceDestinationCount(
+
     val poi: String,
+
     val condition: FilterCondition,
     val count: Int
-) : FilterItem
+
+) : FilterItem {
+
+    @Transient
+    override val type: FilterItemType = FilterItemType.SPACE_DESTINATION_COUNT
+}

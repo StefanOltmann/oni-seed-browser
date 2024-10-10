@@ -19,22 +19,12 @@
 
 package model.filter
 
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.Transient
-import model.GeyserType
-import serializer.GeyserTypeSerializer
+enum class FilterItemType(
+    val displayName: String
+) {
 
-@Serializable
-data class FilterItemGeyserCount(
-
-    @Serializable(with = GeyserTypeSerializer::class)
-    val geyserId: GeyserType,
-
-    val condition: FilterCondition,
-    val count: Int
-
-) : FilterItem {
-
-    @Transient
-    override val type: FilterItemType = FilterItemType.GEYSER_COUNT
+    GEYSER_COUNT("Geyser count"),
+    GEYSER_OUTPUT("Geyser output"),
+    WORLD_TRAIT("World trait"),
+    SPACE_DESTINATION_COUNT("Space destination count")
 }

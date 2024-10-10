@@ -19,4 +19,8 @@
 
 package model.filter
 
-interface FilterItem
+interface FilterItem {
+
+    val type: FilterItemType
+
+}

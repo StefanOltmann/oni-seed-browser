@@ -20,6 +20,7 @@
 package model.filter
 
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 import model.WorldTrait
 
 @Serializable
@@ -30,4 +31,8 @@ data class FilterItemWorldTrait(
 
     val worldTrait: WorldTrait
 
-) : FilterItem
+) : FilterItem {
+
+    @Transient
+    override val type: FilterItemType = FilterItemType.WORLD_TRAIT
+}

@@ -20,6 +20,7 @@
 package model.filter
 
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 import model.GeyserType
 import serializer.GeyserTypeSerializer
 
@@ -28,6 +29,12 @@ data class FilterItemGeyserOutput(
 
     @Serializable(with = GeyserTypeSerializer::class)
     val geyserId: GeyserType,
+
     val condition: FilterCondition,
     val outputInKgPerSecond: Double
-) : FilterItem
+
+) : FilterItem {
+
+    @Transient
+    override val type: FilterItemType = FilterItemType.GEYSER_OUTPUT
+}
