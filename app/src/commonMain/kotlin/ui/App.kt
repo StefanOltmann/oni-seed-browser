@@ -57,7 +57,7 @@ import ui.theme.defaultRoundedCornerShape
 
 val logoIconHeight = 80.dp
 
-const val ALLOW_WEB_CALLS = false
+const val ALLOW_WEB_CALLS = true
 
 data class Tooltip(
     val position: DpOffset,
