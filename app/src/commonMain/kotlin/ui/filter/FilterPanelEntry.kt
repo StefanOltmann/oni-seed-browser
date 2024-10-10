@@ -144,60 +144,63 @@ fun FilterPanelEntry(
                 }
             }
 
-            VerticalSeparator()
+            if (rule.geyserCount != null || rule.geyserOutput != null) {
 
-            val hoveredCondition = remember { mutableStateOf(false) }
+                VerticalSeparator()
 
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier
-                    .padding(horizontal = defaultSpacing)
-                    .fillMaxHeight()
-                    .onHover(hoveredCondition)
-                    .noRippleClickable(onConditionFilterClicked)
-            ) {
+                val hoveredCondition = remember { mutableStateOf(false) }
 
-                Box(
-                    contentAlignment = Alignment.Center,
-                    modifier = Modifier.width(40.dp)
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier
+                        .padding(horizontal = defaultSpacing)
+                        .fillMaxHeight()
+                        .onHover(hoveredCondition)
+                        .noRippleClickable(onConditionFilterClicked)
                 ) {
 
-                    Text(
-                        text = rule.getConditionDescription(),
-                        style = MaterialTheme.typography.bodyLarge,
-                        fontWeight = FontWeight.Bold,
-                        color = if (hoveredCondition.value)
-                            hoverColor
-                        else
-                            MaterialTheme.colorScheme.onBackground
-                    )
+                    Box(
+                        contentAlignment = Alignment.Center,
+                        modifier = Modifier.width(40.dp)
+                    ) {
+
+                        Text(
+                            text = rule.getConditionDescription(),
+                            style = MaterialTheme.typography.bodyLarge,
+                            fontWeight = FontWeight.Bold,
+                            color = if (hoveredCondition.value)
+                                hoverColor
+                            else
+                                MaterialTheme.colorScheme.onBackground
+                        )
+                    }
                 }
+
+                VerticalSeparator()
+
+                DefaultSpacer()
+
+                val textFieldValue = remember {
+                    mutableStateOf(TextFieldValue(text = "0"))
+                }
+
+                BasicTextField(
+                    value = textFieldValue.value,
+                    onValueChange = {
+
+                        if (it.text.all(Char::isDigit))
+                            textFieldValue.value = it
+                    },
+                    cursorBrush = SolidColor(MaterialTheme.colorScheme.onBackground),
+                    singleLine = true,
+                    textStyle = MaterialTheme.typography.bodyLarge.copy(
+                        color = MaterialTheme.colorScheme.onBackground
+                    ),
+                    modifier = Modifier
+                        .background(MaterialTheme.colorScheme.surface)
+                        .width(60.dp)
+                )
             }
-
-            VerticalSeparator()
-
-            DefaultSpacer()
-
-            val textFieldValue = remember {
-                mutableStateOf(TextFieldValue(text = "0"))
-            }
-
-            BasicTextField(
-                value = textFieldValue.value,
-                onValueChange = {
-
-                    if (it.text.all(Char::isDigit))
-                        textFieldValue.value = it
-                },
-                cursorBrush = SolidColor(MaterialTheme.colorScheme.onBackground),
-                singleLine = true,
-                textStyle = MaterialTheme.typography.bodyLarge.copy(
-                    color = MaterialTheme.colorScheme.onBackground
-                ),
-                modifier = Modifier
-                    .background(MaterialTheme.colorScheme.surface)
-                    .width(60.dp)
-            )
 
             DefaultSpacer()
         }
