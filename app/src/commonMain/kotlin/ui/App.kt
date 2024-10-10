@@ -19,21 +19,16 @@
 
 package ui
 
-import SearchRequest
-import SearchResponse
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -45,9 +40,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
+import kotlinx.serialization.json.Json
 import model.Asteroid
+import model.World
+import model.filter.FilterQuery
 import service.DefaultWebClient
-import service.DummyWebClient
+import service.sampleWorldsJson
 import ui.filter.FilterPanel
 import ui.theme.AppTypography
 import ui.theme.DefaultSpacer
@@ -56,8 +54,6 @@ import ui.theme.defaultPadding
 import ui.theme.defaultRoundedCornerShape
 
 val logoIconHeight = 80.dp
-
-const val ALLOW_WEB_CALLS = true
 
 data class Tooltip(
     val position: DpOffset,
@@ -72,24 +68,33 @@ fun App() {
         typography = AppTypography()
     ) {
 
+        /* Changes to this state will trigger a call to the API */
+        val submitFilterQueryState = remember { mutableStateOf(FilterQuery.ALL) }
+
         val lazyListState = rememberLazyListState()
 
         val showMapAsteroid = remember { mutableStateOf<Asteroid?>(null) }
 
         val showTooltip = remember { mutableStateOf<Tooltip?>(null) }
 
-        val demoMode = remember { mutableStateOf(true) }
-
         val isGettingNewResults = remember { mutableStateOf(false) }
 
         val errorMessage = remember { mutableStateOf<String?>(null) }
 
-        val string = produceState<SearchResponse?>(null, demoMode.value) {
+        val searchResponse = produceState(emptyList<World>(), submitFilterQueryState.value) {
 
-            val webClient = if (demoMode.value)
-                DummyWebClient
-            else
-                DefaultWebClient
+            if (submitFilterQueryState.value == FilterQuery.ALL) {
+
+                println("Load demo data...")
+
+                val worlds = Json.decodeFromString<List<World>>(sampleWorldsJson)
+
+                value = worlds.sortedBy { it.cluster }
+
+                return@produceState
+            }
+
+            println("Searching...")
 
             isGettingNewResults.value = true
 
@@ -98,15 +103,10 @@ fun App() {
                 errorMessage.value = null
 
                 /* Reset the data */
-                value = null
+                value = emptyList()
 
-                value = webClient.search(
-                    SearchRequest(
-                        selectedWorld = "null",
-                        worldTraits = emptyList(),
-                        page = 0,
-                        vanilla = true
-                    )
+                value = DefaultWebClient.search(
+                    submitFilterQueryState.value
                 )
 
             } catch (ex: Exception) {
@@ -142,7 +142,6 @@ fun App() {
 
                     MapView(asteroid)
                 }
-
             }
 
             return@MaterialTheme
@@ -194,34 +193,7 @@ fun App() {
 
                 DefaultSpacer()
 
-                FilterPanel()
-
-                if (ALLOW_WEB_CALLS) {
-
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        modifier = Modifier
-                            .defaultPadding()
-                            .border(1.dp, MaterialTheme.colorScheme.onBackground, defaultRoundedCornerShape)
-                    ) {
-
-                        DefaultSpacer()
-
-                        Switch(
-                            checked = demoMode.value,
-                            onCheckedChange = { demoMode.value = it }
-                        )
-
-                        DefaultSpacer()
-
-                        Text(
-                            text = "Demo Mode",
-                            style = MaterialTheme.typography.bodyLarge,
-                            color = MaterialTheme.colorScheme.onBackground,
-                            modifier = Modifier.defaultPadding()
-                        )
-                    }
-                }
+                FilterPanel(submitFilterQueryState)
 
                 if (isGettingNewResults.value) {
 
@@ -239,9 +211,9 @@ fun App() {
 
                 } else {
 
-                    val searchResponse = string.value
+                    val worlds = searchResponse.value
 
-                    val worldCount = searchResponse?.worlds?.size ?: 0
+                    val worldCount = worlds.size
 
                     Text(
                         text = "Showing $worldCount worlds",
@@ -253,13 +225,12 @@ fun App() {
                         modifier = Modifier.weight(1F)
                     ) {
 
-                        if (searchResponse != null)
-                            WorldViewList(
-                                lazyListState,
-                                searchResponse.worlds,
-                                showMapAsteroid,
-                                showTooltip
-                            )
+                        WorldViewList(
+                            lazyListState,
+                            worlds,
+                            showMapAsteroid,
+                            showTooltip
+                        )
                     }
                 }
 

@@ -20,48 +20,21 @@
 package ui.filter
 
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.text.selection.SelectionContainer
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
 import model.filter.FilterQuery
 import ui.theme.DefaultSpacer
 import ui.theme.FillSpacer
 import ui.theme.defaultPadding
-import ui.theme.defaultSpacing
 
 @Composable
 fun ControlsRow(
     filterQueryState: MutableState<FilterQuery>,
-    filterPanelOpen: MutableState<Boolean>
+    filterPanelOpen: MutableState<Boolean>,
+    submitFilterQueryState: MutableState<FilterQuery>
 ) {
-
-    val debugText = remember { mutableStateOf("") }
-
-    if (debugText.value.isNotEmpty()) {
-
-        SelectionContainer {
-
-            TextField(
-                value = debugText.value,
-                onValueChange = {},
-                maxLines = 3,
-                modifier = Modifier
-                    .padding(
-                        horizontal = defaultSpacing
-                    )
-                    .fillMaxWidth()
-            )
-        }
-    }
 
     Row(
         verticalAlignment = Alignment.CenterVertically,
@@ -95,18 +68,10 @@ fun ControlsRow(
                 /* Set the clean state back. */
                 filterQueryState.value = cleanFilterState
 
-                val filterJson = Json {
-                    prettyPrint = true
-                }.encodeToString(cleanFilterState)
-
-                debugText.value = filterJson
-
-                println("Search: $filterJson")
-
-                // TODO Send to server
+                submitFilterQueryState.value = cleanFilterState
 
                 /* Close the panel, so the user can see the results. */
-                // filterPanelOpen.value = false
+                filterPanelOpen.value = false
             }
         )
     }

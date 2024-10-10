@@ -19,11 +19,11 @@
 
 package service
 
-import SearchRequest
-import SearchResponse
+import model.World
+import model.filter.FilterQuery
 
-interface WebClient {
+fun interface WebClient {
 
-    suspend fun search(searchRequest: SearchRequest): SearchResponse
+    suspend fun search(filterQuery: FilterQuery): List<World>
 
 }

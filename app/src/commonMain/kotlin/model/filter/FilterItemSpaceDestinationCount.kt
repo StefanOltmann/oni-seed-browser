@@ -39,7 +39,5 @@ data class FilterItemSpaceDestinationCount(
     override val type: FilterItemType = FilterItemType.SPACE_DESTINATION_COUNT
 
     override fun switchCondition() =
-        copy(
-            condition = condition.next()
-        )
+        copy(condition = condition.next())
 }

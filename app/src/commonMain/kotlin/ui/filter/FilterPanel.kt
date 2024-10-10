@@ -30,6 +30,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -54,7 +55,9 @@ data class FilterSelection(
 )
 
 @Composable
-fun FilterPanel() {
+fun FilterPanel(
+    submitFilterQueryState: MutableState<FilterQuery>
+) {
 
     val filterQueryState = remember { mutableStateOf(FilterQuery.ALL) }
 
@@ -131,7 +134,8 @@ fun FilterPanel() {
 
                     ControlsRow(
                         filterQueryState = filterQueryState,
-                        filterPanelOpen = filterPanelOpen
+                        filterPanelOpen = filterPanelOpen,
+                        submitFilterQueryState = submitFilterQueryState
                     )
                 }
 

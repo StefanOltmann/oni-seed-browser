@@ -37,7 +37,5 @@ data class FilterItemWorldTrait(
     override val type: FilterItemType = FilterItemType.WORLD_TRAIT
 
     override fun switchCondition() =
-        copy(
-            has = !has
-        )
+        copy(has = !has)
 }
