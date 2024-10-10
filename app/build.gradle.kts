@@ -65,6 +65,12 @@ kotlin {
             implementation(libs.ktor.contentnegotiation)
             implementation(libs.ktor.json)
         }
+
+        commonTest.dependencies {
+
+            /* Unit Tests */
+            implementation(libs.kotlin.test)
+        }
     }
 }
 

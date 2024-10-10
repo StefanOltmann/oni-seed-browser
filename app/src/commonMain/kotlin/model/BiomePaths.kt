@@ -28,12 +28,26 @@ data class BiomePaths(
     fun serialize(): String =
         buildString {
 
+            var firstZone = true
+
             for ((zoneType, pointsLists) in polygonMap) {
+
+                if (!firstZone)
+                    append('\n')
+
+                firstZone = false
 
                 append(zoneType)
                 append(':')
 
+                var firstEntry = true
+
                 for (points in pointsLists) {
+
+                    if (!firstEntry)
+                        append(';')
+
+                    firstEntry = false
 
                     for ((pointIndex, point) in points.withIndex()) {
 
@@ -42,16 +56,8 @@ data class BiomePaths(
 
                         append("${point.x},${point.y}")
                     }
-
-                    append(';')
                 }
-
-                removeSuffix(";")
-
-                append('\n')
             }
-
-            removeSuffix("\n")
         }
 
     companion object {
@@ -81,8 +87,8 @@ data class BiomePaths(
 
                         points.add(
                             Point(
-                                x = pairSplit[0].toFloat(),
-                                y = pairSplit[1].toFloat()
+                                x = pairSplit[0].toInt(),
+                                y = pairSplit[1].toInt()
                             )
                         )
                     }
