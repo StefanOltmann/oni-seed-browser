@@ -24,8 +24,11 @@ import SearchResponse
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.client.plugins.defaultRequest
 import io.ktor.client.request.get
+import io.ktor.client.request.header
 import io.ktor.http.ContentType
+import io.ktor.http.HttpHeaders
 import io.ktor.http.contentType
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
@@ -37,6 +40,10 @@ const val SEARCH_URL = "$BASE_API_URL/all"
 object DefaultWebClient : WebClient {
 
     private val httpClient = HttpClient {
+
+        defaultRequest {
+            header(HttpHeaders.AccessControlAllowOrigin, "*")
+        }
 
         install(ContentNegotiation) {
             json(
