@@ -45,7 +45,7 @@ fun main() {
         asteroid = AsteroidType.SandstoneDefault,
         worldTrait = null,
         geyserCount = FilterItemGeyserCount(
-            geyserId = GeyserType.HYDROGEN,
+            geyser = GeyserType.HYDROGEN,
             condition = FilterCondition.AT_LEAST,
             count = 1
         ),
@@ -60,7 +60,7 @@ fun main() {
         worldTrait = null,
         geyserCount = null,
         geyserOutput = FilterItemGeyserOutput(
-            geyserId = GeyserType.WATER,
+            geyser = GeyserType.WATER,
             condition = FilterCondition.EXACTLY,
             outputInKgPerSecond = 1337.0
         ),

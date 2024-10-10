@@ -32,16 +32,19 @@ data class FilterRule(
     val geyserCount: FilterItemGeyserCount?,
     val geyserOutput: FilterItemGeyserOutput?,
     val worldTrait: FilterItemWorldTrait?,
-
-    /* Only for base game, not for Spaced Out */
-    val spaceDestinationCount: FilterItemSpaceDestinationCount?
-
+    val spaceDestinationCount: FilterItemSpaceDestinationCount? // only base game
 ) {
+
+    fun hasItemSet(): Boolean =
+        geyserCount != null ||
+            geyserOutput != null ||
+            worldTrait != null ||
+            spaceDestinationCount != null
 
     fun getItemDescription(): String =
         when {
-            geyserCount != null -> "Count: ${geyserCount.geyserId.displayName}"
-            geyserOutput != null -> "Output: ${geyserOutput.geyserId.displayName}"
+            geyserCount != null -> "Count: ${geyserCount.geyser.displayName}"
+            geyserOutput != null -> "Output: ${geyserOutput.geyser.displayName}"
             worldTrait != null -> worldTrait.worldTrait.displayName
             spaceDestinationCount != null -> "Space destination: ${spaceDestinationCount.poi}"
             else -> "-/-"

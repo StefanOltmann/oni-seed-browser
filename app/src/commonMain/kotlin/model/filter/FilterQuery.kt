@@ -44,6 +44,26 @@ data class FilterQuery(
 
 ) {
 
+    fun cleanCopy(): FilterQuery {
+
+        val newRules = mutableListOf<List<FilterRule>>()
+
+        for (orRuleList in rules) {
+
+            val newOrRules = mutableListOf<FilterRule>()
+
+            for (orRule in orRuleList)
+                if (orRule.hasItemSet())
+                    newOrRules.add(orRule)
+
+            newRules.add(newOrRules)
+        }
+
+        return copy(
+            rules = newRules
+        )
+    }
+
     fun setAsteroid(rulesIndex: Int, ruleIndex: Int, asteroidType: AsteroidType?): FilterQuery {
 
         val newRules = rules.toMutableList()

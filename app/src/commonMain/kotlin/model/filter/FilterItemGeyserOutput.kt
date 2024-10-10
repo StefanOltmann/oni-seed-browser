@@ -28,7 +28,7 @@ import serializer.GeyserTypeSerializer
 data class FilterItemGeyserOutput(
 
     @Serializable(with = GeyserTypeSerializer::class)
-    val geyserId: GeyserType,
+    val geyser: GeyserType,
 
     val condition: FilterCondition,
     val outputInKgPerSecond: Double

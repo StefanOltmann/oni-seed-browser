@@ -187,13 +187,13 @@ fun OverlayContent(
 
                                     val filterItem = when (filterItemType) {
                                         FilterItemType.GEYSER_COUNT -> FilterItemGeyserCount(
-                                            geyserId = geyserType,
+                                            geyser = geyserType,
                                             condition = FilterCondition.AT_LEAST,
                                             count = 1
                                         )
 
                                         FilterItemType.GEYSER_OUTPUT -> FilterItemGeyserOutput(
-                                            geyserId = geyserType,
+                                            geyser = geyserType,
                                             condition = FilterCondition.AT_LEAST,
                                             outputInKgPerSecond = 1.0
                                         )

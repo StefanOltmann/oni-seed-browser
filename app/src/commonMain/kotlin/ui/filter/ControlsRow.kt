@@ -24,6 +24,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import model.filter.FilterQuery
 import ui.theme.DefaultSpacer
 import ui.theme.FillSpacer
@@ -53,8 +55,23 @@ fun ControlsRow(
         SearchButton(
             onClick = {
 
+                val filterState = filterQueryState.value
+
+                /* Ignore call without cluster set. */
+                if (filterState.cluster == null)
+                    return@SearchButton
+
+                /* Remove empty rules */
+                val cleanFilterState = filterState.cleanCopy()
+
+                /* Set the clean state back. */
+                filterQueryState.value = cleanFilterState
+
+                val filterJson = Json.encodeToString(cleanFilterState)
+
+                println("Search: $filterJson")
+
                 // TODO Send to server
-                println("Search")
 
                 /* Close the panel, so the user can see the results. */
                 filterPanelOpen.value = false

@@ -28,7 +28,7 @@ import serializer.GeyserTypeSerializer
 data class FilterItemGeyserCount(
 
     @Serializable(with = GeyserTypeSerializer::class)
-    val geyserId: GeyserType,
+    val geyser: GeyserType,
 
     val condition: FilterCondition,
     val count: Int
