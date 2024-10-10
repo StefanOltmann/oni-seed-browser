@@ -53,7 +53,7 @@ data class FilterQuery(
             val newOrRules = mutableListOf<FilterRule>()
 
             for (orRule in orRuleList)
-                if (orRule.hasItemSet())
+                if (orRule.hasItemSet() && orRule.hasValueSet())
                     newOrRules.add(orRule)
 
             newRules.add(newOrRules)

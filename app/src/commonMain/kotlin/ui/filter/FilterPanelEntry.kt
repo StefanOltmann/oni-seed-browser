@@ -166,7 +166,10 @@ fun FilterPanelEntry(
 
                         Text(
                             text = rule.getConditionDescription(),
-                            style = MaterialTheme.typography.bodyLarge,
+                            style = if (rule.worldTrait != null)
+                                MaterialTheme.typography.bodyLarge
+                            else
+                                MaterialTheme.typography.headlineMedium,
                             fontWeight = FontWeight.Bold,
                             color = if (hoveredCondition.value)
                                 hoverColor
@@ -189,7 +192,7 @@ fun FilterPanelEntry(
                     }
 
                     BasicTextField(
-                        value = "$value",
+                        value = value?.toString() ?: "",
                         onValueChange = onValueChanged,
                         cursorBrush = SolidColor(MaterialTheme.colorScheme.onBackground),
                         singleLine = true,

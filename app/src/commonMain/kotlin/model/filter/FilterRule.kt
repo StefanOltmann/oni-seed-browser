@@ -41,6 +41,11 @@ data class FilterRule(
             worldTrait != null ||
             spaceDestinationCount != null
 
+    fun hasValueSet(): Boolean =
+        geyserCount?.count != null ||
+            geyserOutput?.outputInGramPerSecond != null ||
+            spaceDestinationCount?.count != null
+
     fun getItemDescription(): String =
         when {
             geyserCount != null -> "Count: ${geyserCount.geyser.displayName}"

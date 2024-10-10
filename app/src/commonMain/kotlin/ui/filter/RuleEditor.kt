@@ -118,7 +118,7 @@ fun RuleEditor(
                                 filterQueryState.value = filterQueryState.value.setValue(
                                     rulesIndex = rulesIndex,
                                     ruleIndex = ruleIndex,
-                                    value = -1
+                                    value = null
                                 )
                             }
                         },
