@@ -202,10 +202,10 @@ fun FilterPanelEntry(
                             .background(MaterialTheme.colorScheme.surface)
                             .width(60.dp)
                     )
+
+                    DefaultSpacer()
                 }
             }
-
-            DefaultSpacer()
         }
 
         DefaultSpacer()

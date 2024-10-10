@@ -44,8 +44,7 @@ import ui.theme.doubleSpacing
 
 enum class FilterSelectionType {
     ASTEROID,
-    ITEM,
-    CONDITION
+    ITEM
 }
 
 data class FilterSelection(

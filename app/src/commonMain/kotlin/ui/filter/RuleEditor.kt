@@ -95,10 +95,10 @@ fun RuleEditor(
                         },
                         onConditionFilterClicked = {
 
-                            filterSelection.value = FilterSelection(
-                                rulesIndex,
-                                ruleIndex,
-                                FilterSelectionType.CONDITION
+                            /* Update the query */
+                            filterQueryState.value = filterQueryState.value.switchCondition(
+                                rulesIndex = rulesIndex,
+                                ruleIndex = ruleIndex
                             )
                         },
                         onDeleteClicked = {

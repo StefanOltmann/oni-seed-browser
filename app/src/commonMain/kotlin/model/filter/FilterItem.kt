@@ -23,4 +23,6 @@ interface FilterItem {
 
     val type: FilterItemType
 
+    fun switchCondition(): FilterItem
+
 }

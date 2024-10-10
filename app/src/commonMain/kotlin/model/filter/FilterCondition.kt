@@ -28,5 +28,12 @@ enum class FilterCondition(
 
     EXACTLY("="),
     AT_LEAST(">="),
-    AT_MOST("<=")
+    AT_MOST("<=");
+
+    fun next(): FilterCondition =
+        when (this) {
+            EXACTLY -> AT_LEAST
+            AT_LEAST -> AT_MOST
+            AT_MOST -> EXACTLY
+        }
 }

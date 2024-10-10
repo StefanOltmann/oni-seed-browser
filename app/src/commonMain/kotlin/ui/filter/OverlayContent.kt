@@ -215,21 +215,6 @@ fun OverlayContent(
                         }
                     }
                 }
-
-            } else {
-
-
-                for (each in 1..5) {
-
-                    FilterSelectionEntryItem(
-                        text = "Test item $each",
-                        onClick = {
-
-                            /* Close pop-up */
-                            filterSelection.value = null
-                        }
-                    )
-                }
             }
         }
     }

@@ -37,4 +37,9 @@ data class FilterItemGeyserOutput(
 
     @Transient
     override val type: FilterItemType = FilterItemType.GEYSER_OUTPUT
+
+    override fun switchCondition() =
+        copy(
+            condition = condition.next()
+        )
 }

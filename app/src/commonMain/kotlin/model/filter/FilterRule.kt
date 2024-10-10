@@ -59,6 +59,14 @@ data class FilterRule(
             else -> "-/-"
         }
 
+    fun switchCondition() =
+        copy(
+            geyserOutput = geyserOutput?.switchCondition(),
+            geyserCount = geyserCount?.switchCondition(),
+            worldTrait = worldTrait?.switchCondition(),
+            spaceDestinationCount = spaceDestinationCount?.switchCondition()
+        )
+
     companion object {
 
         val EMPTY: FilterRule = FilterRule(

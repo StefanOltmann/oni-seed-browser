@@ -101,6 +101,21 @@ data class FilterQuery(
         )
     }
 
+    fun switchCondition(rulesIndex: Int, ruleIndex: Int): FilterQuery {
+
+        val newRules = rules.toMutableList()
+
+        val subRules = newRules[rulesIndex].toMutableList()
+
+        newRules[rulesIndex] = subRules
+
+        subRules[ruleIndex] = subRules[ruleIndex].switchCondition()
+
+        return copy(
+            rules = newRules
+        )
+    }
+
     fun addEmptyAndRule(): FilterQuery {
 
         val newRules = rules.toMutableList()
