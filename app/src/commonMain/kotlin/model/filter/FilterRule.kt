@@ -42,7 +42,7 @@ data class FilterRule(
         when {
             geyserCount != null -> "Count: ${geyserCount.geyserId.displayName}"
             geyserOutput != null -> "Output: ${geyserOutput.geyserId.displayName}"
-            worldTrait != null -> "World Trait"
+            worldTrait != null -> worldTrait.worldTrait.displayName
             spaceDestinationCount != null -> "Space destination: ${spaceDestinationCount.poi}"
             else -> "-/-"
         }

@@ -144,7 +144,7 @@ fun FilterPanelEntry(
                 }
             }
 
-            if (rule.geyserCount != null || rule.geyserOutput != null) {
+            if (rule.geyserCount != null || rule.geyserOutput != null || rule.worldTrait != null) {
 
                 VerticalSeparator()
 
@@ -176,30 +176,33 @@ fun FilterPanelEntry(
                     }
                 }
 
-                VerticalSeparator()
+                if (rule.geyserCount != null || rule.geyserOutput != null) {
 
-                DefaultSpacer()
+                    VerticalSeparator()
 
-                val textFieldValue = remember {
-                    mutableStateOf(TextFieldValue(text = "0"))
+                    DefaultSpacer()
+
+                    val textFieldValue = remember {
+                        mutableStateOf(TextFieldValue(text = "1"))
+                    }
+
+                    BasicTextField(
+                        value = textFieldValue.value,
+                        onValueChange = {
+
+                            if (it.text.all(Char::isDigit))
+                                textFieldValue.value = it
+                        },
+                        cursorBrush = SolidColor(MaterialTheme.colorScheme.onBackground),
+                        singleLine = true,
+                        textStyle = MaterialTheme.typography.bodyLarge.copy(
+                            color = MaterialTheme.colorScheme.onBackground
+                        ),
+                        modifier = Modifier
+                            .background(MaterialTheme.colorScheme.surface)
+                            .width(60.dp)
+                    )
                 }
-
-                BasicTextField(
-                    value = textFieldValue.value,
-                    onValueChange = {
-
-                        if (it.text.all(Char::isDigit))
-                            textFieldValue.value = it
-                    },
-                    cursorBrush = SolidColor(MaterialTheme.colorScheme.onBackground),
-                    singleLine = true,
-                    textStyle = MaterialTheme.typography.bodyLarge.copy(
-                        color = MaterialTheme.colorScheme.onBackground
-                    ),
-                    modifier = Modifier
-                        .background(MaterialTheme.colorScheme.surface)
-                        .width(60.dp)
-                )
             }
 
             DefaultSpacer()
