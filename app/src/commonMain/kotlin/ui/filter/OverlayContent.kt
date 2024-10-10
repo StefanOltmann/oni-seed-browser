@@ -24,6 +24,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
@@ -68,6 +69,7 @@ fun OverlayContent(
                 MaterialTheme.colorScheme.background,
                 defaultRoundedCornerShape
             )
+            .width(300.dp)
     ) {
 
         Column(
@@ -123,7 +125,7 @@ fun OverlayContent(
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.SpaceEvenly,
-                        modifier = Modifier.width(300.dp)
+                        modifier = Modifier.fillMaxWidth()
                     ) {
 
                         Box(

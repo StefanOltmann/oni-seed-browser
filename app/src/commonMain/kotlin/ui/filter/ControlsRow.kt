@@ -53,7 +53,7 @@ fun ControlsRow(
             TextField(
                 value = debugText.value,
                 onValueChange = {},
-                maxLines = 5,
+                maxLines = 3,
                 modifier = Modifier
                     .padding(
                         horizontal = defaultSpacing
