@@ -36,13 +36,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import model.GeyserType
+import model.WorldTrait
 import model.filter.FilterCondition
 import model.filter.FilterItemGeyserCount
 import model.filter.FilterItemGeyserOutput
 import model.filter.FilterItemType
+import model.filter.FilterItemWorldTrait
 import model.filter.FilterQuery
 import ui.getAsteroidTypeDrawable
 import ui.getGeyserDrawable
+import ui.getWorldTraitDrawable
 import ui.theme.defaultPadding
 import ui.theme.defaultRoundedCornerShape
 
@@ -117,10 +120,6 @@ fun OverlayContent(
                     if (filterItemType == FilterItemType.SPACE_DESTINATION_COUNT)
                         continue
 
-                    /* TODO Add support later */
-                    if (filterItemType == FilterItemType.WORLD_TRAIT)
-                        continue
-
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.SpaceEvenly,
@@ -148,47 +147,73 @@ fun OverlayContent(
                         )
                     }
 
-                    for (geyserType in GeyserType.entries) {
+                    if (filterItemType == FilterItemType.WORLD_TRAIT) {
 
-                        FilterSelectionEntryItem(
-                            image = getGeyserDrawable(geyserType),
-                            text = geyserType.displayName + when (filterItemType) {
-                                FilterItemType.GEYSER_COUNT -> " count"
-                                FilterItemType.GEYSER_OUTPUT -> " output"
-                                else -> ""
-                            },
-                            onClick = {
+                        for (worldTrait in WorldTrait.entries) {
 
-                                val filterItem = when (filterItemType) {
-                                    FilterItemType.GEYSER_COUNT -> FilterItemGeyserCount(
-                                        geyserId = geyserType,
-                                        condition = FilterCondition.AT_LEAST,
-                                        count = 1
+                            FilterSelectionEntryItem(
+                                image = getWorldTraitDrawable(worldTrait),
+                                text = worldTrait.displayName,
+                                onClick = {
+
+                                    /* Update the query */
+                                    filterQueryState.value = filterQueryState.value.setFilterItem(
+                                        rulesIndex = filterSelectionValue.rulesIndex,
+                                        ruleIndex = filterSelectionValue.ruleIndex,
+                                        filterItem = FilterItemWorldTrait(
+                                            worldTrait = worldTrait,
+                                            has = true
+                                        )
                                     )
 
-                                    FilterItemType.GEYSER_OUTPUT -> FilterItemGeyserOutput(
-                                        geyserId = geyserType,
-                                        condition = FilterCondition.AT_LEAST,
-                                        outputInKgPerSecond = 1.0
-                                    )
-
-                                    else -> error("Illegal item type for geysers: $filterItemType")
+                                    /* Close pop-up */
+                                    filterSelection.value = null
                                 }
+                            )
+                        }
 
-                                /* Update the query */
-                                filterQueryState.value = filterQueryState.value.setFilterItem(
-                                    rulesIndex = filterSelectionValue.rulesIndex,
-                                    ruleIndex = filterSelectionValue.ruleIndex,
-                                    filterItem = filterItem
-                                )
+                    } else {
 
-                                /* Close pop-up */
-                                filterSelection.value = null
-                            }
-                        )
+                        for (geyserType in GeyserType.entries) {
+
+                            FilterSelectionEntryItem(
+                                image = getGeyserDrawable(geyserType),
+                                text = geyserType.displayName + when (filterItemType) {
+                                    FilterItemType.GEYSER_COUNT -> " count"
+                                    FilterItemType.GEYSER_OUTPUT -> " output"
+                                    else -> ""
+                                },
+                                onClick = {
+
+                                    val filterItem = when (filterItemType) {
+                                        FilterItemType.GEYSER_COUNT -> FilterItemGeyserCount(
+                                            geyserId = geyserType,
+                                            condition = FilterCondition.AT_LEAST,
+                                            count = 1
+                                        )
+
+                                        FilterItemType.GEYSER_OUTPUT -> FilterItemGeyserOutput(
+                                            geyserId = geyserType,
+                                            condition = FilterCondition.AT_LEAST,
+                                            outputInKgPerSecond = 1.0
+                                        )
+
+                                        else -> error("Illegal item type for geysers: $filterItemType")
+                                    }
+
+                                    /* Update the query */
+                                    filterQueryState.value = filterQueryState.value.setFilterItem(
+                                        rulesIndex = filterSelectionValue.rulesIndex,
+                                        ruleIndex = filterSelectionValue.ruleIndex,
+                                        filterItem = filterItem
+                                    )
+
+                                    /* Close pop-up */
+                                    filterSelection.value = null
+                                }
+                            )
+                        }
                     }
-
-
                 }
 
             } else {

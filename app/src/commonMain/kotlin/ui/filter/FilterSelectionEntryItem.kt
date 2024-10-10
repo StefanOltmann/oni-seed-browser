@@ -20,6 +20,7 @@
 package ui.filter
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -39,6 +40,7 @@ import ui.noRippleClickable
 import ui.onHover
 import ui.theme.defaultPadding
 import ui.theme.defaultSpacing
+import ui.theme.halfPadding
 import ui.theme.halfSpacing
 import ui.theme.hoverColor
 
@@ -66,11 +68,17 @@ fun FilterSelectionEntryItem(
 
         if (image != null) {
 
-            Image(
-                painter = painterResource(image),
-                contentDescription = null,
+            Box(
+                contentAlignment = Alignment.Center,
                 modifier = Modifier.size(40.dp)
-            )
+            ) {
+
+                Image(
+                    painter = painterResource(image),
+                    contentDescription = null,
+                    modifier = Modifier.halfPadding()
+                )
+            }
         }
 
         Text(
