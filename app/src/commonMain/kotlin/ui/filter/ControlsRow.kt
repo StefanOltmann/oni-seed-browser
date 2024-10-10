@@ -30,7 +30,7 @@ import ui.theme.FillSpacer
 import ui.theme.defaultPadding
 
 @Composable
-private fun ControlsRow(
+fun ControlsRow(
     filterQueryState: MutableState<FilterQuery>,
     filterPanelOpen: MutableState<Boolean>
 ) {
