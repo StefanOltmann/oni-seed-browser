@@ -54,6 +54,7 @@ fun ControlsRow(
         DefaultSpacer()
 
         SearchButton(
+            enabled = filterQueryState.value.cluster != null,
             onClick = {
 
                 val filterState = filterQueryState.value

@@ -28,6 +28,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import ui.noRippleClickable
@@ -36,6 +37,7 @@ import ui.theme.defaultRoundedCornerShape
 
 @Composable
 fun SearchButton(
+    enabled: Boolean,
     onClick: () -> Unit
 ) {
 
@@ -44,11 +46,17 @@ fun SearchButton(
         modifier = Modifier
             .border(
                 1.dp,
-                MaterialTheme.colorScheme.onBackground,
+                if (enabled)
+                    MaterialTheme.colorScheme.onBackground
+                else
+                    MaterialTheme.colorScheme.onBackground.copy(alpha = 0.3F),
                 defaultRoundedCornerShape
             )
             .background(
-                ctaColor,
+                if (enabled)
+                    ctaColor
+                else
+                    Color.Transparent,
                 defaultRoundedCornerShape
             )
             .size(120.dp, 48.dp)
@@ -59,7 +67,10 @@ fun SearchButton(
             text = "SEARCH",
             style = MaterialTheme.typography.bodyLarge,
             fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colorScheme.onBackground
+            color = if (enabled)
+                MaterialTheme.colorScheme.onBackground
+            else
+                MaterialTheme.colorScheme.onBackground.copy(alpha = 0.3F)
         )
     }
 }
