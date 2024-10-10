@@ -63,12 +63,6 @@ fun MapView(
 
             val biomePaths = BiomePaths.parse(asteroid.biomePaths)
 
-            println("ORIGINAL")
-            println("${asteroid.biomePaths}")
-
-            println("RESAVE")
-            println("${biomePaths.serialize()}")
-
             Canvas(
                 modifier = Modifier
                     .size(
