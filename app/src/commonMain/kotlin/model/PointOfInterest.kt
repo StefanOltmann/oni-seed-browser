@@ -29,6 +29,6 @@ data class PointOfInterest(
     @Serializable(with = PointOfInterestTypeSerializer::class)
     val id: PointOfInterestType,
 
-    val posX: Int,
-    val posY: Int,
+    val x: Int,
+    val y: Int,
 )

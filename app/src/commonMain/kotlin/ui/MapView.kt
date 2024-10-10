@@ -117,8 +117,8 @@ fun MapView(
                         contentDescription = null,
                         modifier = Modifier
                             .offset(
-                                x = (poi.posX * viewScale).dp.minus(16.dp),
-                                y = (poi.posY * viewScale).dp.minus(16.dp)
+                                x = (poi.x * viewScale).dp.minus(16.dp),
+                                y = (poi.y * viewScale).dp.minus(16.dp)
                             )
                             .size(32.dp)
                     )
@@ -131,8 +131,8 @@ fun MapView(
                         contentDescription = null,
                         modifier = Modifier
                             .offset(
-                                x = (geyser.posX * viewScale).dp.minus(16.dp),
-                                y = (geyser.posY * viewScale).dp.minus(16.dp)
+                                x = (geyser.x * viewScale).dp.minus(16.dp),
+                                y = (geyser.y * viewScale).dp.minus(16.dp)
                             )
                             .size(32.dp)
                     )
