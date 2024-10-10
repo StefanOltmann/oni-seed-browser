@@ -40,7 +40,7 @@ data class FilterRule(
 
     fun getItemDescription(): String =
         when {
-            geyserCount != null -> "Geyser: ${geyserCount.geyserId.displayName}"
+            geyserCount != null -> "Count: ${geyserCount.geyserId.displayName}"
             geyserOutput != null -> "Output: ${geyserOutput.geyserId.displayName}"
             worldTrait != null -> "World Trait"
             spaceDestinationCount != null -> "Space destination: ${spaceDestinationCount.poi}"

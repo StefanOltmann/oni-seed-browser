@@ -20,16 +20,29 @@
 package ui.filter
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import model.GeyserType
+import model.filter.FilterCondition
+import model.filter.FilterItemGeyserCount
+import model.filter.FilterItemGeyserOutput
+import model.filter.FilterItemType
 import model.filter.FilterQuery
 import ui.getAsteroidTypeDrawable
+import ui.getGeyserDrawable
 import ui.theme.defaultPadding
 import ui.theme.defaultRoundedCornerShape
 
@@ -94,6 +107,88 @@ fun OverlayContent(
                             filterSelection.value = null
                         }
                     )
+                }
+
+            } else if (filterSelectionValue.type == FilterSelectionType.ITEM) {
+
+                for (filterItemType in FilterItemType.entries) {
+
+                    /* TODO Add support later */
+                    if (filterItemType == FilterItemType.SPACE_DESTINATION_COUNT)
+                        continue
+
+                    /* TODO Add support later */
+                    if (filterItemType == FilterItemType.WORLD_TRAIT)
+                        continue
+
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.SpaceEvenly,
+                        modifier = Modifier.width(300.dp)
+                    ) {
+
+                        Box(
+                            modifier = Modifier
+                                .background(MaterialTheme.colorScheme.onBackground)
+                                .width(70.dp)
+                                .height(2.dp)
+                        )
+
+                        Text(
+                            text = filterItemType.displayName.uppercase(),
+                            style = MaterialTheme.typography.bodyLarge,
+                            color = MaterialTheme.colorScheme.onBackground
+                        )
+
+                        Box(
+                            modifier = Modifier
+                                .background(MaterialTheme.colorScheme.onBackground)
+                                .width(70.dp)
+                                .height(2.dp)
+                        )
+                    }
+
+                    for (geyserType in GeyserType.entries) {
+
+                        FilterSelectionEntryItem(
+                            image = getGeyserDrawable(geyserType),
+                            text = geyserType.displayName + when (filterItemType) {
+                                FilterItemType.GEYSER_COUNT -> " count"
+                                FilterItemType.GEYSER_OUTPUT -> " output"
+                                else -> ""
+                            },
+                            onClick = {
+
+                                val filterItem = when (filterItemType) {
+                                    FilterItemType.GEYSER_COUNT -> FilterItemGeyserCount(
+                                        geyserId = geyserType,
+                                        condition = FilterCondition.AT_LEAST,
+                                        count = 1
+                                    )
+
+                                    FilterItemType.GEYSER_OUTPUT -> FilterItemGeyserOutput(
+                                        geyserId = geyserType,
+                                        condition = FilterCondition.AT_LEAST,
+                                        outputInKgPerSecond = 1.0
+                                    )
+
+                                    else -> error("Illegal item type for geysers: $filterItemType")
+                                }
+
+                                /* Update the query */
+                                filterQueryState.value = filterQueryState.value.setFilterItem(
+                                    rulesIndex = filterSelectionValue.rulesIndex,
+                                    ruleIndex = filterSelectionValue.ruleIndex,
+                                    filterItem = filterItem
+                                )
+
+                                /* Close pop-up */
+                                filterSelection.value = null
+                            }
+                        )
+                    }
+
+
                 }
 
             } else {

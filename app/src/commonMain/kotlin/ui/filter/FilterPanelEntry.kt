@@ -127,7 +127,7 @@ fun FilterPanelEntry(
             ) {
 
                 Box(
-                    modifier = Modifier.width(160.dp)
+                    modifier = Modifier.width(200.dp)
                 ) {
 
                     Text(
