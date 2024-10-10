@@ -44,6 +44,13 @@ kotlin {
             implementation(libs.ktor.java)
         }
 
+        val desktopTest by getting
+
+        desktopTest.dependencies {
+
+            implementation("com.menecats:polybool-java:1.0.1")
+        }
+
         val wasmJsMain by getting
 
         wasmJsMain.dependencies {
