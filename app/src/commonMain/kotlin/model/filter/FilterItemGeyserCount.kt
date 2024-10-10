@@ -31,7 +31,7 @@ data class FilterItemGeyserCount(
     val geyser: GeyserType,
 
     val condition: FilterCondition,
-    val count: Int
+    val count: Int?
 
 ) : FilterItem {
 

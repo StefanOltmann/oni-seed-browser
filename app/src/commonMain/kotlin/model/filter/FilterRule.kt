@@ -44,7 +44,7 @@ data class FilterRule(
     fun getItemDescription(): String =
         when {
             geyserCount != null -> "Count: ${geyserCount.geyser.displayName}"
-            geyserOutput != null -> "Output: ${geyserOutput.geyser.displayName}"
+            geyserOutput != null -> "Output (g/s): ${geyserOutput.geyser.displayName}"
             worldTrait != null -> worldTrait.worldTrait.displayName
             spaceDestinationCount != null -> "Space destination: ${spaceDestinationCount.poi}"
             else -> "-/-"

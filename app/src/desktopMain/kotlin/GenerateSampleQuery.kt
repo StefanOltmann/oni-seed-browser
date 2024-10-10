@@ -62,7 +62,7 @@ fun main() {
         geyserOutput = FilterItemGeyserOutput(
             geyser = GeyserType.WATER,
             condition = FilterCondition.EXACTLY,
-            outputInKgPerSecond = 1337.0
+            outputInGramPerSecond = 1337
         ),
         spaceDestinationCount = null
     )

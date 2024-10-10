@@ -116,6 +116,30 @@ data class FilterQuery(
         )
     }
 
+    fun setValue(rulesIndex: Int, ruleIndex: Int, value: Int?): FilterQuery {
+
+        val newRules = rules.toMutableList()
+
+        val subRules = newRules[rulesIndex].toMutableList()
+
+        newRules[rulesIndex] = subRules
+
+        val ruleAtIndex = subRules[ruleIndex]
+
+        subRules[ruleIndex] = ruleAtIndex.copy(
+            geyserCount = ruleAtIndex.geyserCount?.copy(
+                count = value
+            ),
+            geyserOutput = ruleAtIndex.geyserOutput?.copy(
+                outputInGramPerSecond = value
+            )
+        )
+
+        return copy(
+            rules = newRules
+        )
+    }
+
     fun addEmptyAndRule(): FilterQuery {
 
         val newRules = rules.toMutableList()

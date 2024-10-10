@@ -195,7 +195,7 @@ fun OverlayContent(
                                         FilterItemType.GEYSER_OUTPUT -> FilterItemGeyserOutput(
                                             geyser = geyserType,
                                             condition = FilterCondition.AT_LEAST,
-                                            outputInKgPerSecond = 1.0
+                                            outputInGramPerSecond = 1
                                         )
 
                                         else -> error("Illegal item type for geysers: $filterItemType")

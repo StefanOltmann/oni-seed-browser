@@ -101,6 +101,27 @@ fun RuleEditor(
                                 ruleIndex = ruleIndex
                             )
                         },
+                        onValueChanged = {
+
+                            if (it.isNotBlank() && it.all(Char::isDigit)) {
+
+                                /* Update the query */
+                                filterQueryState.value = filterQueryState.value.setValue(
+                                    rulesIndex = rulesIndex,
+                                    ruleIndex = ruleIndex,
+                                    value = it.toInt()
+                                )
+
+                            } else if (it.isBlank()) {
+
+                                /* Update the query */
+                                filterQueryState.value = filterQueryState.value.setValue(
+                                    rulesIndex = rulesIndex,
+                                    ruleIndex = ruleIndex,
+                                    value = -1
+                                )
+                            }
+                        },
                         onDeleteClicked = {
                             filterQueryState.value = query.removeRule(rulesIndex, ruleIndex)
                         }

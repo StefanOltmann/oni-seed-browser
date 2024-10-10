@@ -43,7 +43,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import model.filter.FilterRule
@@ -62,6 +61,7 @@ fun FilterPanelEntry(
     onAsteroidFilterClicked: () -> Unit,
     onItemFilterClicked: () -> Unit,
     onConditionFilterClicked: () -> Unit,
+    onValueChanged: (String) -> Unit,
     onDeleteClicked: () -> Unit
 ) {
 
@@ -182,17 +182,15 @@ fun FilterPanelEntry(
 
                     DefaultSpacer()
 
-                    val textFieldValue = remember {
-                        mutableStateOf(TextFieldValue(text = "1"))
+                    val value = when {
+                        rule.geyserCount != null -> rule.geyserCount.count
+                        rule.geyserOutput != null -> rule.geyserOutput.outputInGramPerSecond
+                        else -> 0
                     }
 
                     BasicTextField(
-                        value = textFieldValue.value,
-                        onValueChange = {
-
-                            if (it.text.all(Char::isDigit))
-                                textFieldValue.value = it
-                        },
+                        value = "$value",
+                        onValueChange = onValueChanged,
                         cursorBrush = SolidColor(MaterialTheme.colorScheme.onBackground),
                         singleLine = true,
                         textStyle = MaterialTheme.typography.bodyLarge.copy(

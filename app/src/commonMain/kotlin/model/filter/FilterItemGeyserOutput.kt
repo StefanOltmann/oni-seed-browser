@@ -31,7 +31,7 @@ data class FilterItemGeyserOutput(
     val geyser: GeyserType,
 
     val condition: FilterCondition,
-    val outputInKgPerSecond: Double
+    val outputInGramPerSecond: Int?
 
 ) : FilterItem {
 
