@@ -151,6 +151,22 @@ enum class Cluster(
         )
     ),
 
+    /** Ceres (lab) */
+    DLC_BLASTED_CERES(
+        prefix = "V-CERS-C",
+        displayName = "Blasted Ceres",
+        asteroidTypes = listOf(
+            AsteroidType.CeresClassicShatteredAsteroid,
+            AsteroidType.MediumSwampy,
+            AsteroidType.TundraMoonlet,
+            AsteroidType.MarshyMoonlet,
+            AsteroidType.NiobiumMoonlet,
+            AsteroidType.MooMoonlet,
+            AsteroidType.WaterMoonlet,
+            AsteroidType.MiniRegolithMoonlet
+        )
+    ),
+
     /** Oceania */
     DLC_OCEANIA(
         prefix = "V-OCAN-C",

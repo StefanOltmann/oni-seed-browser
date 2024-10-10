@@ -201,5 +201,7 @@ enum class AsteroidType(
     /** Regolith Asteroid */
     MiniRegolithMoonlet("Regolith Asteroid"),
 
-    MixingCeresAsteroid("Mixing Ceres Asteroid")
+    MixingCeresAsteroid("Mixing Ceres Asteroid"),
+
+    CeresClassicShatteredAsteroid("Blasted Ceres Asteroid")
 }
