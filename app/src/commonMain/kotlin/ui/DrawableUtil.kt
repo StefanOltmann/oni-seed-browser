@@ -27,6 +27,7 @@ import model.PointOfInterestType
 import model.WorldTrait
 import oni_seed_browser.app.generated.resources.Res
 import oni_seed_browser.app.generated.resources.asteroid_blasted_ceres
+import oni_seed_browser.app.generated.resources.asteroid_blasted_ceres_spaced_out
 import oni_seed_browser.app.generated.resources.asteroid_glowood_wasteland
 import oni_seed_browser.app.generated.resources.asteroid_irradiated_forest
 import oni_seed_browser.app.generated.resources.asteroid_irradiated_marsh
@@ -220,6 +221,7 @@ fun getClusterDrawable(cluster: Cluster): DrawableResource =
     when (cluster) {
         Cluster.BASE_TERRA -> Res.drawable.cluster_base_terra
         Cluster.BASE_CERES -> Res.drawable.cluster_base_ceres
+        Cluster.BASE_BLASTED_CERES -> Res.drawable.asteroid_blasted_ceres
         Cluster.BASE_OCEANIA -> Res.drawable.cluster_base_oceania
         Cluster.BASE_RIME -> Res.drawable.cluster_base_rime
         Cluster.BASE_VERDANTE -> Res.drawable.cluster_base_verdante
@@ -230,7 +232,7 @@ fun getClusterDrawable(cluster: Cluster): DrawableResource =
         Cluster.BASE_OASISSE -> Res.drawable.cluster_base_oasisse
         Cluster.DLC_TERRA -> Res.drawable.cluster_spacedout_terra
         Cluster.DLC_CERES -> Res.drawable.asteroid_spacedout_ceres
-        Cluster.DLC_BLASTED_CERES -> Res.drawable.asteroid_blasted_ceres
+        Cluster.DLC_BLASTED_CERES -> Res.drawable.asteroid_blasted_ceres_spaced_out
         Cluster.DLC_CERES_MINOR -> Res.drawable.asteroid_spacedout_ceres_minor
         Cluster.DLC_OCEANIA -> Res.drawable.cluster_spacedout_oceania
         Cluster.DLC_SQUELCHY -> Res.drawable.cluster_spacedout_squelchy
@@ -312,5 +314,6 @@ fun getAsteroidTypeDrawable(asteroidType: AsteroidType): DrawableResource =
         AsteroidType.Volcanic -> Res.drawable.cluster_base_volcanea
         AsteroidType.VanillaOasis -> Res.drawable.cluster_spacedout_oasisse
         AsteroidType.MixingCeresAsteroid -> Res.drawable.asteroid_mixing_ceres
-        AsteroidType.CeresClassicShatteredAsteroid -> Res.drawable.asteroid_blasted_ceres
+        AsteroidType.CeresClassicShatteredAsteroid -> Res.drawable.asteroid_blasted_ceres_spaced_out
+        AsteroidType.CeresBaseGameShatteredAsteroid -> Res.drawable.asteroid_blasted_ceres
     }

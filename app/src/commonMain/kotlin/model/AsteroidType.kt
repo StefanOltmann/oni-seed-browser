@@ -32,6 +32,9 @@ enum class AsteroidType(
     /** Ceres Asteroid */
     CeresBaseGameAsteroid("Ceres Asteroid"),
 
+    /** Blasted Ceres Asteroid */
+    CeresBaseGameShatteredAsteroid("Blasted Ceres Asteroid"),
+
     /** Oceania Asteroid */
     Oceania("Oceania Asteroid"),
 

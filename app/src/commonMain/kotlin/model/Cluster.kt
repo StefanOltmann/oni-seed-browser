@@ -47,6 +47,15 @@ enum class Cluster(
         )
     ),
 
+    /** Ceres */
+    BASE_BLASTED_CERES(
+        prefix = "CERS-A",
+        displayName = "Blasted Ceres",
+        asteroidTypes = listOf(
+            AsteroidType.CeresBaseGameShatteredAsteroid
+        )
+    ),
+
     /** Oceania */
     BASE_OCEANIA(
         prefix = "OCAN-A",
