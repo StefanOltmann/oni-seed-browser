@@ -93,7 +93,7 @@ fun FilterPanelEntry(
                     if (rule.asteroid == null) {
 
                         Text(
-                            text = "SUM",
+                            text = "ANY",
                             style = MaterialTheme.typography.bodyLarge,
                             fontWeight = FontWeight.Bold,
                             color = if (hoveredAsteroid.value)

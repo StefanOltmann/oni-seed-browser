@@ -79,7 +79,7 @@ fun OverlayContent(
             if (filterSelectionValue.type == FilterSelectionType.ASTEROID) {
 
                 FilterSelectionEntryItem(
-                    text = "Sum of all asteroids",
+                    text = "Any of the asteroids",
                     onClick = {
 
                         /* Update the query */
