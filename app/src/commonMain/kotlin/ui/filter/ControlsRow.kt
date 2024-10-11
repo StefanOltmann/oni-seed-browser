@@ -33,7 +33,7 @@ import ui.theme.defaultPadding
 fun ControlsRow(
     filterQueryState: MutableState<FilterQuery>,
     filterPanelOpen: MutableState<Boolean>,
-    submitFilterQueryState: MutableState<FilterQuery>
+    onSearchButtonPressed: () -> Unit
 ) {
 
     Row(
@@ -69,7 +69,7 @@ fun ControlsRow(
                 /* Set the clean state back. */
                 filterQueryState.value = cleanFilterState
 
-                submitFilterQueryState.value = cleanFilterState
+                onSearchButtonPressed()
 
                 /* Close the panel, so the user can see the results. */
                 filterPanelOpen.value = false

@@ -45,14 +45,15 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.produceState
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.launch
 import kotlinx.serialization.json.Json
 import model.Asteroid
 import model.World
@@ -85,8 +86,9 @@ fun App() {
         typography = AppTypography()
     ) {
 
-        /* Changes to this state will trigger a call to the API */
-        val submitFilterQueryState = remember { mutableStateOf(FilterQuery.ALL) }
+        val coroutineScope = rememberCoroutineScope()
+
+        val filterQueryState = remember { mutableStateOf(FilterQuery.ALL) }
 
         val lazyListState = rememberLazyListState()
 
@@ -100,49 +102,21 @@ fun App() {
 
         val errorMessage = remember { mutableStateOf<String?>(null) }
 
-        LaunchedEffect(submitFilterQueryState.value) {
+        LaunchedEffect(filterQueryState.value) {
             /* Reset the details on each search. */
             showAsteroidDetails.value = null
         }
 
-        val searchResponse = produceState(emptyList<World>(), submitFilterQueryState.value) {
+        val worlds = remember { mutableStateOf(emptyList<World>()) }
 
-            if (submitFilterQueryState.value == FilterQuery.ALL) {
+        LaunchedEffect(true) {
 
-                println("Load demo data...")
+            println("Load demo data...")
 
-                val worlds = Json.decodeFromString<List<World>>(sampleWorldsJson)
+            val parsedWorlds = Json.decodeFromString<List<World>>(sampleWorldsJson)
 
-                /* DLCs first */
-                value = worlds.sortedWith(compareBy({ it.cluster.isBaseGame() }, { it.cluster }))
-
-                return@produceState
-            }
-
-            println("Searching...")
-
-            isGettingNewResults.value = true
-
-            try {
-
-                errorMessage.value = null
-
-                /* Reset the data */
-                value = emptyList()
-
-                value = DefaultWebClient.search(
-                    submitFilterQueryState.value
-                )
-
-            } catch (ex: Exception) {
-
-                ex.printStackTrace()
-
-                errorMessage.value = ex.stackTraceToString()
-
-            } finally {
-                isGettingNewResults.value = false
-            }
+            /* DLCs first */
+            worlds.value = parsedWorlds.sortedWith(compareBy({ it.cluster.isBaseGame() }, { it.cluster }))
         }
 
         val asteroid = showAsteroidMap.value
@@ -211,7 +185,40 @@ fun App() {
 
                 DefaultSpacer()
 
-                FilterPanel(submitFilterQueryState)
+                val search: suspend () -> Unit = {
+
+                    println("Searching...")
+
+                    isGettingNewResults.value = true
+
+                    try {
+
+                        errorMessage.value = null
+
+                        /* Reset the data */
+                        worlds.value = emptyList()
+
+                        worlds.value = DefaultWebClient.search(
+                            filterQueryState.value
+                        )
+
+                    } catch (ex: Exception) {
+
+                        ex.printStackTrace()
+
+                        errorMessage.value = ex.stackTraceToString()
+
+                    } finally {
+                        isGettingNewResults.value = false
+                    }
+                }
+
+                FilterPanel(
+                    filterQueryState = filterQueryState,
+                    onSearchButtonPressed = {
+                        coroutineScope.launch { search() }
+                    }
+                )
 
                 if (isGettingNewResults.value) {
 
@@ -229,9 +236,7 @@ fun App() {
 
                 } else {
 
-                    val worlds = searchResponse.value
-
-                    val worldCount = worlds.size
+                    val worldCount = worlds.value.size
 
                     Text(
                         text = "Showing $worldCount worlds",
@@ -254,7 +259,7 @@ fun App() {
 
                                 WorldViewList(
                                     lazyListState,
-                                    worlds,
+                                    worlds.value,
                                     showAsteroidMap,
                                     showAsteroidDetails,
                                     showTooltip,

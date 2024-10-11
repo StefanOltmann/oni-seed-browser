@@ -56,10 +56,9 @@ data class FilterSelection(
 
 @Composable
 fun FilterPanel(
-    submitFilterQueryState: MutableState<FilterQuery>
+    filterQueryState: MutableState<FilterQuery>,
+    onSearchButtonPressed: () -> Unit
 ) {
-
-    val filterQueryState = remember { mutableStateOf(FilterQuery.ALL) }
 
     val filterPanelOpen = remember { mutableStateOf(false) }
 
@@ -84,7 +83,9 @@ fun FilterPanel(
 
         AnimatedVisibility(filterPanelOpen.value) {
 
-            val spacedOutDlcSelected = remember { mutableStateOf(false) }
+            val spacedOutDlcSelected: MutableState<Boolean> = remember {
+                mutableStateOf(filterQueryState.value.cluster?.isBaseGame() ?: false)
+            }
 
             Box {
 
@@ -135,7 +136,7 @@ fun FilterPanel(
                     ControlsRow(
                         filterQueryState = filterQueryState,
                         filterPanelOpen = filterPanelOpen,
-                        submitFilterQueryState = submitFilterQueryState
+                        onSearchButtonPressed = onSearchButtonPressed
                     )
                 }
 
