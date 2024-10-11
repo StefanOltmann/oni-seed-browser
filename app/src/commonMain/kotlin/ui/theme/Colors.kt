@@ -41,5 +41,5 @@ val appColorScheme = darkColorScheme(
     surface = surfaceColor,
     onSurfaceVariant = surfaceVariantColor,
     surfaceTint = surfaceTint,
-    primary = ctaColor
+    primary = Color(0xFF72bcd4)
 )
