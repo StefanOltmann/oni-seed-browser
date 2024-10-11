@@ -486,6 +486,9 @@ enum class Cluster(
     fun isFrostyPlanet(): Boolean =
         this == BASE_CERES || this == DLC_CERES || this == DLC_CERES_MINOR
 
+    fun isBaseGame(): Boolean =
+        this.name.startsWith("BASE_")
+
     companion object {
 
         val baseGameCluster = listOf(

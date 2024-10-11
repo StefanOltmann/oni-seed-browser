@@ -113,7 +113,8 @@ fun App() {
 
                 val worlds = Json.decodeFromString<List<World>>(sampleWorldsJson)
 
-                value = worlds.sortedBy { it.cluster }
+                /* DLCs first */
+                value = worlds.sortedWith(compareBy({ it.cluster.isBaseGame() }, { it.cluster }))
 
                 return@produceState
             }
