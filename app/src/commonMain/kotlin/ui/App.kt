@@ -367,25 +367,10 @@ fun AsteroidDetails(
                     }
                 }
 
-                for (each in 1..10) {
+                for (geyser in asteroid.geysers.sortedBy { it.id })
+                    GeyserDetail(geyser)
 
-                    Box(
-                        modifier = Modifier
-                            .padding(horizontal = doubleSpacing)
-                            .background(
-                                MaterialTheme.colorScheme.surfaceVariant,
-                                defaultRoundedCornerShape
-                            )
-                            .border(
-                                0.dp,
-                                Color.Black,
-                                defaultRoundedCornerShape
-                            )
-                            .fillMaxWidth()
-                            .height(150.dp)
-                    )
-                }
-
+                DefaultSpacer()
             }
 
             VerticalScrollbar(
