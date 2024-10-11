@@ -35,7 +35,7 @@ import kotlinx.serialization.json.Json
 import model.World
 import model.filter.FilterQuery
 
-const val BASE_API_URL = "http://localhost:8080"
+const val BASE_API_URL = "https://oni-seed-uploader-stefan-oltmann.koyeb.app"
 const val SEARCH_URL = "$BASE_API_URL/search"
 
 private val jsonPretty = Json { this.prettyPrint = true }
