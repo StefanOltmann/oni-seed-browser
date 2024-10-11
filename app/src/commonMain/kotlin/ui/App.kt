@@ -24,6 +24,7 @@ import androidx.compose.foundation.VerticalScrollbar
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.defaultScrollbarStyle
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
@@ -298,7 +299,7 @@ fun AsteroidDetails(
             .padding(
                 start = 0.dp,
                 top = doubleSpacing,
-                bottom = defaultSpacing,
+                bottom = doubleSpacing,
                 end = doubleSpacing
             )
             .background(
@@ -324,23 +325,53 @@ fun AsteroidDetails(
             val scrollState = rememberScrollState()
 
             Column(
+                verticalArrangement = Arrangement.spacedBy(defaultSpacing),
                 modifier = Modifier.verticalScroll(scrollState)
             ) {
 
                 for (worldTrait in asteroid.worldTraits) {
 
-                    Image(
-                        painter = painterResource(getWorldTraitDrawable(worldTrait)),
-                        contentDescription = null,
-                        modifier = Modifier.size(20.dp)
-                    )
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier
+                            .padding(
+                                horizontal = doubleSpacing
+                            )
+                            .background(
+                                MaterialTheme.colorScheme.surfaceVariant,
+                                defaultRoundedCornerShape
+                            )
+                            .border(
+                                0.dp,
+                                Color.Black,
+                                defaultRoundedCornerShape
+                            )
+                            .fillMaxWidth()
+                            .height(50.dp)
+                    ) {
+
+                        Image(
+                            painter = painterResource(getWorldTraitDrawable(worldTrait)),
+                            contentDescription = null,
+                            modifier = Modifier
+                                .padding(horizontal = doubleSpacing)
+                                .size(24.dp)
+                        )
+
+                        Text(
+                            text = worldTrait.displayName,
+                            style = MaterialTheme.typography.headlineSmall,
+                            color = worldTrait.color,
+                            modifier = Modifier.offset(y = -2.dp)
+                        )
+                    }
                 }
 
-                for (each in 1..50) {
+                for (each in 1..10) {
 
                     Box(
                         modifier = Modifier
-                            .padding(doubleSpacing)
+                            .padding(horizontal = doubleSpacing)
                             .background(
                                 MaterialTheme.colorScheme.surfaceVariant,
                                 defaultRoundedCornerShape
