@@ -43,6 +43,8 @@ import ui.theme.DefaultSpacer
 import ui.theme.HalfSpacer
 import ui.theme.defaultRoundedCornerShape
 import ui.theme.doubleSpacing
+import kotlin.math.pow
+import kotlin.math.roundToInt
 
 @Composable
 fun GeyserDetail(
@@ -159,7 +161,7 @@ fun GeyserDetail(
                 )
 
                 Text(
-                    text = "${geyser.activeCycles} cycles",
+                    text = "${geyser.activeCycles.toString(2)} cycles",
                     style = MaterialTheme.typography.bodyLarge,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onBackground
@@ -172,7 +174,7 @@ fun GeyserDetail(
                 )
 
                 Text(
-                    text = "${geyser.dormancyCycles} cycles",
+                    text = "${geyser.dormancyCycles.toString(1)} cycles",
                     style = MaterialTheme.typography.bodyLarge,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onBackground
@@ -180,4 +182,10 @@ fun GeyserDetail(
             }
         }
     }
+}
+
+private fun Float.toString(numOfDec: Int): String {
+    val integerDigits = this.toInt()
+    val floatDigits = ((this - integerDigits) * 10f.pow(numOfDec)).roundToInt()
+    return "${integerDigits}.${floatDigits}"
 }
