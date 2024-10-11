@@ -161,7 +161,7 @@ fun GeyserDetail(
                 )
 
                 Text(
-                    text = "${geyser.activeCycles.toString(2)} cycles",
+                    text = "${geyser.activeCycles.toString(1)} cycles",
                     style = MaterialTheme.typography.bodyLarge,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onBackground
