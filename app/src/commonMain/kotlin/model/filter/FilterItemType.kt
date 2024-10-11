@@ -23,8 +23,8 @@ enum class FilterItemType(
     val displayName: String
 ) {
 
+    WORLD_TRAIT("World trait"),
     GEYSER_COUNT("Geyser count"),
     GEYSER_OUTPUT("Geyser output"),
-    WORLD_TRAIT("World trait"),
     SPACE_DESTINATION_COUNT("Space destination count")
 }

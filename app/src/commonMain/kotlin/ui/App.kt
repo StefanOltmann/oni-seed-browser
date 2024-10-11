@@ -43,6 +43,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.produceState
 import androidx.compose.runtime.remember
@@ -98,6 +99,11 @@ fun App() {
         val isGettingNewResults = remember { mutableStateOf(false) }
 
         val errorMessage = remember { mutableStateOf<String?>(null) }
+
+        LaunchedEffect(submitFilterQueryState.value) {
+            /* Reset the details on each search. */
+            showAsteroidDetails.value = null
+        }
 
         val searchResponse = produceState(emptyList<World>(), submitFilterQueryState.value) {
 
@@ -202,13 +208,6 @@ fun App() {
                     }
                 }
 
-                Text(
-                    text = "This is a non-functional work-in-progress prototype.",
-                    style = MaterialTheme.typography.headlineSmall,
-                    color = MaterialTheme.colorScheme.error,
-                    fontWeight = FontWeight.Bold
-                )
-
                 DefaultSpacer()
 
                 FilterPanel(submitFilterQueryState)
@@ -221,7 +220,7 @@ fun App() {
                     ) {
 
                         Text(
-                            text = "Calling webservice...",
+                            text = "Searching...",
                             style = MaterialTheme.typography.headlineSmall,
                             color = MaterialTheme.colorScheme.onBackground
                         )
