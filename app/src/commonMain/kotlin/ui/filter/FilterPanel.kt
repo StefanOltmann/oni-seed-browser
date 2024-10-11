@@ -84,7 +84,7 @@ fun FilterPanel(
         AnimatedVisibility(filterPanelOpen.value) {
 
             val spacedOutDlcSelected: MutableState<Boolean> = remember {
-                mutableStateOf(filterQueryState.value.cluster?.isBaseGame() ?: false)
+                mutableStateOf(filterQueryState.value.cluster?.isBaseGame()?.not() ?: false)
             }
 
             Box {
