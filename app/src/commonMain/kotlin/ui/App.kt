@@ -19,14 +19,23 @@
 
 package ui
 
+import androidx.compose.foundation.VerticalScrollbar
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.defaultScrollbarStyle
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.rememberScrollbarAdapter
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -52,6 +61,9 @@ import ui.theme.DefaultSpacer
 import ui.theme.appColorScheme
 import ui.theme.defaultPadding
 import ui.theme.defaultRoundedCornerShape
+import ui.theme.defaultSpacing
+import ui.theme.doubleSpacing
+import ui.theme.white
 
 val logoIconHeight = 80.dp
 
@@ -73,7 +85,9 @@ fun App() {
 
         val lazyListState = rememberLazyListState()
 
-        val showMapAsteroid = remember { mutableStateOf<Asteroid?>(null) }
+        val showAsteroidMap = remember { mutableStateOf<Asteroid?>(null) }
+
+        val showAsteroidDetails = remember { mutableStateOf<Asteroid?>(null) }
 
         val showTooltip = remember { mutableStateOf<Tooltip?>(null) }
 
@@ -120,7 +134,7 @@ fun App() {
             }
         }
 
-        val asteroid = showMapAsteroid.value
+        val asteroid = showAsteroidMap.value
 
         if (asteroid != null) {
 
@@ -133,7 +147,7 @@ fun App() {
             ) {
 
                 CloseButton(
-                    onClick = { showMapAsteroid.value = null }
+                    onClick = { showAsteroidMap.value = null }
                 )
 
                 Column {
@@ -213,41 +227,134 @@ fun App() {
 
                     val worlds = searchResponse.value
 
-                    val worldCount = worlds.size
+                    Row {
 
-                    Text(
-                        text = "Showing $worldCount worlds",
-                        style = MaterialTheme.typography.headlineSmall,
-                        color = MaterialTheme.colorScheme.onBackground
-                    )
+                        Column(
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            modifier = Modifier.weight(1F)
+                        ) {
 
-                    Box(
-                        modifier = Modifier.weight(1F)
-                    ) {
+                            val worldCount = worlds.size
 
-                        WorldViewList(
-                            lazyListState,
-                            worlds,
-                            showMapAsteroid,
-                            showTooltip
-                        )
+                            Text(
+                                text = "Showing $worldCount worlds",
+                                style = MaterialTheme.typography.headlineSmall,
+                                color = MaterialTheme.colorScheme.onBackground,
+                                modifier = Modifier.height(40.dp)
+                            )
+
+                            Box(
+                                modifier = Modifier.weight(1F)
+                            ) {
+
+                                WorldViewList(
+                                    lazyListState,
+                                    worlds,
+                                    showAsteroidMap,
+                                    showTooltip
+                                )
+                            }
+                        }
+
+                        AsteroidDetails()
                     }
+
+                    Footer()
                 }
-
-                Footer()
             }
-        }
 
-        val toolTip = showTooltip.value
+            val toolTip = showTooltip.value
 
-        if (toolTip != null) {
+            if (toolTip != null) {
 
-            Box(
-                modifier = Modifier
-                    .offset(toolTip.position.x, toolTip.position.y),
-                content = toolTip.content
-            )
+                Box(
+                    modifier = Modifier.offset(toolTip.position.x, toolTip.position.y),
+                    content = toolTip.content
+                )
+            }
         }
     }
 }
 
+
+@Composable
+fun AsteroidDetails() {
+
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier
+            .width(300.dp)
+            .fillMaxHeight()
+    ) {
+
+        Box(
+            modifier = Modifier
+                .padding(doubleSpacing)
+                .background(
+                    Color.Black,
+                    defaultRoundedCornerShape
+                )
+                .fillMaxWidth()
+                .height(30.dp).border(1.dp, Color.Red)
+        ) {
+
+            Text(
+                text = "Asteroid details",
+                style = MaterialTheme.typography.headlineSmall,
+                color = MaterialTheme.colorScheme.onBackground
+            )
+        }
+
+        Box(
+            modifier = Modifier
+        ) {
+
+            val scrollState = rememberScrollState()
+
+            Column(
+                modifier = Modifier
+                    .padding(
+                        start = defaultSpacing,
+                        top = doubleSpacing,
+                        bottom = doubleSpacing,
+                        end = doubleSpacing
+                    )
+                    .background(
+                        MaterialTheme.colorScheme.surface,
+                        defaultRoundedCornerShape
+                    )
+                    .verticalScroll(scrollState)
+            ) {
+
+                for (each in 1..50) {
+
+                    Box(
+                        modifier = Modifier
+                            .padding(doubleSpacing)
+                            .background(
+                                MaterialTheme.colorScheme.surfaceVariant,
+                                defaultRoundedCornerShape
+                            )
+                            .border(
+                                0.dp,
+                                Color.Black,
+                                defaultRoundedCornerShape
+                            )
+                            .fillMaxWidth()
+                            .height(150.dp)
+                    )
+                }
+
+            }
+
+            VerticalScrollbar(
+                adapter = rememberScrollbarAdapter(scrollState),
+                modifier = Modifier.fillMaxHeight().align(Alignment.CenterEnd),
+                style = defaultScrollbarStyle().copy(
+                    unhoverColor = white.copy(alpha = 0.4f),
+                    hoverColor = white
+                ),
+            )
+        }
+    }
+}

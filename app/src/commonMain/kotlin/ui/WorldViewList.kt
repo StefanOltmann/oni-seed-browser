@@ -45,7 +45,8 @@ fun WorldViewList(
     lazyListState: LazyListState,
     worlds: List<World>,
     showMapAsteroid: MutableState<Asteroid?>,
-    showTooltip: MutableState<Tooltip?>
+    showTooltip: MutableState<Tooltip?>,
+    showScrollbar: Boolean = true
 ) {
 
     Box {
@@ -67,13 +68,16 @@ fun WorldViewList(
             }
         }
 
-        VerticalScrollbar(
-            adapter = rememberScrollbarAdapter(lazyListState),
-            modifier = Modifier.fillMaxHeight().align(Alignment.CenterEnd),
-            style = defaultScrollbarStyle().copy(
-                unhoverColor = white.copy(alpha = 0.4f),
-                hoverColor = white
-            ),
-        )
+        if (showScrollbar) {
+
+            VerticalScrollbar(
+                adapter = rememberScrollbarAdapter(lazyListState),
+                modifier = Modifier.fillMaxHeight().align(Alignment.CenterEnd),
+                style = defaultScrollbarStyle().copy(
+                    unhoverColor = white.copy(alpha = 0.4f),
+                    hoverColor = white
+                )
+            )
+        }
     }
 }
