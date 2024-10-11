@@ -44,7 +44,8 @@ val widthPerWorld: Dp = 380.dp
 @Composable
 fun WorldView(
     world: World,
-    showMapAsteroid: MutableState<Asteroid?>,
+    showAsteroidMap: MutableState<Asteroid?>,
+    showAsteroidDetails: MutableState<Asteroid?>,
     showTooltip: MutableState<Tooltip?>
 ) {
 
@@ -59,13 +60,14 @@ fun WorldView(
 
         CoordinateBox(world.coordinate)
 
-        val asteroid = showMapAsteroid.value
+        val asteroid = showAsteroidMap.value
 
         if (asteroid == null) {
 
             AsteroidsGrid(
                 world,
-                showMapAsteroid,
+                showAsteroidMap,
+                showAsteroidDetails,
                 showTooltip
             )
         }
@@ -75,7 +77,8 @@ fun WorldView(
 @Composable
 private fun AsteroidsGrid(
     world: World,
-    showMapAsteroid: MutableState<Asteroid?>,
+    showAsteroidMap: MutableState<Asteroid?>,
+    showAsteroidDetails: MutableState<Asteroid?>,
     showTooltip: MutableState<Tooltip?>
 ) {
 
@@ -102,9 +105,17 @@ private fun AsteroidsGrid(
             AsteroidDisplay(
                 asteroid = firstAsteroid,
                 isStarterAstroid = true,
+                isSelected = showAsteroidDetails.value == firstAsteroid,
                 showTooltip = showTooltip,
+                showDetails = {
+
+                    if (showAsteroidDetails.value == firstAsteroid)
+                        showAsteroidDetails.value = null
+                    else
+                        showAsteroidDetails.value = firstAsteroid
+                },
                 showMap = {
-                    showMapAsteroid.value = firstAsteroid
+                    showAsteroidMap.value = firstAsteroid
                 }
             )
 
@@ -127,9 +138,17 @@ private fun AsteroidsGrid(
                             AsteroidDisplay(
                                 asteroid = asteroid,
                                 isStarterAstroid = false,
+                                isSelected = showAsteroidDetails.value == asteroid,
                                 showTooltip = showTooltip,
+                                showDetails = {
+
+                                    if (showAsteroidDetails.value == asteroid)
+                                        showAsteroidDetails.value = null
+                                    else
+                                        showAsteroidDetails.value = asteroid
+                                },
                                 showMap = {
-                                    showMapAsteroid.value = asteroid
+                                    showAsteroidMap.value = asteroid
                                 }
                             )
                         }

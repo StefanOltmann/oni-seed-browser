@@ -23,8 +23,8 @@ import androidx.compose.foundation.VerticalScrollbar
 import androidx.compose.foundation.defaultScrollbarStyle
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
@@ -35,8 +35,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import model.Asteroid
 import model.World
-import ui.theme.defaultPadding
-import ui.theme.defaultSpacing
 import ui.theme.doubleSpacing
 import ui.theme.white
 
@@ -44,7 +42,8 @@ import ui.theme.white
 fun WorldViewList(
     lazyListState: LazyListState,
     worlds: List<World>,
-    showMapAsteroid: MutableState<Asteroid?>,
+    showAsteroidMap: MutableState<Asteroid?>,
+    showAsteroidDetails: MutableState<Asteroid?>,
     showTooltip: MutableState<Tooltip?>,
     showScrollbar: Boolean = true
 ) {
@@ -53,16 +52,16 @@ fun WorldViewList(
 
         LazyColumn(
             state = lazyListState,
-            contentPadding = PaddingValues(defaultSpacing),
             verticalArrangement = Arrangement.spacedBy(doubleSpacing),
-            modifier = Modifier.defaultPadding()
+            modifier = Modifier.padding(doubleSpacing)
         ) {
 
             items(worlds) { world ->
 
                 WorldView(
                     world,
-                    showMapAsteroid,
+                    showAsteroidMap,
+                    showAsteroidDetails,
                     showTooltip
                 )
             }

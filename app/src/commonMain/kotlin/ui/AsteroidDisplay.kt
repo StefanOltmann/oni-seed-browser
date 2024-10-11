@@ -77,7 +77,9 @@ val countBackground = Color.Black.copy(alpha = 0.3F)
 fun AsteroidDisplay(
     asteroid: Asteroid,
     isStarterAstroid: Boolean,
+    isSelected: Boolean,
     showTooltip: MutableState<Tooltip?>,
+    showDetails: () -> Unit,
     showMap: () -> Unit
 ) {
 
@@ -85,14 +87,19 @@ fun AsteroidDisplay(
 
     Row(
         verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.background(
+        modifier = Modifier
+            .background(
             MaterialTheme.colorScheme.surfaceVariant,
             defaultRoundedCornerShape
-        ).border(
+            )
+            .border(
             if (isStarterAstroid) 2.dp else 0.dp,
-            Color.Black,
+                if (isSelected) Color.Yellow else Color.Black,
             defaultRoundedCornerShape
-        ).defaultPadding().fillMaxWidth()
+            )
+            .defaultPadding()
+            .fillMaxWidth()
+            .noRippleClickable(showDetails)
     ) {
 
         Box(

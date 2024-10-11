@@ -19,6 +19,7 @@
 
 package ui
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.VerticalScrollbar
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -32,6 +33,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
@@ -53,6 +55,7 @@ import kotlinx.serialization.json.Json
 import model.Asteroid
 import model.World
 import model.filter.FilterQuery
+import org.jetbrains.compose.resources.painterResource
 import service.DefaultWebClient
 import service.sampleWorldsJson
 import ui.filter.FilterPanel
@@ -227,21 +230,22 @@ fun App() {
 
                     val worlds = searchResponse.value
 
-                    Row {
+                    val worldCount = worlds.size
+
+                    Text(
+                        text = "Showing $worldCount worlds",
+                        style = MaterialTheme.typography.headlineSmall,
+                        color = MaterialTheme.colorScheme.onBackground
+                    )
+
+                    Row(
+                        modifier = Modifier.weight(1F)
+                    ) {
 
                         Column(
                             horizontalAlignment = Alignment.CenterHorizontally,
                             modifier = Modifier.weight(1F)
                         ) {
-
-                            val worldCount = worlds.size
-
-                            Text(
-                                text = "Showing $worldCount worlds",
-                                style = MaterialTheme.typography.headlineSmall,
-                                color = MaterialTheme.colorScheme.onBackground,
-                                modifier = Modifier.height(40.dp)
-                            )
 
                             Box(
                                 modifier = Modifier.weight(1F)
@@ -251,12 +255,16 @@ fun App() {
                                     lazyListState,
                                     worlds,
                                     showAsteroidMap,
-                                    showTooltip
+                                    showAsteroidDetails,
+                                    showTooltip,
+                                    showScrollbar = showAsteroidDetails.value == null
                                 )
                             }
                         }
 
-                        AsteroidDetails()
+                        showAsteroidDetails.value?.let {
+                            AsteroidDetails(it)
+                        }
                     }
 
                     Footer()
@@ -278,32 +286,36 @@ fun App() {
 
 
 @Composable
-fun AsteroidDetails() {
+fun AsteroidDetails(
+    asteroid: Asteroid
+) {
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .width(300.dp)
             .fillMaxHeight()
+            .padding(
+                start = 0.dp,
+                top = doubleSpacing,
+                bottom = defaultSpacing,
+                end = doubleSpacing
+            )
+            .background(
+                MaterialTheme.colorScheme.surface,
+                defaultRoundedCornerShape
+            )
     ) {
 
-        Box(
-            modifier = Modifier
-                .padding(doubleSpacing)
-                .background(
-                    Color.Black,
-                    defaultRoundedCornerShape
-                )
-                .fillMaxWidth()
-                .height(30.dp).border(1.dp, Color.Red)
-        ) {
+        DefaultSpacer()
 
-            Text(
-                text = "Asteroid details",
-                style = MaterialTheme.typography.headlineSmall,
-                color = MaterialTheme.colorScheme.onBackground
-            )
-        }
+        Text(
+            text = asteroid.id.displayName + " details",
+            style = MaterialTheme.typography.headlineSmall,
+            color = MaterialTheme.colorScheme.onBackground,
+        )
+
+        DefaultSpacer()
 
         Box(
             modifier = Modifier
@@ -312,19 +324,17 @@ fun AsteroidDetails() {
             val scrollState = rememberScrollState()
 
             Column(
-                modifier = Modifier
-                    .padding(
-                        start = defaultSpacing,
-                        top = doubleSpacing,
-                        bottom = doubleSpacing,
-                        end = doubleSpacing
-                    )
-                    .background(
-                        MaterialTheme.colorScheme.surface,
-                        defaultRoundedCornerShape
-                    )
-                    .verticalScroll(scrollState)
+                modifier = Modifier.verticalScroll(scrollState)
             ) {
+
+                for (worldTrait in asteroid.worldTraits) {
+
+                    Image(
+                        painter = painterResource(getWorldTraitDrawable(worldTrait)),
+                        contentDescription = null,
+                        modifier = Modifier.size(20.dp)
+                    )
+                }
 
                 for (each in 1..50) {
 
