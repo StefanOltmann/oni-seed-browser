@@ -74,7 +74,7 @@ import ui.theme.hoverColor
 val countBackground = Color.Black.copy(alpha = 0.3F)
 
 @Composable
-fun AsteroidDisplay(
+fun AsteroidView(
     asteroid: Asteroid,
     isStarterAstroid: Boolean,
     isSelected: Boolean,
@@ -85,21 +85,27 @@ fun AsteroidDisplay(
 
     val canShowMap = asteroid.biomePaths != null
 
+    val hovered = remember { mutableStateOf(false) }
+
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
             .background(
-            MaterialTheme.colorScheme.surfaceVariant,
-            defaultRoundedCornerShape
+                if (hovered.value)
+                    MaterialTheme.colorScheme.surfaceTint
+                else
+                    MaterialTheme.colorScheme.surfaceVariant,
+                defaultRoundedCornerShape
             )
             .border(
-            if (isStarterAstroid) 2.dp else 0.dp,
+                if (isStarterAstroid) 2.dp else 0.dp,
                 if (isSelected) Color.Yellow else Color.Black,
-            defaultRoundedCornerShape
+                defaultRoundedCornerShape
             )
             .defaultPadding()
             .fillMaxWidth()
             .noRippleClickable(showDetails)
+            .onHover(hovered)
     ) {
 
         Box(

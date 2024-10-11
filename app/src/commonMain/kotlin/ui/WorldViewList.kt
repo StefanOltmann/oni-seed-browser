@@ -36,7 +36,7 @@ import androidx.compose.ui.Modifier
 import model.Asteroid
 import model.World
 import ui.theme.doubleSpacing
-import ui.theme.white
+import ui.theme.lightGray
 
 @Composable
 fun WorldViewList(
@@ -73,8 +73,8 @@ fun WorldViewList(
                 adapter = rememberScrollbarAdapter(lazyListState),
                 modifier = Modifier.fillMaxHeight().align(Alignment.CenterEnd),
                 style = defaultScrollbarStyle().copy(
-                    unhoverColor = white.copy(alpha = 0.4f),
-                    hoverColor = white
+                    unhoverColor = lightGray.copy(alpha = 0.4f),
+                    hoverColor = lightGray
                 )
             )
         }

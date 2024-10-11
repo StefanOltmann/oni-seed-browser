@@ -67,7 +67,7 @@ import ui.theme.defaultPadding
 import ui.theme.defaultRoundedCornerShape
 import ui.theme.defaultSpacing
 import ui.theme.doubleSpacing
-import ui.theme.white
+import ui.theme.lightGray
 
 val logoIconHeight = 80.dp
 
@@ -377,8 +377,8 @@ fun AsteroidDetails(
                 adapter = rememberScrollbarAdapter(scrollState),
                 modifier = Modifier.fillMaxHeight().align(Alignment.CenterEnd),
                 style = defaultScrollbarStyle().copy(
-                    unhoverColor = white.copy(alpha = 0.4f),
-                    hoverColor = white
+                    unhoverColor = lightGray.copy(alpha = 0.4f),
+                    hoverColor = lightGray
                 ),
             )
         }

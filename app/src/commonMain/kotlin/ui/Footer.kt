@@ -38,7 +38,7 @@ import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.unit.dp
 import ui.icons.GithubMark
 import ui.theme.halfSpacing
-import ui.theme.white
+import ui.theme.lightGray
 
 @Composable
 fun Footer() {
@@ -60,7 +60,7 @@ fun Footer() {
             Text(
                 text = "Oxygen Not Included",
                 style = MaterialTheme.typography.bodyLarge,
-                color = white,
+                color = lightGray,
                 modifier = Modifier
                     .offset(y = -2.dp)
                     .clickable {
@@ -71,14 +71,14 @@ fun Footer() {
             Text(
                 text = "©",
                 style = MaterialTheme.typography.bodyLarge,
-                color = white,
+                color = lightGray,
                 modifier = Modifier.offset(y = -2.dp)
             )
 
             Text(
                 text = "Klei Entertainment",
                 style = MaterialTheme.typography.bodyLarge,
-                color = white,
+                color = lightGray,
                 modifier = Modifier
                     .offset(y = -2.dp)
                     .clickable {
@@ -91,13 +91,13 @@ fun Footer() {
                 Text(
                     text = "|",
                     style = MaterialTheme.typography.bodyLarge,
-                    color = white,
+                    color = lightGray,
                     modifier = Modifier.offset(y = -2.dp)
                 )
 
                 Icon(
                     imageVector = GithubMark,
-                    tint = white,
+                    tint = lightGray,
                     contentDescription = null,
                     modifier = Modifier.size(16.dp)
                 )
@@ -105,7 +105,7 @@ fun Footer() {
                 Text(
                     text = "https://github.com/StefanOltmann/oni-seed-browser",
                     style = MaterialTheme.typography.bodyLarge,
-                    color = white,
+                    color = lightGray,
                     modifier = Modifier
                         .offset(y = -2.dp)
                         .clickable {

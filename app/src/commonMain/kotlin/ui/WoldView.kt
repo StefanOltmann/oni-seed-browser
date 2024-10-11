@@ -102,7 +102,7 @@ private fun AsteroidsGrid(
             val firstAsteroid = world.asteroids.first()
 
             /* First Asteroid should span the whole column. */
-            AsteroidDisplay(
+            AsteroidView(
                 asteroid = firstAsteroid,
                 isStarterAstroid = true,
                 isSelected = showAsteroidDetails.value == firstAsteroid,
@@ -135,7 +135,7 @@ private fun AsteroidsGrid(
                             modifier = Modifier.weight(1F)
                         ) {
 
-                            AsteroidDisplay(
+                            AsteroidView(
                                 asteroid = asteroid,
                                 isStarterAstroid = false,
                                 isSelected = showAsteroidDetails.value == asteroid,
