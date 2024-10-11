@@ -30,12 +30,15 @@ import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
 import io.ktor.http.contentType
 import io.ktor.serialization.kotlinx.json.json
+import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import model.World
 import model.filter.FilterQuery
 
 const val BASE_API_URL = "http://localhost:8080"
 const val SEARCH_URL = "$BASE_API_URL/search"
+
+private val jsonPretty = Json { this.prettyPrint = true }
 
 object DefaultWebClient : WebClient {
 
@@ -57,7 +60,7 @@ object DefaultWebClient : WebClient {
 
     override suspend fun search(filterQuery: FilterQuery): List<World> {
 
-        println("Search: $filterQuery")
+        println("Search: " + jsonPretty.encodeToString(filterQuery))
 
         val worlds: List<World> = httpClient.post(SEARCH_URL) {
             contentType(ContentType.Application.Json)
