@@ -63,7 +63,7 @@ fun WorldView(
 
         CoordinateBox(
             coordinate = world.coordinate,
-            showMapClicked = if (world.starMapEntriesSpacedOut != null && false) // FIXME Disabled
+            showMapClicked = if (world.starMapEntriesSpacedOut != null)
                 showMapClicked
             else
                 null

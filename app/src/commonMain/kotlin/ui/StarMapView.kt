@@ -20,18 +20,27 @@
 package ui
 
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.unit.dp
+import model.AsteroidType
 import model.World
+import org.jetbrains.compose.resources.painterResource
 import ui.theme.defaultPadding
 import ui.theme.lightGray
 import kotlin.math.PI
@@ -41,11 +50,16 @@ import kotlin.math.sin
 private const val GRID_RADIUS = 12
 private const val ROTATION_RADIANS = (30f * PI / 180).toFloat()
 
+private val gridColor = lightGray.copy(alpha = 0.2f)
+
 @Composable
 fun StarMapView(
     world: World,
     onCloseClicked: () -> Unit
 ) {
+
+    if (world.starMapEntriesSpacedOut == null)
+        return
 
     Box(
         modifier = Modifier
@@ -72,6 +86,48 @@ fun StarMapView(
             ) {
 
                 HexagonalGrid()
+
+                val hexSize =
+                    minOf(maxWidth.value, maxHeight.value) / (GRID_RADIUS * 3.2f)
+
+                val hexHeight = (hexSize * 2 * (cos(PI / 6))).toFloat()
+
+                for (entry in world.starMapEntriesSpacedOut) {
+
+                    val xOffset = hexSize * 3 / 2 * entry.q * cos(ROTATION_RADIANS) -
+                        hexHeight * (entry.r + entry.q / 2f) * sin(ROTATION_RADIANS)
+
+                    val yOffset = hexSize * 3 / 2 * entry.q * sin(ROTATION_RADIANS) +
+                        hexHeight * (entry.r + entry.q / 2f) * cos(ROTATION_RADIANS)
+
+                    Box(
+                        modifier = Modifier
+                            .offset(
+                                x = xOffset.dp,
+                                y = yOffset.dp
+                            )
+                            .size(hexSize.times(LocalDensity.current.density).dp)
+                    ) {
+
+                        val asteroidType = AsteroidType.entries.find { it.name == entry.id }
+
+                        if (asteroidType != null) {
+
+                            Image(
+                                painter = painterResource(getAsteroidTypeDrawable(asteroidType)),
+                                contentDescription = null,
+                                modifier = Modifier.scale(1.5f)
+                            )
+
+                        } else {
+
+                            Text(
+                                entry.id,
+                                color = Color.Green
+                            )
+                        }
+                    }
+                }
             }
         }
     }
@@ -118,7 +174,7 @@ private fun HexagonalGrid() {
 
                 path.close()
 
-                drawPath(path, lightGray, style = Stroke(width = 1f))
+                drawPath(path, gridColor, style = Stroke(width = 1f))
             }
         }
     }
