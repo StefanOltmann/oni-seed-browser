@@ -36,11 +36,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import model.Asteroid
 import model.BiomePaths
+import oni_seed_browser.app.generated.resources.Res
+import oni_seed_browser.app.generated.resources.background_event_10
 import org.jetbrains.compose.resources.painterResource
 import ui.theme.defaultPadding
 
@@ -60,6 +63,14 @@ fun AsteroidMapView(
                 /* Ignore clicks */
             }
     ) {
+
+        /* Background */
+        Image(
+            painter = painterResource(Res.drawable.background_event_10),
+            contentDescription = null,
+            contentScale = ContentScale.Crop,
+            modifier = Modifier.fillMaxSize()
+        )
 
         CloseButton(
             onClick = onCloseClicked

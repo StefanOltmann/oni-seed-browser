@@ -35,11 +35,14 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
 import model.AsteroidType
 import model.SpacedOutSpacePOI
 import model.World
+import oni_seed_browser.app.generated.resources.Res
+import oni_seed_browser.app.generated.resources.background_space
 import org.jetbrains.compose.resources.painterResource
 import ui.theme.defaultPadding
 import ui.theme.lightGray
@@ -68,6 +71,14 @@ fun StarMapView(
                 /* Ignore clicks */
             }
     ) {
+
+        /* Background */
+        Image(
+            painter = painterResource(Res.drawable.background_space),
+            contentDescription = null,
+            contentScale = ContentScale.Crop,
+            modifier = Modifier.fillMaxSize()
+        )
 
         CloseButton(
             onClick = onCloseClicked
