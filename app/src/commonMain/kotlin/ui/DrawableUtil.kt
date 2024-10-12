@@ -114,7 +114,7 @@ import oni_seed_browser.app.generated.resources.geyser_steam_vent
 import oni_seed_browser.app.generated.resources.geyser_tungsten_volcano
 import oni_seed_browser.app.generated.resources.geyser_volcano
 import oni_seed_browser.app.generated.resources.geyser_water
-import oni_seed_browser.app.generated.resources.poi_artifact
+import oni_seed_browser.app.generated.resources.poi_artifact_outline
 import oni_seed_browser.app.generated.resources.poi_crashed_satellite
 import oni_seed_browser.app.generated.resources.poi_crushed_satellite
 import oni_seed_browser.app.generated.resources.poi_wrecked_satellite
@@ -244,7 +244,7 @@ fun getPointOfInterestDrawable(pointOfInterestType: PointOfInterestType): Drawab
         PointOfInterestType.NEURAL_VACILLATOR -> Res.drawable.building_neural_vacillator
         PointOfInterestType.ANTI_ENTROPY_THERMO_NULLIFIER -> Res.drawable.building_anti_entropy_thermo_nullifier
         PointOfInterestType.EXPERIMENT_52B -> Res.drawable.building_sap_tree
-        PointOfInterestType.ARTIFACT -> Res.drawable.poi_artifact
+        PointOfInterestType.ARTIFACT -> Res.drawable.poi_artifact_outline
         PointOfInterestType.CRASHED_SATELLITE -> Res.drawable.poi_crashed_satellite
         PointOfInterestType.WRECKED_SATELLITE -> Res.drawable.poi_wrecked_satellite
         PointOfInterestType.CRUSHED_SATELLITE -> Res.drawable.poi_crushed_satellite

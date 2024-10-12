@@ -56,6 +56,9 @@ import androidx.compose.ui.unit.times
 import model.Asteroid
 import model.Geyser
 import model.PointOfInterest
+import model.PointOfInterestType
+import oni_seed_browser.app.generated.resources.Res
+import oni_seed_browser.app.generated.resources.poi_artifact_filled
 import org.jetbrains.compose.resources.painterResource
 import ui.theme.DefaultSpacer
 import ui.theme.DoubleSpacer
@@ -338,7 +341,13 @@ private fun PointOfInterestsRow(
             ) {
 
                 Image(
-                    painter = painterResource(getPointOfInterestDrawable(poiType)),
+                    painter = painterResource(
+                        /* Use an alternative graphic for better contrast. */
+                        if (poiType == PointOfInterestType.ARTIFACT)
+                            Res.drawable.poi_artifact_filled
+                        else
+                            getPointOfInterestDrawable(poiType)
+                    ),
                     contentDescription = null,
                     modifier = Modifier.padding(defaultSpacing)
                 )
