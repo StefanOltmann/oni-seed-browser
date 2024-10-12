@@ -145,7 +145,7 @@ fun GeyserDetail(
                 )
 
                 Text(
-                    text = "${geyser.idleTime}s",
+                    text = "${geyser.eruptionTime + geyser.idleTime}s",
                     style = MaterialTheme.typography.bodyLarge,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onBackground
@@ -174,7 +174,7 @@ fun GeyserDetail(
                 )
 
                 Text(
-                    text = "${geyser.dormancyCycles.toString(1)} cycles",
+                    text = "${(geyser.activeCycles + geyser.dormancyCycles).toString(1)} cycles",
                     style = MaterialTheme.typography.bodyLarge,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onBackground
