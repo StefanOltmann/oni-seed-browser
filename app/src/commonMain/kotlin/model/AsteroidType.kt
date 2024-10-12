@@ -144,7 +144,7 @@ enum class AsteroidType(
     MiniBadlands("The Desolands Asteroid"),
 
     /** Metallic Swampy Asteroid */
-    MiniMetallicSwampyStart("Metallic Swampy Asteroid (Start)"),
+    MiniMetallicSwampyStart("Metallic Swampy Asteroid"),
 
     /** Frozen Forest Asteroid */
     MiniForestFrozenWarp("Frozen Forest Asteroid"),
