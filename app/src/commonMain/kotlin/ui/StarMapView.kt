@@ -76,6 +76,8 @@ fun StarMapView(
         Column {
 
             CoordinateBox(
+                index = 0,
+                totalCount = 0,
                 coordinate = world.coordinate,
                 showMapClicked = null
             )

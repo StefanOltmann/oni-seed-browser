@@ -27,7 +27,7 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.rememberScrollbarAdapter
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
@@ -57,10 +57,12 @@ fun WorldViewList(
             modifier = Modifier.padding(doubleSpacing)
         ) {
 
-            items(worlds) { world ->
+            itemsIndexed(worlds) { index, world ->
 
                 WorldView(
                     world,
+                    index + 1,
+                    worlds.size,
                     showStarMap,
                     showAsteroidMap,
                     showAsteroidDetails,

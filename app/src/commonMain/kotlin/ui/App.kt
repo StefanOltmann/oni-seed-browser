@@ -236,14 +236,6 @@ fun App() {
 
                 } else {
 
-                    val worldCount = worlds.value.size
-
-                    Text(
-                        text = "Showing $worldCount worlds",
-                        style = MaterialTheme.typography.headlineSmall,
-                        color = MaterialTheme.colorScheme.onBackground
-                    )
-
                     Row(
                         modifier = Modifier.weight(1F)
                     ) {

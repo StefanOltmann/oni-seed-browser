@@ -44,6 +44,8 @@ val widthPerWorld: Dp = 380.dp
 @Composable
 fun WorldView(
     world: World,
+    index: Int,
+    totalCount: Int,
     showStarMap: MutableState<World?>,
     showAsteroidMap: MutableState<Asteroid?>,
     showAsteroidDetails: MutableState<Asteroid?>,
@@ -62,6 +64,8 @@ fun WorldView(
         val showMapClicked: (() -> Unit) = { showStarMap.value = world }
 
         CoordinateBox(
+            index = index,
+            totalCount = totalCount,
             coordinate = world.coordinate,
             showMapClicked = if (world.starMapEntriesSpacedOut != null)
                 showMapClicked

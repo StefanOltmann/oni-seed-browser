@@ -19,6 +19,7 @@
 
 package ui
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -31,10 +32,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import ui.theme.defaultRoundedCornerShape
 import ui.theme.defaultSpacing
 
 @Composable
 fun CoordinateBox(
+    index: Int,
+    totalCount: Int,
     coordinate: String,
     showMapClicked: (() -> Unit)?
 ) {
@@ -58,8 +62,30 @@ fun CoordinateBox(
             )
         }
 
-        if (showMapClicked != null)
+        if (index > 0 && totalCount > 0) {
 
+            Box(
+                contentAlignment = Alignment.Center,
+                modifier = Modifier
+                    .align(Alignment.CenterStart)
+                    .padding(horizontal = defaultSpacing)
+                    .height(32.dp)
+                    .background(
+                        MaterialTheme.colorScheme.background,
+                        defaultRoundedCornerShape
+                    )
+            ) {
+
+                Text(
+                    text = "# $index / $totalCount",
+                    style = MaterialTheme.typography.headlineSmall,
+                    color = MaterialTheme.colorScheme.onBackground,
+                    modifier = Modifier.padding(horizontal = defaultSpacing)
+                )
+            }
+        }
+
+        if (showMapClicked != null)
             ShowMapButton(
                 onClick = showMapClicked,
                 size = 32.dp,
