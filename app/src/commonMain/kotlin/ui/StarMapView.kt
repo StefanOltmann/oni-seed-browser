@@ -21,7 +21,6 @@ package ui
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
@@ -32,7 +31,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.Stroke
-import androidx.compose.ui.unit.dp
 import model.World
 import ui.theme.defaultPadding
 import ui.theme.lightGray
@@ -82,7 +80,7 @@ fun StarMapView(
 @Composable
 private fun HexagonalGrid() {
 
-    Canvas(modifier = Modifier.fillMaxSize().border(1.dp, Color.Red)) {
+    Canvas(modifier = Modifier.fillMaxSize()) {
 
         val hexSize = minOf(size.width, size.height) / (GRID_RADIUS * 3.2f)
 
