@@ -42,6 +42,7 @@ import ui.theme.lightGray
 fun WorldViewList(
     lazyListState: LazyListState,
     worlds: List<World>,
+    showStarMap: MutableState<World?>,
     showAsteroidMap: MutableState<Asteroid?>,
     showAsteroidDetails: MutableState<Asteroid?>,
     showTooltip: MutableState<Tooltip?>,
@@ -60,6 +61,7 @@ fun WorldViewList(
 
                 WorldView(
                     world,
+                    showStarMap,
                     showAsteroidMap,
                     showAsteroidDetails,
                     showTooltip

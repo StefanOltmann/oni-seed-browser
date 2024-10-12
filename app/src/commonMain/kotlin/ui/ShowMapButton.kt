@@ -20,7 +20,6 @@
 package ui
 
 import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
@@ -30,14 +29,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import ui.theme.defaultRoundedCornerShape
 import ui.theme.halfPadding
 import ui.theme.hoverColor
 
 @Composable
-fun BoxScope.ShowMapButton(
+fun ShowMapButton(
     onClick: () -> Unit,
+    size: Dp = 24.dp,
     modifier: Modifier = Modifier
 ) {
 
@@ -53,7 +54,7 @@ fun BoxScope.ShowMapButton(
         modifier = Modifier
             .onHover(hovered)
             .halfPadding()
-            .size(24.dp)
+            .size(size)
             .border(
                 1.dp,
                 if (hovered.value)

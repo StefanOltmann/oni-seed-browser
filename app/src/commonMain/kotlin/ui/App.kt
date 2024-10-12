@@ -139,7 +139,10 @@ fun App() {
 
                 Column {
 
-                    CoordinateBox(asteroid.id.displayName)
+                    CoordinateBox(
+                        coordinate = asteroid.id.displayName,
+                        showMapClicked = null
+                    )
 
                     MapView(asteroid)
                 }
@@ -262,6 +265,7 @@ fun App() {
                                 WorldViewList(
                                     lazyListState,
                                     worlds.value,
+                                    showStarMap,
                                     showAsteroidMap,
                                     showAsteroidDetails,
                                     showTooltip,
