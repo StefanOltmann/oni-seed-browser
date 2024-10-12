@@ -29,7 +29,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import ui.theme.defaultRoundedCornerShape
@@ -37,8 +36,9 @@ import ui.theme.halfPadding
 import ui.theme.hoverColor
 
 @Composable
-fun BoxScope.SearchIcon(
-    onClick: () -> Unit
+fun BoxScope.ShowMapButton(
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
 
     val hovered = remember { mutableStateOf(false) }
@@ -62,7 +62,7 @@ fun BoxScope.SearchIcon(
                     MaterialTheme.colorScheme.onBackground,
                 defaultRoundedCornerShape
             )
-            .align(Alignment.BottomEnd)
             .noRippleClickable(onClick)
+            .then(modifier)
     )
 }

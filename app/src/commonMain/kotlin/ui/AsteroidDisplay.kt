@@ -114,7 +114,10 @@ fun AsteroidView(
                 modifier = Modifier.defaultPadding()
             )
 
-            SearchIcon(showMap)
+            ShowMapButton(
+                onClick = showMap,
+                modifier = Modifier.align(Alignment.BottomEnd)
+            )
         }
 
         DefaultSpacer()
