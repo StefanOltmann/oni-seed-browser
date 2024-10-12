@@ -47,7 +47,7 @@ import oni_seed_browser.app.generated.resources.Res
 import oni_seed_browser.app.generated.resources.background_space
 import org.jetbrains.compose.resources.painterResource
 import ui.theme.defaultPadding
-import ui.theme.lightGray
+import ui.theme.lightGrayTransparentBorderColor
 
 @Composable
 fun AsteroidMapView(
@@ -117,7 +117,7 @@ fun AsteroidMapView(
                                 width = (asteroid.sizeX * viewScale).dp,
                                 height = (asteroid.sizeY * viewScale).dp,
                             )
-                            .border(0.dp, lightGray)
+                            .border(0.dp, lightGrayTransparentBorderColor)
                     ) {
 
                         for ((zoneType, pointsLists) in biomePaths.polygonMap) {

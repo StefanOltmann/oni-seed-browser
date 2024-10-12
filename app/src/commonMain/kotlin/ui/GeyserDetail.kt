@@ -34,15 +34,16 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import model.Geyser
 import org.jetbrains.compose.resources.painterResource
 import ui.theme.DefaultSpacer
 import ui.theme.HalfSpacer
+import ui.theme.cardColorBackground
 import ui.theme.defaultRoundedCornerShape
 import ui.theme.doubleSpacing
+import ui.theme.lightGrayTransparentBorderColor
 import kotlin.math.pow
 import kotlin.math.roundToInt
 
@@ -56,12 +57,12 @@ fun GeyserDetail(
         modifier = Modifier
             .padding(horizontal = doubleSpacing)
             .background(
-                MaterialTheme.colorScheme.surfaceVariant,
+                cardColorBackground,
                 defaultRoundedCornerShape
             )
             .border(
                 0.dp,
-                Color.Black,
+                lightGrayTransparentBorderColor,
                 defaultRoundedCornerShape
             )
             .fillMaxWidth()

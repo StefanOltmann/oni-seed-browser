@@ -64,10 +64,14 @@ import ui.theme.DefaultSpacer
 import ui.theme.DoubleSpacer
 import ui.theme.FillSpacer
 import ui.theme.HalfSpacer
+import ui.theme.anthracite
+import ui.theme.cardColorBackground
 import ui.theme.defaultPadding
 import ui.theme.defaultRoundedCornerShape
 import ui.theme.defaultSpacing
 import ui.theme.halfSpacing
+import ui.theme.lightGrayTransparentBorderColor
+import ui.theme.surfaceVariantColor
 
 val countBackground = Color.Black.copy(alpha = 0.3F)
 
@@ -88,14 +92,14 @@ fun AsteroidView(
         modifier = Modifier
             .background(
                 if (hovered.value)
-                    MaterialTheme.colorScheme.surfaceTint
+                    surfaceVariantColor
                 else
-                    MaterialTheme.colorScheme.surfaceVariant,
+                    cardColorBackground,
                 defaultRoundedCornerShape
             )
             .border(
-                if (isStarterAstroid) 2.dp else 0.dp,
-                if (isSelected) Color.Yellow else Color.Black,
+                if (isStarterAstroid) 1.dp else 0.dp,
+                if (isSelected) Color.Yellow else lightGrayTransparentBorderColor,
                 defaultRoundedCornerShape
             )
             .defaultPadding()
@@ -232,7 +236,7 @@ private fun GeysersRow(
                     )
                     .border(
                         if (hovered.value) 2.dp else 1.dp,
-                        Color.Black,
+                        anthracite,
                         CircleShape
                     )
                     .onPlaced {
@@ -335,7 +339,7 @@ private fun PointOfInterestsRow(
                     )
                     .border(
                         1.dp,
-                        Color.Black,
+                        anthracite,
                         CircleShape
                     )
             ) {

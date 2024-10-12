@@ -46,12 +46,12 @@ import model.filter.FilterQuery
 import ui.HorizontalSeparator
 import ui.noRippleClickable
 import ui.theme.DefaultSpacer
-import ui.theme.anthracite
+import ui.theme.anthraticeTransparentBackgroundColor
 import ui.theme.defaultRoundedCornerShape
 import ui.theme.doubleSpacing
 import ui.theme.halfSpacing
 import ui.theme.lightGray
-import ui.theme.transparentBackground
+import ui.theme.lightGrayTransparentBorderColor
 
 enum class FilterSelectionType {
     ASTEROID,
@@ -87,8 +87,8 @@ fun FilterPanel(
             .padding(
                 bottom = if (filterPanelOpen.value) doubleSpacing else halfSpacing
             )
-            .background(transparentBackground, defaultRoundedCornerShape)
-            .border(4.dp, anthracite, defaultRoundedCornerShape)
+            .background(anthraticeTransparentBackgroundColor, defaultRoundedCornerShape)
+            .border(0.dp, lightGrayTransparentBorderColor, defaultRoundedCornerShape)
             .shadow(elevation = 8.dp)
             .then(maxSizeModifier)
     ) {

@@ -20,13 +20,13 @@
 package ui
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
@@ -35,8 +35,10 @@ import androidx.compose.ui.unit.dp
 import model.Asteroid
 import model.World
 import ui.theme.FillSpacer
+import ui.theme.anthraticeTransparentBackgroundColor
 import ui.theme.defaultRoundedCornerShape
 import ui.theme.defaultSpacing
+import ui.theme.lightGrayTransparentBorderColor
 import kotlin.math.max
 
 val widthPerWorld: Dp = 380.dp
@@ -55,10 +57,8 @@ fun WorldView(
     Column(
         verticalArrangement = Arrangement.spacedBy(defaultSpacing),
         modifier = Modifier
-            .background(
-                MaterialTheme.colorScheme.surface,
-                defaultRoundedCornerShape
-            )
+            .background(anthraticeTransparentBackgroundColor, defaultRoundedCornerShape)
+            .border(0.dp, lightGrayTransparentBorderColor, defaultRoundedCornerShape)
     ) {
 
         val showMapClicked: (() -> Unit) = { showStarMap.value = world }

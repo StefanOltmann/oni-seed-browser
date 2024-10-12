@@ -34,6 +34,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import ui.theme.defaultRoundedCornerShape
 import ui.theme.defaultSpacing
+import ui.theme.halfSpacing
 
 @Composable
 fun CoordinateBox(
@@ -68,7 +69,7 @@ fun CoordinateBox(
                 contentAlignment = Alignment.Center,
                 modifier = Modifier
                     .align(Alignment.CenterStart)
-                    .padding(horizontal = defaultSpacing)
+                    .padding(horizontal = halfSpacing)
                     .height(32.dp)
                     .background(
                         MaterialTheme.colorScheme.background,

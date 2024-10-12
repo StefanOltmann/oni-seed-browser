@@ -36,7 +36,10 @@ val ctaColor = Color.Blue
 
 val hoverColor = Color.Yellow
 
-val transparentBackground = anthracite.copy(alpha = 0.5f)
+val lightGrayTransparentBorderColor = lightGray.copy(alpha = 0.5f)
+val anthraticeTransparentBackgroundColor = anthracite.copy(alpha = 0.7f)
+
+val cardColorBackground = surfaceColor.copy(alpha = 0.5f)
 
 val appColorScheme = darkColorScheme(
     background = anthracite,

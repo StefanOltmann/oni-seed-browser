@@ -50,7 +50,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.DpOffset
@@ -69,12 +68,15 @@ import ui.filter.FilterPanel
 import ui.theme.AppTypography
 import ui.theme.DefaultSpacer
 import ui.theme.HalfSpacer
+import ui.theme.anthraticeTransparentBackgroundColor
 import ui.theme.appColorScheme
+import ui.theme.cardColorBackground
 import ui.theme.defaultPadding
 import ui.theme.defaultRoundedCornerShape
 import ui.theme.defaultSpacing
 import ui.theme.doubleSpacing
 import ui.theme.lightGray
+import ui.theme.lightGrayTransparentBorderColor
 
 val logoIconHeight = 80.dp
 
@@ -311,10 +313,8 @@ fun AsteroidDetails(
                 bottom = doubleSpacing,
                 end = doubleSpacing
             )
-            .background(
-                MaterialTheme.colorScheme.surface,
-                defaultRoundedCornerShape
-            )
+            .background(anthraticeTransparentBackgroundColor, defaultRoundedCornerShape)
+            .border(0.dp, lightGrayTransparentBorderColor, defaultRoundedCornerShape)
     ) {
 
         DefaultSpacer()
@@ -347,12 +347,12 @@ fun AsteroidDetails(
                                 horizontal = doubleSpacing
                             )
                             .background(
-                                MaterialTheme.colorScheme.surfaceVariant,
+                                cardColorBackground,
                                 defaultRoundedCornerShape
                             )
                             .border(
                                 0.dp,
-                                Color.Black,
+                                lightGrayTransparentBorderColor,
                                 defaultRoundedCornerShape
                             )
                             .fillMaxWidth()
