@@ -28,11 +28,18 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.drawscope.Stroke
 import model.World
 import ui.theme.defaultPadding
+import ui.theme.lightGray
+import kotlin.math.PI
+import kotlin.math.cos
+import kotlin.math.sin
+
+private const val GRID_RADIUS = 5
+private const val ROTATION_RADIANS = (30f * PI / 180).toFloat()
 
 @Composable
 fun StarMapView(
@@ -69,18 +76,60 @@ fun StarMapView(
                     modifier = Modifier.fillMaxSize()
                 ) {
 
-                    val density = LocalDensity.current.density
-
-
-                    Canvas(
-                        modifier = Modifier.fillMaxSize()
-                    ) {
-
-                        drawLine(Color.Red, Offset(0f, 0f), Offset(size.width, size.height))
-
-                    }
+                    HexagonalGrid(hexSize = 50f)
                 }
             }
         }
     }
 }
+
+@Composable
+private fun HexagonalGrid(
+    hexSize: Float
+) {
+
+    Canvas(modifier = Modifier.fillMaxSize()) {
+
+        val hexHeight = (hexSize * 2 * (cos(PI / 6))).toFloat()
+
+        val offsetX = size.width / 2
+        val offsetY = size.height / 2
+
+        for (q in -GRID_RADIUS..GRID_RADIUS) {
+
+            val r1 = maxOf(-GRID_RADIUS, -q - GRID_RADIUS)
+            val r2 = minOf(GRID_RADIUS, -q + GRID_RADIUS)
+
+            for (r in r1..r2) {
+
+                val x = offsetX +
+                    (hexSize * 3 / 2 * q * cos(ROTATION_RADIANS) -
+                        hexHeight * (r + q / 2f) * sin(ROTATION_RADIANS))
+
+                val y = offsetY +
+                    (hexSize * 3 / 2 * q * sin(ROTATION_RADIANS) +
+                        hexHeight * (r + q / 2f) * cos(ROTATION_RADIANS))
+
+                val path = Path()
+
+                for (pointIndex in 0..5) {
+
+                    val angle = (PI / 3 * pointIndex).toFloat() + ROTATION_RADIANS
+
+                    val pointX = x + hexSize * cos(angle)
+                    val pointY = y + hexSize * sin(angle)
+
+                    if (pointIndex == 0)
+                        path.moveTo(pointX, pointY)
+                    else
+                        path.lineTo(pointX, pointY)
+                }
+
+                path.close()
+
+                drawPath(path, lightGray, style = Stroke(width = 1f))
+            }
+        }
+    }
+}
+
