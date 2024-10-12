@@ -22,6 +22,7 @@ package ui
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
@@ -43,9 +44,10 @@ import androidx.compose.ui.unit.dp
 import model.Asteroid
 import model.BiomePaths
 import oni_seed_browser.app.generated.resources.Res
-import oni_seed_browser.app.generated.resources.background_event_10
+import oni_seed_browser.app.generated.resources.background_space
 import org.jetbrains.compose.resources.painterResource
 import ui.theme.defaultPadding
+import ui.theme.lightGray
 
 @Composable
 fun AsteroidMapView(
@@ -66,7 +68,7 @@ fun AsteroidMapView(
 
         /* Background */
         Image(
-            painter = painterResource(Res.drawable.background_event_10),
+            painter = painterResource(Res.drawable.background_space),
             contentDescription = null,
             contentScale = ContentScale.Crop,
             modifier = Modifier.fillMaxSize()
@@ -115,6 +117,7 @@ fun AsteroidMapView(
                                 width = (asteroid.sizeX * viewScale).dp,
                                 height = (asteroid.sizeY * viewScale).dp,
                             )
+                            .border(0.dp, lightGray)
                     ) {
 
                         for ((zoneType, pointsLists) in biomePaths.polygonMap) {
