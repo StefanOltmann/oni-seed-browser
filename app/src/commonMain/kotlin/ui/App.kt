@@ -64,6 +64,7 @@ import service.sampleWorldsJson
 import ui.filter.FilterPanel
 import ui.theme.AppTypography
 import ui.theme.DefaultSpacer
+import ui.theme.HalfSpacer
 import ui.theme.appColorScheme
 import ui.theme.defaultPadding
 import ui.theme.defaultRoundedCornerShape
@@ -154,8 +155,8 @@ fun App() {
             ) {
 
                 Text(
-                    text = "ONI Seed Browser",
-                    style = MaterialTheme.typography.displayLarge,
+                    text = "Oxygen Not Included Seed Browser",
+                    style = MaterialTheme.typography.displayMedium,
                     color = MaterialTheme.colorScheme.onBackground,
                     modifier = Modifier.defaultPadding()
                 )
@@ -181,8 +182,6 @@ fun App() {
                         )
                     }
                 }
-
-                DefaultSpacer()
 
                 val search: suspend () -> Unit = {
 
@@ -211,6 +210,8 @@ fun App() {
                         isGettingNewResults.value = false
                     }
                 }
+
+                HalfSpacer()
 
                 FilterPanel(
                     filterQueryState = filterQueryState,

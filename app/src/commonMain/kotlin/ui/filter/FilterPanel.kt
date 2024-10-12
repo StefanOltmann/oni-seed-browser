@@ -42,6 +42,7 @@ import ui.noRippleClickable
 import ui.theme.DefaultSpacer
 import ui.theme.defaultRoundedCornerShape
 import ui.theme.doubleSpacing
+import ui.theme.halfSpacing
 
 enum class FilterSelectionType {
     ASTEROID,
@@ -74,7 +75,9 @@ fun FilterPanel(
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = doubleSpacing)
-            .padding(bottom = doubleSpacing)
+            .padding(
+                bottom = if (filterPanelOpen.value) doubleSpacing else halfSpacing
+            )
             .background(MaterialTheme.colorScheme.surface, defaultRoundedCornerShape)
             .then(maxSizeModifier)
     ) {
