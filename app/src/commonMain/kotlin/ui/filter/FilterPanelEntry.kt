@@ -199,9 +199,7 @@ fun FilterPanelEntry(
                         textStyle = MaterialTheme.typography.bodyLarge.copy(
                             color = MaterialTheme.colorScheme.onBackground
                         ),
-                        modifier = Modifier
-                            .background(MaterialTheme.colorScheme.surface)
-                            .width(60.dp)
+                        modifier = Modifier.width(60.dp)
                     )
 
                     DefaultSpacer()

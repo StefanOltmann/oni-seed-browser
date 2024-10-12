@@ -30,6 +30,7 @@ import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
@@ -50,6 +51,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
@@ -58,6 +60,8 @@ import kotlinx.serialization.json.Json
 import model.Asteroid
 import model.World
 import model.filter.FilterQuery
+import oni_seed_browser.app.generated.resources.Res
+import oni_seed_browser.app.generated.resources.background_space
 import org.jetbrains.compose.resources.painterResource
 import service.DefaultWebClient
 import service.sampleWorldsJson
@@ -148,10 +152,17 @@ fun App() {
 
         Box {
 
+            /* Background */
+            Image(
+                painter = painterResource(Res.drawable.background_space),
+                contentDescription = null,
+                contentScale = ContentScale.Crop,
+                modifier = Modifier.fillMaxSize()
+            )
+
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier
-                    .background(MaterialTheme.colorScheme.background)
+//                modifier = Modifier.background(MaterialTheme.colorScheme.background)
             ) {
 
                 Text(

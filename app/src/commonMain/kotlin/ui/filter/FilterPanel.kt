@@ -20,15 +20,19 @@
 package ui.filter
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.VerticalScrollbar
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.defaultScrollbarStyle
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.rememberScrollbarAdapter
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
@@ -36,13 +40,18 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.unit.dp
 import model.filter.FilterQuery
 import ui.HorizontalSeparator
 import ui.noRippleClickable
 import ui.theme.DefaultSpacer
+import ui.theme.anthracite
 import ui.theme.defaultRoundedCornerShape
 import ui.theme.doubleSpacing
 import ui.theme.halfSpacing
+import ui.theme.lightGray
+import ui.theme.transparentBackground
 
 enum class FilterSelectionType {
     ASTEROID,
@@ -78,7 +87,9 @@ fun FilterPanel(
             .padding(
                 bottom = if (filterPanelOpen.value) doubleSpacing else halfSpacing
             )
-            .background(MaterialTheme.colorScheme.surface, defaultRoundedCornerShape)
+            .background(transparentBackground, defaultRoundedCornerShape)
+            .border(4.dp, anthracite, defaultRoundedCornerShape)
+            .shadow(elevation = 8.dp)
             .then(maxSizeModifier)
     ) {
 
@@ -92,6 +103,8 @@ fun FilterPanel(
 
             Box {
 
+                val verticalScroll = rememberScrollState()
+
                 Column(
                     modifier = Modifier.alpha(
                         if (filterSelection.value == null) 1.0f else 0.2f
@@ -103,7 +116,7 @@ fun FilterPanel(
                         modifier = Modifier
                             .fillMaxWidth()
                             .weight(1F)
-                            .verticalScroll(rememberScrollState())
+                            .verticalScroll(verticalScroll)
                     ) {
 
                         DefaultSpacer()
@@ -162,6 +175,18 @@ fun FilterPanel(
                         )
                     }
                 }
+
+                VerticalScrollbar(
+                    adapter = rememberScrollbarAdapter(verticalScroll),
+                    modifier = Modifier
+                        .padding(bottom = 72.dp)
+                        .fillMaxHeight()
+                        .align(Alignment.CenterEnd),
+                    style = defaultScrollbarStyle().copy(
+                        unhoverColor = lightGray.copy(alpha = 0.4f),
+                        hoverColor = lightGray
+                    )
+                )
             }
         }
     }

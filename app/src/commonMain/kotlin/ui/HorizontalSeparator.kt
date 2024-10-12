@@ -23,23 +23,58 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.geometry.CornerRadius
+import androidx.compose.ui.graphics.PathEffect
+import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.unit.dp
 import ui.theme.defaultPadding
+import ui.theme.defaultSpacing
+import ui.theme.lightGray
 
 @Composable
-fun HorizontalSeparator(
-    modifier: Modifier = Modifier
-) {
+fun HorizontalSeparator() {
 
     Box(
         modifier = Modifier
             .defaultPadding()
-            .background(MaterialTheme.colorScheme.background)
+            .padding(horizontal = defaultSpacing)
+            .background(lightGray.copy(alpha = 0.5f))
             .fillMaxWidth()
             .height(2.dp)
-            .then(modifier)
+    )
+}
+
+@Composable
+fun DashedHorizontalSeparator() {
+
+    Box(
+        modifier = Modifier
+            .defaultPadding()
+            .padding(horizontal = defaultSpacing)
+            .background(lightGray.copy(alpha = 0.3f))
+            .fillMaxWidth()
+            .drawBehind {
+
+                val dashLength = 8.dp.toPx()
+                val gapLength = 8.dp.toPx()
+                val strokeWidth = 2.dp.toPx()
+
+                drawRoundRect(
+                    color = lightGray.copy(alpha = 0.3f),
+                    size = this.size,
+                    cornerRadius = CornerRadius(
+                        8.dp.toPx(),
+                        8.dp.toPx()
+                    ),
+                    style = Stroke(
+                        width = strokeWidth,
+                        pathEffect = PathEffect.dashPathEffect(floatArrayOf(dashLength, gapLength))
+                    )
+                )
+            }
     )
 }
