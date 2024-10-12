@@ -121,9 +121,9 @@ fun App() {
             worlds.value = parsedWorlds.sortedWith(compareBy({ it.cluster.isBaseGame() }, { it.cluster }))
         }
 
-        val asteroid = showAsteroidMap.value
+        val worldForStarMapView = showStarMap.value
 
-        if (asteroid != null) {
+        if (worldForStarMapView != null) {
 
             Box(
                 modifier = Modifier
@@ -134,19 +134,31 @@ fun App() {
             ) {
 
                 CloseButton(
-                    onClick = { showAsteroidMap.value = null }
+                    onClick = { showStarMap.value = null }
                 )
 
                 Column {
 
                     CoordinateBox(
-                        coordinate = asteroid.id.displayName,
+                        coordinate = worldForStarMapView.coordinate,
                         showMapClicked = null
                     )
 
-                    MapView(asteroid)
+                    StarMapView(worldForStarMapView)
                 }
             }
+
+            return@MaterialTheme
+        }
+
+        val asteroidForMapView = showAsteroidMap.value
+
+        if (asteroidForMapView != null) {
+
+            AsteroidMapView(
+                asteroid = asteroidForMapView,
+                onCloseClicked = { showAsteroidMap.value = null }
+            )
 
             return@MaterialTheme
         }
