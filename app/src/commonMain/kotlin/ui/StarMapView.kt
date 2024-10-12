@@ -20,8 +20,10 @@
 package ui
 
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -34,28 +36,50 @@ import ui.theme.defaultPadding
 
 @Composable
 fun StarMapView(
-    world: World
+    world: World,
+    onCloseClicked: () -> Unit
 ) {
 
     Box(
-        contentAlignment = Alignment.Center,
-        modifier = Modifier.defaultPadding()
+        modifier = Modifier
+            .background(Color.Black)
+            .noRippleClickable {
+                /* Ignore clicks */
+            }
     ) {
 
-        BoxWithConstraints(
-            contentAlignment = Alignment.Center,
-            modifier = Modifier.fillMaxSize()
-        ) {
+        CloseButton(
+            onClick = onCloseClicked
+        )
 
-            val density = LocalDensity.current.density
+        Column {
 
+            CoordinateBox(
+                coordinate = world.coordinate,
+                showMapClicked = null
+            )
 
-            Canvas(
-                modifier = Modifier.fillMaxSize()
+            Box(
+                contentAlignment = Alignment.Center,
+                modifier = Modifier.defaultPadding()
             ) {
 
-                drawLine(Color.Red, Offset(0f, 0f), Offset(size.width, size.height))
+                BoxWithConstraints(
+                    contentAlignment = Alignment.Center,
+                    modifier = Modifier.fillMaxSize()
+                ) {
 
+                    val density = LocalDensity.current.density
+
+
+                    Canvas(
+                        modifier = Modifier.fillMaxSize()
+                    ) {
+
+                        drawLine(Color.Red, Offset(0f, 0f), Offset(size.width, size.height))
+
+                    }
+                }
             }
         }
     }

@@ -125,28 +125,10 @@ fun App() {
 
         if (worldForStarMapView != null) {
 
-            Box(
-                modifier = Modifier
-                    .background(Color.Black)
-                    .noRippleClickable {
-                        /* Ignore clicks */
-                    }
-            ) {
-
-                CloseButton(
-                    onClick = { showStarMap.value = null }
-                )
-
-                Column {
-
-                    CoordinateBox(
-                        coordinate = worldForStarMapView.coordinate,
-                        showMapClicked = null
-                    )
-
-                    StarMapView(worldForStarMapView)
-                }
-            }
+            StarMapView(
+                world = worldForStarMapView,
+                onCloseClicked = { showStarMap.value = null }
+            )
 
             return@MaterialTheme
         }
