@@ -1,5 +1,8 @@
 # ONI Seed Browser
 
+[![Kotlin](https://img.shields.io/badge/kotlin-2.0.21-blue.svg?logo=kotlin)](httpw://kotlinlang.org)
+![WASM](https://img.shields.io/badge/-WASM-gray.svg?style=flat)
+
 This is a game map seed browser for the game [Oxygen Not Included](https://www.klei.com/games/oxygen-not-included) by Klei Entertainment.
 
 Try it on https://stefan-oltmann.de/oni-seed-browser
