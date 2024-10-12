@@ -179,7 +179,10 @@ fun FilterPanel(
                 VerticalScrollbar(
                     adapter = rememberScrollbarAdapter(verticalScroll),
                     modifier = Modifier
-                        .padding(bottom = 72.dp)
+                        .padding(
+                            bottom = 72.dp,
+                            end = 4.dp
+                        )
                         .fillMaxHeight()
                         .align(Alignment.CenterEnd),
                     style = defaultScrollbarStyle().copy(
