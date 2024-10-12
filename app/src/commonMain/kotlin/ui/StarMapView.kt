@@ -21,6 +21,7 @@ package ui
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
@@ -31,6 +32,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.unit.dp
 import model.World
 import ui.theme.defaultPadding
 import ui.theme.lightGray
@@ -38,7 +40,7 @@ import kotlin.math.PI
 import kotlin.math.cos
 import kotlin.math.sin
 
-private const val GRID_RADIUS = 5
+private const val GRID_RADIUS = 12
 private const val ROTATION_RADIANS = (30f * PI / 180).toFloat()
 
 @Composable
@@ -66,34 +68,25 @@ fun StarMapView(
                 showMapClicked = null
             )
 
-            Box(
+            BoxWithConstraints(
                 contentAlignment = Alignment.Center,
-                modifier = Modifier.defaultPadding()
+                modifier = Modifier.defaultPadding().fillMaxSize()
             ) {
 
-                BoxWithConstraints(
-                    contentAlignment = Alignment.Center,
-                    modifier = Modifier.fillMaxSize()
-                ) {
-
-                    HexagonalGrid(hexSize = 50f)
-                }
+                HexagonalGrid()
             }
         }
     }
 }
 
 @Composable
-private fun HexagonalGrid(
-    hexSize: Float
-) {
+private fun HexagonalGrid() {
 
-    Canvas(modifier = Modifier.fillMaxSize()) {
+    Canvas(modifier = Modifier.fillMaxSize().border(1.dp, Color.Red)) {
+
+        val hexSize = minOf(size.width, size.height) / (GRID_RADIUS * 3.2f)
 
         val hexHeight = (hexSize * 2 * (cos(PI / 6))).toFloat()
-
-        val offsetX = size.width / 2
-        val offsetY = size.height / 2
 
         for (q in -GRID_RADIUS..GRID_RADIUS) {
 
@@ -102,11 +95,11 @@ private fun HexagonalGrid(
 
             for (r in r1..r2) {
 
-                val x = offsetX +
+                val x = size.width / 2 +
                     (hexSize * 3 / 2 * q * cos(ROTATION_RADIANS) -
                         hexHeight * (r + q / 2f) * sin(ROTATION_RADIANS))
 
-                val y = offsetY +
+                val y = size.height / 2 +
                     (hexSize * 3 / 2 * q * sin(ROTATION_RADIANS) +
                         hexHeight * (r + q / 2f) * cos(ROTATION_RADIANS))
 
@@ -132,4 +125,5 @@ private fun HexagonalGrid(
         }
     }
 }
+
 
