@@ -28,7 +28,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -39,6 +38,7 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
 import model.AsteroidType
+import model.SpacedOutSpacePOI
 import model.World
 import org.jetbrains.compose.resources.painterResource
 import ui.theme.defaultPadding
@@ -111,6 +111,11 @@ fun StarMapView(
 
                         val asteroidType = AsteroidType.entries.find { it.name == entry.id }
 
+                        val spacedOutSpacePOI = if (asteroidType == null)
+                            SpacedOutSpacePOI.entries.find { it.name == entry.id }
+                        else
+                            null
+
                         if (asteroidType != null) {
 
                             Image(
@@ -119,11 +124,12 @@ fun StarMapView(
                                 modifier = Modifier.scale(1.5f)
                             )
 
-                        } else {
+                        } else if (spacedOutSpacePOI != null) {
 
-                            Text(
-                                entry.id,
-                                color = Color.Green
+                            Image(
+                                painter = painterResource(getSpacedOutSpacePOIDrawable(spacedOutSpacePOI)),
+                                contentDescription = null,
+                                modifier = Modifier.fillMaxSize()
                             )
                         }
                     }
