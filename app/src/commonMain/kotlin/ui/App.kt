@@ -92,6 +92,8 @@ fun App() {
 
         val lazyListState = rememberLazyListState()
 
+        val showStarMap = remember { mutableStateOf<World?>(null) }
+
         val showAsteroidMap = remember { mutableStateOf<Asteroid?>(null) }
 
         val showAsteroidDetails = remember { mutableStateOf<Asteroid?>(null) }

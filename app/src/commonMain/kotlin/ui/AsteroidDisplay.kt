@@ -33,9 +33,6 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Search
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -67,9 +64,7 @@ import ui.theme.HalfSpacer
 import ui.theme.defaultPadding
 import ui.theme.defaultRoundedCornerShape
 import ui.theme.defaultSpacing
-import ui.theme.halfPadding
 import ui.theme.halfSpacing
-import ui.theme.hoverColor
 
 val countBackground = Color.Black.copy(alpha = 0.3F)
 
@@ -82,8 +77,6 @@ fun AsteroidView(
     showDetails: () -> Unit,
     showMap: () -> Unit
 ) {
-
-    val canShowMap = asteroid.biomePaths != null
 
     val hovered = remember { mutableStateOf(false) }
 
@@ -121,33 +114,7 @@ fun AsteroidView(
                 modifier = Modifier.defaultPadding()
             )
 
-            if (canShowMap) {
-
-                val hovered = remember { mutableStateOf(false) }
-
-                Icon(
-                    imageVector = Icons.Default.Search,
-                    contentDescription = null,
-                    tint = if (hovered.value)
-                        hoverColor
-                    else
-                        MaterialTheme.colorScheme.onBackground,
-                    modifier = Modifier
-                        .onHover(hovered)
-                        .halfPadding()
-                        .size(24.dp)
-                        .border(
-                            1.dp,
-                            if (hovered.value)
-                                hoverColor
-                            else
-                                MaterialTheme.colorScheme.onBackground,
-                            defaultRoundedCornerShape
-                        )
-                        .align(Alignment.BottomEnd)
-                        .noRippleClickable(showMap)
-                )
-            }
+            SearchIcon(showMap)
         }
 
         DefaultSpacer()
