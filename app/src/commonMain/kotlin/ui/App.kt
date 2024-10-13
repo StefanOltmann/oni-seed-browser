@@ -109,12 +109,21 @@ fun App(
 
                 println("Load specific seed")
 
-                val world = DefaultWebClient.find(urlHash)
+                try {
 
-                if (world != null)
-                    worlds.value = listOf(world)
-                else
-                    worlds.value = emptyList()
+                    isGettingNewResults.value = true
+
+                    val world = DefaultWebClient.find(urlHash)
+
+                    if (world != null)
+                        worlds.value = listOf(world)
+                    else
+                        worlds.value = emptyList()
+
+
+                } finally {
+                    isGettingNewResults.value = false
+                }
 
             } else {
 
@@ -199,9 +208,9 @@ fun App(
 
                     println("Searching...")
 
-                    isGettingNewResults.value = true
-
                     try {
+
+                        isGettingNewResults.value = true
 
                         errorMessage.value = null
 
