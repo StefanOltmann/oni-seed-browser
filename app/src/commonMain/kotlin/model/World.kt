@@ -50,8 +50,9 @@ data class World(
 
         var rating = 0
 
+        /* Rate traits higher than geysers; for that multiply. */
         for (worldTrait in startingAsteroid.worldTraits)
-            rating += worldTrait.rating.value
+            rating += worldTrait.rating.value * 3
 
         for (geyser in startingAsteroid.geysers)
             rating += geyser.id.rating.value
