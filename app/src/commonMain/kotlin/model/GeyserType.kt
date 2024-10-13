@@ -134,6 +134,6 @@ enum class GeyserType(
     ),
     OIL_WELL(
         type = "OilWell",
-        displayName = "Oil Well"
+        displayName = "Oil Reservoir"
     )
 }
