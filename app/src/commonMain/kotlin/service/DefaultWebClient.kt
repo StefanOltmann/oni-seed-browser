@@ -19,15 +19,13 @@
 
 package service
 
-import io.ktor.client.HttpClient
-import io.ktor.client.call.body
-import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
-import io.ktor.client.plugins.defaultRequest
+import io.ktor.client.*
+import io.ktor.client.call.*
+import io.ktor.client.plugins.*
+import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.client.request.*
-import io.ktor.http.ContentType
-import io.ktor.http.HttpHeaders
-import io.ktor.http.contentType
-import io.ktor.serialization.kotlinx.json.json
+import io.ktor.http.*
+import io.ktor.serialization.kotlinx.json.*
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import model.World
@@ -61,11 +59,14 @@ object DefaultWebClient : WebClient {
 
         println("Find: $coordinate")
 
-        val world: World? = httpClient.get("$FIND_URL/$coordinate") {
+        val response = httpClient.get("$FIND_URL/$coordinate") {
             contentType(ContentType.Application.Json)
-        }.body()
+        }
 
-        return world
+        if (response.status != HttpStatusCode.OK)
+            return null
+
+        return response.body()
     }
 
     override suspend fun search(filterQuery: FilterQuery): List<World> {

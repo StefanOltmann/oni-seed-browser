@@ -120,6 +120,11 @@ fun App(
                     else
                         worlds.value = emptyList()
 
+                } catch (ex: Exception) {
+
+                    ex.printStackTrace()
+
+                    errorMessage.value = ex.stackTraceToString()
 
                 } finally {
                     isGettingNewResults.value = false
