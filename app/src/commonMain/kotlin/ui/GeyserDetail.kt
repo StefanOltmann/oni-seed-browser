@@ -133,6 +133,12 @@ fun GeyserDetail(
             Row {
 
                 Text(
+                    text = "Emits ",
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = MaterialTheme.colorScheme.onBackground
+                )
+
+                Text(
                     text = "${geyser.emitRate} g/s",
                     style = MaterialTheme.typography.bodyLarge,
                     fontWeight = FontWeight.Bold,
@@ -153,7 +159,7 @@ fun GeyserDetail(
                 )
 
                 Text(
-                    text = " every ",
+                    text = " in ",
                     style = MaterialTheme.typography.bodyLarge,
                     color = MaterialTheme.colorScheme.onBackground
                 )
@@ -182,7 +188,7 @@ fun GeyserDetail(
                 )
 
                 Text(
-                    text = " every ",
+                    text = " in ",
                     style = MaterialTheme.typography.bodyLarge,
                     color = MaterialTheme.colorScheme.onBackground
                 )
