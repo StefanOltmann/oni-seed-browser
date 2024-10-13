@@ -40,6 +40,7 @@ import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import model.Asteroid
 import model.BiomePaths
@@ -48,6 +49,7 @@ import oni_seed_browser.app.generated.resources.background_space
 import org.jetbrains.compose.resources.painterResource
 import ui.theme.defaultPadding
 import ui.theme.lightGrayTransparentBorderColor
+import kotlin.math.min
 
 @Composable
 fun AsteroidMapPopup(
@@ -103,19 +105,24 @@ fun AsteroidMapPopup(
 
 @Composable
 fun AsteroidMap(
-    asteroid: Asteroid
+    asteroid: Asteroid,
+    iconSize: Dp = 32.dp,
+    contentAlignment: Alignment = Alignment.Center
 ) {
 
+    val halfIconSize: Dp = iconSize.div(2)
+
     BoxWithConstraints(
-        contentAlignment = Alignment.Center,
+        contentAlignment = contentAlignment,
         modifier = Modifier.fillMaxSize()
     ) {
 
         val density = LocalDensity.current.density
 
-        val maxHeightInPixels = maxHeight.value
-
-        val viewScale = maxHeightInPixels / asteroid.sizeY
+        val viewScale = min(
+            maxHeight.value / asteroid.sizeY,
+            maxWidth.value / asteroid.sizeX
+        )
 
         val biomePaths = BiomePaths.parse(asteroid.biomePaths)
 
@@ -174,10 +181,10 @@ fun AsteroidMap(
                     contentDescription = null,
                     modifier = Modifier
                         .offset(
-                            x = (poi.x * viewScale).dp.minus(16.dp),
-                            y = (poi.y * viewScale).dp.minus(16.dp)
+                            x = (poi.x * viewScale).dp - halfIconSize,
+                            y = (poi.y * viewScale).dp - halfIconSize
                         )
-                        .size(32.dp)
+                        .size(iconSize)
                 )
             }
 
@@ -188,10 +195,10 @@ fun AsteroidMap(
                     contentDescription = null,
                     modifier = Modifier
                         .offset(
-                            x = (geyser.x * viewScale).dp.minus(16.dp),
-                            y = (geyser.y * viewScale).dp.minus(16.dp)
+                            x = (geyser.x * viewScale).dp - halfIconSize,
+                            y = (geyser.y * viewScale).dp - halfIconSize
                         )
-                        .size(32.dp)
+                        .size(iconSize)
                 )
             }
         }

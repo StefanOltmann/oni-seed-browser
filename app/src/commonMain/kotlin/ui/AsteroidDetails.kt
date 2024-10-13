@@ -28,7 +28,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.rememberScrollbarAdapter
@@ -94,11 +93,15 @@ fun AsteroidDetails(
                 Box(
                     contentAlignment = Alignment.BottomCenter,
                     modifier = Modifier
-                        .size(250.dp, 250.dp)
+                        .width(250.dp)
                         .noRippleClickable(showAsteroidMap)
                 ) {
 
-                    AsteroidMap(asteroid)
+                    AsteroidMap(
+                        asteroid = asteroid,
+                        iconSize = 24.dp,
+                        contentAlignment = Alignment.BottomCenter
+                    )
                 }
 
                 for (worldTrait in asteroid.worldTraits)
