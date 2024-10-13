@@ -66,7 +66,9 @@ data class BiomePaths(
 
             val polygonMap = mutableMapOf<ZoneType, List<List<Point>>>()
 
-            val lines = biomePaths.split('\n')
+            val lines = biomePaths
+                .replace("\\n", "\n") // be robust for wrong newline
+                .split('\n')
 
             for (line in lines) {
 
