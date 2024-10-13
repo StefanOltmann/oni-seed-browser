@@ -21,24 +21,13 @@ package ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.BoxScope
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -56,11 +45,7 @@ import org.jetbrains.compose.resources.painterResource
 import service.DefaultWebClient
 import service.sampleWorldsJson
 import ui.filter.FilterPanel
-import ui.theme.AppTypography
-import ui.theme.HalfSpacer
-import ui.theme.appColorScheme
-import ui.theme.defaultPadding
-import ui.theme.defaultRoundedCornerShape
+import ui.theme.*
 
 val logoIconHeight = 80.dp
 
@@ -225,9 +210,13 @@ fun App(
                         /* Reset the data */
                         worlds.value = emptyList()
 
-                        worlds.value = DefaultWebClient.search(
+                        val searchResultWorlds = DefaultWebClient.search(
                             filterQueryState.value
                         )
+
+                        val sortedWorlds = searchResultWorlds.sortedByDescending { it.getRating() }
+
+                        worlds.value = sortedWorlds
 
                     } catch (ex: Exception) {
 

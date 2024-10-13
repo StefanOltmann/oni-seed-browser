@@ -38,4 +38,24 @@ data class World(
     val starMapEntriesVanilla: List<StarMapEntryVanilla>?,
 
     val starMapEntriesSpacedOut: List<StarMapEntrySpacedOut>?
-)
+
+) {
+
+    /**
+     * Rating value for sorting, based on the starter asteroid.
+     */
+    fun getRating(): Int {
+
+        val startingAsteroid = asteroids.first()
+
+        var rating = 0
+
+        for (worldTrait in startingAsteroid.worldTraits)
+            rating += worldTrait.rating.value
+
+        for (geyser in startingAsteroid.geysers)
+            rating += geyser.id.rating.value
+
+        return rating
+    }
+}
