@@ -69,7 +69,9 @@ data class Tooltip(
 )
 
 @Composable
-fun App() {
+fun App(
+    urlHash: String?
+) {
 
     MaterialTheme(
         colorScheme = appColorScheme,
@@ -103,12 +105,26 @@ fun App() {
 
         LaunchedEffect(true) {
 
-            println("Load demo data...")
+            if (urlHash != null) {
 
-            val parsedWorlds = Json.decodeFromString<List<World>>(sampleWorldsJson)
+                println("Load specific seed")
 
-            /* DLCs first */
-            worlds.value = parsedWorlds.sortedWith(compareBy({ it.cluster.isBaseGame() }, { it.cluster }))
+                val world = DefaultWebClient.find(urlHash)
+
+                if (world != null)
+                    worlds.value = listOf(world)
+                else
+                    worlds.value = emptyList()
+
+            } else {
+
+                println("Load demo data...")
+
+                val parsedWorlds = Json.decodeFromString<List<World>>(sampleWorldsJson)
+
+                /* DLCs first */
+                worlds.value = parsedWorlds.sortedWith(compareBy({ it.cluster.isBaseGame() }, { it.cluster }))
+            }
         }
 
         val worldForStarMapView = showStarMap.value
@@ -228,6 +244,31 @@ fun App() {
                             style = MaterialTheme.typography.headlineSmall,
                             color = MaterialTheme.colorScheme.onBackground
                         )
+                    }
+
+                } else if (worlds.value.isEmpty()) {
+
+                    Box(
+                        contentAlignment = Alignment.Center,
+                        modifier = Modifier.weight(1F)
+                    ) {
+
+                        if (urlHash == null) {
+
+                            Text(
+                                text = "No results found.",
+                                style = MaterialTheme.typography.headlineSmall,
+                                color = MaterialTheme.colorScheme.onBackground
+                            )
+
+                        } else {
+
+                            Text(
+                                text = "No results found for $urlHash.",
+                                style = MaterialTheme.typography.headlineSmall,
+                                color = MaterialTheme.colorScheme.onBackground
+                            )
+                        }
                     }
 
                 } else {

@@ -29,9 +29,9 @@ fun main() = application {
         state = rememberWindowState(
             size = DpSize(1200.dp, 800.dp)
         ),
-        title = "ONI Seed Browser",
+        title = "Oxygen Not Included Seed Browser",
         onCloseRequest = ::exitApplication
     ) {
-        App()
+        App(null)
     }
 }

@@ -22,7 +22,9 @@ package service
 import model.World
 import model.filter.FilterQuery
 
-fun interface WebClient {
+interface WebClient {
+
+    suspend fun find(coordinate: String): World?
 
     suspend fun search(filterQuery: FilterQuery): List<World>
 

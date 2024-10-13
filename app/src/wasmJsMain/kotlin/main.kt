@@ -19,9 +19,15 @@
 
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.window.CanvasBasedWindow
+import kotlinx.browser.document
 import ui.App
 
 @OptIn(ExperimentalComposeUiApi::class)
 fun main() {
-    CanvasBasedWindow(canvasElementId = "ComposeTarget") { App() }
+
+    val urlHash = document.location?.hash?.drop(1)?.ifBlank { null }
+
+    CanvasBasedWindow(canvasElementId = "ComposeTarget") {
+        App(urlHash)
+    }
 }

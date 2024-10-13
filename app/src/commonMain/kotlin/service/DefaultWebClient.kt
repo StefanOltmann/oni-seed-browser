@@ -23,9 +23,7 @@ import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.defaultRequest
-import io.ktor.client.request.header
-import io.ktor.client.request.post
-import io.ktor.client.request.setBody
+import io.ktor.client.request.*
 import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
 import io.ktor.http.contentType
@@ -36,6 +34,7 @@ import model.World
 import model.filter.FilterQuery
 
 const val BASE_API_URL = "https://oni-seed-uploader-stefan-oltmann.koyeb.app"
+const val FIND_URL = "$BASE_API_URL/coordinate"
 const val SEARCH_URL = "$BASE_API_URL/search"
 
 private val jsonPretty = Json { this.prettyPrint = true }
@@ -56,6 +55,17 @@ object DefaultWebClient : WebClient {
                 }
             )
         }
+    }
+
+    override suspend fun find(coordinate: String): World? {
+
+        println("Find: $coordinate")
+
+        val world: World? = httpClient.get("$FIND_URL/$coordinate") {
+            contentType(ContentType.Application.Json)
+        }.body()
+
+        return world
     }
 
     override suspend fun search(filterQuery: FilterQuery): List<World> {
