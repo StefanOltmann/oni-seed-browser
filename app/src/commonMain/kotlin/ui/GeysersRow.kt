@@ -53,6 +53,7 @@ import model.Geyser
 import org.jetbrains.compose.resources.painterResource
 import ui.theme.FillSpacer
 import ui.theme.anthracite
+import ui.theme.gray3
 import ui.theme.halfSpacing
 
 @Composable
@@ -115,7 +116,7 @@ fun GeysersRow(
                 modifier = Modifier
                     .size(48.dp)
                     .background(
-                        MaterialTheme.colorScheme.surface,
+                        gray3,
                         CircleShape
                     )
                     .border(

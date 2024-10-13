@@ -49,6 +49,7 @@ import ui.theme.DoubleSpacer
 import ui.theme.FillSpacer
 import ui.theme.anthracite
 import ui.theme.defaultSpacing
+import ui.theme.gray3
 import ui.theme.halfSpacing
 
 @Composable
@@ -103,7 +104,7 @@ fun PointOfInterestsRow(
                 modifier = Modifier
                     .size(48.dp)
                     .background(
-                        MaterialTheme.colorScheme.surface,
+                        gray3,
                         CircleShape
                     )
                     .border(

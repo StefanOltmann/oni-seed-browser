@@ -29,6 +29,8 @@ val surfaceColor = Color(0xFF383a3e)
 val surfaceVariantColor = Color(0xFF424346)
 val surfaceTint = Color(0xFF4d4d4d)
 
+val gray3 = Color(0xFF545454)
+
 //val darkRed = Color(0xFFA62D2D)
 //val darkGreen = Color(0xFF437E3D)
 
@@ -39,7 +41,7 @@ val hoverColor = Color.Yellow
 val lightGrayTransparentBorderColor = lightGray.copy(alpha = 0.5f)
 val anthraticeTransparentBackgroundColor = anthracite.copy(alpha = 0.7f)
 
-val cardColorBackground = surfaceColor.copy(alpha = 0.5f)
+val cardColorBackground = surfaceTint.copy(alpha = 0.5f)
 
 val appColorScheme = darkColorScheme(
     background = anthracite,

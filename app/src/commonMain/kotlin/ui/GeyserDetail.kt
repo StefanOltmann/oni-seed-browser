@@ -29,6 +29,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -43,6 +44,7 @@ import ui.theme.HalfSpacer
 import ui.theme.cardColorBackground
 import ui.theme.defaultRoundedCornerShape
 import ui.theme.doubleSpacing
+import ui.theme.gray3
 import ui.theme.lightGrayTransparentBorderColor
 import kotlin.math.pow
 import kotlin.math.roundToInt
@@ -82,11 +84,22 @@ fun GeyserDetail(
 
                 DefaultSpacer()
 
-                Image(
-                    painter = painterResource(getGeyserDrawable(geyser.id)),
-                    contentDescription = null,
-                    modifier = Modifier.size(48.dp)
-                )
+                Box(
+                    contentAlignment = Alignment.Center,
+                    modifier = Modifier
+                        .size(48.dp)
+                        .background(
+                            gray3.copy(alpha = 0.2F),
+                            CircleShape
+                        )
+                ) {
+
+                    Image(
+                        painter = painterResource(getGeyserDrawable(geyser.id)),
+                        contentDescription = null,
+                        modifier = Modifier.size(48.dp)
+                    )
+                }
 
                 DefaultSpacer()
 
