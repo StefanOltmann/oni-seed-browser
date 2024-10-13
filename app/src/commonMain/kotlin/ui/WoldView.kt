@@ -31,19 +31,29 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ContentCopy
+import androidx.compose.material.icons.filled.CopyAll
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalClipboardManager
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.delay
 import model.Asteroid
 import model.World
 import ui.theme.DefaultSpacer
@@ -56,6 +66,7 @@ import ui.theme.defaultRoundedCornerShape
 import ui.theme.defaultSpacing
 import ui.theme.halfPadding
 import ui.theme.halfSpacing
+import ui.theme.hoverColor
 import ui.theme.lightGray
 import ui.theme.lightGrayTransparentBorderColor
 import kotlin.math.max
@@ -110,6 +121,23 @@ fun WorldView(
             modifier = Modifier.offset(y = -4.dp)
         ) {
 
+            val seedWasCopied = remember { mutableStateOf(false) }
+
+            /*
+             * Set notice back after 3 seconds.
+             */
+            LaunchedEffect(seedWasCopied.value) {
+
+                if (!seedWasCopied.value)
+                    return@LaunchedEffect
+
+                delay(3000)
+
+                seedWasCopied.value = false
+            }
+
+            val clipboardManager = LocalClipboardManager.current
+
             val url = "https://stefan-oltmann.de/oni-seed-browser/#" + world.coordinate;
 
             Spacer(modifier = Modifier.width(defaultSpacing + halfSpacing))
@@ -124,9 +152,39 @@ fun WorldView(
                 )
             }
 
-//            Icon(
-//                imageVector = Icons.Default.
-//            )
+            DefaultSpacer()
+
+            val hovered = remember { mutableStateOf(false) }
+
+            Icon(
+                imageVector = Icons.Default.ContentCopy,
+                contentDescription = null,
+                tint = if (hovered.value)
+                    hoverColor
+                        else
+                            MaterialTheme.colorScheme.onBackground,
+                modifier = Modifier
+                    .onHover(hovered)
+                    .size(16.dp)
+                    .noRippleClickable {
+
+                        clipboardManager.setText(AnnotatedString(url))
+
+                        seedWasCopied.value = true
+                    }
+            )
+
+            if (seedWasCopied.value) {
+
+                DefaultSpacer()
+
+                Text(
+                    text = "Copied URL to clipboard!",
+                    style = MaterialTheme.typography.bodyMedium,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.onBackground
+                )
+            }
         }
 
         HalfSpacer()
