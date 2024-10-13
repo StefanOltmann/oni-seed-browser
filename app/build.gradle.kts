@@ -42,11 +42,6 @@ kotlin {
             implementation(compose.desktop.currentOs)
 
             implementation(libs.ktor.java)
-        }
-
-        val desktopTest by getting
-
-        desktopTest.dependencies {
 
             implementation("com.menecats:polybool-java:1.0.1")
         }
