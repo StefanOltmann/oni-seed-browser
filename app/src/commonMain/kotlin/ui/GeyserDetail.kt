@@ -121,10 +121,8 @@ fun GeyserDetail(
                     color = MaterialTheme.colorScheme.onBackground
                 )
 
-                DefaultSpacer()
-
                 Text(
-                    text = "on average",
+                    text = " on average",
                     style = MaterialTheme.typography.bodyLarge,
                     color = MaterialTheme.colorScheme.onBackground
                 )
