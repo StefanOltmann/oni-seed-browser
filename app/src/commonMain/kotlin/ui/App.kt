@@ -258,7 +258,12 @@ fun App() {
                         }
 
                         showAsteroidDetails.value?.let {
-                            AsteroidDetails(it)
+                            AsteroidDetails(
+                                asteroid = it,
+                                showAsteroidMap = {
+                                    showAsteroidMap.value = it
+                                }
+                            )
                         }
                     }
 

@@ -28,6 +28,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.rememberScrollbarAdapter
@@ -49,7 +50,8 @@ import ui.theme.lightGrayTransparentBorderColor
 
 @Composable
 fun AsteroidDetails(
-    asteroid: Asteroid
+    asteroid: Asteroid,
+    showAsteroidMap: () -> Unit
 ) {
 
     Column(
@@ -84,14 +86,23 @@ fun AsteroidDetails(
             val scrollState = rememberScrollState()
 
             Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.spacedBy(defaultSpacing),
                 modifier = Modifier.verticalScroll(scrollState)
             ) {
 
+                Box(
+                    contentAlignment = Alignment.BottomCenter,
+                    modifier = Modifier
+                        .size(250.dp, 250.dp)
+                        .noRippleClickable(showAsteroidMap)
+                ) {
+
+                    AsteroidMap(asteroid)
+                }
+
                 for (worldTrait in asteroid.worldTraits)
                     WorlTraitDetail(worldTrait)
-
-                // AsteroidMap(asteroid)
 
                 for (geyser in asteroid.geysers.sortedBy { it.id })
                     GeyserDetail(geyser)
