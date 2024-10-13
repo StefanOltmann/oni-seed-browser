@@ -19,7 +19,6 @@
 
 package ui
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.VerticalScrollbar
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -27,13 +26,8 @@ import androidx.compose.foundation.defaultScrollbarStyle
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.rememberScrollbarAdapter
@@ -45,10 +39,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import model.Asteroid
-import org.jetbrains.compose.resources.painterResource
 import ui.theme.DefaultSpacer
 import ui.theme.anthraticeTransparentBackgroundColor
-import ui.theme.cardColorBackground
 import ui.theme.defaultRoundedCornerShape
 import ui.theme.defaultSpacing
 import ui.theme.doubleSpacing
@@ -96,43 +88,8 @@ fun AsteroidDetails(
                 modifier = Modifier.verticalScroll(scrollState)
             ) {
 
-                for (worldTrait in asteroid.worldTraits) {
-
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        modifier = Modifier
-                            .padding(
-                                horizontal = doubleSpacing
-                            )
-                            .background(
-                                cardColorBackground,
-                                defaultRoundedCornerShape
-                            )
-                            .border(
-                                0.dp,
-                                lightGrayTransparentBorderColor,
-                                defaultRoundedCornerShape
-                            )
-                            .fillMaxWidth()
-                            .height(50.dp)
-                    ) {
-
-                        Image(
-                            painter = painterResource(getWorldTraitDrawable(worldTrait)),
-                            contentDescription = null,
-                            modifier = Modifier
-                                .padding(horizontal = doubleSpacing)
-                                .size(24.dp)
-                        )
-
-                        Text(
-                            text = worldTrait.displayName,
-                            style = MaterialTheme.typography.headlineSmall,
-                            color = worldTrait.color,
-                            modifier = Modifier.offset(y = -2.dp)
-                        )
-                    }
-                }
+                for (worldTrait in asteroid.worldTraits)
+                    WorlTraitDetail(worldTrait)
 
                 for (geyser in asteroid.geysers.sortedBy { it.id })
                     GeyserDetail(geyser)
