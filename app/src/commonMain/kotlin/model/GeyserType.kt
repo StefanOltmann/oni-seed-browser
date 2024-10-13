@@ -132,7 +132,7 @@ enum class GeyserType(
         type = "small_volcano",
         displayName = "Minor Volcano"
     ),
-    OIL_WELL(
+    OIL_RESERVOIR(
         type = "OilWell",
         displayName = "Oil Reservoir"
     )

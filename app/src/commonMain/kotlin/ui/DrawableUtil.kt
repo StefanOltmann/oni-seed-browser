@@ -231,7 +231,7 @@ fun getGeyserDrawable(geyserType: GeyserType): DrawableResource =
         GeyserType.SULFUR_GEYSER -> Res.drawable.geyser_liquid_sulfur_geyser
         GeyserType.TUNGSTEN_VOLCANO -> Res.drawable.geyser_tungsten_volcano
         GeyserType.NIOBIUM_VOLCANO -> Res.drawable.geyser_niobium_volcano
-        GeyserType.OIL_WELL -> Res.drawable.geyser_oil_reservoir
+        GeyserType.OIL_RESERVOIR -> Res.drawable.geyser_oil_reservoir
     }
 
 fun getPointOfInterestDrawable(pointOfInterestType: PointOfInterestType): DrawableResource =
