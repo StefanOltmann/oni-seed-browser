@@ -26,18 +26,37 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.text.selection.SelectionContainer
+import androidx.compose.material.icons.Icons
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import model.Asteroid
 import model.World
+import ui.theme.DefaultSpacer
+import ui.theme.DoubleSpacer
 import ui.theme.FillSpacer
+import ui.theme.HalfSpacer
 import ui.theme.anthraticeTransparentBackgroundColor
+import ui.theme.defaultPadding
 import ui.theme.defaultRoundedCornerShape
 import ui.theme.defaultSpacing
+import ui.theme.halfPadding
+import ui.theme.halfSpacing
+import ui.theme.lightGray
 import ui.theme.lightGrayTransparentBorderColor
 import kotlin.math.max
 
@@ -55,7 +74,6 @@ fun WorldView(
 ) {
 
     Column(
-        verticalArrangement = Arrangement.spacedBy(defaultSpacing),
         modifier = Modifier
             .background(anthraticeTransparentBackgroundColor, defaultRoundedCornerShape)
             .border(0.dp, lightGrayTransparentBorderColor, defaultRoundedCornerShape)
@@ -73,6 +91,8 @@ fun WorldView(
                 null
         )
 
+        HalfSpacer()
+
         val asteroid = showAsteroidMap.value
 
         if (asteroid == null) {
@@ -84,6 +104,32 @@ fun WorldView(
                 showTooltip
             )
         }
+
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.offset(y = -4.dp)
+        ) {
+
+            val url = "https://stefan-oltmann.de/oni-seed-browser/#" + world.coordinate;
+
+            Spacer(modifier = Modifier.width(defaultSpacing + halfSpacing))
+
+            SelectionContainer {
+
+                Text(
+                    text = url,
+                    style = MaterialTheme.typography.bodyMedium,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.onBackground
+                )
+            }
+
+//            Icon(
+//                imageVector = Icons.Default.
+//            )
+        }
+
+        HalfSpacer()
     }
 }
 
