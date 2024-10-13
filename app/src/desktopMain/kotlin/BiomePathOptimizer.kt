@@ -22,9 +22,7 @@ import com.menecats.polybool.PolyBool
 import com.menecats.polybool.helpers.PolyBoolHelper.epsilon
 import com.menecats.polybool.helpers.PolyBoolHelper.polygon
 import com.menecats.polybool.models.Polygon
-import model.BiomePaths
-import model.Point
-import model.ZoneType
+import model.*
 import kotlin.math.roundToInt
 
 fun BiomePaths.optimize(): BiomePaths {
@@ -78,4 +76,36 @@ fun BiomePaths.optimize(): BiomePaths {
     }
 
     return BiomePaths(mergedPolygonMap)
+}
+
+fun List<World>.optimizeBiomePaths(): List<World> {
+
+    val optimizedWorlds = mutableListOf<World>()
+
+    for (world in this) {
+
+        val optimizedAsteroids = mutableListOf<Asteroid>()
+
+        for (asteroid in world.asteroids) {
+
+            val optimizedBiomePaths = BiomePaths
+                .parse(asteroid.biomePaths)
+                .optimize()
+                .serialize()
+
+            optimizedAsteroids.add(
+                asteroid.copy(
+                    biomePaths = optimizedBiomePaths
+                )
+            )
+        }
+
+        optimizedWorlds.add(
+            world.copy(
+                asteroids = optimizedAsteroids
+            )
+        )
+    }
+
+    return optimizedWorlds
 }

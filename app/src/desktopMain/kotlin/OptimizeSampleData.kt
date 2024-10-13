@@ -17,29 +17,22 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import model.World
 import service.sampleWorldsJson
 import java.io.File
 
-@OptIn(ExperimentalSerializationApi::class)
-private val json = Json {
-    this.prettyPrint = true
-    this.prettyPrintIndent = "  "
-}
-
 fun main() {
 
-    val parsedWorlds = json.decodeFromString<List<World>>(sampleWorldsJson)
+    val parsedWorlds = Json.decodeFromString<List<World>>(sampleWorldsJson)
 
     /* DLCs first */
-    val sortedWorls = parsedWorlds.sortedWith(compareBy({ it.cluster.isBaseGame() }, { it.cluster }))
+    val sortedWorlds = parsedWorlds.sortedWith(compareBy({ it.cluster.isBaseGame() }, { it.cluster }))
 
-    val optimizedJson = json.encodeToString(sortedWorls)
+    val optimizedWorlds = sortedWorlds.optimizeBiomePaths()
 
-    // TODO
+    val optimizedJson = Json.encodeToString(optimizedWorlds)
 
     File("sample_worlds.json").writeText(optimizedJson)
 }
