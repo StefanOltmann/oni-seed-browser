@@ -44,11 +44,14 @@ enum class Rating(
 
     BAD(
         value = -1,
-        color = Color(0xFFf1c232)
+        color = Color(0xFFFFD27F)
     ),
 
     VERY_BAD(
         value = -2,
         color = Color(0xFFA62D2D)
-    )
+    );
+
+    fun isNegative() =
+        this == BAD || this == VERY_BAD
 }

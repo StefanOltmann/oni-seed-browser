@@ -44,11 +44,12 @@ import model.Asteroid
 import org.jetbrains.compose.resources.painterResource
 import ui.theme.DefaultSpacer
 import ui.theme.HalfSpacer
+import ui.theme.anthraticeTransparentBackgroundColor
 import ui.theme.cardColorBackground
 import ui.theme.defaultPadding
 import ui.theme.defaultRoundedCornerShape
-import ui.theme.defaultSpacing
 import ui.theme.halfPadding
+import ui.theme.halfSpacing
 import ui.theme.lightGrayTransparentBorderColor
 import ui.theme.minimalRoundedCornerShape
 import ui.theme.surfaceVariantColor
@@ -119,7 +120,7 @@ fun AsteroidView(
 
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(defaultSpacing),
+                    horizontalArrangement = Arrangement.spacedBy(halfSpacing),
                     modifier = Modifier.height(24.dp)
                 ) {
 
@@ -134,9 +135,11 @@ fun AsteroidView(
                         Box(
                             contentAlignment = Alignment.Center,
                             modifier = Modifier
-                                .border(
-                                    1.dp,
-                                    lightGrayTransparentBorderColor,
+                                .background(
+                                    if (worldTrait.rating.isNegative())
+                                        worldTrait.rating.color
+                                    else
+                                        anthraticeTransparentBackgroundColor,
                                     minimalRoundedCornerShape
                                 )
                                 .size(24.dp)
