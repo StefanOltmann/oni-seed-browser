@@ -137,7 +137,7 @@ fun AsteroidView(
                             modifier = Modifier
                                 .background(
                                     if (worldTrait.rating.isNegative())
-                                        worldTrait.rating.color
+                                        worldTrait.rating.color.copy(alpha = 0.3f)
                                     else
                                         anthraticeTransparentBackgroundColor,
                                     minimalRoundedCornerShape

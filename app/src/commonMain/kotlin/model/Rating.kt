@@ -44,7 +44,7 @@ enum class Rating(
 
     BAD(
         value = -1,
-        color = Color(0xFFFFD27F)
+        color = Color(0xFFE59400)
     ),
 
     VERY_BAD(
