@@ -127,7 +127,7 @@ fun App() {
 
         if (asteroidForMapView != null) {
 
-            AsteroidMapView(
+            AsteroidMapPopup(
                 asteroid = asteroidForMapView,
                 onCloseClicked = { showAsteroidMap.value = null }
             )

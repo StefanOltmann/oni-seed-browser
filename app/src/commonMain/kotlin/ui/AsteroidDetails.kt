@@ -91,6 +91,8 @@ fun AsteroidDetails(
                 for (worldTrait in asteroid.worldTraits)
                     WorlTraitDetail(worldTrait)
 
+                // AsteroidMap(asteroid)
+
                 for (geyser in asteroid.geysers.sortedBy { it.id })
                     GeyserDetail(geyser)
 

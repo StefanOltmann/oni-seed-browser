@@ -50,13 +50,10 @@ import ui.theme.defaultPadding
 import ui.theme.lightGrayTransparentBorderColor
 
 @Composable
-fun AsteroidMapView(
+fun AsteroidMapPopup(
     asteroid: Asteroid,
     onCloseClicked: () -> Unit
 ) {
-
-    if (asteroid.biomePaths == null)
-        return
 
     Box(
         modifier = Modifier
@@ -98,96 +95,104 @@ fun AsteroidMapView(
                 modifier = Modifier.defaultPadding()
             ) {
 
-                BoxWithConstraints(
-                    contentAlignment = Alignment.Center,
-                    modifier = Modifier.fillMaxSize()
-                ) {
+                AsteroidMap(asteroid)
+            }
+        }
+    }
+}
 
-                    val density = LocalDensity.current.density
+@Composable
+fun AsteroidMap(
+    asteroid: Asteroid
+) {
 
-                    val maxHeightInPixels = maxHeight.value
+    BoxWithConstraints(
+        contentAlignment = Alignment.Center,
+        modifier = Modifier.fillMaxSize()
+    ) {
 
-                    val viewScale = maxHeightInPixels / asteroid.sizeY
+        val density = LocalDensity.current.density
 
-                    val biomePaths = BiomePaths.parse(asteroid.biomePaths)
+        val maxHeightInPixels = maxHeight.value
 
-                    Canvas(
-                        modifier = Modifier
-                            .size(
-                                width = (asteroid.sizeX * viewScale).dp,
-                                height = (asteroid.sizeY * viewScale).dp,
-                            )
-                            .border(0.dp, lightGrayTransparentBorderColor)
-                    ) {
+        val viewScale = maxHeightInPixels / asteroid.sizeY
 
-                        for ((zoneType, pointsLists) in biomePaths.polygonMap) {
+        val biomePaths = BiomePaths.parse(asteroid.biomePaths)
 
-                            for (points in pointsLists) {
+        Canvas(
+            modifier = Modifier
+                .size(
+                    width = (asteroid.sizeX * viewScale).dp,
+                    height = (asteroid.sizeY * viewScale).dp,
+                )
+                .border(0.dp, lightGrayTransparentBorderColor)
+        ) {
 
-                                val path = Path()
+            for ((zoneType, pointsLists) in biomePaths.polygonMap) {
 
-                                val startingPoint = points.first()
+                for (points in pointsLists) {
 
-                                path.moveTo(
-                                    startingPoint.x * viewScale * density,
-                                    startingPoint.y * viewScale * density
-                                )
+                    val path = Path()
 
-                                for (point in points.drop(1)) {
+                    val startingPoint = points.first()
 
-                                    path.lineTo(
-                                        point.x * viewScale * density,
-                                        point.y * viewScale * density
-                                    )
-                                }
+                    path.moveTo(
+                        startingPoint.x * viewScale * density,
+                        startingPoint.y * viewScale * density
+                    )
 
-                                path.lineTo(
-                                    startingPoint.x * viewScale * density,
-                                    startingPoint.y * viewScale * density
-                                )
+                    for (point in points.drop(1)) {
 
-                                drawPath(path, zoneType.color)
-                            }
-                        }
+                        path.lineTo(
+                            point.x * viewScale * density,
+                            point.y * viewScale * density
+                        )
                     }
 
-                    Box(
-                        modifier = Modifier
-                            .size(
-                                width = (asteroid.sizeX * viewScale).dp,
-                                height = (asteroid.sizeY * viewScale).dp,
-                            )
-                    ) {
+                    path.lineTo(
+                        startingPoint.x * viewScale * density,
+                        startingPoint.y * viewScale * density
+                    )
 
-                        for (poi in asteroid.pointsOfInterest) {
-
-                            Image(
-                                painter = painterResource(getPointOfInterestDrawable(poi.id)),
-                                contentDescription = null,
-                                modifier = Modifier
-                                    .offset(
-                                        x = (poi.x * viewScale).dp.minus(16.dp),
-                                        y = (poi.y * viewScale).dp.minus(16.dp)
-                                    )
-                                    .size(32.dp)
-                            )
-                        }
-
-                        for (geyser in asteroid.geysers) {
-
-                            Image(
-                                painter = painterResource(getGeyserDrawable(geyser.id)),
-                                contentDescription = null,
-                                modifier = Modifier
-                                    .offset(
-                                        x = (geyser.x * viewScale).dp.minus(16.dp),
-                                        y = (geyser.y * viewScale).dp.minus(16.dp)
-                                    )
-                                    .size(32.dp)
-                            )
-                        }
-                    }
+                    drawPath(path, zoneType.color)
                 }
+            }
+        }
+
+        Box(
+            modifier = Modifier
+                .size(
+                    width = (asteroid.sizeX * viewScale).dp,
+                    height = (asteroid.sizeY * viewScale).dp,
+                )
+        ) {
+
+            for (poi in asteroid.pointsOfInterest) {
+
+                Image(
+                    painter = painterResource(getPointOfInterestDrawable(poi.id)),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .offset(
+                            x = (poi.x * viewScale).dp.minus(16.dp),
+                            y = (poi.y * viewScale).dp.minus(16.dp)
+                        )
+                        .size(32.dp)
+                )
+            }
+
+            for (geyser in asteroid.geysers) {
+
+                Image(
+                    painter = painterResource(getGeyserDrawable(geyser.id)),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .offset(
+                            x = (geyser.x * viewScale).dp.minus(16.dp),
+                            y = (geyser.y * viewScale).dp.minus(16.dp)
+                        )
+                        .size(32.dp)
+                )
             }
         }
     }
