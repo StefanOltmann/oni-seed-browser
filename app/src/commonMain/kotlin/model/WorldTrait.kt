@@ -102,7 +102,7 @@ enum class WorldTrait(
         color = Color(0xFF61CEF0)
     ),
     Volcanoes(
-        displayName = "Volcanoes",
+        displayName = "Volcanic Activity",
         color = Color(0xFFE7544D)
     ),
     CrashedSatellites(
