@@ -19,11 +19,35 @@
 
 package model
 
-enum class Rating(value: Int) {
+import androidx.compose.ui.graphics.Color
 
-    VERY_GOOD(2),
-    GOOD(1),
-    NEUTRAL(0),
-    BAD(-1),
-    VERY_BAD(-2)
+enum class Rating(
+    value: Int,
+    color: Color
+) {
+
+    VERY_GOOD(
+        value = 2,
+        color = Color(0xFF437E3D)
+    ),
+
+    GOOD(
+        value = 1,
+        Color(0xFF8EB18A)
+    ),
+
+    NEUTRAL(
+        value = 0,
+        color = Color.Transparent
+    ),
+
+    BAD(
+        value = -1,
+        color = Color(0xFFf1c232)
+    ),
+
+    VERY_BAD(
+        value = -2,
+        color = Color(0xFFA62D2D)
+    )
 }
