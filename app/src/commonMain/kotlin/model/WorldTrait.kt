@@ -30,7 +30,8 @@ import kotlinx.serialization.Serializable
 @Serializable
 enum class WorldTrait(
     val displayName: String,
-    val color: Color
+    val color: Color,
+    val rating: Rating = Rating.NEUTRAL
 ) {
 
     BouldersLarge(
@@ -51,23 +52,33 @@ enum class WorldTrait(
     ),
     DeepOil(
         displayName = "Trapped Oil",
-        color = Color(0xFF6E6E6E)
+        color = Color(0xFF6E6E6E),
+        /* More oil reservoirs */
+        rating = Rating.VERY_GOOD
     ),
     FrozenCore(
         displayName = "Frozen Core",
-        color = Color(0xFFA1D6ED)
+        color = Color(0xFFA1D6ED),
+        /* Frozen core helps early with CO2 and to cool down the planet */
+        rating = Rating.GOOD
     ),
     GeoActive(
         displayName = "Geoactive",
-        color = Color(0xFFECA649)
+        color = Color(0xFFECA649),
+        /* More geyser output */
+        rating = Rating.VERY_GOOD
     ),
     Geodes(
         displayName = "Geodes",
-        color = Color(0xFFC47BF4)
+        color = Color(0xFFC47BF4),
+        /* Helpful materials. */
+        rating = Rating.GOOD
     ),
     GeoDormant(
         displayName = "Geodormant",
-        color = Color(0xFF8895A1)
+        color = Color(0xFF8895A1),
+        /* Less geyser output */
+        rating = Rating.VERY_BAD
     ),
     GlaciersLarge(
         displayName = "Large Glaciers",
@@ -75,19 +86,27 @@ enum class WorldTrait(
     ),
     IrregularOil(
         displayName = "Irregular Oil",
-        color = Color(0xFF6C6C6C)
+        color = Color(0xFF6C6C6C),
+        /* More oil patches, easier to access. */
+        rating = Rating.VERY_GOOD
     ),
     MagmaVents(
         displayName = "Magma Channels",
-        color = Color(0xFFE7544D)
+        color = Color(0xFFE7544D),
+        /* Makes the game harder */
+        rating = Rating.BAD
     ),
     MetalPoor(
         displayName = "Metal Poor",
-        color = Color(0xFF8794A0)
+        color = Color(0xFF8794A0),
+        /* Less metal */
+        rating = Rating.VERY_BAD
     ),
     MetalRich(
         displayName = "Metal Rich",
-        color = Color(0xFFD2AB4B)
+        color = Color(0xFFD2AB4B),
+        /* More metal */
+        rating = Rating.VERY_GOOD
     ),
     MisalignedStart(
         displayName = "Alternate Pod Location",
@@ -95,7 +114,9 @@ enum class WorldTrait(
     ),
     SlimeSplats(
         displayName = "Slime Molds",
-        color = Color(0xFF8EB542)
+        color = Color(0xFF8EB542),
+        /* We don't like slime too much. */
+        rating = Rating.BAD
     ),
     SubsurfaceOcean(
         displayName = "Subsurface Ocean",
@@ -103,11 +124,15 @@ enum class WorldTrait(
     ),
     Volcanoes(
         displayName = "Volcanic Activity",
-        color = Color(0xFFE7544D)
+        color = Color(0xFFE7544D),
+        /* Makes the game harder, but more heat energy. */
+        rating = Rating.BAD
     ),
     CrashedSatellites(
         displayName = "Crashed Satellites",
-        color = Color(0xFF7ED360)
+        color = Color(0xFF7ED360),
+        /* Lots of free radiation */
+        rating = Rating.VERY_GOOD
     ),
     DistressSignal(
         displayName = "Frozen Friend",
@@ -115,15 +140,21 @@ enum class WorldTrait(
     ),
     LushCore(
         displayName = "Lush Core",
-        color = Color(0xFF66A052)
+        color = Color(0xFF66A052),
+        /* Access to pips */
+        rating = Rating.GOOD
     ),
     MetalCaves(
         displayName = "Metallic Caves",
-        color = Color(0xFFD2AB4B)
+        color = Color(0xFFD2AB4B),
+        /* More free metal */
+        rating = Rating.GOOD
     ),
     RadioactiveCrust(
         displayName = "Radioactive Crust",
-        color = Color(0xFF7ED360)
+        color = Color(0xFF7ED360),
+        /* More free radiation */
+        rating = Rating.GOOD
     )
 }
 
