@@ -90,8 +90,7 @@ fun StarMapView(
                 index = 0,
                 totalCount = 0,
                 coordinate = world.coordinate,
-                showMapClicked = null,
-                shareClicked = null
+                showMapClicked = null
             )
 
             BoxWithConstraints(

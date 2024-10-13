@@ -30,8 +30,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalClipboardManager
-import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import model.Asteroid
@@ -56,8 +54,6 @@ fun WorldView(
     showTooltip: MutableState<Tooltip?>
 ) {
 
-    val clipboardManager = LocalClipboardManager.current
-
     Column(
         verticalArrangement = Arrangement.spacedBy(defaultSpacing),
         modifier = Modifier
@@ -74,13 +70,7 @@ fun WorldView(
             showMapClicked = if (world.starMapEntriesSpacedOut != null)
                 showMapClicked
             else
-                null,
-            shareClicked = {
-
-                clipboardManager.setText(AnnotatedString(world.coordinate))
-
-                println("SHARE")
-            }
+                null
         )
 
         val asteroid = showAsteroidMap.value
