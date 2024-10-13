@@ -35,6 +35,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -83,6 +84,11 @@ fun AsteroidDetails(
         ) {
 
             val scrollState = rememberScrollState()
+
+            /* Scroll to top if Asteroid is switched. */
+            LaunchedEffect(asteroid) {
+                scrollState.scrollTo(0)
+            }
 
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
