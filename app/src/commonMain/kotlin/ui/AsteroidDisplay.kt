@@ -136,10 +136,12 @@ fun AsteroidView(
                             contentAlignment = Alignment.Center,
                             modifier = Modifier
                                 .background(
-                                    if (worldTrait.rating.isNegative())
-                                        worldTrait.rating.color.copy(alpha = 0.3f)
-                                    else
-                                        anthraticeTransparentBackgroundColor,
+                                    anthraticeTransparentBackgroundColor,
+                                    minimalRoundedCornerShape
+                                )
+                                .border(
+                                    2.dp,
+                                    worldTrait.rating.color,
                                     minimalRoundedCornerShape
                                 )
                                 .size(24.dp)

@@ -20,7 +20,6 @@
 package model
 
 import androidx.compose.ui.graphics.Color
-import ui.theme.anthracite
 
 enum class Rating(
     val value: Int,
@@ -39,7 +38,7 @@ enum class Rating(
 
     NEUTRAL(
         value = 0,
-        color = anthracite
+        color = Color.Transparent
     ),
 
     BAD(

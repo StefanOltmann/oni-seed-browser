@@ -34,7 +34,6 @@ import org.jetbrains.compose.resources.painterResource
 import ui.theme.cardColorBackground
 import ui.theme.defaultRoundedCornerShape
 import ui.theme.doubleSpacing
-import ui.theme.lightGrayTransparentBorderColor
 
 @Composable
 fun WorlTraitDetail(
@@ -48,15 +47,12 @@ fun WorlTraitDetail(
                 horizontal = doubleSpacing
             )
             .background(
-                if (worldTrait.rating.isNegative())
-                    worldTrait.rating.color.copy(alpha = 0.3f)
-                else
                 cardColorBackground,
                 defaultRoundedCornerShape
             )
             .border(
-                0.dp,
-                lightGrayTransparentBorderColor,
+                2.dp,
+                worldTrait.rating.color,
                 defaultRoundedCornerShape
             )
             .fillMaxWidth()
