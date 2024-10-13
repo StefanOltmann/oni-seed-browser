@@ -48,7 +48,9 @@ import ui.theme.cardColorBackground
 import ui.theme.defaultPadding
 import ui.theme.defaultRoundedCornerShape
 import ui.theme.defaultSpacing
+import ui.theme.halfPadding
 import ui.theme.lightGrayTransparentBorderColor
+import ui.theme.minimalRoundedCornerShape
 import ui.theme.surfaceVariantColor
 
 val countBackground = Color.Black.copy(alpha = 0.3F)
@@ -129,11 +131,24 @@ fun AsteroidView(
 
                     for (worldTrait in asteroid.worldTraits) {
 
-                        Image(
-                            painter = painterResource(getWorldTraitDrawable(worldTrait)),
-                            contentDescription = null,
-                            modifier = Modifier.size(20.dp)
-                        )
+                        Box(
+                            contentAlignment = Alignment.Center,
+                            modifier = Modifier
+                                .border(
+                                    1.dp,
+                                    lightGrayTransparentBorderColor,
+                                    minimalRoundedCornerShape
+                                )
+                                .size(24.dp)
+                        ) {
+
+
+                            Image(
+                                painter = painterResource(getWorldTraitDrawable(worldTrait)),
+                                contentDescription = null,
+                                modifier = Modifier.halfPadding()
+                            )
+                        }
                     }
                 }
 
