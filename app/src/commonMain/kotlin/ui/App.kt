@@ -35,6 +35,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -70,7 +71,7 @@ data class Tooltip(
 
 @Composable
 fun App(
-    urlHash: String?
+    urlHash: MutableState<String?>
 ) {
 
     MaterialTheme(
@@ -103,17 +104,19 @@ fun App(
 
         val worlds = remember { mutableStateOf(emptyList<World>()) }
 
-        LaunchedEffect(true) {
+        LaunchedEffect(urlHash.value) {
 
-            if (urlHash != null) {
+            val urlHashValue = urlHash.value
 
-                println("Load specific seed")
+            if (urlHashValue != null) {
+
+                println("Load specific coord: $urlHashValue")
 
                 try {
 
                     isGettingNewResults.value = true
 
-                    val world = DefaultWebClient.find(urlHash)
+                    val world = DefaultWebClient.find(urlHashValue)
 
                     if (world != null)
                         worlds.value = listOf(world)
@@ -267,7 +270,7 @@ fun App(
                         modifier = Modifier.weight(1F)
                     ) {
 
-                        if (urlHash == null) {
+                        if (urlHash.value == null) {
 
                             Text(
                                 text = "No results found.",
@@ -278,7 +281,7 @@ fun App(
                         } else {
 
                             Text(
-                                text = "No results found for $urlHash.",
+                                text = "Coordinate ${urlHash.value} was not found in database.",
                                 style = MaterialTheme.typography.headlineSmall,
                                 color = MaterialTheme.colorScheme.onBackground
                             )

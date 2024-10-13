@@ -17,6 +17,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Window
@@ -32,6 +34,6 @@ fun main() = application {
         title = "Oxygen Not Included Seed Browser",
         onCloseRequest = ::exitApplication
     ) {
-        App(null)
+        App(remember { mutableStateOf(null) })
     }
 }

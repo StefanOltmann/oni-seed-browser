@@ -17,17 +17,28 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.window.CanvasBasedWindow
 import kotlinx.browser.document
+import kotlinx.browser.window
 import ui.App
 
 @OptIn(ExperimentalComposeUiApi::class)
 fun main() {
 
-    val urlHash = document.location?.hash?.drop(1)?.ifBlank { null }
-
     CanvasBasedWindow(canvasElementId = "ComposeTarget") {
+
+        val urlHash = remember {
+            mutableStateOf(document.location?.hash?.drop(1)?.ifBlank { null })
+        }
+
+        window.onhashchange = {
+
+            urlHash.value = it.newURL.substringAfter('#', "").ifBlank { null }
+        }
+
         App(urlHash)
     }
 }
