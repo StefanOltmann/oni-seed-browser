@@ -123,9 +123,9 @@ enum class GeyserType(
         /* Doesn't matter if it's there. Does not produce a lot most of the times. */
         rating = Rating.NEUTRAL
     ),
-    SULFUR_GEYSER(
+    LIQUID_SULFUR_GEYSER(
         type = "liquid_sulfur",
-        displayName = "Sulfur Geyser"
+        displayName = "Liquid Sulfur Geyser"
     ),
     IRON_VOLCANO(
         type = "molten_iron",
