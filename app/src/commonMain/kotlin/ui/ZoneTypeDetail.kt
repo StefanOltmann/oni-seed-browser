@@ -23,6 +23,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -33,13 +34,19 @@ import model.ZoneType
 import org.jetbrains.compose.resources.painterResource
 import ui.theme.*
 
+private val defaultHalfRoundedCornerShape = RoundedCornerShape(
+    topStart = 6.dp,
+    topEnd = 0.dp,
+    bottomStart = 6.dp,
+    bottomEnd = 0.dp
+)
+
 @Composable
 fun ZoneTypeDetail(
     zoneType: ZoneType
 ) {
 
     Box(
-        contentAlignment = Alignment.Center,
         modifier = Modifier
             .padding(horizontal = doubleSpacing)
             .background(
@@ -52,36 +59,38 @@ fun ZoneTypeDetail(
                 defaultRoundedCornerShape
             )
             .fillMaxWidth()
-            .height(160.dp)
     ) {
 
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.halfPadding()
         ) {
+
+            Box(
+                modifier = Modifier
+                    .width(16.dp)
+                    .height(48.dp)
+                    .background(
+                        zoneType.color,
+                        defaultHalfRoundedCornerShape
+                    )
+            )
 
             HalfSpacer()
 
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.height(96.dp)
-            ) {
+            Image(
+                painter = painterResource(getZoneTypeDrawable(zoneType)),
+                contentDescription = null,
+                modifier = Modifier.size(48.dp)
+            )
 
-                DefaultSpacer()
+            DefaultSpacer()
 
-                Image(
-                    painter = painterResource(getZoneTypeDrawable(zoneType)),
-                    contentDescription = null,
-                    modifier = Modifier.size(96.dp)
-                )
-
-                DefaultSpacer()
-
-                Text(
-                    text = zoneType.name,
-                    style = MaterialTheme.typography.bodyLarge,
-                    color = MaterialTheme.colorScheme.onBackground
-                )
-            }
+            Text(
+                text = zoneType.displayName,
+                style = MaterialTheme.typography.headlineSmall,
+                color = MaterialTheme.colorScheme.onBackground
+            )
         }
     }
 }
