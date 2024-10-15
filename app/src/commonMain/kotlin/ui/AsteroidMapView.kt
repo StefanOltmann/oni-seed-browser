@@ -22,6 +22,7 @@ package ui
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
@@ -37,6 +38,7 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.launch
 import model.Asteroid
 import model.BiomePaths
 import model.Geyser
@@ -51,6 +53,8 @@ fun AsteroidMapPopup(
     asteroid: Asteroid,
     onCloseClicked: () -> Unit
 ) {
+
+    val coroutineScope = rememberCoroutineScope()
 
     Box(
         modifier = Modifier
@@ -91,6 +95,10 @@ fun AsteroidMapPopup(
 
             val biomePaths = BiomePaths.parse(asteroid.biomePaths)
 
+            val geyserListLazyListState = rememberLazyListState()
+
+            val sortedGeysers = asteroid.geysers.sortedBy { it.id }
+
             Row(
                 modifier = Modifier.defaultPadding()
             ) {
@@ -105,12 +113,23 @@ fun AsteroidMapPopup(
                         asteroid = asteroid,
                         biomePaths = biomePaths,
                         iconSize = 32.dp,
+                        onGeyserClick = {
+
+                            coroutineScope.launch {
+
+                                val clickedGeyserIndex = sortedGeysers.indexOf(it)
+
+                                if (clickedGeyserIndex >= 0)
+                                    geyserListLazyListState.scrollToItem(clickedGeyserIndex)
+                            }
+                        },
                         highlightedGeyser = highlightedGeyser
                     )
                 }
 
                 AsteroidGeysersDetails(
-                    asteroid.geysers,
+                    sortedGeysers,
+                    geyserListLazyListState,
                     highlightedGeyser
                 )
             }
@@ -124,6 +143,7 @@ fun AsteroidMap(
     biomePaths: BiomePaths,
     iconSize: Dp,
     highlightedGeyser: MutableState<Geyser?>,
+    onGeyserClick: ((Geyser) -> Unit)?,
     contentAlignment: Alignment = Alignment.Center
 ) {
 
@@ -237,6 +257,8 @@ fun AsteroidMap(
                                 highlightedGeyser.value = null
                             else
                                 highlightedGeyser.value = geyser
+
+                            onGeyserClick?.invoke(geyser)
                         }
                 )
             }
@@ -309,6 +331,7 @@ private fun AsteroidBiomeDetails(
 @Composable
 private fun AsteroidGeysersDetails(
     geysers: List<Geyser>,
+    geyserListLazyListState: LazyListState,
     highlightedGeyser: MutableState<Geyser?>
 ) {
 
@@ -335,10 +358,6 @@ private fun AsteroidGeysersDetails(
             modifier = Modifier
         ) {
 
-            val geyserListLazyListState = rememberLazyListState()
-
-            val sortedGeysers = geysers.sortedBy { it.id }
-
             LazyColumn(
                 state = geyserListLazyListState,
                 horizontalAlignment = Alignment.CenterHorizontally,
@@ -346,7 +365,7 @@ private fun AsteroidGeysersDetails(
                 contentPadding = PaddingValues(bottom = doubleSpacing)
             ) {
 
-                items(sortedGeysers) { geyser ->
+                items(geysers) { geyser ->
 
                     val isHighlighted = highlightedGeyser.value == geyser
 

@@ -103,6 +103,7 @@ fun AsteroidDetails(
                         iconSize = 24.dp,
                         // TODO Implement highlighting on hover
                         highlightedGeyser = remember { mutableStateOf(null) },
+                        onGeyserClick = null,
                         contentAlignment = Alignment.BottomCenter
                     )
                 }
