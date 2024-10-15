@@ -42,6 +42,7 @@ import kotlinx.coroutines.launch
 import model.Asteroid
 import model.BiomePaths
 import model.Geyser
+import model.ZoneType
 import oni_seed_browser.app.generated.resources.Res
 import oni_seed_browser.app.generated.resources.background_space
 import org.jetbrains.compose.resources.painterResource
@@ -76,6 +77,7 @@ fun AsteroidMapPopup(
             onClick = onCloseClicked
         )
 
+        val highlightedZoneType = remember { mutableStateOf<ZoneType?>(null) }
         val highlightedGeyser = remember { mutableStateOf<Geyser?>(null) }
 
         Column {
@@ -100,10 +102,14 @@ fun AsteroidMapPopup(
             val sortedGeysers = asteroid.geysers.sortedBy { it.id }
 
             Row(
+                horizontalArrangement = Arrangement.spacedBy(defaultSpacing),
                 modifier = Modifier.defaultPadding()
             ) {
 
-                AsteroidBiomeDetails(asteroid, biomePaths)
+                AsteroidBiomeDetails(
+                    biomePaths,
+                    highlightedZoneType
+                )
 
                 Box(
                     modifier = Modifier.weight(1F)
@@ -123,7 +129,8 @@ fun AsteroidMapPopup(
                                     geyserListLazyListState.animateScrollToItem(clickedGeyserIndex)
                             }
                         },
-                        highlightedGeyser = highlightedGeyser
+                        highlightedGeyser = highlightedGeyser,
+                        highlightedZoneType = highlightedZoneType
                     )
                 }
 
@@ -143,6 +150,7 @@ fun AsteroidMap(
     biomePaths: BiomePaths,
     iconSize: Dp,
     highlightedGeyser: MutableState<Geyser?>,
+    highlightedZoneType: MutableState<ZoneType?>,
     onGeyserClick: ((Geyser) -> Unit)?,
     contentAlignment: Alignment = Alignment.Center
 ) {
@@ -176,6 +184,8 @@ fun AsteroidMap(
 
             for ((zoneType, pointsLists) in biomePaths.polygonMap) {
 
+                val isHighlighted = highlightedZoneType.value == zoneType
+
                 for (points in pointsLists) {
 
                     val path = Path()
@@ -200,7 +210,17 @@ fun AsteroidMap(
                         startingPoint.y * viewScale * density
                     )
 
-                    drawPath(path, zoneType.color)
+                    /*
+                     * Only color the highlighted zone
+                     */
+                    val color = if (highlightedZoneType.value == null)
+                        zoneType.color
+                    else if (isHighlighted)
+                        zoneType.color
+                    else
+                        Color.LightGray
+
+                    drawPath(path, color, 1.0f)
                 }
             }
         }
@@ -268,8 +288,8 @@ fun AsteroidMap(
 
 @Composable
 private fun AsteroidBiomeDetails(
-    asteroid: Asteroid,
-    biomePaths: BiomePaths
+    biomePaths: BiomePaths,
+    highlightedZoneType: MutableState<ZoneType?>
 ) {
 
     Column(
@@ -297,11 +317,6 @@ private fun AsteroidBiomeDetails(
 
             val scrollState = rememberScrollState()
 
-            /* Scroll to top if Asteroid is switched. */
-            LaunchedEffect(asteroid) {
-                scrollState.scrollTo(0)
-            }
-
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.spacedBy(defaultSpacing),
@@ -310,8 +325,33 @@ private fun AsteroidBiomeDetails(
 
                 val presentZoneTypes = biomePaths.polygonMap.keys.sorted()
 
-                for (zoneType in presentZoneTypes)
-                    ZoneTypeDetail(zoneType)
+                for (zoneType in presentZoneTypes) {
+
+                    val isHighlighted = highlightedZoneType.value == zoneType
+
+                    ZoneTypeDetail(
+                        zoneType = zoneType,
+                        modifier = Modifier
+                            .noRippleClickable {
+
+                                if (isHighlighted)
+                                    highlightedZoneType.value = null
+                                else
+                                    highlightedZoneType.value = zoneType
+                            }
+                            .border(
+                                if (isHighlighted)
+                                    2.dp
+                                else
+                                    0.dp,
+                                if (isHighlighted)
+                                    hoverColor
+                                else
+                                    lightGrayTransparentBorderColor,
+                                defaultRoundedCornerShape
+                            )
+                    )
+                }
 
                 DefaultSpacer()
             }
@@ -322,7 +362,7 @@ private fun AsteroidBiomeDetails(
                 style = defaultScrollbarStyle().copy(
                     unhoverColor = lightGray.copy(alpha = 0.4f),
                     hoverColor = lightGray
-                ),
+                )
             )
         }
     }

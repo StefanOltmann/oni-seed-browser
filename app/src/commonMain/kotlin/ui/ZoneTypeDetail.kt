@@ -43,7 +43,8 @@ private val defaultHalfRoundedCornerShape = RoundedCornerShape(
 
 @Composable
 fun ZoneTypeDetail(
-    zoneType: ZoneType
+    zoneType: ZoneType,
+    modifier: Modifier = Modifier
 ) {
 
     Box(
@@ -59,6 +60,7 @@ fun ZoneTypeDetail(
                 defaultRoundedCornerShape
             )
             .fillMaxWidth()
+            .then(modifier)
     ) {
 
         Row(
