@@ -102,7 +102,7 @@ fun WorldView(
                 if (!urlWasCopied.value)
                     return@LaunchedEffect
 
-                delay(2000)
+                delay(1000)
 
                 urlWasCopied.value = false
             }
@@ -150,7 +150,7 @@ fun WorldView(
                 DefaultSpacer()
 
                 Text(
-                    text = "Copied URL to clipboard!",
+                    text = "Copied to clipboard!",
                     style = MaterialTheme.typography.bodyMedium,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onBackground

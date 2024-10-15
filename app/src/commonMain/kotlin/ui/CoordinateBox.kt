@@ -76,7 +76,7 @@ fun CoordinateBox(
                 if (!coordinateWasCopied.value)
                     return@LaunchedEffect
 
-                delay(2000)
+                delay(1000)
 
                 coordinateWasCopied.value = false
             }
@@ -84,7 +84,7 @@ fun CoordinateBox(
             if (coordinateWasCopied.value) {
 
                 Text(
-                    text = "Copied coordinate to clipboard!",
+                    text = "Copied to clipboard!",
                     style = MaterialTheme.typography.headlineSmall,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onBackground
