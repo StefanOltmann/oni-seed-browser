@@ -120,7 +120,7 @@ fun AsteroidMapPopup(
                                 val clickedGeyserIndex = sortedGeysers.indexOf(it)
 
                                 if (clickedGeyserIndex >= 0)
-                                    geyserListLazyListState.scrollToItem(clickedGeyserIndex)
+                                    geyserListLazyListState.animateScrollToItem(clickedGeyserIndex)
                             }
                         },
                         highlightedGeyser = highlightedGeyser
