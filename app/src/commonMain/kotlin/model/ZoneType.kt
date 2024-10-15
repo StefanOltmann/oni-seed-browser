@@ -59,7 +59,7 @@ enum class ZoneType(
     SugarWoods(20, "Nectar", Color(0xFFA2CDA4)),
 
     /* Most of the time right above the magma biome. */
-    OilField(6, "Oily", Color(0xFF3F1C05)),
+    OilField(6, "Oily", Color(0xFF52321D)),
 
     /* Usually at the bottom of the map, so also listed at the bottom */
     MagmaCore(5, "Magma", Color(0xFFDE5A3B)),
