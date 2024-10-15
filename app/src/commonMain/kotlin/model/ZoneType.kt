@@ -30,7 +30,8 @@ enum class ZoneType(
 ) {
 
     FrozenWastes(0, Color(0xFF9DC9D6)),
-    CrystalCaverns(1, Color(0xFFAC72C1)),
+
+    // CrystalCaverns(1, Color(0xFFAC72C1)),
     BoggyMarsh(2, Color(0xFF7B974B)),
     Sandstone(3, Color(0xFFF2BB47)),
     ToxicJungle(4, Color(0xFFCB95A3)),
@@ -43,7 +44,8 @@ enum class ZoneType(
     Radioactive(11, Color(0xFF4AE458)),
     Swamp(12, Color(0xFFEB9B3F)),
     Wasteland(13, Color(0xFFCC3636)),
-    RocketInterior(14, Color(0xFF9E48DF)),
+
+    // RocketInterior(14, Color(0xFF9E48DF)),
     Metallic(15, Color(0xFFFFA007)),
     Barren(16, Color(0xFFF2BB47)),
     Moo(17, Color(0xFF8EC039)),
