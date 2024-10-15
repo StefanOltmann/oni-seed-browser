@@ -25,6 +25,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ContentCopy
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -41,7 +42,6 @@ import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.delay
 import oni_seed_browser.app.generated.resources.Res
 import oni_seed_browser.app.generated.resources.space_hexagon
-import oni_seed_browser.app.generated.resources.space_hexagon_hover
 import org.jetbrains.compose.resources.painterResource
 import ui.theme.*
 
@@ -155,19 +155,30 @@ fun CoordinateBox(
 
             val hovered = remember { mutableStateOf(false) }
 
-            Image(
-                painter = if (hovered.value)
-                    painterResource(Res.drawable.space_hexagon_hover)
-                else
-                    painterResource(Res.drawable.space_hexagon),
-                contentDescription = null,
+            Box(
+                contentAlignment = Alignment.Center,
                 modifier = Modifier
                     .onHover(hovered)
                     .halfPadding()
                     .height(32.dp)
                     .noRippleClickable(showMapClicked)
                     .align(Alignment.CenterEnd)
-            )
+            ) {
+
+                Image(
+                    painter = painterResource(Res.drawable.space_hexagon),
+                    contentDescription = null
+                )
+
+                Icon(
+                    imageVector = Icons.Default.Search,
+                    contentDescription = null,
+                    tint = if (hovered.value)
+                        hoverColor
+                    else
+                        MaterialTheme.colorScheme.onBackground
+                )
+            }
         }
     }
 }
