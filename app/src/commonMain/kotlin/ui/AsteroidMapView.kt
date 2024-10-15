@@ -119,6 +119,7 @@ fun AsteroidMapPopup(
                         asteroid = asteroid,
                         biomePaths = biomePaths,
                         iconSize = 32.dp,
+                        enableClickListener = true,
                         onGeyserClick = {
 
                             coroutineScope.launch {
@@ -149,6 +150,7 @@ fun AsteroidMap(
     asteroid: Asteroid,
     biomePaths: BiomePaths,
     iconSize: Dp,
+    enableClickListener: Boolean,
     highlightedGeyser: MutableState<Geyser?>,
     highlightedZoneType: MutableState<ZoneType?>,
     onGeyserClick: ((Geyser) -> Unit)?,
@@ -157,15 +159,20 @@ fun AsteroidMap(
 
     val halfIconSize: Dp = iconSize.div(2)
 
+    val modifier = if (enableClickListener)
+        Modifier.noRippleClickable {
+
+            /* Clicking not on a geyser should deselect all selections. */
+            highlightedGeyser.value = null
+        }
+    else
+        Modifier
+
     BoxWithConstraints(
         contentAlignment = contentAlignment,
         modifier = Modifier
             .fillMaxSize()
-            .noRippleClickable {
-
-                /* Clicking not on a geyser should deselect all selections. */
-                highlightedGeyser.value = null
-            }
+            .then(modifier)
     ) {
 
         /* Don't render if too small to avoid issues. */
@@ -257,6 +264,19 @@ fun AsteroidMap(
 
                 val isHighlighted = highlightedGeyser.value == geyser
 
+                val geyserClickModifier = if (enableClickListener)
+                    Modifier.noRippleClickable {
+
+                        if (enableClickListener)
+                            return@noRippleClickable
+
+                        highlightedGeyser.value = geyser
+
+                        onGeyserClick?.invoke(geyser)
+                    }
+                else
+                    Modifier
+
                 Image(
                     painter = painterResource(getGeyserDrawable(geyser.id)),
                     contentDescription = null,
@@ -277,12 +297,7 @@ fun AsteroidMap(
                                 Color.Transparent,
                             CircleShape
                         )
-                        .noRippleClickable {
-
-                            highlightedGeyser.value = geyser
-
-                            onGeyserClick?.invoke(geyser)
-                        }
+                        then (geyserClickModifier)
                 )
             }
         }

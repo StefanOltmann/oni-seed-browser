@@ -101,6 +101,7 @@ fun AsteroidDetails(
                         asteroid = asteroid,
                         biomePaths = biomePaths,
                         iconSize = 24.dp,
+                        enableClickListener = false,
                         // TODO Implement highlighting on hover
                         highlightedGeyser = remember { mutableStateOf(null) },
                         highlightedZoneType = remember { mutableStateOf(null) },
