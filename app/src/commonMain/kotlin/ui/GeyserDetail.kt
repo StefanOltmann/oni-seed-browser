@@ -39,7 +39,8 @@ import kotlin.math.roundToInt
 
 @Composable
 fun GeyserDetail(
-    geyser: Geyser
+    geyser: Geyser,
+    modifier: Modifier = Modifier
 ) {
 
     Box(
@@ -60,6 +61,7 @@ fun GeyserDetail(
             )
             .fillMaxWidth()
             .height(160.dp)
+            .then(modifier)
     ) {
 
         Column(

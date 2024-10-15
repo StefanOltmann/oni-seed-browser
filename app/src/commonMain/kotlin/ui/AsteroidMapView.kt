@@ -21,10 +21,10 @@ package ui
 
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -36,6 +36,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import model.Asteroid
 import model.BiomePaths
+import model.Geyser
 import oni_seed_browser.app.generated.resources.Res
 import oni_seed_browser.app.generated.resources.background_space
 import org.jetbrains.compose.resources.painterResource
@@ -68,6 +69,8 @@ fun AsteroidMapPopup(
             onClick = onCloseClicked
         )
 
+        val highlightedGeyser = remember { mutableStateOf<Geyser?>(null) }
+
         Column {
 
             Box(
@@ -95,10 +98,18 @@ fun AsteroidMapPopup(
                     modifier = Modifier.weight(1F)
                 ) {
 
-                    AsteroidMap(asteroid, biomePaths)
+                    AsteroidMap(
+                        asteroid = asteroid,
+                        biomePaths = biomePaths,
+                        iconSize = 32.dp,
+                        highlightedGeyser = highlightedGeyser
+                    )
                 }
 
-                AsteroidGeysersDetails(asteroid)
+                AsteroidGeysersDetails(
+                    asteroid.geysers,
+                    highlightedGeyser
+                )
             }
         }
     }
@@ -108,7 +119,8 @@ fun AsteroidMapPopup(
 fun AsteroidMap(
     asteroid: Asteroid,
     biomePaths: BiomePaths,
-    iconSize: Dp = 32.dp,
+    iconSize: Dp,
+    highlightedGeyser: MutableState<Geyser?>,
     contentAlignment: Alignment = Alignment.Center
 ) {
 
@@ -194,6 +206,8 @@ fun AsteroidMap(
 
             for (geyser in asteroid.geysers) {
 
+                val isHighlighted = highlightedGeyser.value == geyser
+
                 Image(
                     painter = painterResource(getGeyserDrawable(geyser.id)),
                     contentDescription = null,
@@ -203,6 +217,24 @@ fun AsteroidMap(
                             y = (geyser.y * viewScale).dp - halfIconSize
                         )
                         .size(iconSize)
+                        .border(
+                            if (isHighlighted)
+                                2.dp
+                            else
+                                0.dp,
+                            if (isHighlighted)
+                                hoverColor
+                            else
+                                Color.Transparent,
+                            CircleShape
+                        )
+                        .noRippleClickable {
+
+                            if (isHighlighted)
+                                highlightedGeyser.value = null
+                            else
+                                highlightedGeyser.value = geyser
+                        }
                 )
             }
         }
@@ -273,7 +305,8 @@ private fun AsteroidBiomeDetails(
 
 @Composable
 private fun AsteroidGeysersDetails(
-    asteroid: Asteroid
+    geysers: List<Geyser>,
+    highlightedGeyser: MutableState<Geyser?>
 ) {
 
     Column(
@@ -301,19 +334,39 @@ private fun AsteroidGeysersDetails(
 
             val scrollState = rememberScrollState()
 
-            /* Scroll to top if Asteroid is switched. */
-            LaunchedEffect(asteroid) {
-                scrollState.scrollTo(0)
-            }
-
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.spacedBy(defaultSpacing),
                 modifier = Modifier.verticalScroll(scrollState)
             ) {
 
-                for (geyser in asteroid.geysers.sortedBy { it.id })
-                    GeyserDetail(geyser)
+                for (geyser in geysers.sortedBy { it.id }) {
+
+                    val isHighlighted = highlightedGeyser.value == geyser
+
+                    GeyserDetail(
+                        geyser = geyser,
+                        modifier = Modifier
+                            .noRippleClickable {
+
+                                if (isHighlighted)
+                                    highlightedGeyser.value = null
+                                else
+                                    highlightedGeyser.value = geyser
+                            }
+                            .border(
+                                if (isHighlighted)
+                                    2.dp
+                                else
+                                    0.dp,
+                                if (isHighlighted)
+                                    hoverColor
+                                else
+                                    lightGrayTransparentBorderColor,
+                                defaultRoundedCornerShape
+                            )
+                    )
+                }
 
                 DefaultSpacer()
             }
