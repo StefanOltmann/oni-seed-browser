@@ -30,7 +30,6 @@ enum class ZoneType(
 ) {
 
     FrozenWastes(0, Color(0xFF9DC9D6)),
-
     // CrystalCaverns(1, Color(0xFFAC72C1)),
     BoggyMarsh(2, Color(0xFF7B974B)),
     Sandstone(3, Color(0xFFF2BB47)),

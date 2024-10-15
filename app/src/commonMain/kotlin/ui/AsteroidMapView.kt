@@ -19,20 +19,12 @@
 
 package ui
 
-import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.BoxWithConstraints
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.offset
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.*
+import androidx.compose.foundation.layout.*
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -47,8 +39,7 @@ import model.BiomePaths
 import oni_seed_browser.app.generated.resources.Res
 import oni_seed_browser.app.generated.resources.background_space
 import org.jetbrains.compose.resources.painterResource
-import ui.theme.defaultPadding
-import ui.theme.lightGrayTransparentBorderColor
+import ui.theme.*
 import kotlin.math.min
 
 @Composable
@@ -92,12 +83,22 @@ fun AsteroidMapPopup(
                 )
             }
 
-            Box(
-                contentAlignment = Alignment.Center,
+            val biomePaths = BiomePaths.parse(asteroid.biomePaths)
+
+            Row(
                 modifier = Modifier.defaultPadding()
             ) {
 
-                AsteroidMap(asteroid)
+                AsteroidBiomeDetails(asteroid, biomePaths)
+
+                Box(
+                    modifier = Modifier.weight(1F)
+                ) {
+
+                    AsteroidMap(asteroid, biomePaths)
+                }
+
+                AsteroidGeysersDetails(asteroid)
             }
         }
     }
@@ -106,6 +107,7 @@ fun AsteroidMapPopup(
 @Composable
 fun AsteroidMap(
     asteroid: Asteroid,
+    biomePaths: BiomePaths,
     iconSize: Dp = 32.dp,
     contentAlignment: Alignment = Alignment.Center
 ) {
@@ -117,14 +119,16 @@ fun AsteroidMap(
         modifier = Modifier.fillMaxSize()
     ) {
 
+        /* Don't render if too small to avoid issues. */
+        if (maxWidth < 50.dp || maxHeight < 50.dp)
+            return@BoxWithConstraints
+
         val density = LocalDensity.current.density
 
         val viewScale = min(
             maxHeight.value / asteroid.sizeY,
             maxWidth.value / asteroid.sizeX
         )
-
-        val biomePaths = BiomePaths.parse(asteroid.biomePaths)
 
         Canvas(
             modifier = Modifier
@@ -201,6 +205,127 @@ fun AsteroidMap(
                         .size(iconSize)
                 )
             }
+        }
+    }
+}
+
+@Composable
+private fun AsteroidBiomeDetails(
+    asteroid: Asteroid,
+    biomePaths: BiomePaths
+) {
+
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier
+            .width(300.dp)
+            .fillMaxHeight()
+            .background(anthraticeTransparentBackgroundColor, defaultRoundedCornerShape)
+            .border(0.dp, lightGrayTransparentBorderColor, defaultRoundedCornerShape)
+    ) {
+
+        DefaultSpacer()
+
+        Text(
+            text = "Biome details",
+            style = MaterialTheme.typography.headlineSmall,
+            color = MaterialTheme.colorScheme.onBackground,
+        )
+
+        DefaultSpacer()
+
+        Box(
+            modifier = Modifier
+        ) {
+
+            val scrollState = rememberScrollState()
+
+            /* Scroll to top if Asteroid is switched. */
+            LaunchedEffect(asteroid) {
+                scrollState.scrollTo(0)
+            }
+
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(defaultSpacing),
+                modifier = Modifier.verticalScroll(scrollState)
+            ) {
+
+                val presentZoneTypes = biomePaths.polygonMap.keys.sorted()
+
+                for (zoneType in presentZoneTypes)
+                    ZoneTypeDetail(zoneType)
+
+                DefaultSpacer()
+            }
+
+            VerticalScrollbar(
+                adapter = rememberScrollbarAdapter(scrollState),
+                modifier = Modifier.fillMaxHeight().align(Alignment.CenterEnd),
+                style = defaultScrollbarStyle().copy(
+                    unhoverColor = lightGray.copy(alpha = 0.4f),
+                    hoverColor = lightGray
+                ),
+            )
+        }
+    }
+}
+
+@Composable
+private fun AsteroidGeysersDetails(
+    asteroid: Asteroid
+) {
+
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier
+            .width(300.dp)
+            .fillMaxHeight()
+            .background(anthraticeTransparentBackgroundColor, defaultRoundedCornerShape)
+            .border(0.dp, lightGrayTransparentBorderColor, defaultRoundedCornerShape)
+    ) {
+
+        DefaultSpacer()
+
+        Text(
+            text = "Geyser details",
+            style = MaterialTheme.typography.headlineSmall,
+            color = MaterialTheme.colorScheme.onBackground,
+        )
+
+        DefaultSpacer()
+
+        Box(
+            modifier = Modifier
+        ) {
+
+            val scrollState = rememberScrollState()
+
+            /* Scroll to top if Asteroid is switched. */
+            LaunchedEffect(asteroid) {
+                scrollState.scrollTo(0)
+            }
+
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(defaultSpacing),
+                modifier = Modifier.verticalScroll(scrollState)
+            ) {
+
+                for (geyser in asteroid.geysers.sortedBy { it.id })
+                    GeyserDetail(geyser)
+
+                DefaultSpacer()
+            }
+
+            VerticalScrollbar(
+                adapter = rememberScrollbarAdapter(scrollState),
+                modifier = Modifier.fillMaxHeight().align(Alignment.CenterEnd),
+                style = defaultScrollbarStyle().copy(
+                    unhoverColor = lightGray.copy(alpha = 0.4f),
+                    hoverColor = lightGray
+                ),
+            )
         }
     }
 }

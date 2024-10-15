@@ -19,19 +19,8 @@
 
 package ui
 
-import androidx.compose.foundation.VerticalScrollbar
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.defaultScrollbarStyle
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.rememberScrollbarAdapter
-import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.*
+import androidx.compose.foundation.layout.*
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -40,6 +29,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import model.Asteroid
+import model.BiomePaths
 import ui.theme.DefaultSpacer
 import ui.theme.anthraticeTransparentBackgroundColor
 import ui.theme.defaultRoundedCornerShape
@@ -103,8 +93,11 @@ fun AsteroidDetails(
                         .noRippleClickable(showAsteroidMap)
                 ) {
 
+                    val biomePaths = BiomePaths.parse(asteroid.biomePaths)
+
                     AsteroidMap(
                         asteroid = asteroid,
+                        biomePaths = biomePaths,
                         iconSize = 24.dp,
                         contentAlignment = Alignment.BottomCenter
                     )
