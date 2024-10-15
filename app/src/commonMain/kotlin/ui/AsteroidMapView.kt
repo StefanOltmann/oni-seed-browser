@@ -21,6 +21,9 @@ package ui
 
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -332,15 +335,18 @@ private fun AsteroidGeysersDetails(
             modifier = Modifier
         ) {
 
-            val scrollState = rememberScrollState()
+            val geyserListLazyListState = rememberLazyListState()
 
-            Column(
+            val sortedGeysers = geysers.sortedBy { it.id }
+
+            LazyColumn(
+                state = geyserListLazyListState,
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.spacedBy(defaultSpacing),
-                modifier = Modifier.verticalScroll(scrollState)
+                contentPadding = PaddingValues(bottom = doubleSpacing)
             ) {
 
-                for (geyser in geysers.sortedBy { it.id }) {
+                items(sortedGeysers) { geyser ->
 
                     val isHighlighted = highlightedGeyser.value == geyser
 
@@ -367,12 +373,10 @@ private fun AsteroidGeysersDetails(
                             )
                     )
                 }
-
-                DefaultSpacer()
             }
 
             VerticalScrollbar(
-                adapter = rememberScrollbarAdapter(scrollState),
+                adapter = rememberScrollbarAdapter(geyserListLazyListState),
                 modifier = Modifier.fillMaxHeight().align(Alignment.CenterEnd),
                 style = defaultScrollbarStyle().copy(
                     unhoverColor = lightGray.copy(alpha = 0.4f),
