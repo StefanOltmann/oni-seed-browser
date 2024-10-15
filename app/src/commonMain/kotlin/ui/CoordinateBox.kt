@@ -19,6 +19,7 @@
 
 package ui
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -28,12 +29,19 @@ import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import oni_seed_browser.app.generated.resources.Res
+import oni_seed_browser.app.generated.resources.space_hexagon
+import oni_seed_browser.app.generated.resources.space_hexagon_hover
+import org.jetbrains.compose.resources.painterResource
 import ui.theme.defaultRoundedCornerShape
 import ui.theme.defaultSpacing
+import ui.theme.halfPadding
 import ui.theme.halfSpacing
 
 @Composable
@@ -86,12 +94,23 @@ fun CoordinateBox(
             }
         }
 
-        if (showMapClicked != null)
-            ShowMapButton(
-                onClick = showMapClicked,
-                size = 32.dp,
+        if (showMapClicked != null) {
+
+            val hovered = remember { mutableStateOf(false) }
+
+            Image(
+                painter = if (hovered.value)
+                    painterResource(Res.drawable.space_hexagon_hover)
+                else
+                    painterResource(Res.drawable.space_hexagon),
+                contentDescription = null,
                 modifier = Modifier
+                    .onHover(hovered)
+                    .halfPadding()
+                    .height(32.dp)
+                    .noRippleClickable(showMapClicked)
                     .align(Alignment.CenterEnd)
             )
+        }
     }
 }
