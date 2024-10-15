@@ -39,8 +39,8 @@ enum class PointOfInterestType(
     CRASHED_SATELLITE("PropSurfaceSatellite1", "Crashed Satellite"),
     WRECKED_SATELLITE("PropSurfaceSatellite2", "Wrecked Satellite"),
     CRUSHED_SATELLITE("PropSurfaceSatellite3", "Crushed Satellite"),
-    TEMPORAL_TEAR_OPENER("TemporalTearOpener", "Temporal Tear Opener")
-    ;
+    TEMPORAL_TEAR_OPENER("TemporalTearOpener", "Temporal Tear Opener"),
+    CRYOTANK("CryoTank", "Cryotank 3000");
 
     companion object {
 

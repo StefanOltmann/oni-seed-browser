@@ -96,6 +96,7 @@ fun getPointOfInterestDrawable(pointOfInterestType: PointOfInterestType): Drawab
         PointOfInterestType.WRECKED_SATELLITE -> Res.drawable.poi_wrecked_satellite
         PointOfInterestType.CRUSHED_SATELLITE -> Res.drawable.poi_crushed_satellite
         PointOfInterestType.TEMPORAL_TEAR_OPENER -> Res.drawable.building_temporal_tear_opener
+        PointOfInterestType.CRYOTANK -> Res.drawable.building_cryotank
     }
 
 @Composable
