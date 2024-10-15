@@ -159,7 +159,13 @@ fun AsteroidMap(
 
     BoxWithConstraints(
         contentAlignment = contentAlignment,
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
+            .noRippleClickable {
+
+                /* Clicking not on a geyser should deselect all selections. */
+                highlightedGeyser.value = null
+            }
     ) {
 
         /* Don't render if too small to avoid issues. */
@@ -273,10 +279,7 @@ fun AsteroidMap(
                         )
                         .noRippleClickable {
 
-                            if (isHighlighted)
-                                highlightedGeyser.value = null
-                            else
-                                highlightedGeyser.value = geyser
+                            highlightedGeyser.value = geyser
 
                             onGeyserClick?.invoke(geyser)
                         }
