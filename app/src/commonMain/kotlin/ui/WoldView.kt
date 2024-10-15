@@ -102,7 +102,7 @@ fun WorldView(
                 if (!urlWasCopied.value)
                     return@LaunchedEffect
 
-                delay(3000)
+                delay(2000)
 
                 urlWasCopied.value = false
             }

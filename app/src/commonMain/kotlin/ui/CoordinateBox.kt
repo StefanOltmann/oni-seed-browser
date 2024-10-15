@@ -76,7 +76,7 @@ fun CoordinateBox(
                 if (!coordinateWasCopied.value)
                     return@LaunchedEffect
 
-                delay(3000)
+                delay(2000)
 
                 coordinateWasCopied.value = false
             }
