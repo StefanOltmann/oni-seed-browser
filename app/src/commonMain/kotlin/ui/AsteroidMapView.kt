@@ -267,9 +267,6 @@ fun AsteroidMap(
                 val geyserClickModifier = if (enableClickListener)
                     Modifier.noRippleClickable {
 
-                        if (enableClickListener)
-                            return@noRippleClickable
-
                         highlightedGeyser.value = geyser
 
                         onGeyserClick?.invoke(geyser)
