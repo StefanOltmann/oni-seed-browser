@@ -30,6 +30,10 @@ fun main() {
 
     CanvasBasedWindow(canvasElementId = "ComposeTarget") {
 
+        val domain = document.domain
+
+        println("Running on domain: $domain")
+
         val urlHash = remember {
             mutableStateOf(document.location?.hash?.drop(1)?.ifBlank { null })
         }
