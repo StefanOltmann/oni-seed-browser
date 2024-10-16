@@ -21,31 +21,14 @@ package ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.BoxWithConstraints
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ContentCopy
-import androidx.compose.material.icons.filled.CopyAll
-import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalClipboardManager
@@ -56,19 +39,7 @@ import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.delay
 import model.Asteroid
 import model.World
-import ui.theme.DefaultSpacer
-import ui.theme.DoubleSpacer
-import ui.theme.FillSpacer
-import ui.theme.HalfSpacer
-import ui.theme.anthraticeTransparentBackgroundColor
-import ui.theme.defaultPadding
-import ui.theme.defaultRoundedCornerShape
-import ui.theme.defaultSpacing
-import ui.theme.halfPadding
-import ui.theme.halfSpacing
-import ui.theme.hoverColor
-import ui.theme.lightGray
-import ui.theme.lightGrayTransparentBorderColor
+import ui.theme.*
 import kotlin.math.max
 
 val widthPerWorld: Dp = 380.dp
@@ -121,19 +92,19 @@ fun WorldView(
             modifier = Modifier.offset(y = -4.dp)
         ) {
 
-            val seedWasCopied = remember { mutableStateOf(false) }
+            val urlWasCopied = remember { mutableStateOf(false) }
 
             /*
              * Set notice back after 3 seconds.
              */
-            LaunchedEffect(seedWasCopied.value) {
+            LaunchedEffect(urlWasCopied.value) {
 
-                if (!seedWasCopied.value)
+                if (!urlWasCopied.value)
                     return@LaunchedEffect
 
-                delay(3000)
+                delay(1000)
 
-                seedWasCopied.value = false
+                urlWasCopied.value = false
             }
 
             val clipboardManager = LocalClipboardManager.current
@@ -170,16 +141,16 @@ fun WorldView(
 
                         clipboardManager.setText(AnnotatedString(url))
 
-                        seedWasCopied.value = true
+                        urlWasCopied.value = true
                     }
             )
 
-            if (seedWasCopied.value) {
+            if (urlWasCopied.value) {
 
                 DefaultSpacer()
 
                 Text(
-                    text = "Copied URL to clipboard!",
+                    text = "Copied to clipboard!",
                     style = MaterialTheme.typography.bodyMedium,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onBackground

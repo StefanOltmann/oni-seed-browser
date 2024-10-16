@@ -23,55 +23,76 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import model.WorldTrait
+import model.ZoneType
 import org.jetbrains.compose.resources.painterResource
-import ui.theme.cardColorBackground
-import ui.theme.defaultRoundedCornerShape
-import ui.theme.doubleSpacing
+import ui.theme.*
+
+private val defaultHalfRoundedCornerShape = RoundedCornerShape(
+    topStart = 6.dp,
+    topEnd = 0.dp,
+    bottomStart = 6.dp,
+    bottomEnd = 0.dp
+)
 
 @Composable
-fun WorlTraitDetail(
-    worldTrait: WorldTrait
+fun ZoneTypeDetail(
+    zoneType: ZoneType,
+    modifier: Modifier = Modifier
 ) {
 
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
+    Box(
         modifier = Modifier
-            .padding(
-                horizontal = doubleSpacing
-            )
+            .padding(horizontal = doubleSpacing)
             .background(
                 cardColorBackground,
                 defaultRoundedCornerShape
             )
             .border(
-                2.dp,
-                worldTrait.rating.color,
+                0.dp,
+                lightGrayTransparentBorderColor,
                 defaultRoundedCornerShape
             )
             .fillMaxWidth()
-            .height(50.dp)
+            .then(modifier)
     ) {
 
-        Image(
-            painter = painterResource(getWorldTraitDrawable(worldTrait)),
-            contentDescription = null,
-            modifier = Modifier
-                .padding(horizontal = doubleSpacing)
-                .size(24.dp)
-        )
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.halfPadding()
+        ) {
 
-        Text(
-            text = worldTrait.displayName,
-            style = MaterialTheme.typography.headlineSmall,
-            color = worldTrait.color,
-            modifier = Modifier.offset(y = -2.dp)
-        )
+            Box(
+                modifier = Modifier
+                    .width(16.dp)
+                    .height(48.dp)
+                    .background(
+                        zoneType.color,
+                        defaultHalfRoundedCornerShape
+                    )
+            )
+
+            HalfSpacer()
+
+            Image(
+                painter = painterResource(getZoneTypeDrawable(zoneType)),
+                contentDescription = null,
+                modifier = Modifier.size(48.dp)
+            )
+
+            DefaultSpacer()
+
+            Text(
+                text = zoneType.displayName,
+                style = MaterialTheme.typography.headlineSmall,
+                color = MaterialTheme.colorScheme.onBackground
+            )
+        }
     }
 }

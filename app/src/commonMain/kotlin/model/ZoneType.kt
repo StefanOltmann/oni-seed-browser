@@ -26,28 +26,41 @@ import kotlinx.serialization.Serializable
 @Serializable
 enum class ZoneType(
     val id: Int,
+    val displayName: String,
     val color: Color
 ) {
 
-    FrozenWastes(0, Color(0xFF9DC9D6)),
-    CrystalCaverns(1, Color(0xFFAC72C1)),
-    BoggyMarsh(2, Color(0xFF7B974B)),
-    Sandstone(3, Color(0xFFF2BB47)),
-    ToxicJungle(4, Color(0xFFCB95A3)),
-    MagmaCore(5, Color(0xFFDE5A3B)),
-    OilField(6, Color(0xFF3F1C05)),
-    Space(7, Color(0xFF242424)),
-    Ocean(8, Color(0xFFD39898)),
-    Rust(9, Color(0xFFFFA007)),
-    Forest(10, Color(0xFF8EC039)),
-    Radioactive(11, Color(0xFF4AE458)),
-    Swamp(12, Color(0xFFEB9B3F)),
-    Wasteland(13, Color(0xFFCC3636)),
-    RocketInterior(14, Color(0xFF9E48DF)),
-    Metallic(15, Color(0xFFFFA007)),
-    Barren(16, Color(0xFFF2BB47)),
-    Moo(17, Color(0xFF8EC039)),
-    IceCaves(18, Color(0xFFABCFEA)),
-    CarrotQuarry(19, Color(0xFFCDA2C7)),
-    SugarWoods(20, Color(0xFFA2CDA4))
+    /*
+     * Ordered by how they should appear in the biome list.
+     */
+
+    /** Default starting area, should always come first. */
+    Sandstone(3, "Sandstone", Color(0xFFF2BB47)),
+    Barren(16, "Barren", Color(0xFF97752C)),
+
+    Space(7, "Space", Color(0xFF242424)),
+
+    FrozenWastes(0, "Tundra", Color(0xFF9DC9D6)),
+    // CrystalCaverns(1, Color(0xFFAC72C1)),
+    BoggyMarsh(2, "Marsh", Color(0xFF7B974B)),
+    ToxicJungle(4, "Jungle", Color(0xFFCB95A3)),
+
+    Ocean(8, "Ocean", Color(0xFF4C4CFF)),
+    Rust(9, "Rust", Color(0xFFFFA007)),
+    Forest(10, "Forest", Color(0xFF8EC039)),
+    Radioactive(11, "Radioactive", Color(0xFF4AE458)),
+    Swamp(12, "Swampy", Color(0xFFEB9B3F)),
+    Wasteland(13, "Wasteland", Color(0xFFCC3636)),
+    // RocketInterior(14, Color(0xFF9E48DF)),
+    Metallic(15, "Metallic", Color(0xFFFFA007)),
+    Moo(17, "Moo", Color(0xFF8EC039)),
+    IceCaves(18, "Ice Cave", Color(0xFFABCFEA)),
+    CarrotQuarry(19, "Cool Pool", Color(0xFFCDA2C7)),
+    SugarWoods(20, "Nectar", Color(0xFFA2CDA4)),
+
+    /* Most of the time right above the magma biome. */
+    OilField(6, "Oily", Color(0xFF52321D)),
+
+    /* Usually at the bottom of the map, so also listed at the bottom */
+    MagmaCore(5, "Magma", Color(0xFFDE5A3B)),
 }

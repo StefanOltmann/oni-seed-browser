@@ -19,22 +19,31 @@
 
 package ui
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.selection.SelectionContainer
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ContentCopy
+import androidx.compose.material.icons.filled.Search
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalClipboardManager
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import ui.theme.defaultRoundedCornerShape
-import ui.theme.defaultSpacing
-import ui.theme.halfSpacing
+import kotlinx.coroutines.delay
+import oni_seed_browser.app.generated.resources.Res
+import oni_seed_browser.app.generated.resources.space_hexagon
+import org.jetbrains.compose.resources.painterResource
+import ui.theme.*
 
 @Composable
 fun CoordinateBox(
@@ -53,14 +62,70 @@ fun CoordinateBox(
             .height(40.dp)
     ) {
 
-        SelectionContainer {
+        Row(
+            verticalAlignment = Alignment.CenterVertically
+        ) {
 
-            Text(
-                text = coordinate,
-                style = MaterialTheme.typography.headlineLarge,
-                fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.onBackground
-            )
+            val coordinateWasCopied = remember { mutableStateOf(false) }
+
+            /*
+             * Set notice back after 3 seconds.
+             */
+            LaunchedEffect(coordinateWasCopied.value) {
+
+                if (!coordinateWasCopied.value)
+                    return@LaunchedEffect
+
+                delay(1000)
+
+                coordinateWasCopied.value = false
+            }
+
+            if (coordinateWasCopied.value) {
+
+                Text(
+                    text = "Copied to clipboard!",
+                    style = MaterialTheme.typography.headlineSmall,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.onBackground
+                )
+
+            } else {
+
+                SelectionContainer {
+
+                    Text(
+                        text = coordinate,
+                        style = MaterialTheme.typography.headlineLarge,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.onBackground
+                    )
+                }
+
+                DoubleSpacer()
+
+                val clipboardManager = LocalClipboardManager.current
+
+                val hovered = remember { mutableStateOf(false) }
+
+                Icon(
+                    imageVector = Icons.Default.ContentCopy,
+                    contentDescription = null,
+                    tint = if (hovered.value)
+                        hoverColor
+                    else
+                        MaterialTheme.colorScheme.onBackground,
+                    modifier = Modifier
+                        .onHover(hovered)
+                        .size(24.dp)
+                        .noRippleClickable {
+
+                            clipboardManager.setText(AnnotatedString(coordinate))
+
+                            coordinateWasCopied.value = true
+                        }
+                )
+            }
         }
 
         if (index > 0 && totalCount > 0) {
@@ -86,12 +151,34 @@ fun CoordinateBox(
             }
         }
 
-        if (showMapClicked != null)
-            ShowMapButton(
-                onClick = showMapClicked,
-                size = 32.dp,
+        if (showMapClicked != null) {
+
+            val hovered = remember { mutableStateOf(false) }
+
+            Box(
+                contentAlignment = Alignment.Center,
                 modifier = Modifier
+                    .onHover(hovered)
+                    .halfPadding()
+                    .height(32.dp)
+                    .noRippleClickable(showMapClicked)
                     .align(Alignment.CenterEnd)
-            )
+            ) {
+
+                Image(
+                    painter = painterResource(Res.drawable.space_hexagon),
+                    contentDescription = null
+                )
+
+                Icon(
+                    imageVector = Icons.Default.Search,
+                    contentDescription = null,
+                    tint = if (hovered.value)
+                        hoverColor
+                    else
+                        MaterialTheme.colorScheme.onBackground
+                )
+            }
+        }
     }
 }

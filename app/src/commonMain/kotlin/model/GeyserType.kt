@@ -26,7 +26,7 @@ import kotlinx.serialization.Serializable
 enum class GeyserType(
     val type: String,
     val displayName: String,
-    rating: Rating = Rating.NEUTRAL
+    val rating: Rating = Rating.NEUTRAL
 ) {
 
     /*
@@ -171,15 +171,11 @@ enum class GeyserType(
     ),
     VOLCANO(
         type = "big_volcano",
-        displayName = "Valcano",
-        /* Free energy & stone */
-        rating = Rating.GOOD
+        displayName = "Valcano"
     ),
     MINOR_VOLCANO(
         type = "small_volcano",
-        displayName = "Minor Volcano",
-        /* Free energy & stone */
-        rating = Rating.GOOD
+        displayName = "Minor Volcano"
     ),
     OIL_RESERVOIR(
         type = "OilWell",

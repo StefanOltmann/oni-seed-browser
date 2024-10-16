@@ -120,8 +120,11 @@ fun GeysersRow(
                         CircleShape
                     )
                     .border(
-                        if (hovered.value) 2.dp else 1.dp,
-                        anthracite,
+                        if (hovered.value || geyserType.rating.isNegative()) 2.dp else 1.dp,
+                        if (geyserType.rating.isNegative())
+                            geyserType.rating.color
+                        else
+                            anthracite,
                         CircleShape
                     )
                     .onPlaced {

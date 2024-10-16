@@ -114,9 +114,7 @@ enum class WorldTrait(
     ),
     SlimeSplats(
         displayName = "Slime Molds",
-        color = Color(0xFF8EB542),
-        /* We don't like slime too much. */
-        rating = Rating.BAD
+        color = Color(0xFF8EB542)
     ),
     SubsurfaceOcean(
         displayName = "Subsurface Ocean",
