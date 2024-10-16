@@ -97,7 +97,7 @@ fun App(
 
             if (urlHashValue != null) {
 
-                println("Load specific coord: $urlHashValue")
+                println("Load specific coordinate: $urlHashValue")
 
                 try {
 
