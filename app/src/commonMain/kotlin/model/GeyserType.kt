@@ -171,7 +171,7 @@ enum class GeyserType(
     ),
     VOLCANO(
         type = "big_volcano",
-        displayName = "Valcano"
+        displayName = "Volcano"
     ),
     MINOR_VOLCANO(
         type = "small_volcano",
