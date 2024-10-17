@@ -75,7 +75,7 @@ fun getGeyserDrawable(geyserType: GeyserType): DrawableResource =
         GeyserType.LEAKY_OIL_FISSURE -> Res.drawable.geyser_leaky_oil_fissure
         GeyserType.ALUMINIUM_VOLCANO -> Res.drawable.geyser_aluminum_volcano
         GeyserType.COBALT_VOLCANO -> Res.drawable.geyser_cobalt_volcano
-        GeyserType.SULFUR_GEYSER -> Res.drawable.geyser_liquid_sulfur_geyser
+        GeyserType.LIQUID_SULFUR_GEYSER -> Res.drawable.geyser_liquid_sulfur_geyser
         GeyserType.TUNGSTEN_VOLCANO -> Res.drawable.geyser_tungsten_volcano
         GeyserType.NIOBIUM_VOLCANO -> Res.drawable.geyser_niobium_volcano
         GeyserType.OIL_RESERVOIR -> Res.drawable.geyser_oil_reservoir

@@ -19,6 +19,7 @@
 
 package ui
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -100,7 +101,7 @@ fun App(
 
             if (urlHashValue != null) {
 
-                println("Load specific coord: $urlHashValue")
+                println("Load specific coordinate: $urlHashValue")
 
                 try {
 
@@ -313,13 +314,33 @@ fun App(
                             }
                         }
 
-                        showAsteroidDetails.value?.let {
-                            AsteroidDetails(
-                                asteroid = it,
-                                showAsteroidMap = {
-                                    showAsteroidMap.value = it
-                                }
-                            )
+                        val asteroidForDetails = showAsteroidDetails.value
+
+                        AnimatedVisibility(
+                            visible = asteroidForDetails != null
+                        ) {
+
+                            /* Will be NULL on closing. */
+                            if (asteroidForDetails != null) {
+
+                                AsteroidDetails(
+                                    asteroid = asteroidForDetails,
+                                    showAsteroidMap = {
+                                        showAsteroidMap.value = asteroidForDetails
+                                    }
+                                )
+
+                            } else {
+
+                                /*
+                                 * Placeholder box to ensure smooth animation.
+                                 */
+                                Box(
+                                    modifier = Modifier
+                                        .width(300.dp)
+                                        .fillMaxHeight()
+                                )
+                            }
                         }
                     }
 
