@@ -34,6 +34,7 @@ import model.filter.FilterQuery
 const val BASE_API_URL = "https://oni-seed-browser-backend-106729705300.us-central1.run.app"
 const val FIND_URL = "$BASE_API_URL/coordinate"
 const val SEARCH_URL = "$BASE_API_URL/search"
+const val COUNT_URL = "$BASE_API_URL/count"
 
 private val jsonPretty = Json { this.prettyPrint = true }
 
@@ -53,6 +54,18 @@ object DefaultWebClient : WebClient {
                 }
             )
         }
+    }
+
+    override suspend fun countWorlds(): Long? {
+
+        println("Count worlds")
+
+        val response = httpClient.get(COUNT_URL)
+
+        if (response.status != HttpStatusCode.OK)
+            return null
+
+        return response.body()
     }
 
     override suspend fun find(coordinate: String): World? {

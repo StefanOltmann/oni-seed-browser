@@ -54,6 +54,7 @@ data class FilterSelection(
 
 @Composable
 fun FilterPanel(
+    worldCount: Long?,
     filterQueryState: MutableState<FilterQuery>,
     onSearchButtonPressed: () -> Unit
 ) {
@@ -81,7 +82,7 @@ fun FilterPanel(
             .then(maxSizeModifier)
     ) {
 
-        FilterHeader(filterPanelOpen)
+        FilterHeader(worldCount, filterPanelOpen)
 
         AnimatedVisibility(filterPanelOpen.value) {
 

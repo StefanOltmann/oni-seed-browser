@@ -65,6 +65,10 @@ fun App(
         typography = AppTypography()
     ) {
 
+        val worldCount = produceState<Long?>(null) {
+            value = DefaultWebClient.countWorlds()
+        }
+
         val coroutineScope = rememberCoroutineScope()
 
         val filterQueryState = remember { mutableStateOf(FilterQuery.ALL) }
@@ -236,6 +240,7 @@ fun App(
                 HalfSpacer()
 
                 FilterPanel(
+                    worldCount = worldCount.value,
                     filterQueryState = filterQueryState,
                     onSearchButtonPressed = {
                         coroutineScope.launch { search() }

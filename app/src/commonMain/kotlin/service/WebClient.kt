@@ -24,6 +24,8 @@ import model.filter.FilterQuery
 
 interface WebClient {
 
+    suspend fun countWorlds(): Long?
+
     suspend fun find(coordinate: String): World?
 
     suspend fun search(filterQuery: FilterQuery): List<World>
