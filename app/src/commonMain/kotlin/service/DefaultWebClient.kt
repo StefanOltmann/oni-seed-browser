@@ -31,7 +31,7 @@ import kotlinx.serialization.json.Json
 import model.World
 import model.filter.FilterQuery
 
-const val BASE_API_URL = "https://oni-seed-browser-backend-106729705300.us-central1.run.app"
+const val BASE_API_URL = "https://oni-seed-uploader-stefan-oltmann.koyeb.app"
 const val FIND_URL = "$BASE_API_URL/coordinate"
 const val SEARCH_URL = "$BASE_API_URL/search"
 const val COUNT_URL = "$BASE_API_URL/count"
