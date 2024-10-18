@@ -113,8 +113,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -124,8 +124,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -135,8 +135,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "salt_water",
@@ -201,7 +201,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 347,
             "idleTime": 660,
             "eruptionTime": 37,
-            "dormancyCycles": 47.0,
+            "dormancyCycles": 47,
             "activeCycles": 88.1
           },
           {
@@ -322,7 +322,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 2995,
             "idleTime": 422,
             "eruptionTime": 349,
-            "dormancyCycles": 51.0,
+            "dormancyCycles": 51,
             "activeCycles": 96.7
           }
         ]
@@ -380,7 +380,7 @@ val sampleWorldsJson: String = """
             "idleTime": 113,
             "eruptionTime": 785,
             "dormancyCycles": 41.3,
-            "activeCycles": 78.0
+            "activeCycles": 78
           },
           {
             "id": "liquid_co2",
@@ -490,7 +490,7 @@ val sampleWorldsJson: String = """
             "idleTime": 524,
             "eruptionTime": 247,
             "dormancyCycles": 53.1,
-            "activeCycles": 68.0
+            "activeCycles": 68
           }
         ]
       },
@@ -548,7 +548,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 240,
             "idleTime": 659,
             "eruptionTime": 41,
-            "dormancyCycles": 53.0,
+            "dormancyCycles": 53,
             "activeCycles": 58.1
           },
           {
@@ -729,7 +729,7 @@ val sampleWorldsJson: String = """
             "idleTime": 298,
             "eruptionTime": 272,
             "dormancyCycles": 43.7,
-            "activeCycles": 74.0
+            "activeCycles": 74
           },
           {
             "id": "salt_water",
@@ -790,7 +790,7 @@ val sampleWorldsJson: String = """
             "idleTime": 299,
             "eruptionTime": 506,
             "dormancyCycles": 84.3,
-            "activeCycles": 69.0
+            "activeCycles": 69
           }
         ]
       }
@@ -1060,8 +1060,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -1071,8 +1071,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -1082,8 +1082,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "salt_water",
@@ -1170,7 +1170,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 1461,
             "idleTime": 9123,
             "eruptionTime": 60,
-            "dormancyCycles": 38.0,
+            "dormancyCycles": 38,
             "activeCycles": 94.4
           },
           {
@@ -1214,7 +1214,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 1242,
             "idleTime": 491,
             "eruptionTime": 105,
-            "dormancyCycles": 90.0,
+            "dormancyCycles": 90,
             "activeCycles": 102.2
           },
           {
@@ -1247,7 +1247,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 1343,
             "idleTime": 290,
             "eruptionTime": 276,
-            "dormancyCycles": 58.0,
+            "dormancyCycles": 58,
             "activeCycles": 84.3
           },
           {
@@ -1281,7 +1281,7 @@ val sampleWorldsJson: String = """
             "idleTime": 220,
             "eruptionTime": 227,
             "dormancyCycles": 47.1,
-            "activeCycles": 88.0
+            "activeCycles": 88
           },
           {
             "id": "molten_cobalt",
@@ -1313,7 +1313,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 1143,
             "idleTime": 8941,
             "eruptionTime": 60,
-            "dormancyCycles": 47.0,
+            "dormancyCycles": 47,
             "activeCycles": 68.2
           }
         ]
@@ -1377,7 +1377,7 @@ val sampleWorldsJson: String = """
             "idleTime": 438,
             "eruptionTime": 329,
             "dormancyCycles": 53.2,
-            "activeCycles": 68.0
+            "activeCycles": 68
           },
           {
             "id": "molten_cobalt",
@@ -1388,7 +1388,7 @@ val sampleWorldsJson: String = """
             "idleTime": 675,
             "eruptionTime": 61,
             "dormancyCycles": 44.5,
-            "activeCycles": 73.0
+            "activeCycles": 73
           },
           {
             "id": "molten_iron",
@@ -1409,7 +1409,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 321,
             "idleTime": 721,
             "eruptionTime": 33,
-            "dormancyCycles": 54.0,
+            "dormancyCycles": 54,
             "activeCycles": 79.5
           },
           {
@@ -1421,7 +1421,7 @@ val sampleWorldsJson: String = """
             "idleTime": 220,
             "eruptionTime": 227,
             "dormancyCycles": 47.1,
-            "activeCycles": 88.0
+            "activeCycles": 88
           },
           {
             "id": "small_volcano",
@@ -1585,7 +1585,7 @@ val sampleWorldsJson: String = """
             "idleTime": 707,
             "eruptionTime": 51,
             "dormancyCycles": 43.8,
-            "activeCycles": 92.0
+            "activeCycles": 92
           },
           {
             "id": "molten_tungsten",
@@ -1596,7 +1596,7 @@ val sampleWorldsJson: String = """
             "idleTime": 745,
             "eruptionTime": 51,
             "dormancyCycles": 79.5,
-            "activeCycles": 79.0
+            "activeCycles": 79
           },
           {
             "id": "chlorine_gas",
@@ -2068,7 +2068,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 1597,
             "idleTime": 299,
             "eruptionTime": 367,
-            "dormancyCycles": 90.0,
+            "dormancyCycles": 90,
             "activeCycles": 107.4
           },
           {
@@ -2079,8 +2079,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -2090,8 +2090,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -2101,8 +2101,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "slush_water",
@@ -2263,7 +2263,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 104,
             "idleTime": 185,
             "eruptionTime": 250,
-            "dormancyCycles": 30.0,
+            "dormancyCycles": 30,
             "activeCycles": 46.2
           },
           {
@@ -2296,8 +2296,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 247,
             "idleTime": 582,
             "eruptionTime": 34,
-            "dormancyCycles": 39.0,
-            "activeCycles": 43.0
+            "dormancyCycles": 39,
+            "activeCycles": 43
           },
           {
             "id": "molten_copper",
@@ -2329,7 +2329,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 145,
             "idleTime": 482,
             "eruptionTime": 146,
-            "dormancyCycles": 53.0,
+            "dormancyCycles": 53,
             "activeCycles": 63.4
           },
           {
@@ -2340,7 +2340,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 137,
             "idleTime": 396,
             "eruptionTime": 490,
-            "dormancyCycles": 70.0,
+            "dormancyCycles": 70,
             "activeCycles": 82.4
           }
         ]
@@ -2413,7 +2413,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 355,
             "idleTime": 662,
             "eruptionTime": 48,
-            "dormancyCycles": 29.0,
+            "dormancyCycles": 29,
             "activeCycles": 72.6
           },
           {
@@ -2465,7 +2465,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 285,
             "idleTime": 812,
             "eruptionTime": 48,
-            "dormancyCycles": 56.0,
+            "dormancyCycles": 56,
             "activeCycles": 87.5
           },
           {
@@ -2499,7 +2499,7 @@ val sampleWorldsJson: String = """
             "idleTime": 311,
             "eruptionTime": 348,
             "dormancyCycles": 58.2,
-            "activeCycles": 103.0
+            "activeCycles": 103
           },
           {
             "id": "methane",
@@ -2539,7 +2539,7 @@ val sampleWorldsJson: String = """
             "idleTime": 8470,
             "eruptionTime": 62,
             "dormancyCycles": 46.1,
-            "activeCycles": 75.0
+            "activeCycles": 75
           }
         ]
       },
@@ -3024,8 +3024,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -3035,8 +3035,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -3046,8 +3046,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "big_volcano",
@@ -3080,7 +3080,7 @@ val sampleWorldsJson: String = """
             "idleTime": 354,
             "eruptionTime": 308,
             "dormancyCycles": 55.8,
-            "activeCycles": 74.0
+            "activeCycles": 74
           },
           {
             "id": "slush_salt_water",
@@ -3178,8 +3178,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -3189,8 +3189,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -3200,8 +3200,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -3211,8 +3211,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -3222,8 +3222,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -3233,8 +3233,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -3244,8 +3244,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -3255,8 +3255,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -3266,8 +3266,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -3277,8 +3277,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           }
         ]
       },
@@ -3487,7 +3487,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 225,
             "idleTime": 814,
             "eruptionTime": 56,
-            "dormancyCycles": 64.0,
+            "dormancyCycles": 64,
             "activeCycles": 84.5
           },
           {
@@ -3658,7 +3658,7 @@ val sampleWorldsJson: String = """
             "idleTime": 269,
             "eruptionTime": 249,
             "dormancyCycles": 53.2,
-            "activeCycles": 90.0
+            "activeCycles": 90
           }
         ]
       },
@@ -4083,8 +4083,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -4094,8 +4094,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -4105,8 +4105,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "slush_salt_water",
@@ -4128,7 +4128,7 @@ val sampleWorldsJson: String = """
             "idleTime": 381,
             "eruptionTime": 257,
             "dormancyCycles": 47.1,
-            "activeCycles": 66.0
+            "activeCycles": 66
           },
           {
             "id": "slush_salt_water",
@@ -4150,7 +4150,7 @@ val sampleWorldsJson: String = """
             "idleTime": 337,
             "eruptionTime": 310,
             "dormancyCycles": 42.5,
-            "activeCycles": 40.0
+            "activeCycles": 40
           },
           {
             "id": "chlorine_gas",
@@ -4238,7 +4238,7 @@ val sampleWorldsJson: String = """
             "idleTime": 843,
             "eruptionTime": 36,
             "dormancyCycles": 74.6,
-            "activeCycles": 74.0
+            "activeCycles": 74
           },
           {
             "id": "slimy_po2",
@@ -4260,7 +4260,7 @@ val sampleWorldsJson: String = """
             "idleTime": 698,
             "eruptionTime": 46,
             "dormancyCycles": 54.1,
-            "activeCycles": 70.0
+            "activeCycles": 70
           },
           {
             "id": "slimy_po2",
@@ -4358,7 +4358,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 328,
             "idleTime": 612,
             "eruptionTime": 42,
-            "dormancyCycles": 45.0,
+            "dormancyCycles": 45,
             "activeCycles": 72.9
           },
           {
@@ -4380,8 +4380,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -4391,8 +4391,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -4402,8 +4402,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -4413,8 +4413,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -4424,8 +4424,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -4435,8 +4435,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -4446,8 +4446,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -4457,8 +4457,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -4468,8 +4468,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -4479,8 +4479,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -4490,8 +4490,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -4501,8 +4501,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           }
         ]
       },
@@ -4576,7 +4576,7 @@ val sampleWorldsJson: String = """
             "idleTime": 670,
             "eruptionTime": 136,
             "dormancyCycles": 74.6,
-            "activeCycles": 89.0
+            "activeCycles": 89
           },
           {
             "id": "molten_aluminum",
@@ -4586,7 +4586,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 318,
             "idleTime": 711,
             "eruptionTime": 47,
-            "dormancyCycles": 42.0,
+            "dormancyCycles": 42,
             "activeCycles": 72.8
           },
           {
@@ -4762,7 +4762,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 281,
             "idleTime": 710,
             "eruptionTime": 36,
-            "dormancyCycles": 40.0,
+            "dormancyCycles": 40,
             "activeCycles": 55.9
           },
           {
@@ -4825,7 +4825,7 @@ val sampleWorldsJson: String = """
             "idleTime": 8831,
             "eruptionTime": 69,
             "dormancyCycles": 56.9,
-            "activeCycles": 68.0
+            "activeCycles": 68
           }
         ]
       },
@@ -4942,7 +4942,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 1604,
             "idleTime": 159,
             "eruptionTime": 138,
-            "dormancyCycles": 50.0,
+            "dormancyCycles": 50,
             "activeCycles": 79.2
           },
           {
@@ -5241,7 +5241,7 @@ val sampleWorldsJson: String = """
             "idleTime": 192,
             "eruptionTime": 313,
             "dormancyCycles": 46.8,
-            "activeCycles": 81.0
+            "activeCycles": 81
           },
           {
             "id": "methane",
@@ -5273,8 +5273,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -5284,8 +5284,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -5295,8 +5295,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "filthy_water",
@@ -5479,7 +5479,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 1174,
             "idleTime": 331,
             "eruptionTime": 347,
-            "dormancyCycles": 70.0,
+            "dormancyCycles": 70,
             "activeCycles": 87.3
           },
           {
@@ -5524,7 +5524,7 @@ val sampleWorldsJson: String = """
             "idleTime": 664,
             "eruptionTime": 40,
             "dormancyCycles": 73.8,
-            "activeCycles": 100.0
+            "activeCycles": 100
           },
           {
             "id": "hot_water",
@@ -5614,7 +5614,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 268,
             "idleTime": 611,
             "eruptionTime": 34,
-            "dormancyCycles": 51.0,
+            "dormancyCycles": 51,
             "activeCycles": 54.6
           },
           {
@@ -5637,7 +5637,7 @@ val sampleWorldsJson: String = """
             "idleTime": 673,
             "eruptionTime": 62,
             "dormancyCycles": 65.7,
-            "activeCycles": 65.0
+            "activeCycles": 65
           }
         ]
       },
@@ -5736,7 +5736,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 79,
             "idleTime": 363,
             "eruptionTime": 172,
-            "dormancyCycles": 47.0,
+            "dormancyCycles": 47,
             "activeCycles": 67.3
           }
         ]
@@ -6205,8 +6205,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -6216,8 +6216,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -6227,8 +6227,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "hot_co2",
@@ -6260,7 +6260,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 1234,
             "idleTime": 281,
             "eruptionTime": 321,
-            "dormancyCycles": 43.0,
+            "dormancyCycles": 43,
             "activeCycles": 69.8
           },
           {
@@ -6414,8 +6414,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -6425,8 +6425,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -6436,8 +6436,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -6447,8 +6447,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -6458,8 +6458,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -6469,8 +6469,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -6480,8 +6480,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -6491,8 +6491,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -6502,8 +6502,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -6513,8 +6513,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -6524,8 +6524,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -6535,8 +6535,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -6546,8 +6546,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -6557,8 +6557,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -6568,8 +6568,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -6579,8 +6579,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -6590,8 +6590,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -6601,8 +6601,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -6612,8 +6612,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -6623,8 +6623,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -6634,8 +6634,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           }
         ]
       },
@@ -6775,7 +6775,7 @@ val sampleWorldsJson: String = """
             "idleTime": 152,
             "eruptionTime": 192,
             "dormancyCycles": 65.9,
-            "activeCycles": 99.0
+            "activeCycles": 99
           }
         ]
       },
@@ -6885,7 +6885,7 @@ val sampleWorldsJson: String = """
             "idleTime": 783,
             "eruptionTime": 55,
             "dormancyCycles": 46.7,
-            "activeCycles": 68.0
+            "activeCycles": 68
           },
           {
             "id": "molten_tungsten",
@@ -7410,8 +7410,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -7421,8 +7421,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -7432,8 +7432,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "big_volcano",
@@ -7465,7 +7465,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 1070,
             "idleTime": 8756,
             "eruptionTime": 66,
-            "dormancyCycles": 54.0,
+            "dormancyCycles": 54,
             "activeCycles": 70.5
           },
           {
@@ -7509,7 +7509,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 101,
             "idleTime": 194,
             "eruptionTime": 273,
-            "dormancyCycles": 41.0,
+            "dormancyCycles": 41,
             "activeCycles": 54.6
           },
           {
@@ -7520,7 +7520,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 1804,
             "idleTime": 214,
             "eruptionTime": 163,
-            "dormancyCycles": 49.0,
+            "dormancyCycles": 49,
             "activeCycles": 76.8
           },
           {
@@ -7608,8 +7608,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -7619,8 +7619,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -7630,8 +7630,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -7641,8 +7641,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -7652,8 +7652,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -7663,8 +7663,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           }
         ]
       },
@@ -7722,7 +7722,7 @@ val sampleWorldsJson: String = """
             "idleTime": 335,
             "eruptionTime": 249,
             "dormancyCycles": 62.8,
-            "activeCycles": 70.0
+            "activeCycles": 70
           },
           {
             "id": "steam",
@@ -7765,7 +7765,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 693,
             "idleTime": 256,
             "eruptionTime": 306,
-            "dormancyCycles": 58.0,
+            "dormancyCycles": 58,
             "activeCycles": 85.9
           },
           {
@@ -7908,7 +7908,7 @@ val sampleWorldsJson: String = """
             "idleTime": 610,
             "eruptionTime": 44,
             "dormancyCycles": 36.4,
-            "activeCycles": 49.0
+            "activeCycles": 49
           },
           {
             "id": "molten_tungsten",
@@ -8050,7 +8050,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 2957,
             "idleTime": 360,
             "eruptionTime": 294,
-            "dormancyCycles": 50.0,
+            "dormancyCycles": 50,
             "activeCycles": 74.6
           },
           {
@@ -8375,8 +8375,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -8386,8 +8386,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -8397,8 +8397,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "salt_water",
@@ -8420,7 +8420,7 @@ val sampleWorldsJson: String = """
             "idleTime": 371,
             "eruptionTime": 217,
             "dormancyCycles": 44.3,
-            "activeCycles": 103.0
+            "activeCycles": 103
           },
           {
             "id": "steam",
@@ -8463,7 +8463,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 2562,
             "idleTime": 286,
             "eruptionTime": 235,
-            "dormancyCycles": 78.0,
+            "dormancyCycles": 78,
             "activeCycles": 92.3
           },
           {
@@ -8497,7 +8497,7 @@ val sampleWorldsJson: String = """
             "idleTime": 127,
             "eruptionTime": 406,
             "dormancyCycles": 52.3,
-            "activeCycles": 86.0
+            "activeCycles": 86
           },
           {
             "id": "hot_po2",
@@ -8563,7 +8563,7 @@ val sampleWorldsJson: String = """
             "idleTime": 215,
             "eruptionTime": 116,
             "dormancyCycles": 24.3,
-            "activeCycles": 79.0
+            "activeCycles": 79
           },
           {
             "id": "hot_hydrogen",
@@ -8642,7 +8642,7 @@ val sampleWorldsJson: String = """
             "idleTime": 108,
             "eruptionTime": 105,
             "dormancyCycles": 58.6,
-            "activeCycles": 84.0
+            "activeCycles": 84
           },
           {
             "id": "liquid_co2",
@@ -8652,7 +8652,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 126,
             "idleTime": 322,
             "eruptionTime": 387,
-            "dormancyCycles": 30.0,
+            "dormancyCycles": 30,
             "activeCycles": 34.7
           },
           {
@@ -8663,7 +8663,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 1559,
             "idleTime": 308,
             "eruptionTime": 314,
-            "dormancyCycles": 33.0,
+            "dormancyCycles": 33,
             "activeCycles": 45.4
           },
           {
@@ -8675,7 +8675,7 @@ val sampleWorldsJson: String = """
             "idleTime": 483,
             "eruptionTime": 267,
             "dormancyCycles": 64.9,
-            "activeCycles": 96.0
+            "activeCycles": 96
           },
           {
             "id": "hot_hydrogen",
@@ -8730,7 +8730,7 @@ val sampleWorldsJson: String = """
             "idleTime": 707,
             "eruptionTime": 53,
             "dormancyCycles": 43.9,
-            "activeCycles": 86.0
+            "activeCycles": 86
           },
           {
             "id": "filthy_water",
@@ -8740,7 +8740,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3145,
             "idleTime": 310,
             "eruptionTime": 247,
-            "dormancyCycles": 38.0,
+            "dormancyCycles": 38,
             "activeCycles": 63.4
           }
         ]
@@ -8776,7 +8776,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 274,
             "idleTime": 652,
             "eruptionTime": 51,
-            "dormancyCycles": 67.0,
+            "dormancyCycles": 67,
             "activeCycles": 89.5
           },
           {
@@ -8883,7 +8883,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 113,
             "idleTime": 264,
             "eruptionTime": 313,
-            "dormancyCycles": 71.0,
+            "dormancyCycles": 71,
             "activeCycles": 115.2
           },
           {
@@ -9355,8 +9355,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -9366,8 +9366,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -9377,8 +9377,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "methane",
@@ -9465,7 +9465,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 327,
             "idleTime": 722,
             "eruptionTime": 52,
-            "dormancyCycles": 64.0,
+            "dormancyCycles": 64,
             "activeCycles": 96.9
           },
           {
@@ -9487,7 +9487,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 113,
             "idleTime": 303,
             "eruptionTime": 245,
-            "dormancyCycles": 47.0,
+            "dormancyCycles": 47,
             "activeCycles": 81.1
           },
           {
@@ -9520,8 +9520,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -9531,8 +9531,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -9542,8 +9542,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -9553,8 +9553,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -9564,8 +9564,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -9575,8 +9575,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -9586,8 +9586,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           }
         ]
       },
@@ -9726,7 +9726,7 @@ val sampleWorldsJson: String = """
             "idleTime": 710,
             "eruptionTime": 26,
             "dormancyCycles": 42.9,
-            "activeCycles": 70.0
+            "activeCycles": 70
           },
           {
             "id": "liquid_co2",
@@ -9861,7 +9861,7 @@ val sampleWorldsJson: String = """
             "idleTime": 881,
             "eruptionTime": 61,
             "dormancyCycles": 51.8,
-            "activeCycles": 83.0
+            "activeCycles": 83
           }
         ]
       },
@@ -9923,7 +9923,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 400,
             "idleTime": 679,
             "eruptionTime": 47,
-            "dormancyCycles": 48.0,
+            "dormancyCycles": 48,
             "activeCycles": 76.5
           },
           {
@@ -9946,7 +9946,7 @@ val sampleWorldsJson: String = """
             "idleTime": 440,
             "eruptionTime": 239,
             "dormancyCycles": 39.8,
-            "activeCycles": 61.0
+            "activeCycles": 61
           }
         ]
       },
@@ -9974,7 +9974,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 1218,
             "idleTime": 8423,
             "eruptionTime": 69,
-            "dormancyCycles": 49.0,
+            "dormancyCycles": 49,
             "activeCycles": 106.7
           }
         ]
@@ -10414,7 +10414,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 1925,
             "idleTime": 311,
             "eruptionTime": 392,
-            "dormancyCycles": 50.0,
+            "dormancyCycles": 50,
             "activeCycles": 81.9
           },
           {
@@ -10436,7 +10436,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 2658,
             "idleTime": 58,
             "eruptionTime": 119,
-            "dormancyCycles": 40.0,
+            "dormancyCycles": 40,
             "activeCycles": 73.2
           },
           {
@@ -10447,8 +10447,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -10458,8 +10458,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -10469,8 +10469,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "hot_co2",
@@ -10502,7 +10502,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 1175,
             "idleTime": 364,
             "eruptionTime": 340,
-            "dormancyCycles": 53.0,
+            "dormancyCycles": 53,
             "activeCycles": 53.6
           },
           {
@@ -10580,7 +10580,7 @@ val sampleWorldsJson: String = """
             "idleTime": 513,
             "eruptionTime": 26,
             "dormancyCycles": 56.9,
-            "activeCycles": 81.0
+            "activeCycles": 81
           },
           {
             "id": "liquid_co2",
@@ -10809,7 +10809,7 @@ val sampleWorldsJson: String = """
             "idleTime": 689,
             "eruptionTime": 39,
             "dormancyCycles": 61.9,
-            "activeCycles": 78.0
+            "activeCycles": 78
           },
           {
             "id": "molten_iron",
@@ -10915,7 +10915,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 101,
             "idleTime": 288,
             "eruptionTime": 262,
-            "dormancyCycles": 55.0,
+            "dormancyCycles": 55,
             "activeCycles": 58.7
           },
           {
@@ -10989,7 +10989,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 121,
             "idleTime": 206,
             "eruptionTime": 222,
-            "dormancyCycles": 39.0,
+            "dormancyCycles": 39,
             "activeCycles": 74.6
           }
         ]
@@ -11035,7 +11035,7 @@ val sampleWorldsJson: String = """
             "idleTime": 279,
             "eruptionTime": 228,
             "dormancyCycles": 61.9,
-            "activeCycles": 78.0
+            "activeCycles": 78
           }
         ]
       },
@@ -11350,8 +11350,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -11361,8 +11361,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -11372,8 +11372,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "salt_water",
@@ -11383,7 +11383,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3174,
             "idleTime": 345,
             "eruptionTime": 324,
-            "dormancyCycles": 45.0,
+            "dormancyCycles": 45,
             "activeCycles": 54.5
           },
           {
@@ -11395,7 +11395,7 @@ val sampleWorldsJson: String = """
             "idleTime": 270,
             "eruptionTime": 201,
             "dormancyCycles": 33.9,
-            "activeCycles": 50.0
+            "activeCycles": 50
           },
           {
             "id": "steam",
@@ -11493,7 +11493,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 1157,
             "idleTime": 9071,
             "eruptionTime": 78,
-            "dormancyCycles": 52.0,
+            "dormancyCycles": 52,
             "activeCycles": 75.9
           },
           {
@@ -11658,8 +11658,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -11669,8 +11669,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -11680,8 +11680,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -11691,8 +11691,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -11702,8 +11702,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -11713,8 +11713,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -11724,8 +11724,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           }
         ]
       },
@@ -11807,7 +11807,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 153,
             "idleTime": 238,
             "eruptionTime": 184,
-            "dormancyCycles": 40.0,
+            "dormancyCycles": 40,
             "activeCycles": 84.5
           },
           {
@@ -11942,7 +11942,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 266,
             "idleTime": 708,
             "eruptionTime": 59,
-            "dormancyCycles": 36.0,
+            "dormancyCycles": 36,
             "activeCycles": 51.5
           },
           {
@@ -11964,7 +11964,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 248,
             "idleTime": 651,
             "eruptionTime": 52,
-            "dormancyCycles": 54.0,
+            "dormancyCycles": 54,
             "activeCycles": 79.9
           }
         ]
@@ -12006,7 +12006,7 @@ val sampleWorldsJson: String = """
             "idleTime": 785,
             "eruptionTime": 48,
             "dormancyCycles": 43.8,
-            "activeCycles": 69.0
+            "activeCycles": 69
           },
           {
             "id": "molten_tungsten",
@@ -12198,7 +12198,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 1541,
             "idleTime": 511,
             "eruptionTime": 193,
-            "dormancyCycles": 50.0,
+            "dormancyCycles": 50,
             "activeCycles": 89.3
           }
         ]
@@ -12517,7 +12517,7 @@ val sampleWorldsJson: String = """
             "idleTime": 10450,
             "eruptionTime": 73,
             "dormancyCycles": 47.6,
-            "activeCycles": 73.0
+            "activeCycles": 73
           },
           {
             "id": "big_volcano",
@@ -12614,7 +12614,7 @@ val sampleWorldsJson: String = """
             "idleTime": 776,
             "eruptionTime": 62,
             "dormancyCycles": 49.8,
-            "activeCycles": 74.0
+            "activeCycles": 74
           },
           {
             "id": "molten_gold",
@@ -12668,7 +12668,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 2062,
             "idleTime": 370,
             "eruptionTime": 266,
-            "dormancyCycles": 15.0,
+            "dormancyCycles": 15,
             "activeCycles": 10.5
           },
           {
@@ -12736,8 +12736,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 1505,
             "idleTime": 187,
             "eruptionTime": 178,
-            "dormancyCycles": 53.0,
-            "activeCycles": 87.0
+            "dormancyCycles": 53,
+            "activeCycles": 87
           },
           {
             "id": "OilWell",
@@ -12747,8 +12747,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -12758,8 +12758,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -12769,8 +12769,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -12780,8 +12780,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -12791,8 +12791,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "hot_co2",
@@ -12871,8 +12871,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 317,
             "idleTime": 789,
             "eruptionTime": 82,
-            "dormancyCycles": 38.0,
-            "activeCycles": 52.0
+            "dormancyCycles": 38,
+            "activeCycles": 52
           },
           {
             "id": "molten_iron",
@@ -12893,7 +12893,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 295,
             "idleTime": 701,
             "eruptionTime": 49,
-            "dormancyCycles": 72.0,
+            "dormancyCycles": 72,
             "activeCycles": 92.7
           }
         ]
@@ -12957,7 +12957,7 @@ val sampleWorldsJson: String = """
             "idleTime": 714,
             "eruptionTime": 47,
             "dormancyCycles": 49.1,
-            "activeCycles": 70.0
+            "activeCycles": 70
           },
           {
             "id": "hot_hydrogen",
@@ -13497,7 +13497,7 @@ val sampleWorldsJson: String = """
             "idleTime": 724,
             "eruptionTime": 55,
             "dormancyCycles": 40.7,
-            "activeCycles": 43.0
+            "activeCycles": 43
           },
           {
             "id": "molten_gold",
@@ -13540,7 +13540,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 142,
             "idleTime": 469,
             "eruptionTime": 283,
-            "dormancyCycles": 44.0,
+            "dormancyCycles": 44,
             "activeCycles": 51.8
           },
           {
@@ -13642,8 +13642,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -13653,8 +13653,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -13664,8 +13664,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -13675,8 +13675,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -13686,8 +13686,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "hot_co2",
@@ -13919,7 +13919,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3227,
             "idleTime": 436,
             "eruptionTime": 325,
-            "dormancyCycles": 51.0,
+            "dormancyCycles": 51,
             "activeCycles": 75.2
           },
           {
@@ -13961,8 +13961,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 1214,
             "idleTime": 10928,
             "eruptionTime": 79,
-            "dormancyCycles": 53.0,
-            "activeCycles": 74.0
+            "dormancyCycles": 53,
+            "activeCycles": 74
           }
         ]
       },
@@ -14269,7 +14269,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 109,
             "idleTime": 280,
             "eruptionTime": 393,
-            "dormancyCycles": 18.0,
+            "dormancyCycles": 18,
             "activeCycles": 47.3
           },
           {
@@ -14466,7 +14466,7 @@ val sampleWorldsJson: String = """
             "idleTime": 309,
             "eruptionTime": 187,
             "dormancyCycles": 74.9,
-            "activeCycles": 109.0
+            "activeCycles": 109
           },
           {
             "id": "liquid_co2",
@@ -14487,8 +14487,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 97,
             "idleTime": 189,
             "eruptionTime": 427,
-            "dormancyCycles": 57.0,
-            "activeCycles": 72.0
+            "dormancyCycles": 57,
+            "activeCycles": 72
           },
           {
             "id": "molten_copper",
@@ -14572,8 +14572,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -14583,8 +14583,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -14594,8 +14594,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -14605,8 +14605,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -14616,8 +14616,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "methane",
@@ -14649,8 +14649,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -14660,8 +14660,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -14671,8 +14671,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           }
         ]
       },
@@ -14813,7 +14813,7 @@ val sampleWorldsJson: String = """
             "idleTime": 378,
             "eruptionTime": 231,
             "dormancyCycles": 61.6,
-            "activeCycles": 89.0
+            "activeCycles": 89
           },
           {
             "id": "slimy_po2",
@@ -14983,7 +14983,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 1601,
             "idleTime": 191,
             "eruptionTime": 144,
-            "dormancyCycles": 30.0,
+            "dormancyCycles": 30,
             "activeCycles": 38.7
           }
         ]
@@ -15249,7 +15249,7 @@ val sampleWorldsJson: String = """
             "idleTime": 290,
             "eruptionTime": 251,
             "dormancyCycles": 54.7,
-            "activeCycles": 70.0
+            "activeCycles": 70
           },
           {
             "id": "chlorine_gas",
@@ -15435,7 +15435,7 @@ val sampleWorldsJson: String = """
             "idleTime": 355,
             "eruptionTime": 263,
             "dormancyCycles": 37.1,
-            "activeCycles": 53.0
+            "activeCycles": 53
           },
           {
             "id": "small_volcano",
@@ -15446,7 +15446,7 @@ val sampleWorldsJson: String = """
             "idleTime": 8934,
             "eruptionTime": 72,
             "dormancyCycles": 62.2,
-            "activeCycles": 71.0
+            "activeCycles": 71
           },
           {
             "id": "small_volcano",
@@ -15529,8 +15529,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -15540,8 +15540,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -15551,8 +15551,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -15562,8 +15562,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -15573,8 +15573,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "liquid_sulfur",
@@ -15655,7 +15655,7 @@ val sampleWorldsJson: String = """
             "idleTime": 827,
             "eruptionTime": 27,
             "dormancyCycles": 37.6,
-            "activeCycles": 66.0
+            "activeCycles": 66
           },
           {
             "id": "molten_iron",
@@ -15749,7 +15749,7 @@ val sampleWorldsJson: String = """
             "idleTime": 344,
             "eruptionTime": 363,
             "dormancyCycles": 57.4,
-            "activeCycles": 84.0
+            "activeCycles": 84
           }
         ]
       },
@@ -16265,8 +16265,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -16276,8 +16276,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -16287,8 +16287,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -16298,8 +16298,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -16309,8 +16309,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "steam",
@@ -16354,7 +16354,7 @@ val sampleWorldsJson: String = """
             "idleTime": 7821,
             "eruptionTime": 61,
             "dormancyCycles": 47.1,
-            "activeCycles": 71.0
+            "activeCycles": 71
           },
           {
             "id": "slimy_po2",
@@ -16539,7 +16539,7 @@ val sampleWorldsJson: String = """
             "idleTime": 319,
             "eruptionTime": 355,
             "dormancyCycles": 49.1,
-            "activeCycles": 75.0
+            "activeCycles": 75
           }
         ]
       },
@@ -16651,7 +16651,7 @@ val sampleWorldsJson: String = """
             "idleTime": 600,
             "eruptionTime": 34,
             "dormancyCycles": 63.3,
-            "activeCycles": 90.0
+            "activeCycles": 90
           },
           {
             "id": "molten_iron",
@@ -17206,8 +17206,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -17217,8 +17217,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -17228,8 +17228,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -17239,8 +17239,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -17250,8 +17250,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "steam",
@@ -17306,7 +17306,7 @@ val sampleWorldsJson: String = """
             "idleTime": 221,
             "eruptionTime": 270,
             "dormancyCycles": 54.3,
-            "activeCycles": 88.0
+            "activeCycles": 88
           }
         ]
       },
@@ -17466,7 +17466,7 @@ val sampleWorldsJson: String = """
             "idleTime": 712,
             "eruptionTime": 54,
             "dormancyCycles": 82.8,
-            "activeCycles": 114.0
+            "activeCycles": 114
           },
           {
             "id": "molten_copper",
@@ -17499,7 +17499,7 @@ val sampleWorldsJson: String = """
             "idleTime": 671,
             "eruptionTime": 50,
             "dormancyCycles": 38.8,
-            "activeCycles": 79.0
+            "activeCycles": 79
           }
         ]
       },
@@ -17536,7 +17536,7 @@ val sampleWorldsJson: String = """
             "idleTime": 228,
             "eruptionTime": 195,
             "dormancyCycles": 34.4,
-            "activeCycles": 39.0
+            "activeCycles": 39
           },
           {
             "id": "slush_water",
@@ -17557,7 +17557,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 115,
             "idleTime": 182,
             "eruptionTime": 431,
-            "dormancyCycles": 59.0,
+            "dormancyCycles": 59,
             "activeCycles": 73.7
           },
           {
@@ -17569,7 +17569,7 @@ val sampleWorldsJson: String = """
             "idleTime": 360,
             "eruptionTime": 126,
             "dormancyCycles": 63.9,
-            "activeCycles": 72.0
+            "activeCycles": 72
           },
           {
             "id": "small_volcano",
@@ -17620,7 +17620,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 1691,
             "idleTime": 329,
             "eruptionTime": 409,
-            "dormancyCycles": 35.0,
+            "dormancyCycles": 35,
             "activeCycles": 55.4
           },
           {
@@ -17642,7 +17642,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 104,
             "idleTime": 198,
             "eruptionTime": 351,
-            "dormancyCycles": 42.0,
+            "dormancyCycles": 42,
             "activeCycles": 76.6
           },
           {
@@ -17795,7 +17795,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 92,
             "idleTime": 324,
             "eruptionTime": 344,
-            "dormancyCycles": 20.0,
+            "dormancyCycles": 20,
             "activeCycles": 26.8
           },
           {
@@ -18246,7 +18246,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 101,
             "idleTime": 353,
             "eruptionTime": 81,
-            "dormancyCycles": 62.0,
+            "dormancyCycles": 62,
             "activeCycles": 114.8
           },
           {
@@ -18341,8 +18341,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -18352,8 +18352,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -18363,8 +18363,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -18374,8 +18374,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -18385,8 +18385,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "steam",
@@ -18418,7 +18418,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 2894,
             "idleTime": 291,
             "eruptionTime": 327,
-            "dormancyCycles": 41.0,
+            "dormancyCycles": 41,
             "activeCycles": 86.2
           },
           {
@@ -18515,7 +18515,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 315,
             "idleTime": 727,
             "eruptionTime": 32,
-            "dormancyCycles": 52.0,
+            "dormancyCycles": 52,
             "activeCycles": 87.3
           },
           {
@@ -18699,7 +18699,7 @@ val sampleWorldsJson: String = """
             "idleTime": 193,
             "eruptionTime": 229,
             "dormancyCycles": 43.9,
-            "activeCycles": 82.0
+            "activeCycles": 82
           },
           {
             "id": "hot_steam",
@@ -18757,7 +18757,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 278,
             "idleTime": 700,
             "eruptionTime": 42,
-            "dormancyCycles": 54.0,
+            "dormancyCycles": 54,
             "activeCycles": 89.8
           },
           {
@@ -18769,7 +18769,7 @@ val sampleWorldsJson: String = """
             "idleTime": 751,
             "eruptionTime": 46,
             "dormancyCycles": 39.9,
-            "activeCycles": 64.0
+            "activeCycles": 64
           },
           {
             "id": "molten_iron",
@@ -18874,7 +18874,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 101,
             "idleTime": 200,
             "eruptionTime": 285,
-            "dormancyCycles": 46.0,
+            "dormancyCycles": 46,
             "activeCycles": 73.7
           }
         ]
@@ -18909,7 +18909,7 @@ val sampleWorldsJson: String = """
             "idleTime": 423,
             "eruptionTime": 304,
             "dormancyCycles": 47.9,
-            "activeCycles": 146.0
+            "activeCycles": 146
           },
           {
             "id": "slush_water",
@@ -18920,7 +18920,7 @@ val sampleWorldsJson: String = """
             "idleTime": 262,
             "eruptionTime": 299,
             "dormancyCycles": 39.2,
-            "activeCycles": 80.0
+            "activeCycles": 80
           }
         ]
       },
@@ -19000,7 +19000,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 1414,
             "idleTime": 145,
             "eruptionTime": 212,
-            "dormancyCycles": 43.0,
+            "dormancyCycles": 43,
             "activeCycles": 68.2
           }
         ]
@@ -19359,8 +19359,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -19370,8 +19370,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -19381,8 +19381,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -19392,8 +19392,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -19403,8 +19403,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "steam",
@@ -19512,8 +19512,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 341,
             "idleTime": 771,
             "eruptionTime": 55,
-            "dormancyCycles": 26.0,
-            "activeCycles": 43.0
+            "dormancyCycles": 26,
+            "activeCycles": 43
           },
           {
             "id": "molten_cobalt",
@@ -19535,7 +19535,7 @@ val sampleWorldsJson: String = """
             "idleTime": 767,
             "eruptionTime": 40,
             "dormancyCycles": 34.6,
-            "activeCycles": 112.0
+            "activeCycles": 112
           },
           {
             "id": "big_volcano",
@@ -19546,7 +19546,7 @@ val sampleWorldsJson: String = """
             "idleTime": 10208,
             "eruptionTime": 74,
             "dormancyCycles": 20.8,
-            "activeCycles": 28.0
+            "activeCycles": 28
           },
           {
             "id": "big_volcano",
@@ -19579,7 +19579,7 @@ val sampleWorldsJson: String = """
             "idleTime": 8446,
             "eruptionTime": 64,
             "dormancyCycles": 68.6,
-            "activeCycles": 71.0
+            "activeCycles": 71
           },
           {
             "id": "big_volcano",
@@ -19673,7 +19673,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 488,
             "idleTime": 9628,
             "eruptionTime": 77,
-            "dormancyCycles": 49.0,
+            "dormancyCycles": 49,
             "activeCycles": 60.8
           },
           {
@@ -19749,7 +19749,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 2723,
             "idleTime": 502,
             "eruptionTime": 88,
-            "dormancyCycles": 56.0,
+            "dormancyCycles": 56,
             "activeCycles": 75.3
           },
           {
@@ -19760,7 +19760,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 737,
             "idleTime": 234,
             "eruptionTime": 126,
-            "dormancyCycles": 44.0,
+            "dormancyCycles": 44,
             "activeCycles": 73.2
           },
           {
@@ -19783,7 +19783,7 @@ val sampleWorldsJson: String = """
             "idleTime": 9627,
             "eruptionTime": 61,
             "dormancyCycles": 60.6,
-            "activeCycles": 105.0
+            "activeCycles": 105
           },
           {
             "id": "big_volcano",
@@ -19804,7 +19804,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 1089,
             "idleTime": 8894,
             "eruptionTime": 47,
-            "dormancyCycles": 56.0,
+            "dormancyCycles": 56,
             "activeCycles": 75.3
           },
           {
@@ -19935,7 +19935,7 @@ val sampleWorldsJson: String = """
             "idleTime": 603,
             "eruptionTime": 45,
             "dormancyCycles": 32.7,
-            "activeCycles": 35.0
+            "activeCycles": 35
           },
           {
             "id": "molten_tungsten",
@@ -20078,7 +20078,7 @@ val sampleWorldsJson: String = """
             "idleTime": 9680,
             "eruptionTime": 70,
             "dormancyCycles": 73.1,
-            "activeCycles": 99.0
+            "activeCycles": 99
           }
         ]
       },
@@ -20128,7 +20128,7 @@ val sampleWorldsJson: String = """
             "idleTime": 156,
             "eruptionTime": 300,
             "dormancyCycles": 42.5,
-            "activeCycles": 93.0
+            "activeCycles": 93
           }
         ]
       }
@@ -20425,7 +20425,7 @@ val sampleWorldsJson: String = """
             "idleTime": 531,
             "eruptionTime": 392,
             "dormancyCycles": 59.4,
-            "activeCycles": 120.0
+            "activeCycles": 120
           },
           {
             "id": "hot_water",
@@ -20488,8 +20488,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -20499,8 +20499,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -20510,8 +20510,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -20521,8 +20521,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -20532,8 +20532,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "steam",
@@ -20577,7 +20577,7 @@ val sampleWorldsJson: String = """
             "idleTime": 9845,
             "eruptionTime": 61,
             "dormancyCycles": 67.2,
-            "activeCycles": 114.0
+            "activeCycles": 114
           },
           {
             "id": "hot_co2",
@@ -20714,7 +20714,7 @@ val sampleWorldsJson: String = """
             "idleTime": 315,
             "eruptionTime": 297,
             "dormancyCycles": 80.8,
-            "activeCycles": 87.0
+            "activeCycles": 87
           },
           {
             "id": "molten_cobalt",
@@ -20842,7 +20842,7 @@ val sampleWorldsJson: String = """
             "idleTime": 601,
             "eruptionTime": 446,
             "dormancyCycles": 45.2,
-            "activeCycles": 89.0
+            "activeCycles": 89
           },
           {
             "id": "slush_water",
@@ -20852,7 +20852,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 1596,
             "idleTime": 235,
             "eruptionTime": 302,
-            "dormancyCycles": 83.0,
+            "dormancyCycles": 83,
             "activeCycles": 99.4
           },
           {
@@ -20945,7 +20945,7 @@ val sampleWorldsJson: String = """
             "idleTime": 718,
             "eruptionTime": 25,
             "dormancyCycles": 49.3,
-            "activeCycles": 83.0
+            "activeCycles": 83
           },
           {
             "id": "molten_iron",
@@ -21073,7 +21073,7 @@ val sampleWorldsJson: String = """
             "idleTime": 623,
             "eruptionTime": 275,
             "dormancyCycles": 45.2,
-            "activeCycles": 54.0
+            "activeCycles": 54
           }
         ]
       },
@@ -21480,7 +21480,7 @@ val sampleWorldsJson: String = """
             "idleTime": 473,
             "eruptionTime": 162,
             "dormancyCycles": 37.8,
-            "activeCycles": 51.0
+            "activeCycles": 51
           },
           {
             "id": "chlorine_gas",
@@ -21491,7 +21491,7 @@ val sampleWorldsJson: String = """
             "idleTime": 430,
             "eruptionTime": 468,
             "dormancyCycles": 28.6,
-            "activeCycles": 73.0
+            "activeCycles": 73
           },
           {
             "id": "steam",
@@ -21534,8 +21534,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -21545,8 +21545,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -21556,8 +21556,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "molten_gold",
@@ -21589,8 +21589,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 102,
             "idleTime": 561,
             "eruptionTime": 138,
-            "dormancyCycles": 44.0,
-            "activeCycles": 60.0
+            "dormancyCycles": 44,
+            "activeCycles": 60
           },
           {
             "id": "hot_steam",
@@ -21656,7 +21656,7 @@ val sampleWorldsJson: String = """
             "idleTime": 9295,
             "eruptionTime": 63,
             "dormancyCycles": 52.8,
-            "activeCycles": 61.0
+            "activeCycles": 61
           },
           {
             "id": "hot_hydrogen",
@@ -21678,7 +21678,7 @@ val sampleWorldsJson: String = """
             "idleTime": 10699,
             "eruptionTime": 58,
             "dormancyCycles": 35.5,
-            "activeCycles": 67.0
+            "activeCycles": 67
           },
           {
             "id": "hot_co2",
@@ -21887,8 +21887,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -21898,8 +21898,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -21909,8 +21909,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "filthy_water",
@@ -22008,7 +22008,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 335,
             "idleTime": 850,
             "eruptionTime": 65,
-            "dormancyCycles": 50.0,
+            "dormancyCycles": 50,
             "activeCycles": 69.4
           },
           {
@@ -22019,7 +22019,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 1195,
             "idleTime": 7536,
             "eruptionTime": 49,
-            "dormancyCycles": 47.0,
+            "dormancyCycles": 47,
             "activeCycles": 72.2
           },
           {
@@ -22260,7 +22260,7 @@ val sampleWorldsJson: String = """
             "idleTime": 280,
             "eruptionTime": 313,
             "dormancyCycles": 45.7,
-            "activeCycles": 68.0
+            "activeCycles": 68
           },
           {
             "id": "OilWell",
@@ -22270,8 +22270,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -22281,8 +22281,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -22292,8 +22292,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "oil_drip",
@@ -22380,7 +22380,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 376,
             "idleTime": 821,
             "eruptionTime": 48,
-            "dormancyCycles": 44.0,
+            "dormancyCycles": 44,
             "activeCycles": 81.3
           },
           {
@@ -22547,6 +22547,523 @@ val sampleWorldsJson: String = """
     "starMapEntriesSpacedOut": null
   },
   {
+    "coordinate": "OCAN-A-1251386136-0-0-0",
+    "cluster": "OCAN-A",
+    "dlcs": [
+      "FrostyPlanet"
+    ],
+    "asteroids": [
+      {
+        "id": "Oceania",
+        "offsetX": 0,
+        "offsetY": 0,
+        "sizeX": 256,
+        "sizeY": 384,
+        "worldTraits": [
+          "SubsurfaceOcean",
+          "DeepOil",
+          "MetalPoor",
+          "GlaciersLarge"
+        ],
+        "biomePaths": "Sandstone:166,302 150,294 135,307 140,324 127,331 117,324 122,306 108,294 89,302 84,296 89,279 105,279 115,262 109,250 127,235 129,235 133,243 158,250 147,268 153,281 176,283 178,289\nMagmaCore:117,384 110,359 96,353 95,353 80,378 64,353 53,354 40,373 25,357 0,370 0,384;160,384 128,384 134,357 156,354 161,358;256,384 256,369 231,357 217,373 201,352 196,351 182,362 183,384\nOilField:53,354 37,343 25,351 0,341 0,370 25,357 40,373;80,378 64,353 68,349 95,353;134,357 127,351 110,359 117,384 128,384;160,384 161,358 182,362 183,384;256,369 256,342 231,350 221,343 201,352 217,373 231,357\nOcean:87,145 65,150 59,169 35,171 28,159 41,136 30,119 41,99 63,101 68,112 89,120;196,351 189,324 169,319 156,330 140,324 127,331 127,351 134,357 156,354 161,358 182,362;256,342 256,312 229,307 225,288 256,273 256,189 228,187 221,173 198,170 192,150 169,144 168,120 189,112 194,101 215,99 226,120 215,136 229,160 256,158 256,83 227,79 222,66 210,58 187,64 180,75 166,75 149,92 128,80 108,91 91,76 77,75 70,64 48,58 34,67 29,78 0,82 0,260 30,261 37,280 31,287 0,283 0,341 25,351 37,343 53,354 64,353 68,349 95,353 96,353 101,328 117,324 122,306 108,294 89,302 84,296 89,279 77,262 96,246 90,226 68,227 60,241 40,241 32,225 40,210 59,210 75,190 79,190 96,216 109,215 127,235 129,235 148,215 160,217 181,192 198,211 216,210 226,226 217,241 195,240 186,261 184,262 176,283 178,289 196,296 200,314 217,318 221,343 231,350\nToxicJungle:37,280 30,261 0,260 0,283 31,287;89,120 68,112 53,136 41,136 28,159 35,171 59,169 65,150 87,145;169,319 166,302 150,294 135,307 140,324 156,330;195,240 190,229 167,228 160,217 148,215 129,235 133,243 158,250 159,249 184,262 186,261;221,343 217,318 200,314 189,324 196,351 201,352;229,160 215,136 205,137 192,150 198,170 221,173\nFrozenWastes:53,136 41,136 30,119 41,99 63,101 68,112;60,241 40,241 32,225 40,210 59,210 68,227;226,120 215,99 194,101 189,112 168,120 169,144 192,150 205,137 215,136;226,226 216,210 198,211 181,192 160,217 167,228 190,229 195,240 217,241;256,189 256,158 229,160 221,173 228,187\nBoggyMarsh:127,235 109,215 96,216 79,190 75,190 59,210 68,227 90,226 96,246 77,262 89,279 105,279 115,262 109,250;110,359 96,353 101,328 117,324 127,331 127,351;184,262 159,249 158,250 147,268 153,281 176,283;200,314 196,296 178,289 166,302 169,319 189,324;256,312 256,273 225,288 229,307",
+        "pointsOfInterest": [
+          {
+            "id": "Headquarters",
+            "x": 130,
+            "y": 284
+          },
+          {
+            "id": "MassiveHeatSink",
+            "x": 189,
+            "y": 145
+          },
+          {
+            "id": "MassiveHeatSink",
+            "x": 61,
+            "y": 231
+          },
+          {
+            "id": "MassiveHeatSink",
+            "x": 49,
+            "y": 131
+          },
+          {
+            "id": "GeneShuffler",
+            "x": 153,
+            "y": 275
+          },
+          {
+            "id": "GeneShuffler",
+            "x": 78,
+            "y": 145
+          },
+          {
+            "id": "GeneShuffler",
+            "x": 234,
+            "y": 178
+          },
+          {
+            "id": "GeneShuffler",
+            "x": 184,
+            "y": 200
+          }
+        ],
+        "geysers": [
+          {
+            "id": "steam",
+            "x": 164,
+            "y": 241,
+            "emitRate": 3885,
+            "avgEmitRate": 1325,
+            "idleTime": 382,
+            "eruptionTime": 640,
+            "dormancyCycles": 48.6,
+            "activeCycles": 58
+          },
+          {
+            "id": "methane",
+            "x": 213,
+            "y": 320,
+            "emitRate": 284,
+            "avgEmitRate": 113,
+            "idleTime": 166,
+            "eruptionTime": 304,
+            "dormancyCycles": 58.8,
+            "activeCycles": 94
+          },
+          {
+            "id": "steam",
+            "x": 111,
+            "y": 243,
+            "emitRate": 5379,
+            "avgEmitRate": 1488,
+            "idleTime": 394,
+            "eruptionTime": 365,
+            "dormancyCycles": 53.3,
+            "activeCycles": 72.3
+          },
+          {
+            "id": "methane",
+            "x": 99,
+            "y": 342,
+            "emitRate": 298,
+            "avgEmitRate": 101,
+            "idleTime": 202,
+            "eruptionTime": 316,
+            "dormancyCycles": 66.4,
+            "activeCycles": 83.2
+          },
+          {
+            "id": "salt_water",
+            "x": 108,
+            "y": 310,
+            "emitRate": 8663,
+            "avgEmitRate": 2732,
+            "idleTime": 266,
+            "eruptionTime": 265,
+            "dormancyCycles": 47.7,
+            "activeCycles": 81.7
+          },
+          {
+            "id": "OilWell",
+            "x": 36,
+            "y": 349,
+            "emitRate": 3333,
+            "avgEmitRate": 3333,
+            "idleTime": 0,
+            "eruptionTime": 1,
+            "dormancyCycles": 0,
+            "activeCycles": 1
+          },
+          {
+            "id": "OilWell",
+            "x": 121,
+            "y": 363,
+            "emitRate": 3333,
+            "avgEmitRate": 3333,
+            "idleTime": 0,
+            "eruptionTime": 1,
+            "dormancyCycles": 0,
+            "activeCycles": 1
+          },
+          {
+            "id": "OilWell",
+            "x": 168,
+            "y": 364,
+            "emitRate": 3333,
+            "avgEmitRate": 3333,
+            "idleTime": 0,
+            "eruptionTime": 1,
+            "dormancyCycles": 0,
+            "activeCycles": 1
+          },
+          {
+            "id": "slimy_po2",
+            "x": 133,
+            "y": 219,
+            "emitRate": 350,
+            "avgEmitRate": 96,
+            "idleTime": 261,
+            "eruptionTime": 285,
+            "dormancyCycles": 53.7,
+            "activeCycles": 59.3
+          },
+          {
+            "id": "hot_co2",
+            "x": 72,
+            "y": 120,
+            "emitRate": 463,
+            "avgEmitRate": 99,
+            "idleTime": 372,
+            "eruptionTime": 229,
+            "dormancyCycles": 52.7,
+            "activeCycles": 68.1
+          },
+          {
+            "id": "molten_gold",
+            "x": 212,
+            "y": 265,
+            "emitRate": 9074,
+            "avgEmitRate": 426,
+            "idleTime": 579,
+            "eruptionTime": 39,
+            "dormancyCycles": 28.8,
+            "activeCycles": 87.3
+          },
+          {
+            "id": "slimy_po2",
+            "x": 209,
+            "y": 295,
+            "emitRate": 350,
+            "avgEmitRate": 96,
+            "idleTime": 261,
+            "eruptionTime": 285,
+            "dormancyCycles": 53.7,
+            "activeCycles": 59.3
+          },
+          {
+            "id": "steam",
+            "x": 84,
+            "y": 177,
+            "emitRate": 3616,
+            "avgEmitRate": 1371,
+            "idleTime": 234,
+            "eruptionTime": 289,
+            "dormancyCycles": 47.5,
+            "activeCycles": 104
+          },
+          {
+            "id": "slush_salt_water",
+            "x": 36,
+            "y": 163,
+            "emitRate": 3555,
+            "avgEmitRate": 1440,
+            "idleTime": 180,
+            "eruptionTime": 354,
+            "dormancyCycles": 50.6,
+            "activeCycles": 79.4
+          },
+          {
+            "id": "salt_water",
+            "x": 182,
+            "y": 284,
+            "emitRate": 10152,
+            "avgEmitRate": 3177,
+            "idleTime": 348,
+            "eruptionTime": 311,
+            "dormancyCycles": 55.1,
+            "activeCycles": 108.2
+          },
+          {
+            "id": "slush_salt_water",
+            "x": 155,
+            "y": 104,
+            "emitRate": 5148,
+            "avgEmitRate": 1632,
+            "idleTime": 336,
+            "eruptionTime": 282,
+            "dormancyCycles": 39.6,
+            "activeCycles": 89.9
+          },
+          {
+            "id": "hot_po2",
+            "x": 170,
+            "y": 170,
+            "emitRate": 324,
+            "avgEmitRate": 122,
+            "idleTime": 281,
+            "eruptionTime": 350,
+            "dormancyCycles": 43.9,
+            "activeCycles": 93.7
+          },
+          {
+            "id": "small_volcano",
+            "x": 163,
+            "y": 330,
+            "emitRate": 109800,
+            "avgEmitRate": 584,
+            "idleTime": 9091,
+            "eruptionTime": 81,
+            "dormancyCycles": 28.5,
+            "activeCycles": 43.3
+          },
+          {
+            "id": "liquid_co2",
+            "x": 233,
+            "y": 195,
+            "emitRate": 578,
+            "avgEmitRate": 128,
+            "idleTime": 395,
+            "eruptionTime": 297,
+            "dormancyCycles": 70.9,
+            "activeCycles": 76.3
+          },
+          {
+            "id": "slimy_po2",
+            "x": 32,
+            "y": 97,
+            "emitRate": 421,
+            "avgEmitRate": 110,
+            "idleTime": 345,
+            "eruptionTime": 260,
+            "dormancyCycles": 58.1,
+            "activeCycles": 90.8
+          },
+          {
+            "id": "OilWell",
+            "x": 46,
+            "y": 356,
+            "emitRate": 3333,
+            "avgEmitRate": 3333,
+            "idleTime": 0,
+            "eruptionTime": 1,
+            "dormancyCycles": 0,
+            "activeCycles": 1
+          },
+          {
+            "id": "OilWell",
+            "x": 45,
+            "y": 360,
+            "emitRate": 3333,
+            "avgEmitRate": 3333,
+            "idleTime": 0,
+            "eruptionTime": 1,
+            "dormancyCycles": 0,
+            "activeCycles": 1
+          },
+          {
+            "id": "OilWell",
+            "x": 78,
+            "y": 367,
+            "emitRate": 3333,
+            "avgEmitRate": 3333,
+            "idleTime": 0,
+            "eruptionTime": 1,
+            "dormancyCycles": 0,
+            "activeCycles": 1
+          },
+          {
+            "id": "OilWell",
+            "x": 69,
+            "y": 354,
+            "emitRate": 3333,
+            "avgEmitRate": 3333,
+            "idleTime": 0,
+            "eruptionTime": 1,
+            "dormancyCycles": 0,
+            "activeCycles": 1
+          },
+          {
+            "id": "OilWell",
+            "x": 127,
+            "y": 357,
+            "emitRate": 3333,
+            "avgEmitRate": 3333,
+            "idleTime": 0,
+            "eruptionTime": 1,
+            "dormancyCycles": 0,
+            "activeCycles": 1
+          },
+          {
+            "id": "OilWell",
+            "x": 220,
+            "y": 350,
+            "emitRate": 3333,
+            "avgEmitRate": 3333,
+            "idleTime": 0,
+            "eruptionTime": 1,
+            "dormancyCycles": 0,
+            "activeCycles": 1
+          },
+          {
+            "id": "OilWell",
+            "x": 215,
+            "y": 361,
+            "emitRate": 3333,
+            "avgEmitRate": 3333,
+            "idleTime": 0,
+            "eruptionTime": 1,
+            "dormancyCycles": 0,
+            "activeCycles": 1
+          },
+          {
+            "id": "OilWell",
+            "x": 248,
+            "y": 358,
+            "emitRate": 3333,
+            "avgEmitRate": 3333,
+            "idleTime": 0,
+            "eruptionTime": 1,
+            "dormancyCycles": 0,
+            "activeCycles": 1
+          },
+          {
+            "id": "OilWell",
+            "x": 251,
+            "y": 349,
+            "emitRate": 3333,
+            "avgEmitRate": 3333,
+            "idleTime": 0,
+            "eruptionTime": 1,
+            "dormancyCycles": 0,
+            "activeCycles": 1
+          }
+        ]
+      }
+    ],
+    "starMapEntriesVanilla": [
+      {
+        "id": "CarbonaceousAsteroid",
+        "distance": 0
+      },
+      {
+        "id": "CarbonaceousAsteroid",
+        "distance": 0
+      },
+      {
+        "id": "MetallicAsteroid",
+        "distance": 1
+      },
+      {
+        "id": "OilyAsteriod",
+        "distance": 1
+      },
+      {
+        "id": "RockyAsteroid",
+        "distance": 2
+      },
+      {
+        "id": "Satellite",
+        "distance": 2
+      },
+      {
+        "id": "Satellite",
+        "distance": 2
+      },
+      {
+        "id": "IcyDwarf",
+        "distance": 3
+      },
+      {
+        "id": "ForestPlanet",
+        "distance": 3
+      },
+      {
+        "id": "OrganicDwarf",
+        "distance": 4
+      },
+      {
+        "id": "RockyAsteroid",
+        "distance": 4
+      },
+      {
+        "id": "Earth",
+        "distance": 4
+      },
+      {
+        "id": "CarbonaceousAsteroid",
+        "distance": 5
+      },
+      {
+        "id": "RockyAsteroid",
+        "distance": 5
+      },
+      {
+        "id": "RedDwarf",
+        "distance": 6
+      },
+      {
+        "id": "VolcanoPlanet",
+        "distance": 7
+      },
+      {
+        "id": "TerraPlanet",
+        "distance": 7
+      },
+      {
+        "id": "RustPlanet",
+        "distance": 8
+      },
+      {
+        "id": "RustPlanet",
+        "distance": 10
+      },
+      {
+        "id": "VolcanoPlanet",
+        "distance": 10
+      },
+      {
+        "id": "RockyAsteroid",
+        "distance": 11
+      },
+      {
+        "id": "ForestPlanet",
+        "distance": 12
+      },
+      {
+        "id": "ForestPlanet",
+        "distance": 12
+      },
+      {
+        "id": "OrganicDwarf",
+        "distance": 12
+      },
+      {
+        "id": "IceGiant",
+        "distance": 13
+      },
+      {
+        "id": "IceGiant",
+        "distance": 13
+      },
+      {
+        "id": "GasGiant",
+        "distance": 14
+      },
+      {
+        "id": "RockyAsteroid",
+        "distance": 14
+      },
+      {
+        "id": "HeliumGiant",
+        "distance": 15
+      },
+      {
+        "id": "HeliumGiant",
+        "distance": 15
+      },
+      {
+        "id": "ForestPlanet",
+        "distance": 15
+      },
+      {
+        "id": "Wormhole",
+        "distance": 17
+      }
+    ],
+    "starMapEntriesSpacedOut": null
+  },
+  {
     "coordinate": "S-FRZ-1098424328-0-0-0",
     "cluster": "S-FRZ",
     "dlcs": [
@@ -22592,7 +23109,7 @@ val sampleWorldsJson: String = """
             "idleTime": 256,
             "eruptionTime": 270,
             "dormancyCycles": 9.1,
-            "activeCycles": 19.0
+            "activeCycles": 19
           },
           {
             "id": "methane",
@@ -22646,8 +23163,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -22657,8 +23174,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -22668,8 +23185,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "big_volcano",
@@ -22724,7 +23241,7 @@ val sampleWorldsJson: String = """
             "idleTime": 9035,
             "eruptionTime": 72,
             "dormancyCycles": 56.4,
-            "activeCycles": 65.0
+            "activeCycles": 65
           },
           {
             "id": "big_volcano",
@@ -22778,7 +23295,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 1216,
             "idleTime": 8726,
             "eruptionTime": 56,
-            "dormancyCycles": 68.0,
+            "dormancyCycles": 68,
             "activeCycles": 110.7
           },
           {
@@ -22969,7 +23486,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 1513,
             "idleTime": 412,
             "eruptionTime": 239,
-            "dormancyCycles": 35.0,
+            "dormancyCycles": 35,
             "activeCycles": 55.6
           },
           {
@@ -23024,8 +23541,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -23035,8 +23552,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -23046,8 +23563,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "hot_hydrogen",
@@ -23123,7 +23640,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 618,
             "idleTime": 300,
             "eruptionTime": 254,
-            "dormancyCycles": 17.0,
+            "dormancyCycles": 17,
             "activeCycles": 22.2
           },
           {
@@ -23167,7 +23684,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 1036,
             "idleTime": 326,
             "eruptionTime": 313,
-            "dormancyCycles": 55.0,
+            "dormancyCycles": 55,
             "activeCycles": 60.4
           },
           {
@@ -23189,8 +23706,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -23200,8 +23717,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -23211,8 +23728,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -23222,8 +23739,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -23233,8 +23750,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -23244,8 +23761,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -23255,8 +23772,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -23266,8 +23783,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -23277,8 +23794,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -23288,8 +23805,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -23299,8 +23816,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -23310,8 +23827,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -23321,8 +23838,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -23332,8 +23849,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -23343,8 +23860,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -23354,8 +23871,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -23365,8 +23882,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           }
         ]
       }
@@ -23564,7 +24081,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 103,
             "idleTime": 290,
             "eruptionTime": 208,
-            "dormancyCycles": 45.0,
+            "dormancyCycles": 45,
             "activeCycles": 55.4
           },
           {
@@ -23576,7 +24093,7 @@ val sampleWorldsJson: String = """
             "idleTime": 408,
             "eruptionTime": 208,
             "dormancyCycles": 25.3,
-            "activeCycles": 52.0
+            "activeCycles": 52
           },
           {
             "id": "OilWell",
@@ -23586,8 +24103,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -23597,8 +24114,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -23608,8 +24125,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "small_volcano",
@@ -23663,7 +24180,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 2795,
             "idleTime": 366,
             "eruptionTime": 269,
-            "dormancyCycles": 61.0,
+            "dormancyCycles": 61,
             "activeCycles": 100.5
           },
           {
@@ -23730,7 +24247,7 @@ val sampleWorldsJson: String = """
             "idleTime": 202,
             "eruptionTime": 102,
             "dormancyCycles": 42.8,
-            "activeCycles": 61.0
+            "activeCycles": 61
           },
           {
             "id": "salt_water",
@@ -23740,7 +24257,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 2296,
             "idleTime": 463,
             "eruptionTime": 55,
-            "dormancyCycles": 58.0,
+            "dormancyCycles": 58,
             "activeCycles": 53.6
           },
           {
@@ -23751,8 +24268,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -23762,8 +24279,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -23773,8 +24290,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -23784,8 +24301,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -23795,8 +24312,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -23806,8 +24323,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -23817,8 +24334,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           }
         ]
       }
@@ -24018,7 +24535,7 @@ val sampleWorldsJson: String = """
             "idleTime": 387,
             "eruptionTime": 155,
             "dormancyCycles": 39.9,
-            "activeCycles": 75.0
+            "activeCycles": 75
           },
           {
             "id": "chlorine_gas",
@@ -24061,7 +24578,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 2406,
             "idleTime": 195,
             "eruptionTime": 274,
-            "dormancyCycles": 70.0,
+            "dormancyCycles": 70,
             "activeCycles": 87.7
           },
           {
@@ -24072,8 +24589,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -24083,8 +24600,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -24094,8 +24611,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "molten_copper",
@@ -24215,7 +24732,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 1137,
             "idleTime": 8544,
             "eruptionTime": 63,
-            "dormancyCycles": 56.0,
+            "dormancyCycles": 56,
             "activeCycles": 75.8
           },
           {
@@ -24435,7 +24952,7 @@ val sampleWorldsJson: String = """
             "idleTime": 359,
             "eruptionTime": 353,
             "dormancyCycles": 37.6,
-            "activeCycles": 57.0
+            "activeCycles": 57
           },
           {
             "id": "methane",
@@ -24446,7 +24963,7 @@ val sampleWorldsJson: String = """
             "idleTime": 455,
             "eruptionTime": 330,
             "dormancyCycles": 49.9,
-            "activeCycles": 103.0
+            "activeCycles": 103
           },
           {
             "id": "OilWell",
@@ -24456,8 +24973,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -24467,8 +24984,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -24478,8 +24995,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "hot_co2",
@@ -24533,7 +25050,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 118,
             "idleTime": 376,
             "eruptionTime": 110,
-            "dormancyCycles": 55.0,
+            "dormancyCycles": 55,
             "activeCycles": 94.7
           },
           {
@@ -24577,8 +25094,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 1119,
             "idleTime": 7068,
             "eruptionTime": 65,
-            "dormancyCycles": 45.0,
-            "activeCycles": 59.0
+            "dormancyCycles": 45,
+            "activeCycles": 59
           },
           {
             "id": "liquid_co2",
@@ -24867,8 +25384,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -24878,8 +25395,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -24889,8 +25406,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "hot_po2",
@@ -24956,7 +25473,7 @@ val sampleWorldsJson: String = """
             "idleTime": 266,
             "eruptionTime": 249,
             "dormancyCycles": 61.9,
-            "activeCycles": 119.0
+            "activeCycles": 119
           },
           {
             "id": "molten_iron",
@@ -25022,7 +25539,7 @@ val sampleWorldsJson: String = """
             "idleTime": 592,
             "eruptionTime": 83,
             "dormancyCycles": 57.7,
-            "activeCycles": 50.0
+            "activeCycles": 50
           }
         ]
       }
@@ -25210,7 +25727,7 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 95,
             "idleTime": 193,
             "eruptionTime": 272,
-            "dormancyCycles": 53.0,
+            "dormancyCycles": 53,
             "activeCycles": 75.6
           },
           {
@@ -25254,8 +25771,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -25265,8 +25782,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -25276,8 +25793,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "slimy_po2",
@@ -25398,7 +25915,7 @@ val sampleWorldsJson: String = """
             "idleTime": 216,
             "eruptionTime": 471,
             "dormancyCycles": 48.6,
-            "activeCycles": 81.0
+            "activeCycles": 81
           },
           {
             "id": "small_volcano",
@@ -25419,8 +25936,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -25430,8 +25947,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -25441,8 +25958,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -25452,8 +25969,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -25463,8 +25980,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -25474,8 +25991,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -25485,8 +26002,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -25496,8 +26013,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -25507,8 +26024,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -25518,8 +26035,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -25529,8 +26046,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           },
           {
             "id": "OilWell",
@@ -25540,8 +26057,8 @@ val sampleWorldsJson: String = """
             "avgEmitRate": 3333,
             "idleTime": 0,
             "eruptionTime": 1,
-            "dormancyCycles": 0.0,
-            "activeCycles": 1.0
+            "dormancyCycles": 0,
+            "activeCycles": 1
           }
         ]
       }
