@@ -15,7 +15,7 @@ jobs:
       - name: Run Gradle Tasks
         run: |
           chmod +x gradlew
-          ./gradlew build allTests  wasmJsBrowserDistribution
+          ./gradlew build allTests wasmJsBrowserDistribution
       - name: Fix permissions
         run: |
           chmod -v -R +rX "app/build/dist/wasmJs/productionExecutable/" | while read line; do
