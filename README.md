@@ -3,15 +3,14 @@
 [![Kotlin](https://img.shields.io/badge/kotlin-2.0.21-blue.svg?logo=kotlin)](httpw://kotlinlang.org)
 ![WASM](https://img.shields.io/badge/-WASM-gray.svg?style=flat)
 
-This is a game map seed browser for the game [Oxygen Not Included](https://www.klei.com/games/oxygen-not-included) by Klei Entertainment.
+This is a game map seed browser for the game [Oxygen Not Included](https://www.klei.com/games/oxygen-not-included).
+
+It's part of the [MapsNotIncluded.org](https://mapsnotincluded.org) initiative.
 
 Try it on https://stefan-oltmann.de/oni-seed-browser
 
 The backend project is located here:
 https://github.com/stefanoltmann/oni-seed-browser-backend
-
-Data collection is done by a mod made by [SGT_Imalas](https://github.com/Sgt-Imalas):
-https://github.com/Sgt-Imalas/Sgt_Imalas-Oni-Mods/tree/master/_WorldGenStateCapture
 
 ## Contributions
 
