@@ -21,16 +21,16 @@ package model.filter
 
 import kotlinx.serialization.Serializable
 import model.AsteroidType
-import model.Cluster
+import model.ClusterType
 import model.Dlc
 import model.filter.FilterRule.Companion.EMPTY
-import serializer.ClusterSerializer
+import serializer.ClusterTypeSerializer
 
 @Serializable
 data class FilterQuery(
 
-    @Serializable(with = ClusterSerializer::class)
-    val cluster: Cluster?,
+    @Serializable(with = ClusterTypeSerializer::class)
+    val cluster: ClusterType?,
 
     val dlcs: List<Dlc>,
 

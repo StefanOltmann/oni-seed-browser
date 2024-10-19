@@ -19,15 +19,15 @@
 
 package service
 
-import model.World
+import model.Cluster
 import model.filter.FilterQuery
 
 interface WebClient {
 
-    suspend fun countWorlds(): Long?
+    suspend fun countSeeds(): Long?
 
-    suspend fun find(coordinate: String): World?
+    suspend fun find(coordinate: String): Cluster?
 
-    suspend fun search(filterQuery: FilterQuery): List<World>
+    suspend fun search(filterQuery: FilterQuery): List<Cluster>
 
 }

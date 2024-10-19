@@ -34,15 +34,15 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import model.Asteroid
-import model.World
+import model.Cluster
 import ui.theme.doubleSpacing
 import ui.theme.lightGray
 
 @Composable
-fun WorldViewList(
+fun ClusterViewList(
     lazyListState: LazyListState,
-    worlds: List<World>,
-    showStarMap: MutableState<World?>,
+    clusters: List<Cluster>,
+    showStarMap: MutableState<Cluster?>,
     showAsteroidMap: MutableState<Asteroid?>,
     showAsteroidDetails: MutableState<Asteroid?>,
     showTooltip: MutableState<Tooltip?>,
@@ -57,12 +57,12 @@ fun WorldViewList(
             modifier = Modifier.padding(doubleSpacing)
         ) {
 
-            itemsIndexed(worlds) { index, world ->
+            itemsIndexed(clusters) { index, cluster ->
 
-                WorldView(
-                    world,
+                ClusterView(
+                    cluster,
                     index + 1,
-                    worlds.size,
+                    clusters.size,
                     showStarMap,
                     showAsteroidMap,
                     showAsteroidDetails,

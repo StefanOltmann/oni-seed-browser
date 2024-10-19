@@ -19,16 +19,16 @@
 
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import model.World
+import model.Cluster
 import service.sampleWorldsJson
 import java.io.File
 
 fun main() {
 
-    val parsedWorlds = Json.decodeFromString<List<World>>(sampleWorldsJson)
+    val parsedClusters = Json.decodeFromString<List<Cluster>>(sampleWorldsJson)
 
     /* DLCs first */
-    val sortedWorlds = parsedWorlds.sortedWith(compareBy({ it.cluster.isBaseGame() }, { it.cluster }))
+    val sortedWorlds = parsedClusters.sortedWith(compareBy({ it.cluster.isBaseGame() }, { it.cluster }))
 
     val optimizedWorlds = sortedWorlds.optimizeBiomePaths()
 

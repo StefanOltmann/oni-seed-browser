@@ -20,7 +20,7 @@
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import model.AsteroidType
-import model.Cluster
+import model.ClusterType
 import model.Dlc
 import model.GeyserType
 import model.WorldTrait
@@ -103,7 +103,7 @@ fun main() {
 
     val query = FilterQuery(
 
-        cluster = Cluster.BASE_TERRA,
+        cluster = ClusterType.BASE_TERRA,
         dlcs = listOf(Dlc.FrostyPlanet),
         rules = listOf(firstRuleGroup, listOf(secondRule), thirdRuleGroup)
     )

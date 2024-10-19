@@ -39,7 +39,7 @@ import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
 import kotlinx.serialization.json.Json
 import model.Asteroid
-import model.World
+import model.Cluster
 import model.filter.FilterQuery
 import oni_seed_browser.app.generated.resources.Res
 import oni_seed_browser.app.generated.resources.background_space
@@ -67,7 +67,7 @@ fun App(
     ) {
 
         val worldCount = produceState<Long?>(null) {
-            value = DefaultWebClient.countWorlds()
+            value = DefaultWebClient.countSeeds()
         }
 
         val coroutineScope = rememberCoroutineScope()
@@ -76,7 +76,7 @@ fun App(
 
         val lazyListState = rememberLazyListState()
 
-        val showStarMap = remember { mutableStateOf<World?>(null) }
+        val showStarMap = remember { mutableStateOf<Cluster?>(null) }
 
         val showAsteroidMap = remember { mutableStateOf<Asteroid?>(null) }
 
@@ -93,7 +93,7 @@ fun App(
             showAsteroidDetails.value = null
         }
 
-        val worlds = remember { mutableStateOf(emptyList<World>()) }
+        val clusters = remember { mutableStateOf(emptyList<Cluster>()) }
 
         LaunchedEffect(urlHash.value) {
 
@@ -110,9 +110,9 @@ fun App(
                     val world = DefaultWebClient.find(urlHashValue)
 
                     if (world != null)
-                        worlds.value = listOf(world)
+                        clusters.value = listOf(world)
                     else
-                        worlds.value = emptyList()
+                        clusters.value = emptyList()
 
                 } catch (ex: Exception) {
 
@@ -128,10 +128,10 @@ fun App(
 
                 println("Load demo data...")
 
-                val parsedWorlds = Json.decodeFromString<List<World>>(sampleWorldsJson)
+                val parsedClusters = Json.decodeFromString<List<Cluster>>(sampleWorldsJson)
 
                 /* DLCs first */
-                worlds.value = parsedWorlds.sortedWith(compareBy({ it.cluster.isBaseGame() }, { it.cluster }))
+                clusters.value = parsedClusters.sortedWith(compareBy({ it.cluster.isBaseGame() }, { it.cluster }))
             }
         }
 
@@ -140,7 +140,7 @@ fun App(
         if (worldForStarMapView != null) {
 
             StarMapView(
-                world = worldForStarMapView,
+                cluster = worldForStarMapView,
                 onCloseClicked = { showStarMap.value = null }
             )
 
@@ -217,7 +217,7 @@ fun App(
                         errorMessage.value = null
 
                         /* Reset the data */
-                        worlds.value = emptyList()
+                        clusters.value = emptyList()
 
                         val searchResultWorlds = DefaultWebClient.search(
                             filterQueryState.value
@@ -225,7 +225,7 @@ fun App(
 
                         val sortedWorlds = searchResultWorlds.sortedByDescending { it.getRating() }
 
-                        worlds.value = sortedWorlds
+                        clusters.value = sortedWorlds
 
                     } catch (ex: Exception) {
 
@@ -262,7 +262,7 @@ fun App(
                         )
                     }
 
-                } else if (worlds.value.isEmpty()) {
+                } else if (clusters.value.isEmpty()) {
 
                     Box(
                         contentAlignment = Alignment.Center,
@@ -302,9 +302,9 @@ fun App(
                                 modifier = Modifier.weight(1F)
                             ) {
 
-                                WorldViewList(
+                                ClusterViewList(
                                     lazyListState,
-                                    worlds.value,
+                                    clusters.value,
                                     showStarMap,
                                     showAsteroidMap,
                                     showAsteroidDetails,
