@@ -46,7 +46,7 @@ import ui.theme.defaultRoundedCornerShape
 
 @Composable
 fun FilterHeader(
-    worldCount: Long?,
+    seedCount: Long?,
     filterPanelOpen: MutableState<Boolean>
 ) {
 
@@ -73,10 +73,10 @@ fun FilterHeader(
         DoubleSpacer()
 
         Text(
-            text = if (worldCount == null)
+            text = if (seedCount == null)
                 "Filter"
             else
-                "Filter ($worldCount seeds in database)",
+                "Filter ($seedCount seeds in database)",
             style = MaterialTheme.typography.headlineMedium,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.colorScheme.onBackground

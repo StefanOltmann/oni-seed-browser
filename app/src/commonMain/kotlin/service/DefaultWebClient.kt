@@ -28,7 +28,7 @@ import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import model.World
+import model.Cluster
 import model.filter.FilterQuery
 
 const val BASE_API_URL = "https://apibeta.mapsnotincluded.org"
@@ -56,9 +56,9 @@ object DefaultWebClient : WebClient {
         }
     }
 
-    override suspend fun countWorlds(): Long? {
+    override suspend fun countSeeds(): Long? {
 
-        println("Count worlds")
+        println("Count seeds")
 
         val response = httpClient.get(COUNT_URL)
 
@@ -68,7 +68,7 @@ object DefaultWebClient : WebClient {
         return response.body()
     }
 
-    override suspend fun find(coordinate: String): World? {
+    override suspend fun find(coordinate: String): Cluster? {
 
         println("Find: $coordinate")
 
@@ -82,15 +82,15 @@ object DefaultWebClient : WebClient {
         return response.body()
     }
 
-    override suspend fun search(filterQuery: FilterQuery): List<World> {
+    override suspend fun search(filterQuery: FilterQuery): List<Cluster> {
 
         println("Search: " + jsonPretty.encodeToString(filterQuery))
 
-        val worlds: List<World> = httpClient.post(SEARCH_URL) {
+        val clusters: List<Cluster> = httpClient.post(SEARCH_URL) {
             contentType(ContentType.Application.Json)
             setBody(filterQuery)
         }.body()
 
-        return worlds
+        return clusters
     }
 }

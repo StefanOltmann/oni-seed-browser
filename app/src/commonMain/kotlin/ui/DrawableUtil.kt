@@ -100,40 +100,40 @@ fun getPointOfInterestDrawable(pointOfInterestType: PointOfInterestType): Drawab
     }
 
 @Composable
-fun getClusterDrawable(cluster: Cluster): DrawableResource =
-    when (cluster) {
-        Cluster.BASE_TERRA -> Res.drawable.cluster_base_terra
-        Cluster.BASE_CERES -> Res.drawable.cluster_base_ceres
-        Cluster.BASE_BLASTED_CERES -> Res.drawable.asteroid_blasted_ceres
-        Cluster.BASE_OCEANIA -> Res.drawable.cluster_base_oceania
-        Cluster.BASE_RIME -> Res.drawable.cluster_base_rime
-        Cluster.BASE_VERDANTE -> Res.drawable.cluster_base_verdante
-        Cluster.BASE_ARBORIA -> Res.drawable.cluster_base_arboria
-        Cluster.BASE_VOLCANEA -> Res.drawable.cluster_base_volcanea
-        Cluster.BASE_THE_BADLANDS -> Res.drawable.cluster_base_the_badlands
-        Cluster.BASE_ARIDIO -> Res.drawable.cluster_base_aridio
-        Cluster.BASE_OASISSE -> Res.drawable.cluster_base_oasisse
-        Cluster.DLC_TERRA -> Res.drawable.cluster_spacedout_terra
-        Cluster.DLC_CERES -> Res.drawable.asteroid_spacedout_ceres
-        Cluster.DLC_BLASTED_CERES -> Res.drawable.asteroid_blasted_ceres_spaced_out
-        Cluster.DLC_CERES_MINOR -> Res.drawable.asteroid_spacedout_ceres_minor
-        Cluster.DLC_OCEANIA -> Res.drawable.cluster_spacedout_oceania
-        Cluster.DLC_SQUELCHY -> Res.drawable.cluster_spacedout_squelchy
-        Cluster.DLC_RIME -> Res.drawable.cluster_spacedout_rime
-        Cluster.DLC_VERDANTE -> Res.drawable.cluster_spacedout_verdante
-        Cluster.DLC_ARBORIA -> Res.drawable.cluster_spacedout_arboria
-        Cluster.DLC_VOLCANEA -> Res.drawable.cluster_spacedout_volcanea
-        Cluster.DLC_THE_BADLANDS -> Res.drawable.cluster_spacedout_the_badlands
-        Cluster.DLC_ARIDIO -> Res.drawable.cluster_spacedout_aridio
-        Cluster.DLC_OASISSE -> Res.drawable.cluster_spacedout_oasisse
-        Cluster.DLC_TERRANIA -> Res.drawable.cluster_spacedout_terrania
-        Cluster.DLC_FOLIA -> Res.drawable.cluster_spacedout_folia
-        Cluster.DLC_QUAGMIRIS -> Res.drawable.cluster_spacedout_quagmiris
-        Cluster.DLC_METALLIC_SWAMPY_MOONLET -> Res.drawable.cluster_spacedout_metallic_swampy_moonlet
-        Cluster.DLC_THE_DESOLANDS_MOONLET -> Res.drawable.cluster_spacedout_the_desolands_moonlet
-        Cluster.DLC_FROZEN_FOREST_MOONLET -> Res.drawable.cluster_spacedout_frozen_forest_moonlet
-        Cluster.DLC_FLIPPED_MOONLET -> Res.drawable.cluster_spacedout_flipped_moonlet
-        Cluster.DLC_RADIOACTIVE_OCEAN_MOONLET -> Res.drawable.cluster_spacedout_radioactive_ocean_moonlet
+fun getClusterDrawable(clusterType: ClusterType): DrawableResource =
+    when (clusterType) {
+        ClusterType.BASE_TERRA -> Res.drawable.cluster_base_terra
+        ClusterType.BASE_CERES -> Res.drawable.cluster_base_ceres
+        ClusterType.BASE_BLASTED_CERES -> Res.drawable.asteroid_blasted_ceres
+        ClusterType.BASE_OCEANIA -> Res.drawable.cluster_base_oceania
+        ClusterType.BASE_RIME -> Res.drawable.cluster_base_rime
+        ClusterType.BASE_VERDANTE -> Res.drawable.cluster_base_verdante
+        ClusterType.BASE_ARBORIA -> Res.drawable.cluster_base_arboria
+        ClusterType.BASE_VOLCANEA -> Res.drawable.cluster_base_volcanea
+        ClusterType.BASE_THE_BADLANDS -> Res.drawable.cluster_base_the_badlands
+        ClusterType.BASE_ARIDIO -> Res.drawable.cluster_base_aridio
+        ClusterType.BASE_OASISSE -> Res.drawable.cluster_base_oasisse
+        ClusterType.DLC_TERRA -> Res.drawable.cluster_spacedout_terra
+        ClusterType.DLC_CERES -> Res.drawable.asteroid_spacedout_ceres
+        ClusterType.DLC_BLASTED_CERES -> Res.drawable.asteroid_blasted_ceres_spaced_out
+        ClusterType.DLC_CERES_MINOR -> Res.drawable.asteroid_spacedout_ceres_minor
+        ClusterType.DLC_OCEANIA -> Res.drawable.cluster_spacedout_oceania
+        ClusterType.DLC_SQUELCHY -> Res.drawable.cluster_spacedout_squelchy
+        ClusterType.DLC_RIME -> Res.drawable.cluster_spacedout_rime
+        ClusterType.DLC_VERDANTE -> Res.drawable.cluster_spacedout_verdante
+        ClusterType.DLC_ARBORIA -> Res.drawable.cluster_spacedout_arboria
+        ClusterType.DLC_VOLCANEA -> Res.drawable.cluster_spacedout_volcanea
+        ClusterType.DLC_THE_BADLANDS -> Res.drawable.cluster_spacedout_the_badlands
+        ClusterType.DLC_ARIDIO -> Res.drawable.cluster_spacedout_aridio
+        ClusterType.DLC_OASISSE -> Res.drawable.cluster_spacedout_oasisse
+        ClusterType.DLC_TERRANIA -> Res.drawable.cluster_spacedout_terrania
+        ClusterType.DLC_FOLIA -> Res.drawable.cluster_spacedout_folia
+        ClusterType.DLC_QUAGMIRIS -> Res.drawable.cluster_spacedout_quagmiris
+        ClusterType.DLC_METALLIC_SWAMPY_MOONLET -> Res.drawable.cluster_spacedout_metallic_swampy_moonlet
+        ClusterType.DLC_THE_DESOLANDS_MOONLET -> Res.drawable.cluster_spacedout_the_desolands_moonlet
+        ClusterType.DLC_FROZEN_FOREST_MOONLET -> Res.drawable.cluster_spacedout_frozen_forest_moonlet
+        ClusterType.DLC_FLIPPED_MOONLET -> Res.drawable.cluster_spacedout_flipped_moonlet
+        ClusterType.DLC_RADIOACTIVE_OCEAN_MOONLET -> Res.drawable.cluster_spacedout_radioactive_ocean_moonlet
     }
 
 @Composable

@@ -25,21 +25,21 @@ import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
-import model.Cluster
+import model.ClusterType
 
-object ClusterSerializer : KSerializer<Cluster> {
+object ClusterTypeSerializer : KSerializer<ClusterType> {
 
     override val descriptor: SerialDescriptor =
         PrimitiveSerialDescriptor("Cluster", PrimitiveKind.STRING)
 
-    override fun serialize(encoder: Encoder, value: Cluster) =
+    override fun serialize(encoder: Encoder, value: ClusterType) =
         encoder.encodeString(value.prefix)
 
-    override fun deserialize(decoder: Decoder): Cluster {
+    override fun deserialize(decoder: Decoder): ClusterType {
 
         val prefix = decoder.decodeString()
 
-        return Cluster.entries.find { it.prefix == prefix }
+        return ClusterType.entries.find { it.prefix == prefix }
             ?: throw IllegalArgumentException("Unknown prefix: $prefix")
     }
 }

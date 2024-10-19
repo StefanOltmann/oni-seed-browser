@@ -38,7 +38,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import model.Cluster
+import model.ClusterType
 import model.Dlc
 import model.filter.FilterQuery
 import org.jetbrains.compose.resources.painterResource
@@ -61,14 +61,14 @@ fun ClusterSelection(
 
     val enableFrostyPlanet = query.dlcs.contains(Dlc.FrostyPlanet)
 
-    val currentSelectedCluster: Cluster? = filterQueryState.value.cluster
+    val currentSelectedClusterType: ClusterType? = filterQueryState.value.cluster
 
-    val clusters = if (spacedOutDlcSelected.value)
-        Cluster.spacedOutCluster
+    val clusterTypes = if (spacedOutDlcSelected.value)
+        ClusterType.spacedOutCluster
     else
-        Cluster.baseGameCluster
+        ClusterType.baseGameCluster
 
-    val filteredClusters = clusters.filterNot {
+    val filteredClusters = clusterTypes.filterNot {
         !enableFrostyPlanet && it.isFrostyPlanet()
     }
 
@@ -81,7 +81,7 @@ fun ClusterSelection(
 
         for (cluster in filteredClusters) {
 
-            val isSelected = currentSelectedCluster == cluster
+            val isSelected = currentSelectedClusterType == cluster
 
             val clusterHovered = remember { mutableStateOf(false) }
 

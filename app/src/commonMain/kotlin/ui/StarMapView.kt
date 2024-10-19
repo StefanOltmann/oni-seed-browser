@@ -40,7 +40,7 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
 import model.AsteroidType
 import model.SpacedOutSpacePOI
-import model.World
+import model.Cluster
 import oni_seed_browser.app.generated.resources.Res
 import oni_seed_browser.app.generated.resources.background_space
 import org.jetbrains.compose.resources.painterResource
@@ -57,11 +57,11 @@ private val gridColor = lightGray.copy(alpha = 0.2f)
 
 @Composable
 fun StarMapView(
-    world: World,
+    cluster: Cluster,
     onCloseClicked: () -> Unit
 ) {
 
-    if (world.starMapEntriesSpacedOut == null)
+    if (cluster.starMapEntriesSpacedOut == null)
         return
 
     Box(
@@ -89,7 +89,7 @@ fun StarMapView(
             CoordinateBox(
                 index = 0,
                 totalCount = 0,
-                coordinate = world.coordinate,
+                coordinate = cluster.coordinate,
                 showMapClicked = null
             )
 
@@ -105,7 +105,7 @@ fun StarMapView(
 
                 val hexHeight = (hexSize * 2 * (cos(PI / 6))).toFloat()
 
-                for (entry in world.starMapEntriesSpacedOut) {
+                for (entry in cluster.starMapEntriesSpacedOut) {
 
                     val xOffset = hexSize * 3 / 2 * entry.q * cos(ROTATION_RADIANS) -
                         hexHeight * (entry.r + entry.q / 2f) * sin(ROTATION_RADIANS)

@@ -38,18 +38,18 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.delay
 import model.Asteroid
-import model.World
+import model.Cluster
 import ui.theme.*
 import kotlin.math.max
 
 val widthPerWorld: Dp = 380.dp
 
 @Composable
-fun WorldView(
-    world: World,
+fun ClusterView(
+    cluster: Cluster,
     index: Int,
     totalCount: Int,
-    showStarMap: MutableState<World?>,
+    showStarMap: MutableState<Cluster?>,
     showAsteroidMap: MutableState<Asteroid?>,
     showAsteroidDetails: MutableState<Asteroid?>,
     showTooltip: MutableState<Tooltip?>
@@ -61,13 +61,13 @@ fun WorldView(
             .border(0.dp, lightGrayTransparentBorderColor, defaultRoundedCornerShape)
     ) {
 
-        val showMapClicked: (() -> Unit) = { showStarMap.value = world }
+        val showMapClicked: (() -> Unit) = { showStarMap.value = cluster }
 
         CoordinateBox(
             index = index,
             totalCount = totalCount,
-            coordinate = world.coordinate,
-            showMapClicked = if (world.starMapEntriesSpacedOut != null)
+            coordinate = cluster.coordinate,
+            showMapClicked = if (cluster.starMapEntriesSpacedOut != null)
                 showMapClicked
             else
                 null
@@ -80,7 +80,7 @@ fun WorldView(
         if (asteroid == null) {
 
             AsteroidsGrid(
-                world,
+                cluster,
                 showAsteroidMap,
                 showAsteroidDetails,
                 showTooltip
@@ -109,7 +109,7 @@ fun WorldView(
 
             val clipboardManager = LocalClipboardManager.current
 
-            val url = "https://stefan-oltmann.de/oni-seed-browser/#" + world.coordinate;
+            val url = "https://stefan-oltmann.de/oni-seed-browser/#" + cluster.coordinate;
 
             Spacer(modifier = Modifier.width(defaultSpacing + halfSpacing))
 
@@ -164,7 +164,7 @@ fun WorldView(
 
 @Composable
 private fun AsteroidsGrid(
-    world: World,
+    cluster: Cluster,
     showAsteroidMap: MutableState<Asteroid?>,
     showAsteroidDetails: MutableState<Asteroid?>,
     showTooltip: MutableState<Tooltip?>
@@ -187,7 +187,7 @@ private fun AsteroidsGrid(
             verticalArrangement = Arrangement.spacedBy(defaultSpacing)
         ) {
 
-            val firstAsteroid = world.asteroids.first()
+            val firstAsteroid = cluster.asteroids.first()
 
             /* First Asteroid should span the whole column. */
             AsteroidView(
@@ -207,7 +207,7 @@ private fun AsteroidsGrid(
                 }
             )
 
-            val remainingAsteroids = world.asteroids.drop(1)
+            val remainingAsteroids = cluster.asteroids.drop(1)
 
             val asteroidsPerColumn = remainingAsteroids.chunked(gridLayoutColumnCount)
 
