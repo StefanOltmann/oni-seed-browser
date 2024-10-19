@@ -28,6 +28,8 @@ data class Cluster(
 
     val coordinate: String,
 
+    val gameVersion: Int,
+
     @Serializable(with = ClusterTypeSerializer::class)
     val cluster: ClusterType,
 

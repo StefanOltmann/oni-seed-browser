@@ -23,7 +23,7 @@ val sampleWorldsJson: String = """
 [
   {
     "coordinate": "V-SNDST-C-101520169-0-0-0",
-    "cluster": "V-SNDST-C",
+    "gameVersion": 626616,"cluster": "V-SNDST-C",
     "dlcs": [
       "FrostyPlanet",
       "SpacedOut"
@@ -991,7 +991,7 @@ val sampleWorldsJson: String = """
   },
   {
     "coordinate": "V-CER-C-2127567822-0-0-0",
-    "cluster": "V-CER-C",
+    "gameVersion": 626616,"cluster": "V-CER-C",
     "dlcs": [
       "FrostyPlanet",
       "SpacedOut"
@@ -1974,7 +1974,7 @@ val sampleWorldsJson: String = """
   },
   {
     "coordinate": "V-CERS-C-1043692229-0-0-0",
-    "cluster": "V-CERS-C",
+    "gameVersion": 626616,"cluster": "V-CERS-C",
     "dlcs": [
       "FrostyPlanet",
       "SpacedOut"
@@ -2874,7 +2874,7 @@ val sampleWorldsJson: String = """
   },
   {
     "coordinate": "V-OCAN-C-1381507755-0-0-0",
-    "cluster": "V-OCAN-C",
+    "gameVersion": 626616,"cluster": "V-OCAN-C",
     "dlcs": [
       "FrostyPlanet",
       "SpacedOut"
@@ -3929,7 +3929,7 @@ val sampleWorldsJson: String = """
   },
   {
     "coordinate": "V-SWMP-C-636932322-0-0-0",
-    "cluster": "V-SWMP-C",
+    "gameVersion": 626616,"cluster": "V-SWMP-C",
     "dlcs": [
       "FrostyPlanet",
       "SpacedOut"
@@ -5145,7 +5145,7 @@ val sampleWorldsJson: String = """
   },
   {
     "coordinate": "V-SFRZ-C-1319193308-0-0-0",
-    "cluster": "V-SFRZ-C",
+    "gameVersion": 626616,"cluster": "V-SFRZ-C",
     "dlcs": [
       "FrostyPlanet",
       "SpacedOut"
@@ -6076,7 +6076,7 @@ val sampleWorldsJson: String = """
   },
   {
     "coordinate": "V-LUSH-C-1740050187-0-0-0",
-    "cluster": "V-LUSH-C",
+    "gameVersion": 626616,"cluster": "V-LUSH-C",
     "dlcs": [
       "FrostyPlanet",
       "SpacedOut"
@@ -7288,7 +7288,7 @@ val sampleWorldsJson: String = """
   },
   {
     "coordinate": "V-FRST-C-92902282-0-0-0",
-    "cluster": "V-FRST-C",
+    "gameVersion": 626616,"cluster": "V-FRST-C",
     "dlcs": [
       "FrostyPlanet",
       "SpacedOut"
@@ -8292,7 +8292,7 @@ val sampleWorldsJson: String = """
   },
   {
     "coordinate": "V-VOLCA-C-1945674763-0-0-0",
-    "cluster": "V-VOLCA-C",
+    "gameVersion": 626616,"cluster": "V-VOLCA-C",
     "dlcs": [
       "FrostyPlanet",
       "SpacedOut"
@@ -9234,7 +9234,7 @@ val sampleWorldsJson: String = """
   },
   {
     "coordinate": "V-BAD-C-524086935-0-0-0",
-    "cluster": "V-BAD-C",
+    "gameVersion": 626616,"cluster": "V-BAD-C",
     "dlcs": [
       "FrostyPlanet",
       "SpacedOut"
@@ -10294,7 +10294,7 @@ val sampleWorldsJson: String = """
   },
   {
     "coordinate": "V-HTFST-C-174337039-0-0-0",
-    "cluster": "V-HTFST-C",
+    "gameVersion": 626616,"cluster": "V-HTFST-C",
     "dlcs": [
       "FrostyPlanet",
       "SpacedOut"
@@ -11291,7 +11291,7 @@ val sampleWorldsJson: String = """
   },
   {
     "coordinate": "V-OASIS-C-908596465-0-0-0",
-    "cluster": "V-OASIS-C",
+    "gameVersion": 626616,"cluster": "V-OASIS-C",
     "dlcs": [
       "FrostyPlanet",
       "SpacedOut"
@@ -12390,7 +12390,7 @@ val sampleWorldsJson: String = """
   },
   {
     "coordinate": "SNDST-C-1607940615-0-0-0",
-    "cluster": "SNDST-C",
+    "gameVersion": 626616,"cluster": "SNDST-C",
     "dlcs": [
       "FrostyPlanet",
       "SpacedOut"
@@ -13340,7 +13340,7 @@ val sampleWorldsJson: String = """
   },
   {
     "coordinate": "CER-C-90675436-0-0-0",
-    "cluster": "CER-C",
+    "gameVersion": 626616,"cluster": "CER-C",
     "dlcs": [
       "FrostyPlanet",
       "SpacedOut"
@@ -14193,7 +14193,7 @@ val sampleWorldsJson: String = """
   },
   {
     "coordinate": "FRST-C-858965588-0-0-0",
-    "cluster": "FRST-C",
+    "gameVersion": 626616,"cluster": "FRST-C",
     "dlcs": [
       "FrostyPlanet",
       "SpacedOut"
@@ -15185,7 +15185,7 @@ val sampleWorldsJson: String = """
   },
   {
     "coordinate": "SWMP-C-557407634-0-0-0",
-    "cluster": "SWMP-C",
+    "gameVersion": 626616,"cluster": "SWMP-C",
     "dlcs": [
       "FrostyPlanet",
       "SpacedOut"
@@ -16105,7 +16105,7 @@ val sampleWorldsJson: String = """
   },
   {
     "coordinate": "M-SWMP-C-254563355-0-0-0",
-    "cluster": "M-SWMP-C",
+    "gameVersion": 626616,"cluster": "M-SWMP-C",
     "dlcs": [
       "FrostyPlanet",
       "SpacedOut"
@@ -17149,7 +17149,7 @@ val sampleWorldsJson: String = """
   },
   {
     "coordinate": "M-BAD-C-834286562-0-0-0",
-    "cluster": "M-BAD-C",
+    "gameVersion": 626616,"cluster": "M-BAD-C",
     "dlcs": [
       "FrostyPlanet",
       "SpacedOut"
@@ -18183,7 +18183,7 @@ val sampleWorldsJson: String = """
   },
   {
     "coordinate": "M-FRZ-C-2099443363-0-0-0",
-    "cluster": "M-FRZ-C",
+    "gameVersion": 626616,"cluster": "M-FRZ-C",
     "dlcs": [
       "FrostyPlanet",
       "SpacedOut"
@@ -19207,7 +19207,7 @@ val sampleWorldsJson: String = """
   },
   {
     "coordinate": "M-FLIP-C-1342297923-0-0-0",
-    "cluster": "M-FLIP-C",
+    "gameVersion": 626616,"cluster": "M-FLIP-C",
     "dlcs": [
       "FrostyPlanet",
       "SpacedOut"
@@ -20344,7 +20344,7 @@ val sampleWorldsJson: String = """
   },
   {
     "coordinate": "M-RAD-C-328466368-0-0-0",
-    "cluster": "M-RAD-C",
+    "gameVersion": 626616,"cluster": "M-RAD-C",
     "dlcs": [
       "FrostyPlanet",
       "SpacedOut"
@@ -21415,7 +21415,7 @@ val sampleWorldsJson: String = """
   },
   {
     "coordinate": "SNDST-A-2131635252-0-0-0",
-    "cluster": "SNDST-A",
+    "gameVersion": 626616,"cluster": "SNDST-A",
     "dlcs": [
       "FrostyPlanet"
     ],
@@ -21828,7 +21828,7 @@ val sampleWorldsJson: String = """
   },
   {
     "coordinate": "CER-A-487061744-0-0-0",
-    "cluster": "CER-A",
+    "gameVersion": 626616,"cluster": "CER-A",
     "dlcs": [
       "FrostyPlanet"
     ],
@@ -22201,7 +22201,7 @@ val sampleWorldsJson: String = """
   },
   {
     "coordinate": "CERS-A-1481554262-0-0-0",
-    "cluster": "CERS-A",
+    "gameVersion": 626616,"cluster": "CERS-A",
     "dlcs": [
       "FrostyPlanet"
     ],
@@ -22548,7 +22548,7 @@ val sampleWorldsJson: String = """
   },
   {
     "coordinate": "OCAN-A-1251386136-0-0-0",
-    "cluster": "OCAN-A",
+    "gameVersion": 626616,"cluster": "OCAN-A",
     "dlcs": [
       "FrostyPlanet"
     ],
@@ -23065,7 +23065,7 @@ val sampleWorldsJson: String = """
   },
   {
     "coordinate": "S-FRZ-1098424328-0-0-0",
-    "cluster": "S-FRZ",
+    "gameVersion": 626616,"cluster": "S-FRZ",
     "dlcs": [
       "FrostyPlanet"
     ],
@@ -23433,7 +23433,7 @@ val sampleWorldsJson: String = """
   },
   {
     "coordinate": "LUSH-A-1847667149-0-0-0",
-    "cluster": "LUSH-A",
+    "gameVersion": 626616,"cluster": "LUSH-A",
     "dlcs": [
       "FrostyPlanet"
     ],
@@ -24006,7 +24006,7 @@ val sampleWorldsJson: String = """
   },
   {
     "coordinate": "FRST-A-615805514-0-0-0",
-    "cluster": "FRST-A",
+    "gameVersion": 626616,"cluster": "FRST-A",
     "dlcs": [
       "FrostyPlanet"
     ],
@@ -24470,7 +24470,7 @@ val sampleWorldsJson: String = """
   },
   {
     "coordinate": "VOLCA-1234889416-0-0-0",
-    "cluster": "VOLCA",
+    "gameVersion": 626616,"cluster": "VOLCA",
     "dlcs": [
       "FrostyPlanet"
     ],
@@ -24879,7 +24879,7 @@ val sampleWorldsJson: String = """
   },
   {
     "coordinate": "BAD-A-769743522-0-0-0",
-    "cluster": "BAD-A",
+    "gameVersion": 626616,"cluster": "BAD-A",
     "dlcs": [
       "FrostyPlanet"
     ],
@@ -25275,7 +25275,7 @@ val sampleWorldsJson: String = """
   },
   {
     "coordinate": "HTFST-A-2145340721-0-0-0",
-    "cluster": "HTFST-A",
+    "gameVersion": 626616,"cluster": "HTFST-A",
     "dlcs": [
       "FrostyPlanet"
     ],
@@ -25678,7 +25678,7 @@ val sampleWorldsJson: String = """
   },
   {
     "coordinate": "OASIS-A-1126779281-0-0-0",
-    "cluster": "OASIS-A",
+    "gameVersion": 626616,"cluster": "OASIS-A",
     "dlcs": [
       "FrostyPlanet"
     ],

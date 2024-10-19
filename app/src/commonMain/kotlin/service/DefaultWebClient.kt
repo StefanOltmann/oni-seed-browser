@@ -48,11 +48,7 @@ object DefaultWebClient : WebClient {
         }
 
         install(ContentNegotiation) {
-            json(
-                Json {
-                    ignoreUnknownKeys = true
-                }
-            )
+            json(Json)
         }
     }
 
