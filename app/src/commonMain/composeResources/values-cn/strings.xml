@@ -1,0 +1,26 @@
+<resources>
+    <!-- World traits -->
+    <string name="worldTraitBouldersLarge">大卵石</string>
+    <string name="worldTraitBouldersMedium">中等卵石</string>
+    <string name="worldTraitBouldersMixed">混合卵石</string>
+    <string name="worldTraitBouldersSmall">小卵石</string>
+    <string name="worldTraitDeepOil">封闭油</string>
+    <string name="worldTraitFrozenCore">冰冻核心</string>
+    <string name="worldTraitGeoActive">地质活跃</string>
+    <string name="worldTraitGeodes">晶洞</string>
+    <string name="worldTraitGeoDormant">地质休眠</string>
+    <string name="worldTraitGlaciersLarge">大冰川</string>
+    <string name="worldTraitIrregularOil">不规则油</string>
+    <string name="worldTraitMagmaVents">岩浆通道</string>
+    <string name="worldTraitMetalPoor">金属贫乏</string>
+    <string name="worldTraitMetalRich">金属丰富</string>
+    <string name="worldTraitMisalignedStart">替代舱位置</string>
+    <string name="worldTraitSlimeSplats">粘菌</string>
+    <string name="worldTraitSubsurfaceOcean">地下海洋</string>
+    <string name="worldTraitVolcanoes">火山活动</string>
+    <string name="worldTraitCrashedSatellites">坠毁的卫星</string>
+    <string name="worldTraitDistressSignal">冰冻的朋友</string>
+    <string name="worldTraitLushCore">丰盛核心</string>
+    <string name="worldTraitMetalCaves">金属洞穴</string>
+    <string name="worldTraitRadioactiveCrust">放射性地壳</string>
+</resources>
