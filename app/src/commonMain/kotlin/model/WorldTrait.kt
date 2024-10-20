@@ -21,6 +21,8 @@ package model
 
 import androidx.compose.ui.graphics.Color
 import kotlinx.serialization.Serializable
+import oni_seed_browser.app.generated.resources.*
+import org.jetbrains.compose.resources.StringResource
 
 /*
  * See https://oxygennotincluded.fandom.com/wiki/World_Trait
@@ -29,127 +31,127 @@ import kotlinx.serialization.Serializable
 @Suppress("UNUSED")
 @Serializable
 enum class WorldTrait(
-    val displayName: String,
+    val stringResource: StringResource,
     val color: Color,
     val rating: Rating = Rating.NEUTRAL
 ) {
 
     BouldersLarge(
-        displayName = "Large Boulders",
+        stringResource = Res.string.worldTraitBouldersLarge,
         color = Color(0xFFBDBDBD)
     ),
     BouldersMedium(
-        displayName = "Medium Boulders",
+        stringResource = Res.string.worldTraitBouldersMedium,
         color = Color(0xFFBDBDBD)
     ),
     BouldersMixed(
-        displayName = "Mixed Boulders",
+        stringResource = Res.string.worldTraitBouldersMixed,
         color = Color(0xFFBDBDBD)
     ),
     BouldersSmall(
-        displayName = "Small Boulders",
+        stringResource = Res.string.worldTraitBouldersSmall,
         color = Color(0xFFBDBDBD)
     ),
     DeepOil(
-        displayName = "Trapped Oil",
+        stringResource = Res.string.worldTraitDeepOil,
         color = Color(0xFF6E6E6E),
         /* More oil reservoirs */
         rating = Rating.VERY_GOOD
     ),
     FrozenCore(
-        displayName = "Frozen Core",
+        stringResource = Res.string.worldTraitFrozenCore,
         color = Color(0xFFA1D6ED),
         /* Frozen core helps early with CO2 and to cool down the planet */
         rating = Rating.GOOD
     ),
     GeoActive(
-        displayName = "Geoactive",
+        stringResource = Res.string.worldTraitGeoActive,
         color = Color(0xFFECA649),
         /* More geyser output */
         rating = Rating.VERY_GOOD
     ),
     Geodes(
-        displayName = "Geodes",
+        stringResource = Res.string.worldTraitGeodes,
         color = Color(0xFFC47BF4),
         /* Helpful materials. */
         rating = Rating.GOOD
     ),
     GeoDormant(
-        displayName = "Geodormant",
+        stringResource = Res.string.worldTraitGeoDormant,
         color = Color(0xFF8895A1),
         /* Less geyser output */
         rating = Rating.VERY_BAD
     ),
     GlaciersLarge(
-        displayName = "Large Glaciers",
+        stringResource = Res.string.worldTraitGlaciersLarge,
         color = Color(0xFFA1D6ED)
     ),
     IrregularOil(
-        displayName = "Irregular Oil",
+        stringResource = Res.string.worldTraitIrregularOil,
         color = Color(0xFF6C6C6C),
         /* More oil patches, easier to access. */
         rating = Rating.VERY_GOOD
     ),
     MagmaVents(
-        displayName = "Magma Channels",
+        stringResource = Res.string.worldTraitMagmaVents,
         color = Color(0xFFE7544D),
         /* Makes the game harder */
         rating = Rating.BAD
     ),
     MetalPoor(
-        displayName = "Metal Poor",
+        stringResource = Res.string.worldTraitMetalPoor,
         color = Color(0xFF8794A0),
         /* Less metal */
         rating = Rating.VERY_BAD
     ),
     MetalRich(
-        displayName = "Metal Rich",
+        stringResource = Res.string.worldTraitMetalRich,
         color = Color(0xFFD2AB4B),
         /* More metal */
         rating = Rating.VERY_GOOD
     ),
     MisalignedStart(
-        displayName = "Alternate Pod Location",
+        stringResource = Res.string.worldTraitMisalignedStart,
         color = Color(0xFFE7DC93)
     ),
     SlimeSplats(
-        displayName = "Slime Molds",
+        stringResource = Res.string.worldTraitSlimeSplats,
         color = Color(0xFF8EB542)
     ),
     SubsurfaceOcean(
-        displayName = "Subsurface Ocean",
+        stringResource = Res.string.worldTraitSubsurfaceOcean,
         color = Color(0xFF61CEF0)
     ),
     Volcanoes(
-        displayName = "Volcanic Activity",
+        stringResource = Res.string.worldTraitVolcanoes,
         color = Color(0xFFE7544D),
         /* Makes the game harder, but more heat energy. */
         rating = Rating.BAD
     ),
     CrashedSatellites(
-        displayName = "Crashed Satellites",
+        stringResource = Res.string.worldTraitCrashedSatellites,
         color = Color(0xFF7ED360),
         /* Lots of free radiation */
         rating = Rating.VERY_GOOD
     ),
     DistressSignal(
-        displayName = "Frozen Friend",
+        stringResource = Res.string.worldTraitDistressSignal,
         color = Color(0xFF8794A0)
     ),
     LushCore(
-        displayName = "Lush Core",
+        stringResource = Res.string.worldTraitLushCore,
         color = Color(0xFF66A052),
         /* Access to pips */
         rating = Rating.GOOD
     ),
     MetalCaves(
-        displayName = "Metallic Caves",
+        stringResource = Res.string.worldTraitMetalCaves,
         color = Color(0xFFD2AB4B),
         /* More free metal */
         rating = Rating.GOOD
     ),
     RadioactiveCrust(
-        displayName = "Radioactive Crust",
+        stringResource = Res.string.worldTraitRadioactiveCrust,
         color = Color(0xFF7ED360),
         /* More free radiation */
         rating = Rating.GOOD

@@ -31,6 +31,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import model.WorldTrait
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
 import ui.theme.cardColorBackground
 import ui.theme.defaultRoundedCornerShape
 import ui.theme.doubleSpacing
@@ -68,7 +69,7 @@ fun WorlTraitDetail(
         )
 
         Text(
-            text = worldTrait.displayName,
+            text = stringResource(worldTrait.stringResource),
             style = MaterialTheme.typography.headlineSmall,
             color = worldTrait.color,
             modifier = Modifier.offset(y = -2.dp)

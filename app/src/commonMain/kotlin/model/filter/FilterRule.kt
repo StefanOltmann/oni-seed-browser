@@ -47,15 +47,6 @@ data class FilterRule(
             worldTrait != null || // always has a value
             spaceDestinationCount?.count != null
 
-    fun getItemDescription(): String =
-        when {
-            geyserCount != null -> "Count: ${geyserCount.geyser.displayName}"
-            geyserOutput != null -> "Output (g/s): ${geyserOutput.geyser.displayName}"
-            worldTrait != null -> worldTrait.worldTrait.displayName
-            spaceDestinationCount != null -> "Space destination: ${spaceDestinationCount.poi}"
-            else -> "-/-"
-        }
-
     fun getConditionDescription(): String =
         when {
             geyserCount != null -> geyserCount.condition.displayString

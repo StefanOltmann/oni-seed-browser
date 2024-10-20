@@ -22,13 +22,7 @@ package ui.filter
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
@@ -47,6 +41,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import model.filter.FilterRule
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
 import ui.getAsteroidTypeDrawable
 import ui.noRippleClickable
 import ui.onHover
@@ -131,7 +126,7 @@ fun FilterPanelEntry(
                 ) {
 
                     Text(
-                        text = rule.getItemDescription(),
+                        text = getItemDescription(rule),
                         style = MaterialTheme.typography.bodyLarge,
                         fontWeight = FontWeight.Bold,
                         color = if (hoveredItem.value)
@@ -231,6 +226,16 @@ fun FilterPanelEntry(
         }
     }
 }
+
+@Composable
+private fun getItemDescription(rule: FilterRule): String =
+    when {
+        rule.geyserCount != null -> "Count: ${rule.geyserCount.geyser.displayName}"
+        rule.geyserOutput != null -> "Output (g/s): ${rule.geyserOutput.geyser.displayName}"
+        rule.worldTrait != null -> stringResource(rule.worldTrait.worldTrait.stringResource)
+        rule.spaceDestinationCount != null -> "Space destination: ${rule.spaceDestinationCount.poi}"
+        else -> "-/-"
+    }
 
 @Composable
 private fun VerticalSeparator() {
