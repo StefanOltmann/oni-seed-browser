@@ -47,6 +47,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.layout.onSizeChanged
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
@@ -84,166 +86,73 @@ fun App(
         typography = AppTypography()
     ) {
 
-        val worldCount = produceState<Long?>(null) {
-            value = DefaultWebClient.countSeeds()
-        }
+        val screenIsToSmall = remember { mutableStateOf(false) }
 
-        val coroutineScope = rememberCoroutineScope()
+        val density = LocalDensity.current.density
 
-        val filterQueryState = remember { mutableStateOf(FilterQuery.ALL) }
-
-        val lazyListState = rememberLazyListState()
-
-        val showStarMap = remember { mutableStateOf<Cluster?>(null) }
-
-        val showAsteroidMap = remember { mutableStateOf<Asteroid?>(null) }
-
-        val showAsteroidDetails = remember { mutableStateOf<Asteroid?>(null) }
-
-        val showTooltip = remember { mutableStateOf<Tooltip?>(null) }
-
-        val isGettingNewResults = remember { mutableStateOf(false) }
-
-        val errorMessage = remember { mutableStateOf<String?>(null) }
-
-        LaunchedEffect(filterQueryState.value) {
-            /* Reset the details on each search. */
-            showAsteroidDetails.value = null
-        }
-
-        val clusters = remember { mutableStateOf(emptyList<Cluster>()) }
-
-        LaunchedEffect(urlHash.value) {
-
-            val urlHashValue = urlHash.value
-
-            if (urlHashValue != null) {
-
-                println("Load specific coordinate: $urlHashValue")
-
-                try {
-
-                    isGettingNewResults.value = true
-
-                    val world = DefaultWebClient.find(urlHashValue)
-
-                    if (world != null)
-                        clusters.value = listOf(world)
-                    else
-                        clusters.value = emptyList()
-
-                } catch (ex: Exception) {
-
-                    ex.printStackTrace()
-
-                    errorMessage.value = ex.stackTraceToString()
-
-                } finally {
-                    isGettingNewResults.value = false
-                }
-
-            } else {
-
-                println("Load demo data...")
-
-                val parsedClusters = Json.decodeFromString<List<Cluster>>(sampleWorldsJson)
-
-                /* DLCs first */
-                clusters.value = parsedClusters.sortedWith(compareBy({ it.cluster.isBaseGame() }, { it.cluster }))
+        Box(
+            modifier = Modifier.onSizeChanged {
+                screenIsToSmall.value = it.width / density < 800 || it.height / density < 300
             }
-        }
+        ) {
 
-        val worldForStarMapView = showStarMap.value
+            /*
+             * Prevent people from seeing a broken layout.
+             */
+            if (screenIsToSmall.value) {
 
-        if (worldForStarMapView != null) {
+                SmallScreenWarning()
 
-            StarMapView(
-                cluster = worldForStarMapView,
-                onCloseClicked = { showStarMap.value = null }
-            )
+                return@MaterialTheme
+            }
 
-            return@MaterialTheme
-        }
+            val worldCount = produceState<Long?>(null) {
+                value = DefaultWebClient.countSeeds()
+            }
 
-        val asteroidForMapView = showAsteroidMap.value
+            val coroutineScope = rememberCoroutineScope()
 
-        if (asteroidForMapView != null) {
+            val filterQueryState = remember { mutableStateOf(FilterQuery.ALL) }
 
-            AsteroidMapPopup(
-                asteroid = asteroidForMapView,
-                onCloseClicked = { showAsteroidMap.value = null }
-            )
+            val lazyListState = rememberLazyListState()
 
-            return@MaterialTheme
-        }
+            val showStarMap = remember { mutableStateOf<Cluster?>(null) }
 
-        Box {
+            val showAsteroidMap = remember { mutableStateOf<Asteroid?>(null) }
 
-            /* Background */
-            Image(
-                painter = painterResource(Res.drawable.background_space),
-                contentDescription = null,
-                contentScale = ContentScale.Crop,
-                modifier = Modifier
-                    .fillMaxSize()
-                    /* Avoid white background while the image loads. */
-                    .background(Color(0xFF181828))
-            )
+            val showAsteroidDetails = remember { mutableStateOf<Asteroid?>(null) }
 
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-//                modifier = Modifier.background(MaterialTheme.colorScheme.background)
-            ) {
+            val showTooltip = remember { mutableStateOf<Tooltip?>(null) }
 
-                Text(
-                    text = "Oxygen Not Included Seed Browser",
-                    style = MaterialTheme.typography.displayMedium,
-                    color = MaterialTheme.colorScheme.onBackground,
-                    modifier = Modifier.defaultPadding()
-                )
+            val isGettingNewResults = remember { mutableStateOf(false) }
 
-                errorMessage.value?.let {
+            val errorMessage = remember { mutableStateOf<String?>(null) }
 
-                    Column(
-                        modifier = Modifier
-                            .defaultPadding()
-                            .height(128.dp)
-                            .verticalScroll(rememberScrollState())
-                            .background(
-                                MaterialTheme.colorScheme.errorContainer,
-                                defaultRoundedCornerShape
-                            )
-                    ) {
+            LaunchedEffect(filterQueryState.value) {
+                /* Reset the details on each search. */
+                showAsteroidDetails.value = null
+            }
 
-                        Text(
-                            text = it,
-                            style = MaterialTheme.typography.headlineSmall,
-                            color = MaterialTheme.colorScheme.onErrorContainer,
-                            fontWeight = FontWeight.Bold,
-                        )
-                    }
-                }
+            val clusters = remember { mutableStateOf(emptyList<Cluster>()) }
 
-                val search: suspend () -> Unit = {
+            LaunchedEffect(urlHash.value) {
 
-                    println("Searching...")
+                val urlHashValue = urlHash.value
+
+                if (urlHashValue != null) {
+
+                    println("Load specific coordinate: $urlHashValue")
 
                     try {
 
                         isGettingNewResults.value = true
 
-                        errorMessage.value = null
+                        val world = DefaultWebClient.find(urlHashValue)
 
-                        /* Reset the data */
-                        clusters.value = emptyList()
-
-                        val searchResultWorlds = DefaultWebClient.search(
-                            filterQueryState.value
-                        )
-
-                        val sortedWorlds = searchResultWorlds.sortedByDescending { it.getRating() }
-
-                        clusters.value = sortedWorlds
+                        if (world != null)
+                            clusters.value = listOf(world)
+                        else
+                            clusters.value = emptyList()
 
                     } catch (ex: Exception) {
 
@@ -254,128 +163,269 @@ fun App(
                     } finally {
                         isGettingNewResults.value = false
                     }
-                }
-
-                HalfSpacer()
-
-                FilterPanel(
-                    worldCount = worldCount.value,
-                    filterQueryState = filterQueryState,
-                    onSearchButtonPressed = {
-                        coroutineScope.launch { search() }
-                    }
-                )
-
-                if (isGettingNewResults.value) {
-
-                    Box(
-                        contentAlignment = Alignment.Center,
-                        modifier = Modifier.weight(1F)
-                    ) {
-
-                        Text(
-                            text = "Searching...",
-                            style = MaterialTheme.typography.headlineSmall,
-                            color = MaterialTheme.colorScheme.onBackground
-                        )
-                    }
-
-                } else if (clusters.value.isEmpty()) {
-
-                    Box(
-                        contentAlignment = Alignment.Center,
-                        modifier = Modifier.weight(1F)
-                    ) {
-
-                        if (urlHash.value == null) {
-
-                            Text(
-                                text = "No results found.",
-                                style = MaterialTheme.typography.headlineSmall,
-                                color = MaterialTheme.colorScheme.onBackground
-                            )
-
-                        } else {
-
-                            Text(
-                                text = "Coordinate ${urlHash.value} was not found in database.",
-                                style = MaterialTheme.typography.headlineSmall,
-                                color = MaterialTheme.colorScheme.onBackground
-                            )
-                        }
-                    }
 
                 } else {
 
-                    Row(
-                        modifier = Modifier.weight(1F)
-                    ) {
+                    println("Load demo data...")
+
+                    val parsedClusters = Json.decodeFromString<List<Cluster>>(sampleWorldsJson)
+
+                    /* DLCs first */
+                    clusters.value = parsedClusters.sortedWith(compareBy({ it.cluster.isBaseGame() }, { it.cluster }))
+                }
+            }
+
+            val worldForStarMapView = showStarMap.value
+
+            if (worldForStarMapView != null) {
+
+                StarMapView(
+                    cluster = worldForStarMapView,
+                    onCloseClicked = { showStarMap.value = null }
+                )
+
+                return@MaterialTheme
+            }
+
+            val asteroidForMapView = showAsteroidMap.value
+
+            if (asteroidForMapView != null) {
+
+                AsteroidMapPopup(
+                    asteroid = asteroidForMapView,
+                    onCloseClicked = { showAsteroidMap.value = null }
+                )
+
+                return@MaterialTheme
+            }
+
+            Box {
+
+                /* Background */
+                Image(
+                    painter = painterResource(Res.drawable.background_space),
+                    contentDescription = null,
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .fillMaxSize()
+                        /* Avoid white background while the image loads. */
+                        .background(Color(0xFF181828))
+                )
+
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+//                modifier = Modifier.background(MaterialTheme.colorScheme.background)
+                ) {
+
+                    Text(
+                        text = "Oxygen Not Included Seed Browser",
+                        style = MaterialTheme.typography.displayMedium,
+                        color = MaterialTheme.colorScheme.onBackground,
+                        modifier = Modifier.defaultPadding()
+                    )
+
+                    errorMessage.value?.let {
 
                         Column(
-                            horizontalAlignment = Alignment.CenterHorizontally,
+                            modifier = Modifier
+                                .defaultPadding()
+                                .height(128.dp)
+                                .verticalScroll(rememberScrollState())
+                                .background(
+                                    MaterialTheme.colorScheme.errorContainer,
+                                    defaultRoundedCornerShape
+                                )
+                        ) {
+
+                            Text(
+                                text = it,
+                                style = MaterialTheme.typography.headlineSmall,
+                                color = MaterialTheme.colorScheme.onErrorContainer,
+                                fontWeight = FontWeight.Bold,
+                            )
+                        }
+                    }
+
+                    val search: suspend () -> Unit = {
+
+                        println("Searching...")
+
+                        try {
+
+                            isGettingNewResults.value = true
+
+                            errorMessage.value = null
+
+                            /* Reset the data */
+                            clusters.value = emptyList()
+
+                            val searchResultWorlds = DefaultWebClient.search(
+                                filterQueryState.value
+                            )
+
+                            val sortedWorlds = searchResultWorlds.sortedByDescending { it.getRating() }
+
+                            clusters.value = sortedWorlds
+
+                        } catch (ex: Exception) {
+
+                            ex.printStackTrace()
+
+                            errorMessage.value = ex.stackTraceToString()
+
+                        } finally {
+                            isGettingNewResults.value = false
+                        }
+                    }
+
+                    HalfSpacer()
+
+                    FilterPanel(
+                        worldCount = worldCount.value,
+                        filterQueryState = filterQueryState,
+                        onSearchButtonPressed = {
+                            coroutineScope.launch { search() }
+                        }
+                    )
+
+                    if (isGettingNewResults.value) {
+
+                        Box(
+                            contentAlignment = Alignment.Center,
                             modifier = Modifier.weight(1F)
                         ) {
 
-                            Box(
-                                modifier = Modifier.weight(1F)
-                            ) {
-
-                                ClusterViewList(
-                                    lazyListState,
-                                    clusters.value,
-                                    showStarMap,
-                                    showAsteroidMap,
-                                    showAsteroidDetails,
-                                    showTooltip,
-                                    showScrollbar = showAsteroidDetails.value == null
-                                )
-                            }
+                            Text(
+                                text = "Searching...",
+                                style = MaterialTheme.typography.headlineSmall,
+                                color = MaterialTheme.colorScheme.onBackground
+                            )
                         }
 
-                        val asteroidForDetails = showAsteroidDetails.value
+                    } else if (clusters.value.isEmpty()) {
 
-                        AnimatedVisibility(
-                            visible = asteroidForDetails != null
+                        Box(
+                            contentAlignment = Alignment.Center,
+                            modifier = Modifier.weight(1F)
                         ) {
 
-                            /* Will be NULL on closing. */
-                            if (asteroidForDetails != null) {
+                            if (urlHash.value == null) {
 
-                                AsteroidDetails(
-                                    asteroid = asteroidForDetails,
-                                    showAsteroidMap = {
-                                        showAsteroidMap.value = asteroidForDetails
-                                    }
+                                Text(
+                                    text = "No results found.",
+                                    style = MaterialTheme.typography.headlineSmall,
+                                    color = MaterialTheme.colorScheme.onBackground
                                 )
 
                             } else {
 
-                                /*
-                                 * Placeholder box to ensure smooth animation.
-                                 */
-                                Box(
-                                    modifier = Modifier
-                                        .width(300.dp)
-                                        .fillMaxHeight()
+                                Text(
+                                    text = "Coordinate ${urlHash.value} was not found in database.",
+                                    style = MaterialTheme.typography.headlineSmall,
+                                    color = MaterialTheme.colorScheme.onBackground
                                 )
                             }
                         }
+
+                    } else {
+
+                        Row(
+                            modifier = Modifier.weight(1F)
+                        ) {
+
+                            Column(
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                                modifier = Modifier.weight(1F)
+                            ) {
+
+                                Box(
+                                    modifier = Modifier.weight(1F)
+                                ) {
+
+                                    ClusterViewList(
+                                        lazyListState,
+                                        clusters.value,
+                                        showStarMap,
+                                        showAsteroidMap,
+                                        showAsteroidDetails,
+                                        showTooltip,
+                                        showScrollbar = showAsteroidDetails.value == null
+                                    )
+                                }
+                            }
+
+                            val asteroidForDetails = showAsteroidDetails.value
+
+                            AnimatedVisibility(
+                                visible = asteroidForDetails != null
+                            ) {
+
+                                /* Will be NULL on closing. */
+                                if (asteroidForDetails != null) {
+
+                                    AsteroidDetails(
+                                        asteroid = asteroidForDetails,
+                                        showAsteroidMap = {
+                                            showAsteroidMap.value = asteroidForDetails
+                                        }
+                                    )
+
+                                } else {
+
+                                    /*
+                                     * Placeholder box to ensure smooth animation.
+                                     */
+                                    Box(
+                                        modifier = Modifier
+                                            .width(300.dp)
+                                            .fillMaxHeight()
+                                    )
+                                }
+                            }
+                        }
+
+                        Footer()
                     }
-
-                    Footer()
                 }
-            }
 
-            val toolTip = showTooltip.value
+                val toolTip = showTooltip.value
 
-            if (toolTip != null) {
+                if (toolTip != null) {
 
-                Box(
-                    modifier = Modifier.offset(toolTip.position.x, toolTip.position.y),
-                    content = toolTip.content
-                )
+                    Box(
+                        modifier = Modifier.offset(toolTip.position.x, toolTip.position.y),
+                        content = toolTip.content
+                    )
+                }
             }
         }
     }
 }
 
+@Composable
+private fun SmallScreenWarning() {
+
+    Box(
+        contentAlignment = Alignment.Center,
+        modifier = Modifier.fillMaxSize()
+    ) {
+
+        /* Background */
+        Image(
+            painter = painterResource(Res.drawable.background_space),
+            contentDescription = null,
+            contentScale = ContentScale.Crop,
+            modifier = Modifier
+                .fillMaxSize()
+                /* Avoid white background while the image loads. */
+                .background(Color(0xFF181828))
+        )
+
+        Text(
+            text = "Sorry, this app is not yet optimized for small screens.",
+            style = MaterialTheme.typography.headlineSmall,
+            color = MaterialTheme.colorScheme.onBackground,
+            modifier = Modifier.defaultPadding()
+        )
+    }
+}
