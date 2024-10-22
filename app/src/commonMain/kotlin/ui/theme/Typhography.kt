@@ -24,11 +24,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.intl.Locale
 import oni_seed_browser.app.generated.resources.Res
 import oni_seed_browser.app.generated.resources.economica_bold
 import oni_seed_browser.app.generated.resources.economica_bold_italic
 import oni_seed_browser.app.generated.resources.economica_italic
 import oni_seed_browser.app.generated.resources.economica_regular
+import oni_seed_browser.app.generated.resources.noto_sans_bold
+import oni_seed_browser.app.generated.resources.noto_sans_italic
+import oni_seed_browser.app.generated.resources.noto_sans_regular
 import org.jetbrains.compose.resources.Font
 
 @Composable
@@ -55,11 +59,39 @@ fun EconomicaFontFamily(): FontFamily = FontFamily(
     )
 )
 
+/** Font containing chinese symbols. */
+@Composable
+fun NotoSansFamily(): FontFamily = FontFamily(
+    Font(
+        resource = Res.font.noto_sans_regular,
+        weight = FontWeight.Normal,
+        style = FontStyle.Normal
+    ),
+    Font(
+        resource = Res.font.noto_sans_bold,
+        weight = FontWeight.Bold,
+        style = FontStyle.Normal
+    ),
+    Font(
+        resource = Res.font.noto_sans_italic,
+        weight = FontWeight.Normal,
+        style = FontStyle.Italic
+    ),
+    Font(
+        resource = Res.font.noto_sans_bold_italic,
+        weight = FontWeight.Bold,
+        style = FontStyle.Italic
+    )
+)
+
 @Composable
 fun AppTypography(): Typography =
-    Typography().defaultFontFamily(EconomicaFontFamily())
+    if (Locale.current.language != "zh")
+        Typography().defaultFontFamily(EconomicaFontFamily())
+    else
+        Typography().defaultFontFamily(NotoSansFamily())
 
-fun Typography.defaultFontFamily(fontFamily: FontFamily): Typography {
+private fun Typography.defaultFontFamily(fontFamily: FontFamily): Typography {
     return this.copy(
         displayLarge = this.displayLarge.copy(fontFamily = fontFamily),
         displayMedium = this.displayMedium.copy(fontFamily = fontFamily),
