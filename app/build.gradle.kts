@@ -42,8 +42,6 @@ kotlin {
             implementation(compose.desktop.currentOs)
 
             implementation(libs.ktor.java)
-
-            implementation("com.menecats:polybool-java:1.0.1")
         }
 
         val wasmJsMain by getting
