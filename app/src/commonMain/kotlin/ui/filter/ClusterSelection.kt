@@ -121,7 +121,7 @@ fun ClusterSelection(
                 Text(
                     text = cluster.displayName,
                     style = MaterialTheme.typography.bodyLarge,
-                    color = if (clusterHovered.value)
+                    color = if (clusterHovered.value || isSelected)
                         hoverColor
                     else
                         MaterialTheme.colorScheme.onBackground,
