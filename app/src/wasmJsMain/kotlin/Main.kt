@@ -20,6 +20,7 @@
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.ExperimentalComposeUiApi
+import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.window.CanvasBasedWindow
 import kotlinx.browser.document
 import kotlinx.browser.window
@@ -30,9 +31,11 @@ fun main() {
 
     CanvasBasedWindow(canvasElementId = "ComposeTarget") {
 
-        val domain = document.domain
-
-        println("Running on domain: $domain")
+        /* Some debug values */
+        println("Running on domain: ${document.domain}")
+        println("Users language: " + Locale.current.language)
+        println("Users language tag: " + Locale.current.toLanguageTag())
+        println("Users region: " + Locale.current.region)
 
         val urlHash = remember {
             mutableStateOf(document.location?.hash?.drop(1)?.ifBlank { null })
