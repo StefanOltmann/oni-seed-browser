@@ -11,6 +11,7 @@ androidx-espresso-core = "3.5.1"
 kotlin = "2.0.21"
 junit = "4.13.2"
 ktor = "3.0.0"
+detekt = "1.23.7"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -39,3 +40,4 @@ kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref =
 pluginCompose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "compose-plugin" }
 kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
