@@ -32,8 +32,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.selection.SelectionContainer
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ContentCopy
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -53,6 +51,7 @@ import kotlin.math.max
 import kotlinx.coroutines.delay
 import model.Asteroid
 import model.Cluster
+import ui.icons.ContentCopy
 import ui.theme.DefaultSpacer
 import ui.theme.FillSpacer
 import ui.theme.HalfSpacer
@@ -149,7 +148,7 @@ fun ClusterView(
             val hovered = remember { mutableStateOf(false) }
 
             Icon(
-                imageVector = Icons.Default.ContentCopy,
+                imageVector = ContentCopy,
                 contentDescription = null,
                 tint = if (hovered.value)
                     hoverColor

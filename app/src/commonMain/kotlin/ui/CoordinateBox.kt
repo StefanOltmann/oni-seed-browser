@@ -29,7 +29,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ContentCopy
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -48,6 +47,7 @@ import kotlinx.coroutines.delay
 import oni_seed_browser.app.generated.resources.Res
 import oni_seed_browser.app.generated.resources.space_hexagon
 import org.jetbrains.compose.resources.painterResource
+import ui.icons.ContentCopy
 import ui.theme.DoubleSpacer
 import ui.theme.defaultRoundedCornerShape
 import ui.theme.defaultSpacing
@@ -119,7 +119,7 @@ fun CoordinateBox(
                 val hovered = remember { mutableStateOf(false) }
 
                 Icon(
-                    imageVector = Icons.Default.ContentCopy,
+                    imageVector = ContentCopy,
                     contentDescription = null,
                     tint = if (hovered.value)
                         hoverColor
