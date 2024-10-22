@@ -20,7 +20,13 @@
 package ui.filter
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
@@ -32,7 +38,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import model.GeyserType
 import model.WorldTrait
-import model.filter.*
+import model.filter.FilterCondition
+import model.filter.FilterItemGeyserCount
+import model.filter.FilterItemGeyserOutput
+import model.filter.FilterItemType
+import model.filter.FilterItemWorldTrait
+import model.filter.FilterQuery
 import org.jetbrains.compose.resources.stringResource
 import ui.getAsteroidTypeDrawable
 import ui.getGeyserDrawable

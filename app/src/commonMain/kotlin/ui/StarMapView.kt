@@ -38,17 +38,17 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
+import kotlin.math.PI
+import kotlin.math.cos
+import kotlin.math.sin
 import model.AsteroidType
-import model.SpacedOutSpacePOI
 import model.Cluster
+import model.SpacedOutSpacePOI
 import oni_seed_browser.app.generated.resources.Res
 import oni_seed_browser.app.generated.resources.background_space
 import org.jetbrains.compose.resources.painterResource
 import ui.theme.defaultPadding
 import ui.theme.lightGray
-import kotlin.math.PI
-import kotlin.math.cos
-import kotlin.math.sin
 
 private const val GRID_RADIUS = 12
 private const val ROTATION_RADIANS = (30f * PI / 180).toFloat()

@@ -21,7 +21,30 @@ package model
 
 import androidx.compose.ui.graphics.Color
 import kotlinx.serialization.Serializable
-import oni_seed_browser.app.generated.resources.*
+import oni_seed_browser.app.generated.resources.Res
+import oni_seed_browser.app.generated.resources.worldTraitBouldersLarge
+import oni_seed_browser.app.generated.resources.worldTraitBouldersMedium
+import oni_seed_browser.app.generated.resources.worldTraitBouldersMixed
+import oni_seed_browser.app.generated.resources.worldTraitBouldersSmall
+import oni_seed_browser.app.generated.resources.worldTraitCrashedSatellites
+import oni_seed_browser.app.generated.resources.worldTraitDeepOil
+import oni_seed_browser.app.generated.resources.worldTraitDistressSignal
+import oni_seed_browser.app.generated.resources.worldTraitFrozenCore
+import oni_seed_browser.app.generated.resources.worldTraitGeoActive
+import oni_seed_browser.app.generated.resources.worldTraitGeoDormant
+import oni_seed_browser.app.generated.resources.worldTraitGeodes
+import oni_seed_browser.app.generated.resources.worldTraitGlaciersLarge
+import oni_seed_browser.app.generated.resources.worldTraitIrregularOil
+import oni_seed_browser.app.generated.resources.worldTraitLushCore
+import oni_seed_browser.app.generated.resources.worldTraitMagmaVents
+import oni_seed_browser.app.generated.resources.worldTraitMetalCaves
+import oni_seed_browser.app.generated.resources.worldTraitMetalPoor
+import oni_seed_browser.app.generated.resources.worldTraitMetalRich
+import oni_seed_browser.app.generated.resources.worldTraitMisalignedStart
+import oni_seed_browser.app.generated.resources.worldTraitRadioactiveCrust
+import oni_seed_browser.app.generated.resources.worldTraitSlimeSplats
+import oni_seed_browser.app.generated.resources.worldTraitSubsurfaceOcean
+import oni_seed_browser.app.generated.resources.worldTraitVolcanoes
 import org.jetbrains.compose.resources.StringResource
 
 /*

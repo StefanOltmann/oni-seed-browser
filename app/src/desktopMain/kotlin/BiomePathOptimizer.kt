@@ -22,12 +22,12 @@ import com.menecats.polybool.PolyBool
 import com.menecats.polybool.helpers.PolyBoolHelper.epsilon
 import com.menecats.polybool.helpers.PolyBoolHelper.polygon
 import com.menecats.polybool.models.Polygon
+import kotlin.math.roundToInt
 import model.Asteroid
 import model.BiomePaths
-import model.Point
 import model.Cluster
+import model.Point
 import model.ZoneType
-import kotlin.math.roundToInt
 
 fun BiomePaths.optimize(): BiomePaths {
 

@@ -38,6 +38,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import kotlin.math.max
 import model.ClusterType
 import model.Dlc
 import model.filter.FilterQuery
@@ -48,7 +49,6 @@ import ui.noRippleClickable
 import ui.onHover
 import ui.theme.halfPadding
 import ui.theme.hoverColor
-import kotlin.math.max
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable

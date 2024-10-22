@@ -21,7 +21,12 @@ package ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ContentCopy
@@ -43,7 +48,12 @@ import kotlinx.coroutines.delay
 import oni_seed_browser.app.generated.resources.Res
 import oni_seed_browser.app.generated.resources.space_hexagon
 import org.jetbrains.compose.resources.painterResource
-import ui.theme.*
+import ui.theme.DoubleSpacer
+import ui.theme.defaultRoundedCornerShape
+import ui.theme.defaultSpacing
+import ui.theme.halfPadding
+import ui.theme.halfSpacing
+import ui.theme.hoverColor
 
 @Composable
 fun CoordinateBox(

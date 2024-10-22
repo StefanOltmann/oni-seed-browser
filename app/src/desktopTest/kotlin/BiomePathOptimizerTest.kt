@@ -17,10 +17,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import model.BiomePaths
-import model.BiomePathsTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import model.BiomePaths
+import model.BiomePathsTest
 
 class BiomePathOptimizerTest {
 

@@ -41,6 +41,7 @@ enum class ZoneType(
     Space(7, "Space", Color(0xFF242424)),
 
     FrozenWastes(0, "Tundra", Color(0xFF9DC9D6)),
+
     // CrystalCaverns(1, Color(0xFFAC72C1)),
     BoggyMarsh(2, "Marsh", Color(0xFF7B974B)),
     ToxicJungle(4, "Jungle", Color(0xFFCB95A3)),
@@ -51,6 +52,7 @@ enum class ZoneType(
     Radioactive(11, "Radioactive", Color(0xFF4AE458)),
     Swamp(12, "Swampy", Color(0xFFEB9B3F)),
     Wasteland(13, "Wasteland", Color(0xFFCC3636)),
+
     // RocketInterior(14, Color(0xFF9E48DF)),
     Metallic(15, "Metallic", Color(0xFFFFA007)),
     Moo(17, "Moo", Color(0xFF8EC039)),
