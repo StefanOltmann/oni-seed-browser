@@ -1,5 +1,5 @@
 [versions]
-compose-plugin = "1.6.11"
+compose-plugin = "1.7.0"
 kotlin = "2.0.21"
 ktor = "3.0.0"
 detekt = "1.23.7"
