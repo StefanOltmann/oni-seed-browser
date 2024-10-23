@@ -23,7 +23,12 @@ jobs:
         run: |
           pip install fonttools brotli zopfli
           npm install -g glyphhanger
+      - name: Print used chinese fonts
+        timeout: 5m
+        run: |
+          glyphhanger app/src/commonMain/composeResources/values-zh/strings.xml
       - name: Reduce fonts
+        timeout: 5m
         run: |
           glyphhanger app/src/commonMain/composeResources/values-zh/strings.xml --subset=app/src/commonMain/composeResources/font/noto_sans_sc_regular.ttf
           glyphhanger app/src/commonMain/composeResources/values-ko/strings.xml --subset=app/src/commonMain/composeResources/font/noto_sans_kr_regular.ttf
