@@ -1,18 +1,18 @@
 <resources>
     <!-- UI Specific -->
-    <string name="uiTitle">地圖種子瀏覽器</string>
-    <string name="uiFilter">篩選</string>
-    <string name="uiSelectRule">請選擇一個小行星.</string>
+    <string name="uiTitle">地图种子浏览器</string>
+    <string name="uiFilter">筛选</string>
+    <string name="uiSelectRule">请选择一个小行星.</string>
     <string name="uiReset">重置</string>
-    <string name="uiSearch">搜尋</string>
-    <string name="uiSearching">搜尋中...</string>
+    <string name="uiSearch">搜寻</string>
+    <string name="uiSearching">搜寻中...</string>
     <string name="uiAdd">增加</string>
     <string name="uiAnd">和</string>
     <string name="uiOr">或</string>
     <string name="uiAny">任何</string>
     <string name="uiHas">有</string>
-    <string name="uiHasNot">沒有</string>
-    <string name="uiNoResult">沒有找到結果.</string>
+    <string name="uiHasNot">没有</string>
+    <string name="uiNoResult">没有找到结果.</string>
 
     <!-- ClusterType -->
     <string name="clusterTypeBaseTerra">类地星群</string>
