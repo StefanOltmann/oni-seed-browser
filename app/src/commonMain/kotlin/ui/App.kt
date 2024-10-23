@@ -59,7 +59,7 @@ import model.Cluster
 import model.filter.FilterQuery
 import oni_seed_browser.app.generated.resources.Res
 import oni_seed_browser.app.generated.resources.background_space
-import oni_seed_browser.app.generated.resources.uiNoResult
+import oni_seed_browser.app.generated.resources.uiNoResults
 import oni_seed_browser.app.generated.resources.uiSearching
 import oni_seed_browser.app.generated.resources.uiTitle
 import org.jetbrains.compose.resources.painterResource
@@ -316,7 +316,7 @@ fun App(
                             if (urlHash.value == null) {
 
                                 Text(
-                                    text = stringResource(Res.string.uiNoResult),
+                                    text = stringResource(Res.string.uiNoResults),
                                     style = MaterialTheme.typography.headlineSmall,
                                     color = MaterialTheme.colorScheme.onBackground
                                 )

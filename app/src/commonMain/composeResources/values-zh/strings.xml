@@ -7,12 +7,13 @@
     <string name="uiSearch">搜寻</string>
     <string name="uiSearching">搜寻中...</string>
     <string name="uiAdd">增加</string>
+    <string name="uiRule">条件</string>
     <string name="uiAnd">和</string>
     <string name="uiOr">或</string>
     <string name="uiAny">任何</string>
     <string name="uiHas">有</string>
     <string name="uiHasNot">没有</string>
-    <string name="uiNoResult">没有找到结果.</string>
+    <string name="uiNoResults">没有找到结果.</string>
 
     <!-- ClusterType -->
     <string name="clusterTypeBaseTerra">类地星群</string>

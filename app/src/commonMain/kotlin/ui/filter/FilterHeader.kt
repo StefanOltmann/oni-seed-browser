@@ -41,7 +41,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import oni_seed_browser.app.generated.resources.Res
 import oni_seed_browser.app.generated.resources.uiFilter
-import oni_seed_browser.app.generated.resources.uiSeedInDatabase
+import oni_seed_browser.app.generated.resources.uiSeedsInDatabase
 import org.jetbrains.compose.resources.stringResource
 import ui.theme.DefaultSpacer
 import ui.theme.DoubleSpacer
@@ -80,7 +80,7 @@ fun FilterHeader(
             text = if (seedCount == null)
                 stringResource(Res.string.uiFilter)
             else
-                stringResource(Res.string.uiFilter) + " $seedCount " + stringResource(Res.string.uiSeedInDatabase),
+                stringResource(Res.string.uiFilter) + " $seedCount " + stringResource(Res.string.uiSeedsInDatabase),
             style = MaterialTheme.typography.headlineMedium,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.colorScheme.onBackground
