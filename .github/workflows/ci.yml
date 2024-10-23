@@ -1,6 +1,11 @@
-name: GitHub Pages
-on: [ push, pull_request ]
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [ "main" ]
+
 jobs:
+  
   build:
     name: Build Kotlin/Wasm
     runs-on: ubuntu-latest
@@ -12,7 +17,19 @@ jobs:
           java-version: '17'
       - name: Checkout code
         uses: actions/checkout@v3
-      - name: Run Gradle Tasks
+      - name: List all files
+        run: find .
+      - name: Install glyphhanger for font subsetting
+        run: |
+          pip install fonttools brotli
+          npm install -g glyphhanger
+      - name: Reduce fonts
+        run: |
+          glyphhanger app/src/commonMain/composeResources/values-zh/strings.xml --subset=app/src/commonMain/composeResources/font/noto_sans_sc_regular.ttf
+          glyphhanger app/src/commonMain/composeResources/values-ko/strings.xml --subset=app/src/commonMain/composeResources/font/noto_sans_kr_regular.ttf
+      - name: List all files
+        run: find .
+      - name: Run Gradle build
         run: |
           chmod +x gradlew
           ./gradlew build allTests wasmJsBrowserDistribution
@@ -25,6 +42,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: app/build/dist/wasmJs/productionExecutable/
+  
   deploy:
     needs: build
     permissions:
