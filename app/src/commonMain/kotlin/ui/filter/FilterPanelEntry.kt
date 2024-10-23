@@ -48,6 +48,8 @@ import androidx.compose.ui.unit.dp
 import model.filter.FilterRule
 import oni_seed_browser.app.generated.resources.Res
 import oni_seed_browser.app.generated.resources.uiAny
+import oni_seed_browser.app.generated.resources.uiHas
+import oni_seed_browser.app.generated.resources.uiHasNot
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import ui.getAsteroidTypeDrawable
@@ -168,7 +170,7 @@ fun FilterPanelEntry(
                     ) {
 
                         Text(
-                            text = rule.getConditionDescription(),
+                            text = getConditionDescription(rule),
                             style = if (rule.worldTrait != null)
                                 MaterialTheme.typography.bodyLarge
                             else
@@ -238,8 +240,8 @@ fun FilterPanelEntry(
 @Composable
 private fun getItemDescription(rule: FilterRule): String =
     when {
-        rule.geyserCount != null -> "Count: ${rule.geyserCount.geyser.stringResource}"
-        rule.geyserOutput != null -> "Output (g/s): ${rule.geyserOutput.geyser.stringResource}"
+        rule.geyserCount != null -> "Count: " + stringResource(rule.geyserCount.geyser.stringResource)
+        rule.geyserOutput != null -> "Output (g/s): " + stringResource(rule.geyserOutput.geyser.stringResource)
         rule.worldTrait != null -> stringResource(rule.worldTrait.worldTrait.stringResource)
         rule.spaceDestinationCount != null -> "Space destination: ${rule.spaceDestinationCount.poi}"
         else -> "-/-"
@@ -255,3 +257,17 @@ private fun VerticalSeparator() {
             .background(MaterialTheme.colorScheme.onBackground)
     )
 }
+
+@Composable
+private fun getConditionDescription(rule: FilterRule): String =
+    when {
+        rule.geyserCount != null -> rule.geyserCount.condition.displayString
+        rule.geyserOutput != null -> rule.geyserOutput.condition.displayString
+        rule.worldTrait != null -> if (rule.worldTrait.has)
+            stringResource(Res.string.uiHas)
+        else
+            stringResource(Res.string.uiHasNot)
+
+        rule.spaceDestinationCount != null -> "Space destination: ${rule.spaceDestinationCount.poi}"
+        else -> "-/-"
+    }
