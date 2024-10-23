@@ -42,6 +42,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import model.Asteroid
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
 import ui.theme.DefaultSpacer
 import ui.theme.HalfSpacer
 import ui.theme.anthraticeTransparentBackgroundColor
@@ -125,7 +126,7 @@ fun AsteroidView(
                 ) {
 
                     Text(
-                        text = asteroid.id.displayName,
+                        text = stringResource(asteroid.id.displayName),
                         style = MaterialTheme.typography.bodyLarge,
                         color = MaterialTheme.colorScheme.onBackground,
                     )

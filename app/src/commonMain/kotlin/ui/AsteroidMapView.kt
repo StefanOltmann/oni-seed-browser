@@ -70,6 +70,7 @@ import model.ZoneType
 import oni_seed_browser.app.generated.resources.Res
 import oni_seed_browser.app.generated.resources.background_space
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
 import ui.theme.DefaultSpacer
 import ui.theme.anthraticeTransparentBackgroundColor
 import ui.theme.defaultPadding
@@ -119,7 +120,7 @@ fun AsteroidMapPopup(
             ) {
 
                 Text(
-                    text = asteroid.id.displayName,
+                    text = stringResource(asteroid.id.displayName),
                     style = MaterialTheme.typography.headlineLarge,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onBackground
