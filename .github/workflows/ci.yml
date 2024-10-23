@@ -26,12 +26,12 @@ jobs:
       - name: Print used chinese fonts
         timeout-minutes: 5
         run: |
-          glyphhanger app/src/commonMain/composeResources/values-zh/strings.xml
+          glyphhanger ./app/src/commonMain/composeResources/values-zh/strings.xml
       - name: Reduce fonts
         timeout-minutes: 5
         run: |
-          glyphhanger app/src/commonMain/composeResources/values-zh/strings.xml --subset=app/src/commonMain/composeResources/font/noto_sans_sc_regular.ttf
-          glyphhanger app/src/commonMain/composeResources/values-ko/strings.xml --subset=app/src/commonMain/composeResources/font/noto_sans_kr_regular.ttf
+          glyphhanger ./app/src/commonMain/composeResources/values-zh/strings.xml --subset=./app/src/commonMain/composeResources/font/noto_sans_sc_regular.ttf
+          glyphhanger ./app/src/commonMain/composeResources/values-ko/strings.xml --subset=./app/src/commonMain/composeResources/font/noto_sans_kr_regular.ttf
       - name: List all files
         run: find .
       - name: Run Gradle build
