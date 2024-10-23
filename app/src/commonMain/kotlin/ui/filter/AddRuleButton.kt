@@ -35,6 +35,10 @@ import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import oni_seed_browser.app.generated.resources.Res
+import oni_seed_browser.app.generated.resources.uiAdd
+import oni_seed_browser.app.generated.resources.uiRule
+import org.jetbrains.compose.resources.stringResource
 import ui.noRippleClickable
 import ui.onHover
 import ui.theme.halfSpacing
@@ -79,7 +83,7 @@ fun AddRuleButton(
     ) {
 
         Text(
-            text = "ADD '$text' RULE",
+            text = stringResource(Res.string.uiAdd) + text + stringResource(Res.string.uiRule),
             style = MaterialTheme.typography.bodyLarge,
             fontWeight = FontWeight.Bold,
             color = if (hovered.value)

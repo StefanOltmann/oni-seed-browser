@@ -33,6 +33,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import model.filter.FilterQuery
+import oni_seed_browser.app.generated.resources.Res
+import oni_seed_browser.app.generated.resources.uiAnd
+import oni_seed_browser.app.generated.resources.uiOr
+import oni_seed_browser.app.generated.resources.uiSelectRule
+import org.jetbrains.compose.resources.stringResource
 import ui.DashedHorizontalSeparator
 import ui.theme.FillSpacer
 import ui.theme.defaultPadding
@@ -48,7 +53,7 @@ fun RuleEditor(
     if (query.cluster == null) {
 
         Text(
-            text = "Please select an cluster to define rules.",
+            text = stringResource(Res.string.uiSelectRule),
             style = MaterialTheme.typography.headlineSmall,
             color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.7F),
             textAlign = TextAlign.Center,
@@ -130,7 +135,7 @@ fun RuleEditor(
             RuleEditorRow(null) {
 
                 AddRuleButton(
-                    text = "OR",
+                    text = stringResource(Res.string.uiOr),
                     onClick = {
                         filterQueryState.value = query.addEmptyOrRule(rulesIndex)
                     }
@@ -143,7 +148,7 @@ fun RuleEditor(
         RuleEditorRow(null) {
 
             AddRuleButton(
-                text = "AND",
+                text = stringResource(Res.string.uiAnd),
                 onClick = {
                     filterQueryState.value = query.addEmptyAndRule()
                 }

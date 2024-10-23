@@ -39,6 +39,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import oni_seed_browser.app.generated.resources.Res
+import oni_seed_browser.app.generated.resources.uiFilter
+import oni_seed_browser.app.generated.resources.uiSeedInDatabase
+import org.jetbrains.compose.resources.stringResource
 import ui.theme.DefaultSpacer
 import ui.theme.DoubleSpacer
 import ui.theme.FillSpacer
@@ -74,9 +78,9 @@ fun FilterHeader(
 
         Text(
             text = if (seedCount == null)
-                "Filter"
+                stringResource(Res.string.uiFilter)
             else
-                "Filter ($seedCount seeds in database)",
+                stringResource(Res.string.uiFilter) + " $seedCount " + stringResource(Res.string.uiSeedInDatabase),
             style = MaterialTheme.typography.headlineMedium,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.colorScheme.onBackground

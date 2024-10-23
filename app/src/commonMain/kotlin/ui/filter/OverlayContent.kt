@@ -141,7 +141,7 @@ fun OverlayContent(
                         )
 
                         Text(
-                            text = filterItemType.displayName.uppercase(),
+                            text = stringResource(filterItemType.displayName).uppercase(),
                             style = MaterialTheme.typography.bodyLarge,
                             color = MaterialTheme.colorScheme.onBackground
                         )

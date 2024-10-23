@@ -29,6 +29,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import oni_seed_browser.app.generated.resources.Res
+import oni_seed_browser.app.generated.resources.uiReset
+import org.jetbrains.compose.resources.stringResource
 import ui.noRippleClickable
 import ui.theme.defaultRoundedCornerShape
 
@@ -50,7 +53,7 @@ fun ResetButton(
     ) {
 
         Text(
-            text = "RESET",
+            text = stringResource(Res.string.uiReset),
             style = MaterialTheme.typography.bodyLarge,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.colorScheme.onBackground

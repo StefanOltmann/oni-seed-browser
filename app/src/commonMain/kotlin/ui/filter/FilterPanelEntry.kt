@@ -46,6 +46,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import model.filter.FilterRule
+import oni_seed_browser.app.generated.resources.Res
+import oni_seed_browser.app.generated.resources.uiAny
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import ui.getAsteroidTypeDrawable
@@ -94,7 +96,7 @@ fun FilterPanelEntry(
                     if (rule.asteroid == null) {
 
                         Text(
-                            text = "ANY",
+                            text = stringResource(Res.string.uiAny),
                             style = MaterialTheme.typography.bodyLarge,
                             fontWeight = FontWeight.Bold,
                             color = if (hoveredAsteroid.value)

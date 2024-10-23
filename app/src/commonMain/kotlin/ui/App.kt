@@ -59,7 +59,11 @@ import model.Cluster
 import model.filter.FilterQuery
 import oni_seed_browser.app.generated.resources.Res
 import oni_seed_browser.app.generated.resources.background_space
+import oni_seed_browser.app.generated.resources.uiNoResult
+import oni_seed_browser.app.generated.resources.uiSearching
+import oni_seed_browser.app.generated.resources.uiTitle
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
 import service.DefaultWebClient
 import service.sampleWorldsJson
 import ui.filter.FilterPanel
@@ -218,7 +222,7 @@ fun App(
                 ) {
 
                     Text(
-                        text = "Oxygen Not Included Seed Browser",
+                        text = stringResource(Res.string.uiTitle),
                         style = MaterialTheme.typography.displayMedium,
                         color = MaterialTheme.colorScheme.onBackground,
                         modifier = Modifier.defaultPadding()
@@ -296,7 +300,7 @@ fun App(
                         ) {
 
                             Text(
-                                text = "Searching...",
+                                text = stringResource(Res.string.uiSearching),
                                 style = MaterialTheme.typography.headlineSmall,
                                 color = MaterialTheme.colorScheme.onBackground
                             )
@@ -312,7 +316,7 @@ fun App(
                             if (urlHash.value == null) {
 
                                 Text(
-                                    text = "No results found.",
+                                    text = stringResource(Res.string.uiNoResult),
                                     style = MaterialTheme.typography.headlineSmall,
                                     color = MaterialTheme.colorScheme.onBackground
                                 )
