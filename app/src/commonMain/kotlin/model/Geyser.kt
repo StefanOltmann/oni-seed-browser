@@ -42,6 +42,10 @@ data class Geyser(
     val activeCycles: Float
 ) {
 
+    val overallTime = idleTime + eruptionTime
+
+    val overallCycles = activeCycles + dormancyCycles
+
     override fun toString(): String =
         "${id.stringResource} @ $x,$y"
 }

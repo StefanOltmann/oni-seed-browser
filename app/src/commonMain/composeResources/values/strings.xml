@@ -27,6 +27,12 @@
     <string name="uiDetails">details</string>
     <string name="uiBiomeDetails">Biome details</string>
     <string name="uiGeyserDetails">Geyser details</string>
+    <string name="uiGeyserDetailGramPerSecond">g/s</string>
+    <string name="uiGeyserDetailOnAverage">on average</string>
+    <string name="uiGeyserDetailSecondsShort">s</string>
+    <string name="uiGeyserDetailCycles">cycles</string>
+    <string name="uiGeyserDetailEmitDetails">Emits {emitRate} for {eruptionTime} in {overallTime}</string>
+    <string name="uiGeyserDetailActiveDetails">Active for {activeCycles} in {overallCycles}</string>
 
     <!-- ClusterType -->
     <string name="clusterTypeBaseTerra">Terra</string>

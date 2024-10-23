@@ -26,6 +26,12 @@
     <string name="uiDetails">详情</string>
     <string name="uiBiomeDetails">生态群系详情</string>
     <string name="uiGeyserDetails">间歇泉详情</string>
+    <string name="uiGeyserDetailGramPerSecond">克/秒</string>
+    <string name="uiGeyserDetailOnAverage">平均</string>
+    <string name="uiGeyserDetailSecondsShort">秒</string>
+    <string name="uiGeyserDetailCycles">周期</string>
+    <string name="uiGeyserDetailEmitDetails">喷发 {eruptionTime} 期间排放 {emitRate}，总时长 {overallTime}</string>
+    <string name="uiGeyserDetailActiveDetails">总周期 {overallCycles} 中活跃 {activeCycles}</string>
 
     <!-- ClusterType -->
     <string name="clusterTypeBaseTerra">类地星群</string>

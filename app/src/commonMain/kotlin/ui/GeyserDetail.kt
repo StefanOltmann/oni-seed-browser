@@ -40,6 +40,9 @@ import androidx.compose.ui.unit.dp
 import kotlin.math.pow
 import kotlin.math.roundToInt
 import model.Geyser
+import oni_seed_browser.app.generated.resources.Res
+import oni_seed_browser.app.generated.resources.uiGeyserDetailGramPerSecond
+import oni_seed_browser.app.generated.resources.uiGeyserDetailOnAverage
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import ui.theme.DefaultSpacer
@@ -121,14 +124,14 @@ fun GeyserDetail(
             ) {
 
                 Text(
-                    text = "${geyser.avgEmitRate} g/s",
+                    text = "${geyser.avgEmitRate} " + stringResource(Res.string.uiGeyserDetailGramPerSecond),
                     style = MaterialTheme.typography.headlineSmall,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onBackground
                 )
 
                 Text(
-                    text = " on average",
+                    text = " " + stringResource(Res.string.uiGeyserDetailOnAverage),
                     style = MaterialTheme.typography.bodyLarge,
                     color = MaterialTheme.colorScheme.onBackground
                 )
@@ -169,7 +172,7 @@ fun GeyserDetail(
                 )
 
                 Text(
-                    text = "${geyser.eruptionTime + geyser.idleTime}s",
+                    text = "${geyser.overallTime}s",
                     style = MaterialTheme.typography.bodyLarge,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onBackground
