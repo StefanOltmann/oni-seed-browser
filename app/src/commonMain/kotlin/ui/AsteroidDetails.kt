@@ -43,6 +43,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import model.Asteroid
 import model.BiomePaths
+import oni_seed_browser.app.generated.resources.Res
+import oni_seed_browser.app.generated.resources.uiDetails
 import org.jetbrains.compose.resources.stringResource
 import ui.theme.DefaultSpacer
 import ui.theme.anthraticeTransparentBackgroundColor
@@ -76,7 +78,7 @@ fun AsteroidDetails(
         DefaultSpacer()
 
         Text(
-            text = stringResource(asteroid.id.stringResource) + " details",
+            text = stringResource(asteroid.id.stringResource) + " " + stringResource(Res.string.uiDetails),
             style = MaterialTheme.typography.headlineSmall,
             color = MaterialTheme.colorScheme.onBackground,
         )

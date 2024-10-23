@@ -50,6 +50,9 @@ import oni_seed_browser.app.generated.resources.Res
 import oni_seed_browser.app.generated.resources.uiAny
 import oni_seed_browser.app.generated.resources.uiHas
 import oni_seed_browser.app.generated.resources.uiHasNot
+import oni_seed_browser.app.generated.resources.uiItemDescriptionCount
+import oni_seed_browser.app.generated.resources.uiItemDescriptionOutput
+import oni_seed_browser.app.generated.resources.uiItemDescriptionSpaceDestination
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import ui.getAsteroidTypeDrawable
@@ -240,10 +243,22 @@ fun FilterPanelEntry(
 @Composable
 private fun getItemDescription(rule: FilterRule): String =
     when {
-        rule.geyserCount != null -> "Count: " + stringResource(rule.geyserCount.geyser.stringResource)
-        rule.geyserOutput != null -> "Output (g/s): " + stringResource(rule.geyserOutput.geyser.stringResource)
-        rule.worldTrait != null -> stringResource(rule.worldTrait.worldTrait.stringResource)
-        rule.spaceDestinationCount != null -> "Space destination: ${rule.spaceDestinationCount.poi}"
+
+        rule.geyserCount != null ->
+            stringResource(Res.string.uiItemDescriptionCount) + ": " +
+                stringResource(rule.geyserCount.geyser.stringResource)
+
+        rule.geyserOutput != null ->
+            stringResource(Res.string.uiItemDescriptionOutput) + ": " +
+                stringResource(rule.geyserOutput.geyser.stringResource)
+
+        rule.worldTrait != null ->
+            stringResource(rule.worldTrait.worldTrait.stringResource)
+
+        rule.spaceDestinationCount != null ->
+            stringResource(Res.string.uiItemDescriptionSpaceDestination) + ": " +
+                rule.spaceDestinationCount.poi
+
         else -> "-/-"
     }
 

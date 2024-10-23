@@ -44,6 +44,9 @@ import model.filter.FilterItemGeyserOutput
 import model.filter.FilterItemType
 import model.filter.FilterItemWorldTrait
 import model.filter.FilterQuery
+import oni_seed_browser.app.generated.resources.Res
+import oni_seed_browser.app.generated.resources.uiCount
+import oni_seed_browser.app.generated.resources.uiOutput
 import org.jetbrains.compose.resources.stringResource
 import ui.getAsteroidTypeDrawable
 import ui.getGeyserDrawable
@@ -186,8 +189,8 @@ fun OverlayContent(
                             FilterSelectionEntryItem(
                                 image = getGeyserDrawable(geyserType),
                                 text = stringResource(geyserType.stringResource) + when (filterItemType) {
-                                    FilterItemType.GEYSER_COUNT -> " count"
-                                    FilterItemType.GEYSER_OUTPUT -> " output"
+                                    FilterItemType.GEYSER_COUNT -> " " + stringResource(Res.string.uiCount)
+                                    FilterItemType.GEYSER_OUTPUT -> " " + stringResource(Res.string.uiOutput)
                                     else -> ""
                                 },
                                 onClick = {

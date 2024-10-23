@@ -1,19 +1,31 @@
 <resources>
     <!-- UI Specific -->
-    <string name="uiTitle">地图种子浏览器</string>
+    <string name="uiTitle">氧气未解决种子浏览器</string>
     <string name="uiFilter">筛选</string>
-    <string name="uiSelectRule">请选择一个小行星.</string>
+    <string name="uiSelectRule">请选择一个星群以定义规则。</string>
     <string name="uiReset">重置</string>
-    <string name="uiSearch">搜寻</string>
-    <string name="uiSearching">搜寻中...</string>
-    <string name="uiAdd">增加</string>
-    <string name="uiRule">条件</string>
-    <string name="uiAnd">和</string>
+    <string name="uiSearch">搜索</string>
+    <string name="uiSearching">正在搜索...</string>
+    <string name="uiAdd">添加</string>
+    <string name="uiRule">规则</string>
+    <string name="uiAnd">并且</string>
     <string name="uiOr">或</string>
-    <string name="uiAny">任何</string>
+    <string name="uiAny">任意</string>
     <string name="uiHas">有</string>
     <string name="uiHasNot">没有</string>
-    <string name="uiNoResults">没有找到结果.</string>
+    <string name="uiNoResults">未找到结果。</string>
+    <string name="uiSeedsInDatabase">数据库中的种子</string>
+    <string name="uiWorldTrait">世界特性</string>
+    <string name="uiSpaceDestinationCount">太空目的地数量</string>
+    <string name="uiGeyserCount">间歇泉数量</string>
+    <string name="uiGeyserOutput">间歇泉产量</string>
+    <string name="uiItemDescriptionCount">数量</string>
+    <string name="uiItemDescriptionOutput">产量 (克/秒)</string>
+    <string name="uiItemDescriptionSpaceDestination">太空目的地</string>
+    <string name="uiOutput">产出</string>
+    <string name="uiDetails">详情</string>
+    <string name="uiBiomeDetails">生态群系详情</string>
+    <string name="uiGeyserDetails">间歇泉详情</string>
 
     <!-- ClusterType -->
     <string name="clusterTypeBaseTerra">类地星群</string>

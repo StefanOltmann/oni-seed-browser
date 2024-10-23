@@ -69,6 +69,8 @@ import model.Geyser
 import model.ZoneType
 import oni_seed_browser.app.generated.resources.Res
 import oni_seed_browser.app.generated.resources.background_space
+import oni_seed_browser.app.generated.resources.uiBiomeDetails
+import oni_seed_browser.app.generated.resources.uiGeyserDetails
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import ui.theme.DefaultSpacer
@@ -351,7 +353,7 @@ private fun AsteroidBiomeDetails(
         DefaultSpacer()
 
         Text(
-            text = "Biome details",
+            text = stringResource(Res.string.uiBiomeDetails),
             style = MaterialTheme.typography.headlineSmall,
             color = MaterialTheme.colorScheme.onBackground,
         )
@@ -434,7 +436,7 @@ private fun AsteroidGeysersDetails(
         DefaultSpacer()
 
         Text(
-            text = "Geyser details",
+            text = stringResource(Res.string.uiGeyserDetails),
             style = MaterialTheme.typography.headlineSmall,
             color = MaterialTheme.colorScheme.onBackground,
         )

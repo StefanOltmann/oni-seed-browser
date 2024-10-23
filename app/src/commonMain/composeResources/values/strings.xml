@@ -11,12 +11,22 @@
     <string name="uiAnd">AND</string>
     <string name="uiOr">OR</string>
     <string name="uiAny">ANY</string>
+    <string name="uiHas">has</string>
+    <string name="uiHasNot">hasn't</string>
     <string name="uiNoResults">No results found.</string>
     <string name="uiSeedsInDatabase">seeds in database</string>
     <string name="uiWorldTrait">World Trait</string>
+    <string name="uiSpaceDestinationCount">Space Destination Count</string>
     <string name="uiGeyserCount">Geyser Count</string>
     <string name="uiGeyserOutput">Geyser Output</string>
-    <string name="uiSpaceDestinationCount">Space Destination Count</string>
+    <string name="uiItemDescriptionCount">Count</string>
+    <string name="uiItemDescriptionOutput">Output (g/s)</string>
+    <string name="uiItemDescriptionSpaceDestination">Space destination</string>
+    <string name="uiOutput">output</string>
+    <string name="uiCount">count</string>
+    <string name="uiDetails">details</string>
+    <string name="uiBiomeDetails">Biome details</string>
+    <string name="uiGeyserDetails">Geyser details</string>
 
     <!-- ClusterType -->
     <string name="clusterTypeBaseTerra">Terra</string>
