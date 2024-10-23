@@ -12,7 +12,7 @@
     <string name="uiOr">OR</string>
     <string name="uiAny">ANY</string>
     <string name="uiNoResult">No results found.</string>
-    <string name="uiSeedInDatabase">seeds in database.</string>
+    <string name="uiSeedInDatabase">seeds in database</string>
     <string name="uiWorldTrait">World Trait</string>
     <string name="uiGeyserCount">Geyser Count</string>
     <string name="uiGeyserOutput">Geyser Output</string>
