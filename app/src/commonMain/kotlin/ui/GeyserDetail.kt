@@ -214,5 +214,5 @@ fun GeyserDetail(
 private fun Float.toString(numOfDec: Int): String {
     val integerDigits = this.toInt()
     val floatDigits = ((this - integerDigits) * 10f.pow(numOfDec)).roundToInt()
-    return "${integerDigits}.${floatDigits}"
+    return "$integerDigits.$floatDigits"
 }
