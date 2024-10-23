@@ -185,7 +185,7 @@ fun OverlayContent(
 
                             FilterSelectionEntryItem(
                                 image = getGeyserDrawable(geyserType),
-                                text = geyserType.displayName + when (filterItemType) {
+                                text = stringResource(geyserType.displayName) + when (filterItemType) {
                                     FilterItemType.GEYSER_COUNT -> " count"
                                     FilterItemType.GEYSER_OUTPUT -> " output"
                                     else -> ""

@@ -21,48 +21,68 @@ package model
 
 import androidx.compose.ui.graphics.Color
 import kotlinx.serialization.Serializable
+import oni_seed_browser.app.generated.resources.Res
+import oni_seed_browser.app.generated.resources.zoneTypeBarren
+import oni_seed_browser.app.generated.resources.zoneTypeBoggyMarsh
+import oni_seed_browser.app.generated.resources.zoneTypeCarrotQuarry
+import oni_seed_browser.app.generated.resources.zoneTypeForest
+import oni_seed_browser.app.generated.resources.zoneTypeFrozenWastes
+import oni_seed_browser.app.generated.resources.zoneTypeIceCaves
+import oni_seed_browser.app.generated.resources.zoneTypeMagmaCore
+import oni_seed_browser.app.generated.resources.zoneTypeMetallic
+import oni_seed_browser.app.generated.resources.zoneTypeMoo
+import oni_seed_browser.app.generated.resources.zoneTypeOcean
+import oni_seed_browser.app.generated.resources.zoneTypeOilField
+import oni_seed_browser.app.generated.resources.zoneTypeRadioactive
+import oni_seed_browser.app.generated.resources.zoneTypeRust
+import oni_seed_browser.app.generated.resources.zoneTypeSandstone
+import oni_seed_browser.app.generated.resources.zoneTypeSpace
+import oni_seed_browser.app.generated.resources.zoneTypeSugarWoods
+import oni_seed_browser.app.generated.resources.zoneTypeSwamp
+import oni_seed_browser.app.generated.resources.zoneTypeToxicJungle
+import oni_seed_browser.app.generated.resources.zoneTypeWasteland
+import org.jetbrains.compose.resources.StringResource
 
 @Suppress("UNUSED")
 @Serializable
 enum class ZoneType(
     val id: Int,
-    val displayName: String,
+    val displayName: StringResource,
     val color: Color
 ) {
-
     /*
      * Ordered by how they should appear in the biome list.
      */
 
     /** Default starting area, should always come first. */
-    Sandstone(3, "Sandstone", Color(0xFFF2BB47)),
-    Barren(16, "Barren", Color(0xFF97752C)),
+    Sandstone(3, Res.string.zoneTypeSandstone, Color(0xFFF2BB47)),
+    Barren(16, Res.string.zoneTypeBarren, Color(0xFF97752C)),
 
-    Space(7, "Space", Color(0xFF242424)),
+    Space(7, Res.string.zoneTypeSpace, Color(0xFF242424)),
 
-    FrozenWastes(0, "Tundra", Color(0xFF9DC9D6)),
+    FrozenWastes(0, Res.string.zoneTypeFrozenWastes, Color(0xFF9DC9D6)),
 
-    // CrystalCaverns(1, Color(0xFFAC72C1)),
-    BoggyMarsh(2, "Marsh", Color(0xFF7B974B)),
-    ToxicJungle(4, "Jungle", Color(0xFFCB95A3)),
+    // CrystalCaverns(1Res.string. zoneType//(0xFFAC72C1)),
+    BoggyMarsh(2, Res.string.zoneTypeBoggyMarsh, Color(0xFF7B974B)),
+    ToxicJungle(4, Res.string.zoneTypeToxicJungle, Color(0xFFCB95A3)),
 
-    Ocean(8, "Ocean", Color(0xFF4C4CFF)),
-    Rust(9, "Rust", Color(0xFFFFA007)),
-    Forest(10, "Forest", Color(0xFF8EC039)),
-    Radioactive(11, "Radioactive", Color(0xFF4AE458)),
-    Swamp(12, "Swampy", Color(0xFFEB9B3F)),
-    Wasteland(13, "Wasteland", Color(0xFFCC3636)),
+    Ocean(8, Res.string.zoneTypeOcean, Color(0xFF4C4CFF)),
+    Rust(9, Res.string.zoneTypeRust, Color(0xFFFFA007)),
+    Forest(10, Res.string.zoneTypeForest, Color(0xFF8EC039)),
+    Radioactive(11, Res.string.zoneTypeRadioactive, Color(0xFF4AE458)),
+    Swamp(12, Res.string.zoneTypeSwamp, Color(0xFFEB9B3F)),
+    Wasteland(13, Res.string.zoneTypeWasteland, Color(0xFFCC3636)),
 
-    // RocketInterior(14, Color(0xFF9E48DF)),
-    Metallic(15, "Metallic", Color(0xFFFFA007)),
-    Moo(17, "Moo", Color(0xFF8EC039)),
-    IceCaves(18, "Ice Cave", Color(0xFFABCFEA)),
-    CarrotQuarry(19, "Cool Pool", Color(0xFFCDA2C7)),
-    SugarWoods(20, "Nectar", Color(0xFFA2CDA4)),
+    // RocketInterior(1Res.string. zoneType//,Color(0xFF9E48DF)),
+    Metallic(15, Res.string.zoneTypeMetallic, Color(0xFFFFA007)),
+    Moo(17, Res.string.zoneTypeMoo, Color(0xFF8EC039)),
+    IceCaves(18, Res.string.zoneTypeIceCaves, Color(0xFFABCFEA)),
+    CarrotQuarry(19, Res.string.zoneTypeCarrotQuarry, Color(0xFFCDA2C7)),
+    SugarWoods(20, Res.string.zoneTypeSugarWoods, Color(0xFFA2CDA4)),
 
     /* Most of the time right above the magma biome. */
-    OilField(6, "Oily", Color(0xFF52321D)),
+    OilField(6, Res.string.zoneTypeOilField, Color(0xFF52321D)),
 
     /* Usually at the bottom of the map, so also listed at the bottom */
-    MagmaCore(5, "Magma", Color(0xFFDE5A3B)),
+    MagmaCore(5, Res.string.zoneTypeMagmaCore, Color(0xFFDE5A3B)),
 }
