@@ -1,4 +1,5 @@
 <resources>
+    <!-- UI Specific -->
     <!-- ClusterType -->
     <string name="clusterTypeBaseTerra">Terra</string>
     <string name="clusterTypeBaseCeres">Ceres</string>
