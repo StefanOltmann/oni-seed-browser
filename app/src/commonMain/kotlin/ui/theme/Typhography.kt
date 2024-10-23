@@ -30,9 +30,7 @@ import oni_seed_browser.app.generated.resources.economica_bold
 import oni_seed_browser.app.generated.resources.economica_bold_italic
 import oni_seed_browser.app.generated.resources.economica_italic
 import oni_seed_browser.app.generated.resources.economica_regular
-import oni_seed_browser.app.generated.resources.noto_sans_bold
-import oni_seed_browser.app.generated.resources.noto_sans_italic
-import oni_seed_browser.app.generated.resources.noto_sans_regular
+import oni_seed_browser.app.generated.resources.noto_sans_sc_regular
 import org.jetbrains.compose.resources.Font
 
 @Composable
@@ -59,37 +57,22 @@ fun EconomicaFontFamily(): FontFamily = FontFamily(
     )
 )
 
-/** Font containing chinese symbols. */
+/** Font containing simplified chinese symbols. */
 @Composable
-fun NotoSansFamily(): FontFamily = FontFamily(
+fun NotoSansScFamily(): FontFamily = FontFamily(
     Font(
-        resource = Res.font.noto_sans_regular,
+        resource = Res.font.noto_sans_sc_regular,
         weight = FontWeight.Normal,
         style = FontStyle.Normal
-    ),
-    Font(
-        resource = Res.font.noto_sans_bold,
-        weight = FontWeight.Bold,
-        style = FontStyle.Normal
-    ),
-    Font(
-        resource = Res.font.noto_sans_italic,
-        weight = FontWeight.Normal,
-        style = FontStyle.Italic
-    ),
-    Font(
-        resource = Res.font.noto_sans_bold_italic,
-        weight = FontWeight.Bold,
-        style = FontStyle.Italic
     )
 )
 
 @Composable
 fun AppTypography(): Typography =
-    if (Locale.current.language != "zh")
-        Typography().defaultFontFamily(EconomicaFontFamily())
+    if (Locale.current.language == "zh")
+        Typography().defaultFontFamily(NotoSansScFamily())
     else
-        Typography().defaultFontFamily(NotoSansFamily())
+        Typography().defaultFontFamily(EconomicaFontFamily())
 
 private fun Typography.defaultFontFamily(fontFamily: FontFamily): Typography {
     return this.copy(
