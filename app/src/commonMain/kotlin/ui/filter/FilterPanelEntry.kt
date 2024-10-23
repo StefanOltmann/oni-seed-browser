@@ -46,6 +46,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import model.filter.FilterRule
+import oni_seed_browser.app.generated.resources.Res
+import oni_seed_browser.app.generated.resources.uiAny
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import ui.getAsteroidTypeDrawable
@@ -94,7 +96,7 @@ fun FilterPanelEntry(
                     if (rule.asteroid == null) {
 
                         Text(
-                            text = "ANY",
+                            text = stringResource(Res.string.uiAny),
                             style = MaterialTheme.typography.bodyLarge,
                             fontWeight = FontWeight.Bold,
                             color = if (hoveredAsteroid.value)
@@ -236,8 +238,8 @@ fun FilterPanelEntry(
 @Composable
 private fun getItemDescription(rule: FilterRule): String =
     when {
-        rule.geyserCount != null -> "Count: ${rule.geyserCount.geyser.displayName}"
-        rule.geyserOutput != null -> "Output (g/s): ${rule.geyserOutput.geyser.displayName}"
+        rule.geyserCount != null -> "Count: ${rule.geyserCount.geyser.stringResource}"
+        rule.geyserOutput != null -> "Output (g/s): ${rule.geyserOutput.geyser.stringResource}"
         rule.worldTrait != null -> stringResource(rule.worldTrait.worldTrait.stringResource)
         rule.spaceDestinationCount != null -> "Space destination: ${rule.spaceDestinationCount.poi}"
         else -> "-/-"

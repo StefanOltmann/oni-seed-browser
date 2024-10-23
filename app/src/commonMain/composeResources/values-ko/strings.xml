@@ -1,4 +1,23 @@
 <resources>
+    <!-- UI Specific -->
+    <string name="uiTitle">Oxygen Not Included Seed Browser</string>
+    <string name="uiFilter">Filter</string>
+    <string name="uiSelectRule">Please select an cluster to define rules.</string>
+    <string name="uiReset">RESET</string>
+    <string name="uiSearch">SEARCH</string>
+    <string name="uiSearching">Searching...</string>
+    <string name="uiAdd">ADD</string>
+    <string name="uiRule">Rule</string>
+    <string name="uiAnd">AND</string>
+    <string name="uiOr">OR</string>
+    <string name="uiAny">ANY</string>
+    <string name="uiNoResult">No results found.</string>
+    <string name="uiSeedInDatabase">seeds in database.</string>
+    <string name="uiWorldTrait">World Trait</string>
+    <string name="uiGeyserCount">Geyser Count</string>
+    <string name="uiGeyserOutput">Geyser Output</string>
+    <string name="uiSpaceDestinationCount">Space Destination Count</string>
+
     <!-- ClusterType -->
     <string name="clusterTypeBaseTerra">테라</string>
     <string name="clusterTypeBaseCeres">케레스</string>

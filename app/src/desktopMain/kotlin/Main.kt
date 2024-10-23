@@ -24,6 +24,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
+import oni_seed_browser.app.generated.resources.Res
+import oni_seed_browser.app.generated.resources.uiTitle
+import org.jetbrains.compose.resources.stringResource
 import ui.App
 
 fun main() = application {
@@ -31,7 +34,7 @@ fun main() = application {
         state = rememberWindowState(
             size = DpSize(1200.dp, 800.dp)
         ),
-        title = "Oxygen Not Included Seed Browser",
+        title = stringResource(Res.string.uiTitle),
         onCloseRequest = ::exitApplication
     ) {
         App(remember { mutableStateOf(null) })

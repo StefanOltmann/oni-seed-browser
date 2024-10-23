@@ -38,6 +38,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import model.ZoneType
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
 import ui.theme.DefaultSpacer
 import ui.theme.HalfSpacer
 import ui.theme.cardColorBackground
@@ -101,7 +102,7 @@ fun ZoneTypeDetail(
             DefaultSpacer()
 
             Text(
-                text = zoneType.displayName,
+                text = stringResource(zoneType.stringResource),
                 style = MaterialTheme.typography.headlineSmall,
                 color = MaterialTheme.colorScheme.onBackground
             )

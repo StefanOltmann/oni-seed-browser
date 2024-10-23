@@ -19,28 +19,44 @@
 
 package model
 
+import oni_seed_browser.app.generated.resources.Res
+import oni_seed_browser.app.generated.resources.pointOfInterestTypeAntiEntropyThermoNullifier
+import oni_seed_browser.app.generated.resources.pointOfInterestTypeArtifact
+import oni_seed_browser.app.generated.resources.pointOfInterestTypeCrashedSatellite
+import oni_seed_browser.app.generated.resources.pointOfInterestTypeCrushedSatellite
+import oni_seed_browser.app.generated.resources.pointOfInterestTypeCryotank3000
+import oni_seed_browser.app.generated.resources.pointOfInterestTypeExperiment52B
+import oni_seed_browser.app.generated.resources.pointOfInterestTypeNeuralVacillator
+import oni_seed_browser.app.generated.resources.pointOfInterestTypePrintingPod
+import oni_seed_browser.app.generated.resources.pointOfInterestTypeSupplyTeleporterInput
+import oni_seed_browser.app.generated.resources.pointOfInterestTypeSupplyTeleporterOutput
+import oni_seed_browser.app.generated.resources.pointOfInterestTypeTeleporterReceiver
+import oni_seed_browser.app.generated.resources.pointOfInterestTypeTeleporterTransmitter
+import oni_seed_browser.app.generated.resources.pointOfInterestTypeTemporalTearOpener
+import oni_seed_browser.app.generated.resources.pointOfInterestTypeWreckedSatellite
+import org.jetbrains.compose.resources.StringResource
+
 /**
  * See https://oxygennotincluded.fandom.com/wiki/Planetoid_Clusters
  */
 enum class PointOfInterestType(
     val id: String,
-    val displayName: String
+    val stringResource: StringResource
 ) {
-
-    PRINTING_POD("Headquarters", "Printing Pod"),
-    SUPPLY_TELEPORTER_INPUT("WarpConduitSender", "Supply Teleporter Input"),
-    SUPPLY_TELEPORTER_OUTPUT("WarpConduitReceiver", "Supply Teleporter Output"),
-    TELEPORTER_TRANSMITTER("WarpPortal", "Teleporter Transmitter"),
-    TELEPORTER_RECEIVER("WarpReceiver", "Teleporter Receiver"),
-    NEURAL_VACILLATOR("GeneShuffler", "Neural Vacillator"),
-    ANTI_ENTROPY_THERMO_NULLIFIER("MassiveHeatSink", "Anti Entropy Thermo-Nullifier"),
-    EXPERIMENT_52B("SapTree", "Experiment 52B"),
-    ARTIFACT("GravitasPedestal", "Artifact"),
-    CRASHED_SATELLITE("PropSurfaceSatellite1", "Crashed Satellite"),
-    WRECKED_SATELLITE("PropSurfaceSatellite2", "Wrecked Satellite"),
-    CRUSHED_SATELLITE("PropSurfaceSatellite3", "Crushed Satellite"),
-    TEMPORAL_TEAR_OPENER("TemporalTearOpener", "Temporal Tear Opener"),
-    CRYOTANK("CryoTank", "Cryotank 3000");
+    PRINTING_POD("Headquarters", Res.string.pointOfInterestTypePrintingPod),
+    SUPPLY_TELEPORTER_INPUT("WarpConduitSender", Res.string.pointOfInterestTypeSupplyTeleporterInput),
+    SUPPLY_TELEPORTER_OUTPUT("WarpConduitReceiver", Res.string.pointOfInterestTypeSupplyTeleporterOutput),
+    TELEPORTER_TRANSMITTER("WarpPortal", Res.string.pointOfInterestTypeTeleporterTransmitter),
+    TELEPORTER_RECEIVER("WarpReceiver", Res.string.pointOfInterestTypeTeleporterReceiver),
+    NEURAL_VACILLATOR("GeneShuffler", Res.string.pointOfInterestTypeNeuralVacillator),
+    ANTI_ENTROPY_THERMO_NULLIFIER("MassiveHeatSink", Res.string.pointOfInterestTypeAntiEntropyThermoNullifier),
+    EXPERIMENT_52B("SapTree", Res.string.pointOfInterestTypeExperiment52B),
+    ARTIFACT("GravitasPedestal", Res.string.pointOfInterestTypeArtifact),
+    CRASHED_SATELLITE("PropSurfaceSatellite1", Res.string.pointOfInterestTypeCrashedSatellite),
+    WRECKED_SATELLITE("PropSurfaceSatellite2", Res.string.pointOfInterestTypeWreckedSatellite),
+    CRUSHED_SATELLITE("PropSurfaceSatellite3", Res.string.pointOfInterestTypeCrushedSatellite),
+    TEMPORAL_TEAR_OPENER("TemporalTearOpener", Res.string.pointOfInterestTypeTemporalTearOpener),
+    CRYOTANK("CryoTank", Res.string.pointOfInterestTypeCryotank3000);
 
     companion object {
 

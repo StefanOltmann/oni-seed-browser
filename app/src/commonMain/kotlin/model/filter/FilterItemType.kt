@@ -19,12 +19,19 @@
 
 package model.filter
 
+import oni_seed_browser.app.generated.resources.Res
+import oni_seed_browser.app.generated.resources.uiGeyserCount
+import oni_seed_browser.app.generated.resources.uiGeyserOutput
+import oni_seed_browser.app.generated.resources.uiSpaceDestinationCount
+import oni_seed_browser.app.generated.resources.uiWorldTrait
+import org.jetbrains.compose.resources.StringResource
+
 enum class FilterItemType(
-    val displayName: String
+    val stringResource: StringResource
 ) {
 
-    WORLD_TRAIT("World trait"),
-    GEYSER_COUNT("Geyser count"),
-    GEYSER_OUTPUT("Geyser output"),
-    SPACE_DESTINATION_COUNT("Space destination count")
+    WORLD_TRAIT(Res.string.uiWorldTrait),
+    GEYSER_COUNT(Res.string.uiGeyserCount),
+    GEYSER_OUTPUT(Res.string.uiGeyserOutput),
+    SPACE_DESTINATION_COUNT(Res.string.uiSpaceDestinationCount)
 }

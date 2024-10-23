@@ -36,6 +36,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import model.GeyserType
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
 import ui.theme.DefaultSpacer
 import ui.theme.HalfSpacer
 
@@ -84,7 +85,7 @@ fun GeyserCountAndName(
         HalfSpacer()
 
         Text(
-            text = geyserType.displayName,
+            text = stringResource(geyserType.stringResource),
             style = MaterialTheme.typography.bodyLarge,
             color = MaterialTheme.colorScheme.onBackground
         )

@@ -41,6 +41,7 @@ import kotlin.math.pow
 import kotlin.math.roundToInt
 import model.Geyser
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
 import ui.theme.DefaultSpacer
 import ui.theme.HalfSpacer
 import ui.theme.cardColorBackground
@@ -109,7 +110,7 @@ fun GeyserDetail(
                 DefaultSpacer()
 
                 Text(
-                    text = geyser.id.displayName,
+                    text = stringResource(geyser.id.stringResource),
                     style = MaterialTheme.typography.bodyLarge,
                     color = MaterialTheme.colorScheme.onBackground
                 )

@@ -99,7 +99,7 @@ fun OverlayContent(
 
                     FilterSelectionEntryItem(
                         image = getAsteroidTypeDrawable(asteroidType),
-                        text = asteroidType.displayName,
+                        text = stringResource(asteroidType.stringResource),
                         onClick = {
 
                             /* Update the query */
@@ -141,7 +141,7 @@ fun OverlayContent(
                         )
 
                         Text(
-                            text = filterItemType.displayName.uppercase(),
+                            text = stringResource(filterItemType.stringResource).uppercase(),
                             style = MaterialTheme.typography.bodyLarge,
                             color = MaterialTheme.colorScheme.onBackground
                         )
@@ -185,7 +185,7 @@ fun OverlayContent(
 
                             FilterSelectionEntryItem(
                                 image = getGeyserDrawable(geyserType),
-                                text = geyserType.displayName + when (filterItemType) {
+                                text = stringResource(geyserType.stringResource) + when (filterItemType) {
                                     FilterItemType.GEYSER_COUNT -> " count"
                                     FilterItemType.GEYSER_OUTPUT -> " output"
                                     else -> ""

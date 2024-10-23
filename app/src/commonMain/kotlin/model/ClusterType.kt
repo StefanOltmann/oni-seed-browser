@@ -20,19 +20,53 @@
 package model
 
 import kotlinx.serialization.Serializable
+import oni_seed_browser.app.generated.resources.Res
+import oni_seed_browser.app.generated.resources.clusterTypeBaseArboria
+import oni_seed_browser.app.generated.resources.clusterTypeBaseAridio
+import oni_seed_browser.app.generated.resources.clusterTypeBaseBlastedCeres
+import oni_seed_browser.app.generated.resources.clusterTypeBaseCeres
+import oni_seed_browser.app.generated.resources.clusterTypeBaseOasisse
+import oni_seed_browser.app.generated.resources.clusterTypeBaseOceania
+import oni_seed_browser.app.generated.resources.clusterTypeBaseRime
+import oni_seed_browser.app.generated.resources.clusterTypeBaseTerra
+import oni_seed_browser.app.generated.resources.clusterTypeBaseTheBadlands
+import oni_seed_browser.app.generated.resources.clusterTypeBaseVerdante
+import oni_seed_browser.app.generated.resources.clusterTypeBaseVolcanea
+import oni_seed_browser.app.generated.resources.clusterTypeDlcArboria
+import oni_seed_browser.app.generated.resources.clusterTypeDlcAridio
+import oni_seed_browser.app.generated.resources.clusterTypeDlcBlastedCeres
+import oni_seed_browser.app.generated.resources.clusterTypeDlcCeres
+import oni_seed_browser.app.generated.resources.clusterTypeDlcCeresMinor
+import oni_seed_browser.app.generated.resources.clusterTypeDlcFlippedMoonlet
+import oni_seed_browser.app.generated.resources.clusterTypeDlcFolia
+import oni_seed_browser.app.generated.resources.clusterTypeDlcFrozenForestMoonlet
+import oni_seed_browser.app.generated.resources.clusterTypeDlcMetallicSwampyMoonlet
+import oni_seed_browser.app.generated.resources.clusterTypeDlcOasisse
+import oni_seed_browser.app.generated.resources.clusterTypeDlcOceania
+import oni_seed_browser.app.generated.resources.clusterTypeDlcQuagmiris
+import oni_seed_browser.app.generated.resources.clusterTypeDlcRadioactiveOceanMoonlet
+import oni_seed_browser.app.generated.resources.clusterTypeDlcRime
+import oni_seed_browser.app.generated.resources.clusterTypeDlcSquelchy
+import oni_seed_browser.app.generated.resources.clusterTypeDlcTerra
+import oni_seed_browser.app.generated.resources.clusterTypeDlcTerrania
+import oni_seed_browser.app.generated.resources.clusterTypeDlcTheBadlands
+import oni_seed_browser.app.generated.resources.clusterTypeDlcTheDesolandsMoonlet
+import oni_seed_browser.app.generated.resources.clusterTypeDlcVerdante
+import oni_seed_browser.app.generated.resources.clusterTypeDlcVolcanea
+import org.jetbrains.compose.resources.StringResource
 
 @Suppress("UNUSED")
 @Serializable
 enum class ClusterType(
     val prefix: String,
-    val displayName: String,
+    val stringResource: StringResource,
     val asteroidTypes: List<AsteroidType>
 ) {
 
     /** Terra */
     BASE_TERRA(
         prefix = "SNDST-A",
-        displayName = "Terra",
+        stringResource = Res.string.clusterTypeBaseTerra,
         asteroidTypes = listOf(
             AsteroidType.SandstoneDefault
         )
@@ -41,7 +75,7 @@ enum class ClusterType(
     /** Ceres */
     BASE_CERES(
         prefix = "CER-A",
-        displayName = "Ceres",
+        stringResource = Res.string.clusterTypeBaseCeres,
         asteroidTypes = listOf(
             AsteroidType.CeresBaseGameAsteroid
         )
@@ -50,7 +84,7 @@ enum class ClusterType(
     /** Ceres */
     BASE_BLASTED_CERES(
         prefix = "CERS-A",
-        displayName = "Blasted Ceres",
+        stringResource = Res.string.clusterTypeBaseBlastedCeres,
         asteroidTypes = listOf(
             AsteroidType.CeresBaseGameShatteredAsteroid
         )
@@ -59,7 +93,7 @@ enum class ClusterType(
     /** Oceania */
     BASE_OCEANIA(
         prefix = "OCAN-A",
-        displayName = "Oceania",
+        stringResource = Res.string.clusterTypeBaseOceania,
         asteroidTypes = listOf(
             AsteroidType.Oceania
         )
@@ -68,7 +102,7 @@ enum class ClusterType(
     /** Rime */
     BASE_RIME(
         prefix = "S-FRZ",
-        displayName = "Rime",
+        stringResource = Res.string.clusterTypeBaseRime,
         asteroidTypes = listOf(
             AsteroidType.SandstoneFrozen
         )
@@ -77,7 +111,7 @@ enum class ClusterType(
     /** Verdante */
     BASE_VERDANTE(
         prefix = "LUSH-A",
-        displayName = "Verdante",
+        stringResource = Res.string.clusterTypeBaseVerdante,
         asteroidTypes = listOf(
             AsteroidType.ForestLush
         )
@@ -86,7 +120,7 @@ enum class ClusterType(
     /** Arboria */
     BASE_ARBORIA(
         prefix = "FRST-A",
-        displayName = "Arboria",
+        stringResource = Res.string.clusterTypeBaseArboria,
         asteroidTypes = listOf(
             AsteroidType.ForestDefault
         )
@@ -95,7 +129,7 @@ enum class ClusterType(
     /** Volcanea */
     BASE_VOLCANEA(
         prefix = "VOLCA",
-        displayName = "Volcanea",
+        stringResource = Res.string.clusterTypeBaseVolcanea,
         asteroidTypes = listOf(
             AsteroidType.Volcanic
         )
@@ -104,7 +138,7 @@ enum class ClusterType(
     /** The Badlands */
     BASE_THE_BADLANDS(
         prefix = "BAD-A",
-        displayName = "The Badlands",
+        stringResource = Res.string.clusterTypeBaseTheBadlands,
         asteroidTypes = listOf(
             AsteroidType.Badlands
         )
@@ -113,7 +147,7 @@ enum class ClusterType(
     /** Aridio */
     BASE_ARIDIO(
         prefix = "HTFST-A",
-        displayName = "Aridio",
+        stringResource = Res.string.clusterTypeBaseAridio,
         asteroidTypes = listOf(
             AsteroidType.ForestHot
         )
@@ -122,7 +156,7 @@ enum class ClusterType(
     /** Oasisse */
     BASE_OASISSE(
         prefix = "OASIS-A",
-        displayName = "Oasisse",
+        stringResource = Res.string.clusterTypeBaseOasisse,
         asteroidTypes = listOf(
             AsteroidType.Oasis
         )
@@ -131,7 +165,7 @@ enum class ClusterType(
     /** Terra */
     DLC_TERRA(
         prefix = "V-SNDST-C",
-        displayName = "Terra",
+        stringResource = Res.string.clusterTypeDlcTerra,
         asteroidTypes = listOf(
             AsteroidType.VanillaSandstoneDefault,
             AsteroidType.MediumRadioactiveVanillaWarpPlanet,
@@ -147,7 +181,7 @@ enum class ClusterType(
     /** Ceres */
     DLC_CERES(
         prefix = "V-CER-C",
-        displayName = "Ceres",
+        stringResource = Res.string.clusterTypeDlcCeres,
         asteroidTypes = listOf(
             AsteroidType.CeresClassicAsteroid,
             AsteroidType.MediumSwampy,
@@ -163,7 +197,7 @@ enum class ClusterType(
     /** Ceres (lab) */
     DLC_BLASTED_CERES(
         prefix = "V-CERS-C",
-        displayName = "Blasted Ceres",
+        stringResource = Res.string.clusterTypeDlcBlastedCeres,
         asteroidTypes = listOf(
             AsteroidType.CeresClassicShatteredAsteroid,
             AsteroidType.MediumSwampy,
@@ -179,7 +213,7 @@ enum class ClusterType(
     /** Oceania */
     DLC_OCEANIA(
         prefix = "V-OCAN-C",
-        displayName = "Oceania",
+        stringResource = Res.string.clusterTypeDlcOceania,
         asteroidTypes = listOf(
             AsteroidType.VanillaOceania,
             AsteroidType.MediumForestyWasteland,
@@ -195,7 +229,7 @@ enum class ClusterType(
     /** Squelchy */
     DLC_SQUELCHY(
         prefix = "V-SWMP-C",
-        displayName = "Squelchy",
+        stringResource = Res.string.clusterTypeDlcSquelchy,
         asteroidTypes = listOf(
             AsteroidType.VanillaSwampDefault,
             AsteroidType.MediumForestyRadioactiveVanillaWarpPlanet,
@@ -211,7 +245,7 @@ enum class ClusterType(
     /** Rime */
     DLC_RIME(
         prefix = "V-SFRZ-C",
-        displayName = "Rime",
+        stringResource = Res.string.clusterTypeDlcRime,
         asteroidTypes = listOf(
             AsteroidType.VanillaSandstoneFrozen,
             AsteroidType.MediumSwampy,
@@ -227,7 +261,7 @@ enum class ClusterType(
     /** Verdante */
     DLC_VERDANTE(
         prefix = "V-LUSH-C",
-        displayName = "Verdante",
+        stringResource = Res.string.clusterTypeDlcVerdante,
         asteroidTypes = listOf(
             AsteroidType.VanillaForestDefault,
             AsteroidType.MediumSandyRadioactiveVanillaWarpPlanet,
@@ -243,7 +277,7 @@ enum class ClusterType(
     /** Arboria */
     DLC_ARBORIA(
         prefix = "V-FRST-C",
-        displayName = "Arboria",
+        stringResource = Res.string.clusterTypeDlcArboria,
         asteroidTypes = listOf(
             AsteroidType.VanillaArboria,
             AsteroidType.MediumSandyRadioactiveVanillaWarpPlanet,
@@ -259,7 +293,7 @@ enum class ClusterType(
     /** Volcanea */
     DLC_VOLCANEA(
         prefix = "V-VOLCA-C",
-        displayName = "Volcanea",
+        stringResource = Res.string.clusterTypeDlcVolcanea,
         asteroidTypes = listOf(
             AsteroidType.VanillaVolcanic,
             AsteroidType.MediumRadioactiveVanillaWarpPlanet,
@@ -275,7 +309,7 @@ enum class ClusterType(
     /** The Badlands */
     DLC_THE_BADLANDS(
         prefix = "V-BAD-C",
-        displayName = "The Badlands",
+        stringResource = Res.string.clusterTypeDlcTheBadlands,
         asteroidTypes = listOf(
             AsteroidType.VanillaBadlands,
             AsteroidType.MediumRadioactiveVanillaWarpPlanet,
@@ -291,7 +325,7 @@ enum class ClusterType(
     /** Aridio */
     DLC_ARIDIO(
         prefix = "V-HTFST-C",
-        displayName = "Aridio",
+        stringResource = Res.string.clusterTypeDlcAridio,
         asteroidTypes = listOf(
             AsteroidType.VanillaAridio,
             AsteroidType.MediumSandySwamp,
@@ -307,7 +341,7 @@ enum class ClusterType(
     /** Oasisse */
     DLC_OASISSE(
         prefix = "V-OASIS-C",
-        displayName = "Oasisse",
+        stringResource = Res.string.clusterTypeDlcOasisse,
         asteroidTypes = listOf(
             AsteroidType.VanillaOasis,
             AsteroidType.MediumRadioactiveVanillaWarpPlanet,
@@ -323,7 +357,7 @@ enum class ClusterType(
     /** Terrania */
     DLC_TERRANIA(
         prefix = "SNDST-C",
-        displayName = "Terrania",
+        stringResource = Res.string.clusterTypeDlcTerrania,
         asteroidTypes = listOf(
             AsteroidType.TerraMoonlet,
             AsteroidType.IdealLandingSite,
@@ -340,7 +374,7 @@ enum class ClusterType(
     /** Ceres Minor */
     DLC_CERES_MINOR(
         prefix = "CER-C",
-        displayName = "Ceres Minor",
+        stringResource = Res.string.clusterTypeDlcCeresMinor,
         asteroidTypes = listOf(
             AsteroidType.CeresSpacedOutAsteroid,
             AsteroidType.SwampyLandingSite,
@@ -357,7 +391,7 @@ enum class ClusterType(
     /** Folia */
     DLC_FOLIA(
         prefix = "FRST-C",
-        displayName = "Folia",
+        stringResource = Res.string.clusterTypeDlcFolia,
         asteroidTypes = listOf(
             AsteroidType.ForestMoonlet,
             AsteroidType.SwampyLandingSite,
@@ -374,7 +408,7 @@ enum class ClusterType(
     /** Quagmiris */
     DLC_QUAGMIRIS(
         prefix = "SWMP-C",
-        displayName = "Quagmiris",
+        stringResource = Res.string.clusterTypeDlcQuagmiris,
         asteroidTypes = listOf(
             AsteroidType.SwampMoonlet,
             AsteroidType.MetalHeavyLandingSite,
@@ -391,7 +425,7 @@ enum class ClusterType(
     /** Metallic Swampy Moonlet */
     DLC_METALLIC_SWAMPY_MOONLET(
         prefix = "M-SWMP-C",
-        displayName = "Metallic Swampy Moonlet",
+        stringResource = Res.string.clusterTypeDlcMetallicSwampyMoonlet,
         asteroidTypes = listOf(
             AsteroidType.MiniMetallicSwampyStart,
             AsteroidType.MiniBadlands,
@@ -410,7 +444,7 @@ enum class ClusterType(
     /** The Desolands Moonlet */
     DLC_THE_DESOLANDS_MOONLET(
         prefix = "M-BAD-C",
-        displayName = "The Desolands Moonlet",
+        stringResource = Res.string.clusterTypeDlcTheDesolandsMoonlet,
         asteroidTypes = listOf(
             AsteroidType.MiniBadlandsStart,
             AsteroidType.MiniRadioactiveOceanWarp,
@@ -429,7 +463,7 @@ enum class ClusterType(
     /** Frozen Forest Moonlet */
     DLC_FROZEN_FOREST_MOONLET(
         prefix = "M-FRZ-C",
-        displayName = "Frozen Forest Moonlet",
+        stringResource = Res.string.clusterTypeDlcFrozenForestMoonlet,
         asteroidTypes = listOf(
             AsteroidType.MiniForestFrozenStart,
             AsteroidType.MiniBadlandsWarp,
@@ -448,7 +482,7 @@ enum class ClusterType(
     /** Flipped Moonlet */
     DLC_FLIPPED_MOONLET(
         prefix = "M-FLIP-C",
-        displayName = "Flipped Moonlet",
+        stringResource = Res.string.clusterTypeDlcFlippedMoonlet,
         asteroidTypes = listOf(
             AsteroidType.MiniFlippedStart,
             AsteroidType.MiniBadlandsWarp,
@@ -467,7 +501,7 @@ enum class ClusterType(
     /** Radioactive Ocean Moonlet */
     DLC_RADIOACTIVE_OCEAN_MOONLET(
         prefix = "M-RAD-C",
-        displayName = "Radioactive Ocean Moonlet",
+        stringResource = Res.string.clusterTypeDlcRadioactiveOceanMoonlet,
         asteroidTypes = listOf(
             AsteroidType.MiniRadioactiveOceanStart,
             AsteroidType.MiniBadlands,

@@ -43,6 +43,7 @@ import model.ClusterType
 import model.Dlc
 import model.filter.FilterQuery
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
 import ui.getClusterDrawable
 import ui.grayScaleFilter
 import ui.noRippleClickable
@@ -119,7 +120,7 @@ fun ClusterSelection(
                 )
 
                 Text(
-                    text = cluster.displayName,
+                    text = stringResource(cluster.stringResource),
                     style = MaterialTheme.typography.bodyLarge,
                     color = if (clusterHovered.value || isSelected)
                         hoverColor
