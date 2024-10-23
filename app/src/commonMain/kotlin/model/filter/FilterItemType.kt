@@ -27,7 +27,7 @@ import oni_seed_browser.app.generated.resources.uiWorldTrait
 import org.jetbrains.compose.resources.StringResource
 
 enum class FilterItemType(
-    val displayName: StringResource
+    val stringResource: StringResource
 ) {
 
     WORLD_TRAIT(Res.string.uiWorldTrait),

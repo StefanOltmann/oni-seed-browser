@@ -26,7 +26,6 @@ import kotlinx.serialization.Serializable
 enum class Dlc(
     val displayName: String
 ) {
-
     SpacedOut("Spaced Out"),
     FrostyPlanet("Frosty Planet");
 }

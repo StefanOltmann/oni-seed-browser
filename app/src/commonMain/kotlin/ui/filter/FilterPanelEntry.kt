@@ -238,8 +238,8 @@ fun FilterPanelEntry(
 @Composable
 private fun getItemDescription(rule: FilterRule): String =
     when {
-        rule.geyserCount != null -> "Count: ${rule.geyserCount.geyser.displayName}"
-        rule.geyserOutput != null -> "Output (g/s): ${rule.geyserOutput.geyser.displayName}"
+        rule.geyserCount != null -> "Count: ${rule.geyserCount.geyser.stringResource}"
+        rule.geyserOutput != null -> "Output (g/s): ${rule.geyserOutput.geyser.stringResource}"
         rule.worldTrait != null -> stringResource(rule.worldTrait.worldTrait.stringResource)
         rule.spaceDestinationCount != null -> "Space destination: ${rule.spaceDestinationCount.poi}"
         else -> "-/-"

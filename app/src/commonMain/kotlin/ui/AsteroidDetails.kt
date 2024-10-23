@@ -76,7 +76,7 @@ fun AsteroidDetails(
         DefaultSpacer()
 
         Text(
-            text = stringResource(asteroid.id.displayName) + " details",
+            text = stringResource(asteroid.id.stringResource) + " details",
             style = MaterialTheme.typography.headlineSmall,
             color = MaterialTheme.colorScheme.onBackground,
         )

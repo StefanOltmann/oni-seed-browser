@@ -110,7 +110,7 @@ fun GeyserDetail(
                 DefaultSpacer()
 
                 Text(
-                    text = stringResource(geyser.id.displayName),
+                    text = stringResource(geyser.id.stringResource),
                     style = MaterialTheme.typography.bodyLarge,
                     color = MaterialTheme.colorScheme.onBackground
                 )

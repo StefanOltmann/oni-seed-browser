@@ -126,7 +126,7 @@ fun AsteroidView(
                 ) {
 
                     Text(
-                        text = stringResource(asteroid.id.displayName),
+                        text = stringResource(asteroid.id.stringResource),
                         style = MaterialTheme.typography.bodyLarge,
                         color = MaterialTheme.colorScheme.onBackground,
                     )

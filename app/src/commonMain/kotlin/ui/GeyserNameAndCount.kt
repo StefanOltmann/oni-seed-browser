@@ -85,7 +85,7 @@ fun GeyserCountAndName(
         HalfSpacer()
 
         Text(
-            text = stringResource(geyserType.displayName),
+            text = stringResource(geyserType.stringResource),
             style = MaterialTheme.typography.bodyLarge,
             color = MaterialTheme.colorScheme.onBackground
         )

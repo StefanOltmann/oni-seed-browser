@@ -86,7 +86,7 @@ import org.jetbrains.compose.resources.StringResource
  * See https://oxygennotincluded.fandom.com/wiki/Planetoid_Clusters
  */
 enum class AsteroidType(
-    val displayName: StringResource
+    val stringResource: StringResource
 ) {
 
     /** Terra Asteroid */

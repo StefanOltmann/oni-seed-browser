@@ -47,7 +47,7 @@ import org.jetbrains.compose.resources.StringResource
 @Serializable
 enum class ZoneType(
     val id: Int,
-    val displayName: StringResource,
+    val stringResource: StringResource,
     val color: Color
 ) {
     /*

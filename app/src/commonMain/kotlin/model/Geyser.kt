@@ -43,5 +43,5 @@ data class Geyser(
 ) {
 
     override fun toString(): String =
-        "${id.displayName} @ $x,$y"
+        "${id.stringResource} @ $x,$y"
 }

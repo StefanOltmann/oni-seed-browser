@@ -41,7 +41,7 @@ import org.jetbrains.compose.resources.StringResource
  */
 enum class PointOfInterestType(
     val id: String,
-    val displayName: StringResource
+    val stringResource: StringResource
 ) {
     PRINTING_POD("Headquarters", Res.string.pointOfInterestTypePrintingPod),
     SUPPLY_TELEPORTER_INPUT("WarpConduitSender", Res.string.pointOfInterestTypeSupplyTeleporterInput),
