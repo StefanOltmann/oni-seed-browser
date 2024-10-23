@@ -21,7 +21,7 @@ jobs:
         run: find .
       - name: Install glyphhanger for font subsetting
         run: |
-          pip install fonttools brotli
+          pip install fonttools brotli zopfli
           npm install -g glyphhanger
       - name: Reduce fonts
         run: |
