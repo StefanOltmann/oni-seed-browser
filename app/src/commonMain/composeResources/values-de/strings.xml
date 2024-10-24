@@ -15,11 +15,11 @@
     <string name="uiHas">hat</string>
     <string name="uiHasNot">hat nicht</string>
     <string name="uiNoResults">Keine Ergebnisse gefunden.</string>
-    <string name="uiSeedsInDatabase">seeds in der Datenbank</string>
+    <string name="uiSeedsInDatabase">Seeds in der Datenbank</string>
     <string name="uiWorldTrait">World Trait</string>
     <string name="uiSpaceDestinationCount">Space Destination Count</string>
-    <string name="uiGeyserCount">Geyser Anzahl</string>
-    <string name="uiGeyserOutput">Geyser Ausgabe</string>
+    <string name="uiGeyserCount">Geysir Anzahl</string>
+    <string name="uiGeyserOutput">Geysir Ausgabe</string>
     <string name="uiItemDescriptionCount">Anzahl</string>
     <string name="uiItemDescriptionOutput">Ausgabe (g/s)</string>
     <string name="uiItemDescriptionSpaceDestination">Space destination</string>
