@@ -17,6 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.ExperimentalComposeUiApi
@@ -31,11 +32,16 @@ fun main() {
 
     CanvasBasedWindow(canvasElementId = "ComposeTarget") {
 
+        val params = remember { getQueryParameters() }
+
+        val isMniEmbedded = derivedStateOf { params["embedded"] == "mni" }
+
         /* Some debug values */
         println("Running on domain: ${document.domain}")
         println("Users language: " + Locale.current.language)
         println("Users language tag: " + Locale.current.toLanguageTag())
         println("Users region: " + Locale.current.region)
+        println("Parameters: $params")
 
         val urlHash = remember {
             mutableStateOf(document.location?.hash?.drop(1)?.ifBlank { null })
@@ -46,6 +52,31 @@ fun main() {
             urlHash.value = it.newURL.substringAfter('#', "").ifBlank { null }
         }
 
-        App(urlHash)
+        App(
+            urlHash,
+            isMniEmbedded
+        )
     }
+}
+
+private fun getQueryParameters(): Map<String, String> {
+
+    val search = window.location.search
+
+    if (search.isBlank() || !search.startsWith("?"))
+        return emptyMap()
+
+    return search
+        .removePrefix("?")
+        .split("&")
+        .mapNotNull {
+
+            val (key, value) = it.split("=")
+
+            if (key.isNotEmpty())
+                key to value
+            else
+                null
+        }
+        .toMap()
 }

@@ -72,7 +72,8 @@ fun ClusterView(
     showStarMap: MutableState<Cluster?>,
     showAsteroidMap: MutableState<Asteroid?>,
     showAsteroidDetails: MutableState<Asteroid?>,
-    showTooltip: MutableState<Tooltip?>
+    showTooltip: MutableState<Tooltip?>,
+    showMniUrl: Boolean
 ) {
 
     Column(
@@ -129,7 +130,10 @@ fun ClusterView(
 
             val clipboardManager = LocalClipboardManager.current
 
-            val url = "https://stefan-oltmann.de/oni-seed-browser/#" + cluster.coordinate;
+            val url = if (showMniUrl)
+                MNI_URL + cluster.coordinate
+            else
+                ORIGINAL_URL + cluster.coordinate
 
             Spacer(modifier = Modifier.width(defaultSpacing + halfSpacing))
 

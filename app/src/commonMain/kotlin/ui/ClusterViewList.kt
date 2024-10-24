@@ -46,7 +46,8 @@ fun ClusterViewList(
     showAsteroidMap: MutableState<Asteroid?>,
     showAsteroidDetails: MutableState<Asteroid?>,
     showTooltip: MutableState<Tooltip?>,
-    showScrollbar: Boolean = true
+    showScrollbar: Boolean = true,
+    showMniUrl: Boolean = false
 ) {
 
     Box {
@@ -66,7 +67,8 @@ fun ClusterViewList(
                     showStarMap,
                     showAsteroidMap,
                     showAsteroidDetails,
-                    showTooltip
+                    showTooltip,
+                    showMniUrl
                 )
             }
         }

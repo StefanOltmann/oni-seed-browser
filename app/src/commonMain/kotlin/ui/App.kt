@@ -38,7 +38,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.produceState
 import androidx.compose.runtime.remember
@@ -68,10 +68,14 @@ import service.DefaultWebClient
 import service.sampleWorldsJson
 import ui.filter.FilterPanel
 import ui.theme.AppTypography
+import ui.theme.DoubleSpacer
 import ui.theme.HalfSpacer
 import ui.theme.appColorScheme
 import ui.theme.defaultPadding
 import ui.theme.defaultRoundedCornerShape
+
+const val ORIGINAL_URL = "https://stefan-oltmann.de/oni-seed-browser/#"
+const val MNI_URL = "https://mapsnotincluded.org/map-explorer/"
 
 val logoIconHeight = 80.dp
 
@@ -82,7 +86,8 @@ data class Tooltip(
 
 @Composable
 fun App(
-    urlHash: MutableState<String?>
+    urlHash: State<String?>,
+    isMniEmbedded: State<Boolean>
 ) {
 
     MaterialTheme(
@@ -221,12 +226,19 @@ fun App(
 //                modifier = Modifier.background(MaterialTheme.colorScheme.background)
                 ) {
 
-                    Text(
-                        text = stringResource(Res.string.uiTitle),
-                        style = MaterialTheme.typography.displayMedium,
-                        color = MaterialTheme.colorScheme.onBackground,
-                        modifier = Modifier.defaultPadding()
-                    )
+                    if (!isMniEmbedded.value) {
+
+                        Text(
+                            text = stringResource(Res.string.uiTitle),
+                            style = MaterialTheme.typography.displayMedium,
+                            color = MaterialTheme.colorScheme.onBackground,
+                            modifier = Modifier.defaultPadding()
+                        )
+
+                    } else {
+
+                        DoubleSpacer()
+                    }
 
                     errorMessage.value?.let {
 
@@ -353,7 +365,8 @@ fun App(
                                         showAsteroidMap,
                                         showAsteroidDetails,
                                         showTooltip,
-                                        showScrollbar = showAsteroidDetails.value == null
+                                        showScrollbar = showAsteroidDetails.value == null,
+                                        showMniUrl = isMniEmbedded.value
                                     )
                                 }
                             }
