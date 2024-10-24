@@ -11,7 +11,7 @@
     <string name="uiAnd">그리고</string>
     <string name="uiOr">또는</string>
     <string name="uiAny">모든</string>
-    <string name="uiAnyLong">모든 소행성</string>
+    <string name="uiAnyLong">모든 행성</string>
     <string name="uiHas">있음</string>
     <string name="uiHasNot">없음</string>
     <string name="uiNoResults">결과를 찾을 수 없습니다.</string>
