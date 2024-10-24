@@ -24,16 +24,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
-import java.util.Locale
 import oni_seed_browser.app.generated.resources.Res
 import oni_seed_browser.app.generated.resources.uiTitle
 import org.jetbrains.compose.resources.stringResource
 import ui.App
 
 fun main() = application {
-
-    Locale.setDefault(Locale.CHINESE)
-
 
     Window(
         state = rememberWindowState(
