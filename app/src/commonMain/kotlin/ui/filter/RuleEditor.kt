@@ -72,9 +72,9 @@ fun RuleEditor(
                 val text = if (rulesIndex == 0 && ruleIndex == 0)
                     null
                 else if (ruleIndex == 0)
-                    "AND"
+                    stringResource(Res.string.uiAnd)
                 else
-                    "OR"
+                    stringResource(Res.string.uiOr)
 
                 RuleEditorRow(text) {
 

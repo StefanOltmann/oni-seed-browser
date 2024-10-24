@@ -11,6 +11,7 @@
     <string name="uiAnd">并且</string>
     <string name="uiOr">或</string>
     <string name="uiAny">任意</string>
+    <string name="uiAnyLong">任意的小行星</string>
     <string name="uiHas">有</string>
     <string name="uiHasNot">没有</string>
     <string name="uiNoResults">未找到结果。</string>

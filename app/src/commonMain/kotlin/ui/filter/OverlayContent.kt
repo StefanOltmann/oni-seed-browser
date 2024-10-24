@@ -45,6 +45,7 @@ import model.filter.FilterItemType
 import model.filter.FilterItemWorldTrait
 import model.filter.FilterQuery
 import oni_seed_browser.app.generated.resources.Res
+import oni_seed_browser.app.generated.resources.uiAnyLong
 import oni_seed_browser.app.generated.resources.uiCount
 import oni_seed_browser.app.generated.resources.uiOutput
 import org.jetbrains.compose.resources.stringResource
@@ -83,7 +84,7 @@ fun OverlayContent(
             if (filterSelectionValue.type == FilterSelectionType.ASTEROID) {
 
                 FilterSelectionEntryItem(
-                    text = "Any of the asteroids",
+                    text = stringResource(Res.string.uiAnyLong),
                     onClick = {
 
                         /* Update the query */

@@ -6,11 +6,12 @@
     <string name="uiReset">RESET</string>
     <string name="uiSearch">SEARCH</string>
     <string name="uiSearching">Searching...</string>
-    <string name="uiAdd">ADD</string>
-    <string name="uiRule">Rule</string>
+    <string name="uiAdd">Add</string>
+    <string name="uiRule">rule</string>
     <string name="uiAnd">AND</string>
     <string name="uiOr">OR</string>
     <string name="uiAny">ANY</string>
+    <string name="uiAnyLong">Any of the asteroids</string>
     <string name="uiHas">has</string>
     <string name="uiHasNot">hasn't</string>
     <string name="uiNoResults">No results found.</string>

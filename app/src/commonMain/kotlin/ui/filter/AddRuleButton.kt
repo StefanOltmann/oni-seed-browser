@@ -83,7 +83,7 @@ fun AddRuleButton(
     ) {
 
         Text(
-            text = stringResource(Res.string.uiAdd) + text + stringResource(Res.string.uiRule),
+            text = stringResource(Res.string.uiAdd) + " '" + text + "' " + stringResource(Res.string.uiRule),
             style = MaterialTheme.typography.bodyLarge,
             fontWeight = FontWeight.Bold,
             color = if (hovered.value)
