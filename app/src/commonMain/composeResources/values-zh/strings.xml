@@ -115,7 +115,7 @@
     <string name="asteroidTypeMiniRadioactiveOceanWarp">放射性海洋小行星</string>
     <string name="asteroidTypeMiniMetallicSwampy">金属沼泽小行星</string>
     <string name="asteroidTypeMiniForestFrozen">冰冻森林小行星</string>
-    <string name="asteroidTypeMiniBadlandsWarp">金属沼泽小行星</string>
+    <string name="asteroidTypeMiniBadlandsWarp">荒地小行星</string>
     <string name="asteroidTypeMiniForestFrozenStart">冰冻森林小行星</string>
     <string name="asteroidTypeMiniFlippedStart">倒置小行星</string>
     <string name="asteroidTypeMiniRadioactiveOceanStart">放射性海洋小行星</string>
