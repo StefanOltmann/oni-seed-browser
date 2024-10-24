@@ -1,0 +1,37 @@
+<resources>
+    <!-- UI Specific -->
+    <string name="uiTitle">Oxygen Not Included Seed Browser</string>
+    <string name="uiFilter">Filter</string>
+    <string name="uiSelectRule">Bitte wähle ein Cluster um Regeln zu definieren.</string>
+    <string name="uiReset">RESET</string>
+    <string name="uiSearch">SUCHEN</string>
+    <string name="uiSearching">Suche...</string>
+    <string name="uiAdd">Neue</string>
+    <string name="uiRule">Regel</string>
+    <string name="uiAnd">UND</string>
+    <string name="uiOr">ODER</string>
+    <string name="uiAny">*</string>
+    <string name="uiAnyLong">Irgendeiner der Asteroiden</string>
+    <string name="uiHas">hat</string>
+    <string name="uiHasNot">hat nicht</string>
+    <string name="uiNoResults">Keine Ergebnisse gefunden.</string>
+    <string name="uiSeedsInDatabase">seeds in der Datenbank</string>
+    <string name="uiWorldTrait">World Trait</string>
+    <string name="uiSpaceDestinationCount">Space Destination Count</string>
+    <string name="uiGeyserCount">Geyser Anzahl</string>
+    <string name="uiGeyserOutput">Geyser Ausgabe</string>
+    <string name="uiItemDescriptionCount">Anzahl</string>
+    <string name="uiItemDescriptionOutput">Ausgabe (g/s)</string>
+    <string name="uiItemDescriptionSpaceDestination">Space destination</string>
+    <string name="uiOutput">Ausgabe</string>
+    <string name="uiCount">Anzahl</string>
+    <string name="uiDetails">details</string>
+    <string name="uiBiomeDetails">Biom details</string>
+    <string name="uiGeyserDetails">Geysir details</string>
+    <string name="uiGeyserDetailGramPerSecond">g/s</string>
+    <string name="uiGeyserDetailOnAverage">im Durchschnitt</string>
+    <string name="uiGeyserDetailSecondsShort">s</string>
+    <string name="uiGeyserDetailCycles">Zyklen</string>
+    <string name="uiGeyserDetailEmitDetails">Erzeugt {emitRate} für {eruptionTime} in {overallTime}</string>
+    <string name="uiGeyserDetailActiveDetails">Aktiv für {activeCycles} in {overallCycles}</string>
+</resources>
