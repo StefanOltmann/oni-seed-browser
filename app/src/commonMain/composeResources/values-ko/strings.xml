@@ -46,7 +46,7 @@
     <string name="clusterTypeBaseTheBadlands">배드랜드</string>
     <string name="clusterTypeBaseAridio">아리디오</string>
     <string name="clusterTypeBaseOasisse">오아시쎄</string>
-    <string name="clusterTypeDlcTerra">테라</string>
+    <string name="clusterTypeDlcTerra">지구</string>
     <string name="clusterTypeDlcCeres">케레스</string>
     <string name="clusterTypeDlcBlastedCeres">폭파된 케레스</string>
     <string name="clusterTypeDlcOceania">오세아니아</string>
@@ -79,7 +79,7 @@
     <string name="asteroidTypeBadlands">황무지형 행성</string>
     <string name="asteroidTypeForestHot">아리디오 행성</string>
     <string name="asteroidTypeOasis">오아시쎄 행성</string>
-    <string name="asteroidTypeVanillaSandstoneDefault">테라 행성</string>
+    <string name="asteroidTypeVanillaSandstoneDefault">지구형 행성</string>
     <string name="asteroidTypeMediumRadioactiveVanillaWarpPlanet">방사성 늪지 행성</string>
     <string name="asteroidTypeCeresClassicAsteroid">케레스 행성</string>
     <string name="asteroidTypeMediumSwampy">악취의 늪지 행성</string>
