@@ -20,14 +20,17 @@ jobs:
       - name: List all files
         run: find .
       - name: Install glyphhanger for font subsetting
+        if: false # disabled as glyphhanger doesn't work
         run: |
           pip install fonttools brotli zopfli
           npm install -g glyphhanger
       - name: Print used chinese fonts
+        if: false # disabled as glyphhanger doesn't work
         timeout-minutes: 5
         run: |
           glyphhanger ./app/src/commonMain/composeResources/values-zh/strings.xml
       - name: Reduce fonts
+        if: false # doesn't work
         timeout-minutes: 5
         run: |
           glyphhanger ./app/src/commonMain/composeResources/values-zh/strings.xml --subset=./app/src/commonMain/composeResources/font/noto_sans_sc_regular.ttf
