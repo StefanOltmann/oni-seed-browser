@@ -80,9 +80,9 @@
     <string name="asteroidTypeForestHot">아리디오 행성</string>
     <string name="asteroidTypeOasis">오아시쎄 행성</string>
     <string name="asteroidTypeVanillaSandstoneDefault">지구형 행성</string>
-    <string name="asteroidTypeMediumRadioactiveVanillaWarpPlanet">방사성 늪지 행성</string>
+    <string name="asteroidTypeMediumRadioactiveVanillaWarpPlanet">방사성 늪지대 행성</string>
     <string name="asteroidTypeCeresClassicAsteroid">케레스 행성</string>
-    <string name="asteroidTypeMediumSwampy">악취의 늪지 행성</string>
+    <string name="asteroidTypeMediumSwampy">악취의 늪지대 행성</string>
     <string name="asteroidTypeVanillaOceania">오세아니아 행성</string>
     <string name="asteroidTypeMediumForestyWasteland">글로우우드 황무지 행성</string>
     <string name="asteroidTypeVanillaSwampDefault">스퀄치 행성</string>
@@ -105,7 +105,7 @@
     <string name="asteroidTypeOilRichWarpTarget">녹슨 기름 행성</string>
     <string name="asteroidTypeForestMoonlet">폴리아 행성</string>
     <string name="asteroidTypeSwampMoonlet">콰그미리스 행성</string>
-    <string name="asteroidTypeMetalHeavyLandingSite">방사성 늪지 행성</string>
+    <string name="asteroidTypeMetalHeavyLandingSite">방사성 늪지대 행성</string>
     <string name="asteroidTypeMiniBadlands">황량한 행성</string>
     <string name="asteroidTypeMiniMetallicSwampyStart">메탈릭 스왐피 행성</string>
     <string name="asteroidTypeMiniForestFrozenWarp">얼어붙은 숲 행성</string>
