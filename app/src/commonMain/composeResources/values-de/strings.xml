@@ -34,4 +34,28 @@
     <string name="uiGeyserDetailCycles">Zyklen</string>
     <string name="uiGeyserDetailEmitDetails">Erzeugt {emitRate} für {eruptionTime} in {overallTime}</string>
     <string name="uiGeyserDetailActiveDetails">Aktiv für {activeCycles} in {overallCycles}</string>
+    <!-- World traits -->
+    <string name="worldTraitBouldersLarge">Große Felsbrocken</string>
+    <string name="worldTraitBouldersMedium">Mittlere Felsbrocken</string>
+    <string name="worldTraitBouldersMixed">Gemischte Felsbrocken</string>
+    <string name="worldTraitBouldersSmall">Kleine Felsbrocken</string>
+    <string name="worldTraitDeepOil">Eingeschlossenes Öl</string>
+    <string name="worldTraitFrozenCore">Gefrorener Kern</string>
+    <string name="worldTraitGeoActive">Geoaktiv</string>
+    <string name="worldTraitGeodes">Geoden</string>
+    <string name="worldTraitGeoDormant">Geodormant</string>
+    <string name="worldTraitGlaciersLarge">Große Gletscher</string>
+    <string name="worldTraitIrregularOil">Irreguläres Öl</string>
+    <string name="worldTraitMagmaVents">Magmakanäle</string>
+    <string name="worldTraitMetalPoor">Metallarm</string>
+    <string name="worldTraitMetalRich">Metallreich</string>
+    <string name="worldTraitMisalignedStart">Alternativer Start</string>
+    <string name="worldTraitSlimeSplats">Schleimpilze</string>
+    <string name="worldTraitSubsurfaceOcean">Untergrundozean</string>
+    <string name="worldTraitVolcanoes">Vulkanische Aktivität</string>
+    <string name="worldTraitCrashedSatellites">Abgestürzte Satelliten</string>
+    <string name="worldTraitDistressSignal">Gefrorener Freund</string>
+    <string name="worldTraitLushCore">Üppiger Kern</string>
+    <string name="worldTraitMetalCaves">Metallhöhlen</string>
+    <string name="worldTraitRadioactiveCrust">Radioaktive Kruste</string>
 </resources>

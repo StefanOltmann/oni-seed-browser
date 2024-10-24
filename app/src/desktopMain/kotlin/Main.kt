@@ -38,6 +38,9 @@ fun main() = application {
         title = stringResource(Res.string.uiTitle),
         onCloseRequest = ::exitApplication
     ) {
-        App(remember { mutableStateOf(null) })
+        App(
+            urlHash = remember { mutableStateOf(null) },
+            isMniEmbedded = remember { mutableStateOf(false) }
+        )
     }
 }

@@ -21,7 +21,8 @@ package ui.filter
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -78,7 +79,8 @@ fun AddRuleButton(
                     )
                 )
             }
-            .size(120.dp, 40.dp)
+            .widthIn(120.dp)
+            .height(40.dp)
             .noRippleClickable(onClick)
     ) {
 
@@ -86,6 +88,7 @@ fun AddRuleButton(
             text = stringResource(Res.string.uiAdd) + " '" + text + "' " + stringResource(Res.string.uiRule),
             style = MaterialTheme.typography.bodyLarge,
             fontWeight = FontWeight.Bold,
+            maxLines = 1,
             color = if (hovered.value)
                 hoverColor
             else
