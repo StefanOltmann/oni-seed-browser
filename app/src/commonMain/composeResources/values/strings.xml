@@ -144,6 +144,9 @@
     <string name="pointOfInterestTypeCrushedSatellite">Crushed Satellite</string>
     <string name="pointOfInterestTypeTemporalTearOpener">Temporal Tear Opener</string>
     <string name="pointOfInterestTypeCryotank3000">Cryotank 3000</string>
+    <string name="pointOfInterestTypePropFacilityStatue">Monument</string>
+    <string name="pointOfInterestTypeGeothermalVentEntity">Geothermal vent</string>
+    <string name="pointOfInterestTypeGeothermalControllerEntity">Geothermal controller</string>
     <!-- Zone types -->
     <string name="zoneTypeSandstone">Sandstone</string>
     <string name="zoneTypeBarren">Barren</string>

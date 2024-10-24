@@ -26,8 +26,11 @@ import oni_seed_browser.app.generated.resources.pointOfInterestTypeCrashedSatell
 import oni_seed_browser.app.generated.resources.pointOfInterestTypeCrushedSatellite
 import oni_seed_browser.app.generated.resources.pointOfInterestTypeCryotank3000
 import oni_seed_browser.app.generated.resources.pointOfInterestTypeExperiment52B
+import oni_seed_browser.app.generated.resources.pointOfInterestTypeGeothermalControllerEntity
+import oni_seed_browser.app.generated.resources.pointOfInterestTypeGeothermalVentEntity
 import oni_seed_browser.app.generated.resources.pointOfInterestTypeNeuralVacillator
 import oni_seed_browser.app.generated.resources.pointOfInterestTypePrintingPod
+import oni_seed_browser.app.generated.resources.pointOfInterestTypePropFacilityStatue
 import oni_seed_browser.app.generated.resources.pointOfInterestTypeSupplyTeleporterInput
 import oni_seed_browser.app.generated.resources.pointOfInterestTypeSupplyTeleporterOutput
 import oni_seed_browser.app.generated.resources.pointOfInterestTypeTeleporterReceiver
@@ -56,7 +59,10 @@ enum class PointOfInterestType(
     WRECKED_SATELLITE("PropSurfaceSatellite2", Res.string.pointOfInterestTypeWreckedSatellite),
     CRUSHED_SATELLITE("PropSurfaceSatellite3", Res.string.pointOfInterestTypeCrushedSatellite),
     TEMPORAL_TEAR_OPENER("TemporalTearOpener", Res.string.pointOfInterestTypeTemporalTearOpener),
-    CRYOTANK("CryoTank", Res.string.pointOfInterestTypeCryotank3000);
+    CRYOTANK("CryoTank", Res.string.pointOfInterestTypeCryotank3000),
+    PropFacilityStatue("PropFacilityStatue", Res.string.pointOfInterestTypePropFacilityStatue),
+    GeothermalVentEntity("GeothermalVentEntity", Res.string.pointOfInterestTypeGeothermalVentEntity),
+    GeothermalControllerEntity("GeothermalControllerEntity", Res.string.pointOfInterestTypeGeothermalControllerEntity);
 
     companion object {
 

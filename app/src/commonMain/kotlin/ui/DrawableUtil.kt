@@ -138,6 +138,9 @@ import oni_seed_browser.app.generated.resources.geyser_water
 import oni_seed_browser.app.generated.resources.poi_artifact_outline
 import oni_seed_browser.app.generated.resources.poi_crashed_satellite
 import oni_seed_browser.app.generated.resources.poi_crushed_satellite
+import oni_seed_browser.app.generated.resources.poi_geothermal_controller_entity
+import oni_seed_browser.app.generated.resources.poi_geothermal_vent_entity
+import oni_seed_browser.app.generated.resources.poi_prop_facility_statue
 import oni_seed_browser.app.generated.resources.poi_wrecked_satellite
 import oni_seed_browser.app.generated.resources.spacepoi_artifact_1
 import oni_seed_browser.app.generated.resources.spacepoi_artifact_2
@@ -271,6 +274,9 @@ fun getPointOfInterestDrawable(pointOfInterestType: PointOfInterestType): Drawab
         PointOfInterestType.CRUSHED_SATELLITE -> Res.drawable.poi_crushed_satellite
         PointOfInterestType.TEMPORAL_TEAR_OPENER -> Res.drawable.building_temporal_tear_opener
         PointOfInterestType.CRYOTANK -> Res.drawable.building_cryotank
+        PointOfInterestType.PropFacilityStatue -> Res.drawable.poi_prop_facility_statue
+        PointOfInterestType.GeothermalVentEntity -> Res.drawable.poi_geothermal_vent_entity
+        PointOfInterestType.GeothermalControllerEntity -> Res.drawable.poi_geothermal_controller_entity
     }
 
 @Composable
