@@ -22,6 +22,7 @@ package model
 import oni_seed_browser.app.generated.resources.Res
 import oni_seed_browser.app.generated.resources.pointOfInterestTypeAntiEntropyThermoNullifier
 import oni_seed_browser.app.generated.resources.pointOfInterestTypeArtifact
+import oni_seed_browser.app.generated.resources.pointOfInterestTypeCeresTechUnlock
 import oni_seed_browser.app.generated.resources.pointOfInterestTypeCrashedSatellite
 import oni_seed_browser.app.generated.resources.pointOfInterestTypeCrushedSatellite
 import oni_seed_browser.app.generated.resources.pointOfInterestTypeCryotank3000
@@ -62,7 +63,8 @@ enum class PointOfInterestType(
     CRYOTANK("CryoTank", Res.string.pointOfInterestTypeCryotank3000),
     PropFacilityStatue("PropFacilityStatue", Res.string.pointOfInterestTypePropFacilityStatue),
     GeothermalVentEntity("GeothermalVentEntity", Res.string.pointOfInterestTypeGeothermalVentEntity),
-    GeothermalControllerEntity("GeothermalControllerEntity", Res.string.pointOfInterestTypeGeothermalControllerEntity);
+    GeothermalControllerEntity("GeothermalControllerEntity", Res.string.pointOfInterestTypeGeothermalControllerEntity),
+    POICeresTechUnlock("POICeresTechUnlock", Res.string.pointOfInterestTypeCeresTechUnlock);
 
     companion object {
 

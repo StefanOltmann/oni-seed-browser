@@ -147,6 +147,7 @@
     <string name="pointOfInterestTypePropFacilityStatue">Monument</string>
     <string name="pointOfInterestTypeGeothermalVentEntity">Geothermal vent</string>
     <string name="pointOfInterestTypeGeothermalControllerEntity">Geothermal controller</string>
+    <string name="pointOfInterestTypeCeresTechUnlock">Tech unlock</string>
     <!-- Zone types -->
     <string name="zoneTypeSandstone">Sandstone</string>
     <string name="zoneTypeBarren">Barren</string>

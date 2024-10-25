@@ -136,6 +136,7 @@ import oni_seed_browser.app.generated.resources.geyser_tungsten_volcano
 import oni_seed_browser.app.generated.resources.geyser_volcano
 import oni_seed_browser.app.generated.resources.geyser_water
 import oni_seed_browser.app.generated.resources.poi_artifact_outline
+import oni_seed_browser.app.generated.resources.poi_ceres_tech_unlock
 import oni_seed_browser.app.generated.resources.poi_crashed_satellite
 import oni_seed_browser.app.generated.resources.poi_crushed_satellite
 import oni_seed_browser.app.generated.resources.poi_geothermal_controller_entity
@@ -277,6 +278,7 @@ fun getPointOfInterestDrawable(pointOfInterestType: PointOfInterestType): Drawab
         PointOfInterestType.PropFacilityStatue -> Res.drawable.poi_prop_facility_statue
         PointOfInterestType.GeothermalVentEntity -> Res.drawable.poi_geothermal_vent_entity
         PointOfInterestType.GeothermalControllerEntity -> Res.drawable.poi_geothermal_controller_entity
+        PointOfInterestType.POICeresTechUnlock -> Res.drawable.poi_ceres_tech_unlock
     }
 
 @Composable
