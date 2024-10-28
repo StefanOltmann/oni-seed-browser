@@ -31,7 +31,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.unit.dp
+import model.Dlc
 import model.filter.FilterQuery
+import model.filter.GameModeType
 import oni_seed_browser.app.generated.resources.Res
 import oni_seed_browser.app.generated.resources.logo_oni
 import oni_seed_browser.app.generated.resources.logo_spaced_out
@@ -44,7 +46,6 @@ import ui.theme.defaultPadding
 
 @Composable
 fun GameVersionSelection(
-    spacedOutDlcSelected: MutableState<Boolean>,
     filterQueryState: MutableState<FilterQuery>
 ) {
 
@@ -56,11 +57,13 @@ fun GameVersionSelection(
 
         val baseGameLogoHovered = remember { mutableStateOf(false) }
         val spacedOutLogoHovered = remember { mutableStateOf(false) }
+        val spacedOutDlcSelected = filterQueryState.value.dlcs.contains(Dlc.SpacedOut);
+
 
         Image(
-            painter = painterResource(Res.drawable.logo_oni),
+            painter = painterResource(Dlc.BaseGame.icon),
             contentDescription = null,
-            colorFilter = if (!spacedOutDlcSelected.value || baseGameLogoHovered.value)
+            colorFilter = if (!spacedOutDlcSelected || baseGameLogoHovered.value)
                 null
             else
                 grayScaleFilter,
@@ -69,13 +72,15 @@ fun GameVersionSelection(
                 .onHover(baseGameLogoHovered)
                 .noRippleClickable {
 
-                    if (!spacedOutDlcSelected.value)
+                    if (!spacedOutDlcSelected)
                         return@noRippleClickable
 
-                    spacedOutDlcSelected.value = false
+                    val mainVersionsRemoved = filterQueryState.value.dlcs.filterNot { it.isMainVersion };
 
                     filterQueryState.value = filterQueryState.value.copy(
+                        dlcs = mainVersionsRemoved + Dlc.BaseGame,
                         cluster = null,
+                        mode = GameModeType.BASEGAME_STANDARD,
                         rules = emptyList()
                     )
                 }
@@ -83,9 +88,9 @@ fun GameVersionSelection(
         )
 
         Image(
-            painter = painterResource(Res.drawable.logo_spaced_out),
+            painter = painterResource(Dlc.SpacedOut.icon),
             contentDescription = null,
-            colorFilter = if (spacedOutDlcSelected.value || spacedOutLogoHovered.value)
+            colorFilter = if (spacedOutDlcSelected || spacedOutLogoHovered.value)
                 null
             else
                 grayScaleFilter,
@@ -94,13 +99,15 @@ fun GameVersionSelection(
                 .onHover(spacedOutLogoHovered)
                 .noRippleClickable {
 
-                    if (spacedOutDlcSelected.value)
+                    if (spacedOutDlcSelected)
                         return@noRippleClickable
 
-                    spacedOutDlcSelected.value = true
+                    val mainVersionsRemoved = filterQueryState.value.dlcs.filterNot { it.isMainVersion };
 
                     filterQueryState.value = filterQueryState.value.copy(
+                        dlcs = mainVersionsRemoved + Dlc.SpacedOut,
                         cluster = null,
+                        mode = GameModeType.SPACEDOUT_SPACEDOUT,
                         rules = emptyList()
                     )
                 }

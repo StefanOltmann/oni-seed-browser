@@ -42,6 +42,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.unit.dp
 import model.filter.FilterQuery
+import model.filter.GameModeType
 import ui.HorizontalSeparator
 import ui.noRippleClickable
 import ui.theme.DefaultSpacer
@@ -97,8 +98,8 @@ fun FilterPanel(
 
         AnimatedVisibility(filterPanelOpen.value) {
 
-            val spacedOutDlcSelected: MutableState<Boolean> = remember {
-                mutableStateOf(filterQueryState.value.cluster?.isBaseGame()?.not() ?: false)
+            val clusterModeSelection: MutableState<GameModeType> = remember {
+                mutableStateOf((filterQueryState.value.cluster?.gameMode ?: GameModeType.SPACEDOUT_SPACEDOUT))
             }
 
             Box {
@@ -122,7 +123,6 @@ fun FilterPanel(
                         DefaultSpacer()
 
                         GameVersionSelection(
-                            spacedOutDlcSelected = spacedOutDlcSelected,
                             filterQueryState = filterQueryState
                         )
 
@@ -132,8 +132,13 @@ fun FilterPanel(
 
                         HorizontalSeparator()
 
+                        GameModeSelection(
+                            filterQueryState = filterQueryState
+                        )
+
+                        HorizontalSeparator()
+
                         ClusterSelection(
-                            spacedOutDlcSelected = spacedOutDlcSelected,
                             filterQueryState = filterQueryState
                         )
 
