@@ -9,10 +9,10 @@ import oni_seed_browser.app.generated.resources.gameModeSpacedOutSpacedOut
 import oni_seed_browser.app.generated.resources.gameModeTheLab
 import org.jetbrains.compose.resources.StringResource
 
-enum class GameModeType (
+enum class GameModeType(
     val nameStringResource: StringResource,
     val requiredDlcs: List<Dlc>
-){
+) {
     BASEGAME_STANDARD(
         nameStringResource = Res.string.gameModeBaseGameStandard,
         listOf(Dlc.BaseGame)

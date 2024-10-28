@@ -29,8 +29,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import model.Dlc
 import model.filter.FilterQuery
-import oni_seed_browser.app.generated.resources.Res
-import oni_seed_browser.app.generated.resources.logo_frosty_planet_banner
 import org.jetbrains.compose.resources.painterResource
 import ui.grayScaleFilter
 import ui.noRippleClickable

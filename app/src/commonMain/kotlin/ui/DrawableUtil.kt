@@ -451,6 +451,7 @@ fun getZoneTypeDrawable(zoneType: ZoneType): DrawableResource =
         ZoneType.CarrotQuarry -> Res.drawable.biome_carrot_quarry
         ZoneType.SugarWoods -> Res.drawable.biome_sugarwoods
     }
+
 @Composable
 fun getGameModeDrawable(gameModeType: GameModeType): DrawableResource =
     when (gameModeType) {

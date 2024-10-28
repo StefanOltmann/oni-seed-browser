@@ -105,7 +105,7 @@ fun main() {
     val query = FilterQuery(
 
         cluster = ClusterType.BASE_TERRA,
-        dlcs = listOf(Dlc.BaseGame,Dlc.FrostyPlanet),
+        dlcs = listOf(Dlc.BaseGame, Dlc.FrostyPlanet),
         mode = GameModeType.BASEGAME_STANDARD,
         rules = listOf(firstRuleGroup, listOf(secondRule), thirdRuleGroup)
     )
