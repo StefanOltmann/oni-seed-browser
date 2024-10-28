@@ -34,9 +34,6 @@ import androidx.compose.ui.unit.dp
 import model.Dlc
 import model.filter.FilterQuery
 import model.filter.GameModeType
-import oni_seed_browser.app.generated.resources.Res
-import oni_seed_browser.app.generated.resources.logo_oni
-import oni_seed_browser.app.generated.resources.logo_spaced_out
 import org.jetbrains.compose.resources.painterResource
 import ui.grayScaleFilter
 import ui.logoIconHeight

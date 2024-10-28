@@ -27,8 +27,8 @@ import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.runtime.Composable
 import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -39,7 +39,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import model.ClusterType
 import model.filter.FilterQuery
 import model.filter.GameModeType
 import org.jetbrains.compose.resources.painterResource
@@ -60,7 +59,7 @@ fun GameModeSelection(
     val currentSelectedMode = query.mode;
 
     //check if the lab should be shown
-    val filteredGameModes = GameModeType.entries.filter{ it.doDlcSettingsAllowMode(query.dlcs)};
+    val filteredGameModes = GameModeType.entries.filter { it.doDlcSettingsAllowMode(query.dlcs) };
 
     FlowRow() {
         for (gameMode in filteredGameModes) {

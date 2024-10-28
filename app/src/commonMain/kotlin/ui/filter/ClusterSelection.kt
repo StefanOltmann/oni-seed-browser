@@ -37,9 +37,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import kotlin.math.max
 import model.ClusterType
-import model.Dlc
 import model.filter.FilterQuery
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -58,17 +56,14 @@ fun ClusterSelection(
 
     val query = filterQueryState.value
 
-    val currentSelectedClusterType: ClusterType ? = query.cluster
+    val currentSelectedClusterType: ClusterType? = query.cluster
 
     val filteredClusters = ClusterType.entries.filterNot {
         it.gameMode != query.mode || !it.dlcRequirementsFulfilled(query.dlcs)
     }
 
     FlowRow(
-//        maxItemsInEachRow = max(
-//            if (enableFrostyPlanet) 10 else 9,
-//            filteredClusters.size / 2
-//        )
+        maxItemsInEachRow = 6
     ) {
 
         for (cluster in filteredClusters) {
