@@ -110,7 +110,7 @@ fun GameModeSelection(
                     textAlign = TextAlign.Center,
                     overflow = TextOverflow.Ellipsis,
                     maxLines = 2,
-                    modifier = Modifier.size(100.dp, 48.dp)
+                    modifier = Modifier.size(100.dp, 24.dp)
                 )
             }
         }
