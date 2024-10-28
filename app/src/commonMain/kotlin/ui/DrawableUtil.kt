@@ -27,6 +27,7 @@ import model.PointOfInterestType
 import model.SpacedOutSpacePOI
 import model.WorldTrait
 import model.ZoneType
+import model.filter.GameModeType
 import oni_seed_browser.app.generated.resources.Res
 import oni_seed_browser.app.generated.resources.asteroid_blasted_ceres
 import oni_seed_browser.app.generated.resources.asteroid_blasted_ceres_spaced_out
@@ -109,6 +110,11 @@ import oni_seed_browser.app.generated.resources.cluster_spacedout_the_badlands
 import oni_seed_browser.app.generated.resources.cluster_spacedout_the_desolands_moonlet
 import oni_seed_browser.app.generated.resources.cluster_spacedout_verdante
 import oni_seed_browser.app.generated.resources.cluster_spacedout_volcanea
+import oni_seed_browser.app.generated.resources.gamemode_basegame_standard
+import oni_seed_browser.app.generated.resources.gamemode_basegame_thelab
+import oni_seed_browser.app.generated.resources.gamemode_spacedout_classic
+import oni_seed_browser.app.generated.resources.gamemode_spacedout_spacedout
+import oni_seed_browser.app.generated.resources.gamemode_spacedout_thelab
 import oni_seed_browser.app.generated.resources.geyser_aluminum_volcano
 import oni_seed_browser.app.generated.resources.geyser_carbon_dioxide
 import oni_seed_browser.app.generated.resources.geyser_carbon_dioxide_vent
@@ -444,4 +450,13 @@ fun getZoneTypeDrawable(zoneType: ZoneType): DrawableResource =
         ZoneType.IceCaves -> Res.drawable.biome_icecaves
         ZoneType.CarrotQuarry -> Res.drawable.biome_carrot_quarry
         ZoneType.SugarWoods -> Res.drawable.biome_sugarwoods
+    }
+@Composable
+fun getGameModeDrawable(gameModeType: GameModeType): DrawableResource =
+    when (gameModeType) {
+        GameModeType.BASEGAME_STANDARD -> Res.drawable.gamemode_basegame_standard
+        GameModeType.BASEGAME_THELAB -> Res.drawable.gamemode_basegame_thelab
+        GameModeType.SPACEDOUT_CLASSIC -> Res.drawable.gamemode_spacedout_classic
+        GameModeType.SPACEDOUT_SPACEDOUT -> Res.drawable.gamemode_spacedout_spacedout
+        GameModeType.SPACEDOUT_THELAB -> Res.drawable.gamemode_spacedout_thelab
     }

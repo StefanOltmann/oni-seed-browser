@@ -35,6 +35,12 @@
     <string name="uiGeyserDetailEmitDetails">Emits {emitRate} for {eruptionTime} in {overallTime}</string>
     <string name="uiGeyserDetailActiveDetails">Active for {activeCycles} in {overallCycles}</string>
 
+    <!-- GameModes -->
+    <string name="gameModeBaseGameStandard">Standard</string>
+    <string name="gameModeTheLab">The Lab</string>
+    <string name="gameModeSpacedOutClassic">Classic</string>
+    <string name="gameModeSpacedOutSpacedOut">Spaced Out</string>
+
     <!-- ClusterType -->
     <string name="clusterTypeBaseTerra">Terra</string>
     <string name="clusterTypeBaseCeres">Ceres</string>

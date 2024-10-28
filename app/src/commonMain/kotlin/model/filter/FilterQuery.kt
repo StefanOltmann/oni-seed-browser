@@ -34,6 +34,8 @@ data class FilterQuery(
 
     val dlcs: List<Dlc>,
 
+    val mode: GameModeType,
+
     /**
      * List of connected OR-rules.
      *
@@ -207,7 +209,8 @@ data class FilterQuery(
 
         val ALL = FilterQuery(
             cluster = null,
-            dlcs = listOf(Dlc.FrostyPlanet),
+            dlcs = listOf(Dlc.BaseGame, Dlc.FrostyPlanet),
+            mode = GameModeType.BASEGAME_STANDARD,
             rules = emptyList()
         )
     }

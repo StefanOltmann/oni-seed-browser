@@ -41,41 +41,45 @@ fun DlcSelection(
     filterQueryState: MutableState<FilterQuery>
 ) {
 
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(doubleSpacing, Alignment.CenterHorizontally)
-    ) {
+    val actualDlcs = Dlc.entries.filterNot { it.isMainVersion };
 
-        val dlcActivated = filterQueryState.value.dlcs.contains(Dlc.FrostyPlanet)
+    for (dlc in actualDlcs) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(doubleSpacing, Alignment.CenterHorizontally)
+        ) {
 
-        val action: () -> Unit = {
+            val dlcActivated = filterQueryState.value.dlcs.contains(dlc)
 
-            if (dlcActivated) {
+            val action: () -> Unit = {
 
-                filterQueryState.value = filterQueryState.value.copy(
-                    dlcs = filterQueryState.value.dlcs - Dlc.FrostyPlanet
-                )
+                if (dlcActivated) {
 
-            } else {
+                    filterQueryState.value = filterQueryState.value.copy(
+                        dlcs = filterQueryState.value.dlcs - dlc
+                    )
 
-                filterQueryState.value = filterQueryState.value.copy(
-                    dlcs = filterQueryState.value.dlcs + Dlc.FrostyPlanet
-                )
+                } else {
+
+                    filterQueryState.value = filterQueryState.value.copy(
+                        dlcs = filterQueryState.value.dlcs + dlc
+                    )
+                }
             }
+
+            Switch(
+                checked = dlcActivated,
+                onCheckedChange = {
+                    action()
+                }
+            )
+
+            Image(
+                painter = painterResource(dlc.icon),
+                contentDescription = null,
+                colorFilter = if (dlcActivated) null else grayScaleFilter,
+                modifier = Modifier.noRippleClickable(action)
+            )
         }
-
-        Switch(
-            checked = dlcActivated,
-            onCheckedChange = {
-                action()
-            }
-        )
-
-        Image(
-            painter = painterResource(Res.drawable.logo_frosty_planet_banner),
-            contentDescription = null,
-            colorFilter = if (dlcActivated) null else grayScaleFilter,
-            modifier = Modifier.noRippleClickable(action)
-        )
     }
 }

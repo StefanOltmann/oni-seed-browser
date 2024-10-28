@@ -31,6 +31,7 @@ import model.filter.FilterItemSpaceDestinationCount
 import model.filter.FilterItemWorldTrait
 import model.filter.FilterQuery
 import model.filter.FilterRule
+import model.filter.GameModeType
 
 fun main() {
 
@@ -104,7 +105,8 @@ fun main() {
     val query = FilterQuery(
 
         cluster = ClusterType.BASE_TERRA,
-        dlcs = listOf(Dlc.FrostyPlanet),
+        dlcs = listOf(Dlc.BaseGame,Dlc.FrostyPlanet),
+        mode = GameModeType.BASEGAME_STANDARD,
         rules = listOf(firstRuleGroup, listOf(secondRule), thirdRuleGroup)
     )
 
