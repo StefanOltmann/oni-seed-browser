@@ -20,6 +20,7 @@
 package model.filter
 
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 import model.AsteroidType
 import model.ClusterType
 import model.Dlc
@@ -34,7 +35,9 @@ data class FilterQuery(
 
     val dlcs: List<Dlc>,
 
-    val mode: GameModeType,
+    /* Don't send this to the server (for now). */
+    @Transient
+    val mode: GameModeType = GameModeType.BASEGAME_STANDARD,
 
     /**
      * List of connected OR-rules.
