@@ -21,6 +21,7 @@ package service
 
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
+import io.ktor.client.plugins.compression.ContentEncoding
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.defaultRequest
 import io.ktor.client.request.get
@@ -44,6 +45,11 @@ const val COUNT_URL = "$BASE_API_URL/count"
 
 private val jsonPretty = Json { this.prettyPrint = true }
 
+private val strictAllFieldsJson = Json {
+    ignoreUnknownKeys = false
+    encodeDefaults = true
+}
+
 object DefaultWebClient : WebClient {
 
     private val httpClient = HttpClient {
@@ -54,13 +60,15 @@ object DefaultWebClient : WebClient {
         }
 
         install(ContentNegotiation) {
-            json(Json)
+            json(strictAllFieldsJson)
+        }
+
+        install(ContentEncoding) {
+            gzip()
         }
     }
 
     override suspend fun countSeeds(): Long? {
-
-        println("Count seeds")
 
         val response = httpClient.get(COUNT_URL)
 
@@ -88,11 +96,10 @@ object DefaultWebClient : WebClient {
 
         println("Search: " + jsonPretty.encodeToString(filterQuery))
 
-        val clusters: List<Cluster> = httpClient.post(SEARCH_URL) {
+        return httpClient.post(SEARCH_URL) {
             contentType(ContentType.Application.Json)
+            header(HttpHeaders.AcceptEncoding, "gzip")
             setBody(filterQuery)
         }.body()
-
-        return clusters
     }
 }
