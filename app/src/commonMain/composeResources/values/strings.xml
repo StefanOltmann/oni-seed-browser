@@ -69,11 +69,11 @@
     <string name="clusterTypeDlcCeresMinor">Ceres Minor</string>
     <string name="clusterTypeDlcFolia">Folia</string>
     <string name="clusterTypeDlcQuagmiris">Quagmiris</string>
-    <string name="clusterTypeDlcMetallicSwampyMoonlet">Metallic Swampy Moonlet</string>
-    <string name="clusterTypeDlcTheDesolandsMoonlet">The Desolands Moonlet</string>
-    <string name="clusterTypeDlcFrozenForestMoonlet">Frozen Forest Moonlet</string>
+    <string name="clusterTypeDlcMetallicSwampyMoonlet">Metallic Swampy</string>
+    <string name="clusterTypeDlcTheDesolandsMoonlet">The Desolands</string>
+    <string name="clusterTypeDlcFrozenForestMoonlet">Frozen Forest</string>
     <string name="clusterTypeDlcFlippedMoonlet">Flipped Moonlet</string>
-    <string name="clusterTypeDlcRadioactiveOceanMoonlet">Radioactive Ocean Moonlet</string>
+    <string name="clusterTypeDlcRadioactiveOceanMoonlet">Radioactive Ocean</string>
 
     <!-- AsteroidType -->
     <string name="asteroidTypeSandstoneDefault">Terra Asteroid</string>

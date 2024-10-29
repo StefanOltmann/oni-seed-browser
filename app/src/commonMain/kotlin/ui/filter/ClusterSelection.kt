@@ -20,11 +20,9 @@
 package ui.filter
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.MaterialTheme
@@ -108,26 +106,19 @@ fun ClusterSelection(
                     modifier = Modifier.size(100.dp)
                 )
 
-                Box(
-                    contentAlignment = Alignment.Center,
-                    /* We need two rows, because chinese text is larger */
-                    modifier = Modifier.height(48.dp)
-                ) {
-
-                    Text(
-                        text = stringResource(cluster.nameStringResource),
-                        style = MaterialTheme.typography.bodyLarge,
-                        color = if (clusterHovered.value || isSelected)
-                            hoverColor
-                        else
-                            MaterialTheme.colorScheme.onBackground,
-                        fontWeight = if (isSelected) FontWeight.Bold else null,
-                        textAlign = TextAlign.Center,
-                        overflow = TextOverflow.Ellipsis,
-                        maxLines = 2,
-                        modifier = Modifier.width(100.dp)
-                    )
-                }
+                Text(
+                    text = stringResource(cluster.nameStringResource),
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = if (clusterHovered.value || isSelected)
+                        hoverColor
+                    else
+                        MaterialTheme.colorScheme.onBackground,
+                    fontWeight = if (isSelected) FontWeight.Bold else null,
+                    textAlign = TextAlign.Center,
+                    overflow = TextOverflow.Ellipsis,
+                    maxLines = 1,
+                    modifier = Modifier.width(100.dp)
+                )
             }
         }
     }
