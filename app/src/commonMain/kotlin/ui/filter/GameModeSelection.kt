@@ -17,8 +17,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-@file:OptIn(ExperimentalLayoutApi::class)
-
 package ui.filter
 
 import androidx.compose.foundation.Image
@@ -26,6 +24,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -50,18 +49,19 @@ import ui.onHover
 import ui.theme.halfPadding
 import ui.theme.hoverColor
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun GameModeSelection(
     filterQueryState: MutableState<FilterQuery>
 ) {
 
-    val query = filterQueryState.value;
-    val currentSelectedMode = query.mode;
+    val query = filterQueryState.value
+    val currentSelectedMode = query.mode
 
-    //check if the lab should be shown
     val filteredGameModes = GameModeType.entries.filter { it.doDlcSettingsAllowMode(query.dlcs) };
 
-    FlowRow() {
+    FlowRow {
+
         for (gameMode in filteredGameModes) {
 
             val isSelected = currentSelectedMode == gameMode
@@ -108,8 +108,8 @@ fun GameModeSelection(
                     fontWeight = if (isSelected) FontWeight.Bold else null,
                     textAlign = TextAlign.Center,
                     overflow = TextOverflow.Ellipsis,
-                    maxLines = 2,
-                    modifier = Modifier.size(100.dp, 24.dp)
+                    maxLines = 1,
+                    modifier = Modifier.width(100.dp)
                 )
             }
         }
