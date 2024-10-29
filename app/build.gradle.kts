@@ -65,6 +65,7 @@ kotlin {
             implementation(libs.ktor.contentnegotiation)
             implementation(libs.ktor.encoding)
             implementation(libs.ktor.json)
+            implementation(libs.ktor.cbor)
         }
 
         commonTest.dependencies {

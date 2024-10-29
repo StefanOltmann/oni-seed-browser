@@ -32,7 +32,10 @@ import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.contentType
+import io.ktor.serialization.kotlinx.cbor.cbor
 import io.ktor.serialization.kotlinx.json.json
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.cbor.Cbor
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import model.Cluster
@@ -50,8 +53,15 @@ private val strictAllFieldsJson = Json {
     encodeDefaults = true
 }
 
+@OptIn(ExperimentalSerializationApi::class)
+private val strictAllFieldsCbor = Cbor {
+    ignoreUnknownKeys = false
+    encodeDefaults = true
+}
+
 object DefaultWebClient : WebClient {
 
+    @OptIn(ExperimentalSerializationApi::class)
     private val httpClient = HttpClient {
 
         defaultRequest {
@@ -61,10 +71,11 @@ object DefaultWebClient : WebClient {
 
         install(ContentNegotiation) {
             json(strictAllFieldsJson)
+            cbor(strictAllFieldsCbor)
         }
 
         install(ContentEncoding) {
-            gzip()
+            gzip(1.0f)
         }
     }
 
