@@ -35,6 +35,12 @@
     <string name="uiGeyserDetailEmitDetails">每{overallTime}中喷发{eruptionTime} 喷发产率{emitRate}</string>
     <string name="uiGeyserDetailActiveDetails">活跃期:每{overallCycles}中活跃{activeCycles}</string>
 
+    <!-- GameModes -->
+    <string name="gameModeBaseGameStandard">标准</string>
+    <string name="gameModeTheLab">实验室</string>
+    <string name="gameModeSpacedOutClassic">经典</string>
+    <string name="gameModeSpacedOutSpacedOut">眼冒金星!</string>
+
     <!-- ClusterType -->
     <string name="clusterTypeBaseTerra">类地星群</string>
     <string name="clusterTypeBaseCeres">谷神星星群</string>
@@ -68,6 +74,7 @@
     <string name="clusterTypeDlcFrozenForestMoonlet">卫星星群-冰冻森林</string>
     <string name="clusterTypeDlcFlippedMoonlet">卫星星群-倒置</string>
     <string name="clusterTypeDlcRadioactiveOceanMoonlet">卫星星群-放射性海洋</string>
+
     <!-- AsteroidType -->
     <string name="asteroidTypeSandstoneDefault">类地星体</string>
     <string name="asteroidTypeCeresBaseGameAsteroid">谷神星</string>
@@ -129,6 +136,7 @@
     <string name="asteroidTypeMiniRegolithMoonlet">浮土小行星</string>
     <string name="asteroidTypeMixingCeresAsteroid">谷神星碎片</string>
     <string name="asteroidTypeCeresClassicShatteredAsteroid">炸裂的谷神星</string>
+
     <!--  POI types -->
     <string name="pointOfInterestTypePrintingPod">打印舱</string>
     <string name="pointOfInterestTypeSupplyTeleporterInput">供给传送器输入端</string>
@@ -144,6 +152,11 @@
     <string name="pointOfInterestTypeCrushedSatellite">粉碎的卫星</string>
     <string name="pointOfInterestTypeTemporalTearOpener">时间裂口开放器</string>
     <string name="pointOfInterestTypeCryotank3000">低温箱3000</string>
+    <string name="pointOfInterestTypePropFacilityStatue">庄严丰碑</string>
+    <string name="pointOfInterestTypeGeothermalVentEntity">地热排气口</string>
+    <string name="pointOfInterestTypeGeothermalControllerEntity">地热热泵</string>
+    <string name="pointOfInterestTypeCeresTechUnlock">研究信息传送通道</string>
+
     <!-- Zone types -->
     <string name="zoneTypeSandstone">砂岩</string>
     <string name="zoneTypeBarren">岩漠</string>
@@ -164,6 +177,7 @@
     <string name="zoneTypeSugarWoods">花蜜</string>
     <string name="zoneTypeOilField">油质</string>
     <string name="zoneTypeMagmaCore">岩浆</string>
+
     <!-- Geyser types -->
     <string name="geyserTypeCoolSteamVent">低温蒸气喷孔</string>
     <string name="geyserTypeHydrogenVent">氢气喷孔</string>
