@@ -2,14 +2,14 @@
     <!-- UI Specific -->
     <string name="uiTitle">地图种子浏览器</string>
     <string name="uiFilter">筛选</string>
-    <string name="uiSelectRule">请选择一个小行星.</string>
+    <string name="uiSelectRule">请选择小行星类型.</string>
     <string name="uiReset">重置</string>
     <string name="uiSearch">搜索</string>
     <string name="uiSearching">正在搜索中...</string>
     <string name="uiAdd">添加</string>
     <string name="uiRule">条件</string>
-    <string name="uiAnd">加上</string>
-    <string name="uiOr">或是</string>
+    <string name="uiAnd">加</string>
+    <string name="uiOr">或</string>
     <string name="uiAny">任何</string>
     <string name="uiAnyLong">任何小行星</string>
     <string name="uiHas">有</string>
@@ -205,6 +205,7 @@
     <string name="geyserTypeVolcano">火山</string>
     <string name="geyserTypeMinorVolcano">小型火山</string>
     <string name="geyserTypeOilReservoir">储油石</string>
+
     <!-- World traits -->
     <string name="worldTraitBouldersLarge">大型石块</string>
     <string name="worldTraitBouldersMedium">中型石块</string>
