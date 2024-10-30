@@ -4,9 +4,9 @@
     <string name="uiFilter">篩選</string>
     <string name="uiSelectRule">請選擇小行星類型.</string>
     <string name="uiReset">重置</string>
-    <string name="uiSearch">搜尋</string>
-    <string name="uiSearching">正在搜尋中...</string>
-    <string name="uiAdd">新增</string>
+    <string name="uiSearch">搜索</string>
+    <string name="uiSearching">正在搜索中...</string>
+    <string name="uiAdd">添加</string>
     <string name="uiRule">條件</string>
     <string name="uiAnd">加</string>
     <string name="uiOr">或</string>
@@ -17,13 +17,13 @@
     <string name="uiNoResults">未找到結果.</string>
     <string name="uiSeedsInDatabase">個資料庫中的種子</string>
     <string name="uiWorldTrait">星球特質</string>
-    <string name="uiSpaceDestinationCount">太空目的地數</string>
-    <string name="uiGeyserCount">間歇泉數</string>
+    <string name="uiSpaceDestinationCount">太空目的地數量</string>
+    <string name="uiGeyserCount">間歇泉數量</string>
     <string name="uiGeyserOutput">間歇泉生成</string>
     <string name="uiItemDescriptionCount">數量</string>
     <string name="uiItemDescriptionOutput">生成 (克/秒)</string>
     <string name="uiItemDescriptionSpaceDestination">太空目的地</string>
-    <string name="uiOutput">產生</string>
+    <string name="uiOutput">生成</string>
     <string name="uiCount">數量</string>
     <string name="uiDetails">詳情</string>
     <string name="uiBiomeDetails">生態詳情</string>
@@ -150,7 +150,7 @@
     <string name="pointOfInterestTypeCrashedSatellite">撞毀的衛星</string>
     <string name="pointOfInterestTypeWreckedSatellite">失事的衛星</string>
     <string name="pointOfInterestTypeCrushedSatellite">粉碎的衛星</string>
-    <string name="pointOfInterestTypeTemporalTearOpener">時間裂縫開放器</string>
+    <string name="pointOfInterestTypeTemporalTearOpener">時間裂口開放器</string>
     <string name="pointOfInterestTypeCryotank3000">低溫箱3000</string>
     <string name="pointOfInterestTypePropFacilityStatue">莊嚴豐碑</string>
     <string name="pointOfInterestTypeGeothermalVentEntity">地熱排氣口</string>
@@ -207,16 +207,16 @@
     <string name="geyserTypeOilReservoir">儲油石</string>
 
     <!-- World traits -->
-    <string name="worldTraitBouldersLarge">大型石頭</string>
-    <string name="worldTraitBouldersMedium">中型石頭</string>
+    <string name="worldTraitBouldersLarge">大型石塊</string>
+    <string name="worldTraitBouldersMedium">中型石塊</string>
     <string name="worldTraitBouldersMixed">混合型石塊</string>
-    <string name="worldTraitBouldersSmall">小石頭</string>
+    <string name="worldTraitBouldersSmall">小型石塊</string>
     <string name="worldTraitDeepOil">被圈閉的原油</string>
     <string name="worldTraitFrozenCore">冰凍核心</string>
     <string name="worldTraitGeoActive">活躍性地質</string>
     <string name="worldTraitGeodes">晶洞</string>
     <string name="worldTraitGeoDormant">休眠性地質</string>
-    <string name="worldTraitGlaciersLarge">大型冰河</string>
+    <string name="worldTraitGlaciersLarge">大型冰川</string>
     <string name="worldTraitIrregularOil">不規則原油區</string>
     <string name="worldTraitMagmaVents">岩漿通道</string>
     <string name="worldTraitMetalPoor">金屬貧瘠</string>
@@ -228,6 +228,6 @@
     <string name="worldTraitCrashedSatellites">墜毀的衛星群</string>
     <string name="worldTraitDistressSignal">冰封之友</string>
     <string name="worldTraitLushCore">繁茂核心</string>
-    <string name="worldTraitMetalCaves">金屬洞</string>
-    <string name="worldTraitRadioactiveCrust">放射性外殼</string>
+    <string name="worldTraitMetalCaves">金屬洞穴</string>
+    <string name="worldTraitRadioactiveCrust">放射性地殼</string>
 </resources>
