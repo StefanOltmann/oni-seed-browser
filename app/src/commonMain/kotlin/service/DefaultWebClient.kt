@@ -34,6 +34,7 @@ import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.contentType
 import io.ktor.serialization.kotlinx.cbor.cbor
+import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.cbor.Cbor
 import kotlinx.serialization.encodeToString
@@ -46,7 +47,16 @@ const val FIND_URL = "$BASE_API_URL/coordinate"
 const val SEARCH_URL = "$BASE_API_URL/search"
 const val COUNT_URL = "$BASE_API_URL/count"
 
-private val jsonPretty = Json { this.prettyPrint = true }
+private val jsonPretty = Json {
+    prettyPrint = true
+    ignoreUnknownKeys = false
+    encodeDefaults = true
+}
+
+private val strictAllFieldsJson = Json {
+    ignoreUnknownKeys = false
+    encodeDefaults = true
+}
 
 @OptIn(ExperimentalSerializationApi::class)
 private val strictAllFieldsCbor = Cbor {
@@ -65,6 +75,7 @@ object DefaultWebClient : WebClient {
         }
 
         install(ContentNegotiation) {
+            json(strictAllFieldsJson)
             cbor(strictAllFieldsCbor)
         }
 
@@ -104,10 +115,18 @@ object DefaultWebClient : WebClient {
         println("Search: " + jsonPretty.encodeToString(filterQuery))
 
         return httpClient.post(SEARCH_URL) {
-            contentType(ContentType.Application.Cbor)
+
+            /* Filter MUST be sent as JSON, because CBOR causes issues here. */
+            contentType(ContentType.Application.Json)
+
+            /* Response can be in CBOR */
             accept(ContentType.Application.Cbor)
+
+            /* Always zip */
             header(HttpHeaders.AcceptEncoding, "gzip")
+
             setBody(filterQuery)
+
         }.body()
     }
 }
