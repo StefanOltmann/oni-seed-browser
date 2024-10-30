@@ -24,6 +24,7 @@ import io.ktor.client.call.body
 import io.ktor.client.plugins.compression.ContentEncoding
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.defaultRequest
+import io.ktor.client.request.accept
 import io.ktor.client.request.get
 import io.ktor.client.request.header
 import io.ktor.client.request.post
@@ -33,7 +34,6 @@ import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.contentType
 import io.ktor.serialization.kotlinx.cbor.cbor
-import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.cbor.Cbor
 import kotlinx.serialization.encodeToString
@@ -47,11 +47,6 @@ const val SEARCH_URL = "$BASE_API_URL/search"
 const val COUNT_URL = "$BASE_API_URL/count"
 
 private val jsonPretty = Json { this.prettyPrint = true }
-
-private val strictAllFieldsJson = Json {
-    ignoreUnknownKeys = false
-    encodeDefaults = true
-}
 
 @OptIn(ExperimentalSerializationApi::class)
 private val strictAllFieldsCbor = Cbor {
@@ -70,7 +65,6 @@ object DefaultWebClient : WebClient {
         }
 
         install(ContentNegotiation) {
-            json(strictAllFieldsJson)
             cbor(strictAllFieldsCbor)
         }
 
@@ -94,7 +88,9 @@ object DefaultWebClient : WebClient {
         println("Find: $coordinate")
 
         val response = httpClient.get("$FIND_URL/$coordinate") {
-            contentType(ContentType.Application.Json)
+            contentType(ContentType.Application.Cbor)
+            accept(ContentType.Application.Cbor)
+            header(HttpHeaders.AcceptEncoding, "gzip")
         }
 
         if (response.status != HttpStatusCode.OK)
@@ -108,7 +104,8 @@ object DefaultWebClient : WebClient {
         println("Search: " + jsonPretty.encodeToString(filterQuery))
 
         return httpClient.post(SEARCH_URL) {
-            contentType(ContentType.Application.Json)
+            contentType(ContentType.Application.Cbor)
+            accept(ContentType.Application.Cbor)
             header(HttpHeaders.AcceptEncoding, "gzip")
             setBody(filterQuery)
         }.body()
