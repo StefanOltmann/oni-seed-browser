@@ -99,6 +99,8 @@ fun App(
 
         val density = LocalDensity.current.density
 
+        val errorMessage = remember { mutableStateOf<String?>(null) }
+
         Box(
             modifier = Modifier.onSizeChanged {
                 screenIsToSmall.value = it.width / density < 800 || it.height / density < 300
@@ -116,7 +118,19 @@ fun App(
             }
 
             val worldCount = produceState<Long?>(null) {
-                value = DefaultWebClient.countSeeds()
+
+                try {
+
+                    value = DefaultWebClient.countSeeds()
+
+                } catch (ex: Exception) {
+
+                    /* We MUST catch here to prevent UI freezes. */
+
+                    ex.printStackTrace()
+
+                    errorMessage.value = ex.stackTraceToString()
+                }
             }
 
             val coroutineScope = rememberCoroutineScope()
@@ -134,8 +148,6 @@ fun App(
             val showTooltip = remember { mutableStateOf<Tooltip?>(null) }
 
             val isGettingNewResults = remember { mutableStateOf(false) }
-
-            val errorMessage = remember { mutableStateOf<String?>(null) }
 
             LaunchedEffect(filterQueryState.value) {
                 /* Reset the details on each search. */
@@ -164,6 +176,8 @@ fun App(
                             clusters.value = emptyList()
 
                     } catch (ex: Exception) {
+
+                        /* We MUST catch here to prevent UI freezes. */
 
                         ex.printStackTrace()
 
