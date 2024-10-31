@@ -111,9 +111,9 @@ fun ClusterSelection(
                 HalfSpacer()
 
                 /*
-                 * We need more space for the chinese description here.
+                 * We need more space for the chinese or korean description here.
                  */
-                val style = if (Locale.current.language == "zh")
+                val style = if (Locale.current.language == "zh" || Locale.current.language == "ko")
                     MaterialTheme.typography.bodySmall
                 else
                     MaterialTheme.typography.bodyLarge
