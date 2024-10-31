@@ -21,8 +21,10 @@ package service
 
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
+import io.ktor.client.plugins.compression.ContentEncoding
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.defaultRequest
+import io.ktor.client.request.accept
 import io.ktor.client.request.get
 import io.ktor.client.request.header
 import io.ktor.client.request.post
@@ -31,7 +33,10 @@ import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.contentType
+import io.ktor.serialization.kotlinx.cbor.cbor
 import io.ktor.serialization.kotlinx.json.json
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.cbor.Cbor
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import model.Cluster
@@ -42,10 +47,26 @@ const val FIND_URL = "$BASE_API_URL/coordinate"
 const val SEARCH_URL = "$BASE_API_URL/search"
 const val COUNT_URL = "$BASE_API_URL/count"
 
-private val jsonPretty = Json { this.prettyPrint = true }
+private val jsonPretty = Json {
+    prettyPrint = true
+    ignoreUnknownKeys = false
+    encodeDefaults = true
+}
+
+private val strictAllFieldsJson = Json {
+    ignoreUnknownKeys = false
+    encodeDefaults = true
+}
+
+@OptIn(ExperimentalSerializationApi::class)
+private val strictAllFieldsCbor = Cbor {
+    ignoreUnknownKeys = false
+    encodeDefaults = true
+}
 
 object DefaultWebClient : WebClient {
 
+    @OptIn(ExperimentalSerializationApi::class)
     private val httpClient = HttpClient {
 
         defaultRequest {
@@ -54,13 +75,16 @@ object DefaultWebClient : WebClient {
         }
 
         install(ContentNegotiation) {
-            json(Json)
+            json(strictAllFieldsJson)
+            cbor(strictAllFieldsCbor)
+        }
+
+        install(ContentEncoding) {
+            gzip(1.0f)
         }
     }
 
     override suspend fun countSeeds(): Long? {
-
-        println("Count seeds")
 
         val response = httpClient.get(COUNT_URL)
 
@@ -75,7 +99,9 @@ object DefaultWebClient : WebClient {
         println("Find: $coordinate")
 
         val response = httpClient.get("$FIND_URL/$coordinate") {
-            contentType(ContentType.Application.Json)
+            contentType(ContentType.Application.Cbor)
+            accept(ContentType.Application.Cbor)
+            header(HttpHeaders.AcceptEncoding, "gzip")
         }
 
         if (response.status != HttpStatusCode.OK)
@@ -88,11 +114,19 @@ object DefaultWebClient : WebClient {
 
         println("Search: " + jsonPretty.encodeToString(filterQuery))
 
-        val clusters: List<Cluster> = httpClient.post(SEARCH_URL) {
-            contentType(ContentType.Application.Json)
-            setBody(filterQuery)
-        }.body()
+        return httpClient.post(SEARCH_URL) {
 
-        return clusters
+            /* Filter MUST be sent as JSON, because CBOR causes issues here. */
+            contentType(ContentType.Application.Json)
+
+            /* Response can be in CBOR */
+            accept(ContentType.Application.Cbor)
+
+            /* Always zip */
+            header(HttpHeaders.AcceptEncoding, "gzip")
+
+            setBody(filterQuery)
+
+        }.body()
     }
 }

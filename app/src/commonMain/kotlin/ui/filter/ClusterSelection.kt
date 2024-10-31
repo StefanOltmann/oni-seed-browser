@@ -24,6 +24,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -34,6 +35,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -45,6 +47,7 @@ import ui.getClusterDrawable
 import ui.grayScaleFilter
 import ui.noRippleClickable
 import ui.onHover
+import ui.theme.HalfSpacer
 import ui.theme.halfPadding
 import ui.theme.hoverColor
 
@@ -105,9 +108,19 @@ fun ClusterSelection(
                     modifier = Modifier.size(100.dp)
                 )
 
+                HalfSpacer()
+
+                /*
+                 * We need more space for the chinese description here.
+                 */
+                val style = if (Locale.current.language == "zh")
+                    MaterialTheme.typography.bodySmall
+                else
+                    MaterialTheme.typography.bodyLarge
+
                 Text(
                     text = stringResource(cluster.nameStringResource),
-                    style = MaterialTheme.typography.bodyLarge,
+                    style = style,
                     color = if (clusterHovered.value || isSelected)
                         hoverColor
                     else
@@ -115,8 +128,8 @@ fun ClusterSelection(
                     fontWeight = if (isSelected) FontWeight.Bold else null,
                     textAlign = TextAlign.Center,
                     overflow = TextOverflow.Ellipsis,
-                    maxLines = 2,
-                    modifier = Modifier.size(100.dp, 24.dp)
+                    maxLines = 1,
+                    modifier = Modifier.width(120.dp)
                 )
             }
         }

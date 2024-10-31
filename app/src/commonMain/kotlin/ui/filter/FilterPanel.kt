@@ -90,17 +90,12 @@ fun FilterPanel(
             )
             .background(anthraticeTransparentBackgroundColor, defaultRoundedCornerShape)
             .border(0.dp, lightGrayTransparentBorderColor, defaultRoundedCornerShape)
-            //.shadow(elevation = 8.dp)
             .then(maxSizeModifier)
     ) {
 
         FilterHeader(worldCount, filterPanelOpen)
 
         AnimatedVisibility(filterPanelOpen.value) {
-
-            val clusterModeSelection: MutableState<GameModeType> = remember {
-                mutableStateOf((filterQueryState.value.cluster?.gameMode ?: GameModeType.SPACEDOUT_SPACEDOUT))
-            }
 
             Box {
 

@@ -69,11 +69,12 @@
     <string name="clusterTypeDlcCeresMinor">Ceres Minor</string>
     <string name="clusterTypeDlcFolia">Folia</string>
     <string name="clusterTypeDlcQuagmiris">Quagmiris</string>
-    <string name="clusterTypeDlcMetallicSwampyMoonlet">Metallic Swampy Moonlet</string>
-    <string name="clusterTypeDlcTheDesolandsMoonlet">The Desolands Moonlet</string>
-    <string name="clusterTypeDlcFrozenForestMoonlet">Frozen Forest Moonlet</string>
+    <string name="clusterTypeDlcMetallicSwampyMoonlet">Metallic Swampy</string>
+    <string name="clusterTypeDlcTheDesolandsMoonlet">The Desolands</string>
+    <string name="clusterTypeDlcFrozenForestMoonlet">Frozen Forest</string>
     <string name="clusterTypeDlcFlippedMoonlet">Flipped Moonlet</string>
-    <string name="clusterTypeDlcRadioactiveOceanMoonlet">Radioactive Ocean Moonlet</string>
+    <string name="clusterTypeDlcRadioactiveOceanMoonlet">Radioactive Ocean</string>
+
     <!-- AsteroidType -->
     <string name="asteroidTypeSandstoneDefault">Terra Asteroid</string>
     <string name="asteroidTypeCeresBaseGameAsteroid">Ceres Asteroid</string>
@@ -135,6 +136,7 @@
     <string name="asteroidTypeMiniRegolithMoonlet">Regolith Asteroid</string>
     <string name="asteroidTypeMixingCeresAsteroid">Mixing Ceres Asteroid</string>
     <string name="asteroidTypeCeresClassicShatteredAsteroid">Blasted Ceres Asteroid</string>
+
     <!--  POI types -->
     <string name="pointOfInterestTypePrintingPod">Printing Pod</string>
     <string name="pointOfInterestTypeSupplyTeleporterInput">Supply Teleporter Input</string>
@@ -154,6 +156,7 @@
     <string name="pointOfInterestTypeGeothermalVentEntity">Geothermal vent</string>
     <string name="pointOfInterestTypeGeothermalControllerEntity">Geothermal controller</string>
     <string name="pointOfInterestTypeCeresTechUnlock">Tech unlock</string>
+
     <!-- Zone types -->
     <string name="zoneTypeSandstone">Sandstone</string>
     <string name="zoneTypeBarren">Barren</string>
@@ -174,6 +177,7 @@
     <string name="zoneTypeSugarWoods">Nectar</string>
     <string name="zoneTypeOilField">Oily</string>
     <string name="zoneTypeMagmaCore">Magma</string>
+
     <!-- Geyser types -->
     <string name="geyserTypeCoolSteamVent">Cool Steam Vent</string>
     <string name="geyserTypeHydrogenVent">Hydrogen Vent</string>
@@ -201,6 +205,7 @@
     <string name="geyserTypeVolcano">Volcano</string>
     <string name="geyserTypeMinorVolcano">Minor Volcano</string>
     <string name="geyserTypeOilReservoir">Oil Reservoir</string>
+
     <!-- World traits -->
     <string name="worldTraitBouldersLarge">Large Boulders</string>
     <string name="worldTraitBouldersMedium">Medium Boulders</string>
