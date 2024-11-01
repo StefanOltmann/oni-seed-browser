@@ -87,7 +87,12 @@ data class Tooltip(
 @Composable
 fun App(
     urlHash: State<String?>,
-    isMniEmbedded: State<Boolean>
+    isMniEmbedded: State<Boolean>,
+    /**
+     * Note: LocalClipboardManager does not work for Compose for Web
+     * in all browsers for some reason. That's why we use a workaround here.
+     */
+    writeToClipboard: (String) -> Unit
 ) {
 
     MaterialTheme(
@@ -204,7 +209,8 @@ fun App(
 
                 StarMapView(
                     cluster = worldForStarMapView,
-                    onCloseClicked = { showStarMap.value = null }
+                    onCloseClicked = { showStarMap.value = null },
+                    writeToClipboard = writeToClipboard
                 )
 
                 return@MaterialTheme
@@ -380,7 +386,8 @@ fun App(
                                         showAsteroidDetails,
                                         showTooltip,
                                         showScrollbar = showAsteroidDetails.value == null,
-                                        showMniUrl = isMniEmbedded.value
+                                        showMniUrl = isMniEmbedded.value,
+                                        writeToClipboard = writeToClipboard
                                     )
                                 }
                             }

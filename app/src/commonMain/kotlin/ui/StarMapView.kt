@@ -58,7 +58,8 @@ private val gridColor = lightGray.copy(alpha = 0.2f)
 @Composable
 fun StarMapView(
     cluster: Cluster,
-    onCloseClicked: () -> Unit
+    onCloseClicked: () -> Unit,
+    writeToClipboard: (String) -> Unit
 ) {
 
     if (cluster.starMapEntriesSpacedOut == null)
@@ -90,7 +91,8 @@ fun StarMapView(
                 index = 0,
                 totalCount = 0,
                 coordinate = cluster.coordinate,
-                showMapClicked = null
+                showMapClicked = null,
+                writeToClipboard = writeToClipboard
             )
 
             BoxWithConstraints(
