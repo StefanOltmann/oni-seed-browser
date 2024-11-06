@@ -42,7 +42,7 @@ import ui.theme.defaultRoundedCornerShape
 import ui.theme.doubleSpacing
 
 @Composable
-fun WorlTraitDetail(
+fun WorldTraitDetail(
     worldTrait: WorldTrait
 ) {
 

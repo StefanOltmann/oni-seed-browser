@@ -125,7 +125,7 @@ fun AsteroidDetails(
                 }
 
                 for (worldTrait in asteroid.worldTraits)
-                    WorlTraitDetail(worldTrait)
+                    WorldTraitDetail(worldTrait)
 
                 for (geyser in asteroid.geysers.sortedBy { it.id })
                     GeyserDetail(geyser)
