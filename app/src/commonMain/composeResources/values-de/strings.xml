@@ -1,6 +1,6 @@
 <resources>
     <!-- UI Specific -->
-    <string name="uiTitle">Oxygen Not Included Seed Browser</string>
+    <string name="uiTitle">Oxygen Not Included Kartenfinder</string>
     <string name="uiFilter">Filter</string>
     <string name="uiSelectRule">Bitte wähle ein Cluster um Regeln zu definieren.</string>
     <string name="uiReset">RESET</string>
@@ -15,8 +15,8 @@
     <string name="uiHas">hat</string>
     <string name="uiHasNot">hat nicht</string>
     <string name="uiNoResults">Keine Ergebnisse gefunden.</string>
-    <string name="uiSeedsInDatabase">Seeds in der Datenbank</string>
-    <string name="uiWorldTrait">World Trait</string>
+    <string name="uiSeedsInDatabase">Karten in der Datenbank</string>
+    <string name="uiWorldTrait">Welt-Eigenschaft</string>
     <string name="uiSpaceDestinationCount">Space Destination Count</string>
     <string name="uiGeyserCount">Geysir Anzahl</string>
     <string name="uiGeyserOutput">Geysir Ausgabe</string>
