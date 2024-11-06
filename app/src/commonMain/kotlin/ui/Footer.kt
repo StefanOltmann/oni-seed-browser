@@ -19,10 +19,10 @@
 
 package ui
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -34,8 +34,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalUriHandler
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import ui.theme.halfSpacing
+import androidx.compose.ui.unit.sp
+import ui.icons.KotlinLogo
+import ui.theme.HalfSpacer
 import ui.theme.lightGray
 
 @Composable
@@ -43,26 +46,41 @@ fun Footer() {
 
     val uriHandler = LocalUriHandler.current
 
-    BoxWithConstraints {
+    Box(
+        contentAlignment = Alignment.Center,
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(24.dp)
+            .background(Color.Black)
+    ) {
 
         Row(
-            horizontalArrangement = Arrangement.spacedBy(halfSpacing, Alignment.CenterHorizontally),
-            verticalAlignment = Alignment.CenterVertically,
+            verticalAlignment = Alignment.Bottom,
             modifier = Modifier
-                .fillMaxWidth()
-                .height(30.dp)
-                .background(Color.Black)
+                .clickable {
+                    uriHandler.openUri("https://github.com/StefanOltmann/oni-seed-browser")
+                }
         ) {
 
             Text(
-                text = "made by Stefan Oltmann",
-                style = MaterialTheme.typography.bodyMedium,
+                text = "made by Stefan Oltmann with",
+                style = MaterialTheme.typography.bodyLarge,
                 color = lightGray,
+                lineHeight = 0.sp,
+                textAlign = TextAlign.End,
                 modifier = Modifier
+                    .height(20.dp)
+                    .offset(y = 2.dp)
+            )
+
+            HalfSpacer()
+
+            Image(
+                imageVector = KotlinLogo,
+                contentDescription = null,
+                modifier = Modifier
+                    .height(14.dp)
                     .offset(y = -2.dp)
-                    .clickable {
-                        uriHandler.openUri("https://github.com/StefanOltmann/oni-seed-browser")
-                    }
             )
         }
     }
