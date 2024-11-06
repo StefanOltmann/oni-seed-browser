@@ -25,9 +25,8 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
-import androidx.compose.foundation.layout.size
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -36,7 +35,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.unit.dp
-import ui.icons.GithubMark
 import ui.theme.halfSpacing
 import ui.theme.lightGray
 
@@ -47,72 +45,25 @@ fun Footer() {
 
     BoxWithConstraints {
 
-        val showLink = maxWidth > 600.dp
-
         Row(
             horizontalArrangement = Arrangement.spacedBy(halfSpacing, Alignment.CenterHorizontally),
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
                 .fillMaxWidth()
+                .height(30.dp)
                 .background(Color.Black)
         ) {
 
             Text(
-                text = "Oxygen Not Included",
-                style = MaterialTheme.typography.bodyLarge,
+                text = "made by Stefan Oltmann",
+                style = MaterialTheme.typography.bodyMedium,
                 color = lightGray,
                 modifier = Modifier
                     .offset(y = -2.dp)
                     .clickable {
-                        uriHandler.openUri("https://www.klei.com/games/oxygen-not-included")
+                        uriHandler.openUri("https://github.com/StefanOltmann/oni-seed-browser")
                     }
             )
-
-            Text(
-                text = "©",
-                style = MaterialTheme.typography.bodyLarge,
-                color = lightGray,
-                modifier = Modifier.offset(y = -2.dp)
-            )
-
-            Text(
-                text = "Klei Entertainment",
-                style = MaterialTheme.typography.bodyLarge,
-                color = lightGray,
-                modifier = Modifier
-                    .offset(y = -2.dp)
-                    .clickable {
-                        uriHandler.openUri("https://www.klei.com")
-                    }
-            )
-
-            if (showLink) {
-
-                Text(
-                    text = "|",
-                    style = MaterialTheme.typography.bodyLarge,
-                    color = lightGray,
-                    modifier = Modifier.offset(y = -2.dp)
-                )
-
-                Icon(
-                    imageVector = GithubMark,
-                    tint = lightGray,
-                    contentDescription = null,
-                    modifier = Modifier.size(16.dp)
-                )
-
-                Text(
-                    text = "https://github.com/StefanOltmann/oni-seed-browser",
-                    style = MaterialTheme.typography.bodyLarge,
-                    color = lightGray,
-                    modifier = Modifier
-                        .offset(y = -2.dp)
-                        .clickable {
-                            uriHandler.openUri("https://github.com/StefanOltmann/oni-seed-browser")
-                        }
-                )
-            }
         }
     }
 }
