@@ -584,15 +584,12 @@ enum class ClusterType(
         )
     );
 
-
     fun dlcRequirementsFulfilled(requirements: List<Dlc>): Boolean =
-        requirements.containsAll(requiredDlcs);
+        requirements.containsAll(requiredDlcs)
 
     fun isFrostyPlanet(): Boolean =
         requiredDlcs.contains(Dlc.FrostyPlanet)
 
     fun isBaseGame(): Boolean =
         requiredDlcs.contains(Dlc.BaseGame)
-
-
 }
