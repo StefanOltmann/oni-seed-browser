@@ -30,6 +30,7 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
@@ -73,6 +74,7 @@ import ui.theme.HalfSpacer
 import ui.theme.appColorScheme
 import ui.theme.defaultPadding
 import ui.theme.defaultRoundedCornerShape
+import ui.theme.doubleSpacing
 
 const val ORIGINAL_URL = "https://stefan-oltmann.de/oni-seed-browser/#"
 const val MNI_URL = "https://mapsnotincluded.org/map-explorer/"
@@ -87,7 +89,12 @@ data class Tooltip(
 @Composable
 fun App(
     urlHash: State<String?>,
-    isMniEmbedded: State<Boolean>
+    isMniEmbedded: State<Boolean>,
+    /**
+     * Note: LocalClipboardManager does not work for Compose for Web
+     * in all browsers for some reason. That's why we use a workaround here.
+     */
+    writeToClipboard: (String) -> Unit
 ) {
 
     MaterialTheme(
@@ -123,9 +130,9 @@ fun App(
 
                     value = DefaultWebClient.countSeeds()
 
-                } catch (ex: Exception) {
+                } catch (ex: Throwable) {
 
-                    /* We MUST catch here to prevent UI freezes. */
+                    /* We MUST catch Throwable here to prevent UI freezes. */
 
                     ex.printStackTrace()
 
@@ -175,9 +182,9 @@ fun App(
                         else
                             clusters.value = emptyList()
 
-                    } catch (ex: Exception) {
+                    } catch (ex: Throwable) {
 
-                        /* We MUST catch here to prevent UI freezes. */
+                        /* We MUST catch Throwable here to prevent UI freezes. */
 
                         ex.printStackTrace()
 
@@ -204,7 +211,8 @@ fun App(
 
                 StarMapView(
                     cluster = worldForStarMapView,
-                    onCloseClicked = { showStarMap.value = null }
+                    onCloseClicked = { showStarMap.value = null },
+                    writeToClipboard = writeToClipboard
                 )
 
                 return@MaterialTheme
@@ -258,8 +266,8 @@ fun App(
 
                         Column(
                             modifier = Modifier
-                                .defaultPadding()
-                                .height(128.dp)
+                                .padding(doubleSpacing)
+                                .height(100.dp)
                                 .verticalScroll(rememberScrollState())
                                 .background(
                                     MaterialTheme.colorScheme.errorContainer,
@@ -272,6 +280,7 @@ fun App(
                                 style = MaterialTheme.typography.headlineSmall,
                                 color = MaterialTheme.colorScheme.onErrorContainer,
                                 fontWeight = FontWeight.Bold,
+                                modifier = Modifier.defaultPadding()
                             )
                         }
                     }
@@ -380,7 +389,8 @@ fun App(
                                         showAsteroidDetails,
                                         showTooltip,
                                         showScrollbar = showAsteroidDetails.value == null,
-                                        showMniUrl = isMniEmbedded.value
+                                        showMniUrl = isMniEmbedded.value,
+                                        writeToClipboard = writeToClipboard
                                     )
                                 }
                             }

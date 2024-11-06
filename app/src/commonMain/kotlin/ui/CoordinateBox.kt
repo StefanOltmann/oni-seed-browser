@@ -39,8 +39,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalClipboardManager
-import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.delay
@@ -60,7 +58,8 @@ fun CoordinateBox(
     index: Int,
     totalCount: Int,
     coordinate: String,
-    showMapClicked: (() -> Unit)?
+    showMapClicked: (() -> Unit)?,
+    writeToClipboard: (String) -> Unit
 ) {
 
     Box(
@@ -114,8 +113,6 @@ fun CoordinateBox(
 
                 DoubleSpacer()
 
-                val clipboardManager = LocalClipboardManager.current
-
                 val hovered = remember { mutableStateOf(false) }
 
                 Icon(
@@ -130,7 +127,7 @@ fun CoordinateBox(
                         .size(24.dp)
                         .noRippleClickable {
 
-                            clipboardManager.setText(AnnotatedString(coordinate))
+                            writeToClipboard(coordinate)
 
                             coordinateWasCopied.value = true
                         }

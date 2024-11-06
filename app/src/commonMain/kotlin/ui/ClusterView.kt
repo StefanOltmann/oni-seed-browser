@@ -73,7 +73,8 @@ fun ClusterView(
     showAsteroidMap: MutableState<Asteroid?>,
     showAsteroidDetails: MutableState<Asteroid?>,
     showTooltip: MutableState<Tooltip?>,
-    showMniUrl: Boolean
+    showMniUrl: Boolean,
+    writeToClipboard: (String) -> Unit
 ) {
 
     Column(
@@ -91,7 +92,8 @@ fun ClusterView(
             showMapClicked = if (cluster.starMapEntriesSpacedOut != null)
                 showMapClicked
             else
-                null
+                null,
+            writeToClipboard = writeToClipboard
         )
 
         HalfSpacer()
