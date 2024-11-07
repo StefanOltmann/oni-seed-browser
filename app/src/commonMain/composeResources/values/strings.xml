@@ -39,7 +39,7 @@
     <string name="gameModeBaseGameStandard">Standard</string>
     <string name="gameModeTheLab">The Lab</string>
     <string name="gameModeSpacedOutClassic">Classic</string>
-    <string name="gameModeSpacedOutSpacedOut">Spaced Out</string>
+    <string name="gameModeSpacedOutSpacedOut">Spaced Out!</string>
 
     <!-- ClusterType -->
     <string name="clusterTypeBaseTerra">Terra</string>
@@ -134,7 +134,7 @@
     <string name="asteroidTypeMooMoonlet">Moo Asteroid</string>
     <string name="asteroidTypeWaterMoonlet">Water Asteroid</string>
     <string name="asteroidTypeMiniRegolithMoonlet">Regolith Asteroid</string>
-    <string name="asteroidTypeMixingCeresAsteroid">Mixing Ceres Asteroid</string>
+    <string name="asteroidTypeMixingCeresAsteroid">Ceres Fragment</string>
     <string name="asteroidTypeCeresClassicShatteredAsteroid">Blasted Ceres Asteroid</string>
 
     <!--  POI types -->
