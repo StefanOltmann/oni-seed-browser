@@ -26,21 +26,14 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalUriHandler
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import ui.icons.KotlinLogo
-import ui.theme.HalfSpacer
-import ui.theme.lightGray
+import ui.icons.FooterGraphic
 
 @Composable
 fun Footer() {
@@ -63,26 +56,10 @@ fun Footer() {
                 }
         ) {
 
-            Text(
-                text = "made by Stefan Oltmann with",
-                style = MaterialTheme.typography.bodyLarge,
-                fontWeight = FontWeight.Bold,
-                color = lightGray,
-                lineHeight = 0.sp,
-                textAlign = TextAlign.End,
-                modifier = Modifier
-                    .height(20.dp)
-                    .offset(y = 2.dp)
-            )
-
-            HalfSpacer()
-
             Image(
-                imageVector = KotlinLogo,
+                imageVector = FooterGraphic,
                 contentDescription = null,
-                modifier = Modifier
-                    .height(14.dp)
-                    .offset(y = -2.dp)
+                modifier = Modifier.padding(bottom = 2.dp)
             )
         }
     }
