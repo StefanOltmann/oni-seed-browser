@@ -27,7 +27,10 @@ import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -47,7 +50,10 @@ import model.SpacedOutSpacePOI
 import oni_seed_browser.app.generated.resources.Res
 import oni_seed_browser.app.generated.resources.background_space
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
 import ui.theme.defaultPadding
+import ui.theme.defaultSpacing
+import ui.theme.halfSpacing
 import ui.theme.lightGray
 
 private const val GRID_RADIUS = 12
@@ -133,19 +139,55 @@ fun StarMapView(
 
                         if (asteroidType != null) {
 
-                            Image(
-                                painter = painterResource(getAsteroidTypeDrawable(asteroidType)),
-                                contentDescription = null,
-                                modifier = Modifier.scale(1.5f)
-                            )
+                            TooltipContainer(
+                                tooltipContent = {
+                                    GenericTooltip {
+                                        Text(
+                                            text = stringResource(asteroidType.stringResource),
+                                            style = MaterialTheme.typography.bodyMedium,
+                                            color = MaterialTheme.colorScheme.onBackground,
+                                            modifier = Modifier.padding(
+                                                horizontal = defaultSpacing,
+                                                vertical = halfSpacing
+                                            )
+                                        )
+                                    }
+                                },
+                                yOffset = 10
+                            ) {
+
+                                Image(
+                                    painter = painterResource(getAsteroidTypeDrawable(asteroidType)),
+                                    contentDescription = null,
+                                    modifier = Modifier.scale(1.5f)
+                                )
+                            }
 
                         } else if (spacedOutSpacePOI != null) {
 
-                            Image(
-                                painter = painterResource(getSpacedOutSpacePOIDrawable(spacedOutSpacePOI)),
-                                contentDescription = null,
-                                modifier = Modifier.fillMaxSize()
-                            )
+                            TooltipContainer(
+                                tooltipContent = {
+                                    GenericTooltip {
+                                        Text(
+                                            text = spacedOutSpacePOI.name, // TODO
+                                            style = MaterialTheme.typography.bodyMedium,
+                                            color = MaterialTheme.colorScheme.onBackground,
+                                            modifier = Modifier.padding(
+                                                horizontal = defaultSpacing,
+                                                vertical = halfSpacing
+                                            )
+                                        )
+                                    }
+                                },
+                                yOffset = 10
+                            ) {
+
+                                Image(
+                                    painter = painterResource(getSpacedOutSpacePOIDrawable(spacedOutSpacePOI)),
+                                    contentDescription = null,
+                                    modifier = Modifier.fillMaxSize()
+                                )
+                            }
                         }
                     }
                 }
