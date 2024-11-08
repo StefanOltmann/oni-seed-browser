@@ -29,6 +29,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -48,6 +49,7 @@ import ui.theme.anthraticeTransparentBackgroundColor
 import ui.theme.cardColorBackground
 import ui.theme.defaultPadding
 import ui.theme.defaultRoundedCornerShape
+import ui.theme.defaultSpacing
 import ui.theme.halfPadding
 import ui.theme.halfSpacing
 import ui.theme.lightGrayTransparentBorderColor
@@ -131,26 +133,44 @@ fun AsteroidView(
 
                     for (worldTrait in asteroid.worldTraits) {
 
-                        Box(
-                            contentAlignment = Alignment.Center,
-                            modifier = Modifier
-                                .background(
-                                    anthraticeTransparentBackgroundColor,
-                                    minimalRoundedCornerShape
-                                )
-                                .border(
-                                    2.dp,
-                                    worldTrait.rating.color,
-                                    minimalRoundedCornerShape
-                                )
-                                .size(24.dp)
+                        TooltipContainer(
+                            tooltipContent = {
+                                GenericTooltip {
+                                    Text(
+                                        text = stringResource(worldTrait.stringResource),
+                                        style = MaterialTheme.typography.bodyLarge,
+                                        color = MaterialTheme.colorScheme.onBackground,
+                                        modifier = Modifier.padding(
+                                            horizontal = defaultSpacing,
+                                            vertical = halfSpacing
+                                        )
+                                    )
+                                }
+                            },
+                            yOffset = 15
                         ) {
 
-                            Image(
-                                painter = painterResource(getWorldTraitDrawable(worldTrait)),
-                                contentDescription = null,
-                                modifier = Modifier.halfPadding()
-                            )
+                            Box(
+                                contentAlignment = Alignment.Center,
+                                modifier = Modifier
+                                    .background(
+                                        anthraticeTransparentBackgroundColor,
+                                        minimalRoundedCornerShape
+                                    )
+                                    .border(
+                                        2.dp,
+                                        worldTrait.rating.color,
+                                        minimalRoundedCornerShape
+                                    )
+                                    .size(24.dp)
+                            ) {
+
+                                Image(
+                                    painter = painterResource(getWorldTraitDrawable(worldTrait)),
+                                    contentDescription = null,
+                                    modifier = Modifier.halfPadding()
+                                )
+                            }
                         }
                     }
                 }

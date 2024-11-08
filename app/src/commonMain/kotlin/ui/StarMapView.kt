@@ -144,7 +144,7 @@ fun StarMapView(
                                     GenericTooltip {
                                         Text(
                                             text = stringResource(asteroidType.stringResource),
-                                            style = MaterialTheme.typography.bodyMedium,
+                                            style = MaterialTheme.typography.bodyLarge,
                                             color = MaterialTheme.colorScheme.onBackground,
                                             modifier = Modifier.padding(
                                                 horizontal = defaultSpacing,
@@ -170,7 +170,7 @@ fun StarMapView(
                                     GenericTooltip {
                                         Text(
                                             text = spacedOutSpacePOI.name, // TODO
-                                            style = MaterialTheme.typography.bodyMedium,
+                                            style = MaterialTheme.typography.bodyLarge,
                                             color = MaterialTheme.colorScheme.onBackground,
                                             modifier = Modifier.padding(
                                                 horizontal = defaultSpacing,
