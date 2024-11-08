@@ -100,7 +100,8 @@ fun PointOfInterestsRow(
             val count = poisByTypeMap[poiType]!!.size
 
             TooltipContainer(
-                tooltipContent = { PointOfInterestTooltip(poiType, count) }
+                tooltipContent = { PointOfInterestTooltip(poiType, count) },
+                yOffset = -5
             ) {
 
                 Box(

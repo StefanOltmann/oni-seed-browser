@@ -39,6 +39,7 @@ import androidx.compose.ui.window.Popup
 fun TooltipContainer(
     modifier: Modifier = Modifier,
     tooltipContent: @Composable () -> Unit,
+    yOffset: Int = 0,
     content: @Composable () -> Unit
 ) {
 
@@ -59,7 +60,7 @@ fun TooltipContainer(
         if (isHovered)
             Popup(
                 alignment = Alignment.Center,
-                offset = IntOffset(0, size.height),
+                offset = IntOffset(0, size.height + yOffset),
                 content = tooltipContent
             )
     }

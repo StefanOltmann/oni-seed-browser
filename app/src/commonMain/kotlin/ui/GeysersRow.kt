@@ -74,7 +74,8 @@ fun GeysersRow(
             val count = geyserByTypeMap[geyserType]!!.size
 
             TooltipContainer(
-                tooltipContent = { GeyserTooltip(geyserType, count) }
+                tooltipContent = { GeyserTooltip(geyserType, count) },
+                yOffset = -5
             ) {
 
                 Box(
