@@ -20,7 +20,9 @@
 package ui
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -28,15 +30,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import model.GeyserType
+import model.PointOfInterestType
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import ui.theme.DefaultSpacer
 import ui.theme.HalfSpacer
+import ui.theme.halfPadding
 
 @Composable
-fun GeyserTooltip(
-    geyserType: GeyserType,
+fun PointOfInterestTooltip(
+    pointOfInterestType: PointOfInterestType,
     count: Int
 ) {
 
@@ -54,21 +57,24 @@ fun GeyserTooltip(
                 color = MaterialTheme.colorScheme.onBackground
             )
 
-            HalfSpacer()
+            Spacer(
+                Modifier.width(2.dp)
+            )
         }
 
         Image(
-            painter = painterResource(getGeyserDrawable(geyserType)),
+            painter = painterResource(getPointOfInterestDrawable(pointOfInterestType)),
             contentDescription = null,
             modifier = Modifier
                 .size(32.dp)
                 .clip(CircleShape)
+                .halfPadding()
         )
 
         HalfSpacer()
 
         Text(
-            text = stringResource(geyserType.stringResource),
+            text = stringResource(pointOfInterestType.stringResource),
             style = MaterialTheme.typography.bodyLarge,
             color = MaterialTheme.colorScheme.onBackground
         )
