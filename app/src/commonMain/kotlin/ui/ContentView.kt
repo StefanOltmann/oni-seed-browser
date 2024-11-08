@@ -168,11 +168,22 @@ fun ContentView(
 
         if (worldForStarMapView != null) {
 
-            SpacedOutStarMapView(
-                cluster = worldForStarMapView,
-                onCloseClicked = { showStarMap.value = null },
-                writeToClipboard = writeToClipboard
-            )
+            if (worldForStarMapView.starMapEntriesSpacedOut != null) {
+
+                SpacedOutStarMapView(
+                    cluster = worldForStarMapView,
+                    onCloseClicked = { showStarMap.value = null },
+                    writeToClipboard = writeToClipboard
+                )
+
+            } else {
+
+                BaseGameStarMapView(
+                    cluster = worldForStarMapView,
+                    onCloseClicked = { showStarMap.value = null },
+                    writeToClipboard = writeToClipboard
+                )
+            }
 
             return
         }

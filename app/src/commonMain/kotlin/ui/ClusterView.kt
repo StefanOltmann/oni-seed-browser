@@ -88,10 +88,7 @@ fun ClusterView(
             index = index,
             totalCount = totalCount,
             coordinate = cluster.coordinate,
-            showMapClicked = if (cluster.starMapEntriesSpacedOut != null)
-                showMapClicked
-            else
-                null,
+            showMapClicked = showMapClicked,
             writeToClipboard = writeToClipboard
         )
 
