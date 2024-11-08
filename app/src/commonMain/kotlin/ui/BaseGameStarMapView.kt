@@ -24,6 +24,7 @@ import androidx.compose.foundation.VerticalScrollbar
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.defaultScrollbarStyle
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -32,8 +33,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.rememberScrollbarAdapter
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -44,12 +47,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import model.Cluster
+import model.StarMapEntryVanilla
 import oni_seed_browser.app.generated.resources.Res
 import oni_seed_browser.app.generated.resources.background_space
 import org.jetbrains.compose.resources.painterResource
 import ui.theme.defaultPadding
 import ui.theme.defaultSpacing
 import ui.theme.doubleSpacing
+import ui.theme.halfSpacing
 import ui.theme.lightGray
 
 @Composable
@@ -61,6 +66,9 @@ fun BaseGameStarMapView(
 
     if (cluster.starMapEntriesVanilla == null)
         return
+
+    val entriesPerDistance: Map<Int, List<StarMapEntryVanilla>> =
+        cluster.starMapEntriesVanilla.groupBy { it.distance }
 
     Box(
         modifier = Modifier
@@ -110,6 +118,8 @@ fun BaseGameStarMapView(
 
                     for (distance in 17 downTo 0) {
 
+                        val entries = entriesPerDistance[distance] ?: continue
+
                         Row(
                             verticalAlignment = Alignment.CenterVertically
                         ) {
@@ -137,13 +147,48 @@ fun BaseGameStarMapView(
                         }
 
                         Row(
+                            horizontalArrangement = Arrangement.spacedBy(doubleSpacing, Alignment.CenterHorizontally),
                             modifier = Modifier
-                                .height(200.dp)
+                                .height(108.dp)
                                 .fillMaxWidth()
-                                .border(1.dp, Color.Red)
+                                .defaultPadding()
                         ) {
 
+                            for (entry in entries) {
 
+                                TooltipContainer(
+                                    tooltipContent = {
+                                        GenericTooltip {
+                                            Text(
+                                                text = entry.id,
+                                                style = MaterialTheme.typography.bodyLarge,
+                                                color = MaterialTheme.colorScheme.onBackground,
+                                                modifier = Modifier.padding(
+                                                    horizontal = defaultSpacing,
+                                                    vertical = halfSpacing
+                                                )
+                                            )
+                                        }
+                                    },
+                                    yOffset = 15
+                                ) {
+
+                                    Box(
+                                        contentAlignment = Alignment.Center,
+                                        modifier = Modifier
+                                            .size(96.dp)
+                                            .border(2.dp, lightGray, CircleShape)
+                                    ) {
+
+                                        Text(
+                                            text = entry.id,
+                                            style = MaterialTheme.typography.bodySmall,
+                                            color = MaterialTheme.colorScheme.onBackground,
+                                            modifier = Modifier.defaultPadding()
+                                        )
+                                    }
+                                }
+                            }
                         }
                     }
                 }
