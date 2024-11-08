@@ -169,7 +169,7 @@ fun StarMapView(
                                 tooltipContent = {
                                     GenericTooltip {
                                         Text(
-                                            text = spacedOutSpacePOI.name, // TODO
+                                            text = stringResource(spacedOutSpacePOI.stringResource),
                                             style = MaterialTheme.typography.bodyLarge,
                                             color = MaterialTheme.colorScheme.onBackground,
                                             modifier = Modifier.padding(
