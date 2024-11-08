@@ -72,7 +72,6 @@ fun ClusterView(
     showStarMap: MutableState<Cluster?>,
     showAsteroidMap: MutableState<Asteroid?>,
     showAsteroidDetails: MutableState<Asteroid?>,
-    showTooltip: MutableState<Tooltip?>,
     showMniUrl: Boolean,
     writeToClipboard: (String) -> Unit
 ) {
@@ -105,8 +104,7 @@ fun ClusterView(
             AsteroidsGrid(
                 cluster,
                 showAsteroidMap,
-                showAsteroidDetails,
-                showTooltip
+                showAsteroidDetails
             )
         }
 
@@ -192,8 +190,7 @@ fun ClusterView(
 private fun AsteroidsGrid(
     cluster: Cluster,
     showAsteroidMap: MutableState<Asteroid?>,
-    showAsteroidDetails: MutableState<Asteroid?>,
-    showTooltip: MutableState<Tooltip?>
+    showAsteroidDetails: MutableState<Asteroid?>
 ) {
 
     BoxWithConstraints(
@@ -220,7 +217,6 @@ private fun AsteroidsGrid(
                 asteroid = firstAsteroid,
                 isStarterAstroid = true,
                 isSelected = showAsteroidDetails.value == firstAsteroid,
-                showTooltip = showTooltip,
                 showDetails = {
 
                     if (showAsteroidDetails.value == firstAsteroid)
@@ -253,7 +249,6 @@ private fun AsteroidsGrid(
                                 asteroid = asteroid,
                                 isStarterAstroid = false,
                                 isSelected = showAsteroidDetails.value == asteroid,
-                                showTooltip = showTooltip,
                                 showDetails = {
 
                                     if (showAsteroidDetails.value == asteroid)

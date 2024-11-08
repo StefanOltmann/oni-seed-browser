@@ -45,7 +45,7 @@ fun ColumnScope.GeysersView(geysers: List<Geyser>) {
 
             val count = geysersCountOfStarter[geyserType] ?: 0
 
-            GeyserCountAndName(
+            GeyserTooltip(
                 geyserType,
                 count
             )

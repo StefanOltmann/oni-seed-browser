@@ -33,15 +33,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.unit.dp
 import model.GeyserType
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import ui.theme.DefaultSpacer
 import ui.theme.HalfSpacer
+import ui.theme.lightGray
+
+private val shape = RoundedCornerShape(16.dp)
 
 @Composable
-fun GeyserCountAndName(
+fun GeyserTooltip(
     geyserType: GeyserType,
     count: Int
 ) {
@@ -50,14 +54,19 @@ fun GeyserCountAndName(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
             .padding(4.dp)
+            .shadow(
+                elevation = 8.dp,
+                shape = shape,
+                spotColor = lightGray
+            )
             .background(
                 color = MaterialTheme.colorScheme.surfaceVariant,
-                shape = RoundedCornerShape(16.dp)
+                shape = shape
             )
             .border(
                 width = 2.dp,
                 color = MaterialTheme.colorScheme.background,
-                shape = RoundedCornerShape(16.dp)
+                shape = shape
             )
     ) {
 

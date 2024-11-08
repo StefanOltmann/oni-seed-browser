@@ -23,13 +23,11 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -51,7 +49,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
 import kotlinx.serialization.json.Json
@@ -80,11 +77,6 @@ const val ORIGINAL_URL = "https://stefan-oltmann.de/oni-seed-browser/#"
 const val MNI_URL = "https://mapsnotincluded.org/map-explorer/"
 
 val logoIconHeight = 80.dp
-
-data class Tooltip(
-    val position: DpOffset,
-    val content: @Composable BoxScope.() -> Unit
-)
 
 @Composable
 fun App(
@@ -151,8 +143,6 @@ fun App(
             val showAsteroidMap = remember { mutableStateOf<Asteroid?>(null) }
 
             val showAsteroidDetails = remember { mutableStateOf<Asteroid?>(null) }
-
-            val showTooltip = remember { mutableStateOf<Tooltip?>(null) }
 
             val isGettingNewResults = remember { mutableStateOf(false) }
 
@@ -387,7 +377,6 @@ fun App(
                                         showStarMap,
                                         showAsteroidMap,
                                         showAsteroidDetails,
-                                        showTooltip,
                                         showScrollbar = showAsteroidDetails.value == null,
                                         showMniUrl = isMniEmbedded.value,
                                         writeToClipboard = writeToClipboard
@@ -427,16 +416,6 @@ fun App(
 
                         Footer()
                     }
-                }
-
-                val toolTip = showTooltip.value
-
-                if (toolTip != null) {
-
-                    Box(
-                        modifier = Modifier.offset(toolTip.position.x, toolTip.position.y),
-                        content = toolTip.content
-                    )
                 }
             }
         }
