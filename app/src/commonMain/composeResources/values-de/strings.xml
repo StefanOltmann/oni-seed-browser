@@ -25,7 +25,7 @@
     <string name="uiItemDescriptionSpaceDestination">Space destination</string>
     <string name="uiOutput">Ausgabe</string>
     <string name="uiCount">Anzahl</string>
-    <string name="uiDetails">details</string>
+    <string name="uiDetails">Details</string>
     <string name="uiBiomeDetails">Biom details</string>
     <string name="uiGeyserDetails">Geysir details</string>
     <string name="uiGeyserDetailGramPerSecond">g/s</string>
