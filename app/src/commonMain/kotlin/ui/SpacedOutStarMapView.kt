@@ -62,7 +62,7 @@ private const val ROTATION_RADIANS = (30f * PI / 180).toFloat()
 private val gridColor = lightGray.copy(alpha = 0.2f)
 
 @Composable
-fun StarMapView(
+fun SpacedOutStarMapView(
     cluster: Cluster,
     onCloseClicked: () -> Unit,
     writeToClipboard: (String) -> Unit
@@ -242,5 +242,3 @@ private fun HexagonalGrid() {
         }
     }
 }
-
-

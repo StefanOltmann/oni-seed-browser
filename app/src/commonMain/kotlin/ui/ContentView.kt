@@ -168,7 +168,7 @@ fun ContentView(
 
         if (worldForStarMapView != null) {
 
-            StarMapView(
+            SpacedOutStarMapView(
                 cluster = worldForStarMapView,
                 onCloseClicked = { showStarMap.value = null },
                 writeToClipboard = writeToClipboard
