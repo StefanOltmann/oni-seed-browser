@@ -60,6 +60,7 @@ private const val GRID_RADIUS = 12
 private const val ROTATION_RADIANS = (30f * PI / 180).toFloat()
 
 private val gridColor = lightGray.copy(alpha = 0.2f)
+private val pathStroke = Stroke(1f)
 
 @Composable
 fun SpacedOutStarMapView(
@@ -212,13 +213,11 @@ private fun HexagonalGrid() {
 
             for (r in r1..r2) {
 
-                val x = size.width / 2 +
-                    (hexSize * 3 / 2 * q * cos(ROTATION_RADIANS) -
-                        hexHeight * (r + q / 2f) * sin(ROTATION_RADIANS))
+                val x = size.width / 2 + hexSize * 3 / 2 * q * cos(ROTATION_RADIANS) -
+                    hexHeight * (r + q / 2f) * sin(ROTATION_RADIANS)
 
-                val y = size.height / 2 +
-                    (hexSize * 3 / 2 * q * sin(ROTATION_RADIANS) +
-                        hexHeight * (r + q / 2f) * cos(ROTATION_RADIANS))
+                val y = size.height / 2 + hexSize * 3 / 2 * q * sin(ROTATION_RADIANS) +
+                    hexHeight * (r + q / 2f) * cos(ROTATION_RADIANS)
 
                 val path = Path()
 
@@ -237,7 +236,7 @@ private fun HexagonalGrid() {
 
                 path.close()
 
-                drawPath(path, gridColor, style = Stroke(width = 1f))
+                drawPath(path, gridColor, style = pathStroke)
             }
         }
     }
