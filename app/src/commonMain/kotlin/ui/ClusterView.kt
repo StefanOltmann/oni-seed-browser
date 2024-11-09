@@ -90,10 +90,7 @@ fun ClusterView(
             coordinate = cluster.coordinate,
             // FIXME HEX star map is broken right now
             //  See https://github.com/StefanOltmann/oni-seed-browser/issues/11
-            showMapClicked = if (cluster.starMapEntriesVanilla != null)
-                showStarMap
-            else
-                null,
+            showMapClicked = showStarMap,
             writeToClipboard = writeToClipboard
         )
 

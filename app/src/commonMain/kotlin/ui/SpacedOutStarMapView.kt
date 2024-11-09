@@ -27,33 +27,26 @@ import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.offset
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import kotlin.math.PI
 import kotlin.math.cos
 import kotlin.math.sin
-import model.AsteroidType
 import model.Cluster
-import model.SpacedOutSpacePOI
 import oni_seed_browser.app.generated.resources.Res
 import oni_seed_browser.app.generated.resources.background_space
 import org.jetbrains.compose.resources.painterResource
-import org.jetbrains.compose.resources.stringResource
 import ui.theme.defaultPadding
-import ui.theme.defaultSpacing
-import ui.theme.halfSpacing
 import ui.theme.lightGray
 
 private const val GRID_RADIUS = 12
@@ -114,81 +107,31 @@ fun SpacedOutStarMapView(
 
                 val hexHeight = (hexSize * 2 * (cos(PI / 6))).toFloat()
 
-                for (entry in cluster.starMapEntriesSpacedOut) {
+                for (r in -5..5) {
+                    for (q in -5..5) {
 
-                    val xOffset = hexSize * 3 / 2 * entry.q * cos(ROTATION_RADIANS) -
-                        hexHeight * (entry.r + entry.q / 2f) * sin(ROTATION_RADIANS)
+                        val xOffset = hexSize * 3 / 2 * q * cos(ROTATION_RADIANS) -
+                            hexHeight * (r + q / 2f) * sin(ROTATION_RADIANS)
 
-                    val yOffset = hexSize * 3 / 2 * entry.q * sin(ROTATION_RADIANS) +
-                        hexHeight * (entry.r + entry.q / 2f) * cos(ROTATION_RADIANS)
+                        val yOffset = hexSize * 3 / 2 * q * sin(ROTATION_RADIANS) +
+                            hexHeight * (r + q / 2f) * cos(ROTATION_RADIANS)
 
-                    Box(
-                        modifier = Modifier
-                            .offset(
-                                x = xOffset.dp,
-                                y = yOffset.dp
+                        Box(
+                            contentAlignment = Alignment.Center,
+                            modifier = Modifier
+                                .offset(
+                                    x = xOffset.dp,
+                                    y = yOffset.dp
+                                )
+                                .size(hexSize.times(LocalDensity.current.density).dp)
+                        ) {
+
+                            Text(
+                                "q ${q}\nr ${r}",
+                                fontSize = 10.sp,
+                                lineHeight = 0.sp,
+                                color = lightGray
                             )
-                            .size(hexSize.times(LocalDensity.current.density).dp)
-                    ) {
-
-                        val asteroidType = AsteroidType.entries.find { it.name == entry.id }
-
-                        val spacedOutSpacePOI = if (asteroidType == null)
-                            SpacedOutSpacePOI.entries.find { it.name == entry.id }
-                        else
-                            null
-
-                        if (asteroidType != null) {
-
-                            TooltipContainer(
-                                tooltipContent = {
-                                    GenericTooltip {
-                                        Text(
-                                            text = stringResource(asteroidType.stringResource),
-                                            style = MaterialTheme.typography.bodyLarge,
-                                            color = MaterialTheme.colorScheme.onBackground,
-                                            modifier = Modifier.padding(
-                                                horizontal = defaultSpacing,
-                                                vertical = halfSpacing
-                                            )
-                                        )
-                                    }
-                                },
-                                yOffset = 10
-                            ) {
-
-                                Image(
-                                    painter = painterResource(getAsteroidTypeDrawable(asteroidType)),
-                                    contentDescription = null,
-                                    modifier = Modifier.scale(1.5f)
-                                )
-                            }
-
-                        } else if (spacedOutSpacePOI != null) {
-
-                            TooltipContainer(
-                                tooltipContent = {
-                                    GenericTooltip {
-                                        Text(
-                                            text = stringResource(spacedOutSpacePOI.stringResource),
-                                            style = MaterialTheme.typography.bodyLarge,
-                                            color = MaterialTheme.colorScheme.onBackground,
-                                            modifier = Modifier.padding(
-                                                horizontal = defaultSpacing,
-                                                vertical = halfSpacing
-                                            )
-                                        )
-                                    }
-                                },
-                                yOffset = 10
-                            ) {
-
-                                Image(
-                                    painter = painterResource(getSpacedOutSpacePOIDrawable(spacedOutSpacePOI)),
-                                    contentDescription = null,
-                                    modifier = Modifier.fillMaxSize()
-                                )
-                            }
                         }
                     }
                 }
