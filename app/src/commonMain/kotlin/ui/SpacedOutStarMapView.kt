@@ -44,6 +44,7 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import kotlin.math.PI
 import kotlin.math.cos
 import kotlin.math.sin
@@ -161,6 +162,7 @@ fun SpacedOutStarMapView(
                                             text = stringResource(asteroidType.stringResource),
                                             style = MaterialTheme.typography.bodyLarge,
                                             color = MaterialTheme.colorScheme.onBackground,
+                                            lineHeight = 0.sp,
                                             modifier = Modifier.padding(
                                                 horizontal = defaultSpacing,
                                                 vertical = halfSpacing
@@ -187,6 +189,7 @@ fun SpacedOutStarMapView(
                                             text = stringResource(spacedOutSpacePOI.stringResource),
                                             style = MaterialTheme.typography.bodyLarge,
                                             color = MaterialTheme.colorScheme.onBackground,
+                                            lineHeight = 0.sp,
                                             modifier = Modifier.padding(
                                                 horizontal = defaultSpacing,
                                                 vertical = halfSpacing
