@@ -20,9 +20,9 @@ To run the project you'll need the following installed:
 - [Java 17 SDK](https://adoptium.net/de/temurin/releases/?version=17&package=jdk)
 
 1. In IDEA you use `File` -> `New` -> `Project from Version Control...`
-2. Enter the following URL: https://github.com/StefanOltmann/oni-seed-browser.git
+2. Enter the following URL: `https://github.com/StefanOltmann/oni-seed-browser.git`
 3. Click on `Clone` and wait until the project is set up
-4. In the top right you find launch configurations for "Desktop" and "Browser"
+4. In the top right you find launch configurations for `Desktop` and `Browser`
 5. Choose one and hit the `Run` button
 
 ## Contributions
