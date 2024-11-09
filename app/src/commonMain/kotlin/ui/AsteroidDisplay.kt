@@ -131,7 +131,7 @@ fun AsteroidView(
                         color = MaterialTheme.colorScheme.onBackground,
                     )
 
-                    for (worldTrait in asteroid.worldTraits) {
+                    for (worldTrait in asteroid.worldTraits.sorted()) {
 
                         TooltipContainer(
                             tooltipContent = {

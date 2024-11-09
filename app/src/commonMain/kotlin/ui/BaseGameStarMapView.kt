@@ -46,6 +46,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import model.Cluster
 import model.StarMapEntryVanilla
 import oni_seed_browser.app.generated.resources.Res
@@ -160,9 +161,10 @@ fun BaseGameStarMapView(
                                     tooltipContent = {
                                         GenericTooltip {
                                             Text(
-                                                text = entry.id,
+                                                text = entry.id.name,
                                                 style = MaterialTheme.typography.bodyLarge,
                                                 color = MaterialTheme.colorScheme.onBackground,
+                                                lineHeight = 0.sp,
                                                 modifier = Modifier.padding(
                                                     horizontal = defaultSpacing,
                                                     vertical = halfSpacing
@@ -181,7 +183,7 @@ fun BaseGameStarMapView(
                                     ) {
 
                                         Text(
-                                            text = entry.id,
+                                            text = entry.id.name,
                                             style = MaterialTheme.typography.bodySmall,
                                             color = MaterialTheme.colorScheme.onBackground,
                                             modifier = Modifier.defaultPadding()

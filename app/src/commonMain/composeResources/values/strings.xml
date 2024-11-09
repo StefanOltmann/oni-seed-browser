@@ -232,26 +232,26 @@
     <string name="worldTraitRadioactiveCrust">Radioactive Crust</string>
 
     <!-- Space POI -->
-    <string name="artifactSpacePoiGravitasSpaceStation1">Gravitas Space Station 1</string>
-    <string name="artifactSpacePoiGravitasSpaceStation2">Gravitas Space Station 2</string>
-    <string name="artifactSpacePoiGravitasSpaceStation3">Gravitas Space Station 3</string>
-    <string name="artifactSpacePoiGravitasSpaceStation4">Gravitas Space Station 4</string>
-    <string name="artifactSpacePoiGravitasSpaceStation5">Gravitas Space Station 5</string>
-    <string name="artifactSpacePoiGravitasSpaceStation6">Gravitas Space Station 6</string>
-    <string name="artifactSpacePoiGravitasSpaceStation7">Gravitas Space Station 7</string>
-    <string name="artifactSpacePoiGravitasSpaceStation8">Gravitas Space Station 8</string>
+    <string name="artifactSpacePoiGravitasSpaceStation1">Destroyed Satellite</string>
+    <string name="artifactSpacePoiGravitasSpaceStation2">Demolished Rocket</string>
+    <string name="artifactSpacePoiGravitasSpaceStation3">Ruined Rocket</string>
+    <string name="artifactSpacePoiGravitasSpaceStation4">Retired Planetary Excursion Module</string>
+    <string name="artifactSpacePoiGravitasSpaceStation5">Destroyed Satellite</string>
+    <string name="artifactSpacePoiGravitasSpaceStation6">Annihilated Satellite</string>
+    <string name="artifactSpacePoiGravitasSpaceStation7">Wrecked Space Shuttle</string>
+    <string name="artifactSpacePoiGravitasSpaceStation8">Obsolete Space Station Module</string>
     <string name="artifactSpacePoiRussellsTeapot">Russell's Teapot</string>
     <string name="harvestableSpacePoiCarbonAsteroidField">Carbon Asteroid Field</string>
     <string name="harvestableSpacePoiChlorineCloud">Chlorine Cloud</string>
-    <string name="harvestableSpacePoiDlc2CeresOreField">Ceres Ore Field</string>
-    <string name="harvestableSpacePoiForestyOreField">Foresty Ore Field</string>
-    <string name="harvestableSpacePoiFrozenOreField">Frozen Ore Field</string>
-    <string name="harvestableSpacePoiGasGiantCloud">Gas Giant Cloud</string>
+    <string name="harvestableSpacePoiDlc2CeresOreField">Frozen Mercury Asteroid Field</string>
+    <string name="harvestableSpacePoiForestyOreField">Forested Ore Field</string>
+    <string name="harvestableSpacePoiFrozenOreField">Frozen Ore Asteroid Field</string>
+    <string name="harvestableSpacePoiGasGiantCloud">Exploded Gas Giant</string>
     <string name="harvestableSpacePoiGildedAsteroidField">Gilded Asteroid Field</string>
     <string name="harvestableSpacePoiGlimmeringAsteroidField">Glimmering Asteroid Field</string>
     <string name="harvestableSpacePoiHeliumCloud">Helium Cloud</string>
-    <string name="harvestableSpacePoiIceAsteroidField">Ice Asteroid Field</string>
-    <string name="harvestableSpacePoiInterstellarIceField">Interstellar Ice Field</string>
+    <string name="harvestableSpacePoiIceAsteroidField">Exploded Ice Giant</string>
+    <string name="harvestableSpacePoiInterstellarIceField">Ice Asteroid Field</string>
     <string name="harvestableSpacePoiInterstellarOcean">Interstellar Ocean</string>
     <string name="harvestableSpacePoiMetallicAsteroidField">Metallic Asteroid Field</string>
     <string name="harvestableSpacePoiOilyAsteroidField">Oily Asteroid Field</string>
@@ -263,7 +263,7 @@
     <string name="harvestableSpacePoiRockyAsteroidField">Rocky Asteroid Field</string>
     <string name="harvestableSpacePoiSaltyAsteroidField">Salty Asteroid Field</string>
     <string name="harvestableSpacePoiSandyOreField">Sandy Ore Field</string>
-    <string name="harvestableSpacePoiSatelliteField">Satellite Field</string>
+    <string name="harvestableSpacePoiSatelliteField">Space Debris</string>
     <string name="harvestableSpacePoiSwampyOreField">Swampy Ore Field</string>
     <string name="temporalTear">Temporal Tear</string>
 </resources>

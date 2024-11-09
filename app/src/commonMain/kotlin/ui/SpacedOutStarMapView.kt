@@ -26,6 +26,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -40,7 +41,10 @@ import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import kotlin.math.PI
 import kotlin.math.cos
 import kotlin.math.sin
@@ -60,6 +64,7 @@ private const val GRID_RADIUS = 12
 private const val ROTATION_RADIANS = (30f * PI / 180).toFloat()
 
 private val gridColor = lightGray.copy(alpha = 0.2f)
+private val pathStroke = Stroke(1f)
 
 @Composable
 fun SpacedOutStarMapView(
@@ -99,6 +104,17 @@ fun SpacedOutStarMapView(
                 coordinate = cluster.coordinate,
                 showMapClicked = null,
                 writeToClipboard = writeToClipboard
+            )
+
+            // FIXME HEX star map is broken right now
+            //  See https://github.com/StefanOltmann/oni-seed-browser/issues/11
+            Text(
+                text = "WARNING: Due to a bug the positions are mirrored compared to the game.",
+                style = MaterialTheme.typography.headlineLarge,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.error,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth()
             )
 
             BoxWithConstraints(
@@ -146,6 +162,7 @@ fun SpacedOutStarMapView(
                                             text = stringResource(asteroidType.stringResource),
                                             style = MaterialTheme.typography.bodyLarge,
                                             color = MaterialTheme.colorScheme.onBackground,
+                                            lineHeight = 0.sp,
                                             modifier = Modifier.padding(
                                                 horizontal = defaultSpacing,
                                                 vertical = halfSpacing
@@ -153,7 +170,7 @@ fun SpacedOutStarMapView(
                                         )
                                     }
                                 },
-                                yOffset = 10
+                                yOffset = 20
                             ) {
 
                                 Image(
@@ -172,6 +189,7 @@ fun SpacedOutStarMapView(
                                             text = stringResource(spacedOutSpacePOI.stringResource),
                                             style = MaterialTheme.typography.bodyLarge,
                                             color = MaterialTheme.colorScheme.onBackground,
+                                            lineHeight = 0.sp,
                                             modifier = Modifier.padding(
                                                 horizontal = defaultSpacing,
                                                 vertical = halfSpacing
@@ -179,7 +197,7 @@ fun SpacedOutStarMapView(
                                         )
                                     }
                                 },
-                                yOffset = 10
+                                yOffset = 20
                             ) {
 
                                 Image(
@@ -212,13 +230,11 @@ private fun HexagonalGrid() {
 
             for (r in r1..r2) {
 
-                val x = size.width / 2 +
-                    (hexSize * 3 / 2 * q * cos(ROTATION_RADIANS) -
-                        hexHeight * (r + q / 2f) * sin(ROTATION_RADIANS))
+                val x = size.width / 2 + hexSize * 3 / 2 * q * cos(ROTATION_RADIANS) -
+                    hexHeight * (r + q / 2f) * sin(ROTATION_RADIANS)
 
-                val y = size.height / 2 +
-                    (hexSize * 3 / 2 * q * sin(ROTATION_RADIANS) +
-                        hexHeight * (r + q / 2f) * cos(ROTATION_RADIANS))
+                val y = size.height / 2 + hexSize * 3 / 2 * q * sin(ROTATION_RADIANS) +
+                    hexHeight * (r + q / 2f) * cos(ROTATION_RADIANS)
 
                 val path = Path()
 
@@ -237,7 +253,7 @@ private fun HexagonalGrid() {
 
                 path.close()
 
-                drawPath(path, gridColor, style = Stroke(width = 1f))
+                drawPath(path, gridColor, style = pathStroke)
             }
         }
     }

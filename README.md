@@ -12,6 +12,23 @@ Try it on https://stefan-oltmann.de/oni-seed-browser
 The backend project is located here:
 https://github.com/stefanoltmann/oni-seed-browser-backend
 
+## Run the project
+
+To run the project you'll need the following installed:
+
+- [IntelliJ IDEA Community Edition 2024.3 or later](https://www.jetbrains.com/idea/download)
+- [Java 17 SDK](https://adoptium.net/de/temurin/releases/?version=17&package=jdk)
+
+1. In IDEA you use `File` -> `New` -> `Project from Version Control...`
+2. Enter the following URL: `https://github.com/StefanOltmann/oni-seed-browser.git`
+3. Click on `Clone` and wait until the project is set up
+4. In the top right you find launch configurations for `Desktop` and `Browser`
+5. Choose one and hit the `Run` button
+
+If you want to run from command line instead you need to execute
+`./gradlew run` to run the Desktop version or `./gradlew wasmJsBrowserRun`
+to run the Browser version.
+
 ## Contributions
 
 Contributions to this project are welcome! If you encounter any issues,

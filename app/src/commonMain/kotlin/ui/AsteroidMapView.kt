@@ -284,7 +284,7 @@ fun AsteroidMap(
 
                 TooltipContainer(
                     tooltipContent = { PointOfInterestTooltip(poi.id, 1) },
-                    yOffset = 5,
+                    yOffset = 10,
                     modifier = Modifier
                         .offset(
                             x = (poi.x * viewScale).dp - halfIconSize,
@@ -316,7 +316,7 @@ fun AsteroidMap(
 
                 TooltipContainer(
                     tooltipContent = { GeyserTooltip(geyser.id, 1) },
-                    yOffset = 5,
+                    yOffset = 10,
                     modifier = Modifier
                         .offset(
                             x = (geyser.x * viewScale).dp - halfIconSize,

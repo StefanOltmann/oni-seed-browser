@@ -82,13 +82,11 @@ fun ClusterView(
             .border(0.dp, lightGrayTransparentBorderColor, defaultRoundedCornerShape)
     ) {
 
-        val showMapClicked: (() -> Unit) = { showStarMap.value = cluster }
-
         CoordinateBox(
             index = index,
             totalCount = totalCount,
             coordinate = cluster.coordinate,
-            showMapClicked = showMapClicked,
+            showMapClicked = { showStarMap.value = cluster },
             writeToClipboard = writeToClipboard
         )
 
