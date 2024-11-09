@@ -168,7 +168,7 @@ fun SpacedOutStarMapView(
                                         )
                                     }
                                 },
-                                yOffset = 10
+                                yOffset = 20
                             ) {
 
                                 Image(
@@ -194,7 +194,7 @@ fun SpacedOutStarMapView(
                                         )
                                     }
                                 },
-                                yOffset = 10
+                                yOffset = 20
                             ) {
 
                                 Image(
