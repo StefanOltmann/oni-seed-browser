@@ -158,16 +158,16 @@ import oni_seed_browser.app.generated.resources.spacepoi_artifact_6
 import oni_seed_browser.app.generated.resources.spacepoi_artifact_7
 import oni_seed_browser.app.generated.resources.spacepoi_artifact_8
 import oni_seed_browser.app.generated.resources.spacepoi_carbon_asteroid_field
+import oni_seed_browser.app.generated.resources.spacepoi_ceres_starting_field
 import oni_seed_browser.app.generated.resources.spacepoi_chlorine_cloud
-import oni_seed_browser.app.generated.resources.spacepoi_exploded_gas_giant
-import oni_seed_browser.app.generated.resources.spacepoi_forested_ore_field
-import oni_seed_browser.app.generated.resources.spacepoi_frozen_mercury_asteroid_field
-import oni_seed_browser.app.generated.resources.spacepoi_frozen_ore_asteroid_field
+import oni_seed_browser.app.generated.resources.spacepoi_foresty_ore_field
+import oni_seed_browser.app.generated.resources.spacepoi_frozen_ore_field
+import oni_seed_browser.app.generated.resources.spacepoi_gas_giant_cloud
 import oni_seed_browser.app.generated.resources.spacepoi_gilded_asteroid_field
 import oni_seed_browser.app.generated.resources.spacepoi_glimmering_asteroid_field
 import oni_seed_browser.app.generated.resources.spacepoi_helium_cloud
 import oni_seed_browser.app.generated.resources.spacepoi_ice_asteroid_field
-import oni_seed_browser.app.generated.resources.spacepoi_interstellar_ice
+import oni_seed_browser.app.generated.resources.spacepoi_interstellar_ice_field
 import oni_seed_browser.app.generated.resources.spacepoi_interstellar_ocean
 import oni_seed_browser.app.generated.resources.spacepoi_metallic_asteroid_field
 import oni_seed_browser.app.generated.resources.spacepoi_oily_asteroid_field
@@ -180,7 +180,7 @@ import oni_seed_browser.app.generated.resources.spacepoi_rocky_asteroid_field
 import oni_seed_browser.app.generated.resources.spacepoi_russells_teapot
 import oni_seed_browser.app.generated.resources.spacepoi_salty_asteroid_field
 import oni_seed_browser.app.generated.resources.spacepoi_sandy_ore_field
-import oni_seed_browser.app.generated.resources.spacepoi_space_debris
+import oni_seed_browser.app.generated.resources.spacepoi_satellite_field
 import oni_seed_browser.app.generated.resources.spacepoi_swampy_ore_field
 import oni_seed_browser.app.generated.resources.spacepoi_temporal_tear
 import oni_seed_browser.app.generated.resources.worldtrait_boulders_large
@@ -403,15 +403,15 @@ fun getSpacedOutSpacePOIDrawable(spacedOutSpacePOI: SpacedOutSpacePOI): Drawable
         SpacedOutSpacePOI.ArtifactSpacePOI_RussellsTeapot -> Res.drawable.spacepoi_russells_teapot
         SpacedOutSpacePOI.HarvestableSpacePOI_CarbonAsteroidField -> Res.drawable.spacepoi_carbon_asteroid_field
         SpacedOutSpacePOI.HarvestableSpacePOI_ChlorineCloud -> Res.drawable.spacepoi_chlorine_cloud
-        SpacedOutSpacePOI.HarvestableSpacePOI_DLC2CeresOreField -> Res.drawable.spacepoi_frozen_mercury_asteroid_field
-        SpacedOutSpacePOI.HarvestableSpacePOI_ForestyOreField -> Res.drawable.spacepoi_forested_ore_field
-        SpacedOutSpacePOI.HarvestableSpacePOI_FrozenOreField -> Res.drawable.spacepoi_frozen_ore_asteroid_field
-        SpacedOutSpacePOI.HarvestableSpacePOI_GasGiantCloud -> Res.drawable.spacepoi_exploded_gas_giant
+        SpacedOutSpacePOI.HarvestableSpacePOI_DLC2CeresOreField -> Res.drawable.spacepoi_ceres_starting_field
+        SpacedOutSpacePOI.HarvestableSpacePOI_ForestyOreField -> Res.drawable.spacepoi_foresty_ore_field
+        SpacedOutSpacePOI.HarvestableSpacePOI_FrozenOreField -> Res.drawable.spacepoi_frozen_ore_field
+        SpacedOutSpacePOI.HarvestableSpacePOI_GasGiantCloud -> Res.drawable.spacepoi_gas_giant_cloud
         SpacedOutSpacePOI.HarvestableSpacePOI_GildedAsteroidField -> Res.drawable.spacepoi_gilded_asteroid_field
         SpacedOutSpacePOI.HarvestableSpacePOI_GlimmeringAsteroidField -> Res.drawable.spacepoi_glimmering_asteroid_field
         SpacedOutSpacePOI.HarvestableSpacePOI_HeliumCloud -> Res.drawable.spacepoi_helium_cloud
         SpacedOutSpacePOI.HarvestableSpacePOI_IceAsteroidField -> Res.drawable.spacepoi_ice_asteroid_field
-        SpacedOutSpacePOI.HarvestableSpacePOI_InterstellarIceField -> Res.drawable.spacepoi_interstellar_ice
+        SpacedOutSpacePOI.HarvestableSpacePOI_InterstellarIceField -> Res.drawable.spacepoi_interstellar_ice_field
         SpacedOutSpacePOI.HarvestableSpacePOI_InterstellarOcean -> Res.drawable.spacepoi_interstellar_ocean
         SpacedOutSpacePOI.HarvestableSpacePOI_MetallicAsteroidField -> Res.drawable.spacepoi_metallic_asteroid_field
         SpacedOutSpacePOI.HarvestableSpacePOI_OilyAsteroidField -> Res.drawable.spacepoi_oily_asteroid_field
@@ -423,7 +423,7 @@ fun getSpacedOutSpacePOIDrawable(spacedOutSpacePOI: SpacedOutSpacePOI): Drawable
         SpacedOutSpacePOI.HarvestableSpacePOI_RockyAsteroidField -> Res.drawable.spacepoi_rocky_asteroid_field
         SpacedOutSpacePOI.HarvestableSpacePOI_SaltyAsteroidField -> Res.drawable.spacepoi_salty_asteroid_field
         SpacedOutSpacePOI.HarvestableSpacePOI_SandyOreField -> Res.drawable.spacepoi_sandy_ore_field
-        SpacedOutSpacePOI.HarvestableSpacePOI_SatelliteField -> Res.drawable.spacepoi_space_debris
+        SpacedOutSpacePOI.HarvestableSpacePOI_SatelliteField -> Res.drawable.spacepoi_satellite_field
         SpacedOutSpacePOI.HarvestableSpacePOI_SwampyOreField -> Res.drawable.spacepoi_swampy_ore_field
         SpacedOutSpacePOI.TemporalTear -> Res.drawable.spacepoi_temporal_tear
     }
