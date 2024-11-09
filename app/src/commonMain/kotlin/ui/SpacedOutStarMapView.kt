@@ -108,7 +108,7 @@ fun SpacedOutStarMapView(
             // FIXME HEX star map is broken right now
             //  See https://github.com/StefanOltmann/oni-seed-browser/issues/11
             Text(
-                text = "WARNING: Positions are currently not accurate. We're investigating a bug.",
+                text = "WARNING: Due to a bug the positions are mirrored compared to the game.",
                 style = MaterialTheme.typography.headlineLarge,
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colorScheme.error,
