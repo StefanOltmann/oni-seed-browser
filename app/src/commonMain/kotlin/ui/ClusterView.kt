@@ -82,13 +82,18 @@ fun ClusterView(
             .border(0.dp, lightGrayTransparentBorderColor, defaultRoundedCornerShape)
     ) {
 
+        val showStarMap: () -> Unit = { showStarMap.value = cluster }
+
         CoordinateBox(
             index = index,
             totalCount = totalCount,
             coordinate = cluster.coordinate,
-            // FIXME Star map is broken right now
+            // FIXME HEX star map is broken right now
             //  See https://github.com/StefanOltmann/oni-seed-browser/issues/11
-            showMapClicked = null, // { showStarMap.value = cluster },
+            showMapClicked = if (cluster.starMapEntriesVanilla != null)
+                showStarMap
+            else
+                null,
             writeToClipboard = writeToClipboard
         )
 
