@@ -25,6 +25,10 @@ To run the project you'll need the following installed:
 4. In the top right you find launch configurations for `Desktop` and `Browser`
 5. Choose one and hit the `Run` button
 
+If you want to run from command line instead you need to execute
+`./gradlew run` to run the Desktop version or `./gradlew wasmJsBrowserRun`
+to run the Browser version.
+
 ## Contributions
 
 Contributions to this project are welcome! If you encounter any issues,
