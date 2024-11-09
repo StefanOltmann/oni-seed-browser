@@ -161,7 +161,7 @@ fun BaseGameStarMapView(
                                     tooltipContent = {
                                         GenericTooltip {
                                             Text(
-                                                text = entry.id,
+                                                text = entry.id.name,
                                                 style = MaterialTheme.typography.bodyLarge,
                                                 color = MaterialTheme.colorScheme.onBackground,
                                                 lineHeight = 0.sp,
@@ -183,7 +183,7 @@ fun BaseGameStarMapView(
                                     ) {
 
                                         Text(
-                                            text = entry.id,
+                                            text = entry.id.name,
                                             style = MaterialTheme.typography.bodySmall,
                                             color = MaterialTheme.colorScheme.onBackground,
                                             modifier = Modifier.defaultPadding()

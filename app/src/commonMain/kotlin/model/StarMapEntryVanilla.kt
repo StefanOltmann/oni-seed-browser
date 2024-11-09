@@ -24,6 +24,6 @@ import kotlinx.serialization.Serializable
 @Suppress("UNUSED")
 @Serializable
 data class StarMapEntryVanilla(
-    val id: String,
+    val id: VanillaSpacePOI,
     val distance: Int
 )
