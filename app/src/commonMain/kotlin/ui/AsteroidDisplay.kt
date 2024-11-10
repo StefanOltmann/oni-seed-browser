@@ -61,7 +61,7 @@ val countBackground = Color.Black.copy(alpha = 0.3F)
 @Composable
 fun AsteroidView(
     asteroid: Asteroid,
-    isStarterAstroid: Boolean,
+    isStarterAsteroid: Boolean,
     isSelected: Boolean,
     showDetails: () -> Unit,
     showMap: () -> Unit
@@ -80,7 +80,7 @@ fun AsteroidView(
                 defaultRoundedCornerShape
             )
             .border(
-                if (isStarterAstroid) 1.dp else 0.dp,
+                if (isStarterAsteroid) 1.dp else 0.dp,
                 if (isSelected) Color.Yellow else lightGrayTransparentBorderColor,
                 defaultRoundedCornerShape
             )
@@ -177,11 +177,11 @@ fun AsteroidView(
 
                 HalfSpacer()
 
-                GeysersRow(asteroid.geysers, maxWidth, isStarterAstroid)
+                GeysersRow(asteroid.geysers, maxWidth, isStarterAsteroid)
 
                 HalfSpacer()
 
-                PointOfInterestsRow(asteroid.pointsOfInterest, maxWidth, isStarterAstroid)
+                PointOfInterestsRow(asteroid.pointsOfInterest, maxWidth, isStarterAsteroid)
             }
         }
     }
