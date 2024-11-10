@@ -63,7 +63,8 @@ enum class ClusterType(
     val requiredDlcs: List<Dlc>,
     val gameMode: GameModeType,
     val nameStringResource: StringResource,
-    val asteroidTypes: List<AsteroidType>
+    val asteroidTypes: List<AsteroidType>,
+    val starmapRadius: Int = 12
 ) {
 
     /** Terra */
@@ -497,7 +498,8 @@ enum class ClusterType(
             AsteroidType.WaterMoonlet,
             AsteroidType.NiobiumMoonlet,
             AsteroidType.RegolithMoonlet
-        )
+        ),
+        14
     ),
 
     /** The Desolands Moonlet */
@@ -518,7 +520,8 @@ enum class ClusterType(
             AsteroidType.WaterMoonlet,
             AsteroidType.NiobiumMoonlet,
             AsteroidType.RegolithMoonlet
-        )
+        ),
+        14
     ),
 
     /** Frozen Forest Moonlet */
@@ -539,7 +542,8 @@ enum class ClusterType(
             AsteroidType.WaterMoonlet,
             AsteroidType.NiobiumMoonlet,
             AsteroidType.RegolithMoonlet
-        )
+        ),
+        14
     ),
 
     /** Flipped Moonlet */
@@ -560,7 +564,8 @@ enum class ClusterType(
             AsteroidType.WaterMoonlet,
             AsteroidType.NiobiumMoonlet,
             AsteroidType.RegolithMoonlet
-        )
+        ),
+        14
     ),
 
     /** Radioactive Ocean Moonlet */
@@ -581,7 +586,8 @@ enum class ClusterType(
             AsteroidType.WaterMoonlet,
             AsteroidType.NiobiumMoonlet,
             AsteroidType.RegolithMoonlet
-        )
+        ),
+        14
     );
 
     fun dlcRequirementsFulfilled(requirements: List<Dlc>): Boolean =
