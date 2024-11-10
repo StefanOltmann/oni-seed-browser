@@ -109,7 +109,7 @@ fun SpacedOutStarMapView(
             ) {
 
                 val clusterType = cluster.cluster
-                val radius = clusterType.starmapRadius
+                val radius = clusterType.starmapRadius - 1
 
 
                 HexagonalGrid(radius)
