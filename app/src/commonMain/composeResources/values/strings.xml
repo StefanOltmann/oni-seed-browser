@@ -244,6 +244,7 @@
     <string name="harvestableSpacePoiCarbonAsteroidField">Carbon Asteroid Field</string>
     <string name="harvestableSpacePoiChlorineCloud">Chlorine Cloud</string>
     <string name="harvestableSpacePoiDlc2CeresOreField">Frozen Mercury Asteroid Field</string>
+    <string name="harvestableSpacePoiDLC2CERESFIELD">Frozen Cinnabar Asteroid Field</string>
     <string name="harvestableSpacePoiForestyOreField">Forested Ore Field</string>
     <string name="harvestableSpacePoiFrozenOreField">Frozen Ore Asteroid Field</string>
     <string name="harvestableSpacePoiGasGiantCloud">Exploded Gas Giant</string>
