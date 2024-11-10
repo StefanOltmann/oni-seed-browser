@@ -42,7 +42,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.unit.dp
 import model.filter.FilterQuery
-import model.filter.GameModeType
 import ui.HorizontalSeparator
 import ui.noRippleClickable
 import ui.theme.DefaultSpacer
