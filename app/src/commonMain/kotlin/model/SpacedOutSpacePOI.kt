@@ -31,6 +31,7 @@ import oni_seed_browser.app.generated.resources.artifactSpacePoiGravitasSpaceSta
 import oni_seed_browser.app.generated.resources.artifactSpacePoiRussellsTeapot
 import oni_seed_browser.app.generated.resources.harvestableSpacePoiCarbonAsteroidField
 import oni_seed_browser.app.generated.resources.harvestableSpacePoiChlorineCloud
+import oni_seed_browser.app.generated.resources.harvestableSpacePoiDlc2CeresField
 import oni_seed_browser.app.generated.resources.harvestableSpacePoiDlc2CeresOreField
 import oni_seed_browser.app.generated.resources.harvestableSpacePoiForestyOreField
 import oni_seed_browser.app.generated.resources.harvestableSpacePoiFrozenOreField
@@ -72,6 +73,7 @@ enum class SpacedOutSpacePOI(
     ArtifactSpacePOI_RussellsTeapot(Res.string.artifactSpacePoiRussellsTeapot),
     HarvestableSpacePOI_CarbonAsteroidField(Res.string.harvestableSpacePoiCarbonAsteroidField),
     HarvestableSpacePOI_ChlorineCloud(Res.string.harvestableSpacePoiChlorineCloud),
+    HarvestableSpacePOI_DLC2CeresField(Res.string.harvestableSpacePoiDlc2CeresField),
     HarvestableSpacePOI_DLC2CeresOreField(Res.string.harvestableSpacePoiDlc2CeresOreField),
     HarvestableSpacePOI_ForestyOreField(Res.string.harvestableSpacePoiForestyOreField),
     HarvestableSpacePOI_FrozenOreField(Res.string.harvestableSpacePoiFrozenOreField),

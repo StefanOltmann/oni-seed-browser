@@ -244,7 +244,7 @@
     <string name="harvestableSpacePoiCarbonAsteroidField">碳質小行星帶</string>
     <string name="harvestableSpacePoiChlorineCloud">氯氣雲</string>
     <string name="harvestableSpacePoiDlc2CeresOreField">冰凍汞小行星帶</string>
-    <string name="harvestableSpacePoiDLC2CERESFIELD">冰凍硃砂小行星帶</string>
+    <string name="harvestableSpacePoiDlc2CeresField">冰凍硃砂小行星帶</string>
     <string name="harvestableSpacePoiForestyOreField">森林礦帶</string>
     <string name="harvestableSpacePoiFrozenOreField">冰凍礦石小行星帶</string>
     <string name="harvestableSpacePoiGasGiantCloud">爆炸的氣體巨星</string>
