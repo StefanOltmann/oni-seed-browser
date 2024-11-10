@@ -19,100 +19,48 @@
 
 package ui
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.offset
-import androidx.compose.foundation.layout.size
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.unit.dp
-import ui.icons.GithubMark
-import ui.theme.halfSpacing
-import ui.theme.lightGray
+import ui.icons.FooterGraphic
 
 @Composable
 fun Footer() {
 
     val uriHandler = LocalUriHandler.current
 
-    BoxWithConstraints {
-
-        val showLink = maxWidth > 600.dp
+    Box(
+        contentAlignment = Alignment.Center,
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(24.dp)
+            .background(Color.Black)
+    ) {
 
         Row(
-            horizontalArrangement = Arrangement.spacedBy(halfSpacing, Alignment.CenterHorizontally),
-            verticalAlignment = Alignment.CenterVertically,
+            verticalAlignment = Alignment.Bottom,
             modifier = Modifier
-                .fillMaxWidth()
-                .background(Color.Black)
+                .clickable {
+                    uriHandler.openUri("https://github.com/StefanOltmann/oni-seed-browser")
+                }
         ) {
 
-            Text(
-                text = "Oxygen Not Included",
-                style = MaterialTheme.typography.bodyLarge,
-                color = lightGray,
-                modifier = Modifier
-                    .offset(y = -2.dp)
-                    .clickable {
-                        uriHandler.openUri("https://www.klei.com/games/oxygen-not-included")
-                    }
+            Image(
+                imageVector = FooterGraphic,
+                contentDescription = null,
+                modifier = Modifier.padding(bottom = 2.dp)
             )
-
-            Text(
-                text = "©",
-                style = MaterialTheme.typography.bodyLarge,
-                color = lightGray,
-                modifier = Modifier.offset(y = -2.dp)
-            )
-
-            Text(
-                text = "Klei Entertainment",
-                style = MaterialTheme.typography.bodyLarge,
-                color = lightGray,
-                modifier = Modifier
-                    .offset(y = -2.dp)
-                    .clickable {
-                        uriHandler.openUri("https://www.klei.com")
-                    }
-            )
-
-            if (showLink) {
-
-                Text(
-                    text = "|",
-                    style = MaterialTheme.typography.bodyLarge,
-                    color = lightGray,
-                    modifier = Modifier.offset(y = -2.dp)
-                )
-
-                Icon(
-                    imageVector = GithubMark,
-                    tint = lightGray,
-                    contentDescription = null,
-                    modifier = Modifier.size(16.dp)
-                )
-
-                Text(
-                    text = "https://github.com/StefanOltmann/oni-seed-browser",
-                    style = MaterialTheme.typography.bodyLarge,
-                    color = lightGray,
-                    modifier = Modifier
-                        .offset(y = -2.dp)
-                        .clickable {
-                            uriHandler.openUri("https://github.com/StefanOltmann/oni-seed-browser")
-                        }
-                )
-            }
         }
     }
 }

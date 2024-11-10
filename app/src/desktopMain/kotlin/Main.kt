@@ -19,6 +19,8 @@
 
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.platform.LocalClipboardManager
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Window
@@ -38,9 +40,15 @@ fun main() = application {
         title = stringResource(Res.string.uiTitle),
         onCloseRequest = ::exitApplication
     ) {
+
+        val clipboardManager = LocalClipboardManager.current
+
         App(
             urlHash = remember { mutableStateOf(null) },
-            isMniEmbedded = remember { mutableStateOf(false) }
+            isMniEmbedded = remember { mutableStateOf(false) },
+            writeToClipboard = {
+                clipboardManager.setText(AnnotatedString(it))
+            }
         )
     }
 }

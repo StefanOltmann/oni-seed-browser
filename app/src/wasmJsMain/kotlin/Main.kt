@@ -30,6 +30,8 @@ import ui.App
 @OptIn(ExperimentalComposeUiApi::class)
 fun main() {
 
+    window.navigator.clipboard
+
     CanvasBasedWindow(canvasElementId = "ComposeTarget") {
 
         val params = remember { getQueryParameters() }
@@ -53,8 +55,11 @@ fun main() {
         }
 
         App(
-            urlHash,
-            isMniEmbedded
+            urlHash = urlHash,
+            isMniEmbedded = isMniEmbedded,
+            writeToClipboard = {
+                window.navigator.clipboard.writeText(it)
+            }
         )
     }
 }

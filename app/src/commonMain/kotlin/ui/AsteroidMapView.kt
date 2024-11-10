@@ -282,16 +282,22 @@ fun AsteroidMap(
 
             for (poi in asteroid.pointsOfInterest) {
 
-                Image(
-                    painter = painterResource(getPointOfInterestDrawable(poi.id)),
-                    contentDescription = null,
+                TooltipContainer(
+                    tooltipContent = { PointOfInterestTooltip(poi.id, 1) },
+                    yOffset = 10,
                     modifier = Modifier
                         .offset(
                             x = (poi.x * viewScale).dp - halfIconSize,
                             y = (poi.y * viewScale).dp - halfIconSize
                         )
-                        .size(iconSize)
-                )
+                ) {
+
+                    Image(
+                        painter = painterResource(getPointOfInterestDrawable(poi.id)),
+                        contentDescription = null,
+                        modifier = Modifier.size(iconSize)
+                    )
+                }
             }
 
             for (geyser in asteroid.geysers) {
@@ -308,28 +314,35 @@ fun AsteroidMap(
                 else
                     Modifier
 
-                Image(
-                    painter = painterResource(getGeyserDrawable(geyser.id)),
-                    contentDescription = null,
+                TooltipContainer(
+                    tooltipContent = { GeyserTooltip(geyser.id, 1) },
+                    yOffset = 10,
                     modifier = Modifier
                         .offset(
                             x = (geyser.x * viewScale).dp - halfIconSize,
                             y = (geyser.y * viewScale).dp - halfIconSize
                         )
-                        .size(iconSize)
-                        .border(
-                            if (isHighlighted)
-                                2.dp
-                            else
-                                0.dp,
-                            if (isHighlighted)
-                                hoverColor
-                            else
-                                Color.Transparent,
-                            CircleShape
-                        )
-                        then (geyserClickModifier)
-                )
+                ) {
+
+                    Image(
+                        painter = painterResource(getGeyserDrawable(geyser.id)),
+                        contentDescription = null,
+                        modifier = Modifier
+                            .size(iconSize)
+                            .border(
+                                if (isHighlighted)
+                                    2.dp
+                                else
+                                    0.dp,
+                                if (isHighlighted)
+                                    hoverColor
+                                else
+                                    Color.Transparent,
+                                CircleShape
+                            )
+                            then (geyserClickModifier)
+                    )
+                }
             }
         }
     }

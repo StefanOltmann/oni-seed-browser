@@ -1,6 +1,6 @@
 <resources>
     <!-- UI Specific -->
-    <string name="uiTitle">Oxygen Not Included Seed Browser</string>
+    <string name="uiTitle">Oxygen Not Included Kartenfinder</string>
     <string name="uiFilter">Filter</string>
     <string name="uiSelectRule">Bitte wähle ein Cluster um Regeln zu definieren.</string>
     <string name="uiReset">RESET</string>
@@ -15,8 +15,8 @@
     <string name="uiHas">hat</string>
     <string name="uiHasNot">hat nicht</string>
     <string name="uiNoResults">Keine Ergebnisse gefunden.</string>
-    <string name="uiSeedsInDatabase">Seeds in der Datenbank</string>
-    <string name="uiWorldTrait">World Trait</string>
+    <string name="uiSeedsInDatabase">Karten in der Datenbank</string>
+    <string name="uiWorldTrait">Welt-Eigenschaft</string>
     <string name="uiSpaceDestinationCount">Space Destination Count</string>
     <string name="uiGeyserCount">Geysir Anzahl</string>
     <string name="uiGeyserOutput">Geysir Ausgabe</string>
@@ -25,7 +25,7 @@
     <string name="uiItemDescriptionSpaceDestination">Space destination</string>
     <string name="uiOutput">Ausgabe</string>
     <string name="uiCount">Anzahl</string>
-    <string name="uiDetails">details</string>
+    <string name="uiDetails">Details</string>
     <string name="uiBiomeDetails">Biom details</string>
     <string name="uiGeyserDetails">Geysir details</string>
     <string name="uiGeyserDetailGramPerSecond">g/s</string>
@@ -34,6 +34,178 @@
     <string name="uiGeyserDetailCycles">Zyklen</string>
     <string name="uiGeyserDetailEmitDetails">Erzeugt {emitRate} für {eruptionTime} in {overallTime}</string>
     <string name="uiGeyserDetailActiveDetails">Aktiv für {activeCycles} in {overallCycles}</string>
+
+    <!-- GameModes -->
+    <string name="gameModeBaseGameStandard">Standard</string>
+    <string name="gameModeTheLab">Das Labor</string>
+    <string name="gameModeSpacedOutClassic">Klassisch</string>
+    <string name="gameModeSpacedOutSpacedOut">Spaced Out!</string>
+
+    <!-- ClusterType -->
+    <string name="clusterTypeBaseTerra">Terra</string>
+    <string name="clusterTypeBaseCeres">Ceres</string>
+    <string name="clusterTypeBaseBlastedCeres">Zerstörter Ceres</string>
+    <string name="clusterTypeBaseOceania">Ozeanien</string>
+    <string name="clusterTypeBaseRime">Rime</string>
+    <string name="clusterTypeBaseVerdante">Verdante</string>
+    <string name="clusterTypeBaseArboria">Arboria</string>
+    <string name="clusterTypeBaseVolcanea">Volcanea</string>
+    <string name="clusterTypeBaseTheBadlands">Das Ödland</string>
+    <string name="clusterTypeBaseAridio">Aridio</string>
+    <string name="clusterTypeBaseOasisse">Oase</string>
+    <string name="clusterTypeDlcTerra">Terra</string>
+    <string name="clusterTypeDlcCeres">Ceres</string>
+    <string name="clusterTypeDlcBlastedCeres">Zerstörter Ceres</string>
+    <string name="clusterTypeDlcOceania">Ozeanien</string>
+    <string name="clusterTypeDlcSquelchy">Sumpf</string>
+    <string name="clusterTypeDlcRime">Rime</string>
+    <string name="clusterTypeDlcVerdante">Verdante</string>
+    <string name="clusterTypeDlcArboria">Arboria</string>
+    <string name="clusterTypeDlcVolcanea">Volcanea</string>
+    <string name="clusterTypeDlcTheBadlands">Das Ödland</string>
+    <string name="clusterTypeDlcAridio">Aridio</string>
+    <string name="clusterTypeDlcOasisse">Oase</string>
+    <string name="clusterTypeDlcTerrania">Terrania</string>
+    <string name="clusterTypeDlcCeresMinor">Kleiner Ceres</string>
+    <string name="clusterTypeDlcFolia">Folia</string>
+    <string name="clusterTypeDlcQuagmiris">Quagmiris</string>
+    <string name="clusterTypeDlcMetallicSwampyMoonlet">Metallischer Sumpf</string>
+    <string name="clusterTypeDlcTheDesolandsMoonlet">Das Ödland</string>
+    <string name="clusterTypeDlcFrozenForestMoonlet">Gefrorener Wald</string>
+    <string name="clusterTypeDlcFlippedMoonlet">Umgedrehter Asteroid</string>
+    <string name="clusterTypeDlcRadioactiveOceanMoonlet">Radioaktiver Ozean</string>
+
+    <!-- AsteroidType -->
+    <string name="asteroidTypeSandstoneDefault">Terra-Asteroid</string>
+    <string name="asteroidTypeCeresBaseGameAsteroid">Ceres-Asteroid</string>
+    <string name="asteroidTypeCeresBaseGameShatteredAsteroid">Zerstörter Ceres-Asteroid</string>
+    <string name="asteroidTypeOceania">Ozeanien-Asteroid</string>
+    <string name="asteroidTypeSandstoneFrozen">Rime-Asteroid</string>
+    <string name="asteroidTypeForestLush">Verdante-Asteroid</string>
+    <string name="asteroidTypeForestDefault">Arboria-Asteroid</string>
+    <string name="asteroidTypeVolcanic">Volcanea-Asteroid</string>
+    <string name="asteroidTypeBadlands">Der Ödland-Asteroid</string>
+    <string name="asteroidTypeForestHot">Aridio-Asteroid</string>
+    <string name="asteroidTypeOasis">Oase-Asteroid</string>
+    <string name="asteroidTypeVanillaSandstoneDefault">Terra-Asteroid</string>
+    <string name="asteroidTypeMediumRadioactiveVanillaWarpPlanet">Radioaktiver Sumpf-Asteroid</string>
+    <string name="asteroidTypeCeresClassicAsteroid">Ceres-Asteroid</string>
+    <string name="asteroidTypeMediumSwampy">Stinkender Sumpf-Asteroid</string>
+    <string name="asteroidTypeVanillaOceania">Ozeanien-Asteroid</string>
+    <string name="asteroidTypeMediumForestyWasteland">Asteroid der Glutholz-Wüste</string>
+    <string name="asteroidTypeVanillaSwampDefault">Sumpfiger Asteroid</string>
+    <string name="asteroidTypeMediumForestyRadioactiveVanillaWarpPlanet">Radioaktiver Wald-Asteroid</string>
+    <string name="asteroidTypeVanillaSandstoneFrozen">Rime-Asteroid</string>
+    <string name="asteroidTypeVanillaForestDefault">Verdante-Asteroid</string>
+    <string name="asteroidTypeMediumSandyRadioactiveVanillaWarpPlanet">Radioaktiver Terra-Asteroid</string>
+    <string name="asteroidTypeVanillaArboria">Arboria-Asteroid</string>
+    <string name="asteroidTypeVanillaVolcanic">Volcanea-Asteroid</string>
+    <string name="asteroidTypeVanillaBadlands">Das Ödland Asteroid</string>
+    <string name="asteroidTypeVanillaAridio">Aridio-Asteroid</string>
+    <string name="asteroidTypeMediumSandySwamp">Radioaktiver Terrabog-Asteroid</string>
+    <string name="asteroidTypeVanillaOasis">Oase-Asteroid</string>
+    <string name="asteroidTypeTerraMoonlet">Terrania-Asteroid</string>
+    <string name="asteroidTypeIdealLandingSite">Verstrahlter Wald-Asteroid</string>
+    <string name="asteroidTypeWarpOilySwamp">Öliger Sumpf-Asteroid</string>
+    <string name="asteroidTypeRegolithMoonlet">Felsiger Asteroid</string>
+    <string name="asteroidTypeCeresSpacedOutAsteroid">Kleiner Ceres-Asteroid</string>
+    <string name="asteroidTypeSwampyLandingSite">Verstrahlter Sumpfasteroid</string>
+    <string name="asteroidTypeOilRichWarpTarget">Rostiger Öl-Asteroid</string>
+    <string name="asteroidTypeForestMoonlet">Folia-Asteroid</string>
+    <string name="asteroidTypeSwampMoonlet">Quagmiris-Asteroid</string>
+    <string name="asteroidTypeMetalHeavyLandingSite">Verstrahlter Sumpfasteroid</string>
+    <string name="asteroidTypeMiniBadlands">Der Ödland-Asteroid</string>
+    <string name="asteroidTypeMiniMetallicSwampyStart">Metallischer Sumpf-Asteroid</string>
+    <string name="asteroidTypeMiniForestFrozenWarp">Gefrorener Wald-Asteroid</string>
+    <string name="asteroidTypeMiniFlipped">Umgedrehter Asteroid</string>
+    <string name="asteroidTypeMiniRadioactiveOcean">Radioaktiver Ozean-Asteroid</string>
+    <string name="asteroidTypeMiniBadlandsStart">Der Ödland-Asteroid</string>
+    <string name="asteroidTypeMiniRadioactiveOceanWarp">Radioaktiver Ozean-Asteroid</string>
+    <string name="asteroidTypeMiniMetallicSwampy">Metallischer Sumpf-Asteroid</string>
+    <string name="asteroidTypeMiniForestFrozen">Gefrorener Wald-Asteroid</string>
+    <string name="asteroidTypeMiniBadlandsWarp">Der Ödland-Asteroid</string>
+    <string name="asteroidTypeMiniForestFrozenStart">Gefrorener Wald-Asteroid</string>
+    <string name="asteroidTypeMiniFlippedStart">Umgedrehter Asteroid</string>
+    <string name="asteroidTypeMiniRadioactiveOceanStart">Radioaktiver Ozean-Asteroid</string>
+    <string name="asteroidTypeMiniFlippedWarp">Umgedrehter Asteroid</string>
+    <string name="asteroidTypeTundraMoonlet">Tundra-Asteroid</string>
+    <string name="asteroidTypeMarshyMoonlet">Sumpfiger Asteroid</string>
+    <string name="asteroidTypeNiobiumMoonlet">Supraleitender Asteroid</string>
+    <string name="asteroidTypeMooMoonlet">Muh Asteroid</string>
+    <string name="asteroidTypeWaterMoonlet">Wasser-Asteroid</string>
+    <string name="asteroidTypeMiniRegolithMoonlet">Felsiger Asteroid</string>
+    <string name="asteroidTypeMixingCeresAsteroid">Ceres-Fragment</string>
+    <string name="asteroidTypeCeresClassicShatteredAsteroid">Zerstörter Ceres-Asteroid</string>
+
+    <!--  POI types -->
+    <string name="pointOfInterestTypePrintingPod">Printing Pod</string>
+    <string name="pointOfInterestTypeSupplyTeleporterInput">Supply Teleporter Input</string>
+    <string name="pointOfInterestTypeSupplyTeleporterOutput">Supply Teleporter Output</string>
+    <string name="pointOfInterestTypeTeleporterTransmitter">Teleporter Transmitter</string>
+    <string name="pointOfInterestTypeTeleporterReceiver">Teleporter Receiver</string>
+    <string name="pointOfInterestTypeNeuralVacillator">Neural Vacillator</string>
+    <string name="pointOfInterestTypeAntiEntropyThermoNullifier">Anti Entropy Thermo-Nullifier</string>
+    <string name="pointOfInterestTypeExperiment52B">Experiment 52B</string>
+    <string name="pointOfInterestTypeArtifact">Artifact</string>
+    <string name="pointOfInterestTypeCrashedSatellite">Crashed Satellite</string>
+    <string name="pointOfInterestTypeWreckedSatellite">Wrecked Satellite</string>
+    <string name="pointOfInterestTypeCrushedSatellite">Crushed Satellite</string>
+    <string name="pointOfInterestTypeTemporalTearOpener">Temporal Tear Opener</string>
+    <string name="pointOfInterestTypeCryotank3000">Cryotank 3000</string>
+    <string name="pointOfInterestTypePropFacilityStatue">Monument</string>
+    <string name="pointOfInterestTypeGeothermalVentEntity">Geothermal vent</string>
+    <string name="pointOfInterestTypeGeothermalControllerEntity">Geothermal controller</string>
+    <string name="pointOfInterestTypeCeresTechUnlock">Tech unlock</string>
+
+    <!-- Zone types -->
+    <string name="zoneTypeSandstone">Sandstone</string>
+    <string name="zoneTypeBarren">Barren</string>
+    <string name="zoneTypeSpace">Space</string>
+    <string name="zoneTypeFrozenWastes">Tundra</string>
+    <string name="zoneTypeBoggyMarsh">Marsh</string>
+    <string name="zoneTypeToxicJungle">Jungle</string>
+    <string name="zoneTypeOcean">Ocean</string>
+    <string name="zoneTypeRust">Rust</string>
+    <string name="zoneTypeForest">Forest</string>
+    <string name="zoneTypeRadioactive">Radioactive</string>
+    <string name="zoneTypeSwamp">Swampy</string>
+    <string name="zoneTypeWasteland">Wasteland</string>
+    <string name="zoneTypeMetallic">Metallic</string>
+    <string name="zoneTypeMoo">Moo</string>
+    <string name="zoneTypeIceCaves">Ice Cave</string>
+    <string name="zoneTypeCarrotQuarry">Cool Pool</string>
+    <string name="zoneTypeSugarWoods">Nectar</string>
+    <string name="zoneTypeOilField">Oily</string>
+    <string name="zoneTypeMagmaCore">Magma</string>
+
+    <!-- Geyser types -->
+    <string name="geyserTypeCoolSteamVent">Cool Steam Vent</string>
+    <string name="geyserTypeHydrogenVent">Hydrogen Vent</string>
+    <string name="geyserTypeNaturalGasGeyser">Natural Gas Geyser</string>
+    <string name="geyserTypeChlorineGasVent">Chlorine Gas Vent</string>
+    <string name="geyserTypeSteamVent">Steam Vent</string>
+    <string name="geyserTypeCarbonDioxideVent">Carbon Dioxide Vent</string>
+    <string name="geyserTypeHotPollutedOxygenVent">Hot Polluted Oxygen Vent</string>
+    <string name="geyserTypeInfectiousPollutedOxygenVent">Infectious Polluted Oxygen Vent</string>
+    <string name="geyserTypeWaterGeyser">Water Geyser</string>
+    <string name="geyserTypeCoolSlushGeyser">Cool Slush Geyser</string>
+    <string name="geyserTypePollutedWaterVent">Polluted Water Vent</string>
+    <string name="geyserTypeCoolSaltSlushGeyser">Cool Salt Slush Geyser</string>
+    <string name="geyserTypeSaltWaterGeyser">Salt Water Geyser</string>
+    <string name="geyserTypeCarbonDioxideGeyser">Carbon Dioxide Geyser</string>
+    <string name="geyserTypeLeakyOilFissure">Leaky Oil Fissure</string>
+    <string name="geyserTypeLiquidSulfurGeyser">Liquid Sulfur Geyser</string>
+    <string name="geyserTypeIronVolcano">Iron Volcano</string>
+    <string name="geyserTypeCopperVolcano">Copper Volcano</string>
+    <string name="geyserTypeGoldVolcano">Gold Volcano</string>
+    <string name="geyserTypeAluminiumVolcano">Aluminium Volcano</string>
+    <string name="geyserTypeCobaltVolcano">Cobalt Volcano</string>
+    <string name="geyserTypeTungstenVolcano">Tungsten Volcano</string>
+    <string name="geyserTypeNiobiumVolcano">Niobium Volcano</string>
+    <string name="geyserTypeVolcano">Volcano</string>
+    <string name="geyserTypeMinorVolcano">Minor Volcano</string>
+    <string name="geyserTypeOilReservoir">Oil Reservoir</string>
+
     <!-- World traits -->
     <string name="worldTraitBouldersLarge">Große Felsbrocken</string>
     <string name="worldTraitBouldersMedium">Mittlere Felsbrocken</string>

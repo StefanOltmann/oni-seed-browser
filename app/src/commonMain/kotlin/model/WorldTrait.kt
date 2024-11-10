@@ -97,7 +97,7 @@ enum class WorldTrait(
         stringResource = Res.string.worldTraitGeodes,
         color = Color(0xFFC47BF4),
         /* Helpful materials. */
-        rating = Rating.GOOD
+        rating = Rating.VERY_GOOD
     ),
     GeoDormant(
         stringResource = Res.string.worldTraitGeoDormant,

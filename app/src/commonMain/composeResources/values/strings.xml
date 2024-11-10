@@ -39,7 +39,7 @@
     <string name="gameModeBaseGameStandard">Standard</string>
     <string name="gameModeTheLab">The Lab</string>
     <string name="gameModeSpacedOutClassic">Classic</string>
-    <string name="gameModeSpacedOutSpacedOut">Spaced Out</string>
+    <string name="gameModeSpacedOutSpacedOut">Spaced Out!</string>
 
     <!-- ClusterType -->
     <string name="clusterTypeBaseTerra">Terra</string>
@@ -134,7 +134,7 @@
     <string name="asteroidTypeMooMoonlet">Moo Asteroid</string>
     <string name="asteroidTypeWaterMoonlet">Water Asteroid</string>
     <string name="asteroidTypeMiniRegolithMoonlet">Regolith Asteroid</string>
-    <string name="asteroidTypeMixingCeresAsteroid">Mixing Ceres Asteroid</string>
+    <string name="asteroidTypeMixingCeresAsteroid">Ceres Fragment</string>
     <string name="asteroidTypeCeresClassicShatteredAsteroid">Blasted Ceres Asteroid</string>
 
     <!--  POI types -->
@@ -230,4 +230,40 @@
     <string name="worldTraitLushCore">Lush Core</string>
     <string name="worldTraitMetalCaves">Metallic Caves</string>
     <string name="worldTraitRadioactiveCrust">Radioactive Crust</string>
+
+    <!-- Space POI -->
+    <string name="artifactSpacePoiGravitasSpaceStation1">Destroyed Satellite</string>
+    <string name="artifactSpacePoiGravitasSpaceStation2">Demolished Rocket</string>
+    <string name="artifactSpacePoiGravitasSpaceStation3">Ruined Rocket</string>
+    <string name="artifactSpacePoiGravitasSpaceStation4">Retired Planetary Excursion Module</string>
+    <string name="artifactSpacePoiGravitasSpaceStation5">Destroyed Satellite</string>
+    <string name="artifactSpacePoiGravitasSpaceStation6">Annihilated Satellite</string>
+    <string name="artifactSpacePoiGravitasSpaceStation7">Wrecked Space Shuttle</string>
+    <string name="artifactSpacePoiGravitasSpaceStation8">Obsolete Space Station Module</string>
+    <string name="artifactSpacePoiRussellsTeapot">Russell's Teapot</string>
+    <string name="harvestableSpacePoiCarbonAsteroidField">Carbon Asteroid Field</string>
+    <string name="harvestableSpacePoiChlorineCloud">Chlorine Cloud</string>
+    <string name="harvestableSpacePoiDlc2CeresOreField">Frozen Mercury Asteroid Field</string>
+    <string name="harvestableSpacePoiForestyOreField">Forested Ore Field</string>
+    <string name="harvestableSpacePoiFrozenOreField">Frozen Ore Asteroid Field</string>
+    <string name="harvestableSpacePoiGasGiantCloud">Exploded Gas Giant</string>
+    <string name="harvestableSpacePoiGildedAsteroidField">Gilded Asteroid Field</string>
+    <string name="harvestableSpacePoiGlimmeringAsteroidField">Glimmering Asteroid Field</string>
+    <string name="harvestableSpacePoiHeliumCloud">Helium Cloud</string>
+    <string name="harvestableSpacePoiIceAsteroidField">Exploded Ice Giant</string>
+    <string name="harvestableSpacePoiInterstellarIceField">Ice Asteroid Field</string>
+    <string name="harvestableSpacePoiInterstellarOcean">Interstellar Ocean</string>
+    <string name="harvestableSpacePoiMetallicAsteroidField">Metallic Asteroid Field</string>
+    <string name="harvestableSpacePoiOilyAsteroidField">Oily Asteroid Field</string>
+    <string name="harvestableSpacePoiOrganicMassField">Organic Mass Field</string>
+    <string name="harvestableSpacePoiOxidizedAsteroidField">Oxidized Asteroid Field</string>
+    <string name="harvestableSpacePoiOxygenRichAsteroidField">Oxygen-Rich Asteroid Field</string>
+    <string name="harvestableSpacePoiRadioactiveAsteroidField">Radioactive Asteroid Field</string>
+    <string name="harvestableSpacePoiRadioactiveGasCloud">Radioactive Gas Cloud</string>
+    <string name="harvestableSpacePoiRockyAsteroidField">Rocky Asteroid Field</string>
+    <string name="harvestableSpacePoiSaltyAsteroidField">Salty Asteroid Field</string>
+    <string name="harvestableSpacePoiSandyOreField">Sandy Ore Field</string>
+    <string name="harvestableSpacePoiSatelliteField">Space Debris</string>
+    <string name="harvestableSpacePoiSwampyOreField">Swampy Ore Field</string>
+    <string name="temporalTear">Temporal Tear</string>
 </resources>

@@ -99,53 +99,59 @@ fun PointOfInterestsRow(
 
             val count = poisByTypeMap[poiType]!!.size
 
-            Box(
-                contentAlignment = Alignment.Center,
-                modifier = Modifier
-                    .size(48.dp)
-                    .background(
-                        gray3,
-                        CircleShape
-                    )
-                    .border(
-                        1.dp,
-                        anthracite,
-                        CircleShape
-                    )
+            TooltipContainer(
+                tooltipContent = { PointOfInterestTooltip(poiType, count) },
+                yOffset = -5
             ) {
 
-                Image(
-                    painter = painterResource(
-                        /* Use an alternative graphic for better contrast. */
-                        if (poiType == PointOfInterestType.ARTIFACT)
-                            Res.drawable.poi_artifact_filled
-                        else
-                            getPointOfInterestDrawable(poiType)
-                    ),
-                    contentDescription = null,
-                    modifier = Modifier.padding(defaultSpacing)
-                )
-
-                if (count > 1) {
-
-                    Box(
-                        contentAlignment = Alignment.Center,
-                        modifier = Modifier
-                            .size(20.dp)
-                            .offset(y = 14.dp)
-                            .background(
-                                countBackground,
-                                CircleShape
-                            )
-                    ) {
-
-                        Text(
-                            text = "$count",
-                            style = MaterialTheme.typography.bodyLarge,
-                            color = MaterialTheme.colorScheme.onBackground,
-                            fontWeight = FontWeight.Bold,
-                            modifier = Modifier.offset(y = -4.dp)
+                Box(
+                    contentAlignment = Alignment.Center,
+                    modifier = Modifier
+                        .size(48.dp)
+                        .background(
+                            gray3,
+                            CircleShape
                         )
+                        .border(
+                            1.dp,
+                            anthracite,
+                            CircleShape
+                        )
+                ) {
+
+                    Image(
+                        painter = painterResource(
+                            /* Use an alternative graphic for better contrast. */
+                            if (poiType == PointOfInterestType.ARTIFACT)
+                                Res.drawable.poi_artifact_filled
+                            else
+                                getPointOfInterestDrawable(poiType)
+                        ),
+                        contentDescription = null,
+                        modifier = Modifier.padding(defaultSpacing)
+                    )
+
+                    if (count > 1) {
+
+                        Box(
+                            contentAlignment = Alignment.Center,
+                            modifier = Modifier
+                                .size(20.dp)
+                                .offset(y = 14.dp)
+                                .background(
+                                    countBackground,
+                                    CircleShape
+                                )
+                        ) {
+
+                            Text(
+                                text = "$count",
+                                style = MaterialTheme.typography.bodyLarge,
+                                color = MaterialTheme.colorScheme.onBackground,
+                                fontWeight = FontWeight.Bold,
+                                modifier = Modifier.offset(y = -4.dp)
+                            )
+                        }
                     }
                 }
             }

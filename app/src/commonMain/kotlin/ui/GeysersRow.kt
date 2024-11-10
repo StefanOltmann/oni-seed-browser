@@ -33,19 +33,10 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.LayoutCoordinates
-import androidx.compose.ui.layout.onPlaced
-import androidx.compose.ui.layout.positionInRoot
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.min
 import androidx.compose.ui.unit.times
@@ -60,8 +51,7 @@ import ui.theme.halfSpacing
 fun GeysersRow(
     geysers: List<Geyser>,
     maxWidth: Dp,
-    isStarterAstroid: Boolean,
-    showTooltip: MutableState<Tooltip?>
+    isStarterAstroid: Boolean
 ) {
 
     val geyserByTypeMap = geysers.groupBy { it.id }
@@ -83,83 +73,57 @@ fun GeysersRow(
 
             val count = geyserByTypeMap[geyserType]!!.size
 
-            val hovered = remember { mutableStateOf(false) }
-
-            val coordinates = remember { mutableStateOf<LayoutCoordinates?>(null) }
-
-            val posInRoot = coordinates.value?.positionInRoot()
-
-            val density = LocalDensity.current.density
-
-            LaunchedEffect(hovered.value) {
-
-                if (hovered.value && posInRoot != null) {
-
-                    showTooltip.value = Tooltip(
-                        position = DpOffset(
-                            posInRoot.x.dp.div(density).plus(24.dp),
-                            posInRoot.y.dp.div(density).plus(24.dp)
-                        ),
-                        content = {
-
-                            GeyserCountAndName(geyserType, count)
-                        }
-                    )
-                }
-
-                if (!hovered.value)
-                    showTooltip.value = null
-            }
-
-            Box(
-                contentAlignment = Alignment.Center,
-                modifier = Modifier
-                    .size(48.dp)
-                    .background(
-                        gray3,
-                        CircleShape
-                    )
-                    .border(
-                        if (hovered.value || geyserType.rating.isNegative()) 2.dp else 1.dp,
-                        if (geyserType.rating.isNegative())
-                            geyserType.rating.color
-                        else
-                            anthracite,
-                        CircleShape
-                    )
-                    .onPlaced {
-                        coordinates.value = it
-                    }
-                    .onHover(hovered)
+            TooltipContainer(
+                tooltipContent = { GeyserTooltip(geyserType, count) },
+                yOffset = -5
             ) {
 
-                Image(
-                    painter = painterResource(getGeyserDrawable(geyserType)),
-                    contentDescription = null,
-                    alignment = Alignment.BottomCenter,
-                    modifier = Modifier.padding()
-                )
-
-                if (count > 1) {
-
-                    Box(
-                        contentAlignment = Alignment.Center,
-                        modifier = Modifier
-                            .size(20.dp)
-                            .offset(y = 14.dp)
-                            .background(
-                                countBackground,
-                                CircleShape
-                            )
-                    ) {
-
-                        Text(
-                            text = "$count",
-                            style = MaterialTheme.typography.bodyLarge,
-                            color = MaterialTheme.colorScheme.onBackground,
-                            fontWeight = FontWeight.Bold,
-                            modifier = Modifier.offset(y = -4.dp)
+                Box(
+                    contentAlignment = Alignment.Center,
+                    modifier = Modifier
+                        .size(48.dp)
+                        .background(
+                            gray3,
+                            CircleShape
                         )
+                        .border(
+                            if (geyserType.rating.isNegative()) 2.dp else 1.dp,
+                            if (geyserType.rating.isNegative())
+                                geyserType.rating.color
+                            else
+                                anthracite,
+                            CircleShape
+                        )
+                ) {
+
+                    Image(
+                        painter = painterResource(getGeyserDrawable(geyserType)),
+                        contentDescription = null,
+                        alignment = Alignment.BottomCenter,
+                        modifier = Modifier.padding()
+                    )
+
+                    if (count > 1) {
+
+                        Box(
+                            contentAlignment = Alignment.Center,
+                            modifier = Modifier
+                                .size(20.dp)
+                                .offset(y = 14.dp)
+                                .background(
+                                    countBackground,
+                                    CircleShape
+                                )
+                        ) {
+
+                            Text(
+                                text = "$count",
+                                style = MaterialTheme.typography.bodyLarge,
+                                color = MaterialTheme.colorScheme.onBackground,
+                                fontWeight = FontWeight.Bold,
+                                modifier = Modifier.offset(y = -4.dp)
+                            )
+                        }
                     }
                 }
             }
