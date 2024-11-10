@@ -158,6 +158,7 @@ import oni_seed_browser.app.generated.resources.spacepoi_artifact_6
 import oni_seed_browser.app.generated.resources.spacepoi_artifact_7
 import oni_seed_browser.app.generated.resources.spacepoi_artifact_8
 import oni_seed_browser.app.generated.resources.spacepoi_carbon_asteroid_field
+import oni_seed_browser.app.generated.resources.spacepoi_ceres_debris_field
 import oni_seed_browser.app.generated.resources.spacepoi_ceres_starting_field
 import oni_seed_browser.app.generated.resources.spacepoi_chlorine_cloud
 import oni_seed_browser.app.generated.resources.spacepoi_foresty_ore_field
@@ -403,6 +404,7 @@ fun getSpacedOutSpacePOIDrawable(spacedOutSpacePOI: SpacedOutSpacePOI): Drawable
         SpacedOutSpacePOI.ArtifactSpacePOI_RussellsTeapot -> Res.drawable.spacepoi_russells_teapot
         SpacedOutSpacePOI.HarvestableSpacePOI_CarbonAsteroidField -> Res.drawable.spacepoi_carbon_asteroid_field
         SpacedOutSpacePOI.HarvestableSpacePOI_ChlorineCloud -> Res.drawable.spacepoi_chlorine_cloud
+        SpacedOutSpacePOI.HarvestableSpacePOI_DLC2CeresField -> Res.drawable.spacepoi_ceres_debris_field
         SpacedOutSpacePOI.HarvestableSpacePOI_DLC2CeresOreField -> Res.drawable.spacepoi_ceres_starting_field
         SpacedOutSpacePOI.HarvestableSpacePOI_ForestyOreField -> Res.drawable.spacepoi_foresty_ore_field
         SpacedOutSpacePOI.HarvestableSpacePOI_FrozenOreField -> Res.drawable.spacepoi_frozen_ore_field
