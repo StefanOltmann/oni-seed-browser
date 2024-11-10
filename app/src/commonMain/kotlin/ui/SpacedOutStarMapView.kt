@@ -26,7 +26,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -41,13 +40,12 @@ import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlin.math.PI
 import kotlin.math.cos
 import kotlin.math.sin
+import kotlin.math.sqrt
 import model.AsteroidType
 import model.Cluster
 import model.SpacedOutSpacePOI
@@ -60,7 +58,6 @@ import ui.theme.defaultSpacing
 import ui.theme.halfSpacing
 import ui.theme.lightGray
 
-private const val GRID_RADIUS = 12
 private const val ROTATION_RADIANS = (30f * PI / 180).toFloat()
 
 private val gridColor = lightGray.copy(alpha = 0.2f)
@@ -106,36 +103,32 @@ fun SpacedOutStarMapView(
                 writeToClipboard = writeToClipboard
             )
 
-            // FIXME HEX star map is broken right now
-            //  See https://github.com/StefanOltmann/oni-seed-browser/issues/11
-            Text(
-                text = "WARNING: Due to a bug the positions are mirrored compared to the game.",
-                style = MaterialTheme.typography.headlineLarge,
-                fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.error,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.fillMaxWidth()
-            )
-
             BoxWithConstraints(
                 contentAlignment = Alignment.Center,
                 modifier = Modifier.defaultPadding().fillMaxSize()
             ) {
 
-                HexagonalGrid()
+                val clusterType = cluster.cluster
+                val radius = clusterType.starmapRadius
+
+
+                HexagonalGrid(radius)
+
 
                 val hexSize =
-                    minOf(maxWidth.value, maxHeight.value) / (GRID_RADIUS * 3.2f)
+                    minOf(maxWidth.value, maxHeight.value) / (radius * 3.2f)
+                val bufferDistance = 0 //some distance between hexes optionally
 
-                val hexHeight = (hexSize * 2 * (cos(PI / 6))).toFloat()
+                val rStep = (hexSize) * sqrt(3f) + bufferDistance
+                val qStep = (3f / 2f) * (hexSize + bufferDistance)
+
 
                 for (entry in cluster.starMapEntriesSpacedOut) {
 
-                    val xOffset = hexSize * 3 / 2 * entry.q * cos(ROTATION_RADIANS) -
-                        hexHeight * (entry.r + entry.q / 2f) * sin(ROTATION_RADIANS)
 
-                    val yOffset = hexSize * 3 / 2 * entry.q * sin(ROTATION_RADIANS) +
-                        hexHeight * (entry.r + entry.q / 2f) * cos(ROTATION_RADIANS)
+                    val xOffset = entry.r * rStep + (0.5f * entry.q * rStep)
+
+                    val yOffset = entry.q * qStep
 
                     Box(
                         modifier = Modifier
@@ -215,18 +208,18 @@ fun SpacedOutStarMapView(
 }
 
 @Composable
-private fun HexagonalGrid() {
+private fun HexagonalGrid(radius:Int) {
 
     Canvas(modifier = Modifier.fillMaxSize()) {
 
-        val hexSize = minOf(size.width, size.height) / (GRID_RADIUS * 3.2f)
+        val hexSize = minOf(size.width, size.height) / (radius * 3.2f)
 
         val hexHeight = (hexSize * 2 * (cos(PI / 6))).toFloat()
 
-        for (q in -GRID_RADIUS..GRID_RADIUS) {
+        for (q in -radius..radius) {
 
-            val r1 = maxOf(-GRID_RADIUS, -q - GRID_RADIUS)
-            val r2 = minOf(GRID_RADIUS, -q + GRID_RADIUS)
+            val r1 = maxOf(-radius, -q - radius)
+            val r2 = minOf(radius, -q + radius)
 
             for (r in r1..r2) {
 
