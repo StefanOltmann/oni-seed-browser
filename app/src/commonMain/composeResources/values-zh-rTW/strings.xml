@@ -233,25 +233,26 @@
 
     <!-- Space POI -->
     <string name="artifactSpacePoiGravitasSpaceStation1">摧毀的衛星</string>
-    <string name="artifactSpacePoiGravitasSpaceStation2">摧毀的衛星</string>
-    <string name="artifactSpacePoiGravitasSpaceStation3">毀滅的衛星</string>
-    <string name="artifactSpacePoiGravitasSpaceStation4">廢棄的太空站艙體</string>
-    <string name="artifactSpacePoiGravitasSpaceStation5">拆毀的火箭</string>
-    <string name="artifactSpacePoiGravitasSpaceStation6">毀壞的火箭</string>
+    <string name="artifactSpacePoiGravitasSpaceStation2">拆毀的火箭</string>
+    <string name="artifactSpacePoiGravitasSpaceStation3">毀壞的火箭</string>
+    <string name="artifactSpacePoiGravitasSpaceStation4">退役的行星觀覽艙</string>
+    <string name="artifactSpacePoiGravitasSpaceStation5">摧毀的衛星</string>
+    <string name="artifactSpacePoiGravitasSpaceStation6">毀滅的衛星</string>
     <string name="artifactSpacePoiGravitasSpaceStation7">失事的飛船</string>
-    <string name="artifactSpacePoiGravitasSpaceStation8">退役的行星觀覽艙</string>
+    <string name="artifactSpacePoiGravitasSpaceStation8">廢棄的太空站艙體</string>
     <string name="artifactSpacePoiRussellsTeapot">羅素的茶壺</string>
     <string name="harvestableSpacePoiCarbonAsteroidField">碳質小行星帶</string>
     <string name="harvestableSpacePoiChlorineCloud">氯氣雲</string>
     <string name="harvestableSpacePoiDlc2CeresOreField">冰凍汞小行星帶</string>
+    <string name="harvestableSpacePoiDLC2CERESFIELD">冰凍硃砂小行星帶</string>
     <string name="harvestableSpacePoiForestyOreField">森林礦帶</string>
     <string name="harvestableSpacePoiFrozenOreField">冰凍礦石小行星帶</string>
     <string name="harvestableSpacePoiGasGiantCloud">爆炸的氣體巨星</string>
     <string name="harvestableSpacePoiGildedAsteroidField">金質小行星帶</string>
     <string name="harvestableSpacePoiGlimmeringAsteroidField">閃爍小行星帶</string>
     <string name="harvestableSpacePoiHeliumCloud">氦氣雲</string>
-    <string name="harvestableSpacePoiIceAsteroidField">冰小行星帶</string>
-    <string name="harvestableSpacePoiInterstellarIceField">爆炸的冰巨星</string>
+    <string name="harvestableSpacePoiIceAsteroidField">爆炸的冰巨星</string>
+    <string name="harvestableSpacePoiInterstellarIceField">冰小行星帶</string>
     <string name="harvestableSpacePoiInterstellarOcean">星際海洋</string>
     <string name="harvestableSpacePoiMetallicAsteroidField">金屬小行星帶</string>
     <string name="harvestableSpacePoiOilyAsteroidField">油質小行星帶</string>
