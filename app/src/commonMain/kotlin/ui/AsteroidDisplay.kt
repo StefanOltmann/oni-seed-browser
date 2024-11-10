@@ -100,7 +100,7 @@ fun AsteroidView(
             Image(
                 painter = painterResource(getAsteroidTypeDrawable(asteroid.id)),
                 contentDescription = null,
-                modifier = Modifier.defaultPadding()
+                modifier = Modifier.size(108.dp)
             )
 
             ShowMapButton(
