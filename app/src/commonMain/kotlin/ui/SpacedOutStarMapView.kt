@@ -120,18 +120,18 @@ fun SpacedOutStarMapView(
 
                 val hexSize =
                     minOf(maxWidth.value, maxHeight.value) / (radius * 3.2f)
-                val bufferDistance = 0;//some distance between hexes optionally
+                val bufferDistance = 0 //some distance between hexes optionally
 
-                val rStep = (hexSize) * sqrt(3f) + bufferDistance;
-                val qStep = (3f / 2f) * (hexSize + bufferDistance);
+                val rStep = (hexSize) * sqrt(3f) + bufferDistance
+                val qStep = (3f / 2f) * (hexSize + bufferDistance)
 
 
                 for (entry in cluster.starMapEntriesSpacedOut) {
 
 
-                    val xOffset = entry.r * rStep + (0.5f * entry.q * rStep);
+                    val xOffset = entry.r * rStep + (0.5f * entry.q * rStep)
 
-                    val yOffset = entry.q * qStep;
+                    val yOffset = entry.q * qStep
 
                     Box(
                         modifier = Modifier
