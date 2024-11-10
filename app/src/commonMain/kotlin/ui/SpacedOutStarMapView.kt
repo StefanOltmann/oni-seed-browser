@@ -111,11 +111,11 @@ fun SpacedOutStarMapView(
                 modifier = Modifier.defaultPadding().fillMaxSize()
             ) {
 
-                val clusterType = cluster.cluster;
-                val radius = clusterType.starmapRadius;
+                val clusterType = cluster.cluster
+                val radius = clusterType.starmapRadius
 
 
-                HexagonalGrid(radius);
+                HexagonalGrid(radius)
 
 
                 val hexSize =
