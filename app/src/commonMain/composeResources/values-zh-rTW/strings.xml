@@ -4,8 +4,8 @@
     <string name="uiFilter">篩選</string>
     <string name="uiSelectRule">請選擇小行星類型.</string>
     <string name="uiReset">重置</string>
-    <string name="uiSearch">搜索</string>
-    <string name="uiSearching">正在搜索中...</string>
+    <string name="uiSearch">搜尋</string>
+    <string name="uiSearching">正在搜尋中...</string>
     <string name="uiAdd">添加</string>
     <string name="uiRule">條件</string>
     <string name="uiAnd">與</string>
@@ -14,14 +14,14 @@
     <string name="uiAnyLong">全部小行星</string>
     <string name="uiHas">有</string>
     <string name="uiHasNot">沒有</string>
-    <string name="uiNoResults">未找到結果.</string>
-    <string name="uiSeedsInDatabase">個資料庫中的種子</string>
+    <string name="uiNoResults">沒有找到結果.</string>
+    <string name="uiSeedsInDatabase">個種子</string>
     <string name="uiWorldTrait">星球特質</string>
     <string name="uiSpaceDestinationCount">太空目的地數量</string>
     <string name="uiGeyserCount">間歇泉數量</string>
     <string name="uiGeyserOutput">間歇泉噴發量</string>
     <string name="uiItemDescriptionCount">數量</string>
-    <string name="uiItemDescriptionOutput">噴發量 (克/秒)</string>
+    <string name="uiItemDescriptionOutput">噴發量(克/秒)</string>
     <string name="uiItemDescriptionSpaceDestination">太空目的地</string>
     <string name="uiOutput">噴發量</string>
     <string name="uiCount">數量</string>
@@ -138,7 +138,7 @@
     <string name="asteroidTypeCeresClassicShatteredAsteroid">炸裂的穀神星</string>
 
     <!-- POI types -->
-    <string name="pointOfInterestTypePrintingPod">列印艙</string>
+    <string name="pointOfInterestTypePrintingPod">打印艙</string>
     <string name="pointOfInterestTypeSupplyTeleporterInput">供給傳送器輸入端</string>
     <string name="pointOfInterestTypeSupplyTeleporterOutput">供給傳送器輸出端</string>
     <string name="pointOfInterestTypeTeleporterTransmitter">傳送發射器</string>
@@ -155,7 +155,7 @@
     <string name="pointOfInterestTypePropFacilityStatue">莊嚴豐碑</string>
     <string name="pointOfInterestTypeGeothermalVentEntity">地熱排氣口</string>
     <string name="pointOfInterestTypeGeothermalControllerEntity">地熱熱泵</string>
-    <string name="pointOfInterestTypeCeresTechUnlock">研究訊息傳遞通道</string>
+    <string name="pointOfInterestTypeCeresTechUnlock">研究信息傳送通道</string>
 
     <!-- Zone types -->
     <string name="zoneTypeSandstone">砂岩</string>
@@ -221,7 +221,7 @@
     <string name="worldTraitMagmaVents">岩漿通道</string>
     <string name="worldTraitMetalPoor">金屬貧瘠</string>
     <string name="worldTraitMetalRich">金屬富足</string>
-    <string name="worldTraitMisalignedStart">備選的列印艙位置</string>
+    <string name="worldTraitMisalignedStart">備選的打印艙位置</string>
     <string name="worldTraitSlimeSplats">黏液菌團</string>
     <string name="worldTraitSubsurfaceOcean">地下海洋</string>
     <string name="worldTraitVolcanoes">火山活躍</string>
