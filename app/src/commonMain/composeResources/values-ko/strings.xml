@@ -34,6 +34,13 @@
     <string name="uiGeyserDetailCycles">주기</string>
     <string name="uiGeyserDetailEmitDetails">{overallTime} 동안 {eruptionTime} 동안 {emitRate}를 방출</string>
     <string name="uiGeyserDetailActiveDetails">{overallCycles} 중 {activeCycles} 동안 활성</string>
+
+    <!-- GameModes -->
+    <string name="gameModeBaseGameStandard">Standard</string>
+    <string name="gameModeTheLab">The Lab</string>
+    <string name="gameModeSpacedOutClassic">Classic</string>
+    <string name="gameModeSpacedOutSpacedOut">Spaced Out!</string>
+
     <!-- ClusterType -->
     <string name="clusterTypeBaseTerra">지구</string>
     <string name="clusterTypeBaseCeres">케레스</string>
@@ -67,6 +74,7 @@
     <string name="clusterTypeDlcFrozenForestMoonlet">얼어붙은 숲 행성</string>
     <string name="clusterTypeDlcFlippedMoonlet">뒤집힌 행성</string>
     <string name="clusterTypeDlcRadioactiveOceanMoonlet">방사성 해양 행성</string>
+
     <!-- AsteroidType -->
     <string name="asteroidTypeSandstoneDefault">지구형 행성</string>
     <string name="asteroidTypeCeresBaseGameAsteroid">케레스 행성</string>
@@ -128,6 +136,7 @@
     <string name="asteroidTypeMiniRegolithMoonlet">표토 행성</string>
     <string name="asteroidTypeMixingCeresAsteroid">혼합된 케레스 행성</string>
     <string name="asteroidTypeCeresClassicShatteredAsteroid">파괴된 케레스 행성</string>
+
     <!--  POI types -->
     <string name="pointOfInterestTypePrintingPod">프린팅 포드</string>
     <string name="pointOfInterestTypeSupplyTeleporterInput">보급품 순간이동기 입구</string>
@@ -143,6 +152,11 @@
     <string name="pointOfInterestTypeCrushedSatellite">으스러진 위성</string>
     <string name="pointOfInterestTypeTemporalTearOpener">시간의 틈새 개방기</string>
     <string name="pointOfInterestTypeCryotank3000">동면실 3000</string>
+    <string name="pointOfInterestTypePropFacilityStatue">Monument</string>
+    <string name="pointOfInterestTypeGeothermalVentEntity">Geothermal vent</string>
+    <string name="pointOfInterestTypeGeothermalControllerEntity">Geothermal controller</string>
+    <string name="pointOfInterestTypeCeresTechUnlock">Tech unlock</string>
+
     <!-- Zone types -->
     <string name="zoneTypeSandstone">사암</string>
     <string name="zoneTypeBarren">황무지</string>
@@ -163,6 +177,7 @@
     <string name="zoneTypeSugarWoods">꿀</string>
     <string name="zoneTypeOilField">기름진 필드</string>
     <string name="zoneTypeMagmaCore">마그마</string>
+
     <!-- Geyser types -->
     <string name="geyserTypeCoolSteamVent">차가운 증기 분출구</string>
     <string name="geyserTypeHydrogenVent">수소 분출구</string>
@@ -190,6 +205,7 @@
     <string name="geyserTypeVolcano">화산</string>
     <string name="geyserTypeMinorVolcano">작은 화산</string>
     <string name="geyserTypeOilReservoir">원유 매장지</string>
+
     <!-- World traits -->
     <string name="worldTraitBouldersLarge">커다란 바위</string>
     <string name="worldTraitBouldersMedium">보통의 바위</string>
@@ -214,4 +230,41 @@
     <string name="worldTraitLushCore">우거진 숲 핵</string>
     <string name="worldTraitMetalCaves">금속성 동굴</string>
     <string name="worldTraitRadioactiveCrust">방사성 지각</string>
+
+    <!-- Space POI -->
+    <string name="artifactSpacePoiGravitasSpaceStation1">Destroyed Satellite</string>
+    <string name="artifactSpacePoiGravitasSpaceStation2">Demolished Rocket</string>
+    <string name="artifactSpacePoiGravitasSpaceStation3">Ruined Rocket</string>
+    <string name="artifactSpacePoiGravitasSpaceStation4">Retired Planetary Excursion Module</string>
+    <string name="artifactSpacePoiGravitasSpaceStation5">Destroyed Satellite</string>
+    <string name="artifactSpacePoiGravitasSpaceStation6">Annihilated Satellite</string>
+    <string name="artifactSpacePoiGravitasSpaceStation7">Wrecked Space Shuttle</string>
+    <string name="artifactSpacePoiGravitasSpaceStation8">Obsolete Space Station Module</string>
+    <string name="artifactSpacePoiRussellsTeapot">Russell's Teapot</string>
+    <string name="harvestableSpacePoiCarbonAsteroidField">Carbon Asteroid Field</string>
+    <string name="harvestableSpacePoiChlorineCloud">Chlorine Cloud</string>
+    <string name="harvestableSpacePoiDlc2CeresOreField">Frozen Mercury Asteroid Field</string>
+    <string name="harvestableSpacePoiDlc2CeresField">Frozen Cinnabar Asteroid Field</string>
+    <string name="harvestableSpacePoiForestyOreField">Forested Ore Field</string>
+    <string name="harvestableSpacePoiFrozenOreField">Frozen Ore Asteroid Field</string>
+    <string name="harvestableSpacePoiGasGiantCloud">Exploded Gas Giant</string>
+    <string name="harvestableSpacePoiGildedAsteroidField">Gilded Asteroid Field</string>
+    <string name="harvestableSpacePoiGlimmeringAsteroidField">Glimmering Asteroid Field</string>
+    <string name="harvestableSpacePoiHeliumCloud">Helium Cloud</string>
+    <string name="harvestableSpacePoiIceAsteroidField">Exploded Ice Giant</string>
+    <string name="harvestableSpacePoiInterstellarIceField">Ice Asteroid Field</string>
+    <string name="harvestableSpacePoiInterstellarOcean">Interstellar Ocean</string>
+    <string name="harvestableSpacePoiMetallicAsteroidField">Metallic Asteroid Field</string>
+    <string name="harvestableSpacePoiOilyAsteroidField">Oily Asteroid Field</string>
+    <string name="harvestableSpacePoiOrganicMassField">Organic Mass Field</string>
+    <string name="harvestableSpacePoiOxidizedAsteroidField">Oxidized Asteroid Field</string>
+    <string name="harvestableSpacePoiOxygenRichAsteroidField">Oxygen-Rich Asteroid Field</string>
+    <string name="harvestableSpacePoiRadioactiveAsteroidField">Radioactive Asteroid Field</string>
+    <string name="harvestableSpacePoiRadioactiveGasCloud">Radioactive Gas Cloud</string>
+    <string name="harvestableSpacePoiRockyAsteroidField">Rocky Asteroid Field</string>
+    <string name="harvestableSpacePoiSaltyAsteroidField">Salty Asteroid Field</string>
+    <string name="harvestableSpacePoiSandyOreField">Sandy Ore Field</string>
+    <string name="harvestableSpacePoiSatelliteField">Space Debris</string>
+    <string name="harvestableSpacePoiSwampyOreField">Swampy Ore Field</string>
+    <string name="temporalTear">Temporal Tear</string>
 </resources>
