@@ -36,6 +36,9 @@ import oni_seed_browser.app.generated.resources.asteroid_irradiated_forest
 import oni_seed_browser.app.generated.resources.asteroid_irradiated_marsh
 import oni_seed_browser.app.generated.resources.asteroid_irradiated_swampy
 import oni_seed_browser.app.generated.resources.asteroid_marshy
+import oni_seed_browser.app.generated.resources.asteroid_mini_shattered_geo
+import oni_seed_browser.app.generated.resources.asteroid_mini_shattered_start
+import oni_seed_browser.app.generated.resources.asteroid_mini_shattered_warp
 import oni_seed_browser.app.generated.resources.asteroid_mixing_ceres
 import oni_seed_browser.app.generated.resources.asteroid_moo
 import oni_seed_browser.app.generated.resources.asteroid_oily_swamp
@@ -93,6 +96,7 @@ import oni_seed_browser.app.generated.resources.cluster_base_volcanea
 import oni_seed_browser.app.generated.resources.cluster_spacedout_arboria
 import oni_seed_browser.app.generated.resources.cluster_spacedout_aridio
 import oni_seed_browser.app.generated.resources.cluster_spacedout_ceres
+import oni_seed_browser.app.generated.resources.cluster_spacedout_ceres_mantle
 import oni_seed_browser.app.generated.resources.cluster_spacedout_ceres_minor
 import oni_seed_browser.app.generated.resources.cluster_spacedout_flipped_moonlet
 import oni_seed_browser.app.generated.resources.cluster_spacedout_folia
@@ -323,6 +327,7 @@ fun getClusterDrawable(clusterType: ClusterType): DrawableResource =
         ClusterType.DLC_FROZEN_FOREST_MOONLET -> Res.drawable.cluster_spacedout_frozen_forest_moonlet
         ClusterType.DLC_FLIPPED_MOONLET -> Res.drawable.cluster_spacedout_flipped_moonlet
         ClusterType.DLC_RADIOACTIVE_OCEAN_MOONLET -> Res.drawable.cluster_spacedout_radioactive_ocean_moonlet
+        ClusterType.DLC_CERES_MANTLE -> Res.drawable.cluster_spacedout_ceres_mantle
     }
 
 @Composable
@@ -388,6 +393,9 @@ fun getAsteroidTypeDrawable(asteroidType: AsteroidType): DrawableResource =
         AsteroidType.MixingCeresAsteroid -> Res.drawable.asteroid_mixing_ceres
         AsteroidType.CeresClassicShatteredAsteroid -> Res.drawable.asteroid_blasted_ceres_spaced_out
         AsteroidType.CeresBaseGameShatteredAsteroid -> Res.drawable.asteroid_blasted_ceres
+        AsteroidType.MiniShatteredStartAsteroid -> Res.drawable.asteroid_mini_shattered_start
+        AsteroidType.MiniShatteredWarpAsteroid -> Res.drawable.asteroid_mini_shattered_warp
+        AsteroidType.MiniShatteredGeoAsteroid -> Res.drawable.asteroid_mini_shattered_geo
     }
 
 @Composable
