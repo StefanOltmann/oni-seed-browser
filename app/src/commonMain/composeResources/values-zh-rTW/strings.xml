@@ -74,6 +74,7 @@
     <string name="clusterTypeDlcFrozenForestMoonlet">衛星星群-冰凍森林</string>
     <string name="clusterTypeDlcFlippedMoonlet">衛星星群-倒置</string>
     <string name="clusterTypeDlcRadioactiveOceanMoonlet">衛星星群-放射性海洋</string>
+    <string name="clusterTypeDlcCeresMantle">小型星群-穀神星地幔</string>
 
     <!-- AsteroidType -->
     <string name="asteroidTypeSandstoneDefault">類地星體</string>
@@ -136,8 +137,11 @@
     <string name="asteroidTypeMiniRegolithMoonlet">浮土小行星</string>
     <string name="asteroidTypeMixingCeresAsteroid">穀神星碎片</string>
     <string name="asteroidTypeCeresClassicShatteredAsteroid">炸裂的穀神星</string>
+    <string name="asteroidTypeMiniShatteredStartAsteroid">穀神星地幔小行星</string>
+    <string name="asteroidTypeMiniShatteredWarpAsteroid">甜蜜穀神星小行星</string>
+    <string name="asteroidTypeMiniShatteredGeoAsteroid">穀神星核心小行星</string>
 
-    <!-- POI types -->
+    <!--  POI types -->
     <string name="pointOfInterestTypePrintingPod">打印艙</string>
     <string name="pointOfInterestTypeSupplyTeleporterInput">供給傳送器輸入端</string>
     <string name="pointOfInterestTypeSupplyTeleporterOutput">供給傳送器輸出端</string>
