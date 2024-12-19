@@ -1,6 +1,6 @@
 [versions]
-compose-plugin = "1.7.0"
-kotlin = "2.0.21"
+compose-plugin = "1.7.1"
+kotlin = "2.1.0"
 ktor = "3.0.0"
 detekt = "1.23.7"
 
