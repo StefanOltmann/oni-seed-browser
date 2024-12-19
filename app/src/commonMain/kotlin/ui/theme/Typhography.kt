@@ -82,9 +82,8 @@ fun NotoSansKrFamily(): FontFamily = FontFamily(
 fun AppTypography(): Typography =
     if (Locale.current.language == "zh")
         Typography().defaultFontFamily(NotoSansScFamily())
-// See https://github.com/StefanOltmann/oni-seed-browser/issues/20
-//    else if (Locale.current.language == "ko")
-//        Typography().defaultFontFamily(NotoSansKrFamily())
+    else if (Locale.current.language == "ko")
+        Typography().defaultFontFamily(NotoSansKrFamily())
     else
         Typography().defaultFontFamily(EconomicaFontFamily())
 
