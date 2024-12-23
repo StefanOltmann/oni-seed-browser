@@ -82,8 +82,6 @@ fun NotoSansKrFamily(): FontFamily = FontFamily(
 fun AppTypography(): Typography =
     if (Locale.current.language == "zh")
         Typography().defaultFontFamily(NotoSansScFamily())
-    else if (Locale.current.language == "ko")
-        Typography().defaultFontFamily(NotoSansKrFamily())
     else
         Typography().defaultFontFamily(EconomicaFontFamily())
 
