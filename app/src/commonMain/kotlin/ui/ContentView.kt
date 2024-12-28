@@ -64,7 +64,6 @@ fun ContentView(
 ) {
 
     val screenIsToSmall = remember { mutableStateOf(false) }
-
     val density = LocalDensity.current.density
 
     val errorMessage = remember { mutableStateOf<String?>(null) }

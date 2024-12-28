@@ -56,7 +56,9 @@ import ui.theme.lightGrayTransparentBorderColor
 @Composable
 fun GeyserDetail(
     geyser: Geyser,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    compactDrawing: Boolean = false
+
 ) {
 
     Box(
@@ -90,24 +92,25 @@ fun GeyserDetail(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.height(48.dp)
             ) {
+                if (!compactDrawing) {
+                    DefaultSpacer()
 
-                DefaultSpacer()
+                    Box(
+                        contentAlignment = Alignment.Center,
+                        modifier = Modifier
+                            .size(48.dp)
+                            .background(
+                                gray3.copy(alpha = 0.2F),
+                                CircleShape
+                            )
+                    ) {
 
-                Box(
-                    contentAlignment = Alignment.Center,
-                    modifier = Modifier
-                        .size(48.dp)
-                        .background(
-                            gray3.copy(alpha = 0.2F),
-                            CircleShape
+                        Image(
+                            painter = painterResource(getGeyserDrawable(geyser.id)),
+                            contentDescription = null,
+                            modifier = Modifier.size(48.dp)
                         )
-                ) {
-
-                    Image(
-                        painter = painterResource(getGeyserDrawable(geyser.id)),
-                        contentDescription = null,
-                        modifier = Modifier.size(48.dp)
-                    )
+                    }
                 }
 
                 DefaultSpacer()
@@ -118,94 +121,116 @@ fun GeyserDetail(
                     color = MaterialTheme.colorScheme.onBackground
                 )
             }
+            if (compactDrawing) {
+                Row(
+                    verticalAlignment = Alignment.Bottom
+                ) {
 
-            Row(
-                verticalAlignment = Alignment.Bottom
-            ) {
+                    Text(
+                        text = "${geyser.avgEmitRate} " + stringResource(Res.string.uiGeyserDetailGramPerSecond),
+                        style = MaterialTheme.typography.headlineSmall,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.onBackground
+                    )
+                }
+                Row(
+                    verticalAlignment = Alignment.Bottom
+                ) {
+                    Text(
+                        text = " " + stringResource(Res.string.uiGeyserDetailOnAverage),
+                        style = MaterialTheme.typography.bodyLarge,
+                        color = MaterialTheme.colorScheme.onBackground
+                    )
+                }
+            } else {
+                Row(
+                    verticalAlignment = Alignment.Bottom
+                ) {
 
-                Text(
-                    text = "${geyser.avgEmitRate} " + stringResource(Res.string.uiGeyserDetailGramPerSecond),
-                    style = MaterialTheme.typography.headlineSmall,
-                    fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.onBackground
-                )
+                    Text(
+                        text = "${geyser.avgEmitRate} " + stringResource(Res.string.uiGeyserDetailGramPerSecond),
+                        style = MaterialTheme.typography.headlineSmall,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.onBackground
+                    )
 
-                Text(
-                    text = " " + stringResource(Res.string.uiGeyserDetailOnAverage),
-                    style = MaterialTheme.typography.bodyLarge,
-                    color = MaterialTheme.colorScheme.onBackground
-                )
-            }
+                    Text(
+                        text = " " + stringResource(Res.string.uiGeyserDetailOnAverage),
+                        style = MaterialTheme.typography.bodyLarge,
+                        color = MaterialTheme.colorScheme.onBackground
+                    )
+                }
 
-            Row {
+                Row {
 
-                Text(
-                    text = "Emits ",
-                    style = MaterialTheme.typography.bodyLarge,
-                    color = MaterialTheme.colorScheme.onBackground
-                )
+                    Text(
+                        text = "Emits ",
+                        style = MaterialTheme.typography.bodyLarge,
+                        color = MaterialTheme.colorScheme.onBackground
+                    )
 
-                Text(
-                    text = "${geyser.emitRate} g/s",
-                    style = MaterialTheme.typography.bodyLarge,
-                    fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.onBackground
-                )
+                    Text(
+                        text = "${geyser.emitRate} g/s",
+                        style = MaterialTheme.typography.bodyLarge,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.onBackground
+                    )
 
-                Text(
-                    text = " for ",
-                    style = MaterialTheme.typography.bodyLarge,
-                    color = MaterialTheme.colorScheme.onBackground
-                )
+                    Text(
+                        text = " for ",
+                        style = MaterialTheme.typography.bodyLarge,
+                        color = MaterialTheme.colorScheme.onBackground
+                    )
 
-                Text(
-                    text = "${geyser.eruptionTime}s",
-                    style = MaterialTheme.typography.bodyLarge,
-                    fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.onBackground
-                )
+                    Text(
+                        text = "${geyser.eruptionTime}s",
+                        style = MaterialTheme.typography.bodyLarge,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.onBackground
+                    )
 
-                Text(
-                    text = " in ",
-                    style = MaterialTheme.typography.bodyLarge,
-                    color = MaterialTheme.colorScheme.onBackground
-                )
+                    Text(
+                        text = " in ",
+                        style = MaterialTheme.typography.bodyLarge,
+                        color = MaterialTheme.colorScheme.onBackground
+                    )
 
-                Text(
-                    text = "${geyser.overallTime}s",
-                    style = MaterialTheme.typography.bodyLarge,
-                    fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.onBackground
-                )
-            }
+                    Text(
+                        text = "${geyser.overallTime}s",
+                        style = MaterialTheme.typography.bodyLarge,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.onBackground
+                    )
+                }
 
-            Row {
+                Row {
 
-                Text(
-                    text = "Active for ",
-                    style = MaterialTheme.typography.bodyLarge,
-                    color = MaterialTheme.colorScheme.onBackground
-                )
+                    Text(
+                        text = "Active for ",
+                        style = MaterialTheme.typography.bodyLarge,
+                        color = MaterialTheme.colorScheme.onBackground
+                    )
 
-                Text(
-                    text = "${geyser.activeCycles.toString(1)} cycles",
-                    style = MaterialTheme.typography.bodyLarge,
-                    fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.onBackground
-                )
+                    Text(
+                        text = "${geyser.activeCycles.toString(1)} cycles",
+                        style = MaterialTheme.typography.bodyLarge,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.onBackground
+                    )
 
-                Text(
-                    text = " in ",
-                    style = MaterialTheme.typography.bodyLarge,
-                    color = MaterialTheme.colorScheme.onBackground
-                )
+                    Text(
+                        text = " in ",
+                        style = MaterialTheme.typography.bodyLarge,
+                        color = MaterialTheme.colorScheme.onBackground
+                    )
 
-                Text(
-                    text = "${(geyser.activeCycles + geyser.dormancyCycles).toString(1)} cycles",
-                    style = MaterialTheme.typography.bodyLarge,
-                    fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.onBackground
-                )
+                    Text(
+                        text = "${(geyser.activeCycles + geyser.dormancyCycles).toString(1)} cycles",
+                        style = MaterialTheme.typography.bodyLarge,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.onBackground
+                    )
+                }
             }
         }
     }
