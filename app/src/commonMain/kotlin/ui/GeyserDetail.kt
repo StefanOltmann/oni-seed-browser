@@ -57,7 +57,7 @@ import ui.theme.lightGrayTransparentBorderColor
 fun GeyserDetail(
     geyser: Geyser,
     modifier: Modifier = Modifier,
-    compactDrawing: Boolean = false
+    compactLayout: Boolean = false
 
 ) {
 
@@ -92,36 +92,37 @@ fun GeyserDetail(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.height(48.dp)
             ) {
-                if (!compactDrawing) {
-                    DefaultSpacer()
-
-                    Box(
-                        contentAlignment = Alignment.Center,
-                        modifier = Modifier
-                            .size(48.dp)
-                            .background(
-                                gray3.copy(alpha = 0.2F),
-                                CircleShape
-                            )
-                    ) {
-
-                        Image(
-                            painter = painterResource(getGeyserDrawable(geyser.id)),
-                            contentDescription = null,
-                            modifier = Modifier.size(48.dp)
-                        )
-                    }
-                }
 
                 DefaultSpacer()
 
-                Text(
-                    text = stringResource(geyser.id.stringResource),
-                    style = MaterialTheme.typography.bodyLarge,
-                    color = MaterialTheme.colorScheme.onBackground
-                )
+                Box(
+                    contentAlignment = Alignment.Center,
+                    modifier = Modifier
+                        .size(48.dp)
+                        .background(
+                            gray3.copy(alpha = 0.2F),
+                            CircleShape
+                        )
+                ) {
+
+                    Image(
+                        painter = painterResource(getGeyserDrawable(geyser.id)),
+                        contentDescription = null,
+                        modifier = Modifier.size(48.dp)
+                    )
+                }
+
+                if (!compactLayout) {
+                    DefaultSpacer()
+
+                    Text(
+                        text = stringResource(geyser.id.stringResource),
+                        style = MaterialTheme.typography.bodyLarge,
+                        color = MaterialTheme.colorScheme.onBackground
+                    )
+                }
             }
-            if (compactDrawing) {
+            if (compactLayout) {
                 Row(
                     verticalAlignment = Alignment.Bottom
                 ) {
