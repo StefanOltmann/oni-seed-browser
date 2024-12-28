@@ -30,7 +30,6 @@ import oni_seed_browser.app.generated.resources.economica_bold
 import oni_seed_browser.app.generated.resources.economica_bold_italic
 import oni_seed_browser.app.generated.resources.economica_italic
 import oni_seed_browser.app.generated.resources.economica_regular
-import oni_seed_browser.app.generated.resources.noto_sans_kr_regular
 import oni_seed_browser.app.generated.resources.noto_sans_sc_regular
 import org.jetbrains.compose.resources.Font
 
@@ -63,16 +62,6 @@ fun EconomicaFontFamily(): FontFamily = FontFamily(
 fun NotoSansScFamily(): FontFamily = FontFamily(
     Font(
         resource = Res.font.noto_sans_sc_regular,
-        weight = FontWeight.Normal,
-        style = FontStyle.Normal
-    )
-)
-
-/** Font containing korean symbols. */
-@Composable
-fun NotoSansKrFamily(): FontFamily = FontFamily(
-    Font(
-        resource = Res.font.noto_sans_kr_regular,
         weight = FontWeight.Normal,
         style = FontStyle.Normal
     )
