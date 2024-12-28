@@ -71,9 +71,9 @@ fun FilterPanelEntry(
     onItemFilterClicked: () -> Unit,
     onConditionFilterClicked: () -> Unit,
     onValueChanged: (String) -> Unit,
-    onDeleteClicked: () -> Unit
+    onDeleteClicked: () -> Unit,
+    smallScreenWidth: Boolean
 ) {
-
     Row {
 
         Row(
@@ -125,7 +125,6 @@ fun FilterPanelEntry(
             VerticalSeparator()
 
             val hoveredItem = remember { mutableStateOf(false) }
-
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier
@@ -135,8 +134,10 @@ fun FilterPanelEntry(
                     .noRippleClickable(onItemFilterClicked)
             ) {
 
+                val minSize = if (smallScreenWidth) 50.dp else 200.dp
+
                 Box(
-                    modifier = Modifier.width(200.dp)
+                    modifier = Modifier.width(minSize)
                 ) {
 
                     Text(

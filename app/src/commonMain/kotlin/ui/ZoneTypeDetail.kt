@@ -57,7 +57,8 @@ private val defaultHalfRoundedCornerShape = RoundedCornerShape(
 @Composable
 fun ZoneTypeDetail(
     zoneType: ZoneType,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    drawBiomeIcon: Boolean = true
 ) {
 
     Box(
@@ -93,11 +94,12 @@ fun ZoneTypeDetail(
 
             HalfSpacer()
 
-            Image(
-                painter = painterResource(getZoneTypeDrawable(zoneType)),
-                contentDescription = null,
-                modifier = Modifier.size(48.dp)
-            )
+            if (drawBiomeIcon)
+                Image(
+                    painter = painterResource(getZoneTypeDrawable(zoneType)),
+                    contentDescription = null,
+                    modifier = Modifier.size(48.dp)
+                )
 
             DefaultSpacer()
 
