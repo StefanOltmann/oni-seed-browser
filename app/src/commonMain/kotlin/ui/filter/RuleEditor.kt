@@ -28,8 +28,12 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.onSizeChanged
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import model.filter.FilterQuery
@@ -48,6 +52,8 @@ fun RuleEditor(
     filterSelection: MutableState<FilterSelection?>
 ) {
 
+    val density = LocalDensity.current.density
+    val smallScreen = remember { mutableStateOf(false) }
     val query = filterQueryState.value
 
     if (query.cluster == null) {
@@ -63,7 +69,12 @@ fun RuleEditor(
         return
     }
 
-    Column {
+    println(smallScreen.value)
+    Column(
+        modifier = Modifier.onSizeChanged {
+            smallScreen.value = it.width / density < 400
+        })
+    {
 
         for ((rulesIndex, orConnectedRules) in query.rules.withIndex()) {
 
@@ -127,7 +138,9 @@ fun RuleEditor(
                         },
                         onDeleteClicked = {
                             filterQueryState.value = query.removeRule(rulesIndex, ruleIndex)
-                        }
+                        },
+                        smallScreen.value
+
                     )
                 }
             }
