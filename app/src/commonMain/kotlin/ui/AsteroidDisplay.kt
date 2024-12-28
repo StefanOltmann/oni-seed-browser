@@ -42,6 +42,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
+import kotlin.math.roundToInt
 import model.Asteroid
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -57,7 +58,6 @@ import ui.theme.halfSpacing
 import ui.theme.lightGrayTransparentBorderColor
 import ui.theme.minimalRoundedCornerShape
 import ui.theme.surfaceVariantColor
-import kotlin.math.roundToInt
 
 val countBackground = Color.Black.copy(alpha = 0.3F)
 
