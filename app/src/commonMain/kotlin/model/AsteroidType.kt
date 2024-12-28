@@ -54,6 +54,9 @@ import oni_seed_browser.app.generated.resources.asteroidTypeMiniRadioactiveOcean
 import oni_seed_browser.app.generated.resources.asteroidTypeMiniRadioactiveOceanStart
 import oni_seed_browser.app.generated.resources.asteroidTypeMiniRadioactiveOceanWarp
 import oni_seed_browser.app.generated.resources.asteroidTypeMiniRegolithMoonlet
+import oni_seed_browser.app.generated.resources.asteroidTypeMiniShatteredGeoAsteroid
+import oni_seed_browser.app.generated.resources.asteroidTypeMiniShatteredStartAsteroid
+import oni_seed_browser.app.generated.resources.asteroidTypeMiniShatteredWarpAsteroid
 import oni_seed_browser.app.generated.resources.asteroidTypeMixingCeresAsteroid
 import oni_seed_browser.app.generated.resources.asteroidTypeMooMoonlet
 import oni_seed_browser.app.generated.resources.asteroidTypeNiobiumMoonlet
@@ -269,5 +272,12 @@ enum class AsteroidType(
 
     MixingCeresAsteroid(Res.string.asteroidTypeMixingCeresAsteroid),
 
-    CeresClassicShatteredAsteroid(Res.string.asteroidTypeCeresClassicShatteredAsteroid)
+    CeresClassicShatteredAsteroid(Res.string.asteroidTypeCeresClassicShatteredAsteroid),
+
+    MiniShatteredStartAsteroid(Res.string.asteroidTypeMiniShatteredStartAsteroid),
+
+    MiniShatteredWarpAsteroid(Res.string.asteroidTypeMiniShatteredWarpAsteroid),
+
+    MiniShatteredGeoAsteroid(Res.string.asteroidTypeMiniShatteredGeoAsteroid)
+
 }

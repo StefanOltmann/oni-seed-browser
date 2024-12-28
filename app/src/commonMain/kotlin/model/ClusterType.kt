@@ -37,6 +37,7 @@ import oni_seed_browser.app.generated.resources.clusterTypeDlcArboria
 import oni_seed_browser.app.generated.resources.clusterTypeDlcAridio
 import oni_seed_browser.app.generated.resources.clusterTypeDlcBlastedCeres
 import oni_seed_browser.app.generated.resources.clusterTypeDlcCeres
+import oni_seed_browser.app.generated.resources.clusterTypeDlcCeresMantle
 import oni_seed_browser.app.generated.resources.clusterTypeDlcCeresMinor
 import oni_seed_browser.app.generated.resources.clusterTypeDlcFlippedMoonlet
 import oni_seed_browser.app.generated.resources.clusterTypeDlcFolia
@@ -64,7 +65,7 @@ enum class ClusterType(
     val gameMode: GameModeType,
     val nameStringResource: StringResource,
     val asteroidTypes: List<AsteroidType>,
-    val starmapRadius: Int = 12
+    val starMapRadius: Int = 12
 ) {
 
     /** Terra */
@@ -89,7 +90,7 @@ enum class ClusterType(
         )
     ),
 
-    /** Ceres */
+    /** Blasted Ceres */
     BASE_BLASTED_CERES(
         prefix = "CERS-A",
         requiredDlcs = listOf(Dlc.BaseGame, Dlc.FrostyPlanet),
@@ -499,7 +500,7 @@ enum class ClusterType(
             AsteroidType.NiobiumMoonlet,
             AsteroidType.RegolithMoonlet
         ),
-        14
+        starMapRadius = 14
     ),
 
     /** The Desolands Moonlet */
@@ -521,7 +522,7 @@ enum class ClusterType(
             AsteroidType.NiobiumMoonlet,
             AsteroidType.RegolithMoonlet
         ),
-        14
+        starMapRadius = 14
     ),
 
     /** Frozen Forest Moonlet */
@@ -543,7 +544,7 @@ enum class ClusterType(
             AsteroidType.NiobiumMoonlet,
             AsteroidType.RegolithMoonlet
         ),
-        14
+        starMapRadius = 14
     ),
 
     /** Flipped Moonlet */
@@ -565,7 +566,7 @@ enum class ClusterType(
             AsteroidType.NiobiumMoonlet,
             AsteroidType.RegolithMoonlet
         ),
-        14
+        starMapRadius = 14
     ),
 
     /** Radioactive Ocean Moonlet */
@@ -587,7 +588,28 @@ enum class ClusterType(
             AsteroidType.NiobiumMoonlet,
             AsteroidType.RegolithMoonlet
         ),
-        14
+        starMapRadius = 14
+    ),
+
+    /** Radioactive Ocean Moonlet */
+    DLC_CERES_MANTLE(
+        prefix = "M-CERS-C",
+        requiredDlcs = listOf(Dlc.SpacedOut, Dlc.FrostyPlanet),
+        gameMode = GameModeType.SPACEDOUT_SPACEDOUT,
+        nameStringResource = Res.string.clusterTypeDlcCeresMantle,
+        asteroidTypes = listOf(
+            AsteroidType.MiniShatteredStartAsteroid,
+            AsteroidType.MiniShatteredWarpAsteroid,
+            AsteroidType.MiniShatteredGeoAsteroid,
+            AsteroidType.SwampyLandingSite,
+            AsteroidType.TundraMoonlet,
+            AsteroidType.MarshyMoonlet,
+            AsteroidType.MooMoonlet,
+            AsteroidType.WaterMoonlet,
+            AsteroidType.NiobiumMoonlet,
+            AsteroidType.RegolithMoonlet
+        ),
+        starMapRadius = 14
     );
 
     fun dlcRequirementsFulfilled(requirements: List<Dlc>): Boolean =

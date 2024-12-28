@@ -210,7 +210,7 @@ private fun AsteroidsGrid(
             /* First Asteroid should span the whole column. */
             AsteroidView(
                 asteroid = firstAsteroid,
-                isStarterAstroid = true,
+                isStarterAsteroid = true,
                 isSelected = showAsteroidDetails.value == firstAsteroid,
                 showDetails = {
 
@@ -242,7 +242,7 @@ private fun AsteroidsGrid(
 
                             AsteroidView(
                                 asteroid = asteroid,
-                                isStarterAstroid = false,
+                                isStarterAsteroid = false,
                                 isSelected = showAsteroidDetails.value == asteroid,
                                 showDetails = {
 

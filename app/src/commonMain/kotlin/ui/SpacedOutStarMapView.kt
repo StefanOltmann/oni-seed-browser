@@ -109,22 +109,16 @@ fun SpacedOutStarMapView(
             ) {
 
                 val clusterType = cluster.cluster
-                val radius = clusterType.starmapRadius
-
+                val radius = clusterType.starMapRadius - 1
 
                 HexagonalGrid(radius)
 
+                val hexSize = minOf(maxWidth.value, maxHeight.value) / (radius * 3.2f)
 
-                val hexSize =
-                    minOf(maxWidth.value, maxHeight.value) / (radius * 3.2f)
-                val bufferDistance = 0 //some distance between hexes optionally
-
-                val rStep = (hexSize) * sqrt(3f) + bufferDistance
-                val qStep = (3f / 2f) * (hexSize + bufferDistance)
-
+                val rStep = (hexSize) * sqrt(3f)
+                val qStep = (3f / 2f) * hexSize
 
                 for (entry in cluster.starMapEntriesSpacedOut) {
-
 
                     val xOffset = entry.r * rStep + (0.5f * entry.q * rStep)
 
@@ -208,7 +202,7 @@ fun SpacedOutStarMapView(
 }
 
 @Composable
-private fun HexagonalGrid(radius:Int) {
+private fun HexagonalGrid(radius: Int) {
 
     Canvas(modifier = Modifier.fillMaxSize()) {
 

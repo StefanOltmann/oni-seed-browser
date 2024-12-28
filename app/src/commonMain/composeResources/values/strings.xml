@@ -74,6 +74,7 @@
     <string name="clusterTypeDlcFrozenForestMoonlet">Frozen Forest</string>
     <string name="clusterTypeDlcFlippedMoonlet">Flipped Moonlet</string>
     <string name="clusterTypeDlcRadioactiveOceanMoonlet">Radioactive Ocean</string>
+    <string name="clusterTypeDlcCeresMantle">Ceres Mantle</string>
 
     <!-- AsteroidType -->
     <string name="asteroidTypeSandstoneDefault">Terra Asteroid</string>
@@ -136,6 +137,9 @@
     <string name="asteroidTypeMiniRegolithMoonlet">Regolith Asteroid</string>
     <string name="asteroidTypeMixingCeresAsteroid">Ceres Fragment</string>
     <string name="asteroidTypeCeresClassicShatteredAsteroid">Blasted Ceres Asteroid</string>
+    <string name="asteroidTypeMiniShatteredStartAsteroid">Ceres Mantle Asteroid</string>
+    <string name="asteroidTypeMiniShatteredWarpAsteroid">Sweet Ceres Asteroid</string>
+    <string name="asteroidTypeMiniShatteredGeoAsteroid">Ceres Core Asteroid</string>
 
     <!--  POI types -->
     <string name="pointOfInterestTypePrintingPod">Printing Pod</string>
@@ -244,6 +248,7 @@
     <string name="harvestableSpacePoiCarbonAsteroidField">Carbon Asteroid Field</string>
     <string name="harvestableSpacePoiChlorineCloud">Chlorine Cloud</string>
     <string name="harvestableSpacePoiDlc2CeresOreField">Frozen Mercury Asteroid Field</string>
+    <string name="harvestableSpacePoiDlc2CeresField">Frozen Cinnabar Asteroid Field</string>
     <string name="harvestableSpacePoiForestyOreField">Forested Ore Field</string>
     <string name="harvestableSpacePoiFrozenOreField">Frozen Ore Asteroid Field</string>
     <string name="harvestableSpacePoiGasGiantCloud">Exploded Gas Giant</string>

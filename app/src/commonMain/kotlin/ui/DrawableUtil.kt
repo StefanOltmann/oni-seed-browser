@@ -36,6 +36,9 @@ import oni_seed_browser.app.generated.resources.asteroid_irradiated_forest
 import oni_seed_browser.app.generated.resources.asteroid_irradiated_marsh
 import oni_seed_browser.app.generated.resources.asteroid_irradiated_swampy
 import oni_seed_browser.app.generated.resources.asteroid_marshy
+import oni_seed_browser.app.generated.resources.asteroid_mini_shattered_geo
+import oni_seed_browser.app.generated.resources.asteroid_mini_shattered_start
+import oni_seed_browser.app.generated.resources.asteroid_mini_shattered_warp
 import oni_seed_browser.app.generated.resources.asteroid_mixing_ceres
 import oni_seed_browser.app.generated.resources.asteroid_moo
 import oni_seed_browser.app.generated.resources.asteroid_oily_swamp
@@ -93,6 +96,7 @@ import oni_seed_browser.app.generated.resources.cluster_base_volcanea
 import oni_seed_browser.app.generated.resources.cluster_spacedout_arboria
 import oni_seed_browser.app.generated.resources.cluster_spacedout_aridio
 import oni_seed_browser.app.generated.resources.cluster_spacedout_ceres
+import oni_seed_browser.app.generated.resources.cluster_spacedout_ceres_mantle
 import oni_seed_browser.app.generated.resources.cluster_spacedout_ceres_minor
 import oni_seed_browser.app.generated.resources.cluster_spacedout_flipped_moonlet
 import oni_seed_browser.app.generated.resources.cluster_spacedout_folia
@@ -158,6 +162,7 @@ import oni_seed_browser.app.generated.resources.spacepoi_artifact_6
 import oni_seed_browser.app.generated.resources.spacepoi_artifact_7
 import oni_seed_browser.app.generated.resources.spacepoi_artifact_8
 import oni_seed_browser.app.generated.resources.spacepoi_carbon_asteroid_field
+import oni_seed_browser.app.generated.resources.spacepoi_ceres_debris_field
 import oni_seed_browser.app.generated.resources.spacepoi_ceres_starting_field
 import oni_seed_browser.app.generated.resources.spacepoi_chlorine_cloud
 import oni_seed_browser.app.generated.resources.spacepoi_foresty_ore_field
@@ -322,6 +327,7 @@ fun getClusterDrawable(clusterType: ClusterType): DrawableResource =
         ClusterType.DLC_FROZEN_FOREST_MOONLET -> Res.drawable.cluster_spacedout_frozen_forest_moonlet
         ClusterType.DLC_FLIPPED_MOONLET -> Res.drawable.cluster_spacedout_flipped_moonlet
         ClusterType.DLC_RADIOACTIVE_OCEAN_MOONLET -> Res.drawable.cluster_spacedout_radioactive_ocean_moonlet
+        ClusterType.DLC_CERES_MANTLE -> Res.drawable.cluster_spacedout_ceres_mantle
     }
 
 @Composable
@@ -342,7 +348,7 @@ fun getAsteroidTypeDrawable(asteroidType: AsteroidType): DrawableResource =
         AsteroidType.MiniForestFrozen -> Res.drawable.cluster_spacedout_frozen_forest_moonlet
         AsteroidType.MiniFlipped -> Res.drawable.cluster_spacedout_flipped_moonlet
         AsteroidType.SandstoneDefault -> Res.drawable.cluster_base_terra
-        AsteroidType.Badlands -> Res.drawable.cluster_spacedout_the_desolands_moonlet
+        AsteroidType.Badlands -> Res.drawable.cluster_base_the_badlands
         AsteroidType.MiniBadlandsWarp -> Res.drawable.cluster_spacedout_the_desolands_moonlet
         AsteroidType.MiniForestFrozenStart -> Res.drawable.cluster_spacedout_frozen_forest_moonlet
         AsteroidType.MiniRadioactiveOcean -> Res.drawable.cluster_spacedout_radioactive_ocean_moonlet
@@ -387,6 +393,9 @@ fun getAsteroidTypeDrawable(asteroidType: AsteroidType): DrawableResource =
         AsteroidType.MixingCeresAsteroid -> Res.drawable.asteroid_mixing_ceres
         AsteroidType.CeresClassicShatteredAsteroid -> Res.drawable.asteroid_blasted_ceres_spaced_out
         AsteroidType.CeresBaseGameShatteredAsteroid -> Res.drawable.asteroid_blasted_ceres
+        AsteroidType.MiniShatteredStartAsteroid -> Res.drawable.asteroid_mini_shattered_start
+        AsteroidType.MiniShatteredWarpAsteroid -> Res.drawable.asteroid_mini_shattered_warp
+        AsteroidType.MiniShatteredGeoAsteroid -> Res.drawable.asteroid_mini_shattered_geo
     }
 
 @Composable
@@ -403,6 +412,7 @@ fun getSpacedOutSpacePOIDrawable(spacedOutSpacePOI: SpacedOutSpacePOI): Drawable
         SpacedOutSpacePOI.ArtifactSpacePOI_RussellsTeapot -> Res.drawable.spacepoi_russells_teapot
         SpacedOutSpacePOI.HarvestableSpacePOI_CarbonAsteroidField -> Res.drawable.spacepoi_carbon_asteroid_field
         SpacedOutSpacePOI.HarvestableSpacePOI_ChlorineCloud -> Res.drawable.spacepoi_chlorine_cloud
+        SpacedOutSpacePOI.HarvestableSpacePOI_DLC2CeresField -> Res.drawable.spacepoi_ceres_debris_field
         SpacedOutSpacePOI.HarvestableSpacePOI_DLC2CeresOreField -> Res.drawable.spacepoi_ceres_starting_field
         SpacedOutSpacePOI.HarvestableSpacePOI_ForestyOreField -> Res.drawable.spacepoi_foresty_ore_field
         SpacedOutSpacePOI.HarvestableSpacePOI_FrozenOreField -> Res.drawable.spacepoi_frozen_ore_field

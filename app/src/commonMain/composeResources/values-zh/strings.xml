@@ -4,8 +4,8 @@
     <string name="uiFilter">筛选</string>
     <string name="uiSelectRule">请选择小行星类型.</string>
     <string name="uiReset">重置</string>
-    <string name="uiSearch">搜索</string>
-    <string name="uiSearching">正在搜索中...</string>
+    <string name="uiSearch">搜寻</string>
+    <string name="uiSearching">正在搜寻中...</string>
     <string name="uiAdd">添加</string>
     <string name="uiRule">条件</string>
     <string name="uiAnd">与</string>
@@ -14,14 +14,14 @@
     <string name="uiAnyLong">全部小行星</string>
     <string name="uiHas">有</string>
     <string name="uiHasNot">没有</string>
-    <string name="uiNoResults">未找到结果.</string>
-    <string name="uiSeedsInDatabase">个数据库中的种子</string>
+    <string name="uiNoResults">没有找到结果.</string>
+    <string name="uiSeedsInDatabase">个种子</string>
     <string name="uiWorldTrait">星球特质</string>
     <string name="uiSpaceDestinationCount">太空目的地数量</string>
     <string name="uiGeyserCount">间歇泉数量</string>
     <string name="uiGeyserOutput">间歇泉喷发量</string>
     <string name="uiItemDescriptionCount">数量</string>
-    <string name="uiItemDescriptionOutput">喷发量 (克/秒)</string>
+    <string name="uiItemDescriptionOutput">喷发量(克/秒)</string>
     <string name="uiItemDescriptionSpaceDestination">太空目的地</string>
     <string name="uiOutput">喷发量</string>
     <string name="uiCount">数量</string>
@@ -74,6 +74,7 @@
     <string name="clusterTypeDlcFrozenForestMoonlet">卫星星群-冰冻森林</string>
     <string name="clusterTypeDlcFlippedMoonlet">卫星星群-倒置</string>
     <string name="clusterTypeDlcRadioactiveOceanMoonlet">卫星星群-放射性海洋</string>
+    <string name="clusterTypeDlcCeresMantle">小型星群-谷神星地幔</string>
 
     <!-- AsteroidType -->
     <string name="asteroidTypeSandstoneDefault">类地星体</string>
@@ -136,6 +137,9 @@
     <string name="asteroidTypeMiniRegolithMoonlet">浮土小行星</string>
     <string name="asteroidTypeMixingCeresAsteroid">谷神星碎片</string>
     <string name="asteroidTypeCeresClassicShatteredAsteroid">炸裂的谷神星</string>
+    <string name="asteroidTypeMiniShatteredStartAsteroid">谷神星地幔小行星</string>
+    <string name="asteroidTypeMiniShatteredWarpAsteroid">甜蜜谷神星小行星</string>
+    <string name="asteroidTypeMiniShatteredGeoAsteroid">谷神星核心小行星</string>
 
     <!--  POI types -->
     <string name="pointOfInterestTypePrintingPod">打印舱</string>
@@ -233,25 +237,26 @@
 
     <!-- Space POI -->
     <string name="artifactSpacePoiGravitasSpaceStation1">摧毁的卫星</string>
-    <string name="artifactSpacePoiGravitasSpaceStation2">摧毁的卫星</string>
-    <string name="artifactSpacePoiGravitasSpaceStation3">毁灭的卫星</string>
-    <string name="artifactSpacePoiGravitasSpaceStation4">废弃的太空站舱体</string>
-    <string name="artifactSpacePoiGravitasSpaceStation5">拆毁的火箭</string>
-    <string name="artifactSpacePoiGravitasSpaceStation6">毁坏的火箭</string>
+    <string name="artifactSpacePoiGravitasSpaceStation2">拆毁的火箭</string>
+    <string name="artifactSpacePoiGravitasSpaceStation3">毁坏的火箭</string>
+    <string name="artifactSpacePoiGravitasSpaceStation4">退役的行星观览舱</string>
+    <string name="artifactSpacePoiGravitasSpaceStation5">摧毁的卫星</string>
+    <string name="artifactSpacePoiGravitasSpaceStation6">毁灭的卫星</string>
     <string name="artifactSpacePoiGravitasSpaceStation7">失事的飞船</string>
-    <string name="artifactSpacePoiGravitasSpaceStation8">退役的行星观览舱</string>
+    <string name="artifactSpacePoiGravitasSpaceStation8">废弃的太空站舱体</string>
     <string name="artifactSpacePoiRussellsTeapot">罗素的茶壶</string>
     <string name="harvestableSpacePoiCarbonAsteroidField">碳质小行星带</string>
     <string name="harvestableSpacePoiChlorineCloud">氯气云</string>
-    <string name="harvestableSpacePoiDlc2CeresOreField">冰凍汞小行星帶</string>
+    <string name="harvestableSpacePoiDlc2CeresOreField">冰冻汞小行星带</string>
+    <string name="harvestableSpacePoiDlc2CeresField">冰冻朱砂小行星带</string>
     <string name="harvestableSpacePoiForestyOreField">森林矿带</string>
     <string name="harvestableSpacePoiFrozenOreField">冰冻矿石小行星带</string>
     <string name="harvestableSpacePoiGasGiantCloud">爆炸的气体巨星</string>
     <string name="harvestableSpacePoiGildedAsteroidField">金质小行星带</string>
     <string name="harvestableSpacePoiGlimmeringAsteroidField">闪烁小行星带</string>
     <string name="harvestableSpacePoiHeliumCloud">氦气云</string>
-    <string name="harvestableSpacePoiIceAsteroidField">冰小行星带</string>
-    <string name="harvestableSpacePoiInterstellarIceField">爆炸的冰巨星</string>
+    <string name="harvestableSpacePoiIceAsteroidField">爆炸的冰巨星</string>
+    <string name="harvestableSpacePoiInterstellarIceField">冰小行星带</string>
     <string name="harvestableSpacePoiInterstellarOcean">星际海洋</string>
     <string name="harvestableSpacePoiMetallicAsteroidField">金属小行星带</string>
     <string name="harvestableSpacePoiOilyAsteroidField">油质小行星带</string>
