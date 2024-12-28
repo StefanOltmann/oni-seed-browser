@@ -69,12 +69,11 @@ fun RuleEditor(
         return
     }
 
-    println(smallScreen.value)
     Column(
         modifier = Modifier.onSizeChanged {
             smallScreen.value = it.width / density < 400
-        })
-    {
+        }
+    ) {
 
         for ((rulesIndex, orConnectedRules) in query.rules.withIndex()) {
 
