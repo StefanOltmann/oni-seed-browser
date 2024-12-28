@@ -78,12 +78,12 @@ fun ContentView(
         /*
          * Prevent people from seeing a broken layout.
          */
-        if (screenIsToSmall.value) {
-
-            SmallScreenWarning()
-
-            return
-        }
+//        if (screenIsToSmall.value) {
+//
+//            SmallScreenWarning()
+//
+//            return
+//        }
 
         val worldCount = produceState<Long?>(null) {
 

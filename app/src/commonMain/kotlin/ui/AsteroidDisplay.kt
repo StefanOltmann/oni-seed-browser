@@ -39,6 +39,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.onSizeChanged
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
 import model.Asteroid
 import org.jetbrains.compose.resources.painterResource
@@ -55,6 +57,7 @@ import ui.theme.halfSpacing
 import ui.theme.lightGrayTransparentBorderColor
 import ui.theme.minimalRoundedCornerShape
 import ui.theme.surfaceVariantColor
+import kotlin.math.roundToInt
 
 val countBackground = Color.Black.copy(alpha = 0.3F)
 
@@ -68,6 +71,8 @@ fun AsteroidView(
 ) {
 
     val hovered = remember { mutableStateOf(false) }
+    val density = LocalDensity.current.density
+    val localScreenWidth = remember { mutableStateOf(0) }
 
     Row(
         verticalAlignment = Alignment.CenterVertically,
@@ -88,6 +93,7 @@ fun AsteroidView(
             .fillMaxWidth()
             .noRippleClickable(showDetails)
             .onHover(hovered)
+            .onSizeChanged { localScreenWidth.value = (it.width / density).roundToInt() }
     ) {
 
         Box(
@@ -175,13 +181,36 @@ fun AsteroidView(
                     }
                 }
 
-                HalfSpacer()
+                if (localScreenWidth.value > 300) {
 
-                GeysersRow(asteroid.geysers, maxWidth, isStarterAsteroid)
+                    HalfSpacer()
 
-                HalfSpacer()
+                    GeysersRow(asteroid.geysers, maxWidth, isStarterAsteroid)
 
-                PointOfInterestsRow(asteroid.pointsOfInterest, maxWidth, isStarterAsteroid)
+                    HalfSpacer()
+
+                    PointOfInterestsRow(asteroid.pointsOfInterest, maxWidth, isStarterAsteroid)
+                } else if (localScreenWidth.value > 200) {
+
+                    val geyserCount = asteroid.geysers.count()
+                    if (geyserCount > 0) {
+                        HalfSpacer()
+                        Text(
+                            text = "${geyserCount}x Geysers",
+                            style = MaterialTheme.typography.bodyLarge,
+                            color = MaterialTheme.colorScheme.onBackground,
+                        )
+                    }
+                    val poiCount = asteroid.pointsOfInterest.count()
+                    if (poiCount > 0) {
+                        HalfSpacer()
+                        Text(
+                            text = "${poiCount}x POIs",
+                            style = MaterialTheme.typography.bodyLarge,
+                            color = MaterialTheme.colorScheme.onBackground,
+                        )
+                    }
+                }
             }
         }
     }
