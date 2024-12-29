@@ -34,17 +34,13 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.onSizeChanged
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import kotlin.math.roundToInt
 import model.Asteroid
+import model.WorldTrait
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import ui.theme.DefaultSpacer
@@ -58,7 +54,6 @@ import ui.theme.halfPadding
 import ui.theme.halfSpacing
 import ui.theme.lightGrayTransparentBorderColor
 import ui.theme.minimalRoundedCornerShape
-import ui.theme.surfaceVariantColor
 
 val countBackground = Color.Black.copy(alpha = 0.3F)
 
@@ -69,19 +64,11 @@ fun AsteroidView(
     showMap: () -> Unit
 ) {
 
-    val hovered = remember { mutableStateOf(false) }
-
-    val density = LocalDensity.current.density
-    val rowWidth = remember { mutableStateOf(0) }
-
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
             .background(
-                if (hovered.value)
-                    surfaceVariantColor
-                else
-                    cardColorBackground,
+                cardColorBackground,
                 defaultRoundedCornerShape
             )
             .border(
@@ -91,9 +78,6 @@ fun AsteroidView(
             )
             .defaultPadding()
             .fillMaxWidth()
-            .noRippleClickable(showMap)
-            .onHover(hovered)
-            .onSizeChanged { rowWidth.value = (it.width / density).roundToInt() }
     ) {
 
         Box(
@@ -121,6 +105,8 @@ fun AsteroidView(
 
             val maxWidth = maxWidth
 
+            val fullWidthDisplay = maxWidth > 300.dp
+
             Column(
                 horizontalAlignment = Alignment.Start
             ) {
@@ -139,53 +125,11 @@ fun AsteroidView(
                         overflow = TextOverflow.Ellipsis
                     )
 
-                    for (worldTrait in asteroid.worldTraits.sorted()) {
-
-                        TooltipContainer(
-                            tooltipContent = {
-                                GenericTooltip {
-                                    Text(
-                                        text = stringResource(worldTrait.stringResource),
-                                        style = MaterialTheme.typography.bodyLarge,
-                                        color = MaterialTheme.colorScheme.onBackground,
-                                        modifier = Modifier.padding(
-                                            horizontal = defaultSpacing,
-                                            vertical = halfSpacing
-                                        ),
-                                        maxLines = 1,
-                                        overflow = TextOverflow.Ellipsis
-                                    )
-                                }
-                            },
-                            yOffset = 15
-                        ) {
-
-                            Box(
-                                contentAlignment = Alignment.Center,
-                                modifier = Modifier
-                                    .background(
-                                        anthraticeTransparentBackgroundColor,
-                                        minimalRoundedCornerShape
-                                    )
-                                    .border(
-                                        2.dp,
-                                        worldTrait.rating.color,
-                                        minimalRoundedCornerShape
-                                    )
-                                    .size(24.dp)
-                            ) {
-
-                                Image(
-                                    painter = painterResource(getWorldTraitDrawable(worldTrait)),
-                                    contentDescription = null,
-                                    modifier = Modifier.halfPadding()
-                                )
-                            }
-                        }
-                    }
+                    if (fullWidthDisplay)
+                        WorldTraitsRow(asteroid.worldTraits)
                 }
 
-                if (rowWidth.value > 300) {
+                if (fullWidthDisplay) {
 
                     HalfSpacer()
 
@@ -195,11 +139,18 @@ fun AsteroidView(
 
                     PointOfInterestsRow(asteroid.pointsOfInterest, maxWidth, isStarterAsteroid)
 
-                } else if (rowWidth.value > 200) {
+                } else if (maxWidth > 200.dp) {
+
+                    HalfSpacer()
+
+                    WorldTraitsRow(asteroid.worldTraits)
 
                     val geyserCount = asteroid.geysers.count()
+
                     if (geyserCount > 0) {
+
                         HalfSpacer()
+
                         Text(
                             text = "${geyserCount}x Geysers",
                             style = MaterialTheme.typography.bodyLarge,
@@ -208,9 +159,13 @@ fun AsteroidView(
                             overflow = TextOverflow.Ellipsis
                         )
                     }
+
                     val poiCount = asteroid.pointsOfInterest.count()
+
                     if (poiCount > 0) {
+
                         HalfSpacer()
+
                         Text(
                             text = "${poiCount}x POIs",
                             style = MaterialTheme.typography.bodyLarge,
@@ -225,3 +180,54 @@ fun AsteroidView(
     }
 }
 
+@Composable
+private fun WorldTraitsRow(worldTraits: List<WorldTrait>) {
+
+    Row {
+
+        for (worldTrait in worldTraits.sorted()) {
+
+            TooltipContainer(
+                tooltipContent = {
+                    GenericTooltip {
+                        Text(
+                            text = stringResource(worldTrait.stringResource),
+                            style = MaterialTheme.typography.bodyLarge,
+                            color = MaterialTheme.colorScheme.onBackground,
+                            modifier = Modifier.padding(
+                                horizontal = defaultSpacing,
+                                vertical = halfSpacing
+                            ),
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
+                        )
+                    }
+                },
+                yOffset = 15
+            ) {
+
+                Box(
+                    contentAlignment = Alignment.Center,
+                    modifier = Modifier
+                        .background(
+                            anthraticeTransparentBackgroundColor,
+                            minimalRoundedCornerShape
+                        )
+                        .border(
+                            2.dp,
+                            worldTrait.rating.color,
+                            minimalRoundedCornerShape
+                        )
+                        .size(24.dp)
+                ) {
+
+                    Image(
+                        painter = painterResource(getWorldTraitDrawable(worldTrait)),
+                        contentDescription = null,
+                        modifier = Modifier.halfPadding()
+                    )
+                }
+            }
+        }
+    }
+}
