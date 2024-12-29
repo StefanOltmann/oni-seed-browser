@@ -1,7 +1,7 @@
 [versions]
-compose-plugin = "1.7.1"
+compose-plugin = "1.7.3"
 kotlin = "2.1.0"
-ktor = "3.0.0"
+ktor = "3.0.3"
 detekt = "1.23.7"
 
 [libraries]
