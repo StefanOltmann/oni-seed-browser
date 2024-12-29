@@ -22,6 +22,7 @@ package ui
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -140,30 +141,8 @@ fun CoordinateBox(
             }
         }
 
-        if (index > 0 && totalCount > 0) {
-
-            Box(
-                contentAlignment = Alignment.Center,
-                modifier = Modifier
-                    .align(Alignment.CenterStart)
-                    .padding(horizontal = halfSpacing)
-                    .height(32.dp)
-                    .background(
-                        MaterialTheme.colorScheme.background,
-                        defaultRoundedCornerShape
-                    )
-            ) {
-
-                Text(
-                    text = "# $index / $totalCount",
-                    style = MaterialTheme.typography.headlineSmall,
-                    color = MaterialTheme.colorScheme.onBackground,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis,
-                    modifier = Modifier.padding(horizontal = defaultSpacing)
-                )
-            }
-        }
+        if (index > 0 && totalCount > 0)
+            IndexIndicator(index, totalCount)
 
         if (showMapClicked != null) {
 
@@ -193,6 +172,38 @@ fun CoordinateBox(
                         MaterialTheme.colorScheme.onBackground
                 )
             }
+        }
+    }
+}
+
+@Composable
+private fun BoxScope.IndexIndicator(
+    index: Int,
+    totalCount: Int
+) {
+
+    if (index > 0 && totalCount > 0) {
+
+        Box(
+            contentAlignment = Alignment.Center,
+            modifier = Modifier
+                .align(Alignment.CenterStart)
+                .padding(horizontal = halfSpacing)
+                .height(32.dp)
+                .background(
+                    MaterialTheme.colorScheme.background,
+                    defaultRoundedCornerShape
+                )
+        ) {
+
+            Text(
+                text = "# $index / $totalCount",
+                style = MaterialTheme.typography.headlineSmall,
+                color = MaterialTheme.colorScheme.onBackground,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+                modifier = Modifier.padding(horizontal = defaultSpacing)
+            )
         }
     }
 }
