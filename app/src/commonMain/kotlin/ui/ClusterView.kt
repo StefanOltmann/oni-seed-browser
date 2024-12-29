@@ -71,7 +71,6 @@ fun ClusterView(
     totalCount: Int,
     showStarMap: MutableState<Cluster?>,
     showAsteroidMap: MutableState<Asteroid?>,
-    showAsteroidDetails: MutableState<Asteroid?>,
     showMniUrl: Boolean,
     writeToClipboard: (String) -> Unit
 ) {
@@ -98,8 +97,7 @@ fun ClusterView(
 
             AsteroidsGrid(
                 cluster,
-                showAsteroidMap,
-                showAsteroidDetails
+                showAsteroidMap
             )
         }
 
@@ -184,8 +182,7 @@ fun ClusterView(
 @Composable
 private fun AsteroidsGrid(
     cluster: Cluster,
-    showAsteroidMap: MutableState<Asteroid?>,
-    showAsteroidDetails: MutableState<Asteroid?>
+    showAsteroidMap: MutableState<Asteroid?>
 ) {
 
     BoxWithConstraints(
@@ -211,14 +208,6 @@ private fun AsteroidsGrid(
             AsteroidView(
                 asteroid = firstAsteroid,
                 isStarterAsteroid = true,
-                isSelected = showAsteroidDetails.value == firstAsteroid,
-                showDetails = {
-
-                    if (showAsteroidDetails.value == firstAsteroid)
-                        showAsteroidDetails.value = null
-                    else
-                        showAsteroidDetails.value = firstAsteroid
-                },
                 showMap = {
                     showAsteroidMap.value = firstAsteroid
                 }
@@ -243,14 +232,6 @@ private fun AsteroidsGrid(
                             AsteroidView(
                                 asteroid = asteroid,
                                 isStarterAsteroid = false,
-                                isSelected = showAsteroidDetails.value == asteroid,
-                                showDetails = {
-
-                                    if (showAsteroidDetails.value == asteroid)
-                                        showAsteroidDetails.value = null
-                                    else
-                                        showAsteroidDetails.value = asteroid
-                                },
                                 showMap = {
                                     showAsteroidMap.value = asteroid
                                 }

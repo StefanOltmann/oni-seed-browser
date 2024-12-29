@@ -74,16 +74,6 @@ fun ContentView(
         }
     ) {
 
-        /*
-         * Prevent people from seeing a broken layout.
-         */
-//        if (screenIsToSmall.value) {
-//
-//            SmallScreenWarning()
-//
-//            return
-//        }
-
         val worldCount = produceState<Long?>(null) {
 
             try {
@@ -110,14 +100,7 @@ fun ContentView(
 
         val showAsteroidMap = remember { mutableStateOf<Asteroid?>(null) }
 
-        val showAsteroidDetails = remember { mutableStateOf<Asteroid?>(null) }
-
         val isGettingNewResults = remember { mutableStateOf(false) }
-
-        LaunchedEffect(filterQueryState.value) {
-            /* Reset the details on each search. */
-            showAsteroidDetails.value = null
-        }
 
         val clusters = remember { mutableStateOf(emptyList<Cluster>()) }
 
@@ -355,39 +338,8 @@ fun ContentView(
                                     clusters.value,
                                     showStarMap,
                                     showAsteroidMap,
-                                    showAsteroidDetails,
-                                    showScrollbar = showAsteroidDetails.value == null,
                                     showMniUrl = isMniEmbedded.value,
                                     writeToClipboard = writeToClipboard
-                                )
-                            }
-                        }
-
-                        val asteroidForDetails = showAsteroidDetails.value
-
-                        AnimatedVisibility(
-                            visible = asteroidForDetails != null
-                        ) {
-
-                            /* Will be NULL on closing. */
-                            if (asteroidForDetails != null) {
-
-                                AsteroidDetails(
-                                    asteroid = asteroidForDetails,
-                                    showAsteroidMap = {
-                                        showAsteroidMap.value = asteroidForDetails
-                                    }
-                                )
-
-                            } else {
-
-                                /*
-                                 * Placeholder box to ensure smooth animation.
-                                 */
-                                Box(
-                                    modifier = Modifier
-                                        .width(300.dp)
-                                        .fillMaxHeight()
                                 )
                             }
                         }

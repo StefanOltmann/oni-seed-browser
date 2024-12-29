@@ -44,8 +44,6 @@ fun ClusterViewList(
     clusters: List<Cluster>,
     showStarMap: MutableState<Cluster?>,
     showAsteroidMap: MutableState<Asteroid?>,
-    showAsteroidDetails: MutableState<Asteroid?>,
-    showScrollbar: Boolean = true,
     showMniUrl: Boolean = false,
     writeToClipboard: (String) -> Unit
 ) {
@@ -66,23 +64,19 @@ fun ClusterViewList(
                     clusters.size,
                     showStarMap,
                     showAsteroidMap,
-                    showAsteroidDetails,
                     showMniUrl,
                     writeToClipboard
                 )
             }
         }
 
-        if (showScrollbar) {
-
-            VerticalScrollbar(
-                adapter = rememberScrollbarAdapter(lazyListState),
-                modifier = Modifier.fillMaxHeight().align(Alignment.CenterEnd),
-                style = defaultScrollbarStyle().copy(
-                    unhoverColor = lightGray.copy(alpha = 0.4f),
-                    hoverColor = lightGray
-                )
+        VerticalScrollbar(
+            adapter = rememberScrollbarAdapter(lazyListState),
+            modifier = Modifier.fillMaxHeight().align(Alignment.CenterEnd),
+            style = defaultScrollbarStyle().copy(
+                unhoverColor = lightGray.copy(alpha = 0.4f),
+                hoverColor = lightGray
             )
-        }
+        )
     }
 }

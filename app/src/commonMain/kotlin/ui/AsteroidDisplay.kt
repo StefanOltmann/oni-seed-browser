@@ -65,8 +65,6 @@ val countBackground = Color.Black.copy(alpha = 0.3F)
 fun AsteroidView(
     asteroid: Asteroid,
     isStarterAsteroid: Boolean,
-    isSelected: Boolean,
-    showDetails: () -> Unit,
     showMap: () -> Unit
 ) {
 
@@ -86,12 +84,12 @@ fun AsteroidView(
             )
             .border(
                 if (isStarterAsteroid) 1.dp else 0.dp,
-                if (isSelected) Color.Yellow else lightGrayTransparentBorderColor,
+                lightGrayTransparentBorderColor,
                 defaultRoundedCornerShape
             )
             .defaultPadding()
             .fillMaxWidth()
-            .noRippleClickable(showDetails)
+            .noRippleClickable(showMap)
             .onHover(hovered)
             .onSizeChanged { localScreenWidth.value = (it.width / density).roundToInt() }
     ) {
