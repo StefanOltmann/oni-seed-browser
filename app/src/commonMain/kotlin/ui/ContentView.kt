@@ -3,6 +3,7 @@ package ui
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -191,14 +192,22 @@ fun ContentView(
 
                 if (!isMniEmbedded.value) {
 
-                    Text(
-                        text = stringResource(Res.string.uiTitle),
-                        style = MaterialTheme.typography.displayMedium,
-                        color = MaterialTheme.colorScheme.onBackground,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis,
-                        modifier = Modifier.defaultPadding()
-                    )
+                    BoxWithConstraints {
+
+                        Text(
+                            text = stringResource(Res.string.uiTitle),
+                            style = if (maxWidth >= 500.dp)
+                                MaterialTheme.typography.displayMedium
+                            else if (maxWidth >= 400.dp)
+                                MaterialTheme.typography.displaySmall
+                            else
+                                MaterialTheme.typography.titleLarge,
+                            color = MaterialTheme.colorScheme.onBackground,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis,
+                            modifier = Modifier.defaultPadding()
+                        )
+                    }
 
                 } else {
 
