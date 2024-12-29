@@ -84,7 +84,7 @@ fun FilterHeader(
                 stringResource(Res.string.uiFilter) + " $seedCount " + stringResource(Res.string.uiSeedsInDatabase),
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
-            style = MaterialTheme.typography.headlineMedium,
+            style = MaterialTheme.typography.headlineSmall,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.colorScheme.onBackground,
             modifier = Modifier.weight(1F)
