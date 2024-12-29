@@ -32,6 +32,7 @@
     <string name="uiGeyserDetailOnAverage">on average</string>
     <string name="uiGeyserDetailSecondsShort">s</string>
     <string name="uiGeyserDetailCycles">cycles</string>
+    <string name="uiCopiedToClipboard">Copied to clipboard!</string>
     <string name="uiGeyserDetailEmitDetails">Emits {emitRate} for {eruptionTime} in {overallTime}</string>
     <string name="uiGeyserDetailActiveDetails">Active for {activeCycles} in {overallCycles}</string>
 
