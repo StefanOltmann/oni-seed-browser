@@ -15,7 +15,7 @@
     <string name="uiHas">has</string>
     <string name="uiHasNot">hasn't</string>
     <string name="uiNoResults">No results found.</string>
-    <string name="uiSeedsInDatabase">seeds in database</string>
+    <string name="uiSeedsInDatabase">seeds</string>
     <string name="uiWorldTrait">World Trait</string>
     <string name="uiSpaceDestinationCount">Space Destination Count</string>
     <string name="uiGeyserCount">Geyser Count</string>

@@ -15,7 +15,7 @@
     <string name="uiHas">hat</string>
     <string name="uiHasNot">hat nicht</string>
     <string name="uiNoResults">Keine Ergebnisse gefunden.</string>
-    <string name="uiSeedsInDatabase">Karten in der Datenbank</string>
+    <string name="uiSeedsInDatabase">Karten</string>
     <string name="uiWorldTrait">Welt-Eigenschaft</string>
     <string name="uiSpaceDestinationCount">Space Destination Count</string>
     <string name="uiGeyserCount">Geysir Anzahl</string>
