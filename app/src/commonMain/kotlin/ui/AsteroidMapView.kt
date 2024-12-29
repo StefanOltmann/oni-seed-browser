@@ -141,7 +141,6 @@ fun AsteroidMapPopup(
                 }
         ) {
 
-
             Box(
                 contentAlignment = Center,
                 modifier = Modifier.fillMaxWidth()
@@ -169,12 +168,19 @@ fun AsteroidMapPopup(
             ) {
 
                 if (useCompactLayout.value && !biomeDrawerExpanded.value) {
-                    if (!geyserDrawerExpanded.value) //when the other drawer is expanded, hide this one to save horizontal space
+
+                    /* When the other drawer is expanded, hide this one to save horizontal space */
+                    if (!geyserDrawerExpanded.value)
                         DrawerButton(
                             Icons.AutoMirrored.Filled.KeyboardArrowRight,
-                            onClick = { biomeDrawerExpanded.value = true; geyserDrawerExpanded.value = false; }
+                            onClick = {
+                                biomeDrawerExpanded.value = true
+                                geyserDrawerExpanded.value = false
+                            }
                         )
+
                 } else {
+
                     AsteroidBiomeDetails(
                         biomePaths,
                         highlightedZoneType,
@@ -211,12 +217,19 @@ fun AsteroidMapPopup(
                     )
                 }
                 if (useCompactLayout.value && !geyserDrawerExpanded.value) {
-                    if (!biomeDrawerExpanded.value) //when the other drawer is expanded, hide this one to save horizontal space
+
+                    /* When the other drawer is expanded, hide this one to save horizontal space */
+                    if (!biomeDrawerExpanded.value)
                         DrawerButton(
                             Icons.AutoMirrored.Filled.KeyboardArrowLeft,
-                            onClick = { biomeDrawerExpanded.value = false; geyserDrawerExpanded.value = true; }
+                            onClick = {
+                                biomeDrawerExpanded.value = false
+                                geyserDrawerExpanded.value = true
+                            }
                         )
+
                 } else {
+
                     AsteroidGeysersDetails(
                         sortedGeysers,
                         geyserListLazyListState,
@@ -416,7 +429,6 @@ private fun DrawerButton(
             .onHover(hovered)
     ) {
 
-
         Icon(
             imageVector = arrowImage,
             contentDescription = null,
@@ -430,7 +442,6 @@ private fun DrawerButton(
         )
     }
 }
-
 
 @Composable
 private fun AsteroidBiomeDetails(
@@ -531,7 +542,6 @@ private fun AsteroidGeysersDetails(
     useCompactLayout: Boolean,
     geyserDrawerExpanded: MutableState<Boolean>
 ) {
-
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
