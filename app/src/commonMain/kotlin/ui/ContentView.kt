@@ -30,6 +30,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
 import kotlinx.serialization.json.Json
@@ -206,6 +207,8 @@ fun ContentView(
                         text = stringResource(Res.string.uiTitle),
                         style = MaterialTheme.typography.displayMedium,
                         color = MaterialTheme.colorScheme.onBackground,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
                         modifier = Modifier.defaultPadding()
                     )
 
@@ -232,6 +235,8 @@ fun ContentView(
                             style = MaterialTheme.typography.headlineSmall,
                             color = MaterialTheme.colorScheme.onErrorContainer,
                             fontWeight = FontWeight.Bold,
+                            maxLines = 50,
+                            overflow = TextOverflow.Ellipsis,
                             modifier = Modifier.defaultPadding()
                         )
                     }
@@ -289,7 +294,9 @@ fun ContentView(
                         Text(
                             text = stringResource(Res.string.uiSearching),
                             style = MaterialTheme.typography.headlineSmall,
-                            color = MaterialTheme.colorScheme.onBackground
+                            color = MaterialTheme.colorScheme.onBackground,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
                         )
                     }
 
@@ -305,7 +312,9 @@ fun ContentView(
                             Text(
                                 text = stringResource(Res.string.uiNoResults),
                                 style = MaterialTheme.typography.headlineSmall,
-                                color = MaterialTheme.colorScheme.onBackground
+                                color = MaterialTheme.colorScheme.onBackground,
+                                maxLines = 1,
+                                overflow = TextOverflow.Ellipsis
                             )
 
                         } else {
@@ -313,7 +322,9 @@ fun ContentView(
                             Text(
                                 text = "Coordinate ${urlHash.value} was not found in database.",
                                 style = MaterialTheme.typography.headlineSmall,
-                                color = MaterialTheme.colorScheme.onBackground
+                                color = MaterialTheme.colorScheme.onBackground,
+                                maxLines = 1,
+                                overflow = TextOverflow.Ellipsis
                             )
                         }
                     }

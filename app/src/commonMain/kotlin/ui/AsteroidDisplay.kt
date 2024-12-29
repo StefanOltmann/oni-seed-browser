@@ -41,6 +41,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import kotlin.math.roundToInt
 import model.Asteroid
@@ -133,6 +134,8 @@ fun AsteroidView(
                         text = stringResource(asteroid.id.stringResource),
                         style = MaterialTheme.typography.bodyLarge,
                         color = MaterialTheme.colorScheme.onBackground,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
                     )
 
                     for (worldTrait in asteroid.worldTraits.sorted()) {
@@ -147,7 +150,9 @@ fun AsteroidView(
                                         modifier = Modifier.padding(
                                             horizontal = defaultSpacing,
                                             vertical = halfSpacing
-                                        )
+                                        ),
+                                        maxLines = 1,
+                                        overflow = TextOverflow.Ellipsis
                                     )
                                 }
                             },
@@ -197,6 +202,8 @@ fun AsteroidView(
                             text = "${geyserCount}x Geysers",
                             style = MaterialTheme.typography.bodyLarge,
                             color = MaterialTheme.colorScheme.onBackground,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
                         )
                     }
                     val poiCount = asteroid.pointsOfInterest.count()
@@ -206,6 +213,8 @@ fun AsteroidView(
                             text = "${poiCount}x POIs",
                             style = MaterialTheme.typography.bodyLarge,
                             color = MaterialTheme.colorScheme.onBackground,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
                         )
                     }
                 }
