@@ -70,8 +70,9 @@ fun AsteroidView(
 ) {
 
     val hovered = remember { mutableStateOf(false) }
+
     val density = LocalDensity.current.density
-    val localScreenWidth = remember { mutableStateOf(0) }
+    val rowWidth = remember { mutableStateOf(0) }
 
     Row(
         verticalAlignment = Alignment.CenterVertically,
@@ -92,7 +93,7 @@ fun AsteroidView(
             .fillMaxWidth()
             .noRippleClickable(showMap)
             .onHover(hovered)
-            .onSizeChanged { localScreenWidth.value = (it.width / density).roundToInt() }
+            .onSizeChanged { rowWidth.value = (it.width / density).roundToInt() }
     ) {
 
         Box(
@@ -184,7 +185,7 @@ fun AsteroidView(
                     }
                 }
 
-                if (localScreenWidth.value > 300) {
+                if (rowWidth.value > 300) {
 
                     HalfSpacer()
 
@@ -193,7 +194,8 @@ fun AsteroidView(
                     HalfSpacer()
 
                     PointOfInterestsRow(asteroid.pointsOfInterest, maxWidth, isStarterAsteroid)
-                } else if (localScreenWidth.value > 200) {
+
+                } else if (rowWidth.value > 200) {
 
                     val geyserCount = asteroid.geysers.count()
                     if (geyserCount > 0) {
