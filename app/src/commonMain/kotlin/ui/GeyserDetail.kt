@@ -114,13 +114,15 @@ fun GeyserDetail(
                 }
 
                 if (!compactLayout) {
+
                     DefaultSpacer()
 
                     Text(
                         text = stringResource(geyser.id.stringResource),
                         style = MaterialTheme.typography.bodyLarge,
                         color = MaterialTheme.colorScheme.onBackground,
-                        maxLines = 1,
+                        /* Can span two lines */
+                        maxLines = 2,
                         overflow = TextOverflow.Ellipsis
                     )
                 }

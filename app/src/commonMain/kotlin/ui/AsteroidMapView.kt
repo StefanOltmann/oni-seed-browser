@@ -94,6 +94,8 @@ import ui.theme.hoverColor
 import ui.theme.lightGray
 import ui.theme.lightGrayTransparentBorderColor
 
+private val sidebarWidth = 256.dp
+
 @Composable
 fun AsteroidMapPopup(
     asteroid: Asteroid,
@@ -130,14 +132,12 @@ fun AsteroidMapPopup(
         val highlightedGeyser = remember { mutableStateOf<Geyser?>(null) }
         val biomeDrawerExpanded = remember { mutableStateOf(false) }
         val geyserDrawerExpanded = remember { mutableStateOf(false) }
-        val drawerWidth = remember { mutableStateOf(300) }
 
         Column(
             verticalArrangement = Arrangement.Center,
             modifier = Modifier.fillMaxWidth()
                 .onSizeChanged {
-                    useCompactLayout.value = it.width / density < 950
-                    drawerWidth.value = min((it.width * 0.3f).roundToInt(), 300);
+                    useCompactLayout.value = it.width / density < 900
                 }
         ) {
 
@@ -184,7 +184,6 @@ fun AsteroidMapPopup(
                     AsteroidBiomeDetails(
                         biomePaths,
                         highlightedZoneType,
-                        drawerWidth.value,
                         useCompactLayout.value,
                         biomeDrawerExpanded
                     )
@@ -234,7 +233,6 @@ fun AsteroidMapPopup(
                         sortedGeysers,
                         geyserListLazyListState,
                         highlightedGeyser,
-                        drawerWidth.value,
                         useCompactLayout.value,
                         geyserDrawerExpanded
                     )
@@ -447,7 +445,6 @@ private fun DrawerButton(
 private fun AsteroidBiomeDetails(
     biomePaths: BiomePaths,
     highlightedZoneType: MutableState<ZoneType?>,
-    drawerWidth: Int,
     useCompactLayout: Boolean,
     biomeDrawerExpanded: MutableState<Boolean>,
 ) {
@@ -455,7 +452,7 @@ private fun AsteroidBiomeDetails(
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
-            .width(drawerWidth.dp)
+            .width(sidebarWidth)
             .fillMaxHeight()
             .background(anthraticeTransparentBackgroundColor, defaultRoundedCornerShape)
             .border(0.dp, lightGrayTransparentBorderColor, defaultRoundedCornerShape)
@@ -538,7 +535,6 @@ private fun AsteroidGeysersDetails(
     geysers: List<Geyser>,
     geyserListLazyListState: LazyListState,
     highlightedGeyser: MutableState<Geyser?>,
-    drawerWidth: Int,
     useCompactLayout: Boolean,
     geyserDrawerExpanded: MutableState<Boolean>
 ) {
@@ -546,15 +542,17 @@ private fun AsteroidGeysersDetails(
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
-            .width(drawerWidth.dp)
+            .width(sidebarWidth)
             .fillMaxHeight()
             .background(anthraticeTransparentBackgroundColor, defaultRoundedCornerShape)
             .border(0.dp, lightGrayTransparentBorderColor, defaultRoundedCornerShape)
     ) {
+
         if (useCompactLayout)
             CloseButton(onClick = { geyserDrawerExpanded.value = false })
 
         DefaultSpacer()
+
         Text(
             text = stringResource(Res.string.uiGeyserDetails),
             style = MaterialTheme.typography.headlineSmall,
