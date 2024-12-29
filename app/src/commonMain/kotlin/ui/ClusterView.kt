@@ -72,6 +72,7 @@ fun ClusterView(
     cluster: Cluster,
     index: Int,
     totalCount: Int,
+    useCompactLayout: Boolean,
     showStarMap: MutableState<Cluster?>,
     showAsteroidMap: MutableState<Asteroid?>,
     showMniUrl: Boolean,
@@ -100,6 +101,7 @@ fun ClusterView(
 
             AsteroidsGrid(
                 cluster,
+                useCompactLayout,
                 showAsteroidMap
             )
         }
@@ -140,17 +142,17 @@ fun ClusterView(
 
             Spacer(modifier = Modifier.width(defaultSpacing + halfSpacing))
 
-                Text(
-                    text = if (urlWasCopied.value)
-                        stringResource(Res.string.uiCopiedToClipboard)
-                    else
-                        url,
-                    style = MaterialTheme.typography.bodyMedium,
-                    fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.onBackground,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
-                )
+            Text(
+                text = if (urlWasCopied.value)
+                    stringResource(Res.string.uiCopiedToClipboard)
+                else
+                    url,
+                style = MaterialTheme.typography.bodyMedium,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.onBackground,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
+            )
 
             DefaultSpacer()
 
@@ -179,6 +181,7 @@ fun ClusterView(
 @Composable
 private fun AsteroidsGrid(
     cluster: Cluster,
+    useCompactLayout: Boolean,
     showAsteroidMap: MutableState<Asteroid?>
 ) {
 
@@ -205,6 +208,7 @@ private fun AsteroidsGrid(
             AsteroidView(
                 asteroid = firstAsteroid,
                 isStarterAsteroid = true,
+                useCompactLayout = useCompactLayout,
                 showMap = {
                     showAsteroidMap.value = firstAsteroid
                 }
@@ -229,6 +233,7 @@ private fun AsteroidsGrid(
                             AsteroidView(
                                 asteroid = asteroid,
                                 isStarterAsteroid = false,
+                                useCompactLayout = useCompactLayout,
                                 showMap = {
                                     showAsteroidMap.value = asteroid
                                 }

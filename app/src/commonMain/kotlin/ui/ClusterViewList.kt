@@ -42,6 +42,7 @@ import ui.theme.lightGray
 fun ClusterViewList(
     lazyListState: LazyListState,
     clusters: List<Cluster>,
+    useCompactLayout: Boolean,
     showStarMap: MutableState<Cluster?>,
     showAsteroidMap: MutableState<Asteroid?>,
     showMniUrl: Boolean = false,
@@ -62,6 +63,7 @@ fun ClusterViewList(
                     cluster,
                     index + 1,
                     clusters.size,
+                    useCompactLayout,
                     showStarMap,
                     showAsteroidMap,
                     showMniUrl,

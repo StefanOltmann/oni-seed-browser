@@ -25,9 +25,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.layout.onSizeChanged
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import kotlin.math.roundToInt
 import kotlinx.coroutines.launch
 import kotlinx.serialization.json.Json
 import model.Asteroid
@@ -62,7 +65,14 @@ fun ContentView(
 
     val errorMessage = remember { mutableStateOf<String?>(null) }
 
-    Box {
+    val density = LocalDensity.current.density
+    val useCompactLayout = remember { mutableStateOf(false) }
+
+    Box(
+        modifier = Modifier.onSizeChanged {
+            useCompactLayout.value = it.width / density < 400
+        }
+    ) {
 
         val worldCount = produceState<Long?>(null) {
 
@@ -344,6 +354,7 @@ fun ContentView(
                                 ClusterViewList(
                                     lazyListState,
                                     clusters.value,
+                                    useCompactLayout.value,
                                     showStarMap,
                                     showAsteroidMap,
                                     showMniUrl = isMniEmbedded.value,

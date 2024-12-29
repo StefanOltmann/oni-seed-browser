@@ -87,10 +87,10 @@ fun CoordinateBox(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.noRippleClickable {
 
-                    writeToClipboard(coordinate)
+                writeToClipboard(coordinate)
 
-                    coordinateWasCopied.value = true
-                }
+                coordinateWasCopied.value = true
+            }
         ) {
 
             /*
@@ -106,22 +106,22 @@ fun CoordinateBox(
                 coordinateWasCopied.value = false
             }
 
-                    Text(
-                        text = if (coordinateWasCopied.value)
-                            stringResource(Res.string.uiCopiedToClipboard)
-                        else
-                            coordinate,
-                        style = if (width.value >= 600)
-                            MaterialTheme.typography.headlineLarge
-                        else if (width.value >= 300)
-                            MaterialTheme.typography.headlineSmall
-                        else
-                            MaterialTheme.typography.bodyMedium,
-                        fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.onBackground,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis
-                    )
+            Text(
+                text = if (coordinateWasCopied.value)
+                    stringResource(Res.string.uiCopiedToClipboard)
+                else
+                    coordinate,
+                style = if (width.value >= 600)
+                    MaterialTheme.typography.headlineLarge
+                else if (width.value >= 300)
+                    MaterialTheme.typography.headlineSmall
+                else
+                    MaterialTheme.typography.bodyMedium,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.onBackground,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
+            )
 
             if (!coordinateWasCopied.value) {
 

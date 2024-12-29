@@ -61,6 +61,7 @@ val countBackground = Color.Black.copy(alpha = 0.3F)
 fun AsteroidView(
     asteroid: Asteroid,
     isStarterAsteroid: Boolean,
+    useCompactLayout: Boolean,
     showMap: () -> Unit
 ) {
 
@@ -105,8 +106,6 @@ fun AsteroidView(
 
             val maxWidth = maxWidth
 
-            val fullWidthDisplay = maxWidth > 300.dp
-
             Column(
                 horizontalAlignment = Alignment.Start
             ) {
@@ -125,11 +124,11 @@ fun AsteroidView(
                         overflow = TextOverflow.Ellipsis
                     )
 
-                    if (fullWidthDisplay)
+                    if (!useCompactLayout)
                         WorldTraitsRow(asteroid.worldTraits)
                 }
 
-                if (fullWidthDisplay) {
+                if (!useCompactLayout) {
 
                     HalfSpacer()
 
@@ -139,7 +138,7 @@ fun AsteroidView(
 
                     PointOfInterestsRow(asteroid.pointsOfInterest, maxWidth, isStarterAsteroid)
 
-                } else if (maxWidth > 200.dp) {
+                } else if (maxWidth > 100.dp) {
 
                     HalfSpacer()
 

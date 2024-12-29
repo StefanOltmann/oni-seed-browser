@@ -154,7 +154,7 @@ fun GeyserDetail(
                 }
 
             } else {
-                
+
                 Row(
                     verticalAlignment = Alignment.Bottom
                 ) {
