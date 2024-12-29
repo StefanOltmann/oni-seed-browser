@@ -58,8 +58,7 @@ import ui.theme.lightGrayTransparentBorderColor
 fun GeyserDetail(
     geyser: Geyser,
     modifier: Modifier = Modifier,
-    compactLayout: Boolean = false
-
+    compactLayout: Boolean
 ) {
 
     Box(
@@ -127,7 +126,9 @@ fun GeyserDetail(
                     )
                 }
             }
+
             if (compactLayout) {
+
                 Row(
                     verticalAlignment = Alignment.Bottom
                 ) {
@@ -141,6 +142,7 @@ fun GeyserDetail(
                         overflow = TextOverflow.Ellipsis
                     )
                 }
+
                 Row(
                     verticalAlignment = Alignment.Bottom
                 ) {
@@ -150,7 +152,9 @@ fun GeyserDetail(
                         color = MaterialTheme.colorScheme.onBackground
                     )
                 }
+
             } else {
+                
                 Row(
                     verticalAlignment = Alignment.Bottom
                 ) {

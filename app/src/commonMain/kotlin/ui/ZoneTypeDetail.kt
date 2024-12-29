@@ -35,6 +35,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import model.ZoneType
 import org.jetbrains.compose.resources.painterResource
@@ -58,7 +60,7 @@ private val defaultHalfRoundedCornerShape = RoundedCornerShape(
 fun ZoneTypeDetail(
     zoneType: ZoneType,
     modifier: Modifier = Modifier,
-    drawBiomeIcon: Boolean = true
+    useCompactLayout: Boolean
 ) {
 
     Box(
@@ -85,7 +87,12 @@ fun ZoneTypeDetail(
             Box(
                 modifier = Modifier
                     .width(16.dp)
-                    .height(48.dp)
+                    .height(
+                        if (useCompactLayout)
+                            32.dp
+                        else
+                            48.dp
+                    )
                     .background(
                         zoneType.color,
                         defaultHalfRoundedCornerShape
@@ -94,7 +101,7 @@ fun ZoneTypeDetail(
 
             HalfSpacer()
 
-            if (drawBiomeIcon)
+            if (!useCompactLayout)
                 Image(
                     painter = painterResource(getZoneTypeDrawable(zoneType)),
                     contentDescription = null,
@@ -105,8 +112,13 @@ fun ZoneTypeDetail(
 
             Text(
                 text = stringResource(zoneType.stringResource),
-                style = MaterialTheme.typography.headlineSmall,
-                color = MaterialTheme.colorScheme.onBackground
+                style = if (useCompactLayout)
+                    MaterialTheme.typography.titleMedium
+                else
+                    MaterialTheme.typography.headlineSmall,
+                color = MaterialTheme.colorScheme.onBackground,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
             )
         }
     }

@@ -71,7 +71,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import kotlin.math.min
-import kotlin.math.roundToInt
 import kotlinx.coroutines.launch
 import model.Asteroid
 import model.BiomePaths
@@ -94,7 +93,8 @@ import ui.theme.hoverColor
 import ui.theme.lightGray
 import ui.theme.lightGrayTransparentBorderColor
 
-private val sidebarWidth = 256.dp
+private val defaultSidebarWidth = (32 * 8).dp
+private val compactSidebarWidth = (17 * 8).dp
 
 @Composable
 fun AsteroidMapPopup(
@@ -452,13 +452,19 @@ private fun AsteroidBiomeDetails(
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
-            .width(sidebarWidth)
+            .width(
+                if (useCompactLayout)
+                    compactSidebarWidth
+                else
+                    defaultSidebarWidth
+            )
             .fillMaxHeight()
             .background(anthraticeTransparentBackgroundColor, defaultRoundedCornerShape)
             .border(0.dp, lightGrayTransparentBorderColor, defaultRoundedCornerShape)
     ) {
 
         DefaultSpacer()
+
         if (useCompactLayout)
             CloseButton(onClick = { biomeDrawerExpanded.value = false })
 
@@ -511,7 +517,7 @@ private fun AsteroidBiomeDetails(
                                     lightGrayTransparentBorderColor,
                                 defaultRoundedCornerShape
                             ),
-                        drawBiomeIcon = !useCompactLayout
+                        useCompactLayout = useCompactLayout
                     )
                 }
 
@@ -542,7 +548,12 @@ private fun AsteroidGeysersDetails(
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
-            .width(sidebarWidth)
+            .width(
+                if (useCompactLayout)
+                    compactSidebarWidth
+                else
+                    defaultSidebarWidth
+            )
             .fillMaxHeight()
             .background(anthraticeTransparentBackgroundColor, defaultRoundedCornerShape)
             .border(0.dp, lightGrayTransparentBorderColor, defaultRoundedCornerShape)
