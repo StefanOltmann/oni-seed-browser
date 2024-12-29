@@ -86,10 +86,9 @@ fun FilterHeader(
             overflow = TextOverflow.Ellipsis,
             style = MaterialTheme.typography.headlineMedium,
             fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colorScheme.onBackground
+            color = MaterialTheme.colorScheme.onBackground,
+            modifier = Modifier.weight(1F)
         )
-
-        FillSpacer()
 
         Icon(
             imageVector = if (filterPanelOpen.value)
