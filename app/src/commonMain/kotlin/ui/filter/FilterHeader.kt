@@ -38,6 +38,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import oni_seed_browser.app.generated.resources.Res
 import oni_seed_browser.app.generated.resources.uiFilter
@@ -81,12 +82,13 @@ fun FilterHeader(
                 stringResource(Res.string.uiFilter)
             else
                 stringResource(Res.string.uiFilter) + " $seedCount " + stringResource(Res.string.uiSeedsInDatabase),
-            style = MaterialTheme.typography.headlineMedium,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
+            style = MaterialTheme.typography.headlineSmall,
             fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colorScheme.onBackground
+            color = MaterialTheme.colorScheme.onBackground,
+            modifier = Modifier.weight(1F)
         )
-
-        FillSpacer()
 
         Icon(
             imageVector = if (filterPanelOpen.value)

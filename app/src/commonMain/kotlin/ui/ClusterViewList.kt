@@ -42,10 +42,9 @@ import ui.theme.lightGray
 fun ClusterViewList(
     lazyListState: LazyListState,
     clusters: List<Cluster>,
+    useCompactLayout: Boolean,
     showStarMap: MutableState<Cluster?>,
     showAsteroidMap: MutableState<Asteroid?>,
-    showAsteroidDetails: MutableState<Asteroid?>,
-    showScrollbar: Boolean = true,
     showMniUrl: Boolean = false,
     writeToClipboard: (String) -> Unit
 ) {
@@ -64,25 +63,22 @@ fun ClusterViewList(
                     cluster,
                     index + 1,
                     clusters.size,
+                    useCompactLayout,
                     showStarMap,
                     showAsteroidMap,
-                    showAsteroidDetails,
                     showMniUrl,
                     writeToClipboard
                 )
             }
         }
 
-        if (showScrollbar) {
-
-            VerticalScrollbar(
-                adapter = rememberScrollbarAdapter(lazyListState),
-                modifier = Modifier.fillMaxHeight().align(Alignment.CenterEnd),
-                style = defaultScrollbarStyle().copy(
-                    unhoverColor = lightGray.copy(alpha = 0.4f),
-                    hoverColor = lightGray
-                )
+        VerticalScrollbar(
+            adapter = rememberScrollbarAdapter(lazyListState),
+            modifier = Modifier.fillMaxHeight().align(Alignment.CenterEnd),
+            style = defaultScrollbarStyle().copy(
+                unhoverColor = lightGray.copy(alpha = 0.4f),
+                hoverColor = lightGray
             )
-        }
+        )
     }
 }

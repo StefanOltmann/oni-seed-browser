@@ -28,9 +28,14 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.onSizeChanged
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import model.filter.FilterQuery
 import oni_seed_browser.app.generated.resources.Res
@@ -48,14 +53,18 @@ fun RuleEditor(
     filterSelection: MutableState<FilterSelection?>
 ) {
 
+    val density = LocalDensity.current.density
+    val smallScreen = remember { mutableStateOf(false) }
     val query = filterQueryState.value
 
     if (query.cluster == null) {
 
         Text(
             text = stringResource(Res.string.uiSelectRule),
-            style = MaterialTheme.typography.headlineSmall,
+            style = MaterialTheme.typography.titleLarge,
             color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.7F),
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
             textAlign = TextAlign.Center,
             modifier = Modifier.height(48.dp)
         )
@@ -63,7 +72,11 @@ fun RuleEditor(
         return
     }
 
-    Column {
+    Column(
+        modifier = Modifier.onSizeChanged {
+            smallScreen.value = it.width / density < 400
+        }
+    ) {
 
         for ((rulesIndex, orConnectedRules) in query.rules.withIndex()) {
 
@@ -127,7 +140,9 @@ fun RuleEditor(
                         },
                         onDeleteClicked = {
                             filterQueryState.value = query.removeRule(rulesIndex, ruleIndex)
-                        }
+                        },
+                        smallScreen.value
+
                     )
                 }
             }

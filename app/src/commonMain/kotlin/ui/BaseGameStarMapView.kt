@@ -45,6 +45,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import model.Cluster
@@ -136,6 +137,8 @@ fun BaseGameStarMapView(
                                 text = ((distance + 2) * 10).toString() + " 000 km",
                                 style = MaterialTheme.typography.bodyLarge,
                                 color = MaterialTheme.colorScheme.onBackground,
+                                maxLines = 1,
+                                overflow = TextOverflow.Ellipsis,
                                 modifier = Modifier.defaultPadding()
                             )
 
@@ -164,6 +167,8 @@ fun BaseGameStarMapView(
                                                 text = entry.id.name,
                                                 style = MaterialTheme.typography.bodyLarge,
                                                 color = MaterialTheme.colorScheme.onBackground,
+                                                maxLines = 1,
+                                                overflow = TextOverflow.Ellipsis,
                                                 lineHeight = 0.sp,
                                                 modifier = Modifier.padding(
                                                     horizontal = defaultSpacing,
@@ -186,6 +191,8 @@ fun BaseGameStarMapView(
                                             text = entry.id.name,
                                             style = MaterialTheme.typography.bodySmall,
                                             color = MaterialTheme.colorScheme.onBackground,
+                                            maxLines = 1,
+                                            overflow = TextOverflow.Ellipsis,
                                             modifier = Modifier.defaultPadding()
                                         )
                                     }

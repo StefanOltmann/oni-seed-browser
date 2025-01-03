@@ -1,16 +1,14 @@
 package ui
 
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -30,7 +28,9 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import kotlin.math.roundToInt
 import kotlinx.coroutines.launch
 import kotlinx.serialization.json.Json
 import model.Asteroid
@@ -63,27 +63,16 @@ fun ContentView(
     writeToClipboard: (String) -> Unit
 ) {
 
-    val screenIsToSmall = remember { mutableStateOf(false) }
+    val errorMessage = remember { mutableStateOf<String?>(null) }
 
     val density = LocalDensity.current.density
-
-    val errorMessage = remember { mutableStateOf<String?>(null) }
+    val useCompactLayout = remember { mutableStateOf(false) }
 
     Box(
         modifier = Modifier.onSizeChanged {
-            screenIsToSmall.value = it.width / density < 800 || it.height / density < 300
+            useCompactLayout.value = it.width / density < 400
         }
     ) {
-
-        /*
-         * Prevent people from seeing a broken layout.
-         */
-        if (screenIsToSmall.value) {
-
-            SmallScreenWarning()
-
-            return
-        }
 
         val worldCount = produceState<Long?>(null) {
 
@@ -111,14 +100,7 @@ fun ContentView(
 
         val showAsteroidMap = remember { mutableStateOf<Asteroid?>(null) }
 
-        val showAsteroidDetails = remember { mutableStateOf<Asteroid?>(null) }
-
         val isGettingNewResults = remember { mutableStateOf(false) }
-
-        LaunchedEffect(filterQueryState.value) {
-            /* Reset the details on each search. */
-            showAsteroidDetails.value = null
-        }
 
         val clusters = remember { mutableStateOf(emptyList<Cluster>()) }
 
@@ -220,12 +202,22 @@ fun ContentView(
 
                 if (!isMniEmbedded.value) {
 
-                    Text(
-                        text = stringResource(Res.string.uiTitle),
-                        style = MaterialTheme.typography.displayMedium,
-                        color = MaterialTheme.colorScheme.onBackground,
-                        modifier = Modifier.defaultPadding()
-                    )
+                    BoxWithConstraints {
+
+                        Text(
+                            text = stringResource(Res.string.uiTitle),
+                            style = if (maxWidth >= 500.dp)
+                                MaterialTheme.typography.displayMedium
+                            else if (maxWidth >= 400.dp)
+                                MaterialTheme.typography.displaySmall
+                            else
+                                MaterialTheme.typography.titleLarge,
+                            color = MaterialTheme.colorScheme.onBackground,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis,
+                            modifier = Modifier.defaultPadding()
+                        )
+                    }
 
                 } else {
 
@@ -250,6 +242,8 @@ fun ContentView(
                             style = MaterialTheme.typography.headlineSmall,
                             color = MaterialTheme.colorScheme.onErrorContainer,
                             fontWeight = FontWeight.Bold,
+                            maxLines = 50,
+                            overflow = TextOverflow.Ellipsis,
                             modifier = Modifier.defaultPadding()
                         )
                     }
@@ -307,7 +301,9 @@ fun ContentView(
                         Text(
                             text = stringResource(Res.string.uiSearching),
                             style = MaterialTheme.typography.headlineSmall,
-                            color = MaterialTheme.colorScheme.onBackground
+                            color = MaterialTheme.colorScheme.onBackground,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
                         )
                     }
 
@@ -323,7 +319,9 @@ fun ContentView(
                             Text(
                                 text = stringResource(Res.string.uiNoResults),
                                 style = MaterialTheme.typography.headlineSmall,
-                                color = MaterialTheme.colorScheme.onBackground
+                                color = MaterialTheme.colorScheme.onBackground,
+                                maxLines = 1,
+                                overflow = TextOverflow.Ellipsis
                             )
 
                         } else {
@@ -331,7 +329,9 @@ fun ContentView(
                             Text(
                                 text = "Coordinate ${urlHash.value} was not found in database.",
                                 style = MaterialTheme.typography.headlineSmall,
-                                color = MaterialTheme.colorScheme.onBackground
+                                color = MaterialTheme.colorScheme.onBackground,
+                                maxLines = 1,
+                                overflow = TextOverflow.Ellipsis
                             )
                         }
                     }
@@ -354,41 +354,11 @@ fun ContentView(
                                 ClusterViewList(
                                     lazyListState,
                                     clusters.value,
+                                    useCompactLayout.value,
                                     showStarMap,
                                     showAsteroidMap,
-                                    showAsteroidDetails,
-                                    showScrollbar = showAsteroidDetails.value == null,
                                     showMniUrl = isMniEmbedded.value,
                                     writeToClipboard = writeToClipboard
-                                )
-                            }
-                        }
-
-                        val asteroidForDetails = showAsteroidDetails.value
-
-                        AnimatedVisibility(
-                            visible = asteroidForDetails != null
-                        ) {
-
-                            /* Will be NULL on closing. */
-                            if (asteroidForDetails != null) {
-
-                                AsteroidDetails(
-                                    asteroid = asteroidForDetails,
-                                    showAsteroidMap = {
-                                        showAsteroidMap.value = asteroidForDetails
-                                    }
-                                )
-
-                            } else {
-
-                                /*
-                                 * Placeholder box to ensure smooth animation.
-                                 */
-                                Box(
-                                    modifier = Modifier
-                                        .width(300.dp)
-                                        .fillMaxHeight()
                                 )
                             }
                         }

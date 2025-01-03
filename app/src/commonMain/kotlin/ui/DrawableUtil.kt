@@ -348,7 +348,7 @@ fun getAsteroidTypeDrawable(asteroidType: AsteroidType): DrawableResource =
         AsteroidType.MiniForestFrozen -> Res.drawable.cluster_spacedout_frozen_forest_moonlet
         AsteroidType.MiniFlipped -> Res.drawable.cluster_spacedout_flipped_moonlet
         AsteroidType.SandstoneDefault -> Res.drawable.cluster_base_terra
-        AsteroidType.Badlands -> Res.drawable.cluster_spacedout_the_desolands_moonlet
+        AsteroidType.Badlands -> Res.drawable.cluster_base_the_badlands
         AsteroidType.MiniBadlandsWarp -> Res.drawable.cluster_spacedout_the_desolands_moonlet
         AsteroidType.MiniForestFrozenStart -> Res.drawable.cluster_spacedout_frozen_forest_moonlet
         AsteroidType.MiniRadioactiveOcean -> Res.drawable.cluster_spacedout_radioactive_ocean_moonlet

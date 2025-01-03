@@ -31,7 +31,6 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -45,12 +44,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import kotlin.math.max
 import kotlinx.coroutines.delay
 import model.Asteroid
 import model.Cluster
+import oni_seed_browser.app.generated.resources.Res
+import oni_seed_browser.app.generated.resources.uiCopiedToClipboard
+import org.jetbrains.compose.resources.stringResource
 import ui.icons.ContentCopy
 import ui.theme.DefaultSpacer
 import ui.theme.FillSpacer
@@ -69,9 +72,9 @@ fun ClusterView(
     cluster: Cluster,
     index: Int,
     totalCount: Int,
+    useCompactLayout: Boolean,
     showStarMap: MutableState<Cluster?>,
     showAsteroidMap: MutableState<Asteroid?>,
-    showAsteroidDetails: MutableState<Asteroid?>,
     showMniUrl: Boolean,
     writeToClipboard: (String) -> Unit
 ) {
@@ -98,17 +101,31 @@ fun ClusterView(
 
             AsteroidsGrid(
                 cluster,
-                showAsteroidMap,
-                showAsteroidDetails
+                useCompactLayout,
+                showAsteroidMap
             )
         }
 
+        val clipboardManager = LocalClipboardManager.current
+
+        val urlWasCopied = remember { mutableStateOf(false) }
+
+        val url = if (showMniUrl)
+            MNI_URL + cluster.coordinate
+        else
+            ORIGINAL_URL + cluster.coordinate
+
         Row(
             verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.offset(y = -4.dp)
-        ) {
+            modifier = Modifier
+                .offset(y = -4.dp)
+                .noRippleClickable {
 
-            val urlWasCopied = remember { mutableStateOf(false) }
+                    clipboardManager.setText(AnnotatedString(url))
+
+                    urlWasCopied.value = true
+                }
+        ) {
 
             /*
              * Set notice back after 3 seconds.
@@ -123,56 +140,36 @@ fun ClusterView(
                 urlWasCopied.value = false
             }
 
-            val clipboardManager = LocalClipboardManager.current
-
-            val url = if (showMniUrl)
-                MNI_URL + cluster.coordinate
-            else
-                ORIGINAL_URL + cluster.coordinate
-
             Spacer(modifier = Modifier.width(defaultSpacing + halfSpacing))
 
-            SelectionContainer {
-
-                Text(
-                    text = url,
-                    style = MaterialTheme.typography.bodyMedium,
-                    fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.onBackground
-                )
-            }
+            Text(
+                text = if (urlWasCopied.value)
+                    stringResource(Res.string.uiCopiedToClipboard)
+                else
+                    url,
+                style = MaterialTheme.typography.bodyMedium,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.onBackground,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
+            )
 
             DefaultSpacer()
 
-            val hovered = remember { mutableStateOf(false) }
+            if (!urlWasCopied.value) {
 
-            Icon(
-                imageVector = ContentCopy,
-                contentDescription = null,
-                tint = if (hovered.value)
-                    hoverColor
-                else
-                    MaterialTheme.colorScheme.onBackground,
-                modifier = Modifier
-                    .onHover(hovered)
-                    .size(16.dp)
-                    .noRippleClickable {
+                val hovered = remember { mutableStateOf(false) }
 
-                        clipboardManager.setText(AnnotatedString(url))
-
-                        urlWasCopied.value = true
-                    }
-            )
-
-            if (urlWasCopied.value) {
-
-                DefaultSpacer()
-
-                Text(
-                    text = "Copied to clipboard!",
-                    style = MaterialTheme.typography.bodyMedium,
-                    fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.onBackground
+                Icon(
+                    imageVector = ContentCopy,
+                    contentDescription = null,
+                    tint = if (hovered.value)
+                        hoverColor
+                    else
+                        MaterialTheme.colorScheme.onBackground,
+                    modifier = Modifier
+                        .onHover(hovered)
+                        .size(16.dp)
                 )
             }
         }
@@ -184,8 +181,8 @@ fun ClusterView(
 @Composable
 private fun AsteroidsGrid(
     cluster: Cluster,
-    showAsteroidMap: MutableState<Asteroid?>,
-    showAsteroidDetails: MutableState<Asteroid?>
+    useCompactLayout: Boolean,
+    showAsteroidMap: MutableState<Asteroid?>
 ) {
 
     BoxWithConstraints(
@@ -211,14 +208,7 @@ private fun AsteroidsGrid(
             AsteroidView(
                 asteroid = firstAsteroid,
                 isStarterAsteroid = true,
-                isSelected = showAsteroidDetails.value == firstAsteroid,
-                showDetails = {
-
-                    if (showAsteroidDetails.value == firstAsteroid)
-                        showAsteroidDetails.value = null
-                    else
-                        showAsteroidDetails.value = firstAsteroid
-                },
+                useCompactLayout = useCompactLayout,
                 showMap = {
                     showAsteroidMap.value = firstAsteroid
                 }
@@ -243,14 +233,7 @@ private fun AsteroidsGrid(
                             AsteroidView(
                                 asteroid = asteroid,
                                 isStarterAsteroid = false,
-                                isSelected = showAsteroidDetails.value == asteroid,
-                                showDetails = {
-
-                                    if (showAsteroidDetails.value == asteroid)
-                                        showAsteroidDetails.value = null
-                                    else
-                                        showAsteroidDetails.value = asteroid
-                                },
+                                useCompactLayout = useCompactLayout,
                                 showMap = {
                                     showAsteroidMap.value = asteroid
                                 }

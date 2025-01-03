@@ -15,7 +15,7 @@
     <string name="uiHas">has</string>
     <string name="uiHasNot">hasn't</string>
     <string name="uiNoResults">No results found.</string>
-    <string name="uiSeedsInDatabase">seeds in database</string>
+    <string name="uiSeedsInDatabase">seeds</string>
     <string name="uiWorldTrait">World Trait</string>
     <string name="uiSpaceDestinationCount">Space Destination Count</string>
     <string name="uiGeyserCount">Geyser Count</string>
@@ -32,6 +32,7 @@
     <string name="uiGeyserDetailOnAverage">on average</string>
     <string name="uiGeyserDetailSecondsShort">s</string>
     <string name="uiGeyserDetailCycles">cycles</string>
+    <string name="uiCopiedToClipboard">Copied to clipboard!</string>
     <string name="uiGeyserDetailEmitDetails">Emits {emitRate} for {eruptionTime} in {overallTime}</string>
     <string name="uiGeyserDetailActiveDetails">Active for {activeCycles} in {overallCycles}</string>
 

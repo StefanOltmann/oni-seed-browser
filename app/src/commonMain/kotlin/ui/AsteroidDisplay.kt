@@ -34,13 +34,13 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import model.Asteroid
+import model.WorldTrait
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import ui.theme.DefaultSpacer
@@ -54,7 +54,6 @@ import ui.theme.halfPadding
 import ui.theme.halfSpacing
 import ui.theme.lightGrayTransparentBorderColor
 import ui.theme.minimalRoundedCornerShape
-import ui.theme.surfaceVariantColor
 
 val countBackground = Color.Black.copy(alpha = 0.3F)
 
@@ -62,32 +61,24 @@ val countBackground = Color.Black.copy(alpha = 0.3F)
 fun AsteroidView(
     asteroid: Asteroid,
     isStarterAsteroid: Boolean,
-    isSelected: Boolean,
-    showDetails: () -> Unit,
+    useCompactLayout: Boolean,
     showMap: () -> Unit
 ) {
-
-    val hovered = remember { mutableStateOf(false) }
 
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
             .background(
-                if (hovered.value)
-                    surfaceVariantColor
-                else
-                    cardColorBackground,
+                cardColorBackground,
                 defaultRoundedCornerShape
             )
             .border(
                 if (isStarterAsteroid) 1.dp else 0.dp,
-                if (isSelected) Color.Yellow else lightGrayTransparentBorderColor,
+                lightGrayTransparentBorderColor,
                 defaultRoundedCornerShape
             )
             .defaultPadding()
             .fillMaxWidth()
-            .noRippleClickable(showDetails)
-            .onHover(hovered)
     ) {
 
         Box(
@@ -129,61 +120,113 @@ fun AsteroidView(
                         text = stringResource(asteroid.id.stringResource),
                         style = MaterialTheme.typography.bodyLarge,
                         color = MaterialTheme.colorScheme.onBackground,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
                     )
 
-                    for (worldTrait in asteroid.worldTraits.sorted()) {
-
-                        TooltipContainer(
-                            tooltipContent = {
-                                GenericTooltip {
-                                    Text(
-                                        text = stringResource(worldTrait.stringResource),
-                                        style = MaterialTheme.typography.bodyLarge,
-                                        color = MaterialTheme.colorScheme.onBackground,
-                                        modifier = Modifier.padding(
-                                            horizontal = defaultSpacing,
-                                            vertical = halfSpacing
-                                        )
-                                    )
-                                }
-                            },
-                            yOffset = 15
-                        ) {
-
-                            Box(
-                                contentAlignment = Alignment.Center,
-                                modifier = Modifier
-                                    .background(
-                                        anthraticeTransparentBackgroundColor,
-                                        minimalRoundedCornerShape
-                                    )
-                                    .border(
-                                        2.dp,
-                                        worldTrait.rating.color,
-                                        minimalRoundedCornerShape
-                                    )
-                                    .size(24.dp)
-                            ) {
-
-                                Image(
-                                    painter = painterResource(getWorldTraitDrawable(worldTrait)),
-                                    contentDescription = null,
-                                    modifier = Modifier.halfPadding()
-                                )
-                            }
-                        }
-                    }
+                    if (!useCompactLayout)
+                        WorldTraitsRow(asteroid.worldTraits)
                 }
 
-                HalfSpacer()
+                if (!useCompactLayout) {
 
-                GeysersRow(asteroid.geysers, maxWidth, isStarterAsteroid)
+                    HalfSpacer()
 
-                HalfSpacer()
+                    GeysersRow(asteroid.geysers, maxWidth, isStarterAsteroid)
 
-                PointOfInterestsRow(asteroid.pointsOfInterest, maxWidth, isStarterAsteroid)
+                    HalfSpacer()
+
+                    PointOfInterestsRow(asteroid.pointsOfInterest, maxWidth, isStarterAsteroid)
+
+                } else if (maxWidth > 100.dp) {
+
+                    HalfSpacer()
+
+                    WorldTraitsRow(asteroid.worldTraits)
+
+                    val geyserCount = asteroid.geysers.count()
+
+                    if (geyserCount > 0) {
+
+                        HalfSpacer()
+
+                        Text(
+                            text = "${geyserCount}x Geysers",
+                            style = MaterialTheme.typography.bodyLarge,
+                            color = MaterialTheme.colorScheme.onBackground,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
+                        )
+                    }
+
+                    val poiCount = asteroid.pointsOfInterest.count()
+
+                    if (poiCount > 0) {
+
+                        HalfSpacer()
+
+                        Text(
+                            text = "${poiCount}x POIs",
+                            style = MaterialTheme.typography.bodyLarge,
+                            color = MaterialTheme.colorScheme.onBackground,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
+                        )
+                    }
+                }
             }
         }
     }
 }
 
+@Composable
+private fun WorldTraitsRow(worldTraits: List<WorldTrait>) {
+
+    Row {
+
+        for (worldTrait in worldTraits.sorted()) {
+
+            TooltipContainer(
+                tooltipContent = {
+                    GenericTooltip {
+                        Text(
+                            text = stringResource(worldTrait.stringResource),
+                            style = MaterialTheme.typography.bodyLarge,
+                            color = MaterialTheme.colorScheme.onBackground,
+                            modifier = Modifier.padding(
+                                horizontal = defaultSpacing,
+                                vertical = halfSpacing
+                            ),
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
+                        )
+                    }
+                },
+                yOffset = 15
+            ) {
+
+                Box(
+                    contentAlignment = Alignment.Center,
+                    modifier = Modifier
+                        .background(
+                            anthraticeTransparentBackgroundColor,
+                            minimalRoundedCornerShape
+                        )
+                        .border(
+                            2.dp,
+                            worldTrait.rating.color,
+                            minimalRoundedCornerShape
+                        )
+                        .size(24.dp)
+                ) {
+
+                    Image(
+                        painter = painterResource(getWorldTraitDrawable(worldTrait)),
+                        contentDescription = null,
+                        modifier = Modifier.halfPadding()
+                    )
+                }
+            }
+        }
+    }
+}

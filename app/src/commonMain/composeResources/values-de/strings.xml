@@ -15,7 +15,7 @@
     <string name="uiHas">hat</string>
     <string name="uiHasNot">hat nicht</string>
     <string name="uiNoResults">Keine Ergebnisse gefunden.</string>
-    <string name="uiSeedsInDatabase">Karten in der Datenbank</string>
+    <string name="uiSeedsInDatabase">Karten</string>
     <string name="uiWorldTrait">Welt-Eigenschaft</string>
     <string name="uiSpaceDestinationCount">Space Destination Count</string>
     <string name="uiGeyserCount">Geysir Anzahl</string>
@@ -32,6 +32,7 @@
     <string name="uiGeyserDetailOnAverage">im Durchschnitt</string>
     <string name="uiGeyserDetailSecondsShort">s</string>
     <string name="uiGeyserDetailCycles">Zyklen</string>
+    <string name="uiCopiedToClipboard">In die Zwischenablage kopiert!</string>
     <string name="uiGeyserDetailEmitDetails">Erzeugt {emitRate} für {eruptionTime} in {overallTime}</string>
     <string name="uiGeyserDetailActiveDetails">Aktiv für {activeCycles} in {overallCycles}</string>
 

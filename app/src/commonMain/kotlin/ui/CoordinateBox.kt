@@ -22,12 +22,12 @@ package ui
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Icon
@@ -39,12 +39,18 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.onSizeChanged
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import kotlin.math.roundToInt
 import kotlinx.coroutines.delay
 import oni_seed_browser.app.generated.resources.Res
 import oni_seed_browser.app.generated.resources.space_hexagon
+import oni_seed_browser.app.generated.resources.uiCopiedToClipboard
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
 import ui.icons.ContentCopy
 import ui.theme.DoubleSpacer
 import ui.theme.defaultRoundedCornerShape
@@ -62,6 +68,9 @@ fun CoordinateBox(
     writeToClipboard: (String) -> Unit
 ) {
 
+    val density = LocalDensity.current.density
+    val width = remember { mutableStateOf(0) }
+
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier
@@ -69,13 +78,20 @@ fun CoordinateBox(
             .padding(top = defaultSpacing)
             .fillMaxWidth()
             .height(40.dp)
+            .onSizeChanged { width.value = (it.width / density).roundToInt() }
     ) {
 
-        Row(
-            verticalAlignment = Alignment.CenterVertically
-        ) {
+        val coordinateWasCopied = remember { mutableStateOf(false) }
 
-            val coordinateWasCopied = remember { mutableStateOf(false) }
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.noRippleClickable {
+
+                writeToClipboard(coordinate)
+
+                coordinateWasCopied.value = true
+            }
+        ) {
 
             /*
              * Set notice back after 3 seconds.
@@ -90,26 +106,24 @@ fun CoordinateBox(
                 coordinateWasCopied.value = false
             }
 
-            if (coordinateWasCopied.value) {
+            Text(
+                text = if (coordinateWasCopied.value)
+                    stringResource(Res.string.uiCopiedToClipboard)
+                else
+                    coordinate,
+                style = if (width.value >= 600)
+                    MaterialTheme.typography.headlineLarge
+                else if (width.value >= 300)
+                    MaterialTheme.typography.headlineSmall
+                else
+                    MaterialTheme.typography.bodyMedium,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.onBackground,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
+            )
 
-                Text(
-                    text = "Copied to clipboard!",
-                    style = MaterialTheme.typography.headlineSmall,
-                    fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.onBackground
-                )
-
-            } else {
-
-                SelectionContainer {
-
-                    Text(
-                        text = coordinate,
-                        style = MaterialTheme.typography.headlineLarge,
-                        fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.onBackground
-                    )
-                }
+            if (!coordinateWasCopied.value) {
 
                 DoubleSpacer()
 
@@ -125,38 +139,12 @@ fun CoordinateBox(
                     modifier = Modifier
                         .onHover(hovered)
                         .size(24.dp)
-                        .noRippleClickable {
-
-                            writeToClipboard(coordinate)
-
-                            coordinateWasCopied.value = true
-                        }
                 )
             }
         }
 
-        if (index > 0 && totalCount > 0) {
-
-            Box(
-                contentAlignment = Alignment.Center,
-                modifier = Modifier
-                    .align(Alignment.CenterStart)
-                    .padding(horizontal = halfSpacing)
-                    .height(32.dp)
-                    .background(
-                        MaterialTheme.colorScheme.background,
-                        defaultRoundedCornerShape
-                    )
-            ) {
-
-                Text(
-                    text = "# $index / $totalCount",
-                    style = MaterialTheme.typography.headlineSmall,
-                    color = MaterialTheme.colorScheme.onBackground,
-                    modifier = Modifier.padding(horizontal = defaultSpacing)
-                )
-            }
-        }
+        if (width.value >= 600 && index > 0 && totalCount > 0)
+            IndexIndicator(index, totalCount)
 
         if (showMapClicked != null) {
 
@@ -186,6 +174,38 @@ fun CoordinateBox(
                         MaterialTheme.colorScheme.onBackground
                 )
             }
+        }
+    }
+}
+
+@Composable
+private fun BoxScope.IndexIndicator(
+    index: Int,
+    totalCount: Int
+) {
+
+    if (index > 0 && totalCount > 0) {
+
+        Box(
+            contentAlignment = Alignment.Center,
+            modifier = Modifier
+                .align(Alignment.CenterStart)
+                .padding(horizontal = halfSpacing)
+                .height(32.dp)
+                .background(
+                    MaterialTheme.colorScheme.background,
+                    defaultRoundedCornerShape
+                )
+        ) {
+
+            Text(
+                text = "# $index / $totalCount",
+                style = MaterialTheme.typography.headlineSmall,
+                color = MaterialTheme.colorScheme.onBackground,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+                modifier = Modifier.padding(horizontal = defaultSpacing)
+            )
         }
     }
 }
