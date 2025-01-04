@@ -35,6 +35,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -42,8 +44,12 @@ import kotlin.math.pow
 import kotlin.math.roundToInt
 import model.Geyser
 import oni_seed_browser.app.generated.resources.Res
+import oni_seed_browser.app.generated.resources.uiGeyserDetailActiveDetails
+import oni_seed_browser.app.generated.resources.uiGeyserDetailCycles
+import oni_seed_browser.app.generated.resources.uiGeyserDetailEmitDetails
 import oni_seed_browser.app.generated.resources.uiGeyserDetailGramPerSecond
 import oni_seed_browser.app.generated.resources.uiGeyserDetailOnAverage
+import oni_seed_browser.app.generated.resources.uiGeyserDetailSecondsShort
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import ui.theme.DefaultSpacer
@@ -53,6 +59,8 @@ import ui.theme.defaultRoundedCornerShape
 import ui.theme.doubleSpacing
 import ui.theme.gray3
 import ui.theme.lightGrayTransparentBorderColor
+
+private val boldSpanStyle = SpanStyle(fontWeight = FontWeight.Bold)
 
 @Composable
 fun GeyserDetail(
@@ -175,71 +183,90 @@ fun GeyserDetail(
 
                 Row {
 
-                    Text(
-                        text = "Emits ",
-                        style = MaterialTheme.typography.bodyLarge,
-                        color = MaterialTheme.colorScheme.onBackground
-                    )
+                    val template = stringResource(Res.string.uiGeyserDetailEmitDetails)
+
+                    val secondsText = stringResource(Res.string.uiGeyserDetailSecondsShort)
+                    val gramPerSecondText = stringResource(Res.string.uiGeyserDetailGramPerSecond)
+
+                    val formattedText = buildAnnotatedString {
+
+                        var currentIndex = 0
+
+                        val regex = "\\{(emitRate|eruptionTime|overallTime)\\}".toRegex()
+
+                        regex.findAll(template).forEach { match ->
+
+                            val placeholder = match.groupValues[1]
+                            val startIndex = match.range.first
+
+                            append(template.substring(currentIndex, startIndex))
+
+                            pushStyle(boldSpanStyle)
+                            when (placeholder) {
+
+                                "emitRate" ->
+                                    append("${geyser.emitRate} $gramPerSecondText")
+
+                                "eruptionTime" ->
+                                    append("${geyser.eruptionTime}$secondsText")
+
+                                "overallTime" ->
+                                    append("${geyser.overallTime}$secondsText")
+                            }
+                            pop()
+
+                            currentIndex = match.range.last + 1
+                        }
+
+                        append(template.substring(currentIndex))
+                    }
 
                     Text(
-                        text = "${geyser.emitRate} g/s",
+                        text = formattedText,
                         style = MaterialTheme.typography.bodyLarge,
-                        fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.onBackground
-                    )
-
-                    Text(
-                        text = " for ",
-                        style = MaterialTheme.typography.bodyLarge,
-                        color = MaterialTheme.colorScheme.onBackground
-                    )
-
-                    Text(
-                        text = "${geyser.eruptionTime}s",
-                        style = MaterialTheme.typography.bodyLarge,
-                        fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.onBackground
-                    )
-
-                    Text(
-                        text = " in ",
-                        style = MaterialTheme.typography.bodyLarge,
-                        color = MaterialTheme.colorScheme.onBackground
-                    )
-
-                    Text(
-                        text = "${geyser.overallTime}s",
-                        style = MaterialTheme.typography.bodyLarge,
-                        fontWeight = FontWeight.Bold,
                         color = MaterialTheme.colorScheme.onBackground
                     )
                 }
 
                 Row {
 
-                    Text(
-                        text = "Active for ",
-                        style = MaterialTheme.typography.bodyLarge,
-                        color = MaterialTheme.colorScheme.onBackground
-                    )
+                    val template = stringResource(Res.string.uiGeyserDetailActiveDetails)
+
+                    val cyclesText = stringResource(Res.string.uiGeyserDetailCycles)
+
+                    val formattedText = buildAnnotatedString {
+
+                        var currentIndex = 0
+
+                        val regex = "\\{(activeCycles|overallCycles)\\}".toRegex()
+
+                        regex.findAll(template).forEach { match ->
+
+                            val placeholder = match.groupValues[1]
+                            val startIndex = match.range.first
+
+                            append(template.substring(currentIndex, startIndex))
+
+                            pushStyle(boldSpanStyle)
+                            when (placeholder) {
+
+                                "activeCycles" ->
+                                    append("${geyser.activeCycles.toString(1)} $cyclesText")
+
+                                "overallCycles" ->
+                                    append("${(geyser.activeCycles + geyser.dormancyCycles).toString(1)} $cyclesText")
+                            }
+                            pop()
+
+                            currentIndex = match.range.last + 1
+                        }
+
+                        append(template.substring(currentIndex))
+                    }
 
                     Text(
-                        text = "${geyser.activeCycles.toString(1)} cycles",
+                        text = formattedText,
                         style = MaterialTheme.typography.bodyLarge,
-                        fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.onBackground
-                    )
-
-                    Text(
-                        text = " in ",
-                        style = MaterialTheme.typography.bodyLarge,
-                        color = MaterialTheme.colorScheme.onBackground
-                    )
-
-                    Text(
-                        text = "${(geyser.activeCycles + geyser.dormancyCycles).toString(1)} cycles",
-                        style = MaterialTheme.typography.bodyLarge,
-                        fontWeight = FontWeight.Bold,
                         color = MaterialTheme.colorScheme.onBackground
                     )
                 }
