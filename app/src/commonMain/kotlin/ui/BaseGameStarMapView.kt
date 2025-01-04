@@ -53,6 +53,7 @@ import model.StarMapEntryVanilla
 import oni_seed_browser.app.generated.resources.Res
 import oni_seed_browser.app.generated.resources.background_space
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
 import ui.theme.DefaultSpacer
 import ui.theme.HalfSpacer
 import ui.theme.defaultPadding
@@ -189,7 +190,7 @@ fun BaseGameStarMapView(
                                     HalfSpacer()
 
                                     Text(
-                                        text = entry.id.name,
+                                        text = stringResource(entry.id.stringResource),
                                         style = MaterialTheme.typography.bodySmall,
                                         color = MaterialTheme.colorScheme.onBackground,
                                         maxLines = 1,
