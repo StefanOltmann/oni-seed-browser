@@ -38,6 +38,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import kotlin.math.pow
@@ -223,7 +224,10 @@ fun GeyserDetail(
 
                     Text(
                         text = formattedText,
-                        style = MaterialTheme.typography.bodyLarge,
+                        style = if (Locale.current.language == "zh")
+                            MaterialTheme.typography.bodySmall
+                        else
+                            MaterialTheme.typography.bodyLarge,
                         color = MaterialTheme.colorScheme.onBackground
                     )
                 }
@@ -266,7 +270,10 @@ fun GeyserDetail(
 
                     Text(
                         text = formattedText,
-                        style = MaterialTheme.typography.bodyLarge,
+                        style = if (Locale.current.language == "zh")
+                            MaterialTheme.typography.bodySmall
+                                else
+                            MaterialTheme.typography.bodyLarge,
                         color = MaterialTheme.colorScheme.onBackground
                     )
                 }
