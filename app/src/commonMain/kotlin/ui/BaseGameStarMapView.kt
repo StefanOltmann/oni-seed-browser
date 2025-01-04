@@ -59,6 +59,8 @@ import ui.theme.doubleSpacing
 import ui.theme.halfSpacing
 import ui.theme.lightGray
 
+private val circleColor = lightGray.copy(alpha = 0.2f)
+
 @Composable
 fun BaseGameStarMapView(
     cluster: Cluster,
@@ -184,16 +186,12 @@ fun BaseGameStarMapView(
                                         contentAlignment = Alignment.Center,
                                         modifier = Modifier
                                             .size(96.dp)
-                                            .border(2.dp, lightGray, CircleShape)
+                                            .border(0.dp, circleColor, CircleShape)
                                     ) {
 
-                                        Text(
-                                            text = entry.id.name,
-                                            style = MaterialTheme.typography.bodySmall,
-                                            color = MaterialTheme.colorScheme.onBackground,
-                                            maxLines = 1,
-                                            overflow = TextOverflow.Ellipsis,
-                                            modifier = Modifier.defaultPadding()
+                                        Image(
+                                            painter = painterResource(getVanillaSpacePOIDrawable(entry.id)),
+                                            contentDescription = null
                                         )
                                     }
                                 }
