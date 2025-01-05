@@ -19,11 +19,11 @@
     <string name="uiWorldTrait">星球特质</string>
     <string name="uiSpaceDestinationCount">太空目的地数量</string>
     <string name="uiGeyserCount">间歇泉数量</string>
-    <string name="uiGeyserOutput">间歇泉产量</string>
+    <string name="uiGeyserOutput">间歇泉平均产量</string>
     <string name="uiItemDescriptionCount">数量</string>
-    <string name="uiItemDescriptionOutput">产量</string>
+    <string name="uiItemDescriptionOutput">产量(克/秒)</string>
     <string name="uiItemDescriptionSpaceDestination">太空目的地</string>
-    <string name="uiOutput">产量(克/秒)</string>
+    <string name="uiOutput">产量</string>
     <string name="uiCount">数量</string>
     <string name="uiDetails">详情</string>
     <string name="uiBiomeDetails">生态详情</string>
