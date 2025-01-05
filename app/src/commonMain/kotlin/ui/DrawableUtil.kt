@@ -25,6 +25,7 @@ import model.ClusterType
 import model.GeyserType
 import model.PointOfInterestType
 import model.SpacedOutSpacePOI
+import model.VanillaSpacePOI
 import model.WorldTrait
 import model.ZoneType
 import model.filter.GameModeType
@@ -188,6 +189,30 @@ import oni_seed_browser.app.generated.resources.spacepoi_sandy_ore_field
 import oni_seed_browser.app.generated.resources.spacepoi_satellite_field
 import oni_seed_browser.app.generated.resources.spacepoi_swampy_ore_field
 import oni_seed_browser.app.generated.resources.spacepoi_temporal_tear
+import oni_seed_browser.app.generated.resources.vanilla_spacepoi_carbonaceous_asteroid
+import oni_seed_browser.app.generated.resources.vanilla_spacepoi_chlorine_planet
+import oni_seed_browser.app.generated.resources.vanilla_spacepoi_dlc2_ceres_space_destination
+import oni_seed_browser.app.generated.resources.vanilla_spacepoi_dusty_moon
+import oni_seed_browser.app.generated.resources.vanilla_spacepoi_earth
+import oni_seed_browser.app.generated.resources.vanilla_spacepoi_forest_planet
+import oni_seed_browser.app.generated.resources.vanilla_spacepoi_gas_giant
+import oni_seed_browser.app.generated.resources.vanilla_spacepoi_gold_asteroid
+import oni_seed_browser.app.generated.resources.vanilla_spacepoi_helium_giant
+import oni_seed_browser.app.generated.resources.vanilla_spacepoi_ice_giant
+import oni_seed_browser.app.generated.resources.vanilla_spacepoi_icy_dwarf
+import oni_seed_browser.app.generated.resources.vanilla_spacepoi_metallic_asteroid
+import oni_seed_browser.app.generated.resources.vanilla_spacepoi_oily_asteriod
+import oni_seed_browser.app.generated.resources.vanilla_spacepoi_organic_dwarf
+import oni_seed_browser.app.generated.resources.vanilla_spacepoi_red_dwarf
+import oni_seed_browser.app.generated.resources.vanilla_spacepoi_rocky_asteroid
+import oni_seed_browser.app.generated.resources.vanilla_spacepoi_rust_planet
+import oni_seed_browser.app.generated.resources.vanilla_spacepoi_salt_desert_planet
+import oni_seed_browser.app.generated.resources.vanilla_spacepoi_salt_dwarf
+import oni_seed_browser.app.generated.resources.vanilla_spacepoi_satellite
+import oni_seed_browser.app.generated.resources.vanilla_spacepoi_shiny_planet
+import oni_seed_browser.app.generated.resources.vanilla_spacepoi_terra_planet
+import oni_seed_browser.app.generated.resources.vanilla_spacepoi_volcano_planet
+import oni_seed_browser.app.generated.resources.vanilla_spacepoi_wormhole
 import oni_seed_browser.app.generated.resources.worldtrait_boulders_large
 import oni_seed_browser.app.generated.resources.worldtrait_boulders_medium
 import oni_seed_browser.app.generated.resources.worldtrait_boulders_mixed
@@ -438,34 +463,34 @@ fun getSpacedOutSpacePOIDrawable(spacedOutSpacePOI: SpacedOutSpacePOI): Drawable
         SpacedOutSpacePOI.TemporalTear -> Res.drawable.spacepoi_temporal_tear
     }
 
-//@Composable
-//fun getVanillaSpacePOIDrawable(vanillaSpacePOI: VanillaSpacePOI): DrawableResource =
-//    when (vanillaSpacePOI) {
-//        VanillaSpacePOI.CarbonaceousAsteroid -> Res.drawable.vanilla_spacepoi_carbon_asteroid
-//        VanillaSpacePOI.ChlorinePlanet -> Res.drawable.vanilla_spacepoi_chlorine_planet
-//        VanillaSpacePOI.DLC2CeresSpaceDestination -> Res.drawable.vanilla_spacepoi_
-//        VanillaSpacePOI.DustyMoon -> Res.drawable.vanilla_spacepoi_dusty_dwarf
-//        VanillaSpacePOI.Earth -> Res.drawable.vanilla_spacepoi_terrestrial_planet
-//        VanillaSpacePOI.ForestPlanet -> Res.drawable.vanilla_spacepoi_living_planet
-//        VanillaSpacePOI.GasGiant -> Res.drawable.vanilla_spacepoi_gas_giant
-//        VanillaSpacePOI.GoldAsteroid -> Res.drawable.vanilla_spacepoi_glimmering_planet
-//        VanillaSpacePOI.HeliumGiant -> Res.drawable.vanilla_spacepoi_helium_giant
-//        VanillaSpacePOI.IceGiant -> Res.drawable.vanilla_spacepoi_interstellar_ice
-//        VanillaSpacePOI.IcyDwarf -> Res.drawable.vanilla_spacepoi_
-//        VanillaSpacePOI.MetallicAsteroid -> Res.drawable.vanilla_spacepoi_metallic_asteroid
-//        VanillaSpacePOI.OilyAsteriod -> Res.drawable.vanilla_spacepoi_oily_asteroid
-//        VanillaSpacePOI.OrganicDwarf -> Res.drawable.vanilla_spacepoi_organic_mass
-//        VanillaSpacePOI.RedDwarf -> Res.drawable.vanilla_spacepoi_red_dwarf
-//        VanillaSpacePOI.RockyAsteroid -> Res.drawable.vanilla_spacepoi_rocky_asteroid
-//        VanillaSpacePOI.RustPlanet -> Res.drawable.vanilla_spacepoi_
-//        VanillaSpacePOI.SaltDesertPlanet -> Res.drawable.vanilla_spacepoi_salty_dwarf
-//        VanillaSpacePOI.SaltDwarf -> Res.drawable.vanilla_spacepoi_salty_dwarf
-//        VanillaSpacePOI.Satellite -> Res.drawable.vanilla_spacepoi_
-//        VanillaSpacePOI.ShinyPlanet -> Res.drawable.vanilla_spacepoi_
-//        VanillaSpacePOI.TerraPlanet -> Res.drawable.vanilla_spacepoi_terrestrial_planet
-//        VanillaSpacePOI.VolcanoPlanet -> Res.drawable.vanilla_spacepoi_volcanic_planet
-//        VanillaSpacePOI.Wormhole -> Res.drawable.vanilla_spacepoi_temporal_tear
-//    }
+@Composable
+fun getVanillaSpacePOIDrawable(vanillaSpacePOI: VanillaSpacePOI): DrawableResource =
+    when (vanillaSpacePOI) {
+        VanillaSpacePOI.CarbonaceousAsteroid -> Res.drawable.vanilla_spacepoi_carbonaceous_asteroid
+        VanillaSpacePOI.ChlorinePlanet -> Res.drawable.vanilla_spacepoi_chlorine_planet
+        VanillaSpacePOI.DLC2CeresSpaceDestination -> Res.drawable.vanilla_spacepoi_dlc2_ceres_space_destination
+        VanillaSpacePOI.DustyMoon -> Res.drawable.vanilla_spacepoi_dusty_moon
+        VanillaSpacePOI.Earth -> Res.drawable.vanilla_spacepoi_earth
+        VanillaSpacePOI.ForestPlanet -> Res.drawable.vanilla_spacepoi_forest_planet
+        VanillaSpacePOI.GasGiant -> Res.drawable.vanilla_spacepoi_gas_giant
+        VanillaSpacePOI.GoldAsteroid -> Res.drawable.vanilla_spacepoi_gold_asteroid
+        VanillaSpacePOI.HeliumGiant -> Res.drawable.vanilla_spacepoi_helium_giant
+        VanillaSpacePOI.IceGiant -> Res.drawable.vanilla_spacepoi_ice_giant
+        VanillaSpacePOI.IcyDwarf -> Res.drawable.vanilla_spacepoi_icy_dwarf
+        VanillaSpacePOI.MetallicAsteroid -> Res.drawable.vanilla_spacepoi_metallic_asteroid
+        VanillaSpacePOI.OilyAsteriod -> Res.drawable.vanilla_spacepoi_oily_asteriod
+        VanillaSpacePOI.OrganicDwarf -> Res.drawable.vanilla_spacepoi_organic_dwarf
+        VanillaSpacePOI.RedDwarf -> Res.drawable.vanilla_spacepoi_red_dwarf
+        VanillaSpacePOI.RockyAsteroid -> Res.drawable.vanilla_spacepoi_rocky_asteroid
+        VanillaSpacePOI.RustPlanet -> Res.drawable.vanilla_spacepoi_rust_planet
+        VanillaSpacePOI.SaltDesertPlanet -> Res.drawable.vanilla_spacepoi_salt_desert_planet
+        VanillaSpacePOI.SaltDwarf -> Res.drawable.vanilla_spacepoi_salt_dwarf
+        VanillaSpacePOI.Satellite -> Res.drawable.vanilla_spacepoi_satellite
+        VanillaSpacePOI.ShinyPlanet -> Res.drawable.vanilla_spacepoi_shiny_planet
+        VanillaSpacePOI.TerraPlanet -> Res.drawable.vanilla_spacepoi_terra_planet
+        VanillaSpacePOI.VolcanoPlanet -> Res.drawable.vanilla_spacepoi_volcano_planet
+        VanillaSpacePOI.Wormhole -> Res.drawable.vanilla_spacepoi_wormhole
+    }
 
 @Composable
 fun getZoneTypeDrawable(zoneType: ZoneType): DrawableResource =

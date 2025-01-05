@@ -53,11 +53,18 @@ import model.StarMapEntryVanilla
 import oni_seed_browser.app.generated.resources.Res
 import oni_seed_browser.app.generated.resources.background_space
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
+import ui.theme.DefaultSpacer
+import ui.theme.HalfSpacer
 import ui.theme.defaultPadding
 import ui.theme.defaultSpacing
 import ui.theme.doubleSpacing
 import ui.theme.halfSpacing
 import ui.theme.lightGray
+
+private const val CIRCLE_SIZE_DP = 96
+
+private val circleColor = lightGray.copy(alpha = 0.2f)
 
 @Composable
 fun BaseGameStarMapView(
@@ -133,14 +140,17 @@ fun BaseGameStarMapView(
                                     .weight(1F)
                             )
 
+                            DefaultSpacer()
+
                             Text(
                                 text = ((distance + 2) * 10).toString() + " 000 km",
                                 style = MaterialTheme.typography.bodyLarge,
                                 color = MaterialTheme.colorScheme.onBackground,
                                 maxLines = 1,
-                                overflow = TextOverflow.Ellipsis,
-                                modifier = Modifier.defaultPadding()
+                                overflow = TextOverflow.Ellipsis
                             )
+
+                            DefaultSpacer()
 
                             Box(
                                 modifier = Modifier
@@ -153,50 +163,42 @@ fun BaseGameStarMapView(
                         Row(
                             horizontalArrangement = Arrangement.spacedBy(doubleSpacing, Alignment.CenterHorizontally),
                             modifier = Modifier
-                                .height(108.dp)
+                                .height((CIRCLE_SIZE_DP + 12 + 24).dp)
                                 .fillMaxWidth()
                                 .defaultPadding()
                         ) {
 
                             for (entry in entries) {
 
-                                TooltipContainer(
-                                    tooltipContent = {
-                                        GenericTooltip {
-                                            Text(
-                                                text = entry.id.name,
-                                                style = MaterialTheme.typography.bodyLarge,
-                                                color = MaterialTheme.colorScheme.onBackground,
-                                                maxLines = 1,
-                                                overflow = TextOverflow.Ellipsis,
-                                                lineHeight = 0.sp,
-                                                modifier = Modifier.padding(
-                                                    horizontal = defaultSpacing,
-                                                    vertical = halfSpacing
-                                                )
-                                            )
-                                        }
-                                    },
-                                    yOffset = 15
+                                Column(
+                                    horizontalAlignment = Alignment.CenterHorizontally
                                 ) {
 
                                     Box(
                                         contentAlignment = Alignment.Center,
                                         modifier = Modifier
-                                            .size(96.dp)
-                                            .border(2.dp, lightGray, CircleShape)
+                                            .size(CIRCLE_SIZE_DP.dp)
+                                            .border(0.dp, circleColor, CircleShape)
                                     ) {
 
-                                        Text(
-                                            text = entry.id.name,
-                                            style = MaterialTheme.typography.bodySmall,
-                                            color = MaterialTheme.colorScheme.onBackground,
-                                            maxLines = 1,
-                                            overflow = TextOverflow.Ellipsis,
-                                            modifier = Modifier.defaultPadding()
+                                        Image(
+                                            painter = painterResource(getVanillaSpacePOIDrawable(entry.id)),
+                                            contentDescription = null
                                         )
                                     }
+
+                                    HalfSpacer()
+
+                                    Text(
+                                        text = stringResource(entry.id.stringResource),
+                                        style = MaterialTheme.typography.bodySmall,
+                                        color = MaterialTheme.colorScheme.onBackground,
+                                        maxLines = 1,
+                                        overflow = TextOverflow.Ellipsis,
+                                        modifier = Modifier.height(24.dp)
+                                    )
                                 }
+
                             }
                         }
                     }

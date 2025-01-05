@@ -272,4 +272,30 @@
     <string name="harvestableSpacePoiSatelliteField">Space Debris</string>
     <string name="harvestableSpacePoiSwampyOreField">Swampy Ore Field</string>
     <string name="temporalTear">Temporal Tear</string>
+
+    <!-- Vanilla Space POI -->
+    <string name="vanillaSpacePoiCarbonaceousAsteroid">Carbonaceous Asteroid</string>
+    <string name="vanillaSpacePoiChlorinePlanet">Chlorine Planet</string>
+    <string name="vanillaSpacePoiDLC2CeresSpaceDestination">DLC2 Ceres Space Destination</string>
+    <string name="vanillaSpacePoiDustyMoon">Dusty Moon</string>
+    <string name="vanillaSpacePoiEarth">Earth</string>
+    <string name="vanillaSpacePoiForestPlanet">Forest Planet</string>
+    <string name="vanillaSpacePoiGasGiant">Gas Giant</string>
+    <string name="vanillaSpacePoiGoldAsteroid">Gold Asteroid</string>
+    <string name="vanillaSpacePoiHeliumGiant">Helium Giant</string>
+    <string name="vanillaSpacePoiIceGiant">Ice Giant</string>
+    <string name="vanillaSpacePoiIcyDwarf">Icy Dwarf</string>
+    <string name="vanillaSpacePoiMetallicAsteroid">Metallic Asteroid</string>
+    <string name="vanillaSpacePoiOilyAsteroid">Oily Asteroid</string>
+    <string name="vanillaSpacePoiOrganicDwarf">Organic Dwarf</string>
+    <string name="vanillaSpacePoiRedDwarf">Red Dwarf</string>
+    <string name="vanillaSpacePoiRockyAsteroid">Rocky Asteroid</string>
+    <string name="vanillaSpacePoiRustPlanet">Rust Planet</string>
+    <string name="vanillaSpacePoiSaltDesertPlanet">Salt Desert Planet</string>
+    <string name="vanillaSpacePoiSaltDwarf">Salt Dwarf</string>
+    <string name="vanillaSpacePoiSatellite">Satellite</string>
+    <string name="vanillaSpacePoiShinyPlanet">Shiny Planet</string>
+    <string name="vanillaSpacePoiTerraPlanet">Terra Planet</string>
+    <string name="vanillaSpacePoiVolcanoPlanet">Volcano Planet</string>
+    <string name="vanillaSpacePoiWormhole">Wormhole</string>
 </resources>
