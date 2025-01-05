@@ -32,7 +32,7 @@
     <string name="uiGeyserDetailOnAverage">平均产量</string>
     <string name="uiGeyserDetailSecondsShort">秒</string>
     <string name="uiGeyserDetailCycles">周期</string>
-    <string name="uiCopiedToClipboard">已复制到剪贴板!</string>
+    <string name="uiCopiedToClipboard">已复制到剪贴簿!</string>
     <string name="uiGeyserDetailEmitDetails">每{overallTime}中喷发{eruptionTime}产量{emitRate}</string>
     <string name="uiGeyserDetailActiveDetails">活跃期:每{overallCycles}中活跃{activeCycles}</string>
 
