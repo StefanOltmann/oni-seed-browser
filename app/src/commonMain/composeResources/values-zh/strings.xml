@@ -19,21 +19,22 @@
     <string name="uiWorldTrait">星球特质</string>
     <string name="uiSpaceDestinationCount">太空目的地数量</string>
     <string name="uiGeyserCount">间歇泉数量</string>
-    <string name="uiGeyserOutput">间歇泉喷发量</string>
+    <string name="uiGeyserOutput">间歇泉产量</string>
     <string name="uiItemDescriptionCount">数量</string>
-    <string name="uiItemDescriptionOutput">喷发量(克/秒)</string>
+    <string name="uiItemDescriptionOutput">产量</string>
     <string name="uiItemDescriptionSpaceDestination">太空目的地</string>
-    <string name="uiOutput">喷发量</string>
+    <string name="uiOutput">产量(克/秒)</string>
     <string name="uiCount">数量</string>
     <string name="uiDetails">详情</string>
     <string name="uiBiomeDetails">生态详情</string>
     <string name="uiGeyserDetails">间歇泉详情</string>
     <string name="uiGeyserDetailGramPerSecond">克/秒</string>
-    <string name="uiGeyserDetailOnAverage">的平均产率</string>
+    <string name="uiGeyserDetailOnAverage">平均产量</string>
     <string name="uiGeyserDetailSecondsShort">秒</string>
     <string name="uiGeyserDetailCycles">周期</string>
-    <string name="uiGeyserDetailEmitDetails">每{overallTime}中喷发{eruptionTime} 喷发产率{emitRate}</string>
-    <string name="uiGeyserDetailActiveDetails">活跃期:每{overallCycles}中活跃{activeCycles}</string>
+    <string name="uiCopiedToClipboard">已复制到剪贴簿!</string>
+    <string name="uiGeyserDetailEmitDetails">每{overallTime}中喷发{eruptionTime}产量{emitRate}</string>
+    <string name="uiGeyserDetailActiveDetails">每{overallCycles}中活跃{activeCycles}</string>
 
     <!-- GameModes -->
     <string name="gameModeBaseGameStandard">标准</string>
@@ -271,4 +272,30 @@
     <string name="harvestableSpacePoiSatelliteField">太空残骸</string>
     <string name="harvestableSpacePoiSwampyOreField">沼泽矿带</string>
     <string name="temporalTear">时间裂口</string>
+
+    <!-- Vanilla Space POI -->
+    <string name="vanillaSpacePoiCarbonaceousAsteroid">碳质小行星</string>
+    <string name="vanillaSpacePoiChlorinePlanet">氯行星</string>
+    <string name="vanillaSpacePoiDLC2CeresSpaceDestination">谷神星</string>
+    <string name="vanillaSpacePoiDustyMoon">尘埃矮星</string>
+    <string name="vanillaSpacePoiEarth">碎裂行星</string>
+    <string name="vanillaSpacePoiForestPlanet">生命行星</string>
+    <string name="vanillaSpacePoiGasGiant">气体巨星</string>
+    <string name="vanillaSpacePoiGoldAsteroid">金质小行星</string>
+    <string name="vanillaSpacePoiHeliumGiant">氦巨星</string>
+    <string name="vanillaSpacePoiIceGiant">寒冰巨星</string>
+    <string name="vanillaSpacePoiIcyDwarf">星际冰星</string>
+    <string name="vanillaSpacePoiMetallicAsteroid">金属小行星</string>
+    <string name="vanillaSpacePoiOilyAsteroid">油质小行星</string>
+    <string name="vanillaSpacePoiOrganicDwarf">有机质体</string>
+    <string name="vanillaSpacePoiRedDwarf">红矮星</string>
+    <string name="vanillaSpacePoiRockyAsteroid">岩石小行星</string>
+    <string name="vanillaSpacePoiRustPlanet">氧化小行星</string>
+    <string name="vanillaSpacePoiSaltDesertPlanet">干燥行星</string>
+    <string name="vanillaSpacePoiSaltDwarf">盐质矮星</string>
+    <string name="vanillaSpacePoiSatellite">卫星</string>
+    <string name="vanillaSpacePoiShinyPlanet">闪烁行星</string>
+    <string name="vanillaSpacePoiTerraPlanet">类地行星</string>
+    <string name="vanillaSpacePoiVolcanoPlanet">火山行星</string>
+    <string name="vanillaSpacePoiWormhole">时间裂口</string>
 </resources>
