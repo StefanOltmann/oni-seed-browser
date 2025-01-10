@@ -47,7 +47,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import model.Cluster
 import model.StarMapEntryVanilla
 import oni_seed_browser.app.generated.resources.Res
@@ -59,7 +58,6 @@ import ui.theme.HalfSpacer
 import ui.theme.defaultPadding
 import ui.theme.defaultSpacing
 import ui.theme.doubleSpacing
-import ui.theme.halfSpacing
 import ui.theme.lightGray
 
 private const val CIRCLE_SIZE_DP = 96

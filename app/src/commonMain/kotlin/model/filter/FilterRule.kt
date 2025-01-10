@@ -25,8 +25,7 @@ import model.AsteroidType
 @Serializable
 data class FilterRule(
 
-    /* NULL = All asteroids */
-    val asteroid: AsteroidType?,
+    val asteroid: AsteroidType,
 
     /* Items */
     val geyserCount: FilterItemGeyserCount?,
@@ -54,15 +53,4 @@ data class FilterRule(
             worldTrait = worldTrait?.switchCondition(),
             spaceDestinationCount = spaceDestinationCount?.switchCondition()
         )
-
-    companion object {
-
-        val EMPTY: FilterRule = FilterRule(
-            asteroid = null,
-            geyserCount = null,
-            geyserOutput = null,
-            worldTrait = null,
-            spaceDestinationCount = null
-        )
-    }
 }

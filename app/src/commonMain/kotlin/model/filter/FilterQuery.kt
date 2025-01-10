@@ -24,7 +24,6 @@ import kotlinx.serialization.Transient
 import model.AsteroidType
 import model.ClusterType
 import model.Dlc
-import model.filter.FilterRule.Companion.EMPTY
 import serializer.ClusterTypeSerializer
 
 @Serializable
@@ -69,7 +68,7 @@ data class FilterQuery(
         )
     }
 
-    fun setAsteroid(rulesIndex: Int, ruleIndex: Int, asteroidType: AsteroidType?): FilterQuery {
+    fun setAsteroid(rulesIndex: Int, ruleIndex: Int, asteroidType: AsteroidType): FilterQuery {
 
         val newRules = rules.toMutableList()
 

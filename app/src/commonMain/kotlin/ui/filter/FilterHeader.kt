@@ -46,7 +46,6 @@ import oni_seed_browser.app.generated.resources.uiSeedsInDatabase
 import org.jetbrains.compose.resources.stringResource
 import ui.theme.DefaultSpacer
 import ui.theme.DoubleSpacer
-import ui.theme.FillSpacer
 import ui.theme.defaultRoundedCornerShape
 
 @Composable

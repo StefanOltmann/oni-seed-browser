@@ -76,7 +76,7 @@ fun main() {
     val thirdRuleGroup = mutableListOf<FilterRule>()
 
     val thirdRule = FilterRule(
-        asteroid = null,
+        asteroid = AsteroidType.CeresClassicShatteredAsteroid,
         worldTrait = null,
         geyserCount = null,
         geyserOutput = FilterItemGeyserOutput(
@@ -88,7 +88,7 @@ fun main() {
     )
 
     val thirdRuleOr = FilterRule(
-        asteroid = null,
+        asteroid = AsteroidType.CeresClassicShatteredAsteroid,
         worldTrait = null,
         geyserCount = null,
         geyserOutput = null,
