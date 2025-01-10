@@ -272,7 +272,7 @@ fun GeyserDetail(
                         text = formattedText,
                         style = if (Locale.current.language == "zh")
                             MaterialTheme.typography.bodySmall
-                                else
+                        else
                             MaterialTheme.typography.bodyLarge,
                         color = MaterialTheme.colorScheme.onBackground
                     )
