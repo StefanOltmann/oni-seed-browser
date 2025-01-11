@@ -30,4 +30,6 @@ interface WebClient {
 
     suspend fun search(filterQuery: FilterQuery): List<Cluster>
 
+    suspend fun getSteamId(): String?
+
 }

@@ -29,6 +29,7 @@ import io.ktor.client.request.get
 import io.ktor.client.request.header
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
+import io.ktor.client.statement.bodyAsText
 import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
@@ -128,5 +129,15 @@ object DefaultWebClient : WebClient {
             setBody(filterQuery)
 
         }.body()
+    }
+
+    override suspend fun getSteamId(): String? {
+
+        val response = httpClient.get("$BASE_API_URL/steamid")
+
+        if (response.status != HttpStatusCode.OK)
+            return null
+
+        return response.bodyAsText()
     }
 }

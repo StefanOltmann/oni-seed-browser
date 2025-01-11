@@ -89,6 +89,24 @@ fun ContentView(
             }
         }
 
+        val steamId = produceState<String?>(null) {
+
+            try {
+
+                value = DefaultWebClient.getSteamId()
+
+            } catch (ex: Throwable) {
+
+                /* We MUST catch Throwable here to prevent UI freezes. */
+
+                ex.printStackTrace()
+
+                errorMessage.value = ex.stackTraceToString()
+            }
+        }
+
+        println("Steam ID: ${steamId.value}")
+
         val coroutineScope = rememberCoroutineScope()
 
         val filterQueryState = remember { mutableStateOf(FilterQuery.ALL) }
