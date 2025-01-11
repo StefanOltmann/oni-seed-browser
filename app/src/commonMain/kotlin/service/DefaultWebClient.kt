@@ -23,6 +23,8 @@ import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.plugins.compression.ContentEncoding
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.client.plugins.cookies.AcceptAllCookiesStorage
+import io.ktor.client.plugins.cookies.HttpCookies
 import io.ktor.client.plugins.defaultRequest
 import io.ktor.client.request.accept
 import io.ktor.client.request.get
@@ -82,6 +84,10 @@ object DefaultWebClient : WebClient {
 
         install(ContentEncoding) {
             gzip(1.0f)
+        }
+
+        install(HttpCookies) {
+            storage = AcceptAllCookiesStorage()
         }
     }
 
