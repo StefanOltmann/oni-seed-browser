@@ -1,6 +1,6 @@
 /*
  * ONI Seed Browser
- * Copyright (C) 2024 Stefan Oltmann
+ * Copyright (C) 2025 Stefan Oltmann
  * https://stefan-oltmann.de/oni-seed-browser
  *
  * This program is free software: you can redistribute it and/or modify
@@ -48,7 +48,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import model.filter.FilterRule
 import oni_seed_browser.app.generated.resources.Res
-import oni_seed_browser.app.generated.resources.uiAny
 import oni_seed_browser.app.generated.resources.uiHas
 import oni_seed_browser.app.generated.resources.uiHasNot
 import oni_seed_browser.app.generated.resources.uiItemDescriptionCount
@@ -99,26 +98,11 @@ fun FilterPanelEntry(
                     modifier = Modifier.width(40.dp)
                 ) {
 
-                    if (rule.asteroid == null) {
-
-                        Text(
-                            text = stringResource(Res.string.uiAny),
-                            style = MaterialTheme.typography.bodyLarge,
-                            fontWeight = FontWeight.Bold,
-                            color = if (hoveredAsteroid.value)
-                                hoverColor
-                            else
-                                MaterialTheme.colorScheme.onBackground
-                        )
-
-                    } else {
-
-                        Image(
-                            painter = painterResource(getAsteroidTypeDrawable(rule.asteroid)),
-                            contentDescription = null,
-                            modifier = Modifier.size(30.dp)
-                        )
-                    }
+                    Image(
+                        painter = painterResource(getAsteroidTypeDrawable(rule.asteroid)),
+                        contentDescription = null,
+                        modifier = Modifier.size(30.dp)
+                    )
                 }
             }
 

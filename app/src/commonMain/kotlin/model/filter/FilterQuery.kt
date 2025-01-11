@@ -1,6 +1,6 @@
 /*
  * ONI Seed Browser
- * Copyright (C) 2024 Stefan Oltmann
+ * Copyright (C) 2025 Stefan Oltmann
  * https://stefan-oltmann.de/oni-seed-browser
  *
  * This program is free software: you can redistribute it and/or modify
@@ -24,7 +24,6 @@ import kotlinx.serialization.Transient
 import model.AsteroidType
 import model.ClusterType
 import model.Dlc
-import model.filter.FilterRule.Companion.EMPTY
 import serializer.ClusterTypeSerializer
 
 @Serializable
@@ -69,7 +68,7 @@ data class FilterQuery(
         )
     }
 
-    fun setAsteroid(rulesIndex: Int, ruleIndex: Int, asteroidType: AsteroidType?): FilterQuery {
+    fun setAsteroid(rulesIndex: Int, ruleIndex: Int, asteroidType: AsteroidType): FilterQuery {
 
         val newRules = rules.toMutableList()
 
@@ -147,9 +146,23 @@ data class FilterQuery(
 
     fun addEmptyAndRule(): FilterQuery {
 
+        /* Can't add rules without selecting a Cluster first. */
+        if (cluster == null)
+            return this
+
         val newRules = rules.toMutableList()
 
-        newRules.add(listOf(EMPTY))
+        newRules.add(
+            listOf(
+                FilterRule(
+                    asteroid = cluster.asteroidTypes.first(),
+                    geyserCount = null,
+                    geyserOutput = null,
+                    worldTrait = null,
+                    spaceDestinationCount = null
+                )
+            )
+        )
 
         return copy(
             rules = newRules
@@ -158,13 +171,25 @@ data class FilterQuery(
 
     fun addEmptyOrRule(rulesIndex: Int): FilterQuery {
 
+        /* Can't add rules without selecting a Cluster first. */
+        if (cluster == null)
+            return this
+
         val rulesCopy = rules.toMutableList()
 
         val newRules = rules[rulesIndex].toMutableList()
 
-        newRules.add(EMPTY)
+        newRules.add(
+            FilterRule(
+                asteroid = cluster.asteroidTypes.first(),
+                geyserCount = null,
+                geyserOutput = null,
+                worldTrait = null,
+                spaceDestinationCount = null
+            )
+        )
 
-        rulesCopy.set(rulesIndex, newRules)
+        rulesCopy[rulesIndex] = newRules
 
         return copy(
             rules = rulesCopy

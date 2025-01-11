@@ -10,8 +10,6 @@
     <string name="uiRule">Regel</string>
     <string name="uiAnd">UND</string>
     <string name="uiOr">ODER</string>
-    <string name="uiAny">*</string>
-    <string name="uiAnyLong">Irgendeiner der Asteroiden</string>
     <string name="uiHas">hat</string>
     <string name="uiHasNot">hat nicht</string>
     <string name="uiNoResults">Keine Ergebnisse gefunden.</string>

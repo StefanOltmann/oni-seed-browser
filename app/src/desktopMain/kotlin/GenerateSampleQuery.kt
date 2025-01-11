@@ -1,6 +1,6 @@
 /*
  * ONI Seed Browser
- * Copyright (C) 2024 Stefan Oltmann
+ * Copyright (C) 2025 Stefan Oltmann
  * https://stefan-oltmann.de/oni-seed-browser
  *
  * This program is free software: you can redistribute it and/or modify
@@ -76,7 +76,7 @@ fun main() {
     val thirdRuleGroup = mutableListOf<FilterRule>()
 
     val thirdRule = FilterRule(
-        asteroid = null,
+        asteroid = AsteroidType.CeresClassicShatteredAsteroid,
         worldTrait = null,
         geyserCount = null,
         geyserOutput = FilterItemGeyserOutput(
@@ -88,7 +88,7 @@ fun main() {
     )
 
     val thirdRuleOr = FilterRule(
-        asteroid = null,
+        asteroid = AsteroidType.CeresClassicShatteredAsteroid,
         worldTrait = null,
         geyserCount = null,
         geyserOutput = null,

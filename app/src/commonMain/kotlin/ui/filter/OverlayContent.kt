@@ -1,6 +1,6 @@
 /*
  * ONI Seed Browser
- * Copyright (C) 2024 Stefan Oltmann
+ * Copyright (C) 2025 Stefan Oltmann
  * https://stefan-oltmann.de/oni-seed-browser
  *
  * This program is free software: you can redistribute it and/or modify
@@ -45,7 +45,6 @@ import model.filter.FilterItemType
 import model.filter.FilterItemWorldTrait
 import model.filter.FilterQuery
 import oni_seed_browser.app.generated.resources.Res
-import oni_seed_browser.app.generated.resources.uiAnyLong
 import oni_seed_browser.app.generated.resources.uiCount
 import oni_seed_browser.app.generated.resources.uiOutput
 import org.jetbrains.compose.resources.stringResource
@@ -82,22 +81,6 @@ fun OverlayContent(
         ) {
 
             if (filterSelectionValue.type == FilterSelectionType.ASTEROID) {
-
-                FilterSelectionEntryItem(
-                    text = stringResource(Res.string.uiAnyLong),
-                    onClick = {
-
-                        /* Update the query */
-                        filterQueryState.value = filterQueryState.value.setAsteroid(
-                            rulesIndex = filterSelectionValue.rulesIndex,
-                            ruleIndex = filterSelectionValue.ruleIndex,
-                            asteroidType = null
-                        )
-
-                        /* Close pop-up */
-                        filterSelection.value = null
-                    }
-                )
 
                 for (asteroidType in cluster.asteroidTypes) {
 

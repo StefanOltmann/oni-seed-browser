@@ -1,6 +1,6 @@
 /*
  * ONI Seed Browser
- * Copyright (C) 2024 Stefan Oltmann
+ * Copyright (C) 2025 Stefan Oltmann
  * https://stefan-oltmann.de/oni-seed-browser
  *
  * This program is free software: you can redistribute it and/or modify
@@ -25,8 +25,7 @@ import model.AsteroidType
 @Serializable
 data class FilterRule(
 
-    /* NULL = All asteroids */
-    val asteroid: AsteroidType?,
+    val asteroid: AsteroidType,
 
     /* Items */
     val geyserCount: FilterItemGeyserCount?,
@@ -54,15 +53,4 @@ data class FilterRule(
             worldTrait = worldTrait?.switchCondition(),
             spaceDestinationCount = spaceDestinationCount?.switchCondition()
         )
-
-    companion object {
-
-        val EMPTY: FilterRule = FilterRule(
-            asteroid = null,
-            geyserCount = null,
-            geyserOutput = null,
-            worldTrait = null,
-            spaceDestinationCount = null
-        )
-    }
 }

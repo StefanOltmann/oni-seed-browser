@@ -10,8 +10,6 @@
     <string name="uiRule">rule</string>
     <string name="uiAnd">AND</string>
     <string name="uiOr">OR</string>
-    <string name="uiAny">ANY</string>
-    <string name="uiAnyLong">Any of the asteroids</string>
     <string name="uiHas">has</string>
     <string name="uiHasNot">hasn't</string>
     <string name="uiNoResults">No results found.</string>

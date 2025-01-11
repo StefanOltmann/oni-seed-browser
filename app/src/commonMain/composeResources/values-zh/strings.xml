@@ -10,8 +10,6 @@
     <string name="uiRule">条件</string>
     <string name="uiAnd">与</string>
     <string name="uiOr">或</string>
-    <string name="uiAny">全部</string>
-    <string name="uiAnyLong">全部小行星</string>
     <string name="uiHas">有</string>
     <string name="uiHasNot">没有</string>
     <string name="uiNoResults">没有找到结果.</string>
