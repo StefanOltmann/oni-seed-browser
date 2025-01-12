@@ -75,8 +75,22 @@ object AppStorage {
 
     fun saveFilter(filterQuery: FilterQuery) {
 
-        val json = jsonPretty.encodeToString(filterQuery)
+        try {
 
-        settings.putString(FILTER_SETTINGS_KEY, json)
+            val json = jsonPretty.encodeToString(filterQuery)
+
+            settings.putString(FILTER_SETTINGS_KEY, json)
+
+        } catch (ex: Exception) {
+
+            /*
+             * Saving the filter is optional and should not
+             * break the service on malfunction.
+             */
+
+            ex.printStackTrace()
+
+            settings.remove(FILTER_SETTINGS_KEY)
+        }
     }
 }
