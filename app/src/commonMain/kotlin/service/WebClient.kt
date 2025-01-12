@@ -28,6 +28,12 @@ interface WebClient {
 
     suspend fun find(coordinate: String): Cluster?
 
+    /*
+     * Requests a coordinate and returns if request was valid.
+     * Can be invalid if coordinate has wrong syntax.
+     */
+    suspend fun request(coordinate: String): Boolean
+
     suspend fun search(filterQuery: FilterQuery): List<Cluster>
 
     suspend fun getSteamId(): String?

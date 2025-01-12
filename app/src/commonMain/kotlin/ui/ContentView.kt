@@ -37,6 +37,7 @@ import model.Asteroid
 import model.Cluster
 import oni_seed_browser.app.generated.resources.Res
 import oni_seed_browser.app.generated.resources.background_space
+import oni_seed_browser.app.generated.resources.uiCoordinateNotFound
 import oni_seed_browser.app.generated.resources.uiNoResults
 import oni_seed_browser.app.generated.resources.uiSearching
 import oni_seed_browser.app.generated.resources.uiTitle
@@ -342,7 +343,9 @@ fun ContentView(
                         modifier = Modifier.weight(1F)
                     ) {
 
-                        if (urlHash.value == null) {
+                        val coordinate = urlHash.value
+
+                        if (coordinate == null) {
 
                             Text(
                                 text = stringResource(Res.string.uiNoResults),
@@ -354,13 +357,26 @@ fun ContentView(
 
                         } else {
 
-                            Text(
-                                text = "Coordinate ${urlHash.value} was not found in database.",
-                                style = MaterialTheme.typography.headlineSmall,
-                                color = MaterialTheme.colorScheme.onBackground,
-                                maxLines = 1,
-                                overflow = TextOverflow.Ellipsis
-                            )
+                            Column(
+                                horizontalAlignment = Alignment.CenterHorizontally
+                            ) {
+
+                                Text(
+                                    text = stringResource(Res.string.uiCoordinateNotFound)
+                                        .replace("{coordinate}", coordinate),
+                                    style = MaterialTheme.typography.headlineSmall,
+                                    color = MaterialTheme.colorScheme.onBackground,
+                                    maxLines = 1,
+                                    overflow = TextOverflow.Ellipsis
+                                )
+
+                                DoubleSpacer()
+
+                                RequestCoordinateButton(
+                                    enabled = steamId.value != null,
+                                    coordinate = coordinate
+                                )
+                            }
                         }
                     }
 

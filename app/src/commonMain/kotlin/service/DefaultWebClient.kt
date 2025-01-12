@@ -47,6 +47,7 @@ import model.filter.FilterQuery
 
 const val BASE_API_URL = "https://ingest.mapsnotincluded.org"
 const val FIND_URL = "$BASE_API_URL/coordinate"
+const val REQUEST_URL = "$BASE_API_URL/request_coordinate"
 const val SEARCH_URL = "$BASE_API_URL/search"
 const val COUNT_URL = "$BASE_API_URL/count"
 
@@ -112,6 +113,15 @@ object DefaultWebClient : WebClient {
             return null
 
         return response.body()
+    }
+
+    override suspend fun request(coordinate: String): Boolean {
+
+        println("Request: $coordinate")
+
+        val response = httpClient.get("$REQUEST_URL/$coordinate")
+
+        return response.status.isSuccess()
     }
 
     override suspend fun search(filterQuery: FilterQuery): List<Cluster> {
