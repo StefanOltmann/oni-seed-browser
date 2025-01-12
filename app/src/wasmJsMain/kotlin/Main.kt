@@ -44,6 +44,7 @@ fun main() {
         println("Users language tag: " + Locale.current.toLanguageTag())
         println("Users region: " + Locale.current.region)
         println("Parameters: $params")
+        println("Cookies: ${document.cookie}")
 
         val urlHash = remember {
             mutableStateOf(document.location?.hash?.drop(1)?.ifBlank { null })
