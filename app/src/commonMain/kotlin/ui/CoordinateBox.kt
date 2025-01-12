@@ -146,35 +146,45 @@ fun CoordinateBox(
         if (width.value >= 600 && index > 0 && totalCount > 0)
             IndexIndicator(index, totalCount)
 
-        if (showMapClicked != null) {
+        Row(
+            modifier = Modifier.align(Alignment.CenterEnd)
+        ) {
 
-            val hovered = remember { mutableStateOf(false) }
-
-            Box(
-                contentAlignment = Alignment.Center,
-                modifier = Modifier
-                    .onHover(hovered)
-                    .halfPadding()
-                    .height(32.dp)
-                    .noRippleClickable(showMapClicked)
-                    .align(Alignment.CenterEnd)
-            ) {
-
-                Image(
-                    painter = painterResource(Res.drawable.space_hexagon),
-                    contentDescription = null
-                )
-
-                Icon(
-                    imageVector = Icons.Default.Search,
-                    contentDescription = null,
-                    tint = if (hovered.value)
-                        hoverColor
-                    else
-                        MaterialTheme.colorScheme.onBackground
-                )
-            }
+            if (showMapClicked != null)
+                ShowMapButton(showMapClicked)
         }
+    }
+}
+
+@Composable
+private fun ShowMapButton(
+    showMapClicked: (() -> Unit)
+) {
+
+    val hovered = remember { mutableStateOf(false) }
+
+    Box(
+        contentAlignment = Alignment.Center,
+        modifier = Modifier
+            .onHover(hovered)
+            .halfPadding()
+            .height(32.dp)
+            .noRippleClickable(showMapClicked)
+    ) {
+
+        Image(
+            painter = painterResource(Res.drawable.space_hexagon),
+            contentDescription = null
+        )
+
+        Icon(
+            imageVector = Icons.Default.Search,
+            contentDescription = null,
+            tint = if (hovered.value)
+                hoverColor
+            else
+                MaterialTheme.colorScheme.onBackground
+        )
     }
 }
 
