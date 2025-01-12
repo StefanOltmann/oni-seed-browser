@@ -43,6 +43,7 @@ import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.cbor.Cbor
 import kotlinx.serialization.json.Json
 import model.Cluster
+import model.RateCoordinateRequest
 import model.filter.FilterQuery
 
 const val BASE_API_URL = "https://ingest.mapsnotincluded.org"
@@ -119,12 +120,44 @@ object DefaultWebClient : WebClient {
 
         println("Request: $coordinate")
 
-        val response = httpClient.post("$REQUEST_URL") {
+        val response = httpClient.post(REQUEST_URL) {
             contentType(ContentType.Text.Plain)
             setBody(coordinate)
         }
 
         return response.status.isSuccess()
+    }
+
+    override suspend fun findFavoredCoordinates(): List<String> {
+
+        val response = httpClient.get("$BASE_API_URL/favored-coordinates")
+
+        if (!response.status.isSuccess())
+            error("Requesting favored coordinates failed with HTTP ${response.status}: ${response.bodyAsText()}")
+
+        return response.body()
+    }
+
+    override suspend fun rate(coordinate: String, like: Boolean): Boolean {
+
+        println((if (like) "Like" else "Unlike") + " " + coordinate)
+
+        val response = httpClient.post("$BASE_API_URL/rate-coordinate") {
+            contentType(ContentType.Application.Json)
+            setBody(
+                RateCoordinateRequest(
+                    coordinate = coordinate,
+                    like = like
+                )
+            )
+        }
+
+        val success = response.status.isSuccess()
+
+        if (!success)
+            println("Request failed with HTTP ${response.status}: ${response.bodyAsText()}")
+
+        return success
     }
 
     override suspend fun search(filterQuery: FilterQuery): List<Cluster> {

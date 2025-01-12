@@ -40,6 +40,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -50,11 +51,13 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import kotlin.math.roundToInt
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import oni_seed_browser.app.generated.resources.Res
 import oni_seed_browser.app.generated.resources.space_hexagon
 import oni_seed_browser.app.generated.resources.uiCopiedToClipboard
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
+import service.DefaultWebClient
 import ui.icons.ContentCopy
 import ui.theme.DoubleSpacer
 import ui.theme.defaultRoundedCornerShape
@@ -157,6 +160,8 @@ fun CoordinateBox(
 
             val favorite = favoriteCoordinates.value.contains(coordinate)
 
+            val coroutineScope = rememberCoroutineScope()
+
             Icon(
                 imageVector = if (favorite)
                     Icons.Filled.Favorite
@@ -172,10 +177,26 @@ fun CoordinateBox(
                     .size(32.dp)
                     .noRippleClickable {
 
-                        if (favorite)
-                            favoriteCoordinates.value -= coordinate
-                        else
-                            favoriteCoordinates.value += coordinate
+                        coroutineScope.launch {
+
+                            /*
+                             * Perform the operation on the backend and if that
+                             * is successful show the change in the UI.
+                             *
+                             * We want to keep backend and frontend in sync here.
+                             */
+
+                            if (favorite) {
+
+                                if (DefaultWebClient.rate(coordinate, like = false))
+                                    favoriteCoordinates.value -= coordinate
+
+                            } else {
+
+                                if (DefaultWebClient.rate(coordinate, like = true))
+                                    favoriteCoordinates.value += coordinate
+                            }
+                        }
                     }
             )
 

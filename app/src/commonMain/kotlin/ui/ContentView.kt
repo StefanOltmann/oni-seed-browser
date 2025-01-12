@@ -107,7 +107,23 @@ fun ContentView(
             }
         }
 
-        val favoriteCoordinates = remember { mutableStateOf(emptyList<String>()) }
+        val favoredCoordinates = remember { mutableStateOf(emptyList<String>()) }
+
+        LaunchedEffect(true) {
+
+            try {
+
+                favoredCoordinates.value = DefaultWebClient.findFavoredCoordinates()
+
+            } catch (ex: Throwable) {
+
+                /* We MUST catch Throwable here to prevent UI freezes. */
+
+                ex.printStackTrace()
+
+                errorMessage.value = ex.stackTraceToString()
+            }
+        }
 
         val coroutineScope = rememberCoroutineScope()
 
@@ -175,7 +191,7 @@ fun ContentView(
 
                 SpacedOutStarMapView(
                     cluster = worldForStarMapView,
-                    favoriteCoordinates = favoriteCoordinates,
+                    favoriteCoordinates = favoredCoordinates,
                     onCloseClicked = { showStarMap.value = null },
                     writeToClipboard = writeToClipboard
                 )
@@ -184,7 +200,7 @@ fun ContentView(
 
                 BaseGameStarMapView(
                     cluster = worldForStarMapView,
-                    favoriteCoordinates = favoriteCoordinates,
+                    favoriteCoordinates = favoredCoordinates,
                     onCloseClicked = { showStarMap.value = null },
                     writeToClipboard = writeToClipboard
                 )
@@ -401,7 +417,7 @@ fun ContentView(
                                     lazyListState,
                                     clusters.value,
                                     useCompactLayout.value,
-                                    favoriteCoordinates,
+                                    favoredCoordinates,
                                     showStarMap,
                                     showAsteroidMap,
                                     showMniUrl = isMniEmbedded.value,
