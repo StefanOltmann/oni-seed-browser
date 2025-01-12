@@ -46,6 +46,7 @@ import service.DefaultWebClient
 import service.sampleWorldsJson
 import ui.filter.FilterPanel
 import ui.theme.DoubleSpacer
+import ui.theme.FillSpacer
 import ui.theme.HalfSpacer
 import ui.theme.defaultPadding
 import ui.theme.defaultRoundedCornerShape
@@ -219,7 +220,11 @@ fun ContentView(
 //                modifier = Modifier.background(MaterialTheme.colorScheme.background)
             ) {
 
-                if (!isMniEmbedded.value) {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+
+                    DoubleSpacer()
 
                     BoxWithConstraints {
 
@@ -238,7 +243,9 @@ fun ContentView(
                         )
                     }
 
-                } else {
+                    FillSpacer()
+
+                    LoginWithSteamButton()
 
                     DoubleSpacer()
                 }

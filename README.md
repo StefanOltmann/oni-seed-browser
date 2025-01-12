@@ -43,3 +43,6 @@ ensuring the community's freedom to use, modify, and distribute the software.
 The images are sourced from the game and are the property of Klei Entertainment,
 used in compliance with [Klei's Player Creation Guidelines](https://support.klei.com/hc/en-us/articles/360029880791-Player-Creation-Guidelines).
 
+Steam and the Steam logo are trademarks and/or registered trademarks
+of Valve Corporation in the U.S. and/or other countries.
+The icon was created by [FontAwesome.com](https://fontawesome.com/icons/steam?f=brands&s=solid).
