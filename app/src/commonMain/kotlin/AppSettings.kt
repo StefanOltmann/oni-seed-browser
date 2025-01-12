@@ -1,7 +1,3 @@
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
-import model.filter.FilterQuery
-
 /*
  * ONI Seed Browser
  * Copyright (C) 2025 Stefan Oltmann
@@ -21,15 +17,39 @@ import model.filter.FilterQuery
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import kotlin.uuid.ExperimentalUuidApi
+import kotlin.uuid.Uuid
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
+import model.filter.FilterQuery
+
 private val jsonPretty = Json {
     prettyPrint = true
     ignoreUnknownKeys = false
     encodeDefaults = true
 }
 
+private const val USER_ID_SETTINGS_KEY = "user"
 private const val FILTER_SETTINGS_KEY = "filter"
 
 object AppSettings {
+
+    val userId: String = getOrCreateUserId()
+
+    @OptIn(ExperimentalUuidApi::class)
+    private fun getOrCreateUserId(): String {
+
+        val existingId = settings.getStringOrNull(USER_ID_SETTINGS_KEY)
+
+        if (existingId != null)
+            return existingId
+
+        val newId = Uuid.random().toString()
+
+        settings.putString(USER_ID_SETTINGS_KEY, newId)
+
+        return newId
+    }
 
     fun loadFilter(): FilterQuery {
 

@@ -19,6 +19,7 @@
 
 package service
 
+import AppSettings
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.plugins.compression.ContentEncoding
@@ -27,6 +28,7 @@ import io.ktor.client.plugins.defaultRequest
 import io.ktor.client.request.accept
 import io.ktor.client.request.get
 import io.ktor.client.request.header
+import io.ktor.client.request.headers
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
 import io.ktor.client.statement.bodyAsText
@@ -64,9 +66,15 @@ object DefaultWebClient : WebClient {
     private val httpClient = HttpClient {
 
         defaultRequest {
-            /* For CORS */
-            header(HttpHeaders.AccessControlAllowOrigin, "*")
-            // header("user", userId)
+
+            headers {
+
+                /* For CORS */
+                append(HttpHeaders.AccessControlAllowOrigin, "*")
+
+                /* Auth */
+                append("User", AppSettings.userId)
+            }
         }
 
         install(ContentNegotiation) {

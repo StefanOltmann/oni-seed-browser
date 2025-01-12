@@ -18,26 +18,5 @@
  */
 
 import com.russhwolf.settings.Settings
-import kotlin.uuid.ExperimentalUuidApi
-import kotlin.uuid.Uuid
-
-private const val USER_ID_SETTINGS_KEY = "user"
 
 expect val settings: Settings
-
-val userId: String = getOrCreateUserId()
-
-@OptIn(ExperimentalUuidApi::class)
-fun getOrCreateUserId(): String {
-
-    val existingId = settings.getStringOrNull(USER_ID_SETTINGS_KEY)
-
-    if (existingId != null)
-        return existingId
-
-    val newId = Uuid.random().toString()
-
-    settings.putString(USER_ID_SETTINGS_KEY, newId)
-
-    return newId
-}
