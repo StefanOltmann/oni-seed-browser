@@ -41,7 +41,6 @@ import kotlinx.serialization.cbor.Cbor
 import kotlinx.serialization.json.Json
 import model.Cluster
 import model.filter.FilterQuery
-import userId
 
 const val BASE_API_URL = "https://ingest.mapsnotincluded.org"
 const val FIND_URL = "$BASE_API_URL/coordinate"
@@ -67,7 +66,7 @@ object DefaultWebClient : WebClient {
         defaultRequest {
             /* For CORS */
             header(HttpHeaders.AccessControlAllowOrigin, "*")
-            header("user", userId)
+            // header("user", userId)
         }
 
         install(ContentNegotiation) {
