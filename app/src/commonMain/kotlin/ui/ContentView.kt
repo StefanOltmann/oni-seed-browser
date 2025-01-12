@@ -1,5 +1,6 @@
 package ui
 
+import AppSettings
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -34,7 +35,6 @@ import kotlinx.coroutines.launch
 import kotlinx.serialization.json.Json
 import model.Asteroid
 import model.Cluster
-import model.filter.FilterQuery
 import oni_seed_browser.app.generated.resources.Res
 import oni_seed_browser.app.generated.resources.background_space
 import oni_seed_browser.app.generated.resources.uiNoResults
@@ -112,7 +112,9 @@ fun ContentView(
 
         val coroutineScope = rememberCoroutineScope()
 
-        val filterQueryState = remember { mutableStateOf(FilterQuery.ALL) }
+        val filterQueryState = remember {
+            mutableStateOf(AppSettings.loadFilter())
+        }
 
         val lazyListState = rememberLazyListState()
 
@@ -275,6 +277,11 @@ fun ContentView(
 
                     try {
 
+                        val filterQuery = filterQueryState.value
+
+                        /* Save filter on search */
+                        AppSettings.saveFilter(filterQuery)
+
                         isGettingNewResults.value = true
 
                         errorMessage.value = null
@@ -282,9 +289,7 @@ fun ContentView(
                         /* Reset the data */
                         clusters.value = emptyList()
 
-                        val searchResultWorlds = DefaultWebClient.search(
-                            filterQueryState.value
-                        )
+                        val searchResultWorlds = DefaultWebClient.search(filterQuery)
 
                         val sortedWorlds = searchResultWorlds.sortedByDescending { it.getRating() }
 

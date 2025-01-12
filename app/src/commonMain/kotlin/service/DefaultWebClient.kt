@@ -38,7 +38,6 @@ import io.ktor.serialization.kotlinx.cbor.cbor
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.cbor.Cbor
-import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import model.Cluster
 import model.filter.FilterQuery
@@ -47,12 +46,6 @@ const val BASE_API_URL = "https://ingest.mapsnotincluded.org"
 const val FIND_URL = "$BASE_API_URL/coordinate"
 const val SEARCH_URL = "$BASE_API_URL/search"
 const val COUNT_URL = "$BASE_API_URL/count"
-
-private val jsonPretty = Json {
-    prettyPrint = true
-    ignoreUnknownKeys = false
-    encodeDefaults = true
-}
 
 private val strictAllFieldsJson = Json {
     ignoreUnknownKeys = false
@@ -112,8 +105,6 @@ object DefaultWebClient : WebClient {
     }
 
     override suspend fun search(filterQuery: FilterQuery): List<Cluster> {
-
-        println("Search: " + jsonPretty.encodeToString(filterQuery))
 
         return httpClient.post(SEARCH_URL) {
 
