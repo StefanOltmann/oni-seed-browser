@@ -107,7 +107,7 @@ fun ContentView(
             }
         }
 
-        println("Steam ID: ${steamId.value}")
+        val favoriteCoordinates = remember { mutableStateOf(emptyList<String>()) }
 
         val coroutineScope = rememberCoroutineScope()
 
@@ -175,6 +175,7 @@ fun ContentView(
 
                 SpacedOutStarMapView(
                     cluster = worldForStarMapView,
+                    favoriteCoordinates = favoriteCoordinates,
                     onCloseClicked = { showStarMap.value = null },
                     writeToClipboard = writeToClipboard
                 )
@@ -183,6 +184,7 @@ fun ContentView(
 
                 BaseGameStarMapView(
                     cluster = worldForStarMapView,
+                    favoriteCoordinates = favoriteCoordinates,
                     onCloseClicked = { showStarMap.value = null },
                     writeToClipboard = writeToClipboard
                 )
@@ -399,6 +401,7 @@ fun ContentView(
                                     lazyListState,
                                     clusters.value,
                                     useCompactLayout.value,
+                                    favoriteCoordinates,
                                     showStarMap,
                                     showAsteroidMap,
                                     showMniUrl = isMniEmbedded.value,

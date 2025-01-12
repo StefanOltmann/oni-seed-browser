@@ -29,16 +29,20 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
@@ -64,6 +68,7 @@ fun CoordinateBox(
     index: Int,
     totalCount: Int,
     coordinate: String,
+    favoriteCoordinates: MutableState<List<String>>,
     showMapClicked: (() -> Unit)?,
     writeToClipboard: (String) -> Unit
 ) {
@@ -150,6 +155,30 @@ fun CoordinateBox(
             modifier = Modifier.align(Alignment.CenterEnd)
         ) {
 
+            val favorite = favoriteCoordinates.value.contains(coordinate)
+
+            Icon(
+                imageVector = if (favorite)
+                    Icons.Filled.Favorite
+                else
+                    Icons.Outlined.FavoriteBorder,
+                contentDescription = null,
+                tint = if (favorite)
+                    Color.Red
+                else
+                    MaterialTheme.colorScheme.onBackground.copy(alpha = 0.3f),
+                modifier = Modifier
+                    .halfPadding()
+                    .size(32.dp)
+                    .noRippleClickable {
+
+                        if (favorite)
+                            favoriteCoordinates.value -= coordinate
+                        else
+                            favoriteCoordinates.value += coordinate
+                    }
+            )
+
             if (showMapClicked != null)
                 ShowMapButton(showMapClicked)
         }
@@ -168,7 +197,7 @@ private fun ShowMapButton(
         modifier = Modifier
             .onHover(hovered)
             .halfPadding()
-            .height(32.dp)
+            .size(32.dp)
             .noRippleClickable(showMapClicked)
     ) {
 

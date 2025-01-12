@@ -32,6 +32,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
@@ -66,6 +67,7 @@ private val pathStroke = Stroke(1f)
 @Composable
 fun SpacedOutStarMapView(
     cluster: Cluster,
+    favoriteCoordinates: MutableState<List<String>>,
     onCloseClicked: () -> Unit,
     writeToClipboard: (String) -> Unit
 ) {
@@ -99,6 +101,7 @@ fun SpacedOutStarMapView(
                 index = 0,
                 totalCount = 0,
                 coordinate = cluster.coordinate,
+                favoriteCoordinates = favoriteCoordinates,
                 showMapClicked = null,
                 writeToClipboard = writeToClipboard
             )
