@@ -29,24 +29,24 @@ private val jsonPretty = Json {
     encodeDefaults = true
 }
 
-private const val USER_ID_SETTINGS_KEY = "user"
+private const val CLIENT_ID_SETTINGS_KEY = "id"
 private const val FILTER_SETTINGS_KEY = "filter"
 
 object AppStorage {
 
-    val userId: String = getOrCreateUserId()
+    val clientId: String = getOrCreateClientId()
 
     @OptIn(ExperimentalUuidApi::class)
-    private fun getOrCreateUserId(): String {
+    private fun getOrCreateClientId(): String {
 
-        val existingId = settings.getStringOrNull(USER_ID_SETTINGS_KEY)
+        val existingId = settings.getStringOrNull(CLIENT_ID_SETTINGS_KEY)
 
         if (existingId != null)
             return existingId
 
         val newId = Uuid.random().toString()
 
-        settings.putString(USER_ID_SETTINGS_KEY, newId)
+        settings.putString(CLIENT_ID_SETTINGS_KEY, newId)
 
         return newId
     }

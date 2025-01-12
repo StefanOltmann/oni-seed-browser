@@ -73,7 +73,7 @@ object DefaultWebClient : WebClient {
                 append(HttpHeaders.AccessControlAllowOrigin, "*")
 
                 /* Auth */
-                append("User", AppStorage.userId)
+                append("Client-ID", AppStorage.clientId)
             }
         }
 
