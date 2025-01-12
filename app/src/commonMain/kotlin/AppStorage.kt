@@ -36,6 +36,10 @@ object AppStorage {
 
     val clientId: String = getOrCreateClientId()
 
+    init {
+        println("Client ID: $clientId")
+    }
+
     @OptIn(ExperimentalUuidApi::class)
     private fun getOrCreateClientId(): String {
 
