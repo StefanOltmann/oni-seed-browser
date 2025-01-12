@@ -119,7 +119,10 @@ object DefaultWebClient : WebClient {
 
         println("Request: $coordinate")
 
-        val response = httpClient.get("$REQUEST_URL/$coordinate")
+        val response = httpClient.post("$REQUEST_URL") {
+            contentType(ContentType.Text.Plain)
+            setBody(coordinate)
+        }
 
         return response.status.isSuccess()
     }
