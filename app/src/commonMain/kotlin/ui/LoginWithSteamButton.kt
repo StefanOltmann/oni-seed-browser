@@ -37,6 +37,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import oni_seed_browser.app.generated.resources.Res
+import oni_seed_browser.app.generated.resources.uiConnected
 import oni_seed_browser.app.generated.resources.uiLoginWithSteam
 import org.jetbrains.compose.resources.stringResource
 import ui.icons.IconSteam
@@ -46,7 +47,9 @@ import ui.theme.halfPadding
 import ui.theme.minimalRoundedCornerShape
 
 @Composable
-fun LoginWithSteamButton() {
+fun LoginWithSteamButton(
+    connected: Boolean
+) {
 
     val hovered = remember { mutableStateOf(false) }
 
@@ -57,14 +60,16 @@ fun LoginWithSteamButton() {
         modifier = Modifier
             .onHover(hovered)
             .background(
-                if (hovered.value)
+                if (!connected && hovered.value)
                     MaterialTheme.colorScheme.surface
                 else
                     MaterialTheme.colorScheme.background,
                 minimalRoundedCornerShape
             )
             .noRippleClickable {
-                uriHandler.openUri("https://ingest.mapsnotincluded.org/login/$clientId")
+
+                if (!connected)
+                    uriHandler.openUri("https://ingest.mapsnotincluded.org/login/$clientId")
             }
     ) {
 
@@ -81,27 +86,41 @@ fun LoginWithSteamButton() {
 
         HalfSpacer()
 
-        Text(
-            text = stringResource(Res.string.uiLoginWithSteam),
-            style = MaterialTheme.typography.titleMedium,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colorScheme.onBackground,
-            maxLines = 1,
-            modifier = Modifier.offset(y = -2.dp)
-        )
+        if (!connected) {
 
-        /*
-         * To follow https://partner.steamgames.com/doc/marketing/branding
-         * and avoid trouble.
-         */
-        Text(
-            text = "®",
-            style = MaterialTheme.typography.bodySmall,
-            fontSize = 6.sp,
-            color = MaterialTheme.colorScheme.onBackground,
-            maxLines = 1,
-            modifier = Modifier.align(Alignment.Top)
-        )
+            Text(
+                text = stringResource(Res.string.uiLoginWithSteam),
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.onBackground,
+                maxLines = 1,
+                modifier = Modifier.offset(y = -2.dp)
+            )
+
+            /*
+             * To follow https://partner.steamgames.com/doc/marketing/branding
+             * and avoid trouble.
+             */
+            Text(
+                text = "®",
+                style = MaterialTheme.typography.bodySmall,
+                fontSize = 6.sp,
+                color = MaterialTheme.colorScheme.onBackground,
+                maxLines = 1,
+                modifier = Modifier.align(Alignment.Top)
+            )
+
+        } else {
+
+            Text(
+                text = stringResource(Res.string.uiConnected),
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.onBackground,
+                maxLines = 1,
+                modifier = Modifier.offset(y = -2.dp)
+            )
+        }
 
         DefaultSpacer()
     }

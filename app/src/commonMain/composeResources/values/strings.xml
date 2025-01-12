@@ -34,6 +34,7 @@
     <string name="uiGeyserDetailEmitDetails">Emits {emitRate} for {eruptionTime} in {overallTime}</string>
     <string name="uiGeyserDetailActiveDetails">Active for {activeCycles} in {overallCycles}</string>
     <string name="uiLoginWithSteam">Login with STEAM</string>
+    <string name="uiConnected">Connected</string>
 
     <!-- GameModes -->
     <string name="gameModeBaseGameStandard">Standard</string>

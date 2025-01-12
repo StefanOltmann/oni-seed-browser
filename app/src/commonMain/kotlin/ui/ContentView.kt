@@ -245,7 +245,9 @@ fun ContentView(
 
                     FillSpacer()
 
-                    LoginWithSteamButton()
+                    LoginWithSteamButton(
+                        connected = steamId.value != null
+                    )
 
                     DoubleSpacer()
                 }

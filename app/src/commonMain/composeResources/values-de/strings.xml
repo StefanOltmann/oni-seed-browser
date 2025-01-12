@@ -33,6 +33,8 @@
     <string name="uiCopiedToClipboard">In die Zwischenablage kopiert!</string>
     <string name="uiGeyserDetailEmitDetails">Erzeugt {emitRate} für {eruptionTime} in {overallTime}</string>
     <string name="uiGeyserDetailActiveDetails">Aktiv für {activeCycles} in {overallCycles}</string>
+    <string name="uiLoginWithSteam">Login mit STEAM</string>
+    <string name="uiConnected">Verbunden</string>
 
     <!-- GameModes -->
     <string name="gameModeBaseGameStandard">Standard</string>
