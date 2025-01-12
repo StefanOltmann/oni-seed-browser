@@ -19,7 +19,7 @@
 
 package service
 
-import AppSettings
+import AppStorage
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.plugins.compression.ContentEncoding
@@ -73,7 +73,7 @@ object DefaultWebClient : WebClient {
                 append(HttpHeaders.AccessControlAllowOrigin, "*")
 
                 /* Auth */
-                append("User", AppSettings.userId)
+                append("User", AppStorage.userId)
             }
         }
 

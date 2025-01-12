@@ -32,7 +32,7 @@ private val jsonPretty = Json {
 private const val USER_ID_SETTINGS_KEY = "user"
 private const val FILTER_SETTINGS_KEY = "filter"
 
-object AppSettings {
+object AppStorage {
 
     val userId: String = getOrCreateUserId()
 

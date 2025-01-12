@@ -1,6 +1,6 @@
 package ui
 
-import AppSettings
+import AppStorage
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -110,7 +110,7 @@ fun ContentView(
         val coroutineScope = rememberCoroutineScope()
 
         val filterQueryState = remember {
-            mutableStateOf(AppSettings.loadFilter())
+            mutableStateOf(AppStorage.loadFilter())
         }
 
         val lazyListState = rememberLazyListState()
@@ -275,9 +275,6 @@ fun ContentView(
                     try {
 
                         val filterQuery = filterQueryState.value
-
-                        /* Save filter on search */
-                        AppSettings.saveFilter(filterQuery)
 
                         isGettingNewResults.value = true
 
