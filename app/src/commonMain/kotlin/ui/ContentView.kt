@@ -50,6 +50,7 @@ import ui.theme.HalfSpacer
 import ui.theme.defaultPadding
 import ui.theme.defaultRoundedCornerShape
 import ui.theme.doubleSpacing
+import userId
 
 @Composable
 fun ContentView(
@@ -76,6 +77,8 @@ fun ContentView(
         val worldCount = produceState<Long?>(null) {
 
             try {
+
+                println("User ID: $userId")
 
                 value = DefaultWebClient.countSeeds()
 

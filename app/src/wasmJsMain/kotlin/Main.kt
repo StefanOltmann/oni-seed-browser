@@ -25,13 +25,12 @@ import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.window.CanvasBasedWindow
 import kotlinx.browser.document
 import kotlinx.browser.window
-import org.w3c.dom.set
 import ui.App
-
-const val SESSION_COOKIE_MAX_AGE = 90 * 24 * 60 * 60
 
 @OptIn(ExperimentalComposeUiApi::class)
 fun main() {
+
+    val userId = getOrCreateUserId()
 
     CanvasBasedWindow(canvasElementId = "ComposeTarget") {
 
@@ -51,19 +50,13 @@ fun main() {
             mutableStateOf(document.location?.hash?.drop(1)?.ifBlank { null })
         }
 
-        params["userSession"]?.let { session ->
-
-            document.cookie = "${"USER_SESSION"}=$session; max-age=$SESSION_COOKIE_MAX_AGE; path=/"
-
-            window.localStorage["USER_SESSION"] = session
-        }
-
         window.onhashchange = {
 
             urlHash.value = it.newURL.substringAfter('#', "").ifBlank { null }
         }
 
         App(
+            userId = userId,
             urlHash = urlHash,
             isMniEmbedded = isMniEmbedded,
             writeToClipboard = {
