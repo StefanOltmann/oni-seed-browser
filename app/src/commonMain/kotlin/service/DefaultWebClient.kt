@@ -47,7 +47,7 @@ import model.filter.FilterQuery
 
 const val BASE_API_URL = "https://ingest.mapsnotincluded.org"
 const val FIND_URL = "$BASE_API_URL/coordinate"
-const val REQUEST_URL = "$BASE_API_URL/request_coordinate"
+const val REQUEST_URL = "$BASE_API_URL/request-coordinate"
 const val SEARCH_URL = "$BASE_API_URL/search"
 const val COUNT_URL = "$BASE_API_URL/count"
 
