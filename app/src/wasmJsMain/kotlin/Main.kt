@@ -27,10 +27,10 @@ import kotlinx.browser.document
 import kotlinx.browser.window
 import ui.App
 
+const val SESSION_COOKIE_MAX_AGE = 90 * 24 * 60 * 60
+
 @OptIn(ExperimentalComposeUiApi::class)
 fun main() {
-
-    window.navigator.clipboard
 
     CanvasBasedWindow(canvasElementId = "ComposeTarget") {
 
@@ -47,6 +47,11 @@ fun main() {
 
         val urlHash = remember {
             mutableStateOf(document.location?.hash?.drop(1)?.ifBlank { null })
+        }
+
+        params["userSession"]?.let { session ->
+
+            document.cookie = "${"USER_SESSION"}=$session; max-age=$SESSION_COOKIE_MAX_AGE; path=/"
         }
 
         window.onhashchange = {
