@@ -36,6 +36,7 @@ import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.contentType
+import io.ktor.http.isSuccess
 import io.ktor.serialization.kotlinx.cbor.cbor
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.ExperimentalSerializationApi
@@ -115,7 +116,7 @@ object DefaultWebClient : WebClient {
 
     override suspend fun search(filterQuery: FilterQuery): List<Cluster> {
 
-        return httpClient.post(SEARCH_URL) {
+        val response = httpClient.post(SEARCH_URL) {
 
             /* Filter MUST be sent as JSON, because CBOR causes issues here. */
             contentType(ContentType.Application.Json)
@@ -128,7 +129,12 @@ object DefaultWebClient : WebClient {
 
             setBody(filterQuery)
 
-        }.body()
+        }
+
+        if (!response.status.isSuccess())
+            error("Search returned status code ${response.status}: ${response.bodyAsText()}")
+
+        return response.body()
     }
 
     override suspend fun getSteamId(): String? {
