@@ -420,6 +420,7 @@ fun ContentView(
                                     favoredCoordinates,
                                     showStarMap,
                                     showAsteroidMap,
+                                    showFavoriteIcon = steamId.value != null,
                                     showMniUrl = isMniEmbedded.value,
                                     writeToClipboard = writeToClipboard
                                 )

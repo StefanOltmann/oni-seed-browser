@@ -73,6 +73,7 @@ fun CoordinateBox(
     coordinate: String,
     favoriteCoordinates: MutableState<List<String>>,
     showMapClicked: (() -> Unit)?,
+    showFavoriteIcon: Boolean,
     writeToClipboard: (String) -> Unit
 ) {
 
@@ -158,47 +159,50 @@ fun CoordinateBox(
             modifier = Modifier.align(Alignment.CenterEnd)
         ) {
 
-            val favorite = favoriteCoordinates.value.contains(coordinate)
+            if (showFavoriteIcon) {
 
-            val coroutineScope = rememberCoroutineScope()
+                val favorite = favoriteCoordinates.value.contains(coordinate)
 
-            Icon(
-                imageVector = if (favorite)
-                    Icons.Filled.Favorite
-                else
-                    Icons.Outlined.FavoriteBorder,
-                contentDescription = null,
-                tint = if (favorite)
-                    Color.Red
-                else
-                    MaterialTheme.colorScheme.onBackground.copy(alpha = 0.3f),
-                modifier = Modifier
-                    .halfPadding()
-                    .size(32.dp)
-                    .noRippleClickable {
+                val coroutineScope = rememberCoroutineScope()
 
-                        coroutineScope.launch {
+                Icon(
+                    imageVector = if (favorite)
+                        Icons.Filled.Favorite
+                    else
+                        Icons.Outlined.FavoriteBorder,
+                    contentDescription = null,
+                    tint = if (favorite)
+                        Color.Red
+                    else
+                        MaterialTheme.colorScheme.onBackground.copy(alpha = 0.3f),
+                    modifier = Modifier
+                        .halfPadding()
+                        .size(32.dp)
+                        .noRippleClickable {
 
-                            /*
+                            coroutineScope.launch {
+
+                                /*
                              * Perform the operation on the backend and if that
                              * is successful show the change in the UI.
                              *
                              * We want to keep backend and frontend in sync here.
                              */
 
-                            if (favorite) {
+                                if (favorite) {
 
-                                if (DefaultWebClient.rate(coordinate, like = false))
-                                    favoriteCoordinates.value -= coordinate
+                                    if (DefaultWebClient.rate(coordinate, like = false))
+                                        favoriteCoordinates.value -= coordinate
 
-                            } else {
+                                } else {
 
-                                if (DefaultWebClient.rate(coordinate, like = true))
-                                    favoriteCoordinates.value += coordinate
+                                    if (DefaultWebClient.rate(coordinate, like = true))
+                                        favoriteCoordinates.value += coordinate
+                                }
                             }
                         }
-                    }
-            )
+                )
+            }
 
             if (showMapClicked != null)
                 ShowMapButton(showMapClicked)
