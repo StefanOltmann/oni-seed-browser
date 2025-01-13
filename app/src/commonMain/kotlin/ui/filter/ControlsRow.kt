@@ -19,6 +19,7 @@
 
 package ui.filter
 
+import AppStorage
 import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
@@ -47,7 +48,11 @@ fun ControlsRow(
 
         ResetButton(
             onClick = {
+
                 filterQueryState.value = FilterQuery.ALL
+
+                /* Save the reset to the storage. */
+                AppStorage.saveFilter(FilterQuery.ALL)
             }
         )
 
@@ -65,6 +70,9 @@ fun ControlsRow(
 
                 /* Remove empty rules */
                 val cleanFilterState = filterState.cleanCopy()
+
+                /* Save filter */
+                AppStorage.saveFilter(cleanFilterState)
 
                 /* Set the clean state back. */
                 filterQueryState.value = cleanFilterState

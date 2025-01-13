@@ -427,7 +427,7 @@ enum class ClusterType(
     /** Ceres Minor */
     DLC_CERES_MINOR(
         prefix = "CER-C",
-        requiredDlcs = listOf(Dlc.SpacedOut),
+        requiredDlcs = listOf(Dlc.SpacedOut, Dlc.FrostyPlanet),
         gameMode = GameModeType.SPACEDOUT_SPACEDOUT,
         nameStringResource = Res.string.clusterTypeDlcCeresMinor,
         asteroidTypes = listOf(

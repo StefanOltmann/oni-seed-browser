@@ -29,16 +29,21 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
@@ -46,11 +51,13 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import kotlin.math.roundToInt
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import oni_seed_browser.app.generated.resources.Res
 import oni_seed_browser.app.generated.resources.space_hexagon
 import oni_seed_browser.app.generated.resources.uiCopiedToClipboard
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
+import service.DefaultWebClient
 import ui.icons.ContentCopy
 import ui.theme.DoubleSpacer
 import ui.theme.defaultRoundedCornerShape
@@ -64,6 +71,7 @@ fun CoordinateBox(
     index: Int,
     totalCount: Int,
     coordinate: String,
+    favoriteCoordinates: MutableState<List<String>>,
     showMapClicked: (() -> Unit)?,
     writeToClipboard: (String) -> Unit
 ) {
@@ -146,35 +154,87 @@ fun CoordinateBox(
         if (width.value >= 600 && index > 0 && totalCount > 0)
             IndexIndicator(index, totalCount)
 
-        if (showMapClicked != null) {
+        Row(
+            modifier = Modifier.align(Alignment.CenterEnd)
+        ) {
 
-            val hovered = remember { mutableStateOf(false) }
+            val favorite = favoriteCoordinates.value.contains(coordinate)
 
-            Box(
-                contentAlignment = Alignment.Center,
+            val coroutineScope = rememberCoroutineScope()
+
+            Icon(
+                imageVector = if (favorite)
+                    Icons.Filled.Favorite
+                else
+                    Icons.Outlined.FavoriteBorder,
+                contentDescription = null,
+                tint = if (favorite)
+                    Color.Red
+                else
+                    MaterialTheme.colorScheme.onBackground.copy(alpha = 0.3f),
                 modifier = Modifier
-                    .onHover(hovered)
                     .halfPadding()
-                    .height(32.dp)
-                    .noRippleClickable(showMapClicked)
-                    .align(Alignment.CenterEnd)
-            ) {
+                    .size(32.dp)
+                    .noRippleClickable {
 
-                Image(
-                    painter = painterResource(Res.drawable.space_hexagon),
-                    contentDescription = null
-                )
+                        coroutineScope.launch {
 
-                Icon(
-                    imageVector = Icons.Default.Search,
-                    contentDescription = null,
-                    tint = if (hovered.value)
-                        hoverColor
-                    else
-                        MaterialTheme.colorScheme.onBackground
-                )
-            }
+                            /*
+                             * Perform the operation on the backend and if that
+                             * is successful show the change in the UI.
+                             *
+                             * We want to keep backend and frontend in sync here.
+                             */
+
+                            if (favorite) {
+
+                                if (DefaultWebClient.rate(coordinate, like = false))
+                                    favoriteCoordinates.value -= coordinate
+
+                            } else {
+
+                                if (DefaultWebClient.rate(coordinate, like = true))
+                                    favoriteCoordinates.value += coordinate
+                            }
+                        }
+                    }
+            )
+
+            if (showMapClicked != null)
+                ShowMapButton(showMapClicked)
         }
+    }
+}
+
+@Composable
+private fun ShowMapButton(
+    showMapClicked: (() -> Unit)
+) {
+
+    val hovered = remember { mutableStateOf(false) }
+
+    Box(
+        contentAlignment = Alignment.Center,
+        modifier = Modifier
+            .onHover(hovered)
+            .halfPadding()
+            .size(32.dp)
+            .noRippleClickable(showMapClicked)
+    ) {
+
+        Image(
+            painter = painterResource(Res.drawable.space_hexagon),
+            contentDescription = null
+        )
+
+        Icon(
+            imageVector = Icons.Default.Search,
+            contentDescription = null,
+            tint = if (hovered.value)
+                hoverColor
+            else
+                MaterialTheme.colorScheme.onBackground
+        )
     }
 }
 

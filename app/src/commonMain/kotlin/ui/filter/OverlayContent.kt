@@ -110,10 +110,6 @@ fun OverlayContent(
                     if (filterItemType == FilterItemType.SPACE_DESTINATION_COUNT)
                         continue
 
-                    /* TODO We need backend support */
-                    if (filterItemType == FilterItemType.GEYSER_COUNT)
-                        continue
-
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.SpaceEvenly,

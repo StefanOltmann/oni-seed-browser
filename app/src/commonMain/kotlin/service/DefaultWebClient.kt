@@ -19,6 +19,7 @@
 
 package service
 
+import AppStorage
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.plugins.compression.ContentEncoding
@@ -27,31 +28,29 @@ import io.ktor.client.plugins.defaultRequest
 import io.ktor.client.request.accept
 import io.ktor.client.request.get
 import io.ktor.client.request.header
+import io.ktor.client.request.headers
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
+import io.ktor.client.statement.bodyAsText
 import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.contentType
+import io.ktor.http.isSuccess
 import io.ktor.serialization.kotlinx.cbor.cbor
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.cbor.Cbor
-import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import model.Cluster
+import model.RateCoordinateRequest
 import model.filter.FilterQuery
 
 const val BASE_API_URL = "https://ingest.mapsnotincluded.org"
 const val FIND_URL = "$BASE_API_URL/coordinate"
+const val REQUEST_URL = "$BASE_API_URL/request-coordinate"
 const val SEARCH_URL = "$BASE_API_URL/search"
 const val COUNT_URL = "$BASE_API_URL/count"
-
-private val jsonPretty = Json {
-    prettyPrint = true
-    ignoreUnknownKeys = false
-    encodeDefaults = true
-}
 
 private val strictAllFieldsJson = Json {
     ignoreUnknownKeys = false
@@ -70,8 +69,15 @@ object DefaultWebClient : WebClient {
     private val httpClient = HttpClient {
 
         defaultRequest {
-            /* For CORS */
-            header(HttpHeaders.AccessControlAllowOrigin, "*")
+
+            headers {
+
+                /* For CORS */
+                append(HttpHeaders.AccessControlAllowOrigin, "*")
+
+                /* Auth */
+                append("Client-ID", AppStorage.clientId)
+            }
         }
 
         install(ContentNegotiation) {
@@ -110,11 +116,53 @@ object DefaultWebClient : WebClient {
         return response.body()
     }
 
+    override suspend fun request(coordinate: String): Boolean {
+
+        println("Request: $coordinate")
+
+        val response = httpClient.post(REQUEST_URL) {
+            contentType(ContentType.Text.Plain)
+            setBody(coordinate)
+        }
+
+        return response.status.isSuccess()
+    }
+
+    override suspend fun findFavoredCoordinates(): List<String> {
+
+        val response = httpClient.get("$BASE_API_URL/favored-coordinates")
+
+        if (!response.status.isSuccess())
+            error("Requesting favored coordinates failed with HTTP ${response.status}: ${response.bodyAsText()}")
+
+        return response.body()
+    }
+
+    override suspend fun rate(coordinate: String, like: Boolean): Boolean {
+
+        println((if (like) "Like" else "Unlike") + " " + coordinate)
+
+        val response = httpClient.post("$BASE_API_URL/rate-coordinate") {
+            contentType(ContentType.Application.Json)
+            setBody(
+                RateCoordinateRequest(
+                    coordinate = coordinate,
+                    like = like
+                )
+            )
+        }
+
+        val success = response.status.isSuccess()
+
+        if (!success)
+            println("Request failed with HTTP ${response.status}: ${response.bodyAsText()}")
+
+        return success
+    }
+
     override suspend fun search(filterQuery: FilterQuery): List<Cluster> {
 
-        println("Search: " + jsonPretty.encodeToString(filterQuery))
-
-        return httpClient.post(SEARCH_URL) {
+        val response = httpClient.post(SEARCH_URL) {
 
             /* Filter MUST be sent as JSON, because CBOR causes issues here. */
             contentType(ContentType.Application.Json)
@@ -127,6 +175,21 @@ object DefaultWebClient : WebClient {
 
             setBody(filterQuery)
 
-        }.body()
+        }
+
+        if (!response.status.isSuccess())
+            error("Search returned status code ${response.status}: ${response.bodyAsText()}")
+
+        return response.body()
+    }
+
+    override suspend fun getSteamId(): String? {
+
+        val response = httpClient.get("$BASE_API_URL/steamid")
+
+        if (response.status != HttpStatusCode.OK)
+            return null
+
+        return response.bodyAsText()
     }
 }

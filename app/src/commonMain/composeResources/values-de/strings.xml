@@ -33,6 +33,12 @@
     <string name="uiCopiedToClipboard">In die Zwischenablage kopiert!</string>
     <string name="uiGeyserDetailEmitDetails">Erzeugt {emitRate} für {eruptionTime} in {overallTime}</string>
     <string name="uiGeyserDetailActiveDetails">Aktiv für {activeCycles} in {overallCycles}</string>
+    <string name="uiLoginWithSteam">Login mit STEAM</string>
+    <string name="uiConnected">Verbunden</string>
+    <string name="uiCoordinateNotFound">Die Koordinate {coordinate} wurde nicht in der Datenbank gefunden.</string>
+    <string name="uiRequestCoordinateButton">Das Hinzufügen dieser Koordinate anfragen</string>
+    <string name="uiCoordinateRequested">Koordinate angefragt</string>
+    <string name="uiCoordinateRequestFailed">Anfrage der Koordinate fehlgeschlagen</string>
 
     <!-- GameModes -->
     <string name="gameModeBaseGameStandard">Standard</string>

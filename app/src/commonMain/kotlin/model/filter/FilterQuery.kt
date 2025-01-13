@@ -20,7 +20,6 @@
 package model.filter
 
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.Transient
 import model.AsteroidType
 import model.ClusterType
 import model.Dlc
@@ -29,13 +28,16 @@ import serializer.ClusterTypeSerializer
 @Serializable
 data class FilterQuery(
 
+    /*
+     * Note: To restore the filter from local storage
+     * no fields should be marked as transient.
+     */
+
     @Serializable(with = ClusterTypeSerializer::class)
     val cluster: ClusterType?,
 
     val dlcs: List<Dlc>,
 
-    /* Don't send this to the server (for now). */
-    @Transient
     val mode: GameModeType = GameModeType.BASEGAME_STANDARD,
 
     /**

@@ -17,29 +17,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package service
+import com.russhwolf.settings.PreferencesSettings
+import com.russhwolf.settings.Settings
+import java.util.prefs.Preferences
 
-import model.Cluster
-import model.filter.FilterQuery
+private val preferences: Preferences = Preferences.userRoot().node("oni-seed-browser")
 
-interface WebClient {
-
-    suspend fun countSeeds(): Long?
-
-    suspend fun find(coordinate: String): Cluster?
-
-    /*
-     * Requests a coordinate and returns if request was valid.
-     * Can be invalid if coordinate has wrong syntax.
-     */
-    suspend fun request(coordinate: String): Boolean
-
-    suspend fun findFavoredCoordinates(): List<String>
-
-    suspend fun rate(coordinate: String, like: Boolean): Boolean
-
-    suspend fun search(filterQuery: FilterQuery): List<Cluster>
-
-    suspend fun getSteamId(): String?
-
-}
+actual val settings: Settings = PreferencesSettings(preferences)

@@ -1,5 +1,6 @@
 package ui
 
+import AppStorage
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -34,9 +35,9 @@ import kotlinx.coroutines.launch
 import kotlinx.serialization.json.Json
 import model.Asteroid
 import model.Cluster
-import model.filter.FilterQuery
 import oni_seed_browser.app.generated.resources.Res
 import oni_seed_browser.app.generated.resources.background_space
+import oni_seed_browser.app.generated.resources.uiCoordinateNotFound
 import oni_seed_browser.app.generated.resources.uiNoResults
 import oni_seed_browser.app.generated.resources.uiSearching
 import oni_seed_browser.app.generated.resources.uiTitle
@@ -46,6 +47,7 @@ import service.DefaultWebClient
 import service.sampleWorldsJson
 import ui.filter.FilterPanel
 import ui.theme.DoubleSpacer
+import ui.theme.FillSpacer
 import ui.theme.HalfSpacer
 import ui.theme.defaultPadding
 import ui.theme.defaultRoundedCornerShape
@@ -89,9 +91,45 @@ fun ContentView(
             }
         }
 
+        val steamId = produceState<String?>(null) {
+
+            try {
+
+                value = DefaultWebClient.getSteamId()
+
+            } catch (ex: Throwable) {
+
+                /* We MUST catch Throwable here to prevent UI freezes. */
+
+                ex.printStackTrace()
+
+                errorMessage.value = ex.stackTraceToString()
+            }
+        }
+
+        val favoredCoordinates = remember { mutableStateOf(emptyList<String>()) }
+
+        LaunchedEffect(true) {
+
+            try {
+
+                favoredCoordinates.value = DefaultWebClient.findFavoredCoordinates()
+
+            } catch (ex: Throwable) {
+
+                /* We MUST catch Throwable here to prevent UI freezes. */
+
+                ex.printStackTrace()
+
+                errorMessage.value = ex.stackTraceToString()
+            }
+        }
+
         val coroutineScope = rememberCoroutineScope()
 
-        val filterQueryState = remember { mutableStateOf(FilterQuery.ALL) }
+        val filterQueryState = remember {
+            mutableStateOf(AppStorage.loadFilter())
+        }
 
         val lazyListState = rememberLazyListState()
 
@@ -153,6 +191,7 @@ fun ContentView(
 
                 SpacedOutStarMapView(
                     cluster = worldForStarMapView,
+                    favoriteCoordinates = favoredCoordinates,
                     onCloseClicked = { showStarMap.value = null },
                     writeToClipboard = writeToClipboard
                 )
@@ -161,6 +200,7 @@ fun ContentView(
 
                 BaseGameStarMapView(
                     cluster = worldForStarMapView,
+                    favoriteCoordinates = favoredCoordinates,
                     onCloseClicked = { showStarMap.value = null },
                     writeToClipboard = writeToClipboard
                 )
@@ -199,7 +239,11 @@ fun ContentView(
 //                modifier = Modifier.background(MaterialTheme.colorScheme.background)
             ) {
 
-                if (!isMniEmbedded.value) {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+
+                    DoubleSpacer()
 
                     BoxWithConstraints {
 
@@ -218,7 +262,11 @@ fun ContentView(
                         )
                     }
 
-                } else {
+                    FillSpacer()
+
+                    LoginWithSteamButton(
+                        connected = steamId.value != null
+                    )
 
                     DoubleSpacer()
                 }
@@ -254,6 +302,8 @@ fun ContentView(
 
                     try {
 
+                        val filterQuery = filterQueryState.value
+
                         isGettingNewResults.value = true
 
                         errorMessage.value = null
@@ -261,9 +311,7 @@ fun ContentView(
                         /* Reset the data */
                         clusters.value = emptyList()
 
-                        val searchResultWorlds = DefaultWebClient.search(
-                            filterQueryState.value
-                        )
+                        val searchResultWorlds = DefaultWebClient.search(filterQuery)
 
                         val sortedWorlds = searchResultWorlds.sortedByDescending { it.getRating() }
 
@@ -313,7 +361,9 @@ fun ContentView(
                         modifier = Modifier.weight(1F)
                     ) {
 
-                        if (urlHash.value == null) {
+                        val coordinate = urlHash.value
+
+                        if (coordinate == null) {
 
                             Text(
                                 text = stringResource(Res.string.uiNoResults),
@@ -325,13 +375,26 @@ fun ContentView(
 
                         } else {
 
-                            Text(
-                                text = "Coordinate ${urlHash.value} was not found in database.",
-                                style = MaterialTheme.typography.headlineSmall,
-                                color = MaterialTheme.colorScheme.onBackground,
-                                maxLines = 1,
-                                overflow = TextOverflow.Ellipsis
-                            )
+                            Column(
+                                horizontalAlignment = Alignment.CenterHorizontally
+                            ) {
+
+                                Text(
+                                    text = stringResource(Res.string.uiCoordinateNotFound)
+                                        .replace("{coordinate}", coordinate),
+                                    style = MaterialTheme.typography.headlineSmall,
+                                    color = MaterialTheme.colorScheme.onBackground,
+                                    maxLines = 1,
+                                    overflow = TextOverflow.Ellipsis
+                                )
+
+                                DoubleSpacer()
+
+                                RequestCoordinateButton(
+                                    enabled = steamId.value != null,
+                                    coordinate = coordinate
+                                )
+                            }
                         }
                     }
 
@@ -354,6 +417,7 @@ fun ContentView(
                                     lazyListState,
                                     clusters.value,
                                     useCompactLayout.value,
+                                    favoredCoordinates,
                                     showStarMap,
                                     showAsteroidMap,
                                     showMniUrl = isMniEmbedded.value,
