@@ -33,7 +33,7 @@
     <string name="uiCopiedToClipboard">已复制到剪贴簿!</string>
     <string name="uiGeyserDetailEmitDetails">每{overallTime}中喷发{eruptionTime}产量{emitRate}</string>
     <string name="uiGeyserDetailActiveDetails">每{overallCycles}中活跃{activeCycles}</string>
-    <string name="uiLoginWithSteam">连结 steam 帐号</string>
+    <string name="uiLoginWithSteam">连结 steam® 帐号</string>
     <string name="uiConnected">帐号已连结</string>
     <string name="uiCoordinateNotFound">种子码 {coordinate} 在资料库中没有找到.</string>
     <string name="uiRequestCoordinateButton">请求添加此种子码</string>
