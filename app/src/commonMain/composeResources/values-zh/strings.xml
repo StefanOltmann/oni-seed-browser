@@ -17,7 +17,7 @@
     <string name="uiWorldTrait">星球特质</string>
     <string name="uiSpaceDestinationCount">太空目的地数量</string>
     <string name="uiGeyserCount">间歇泉数量</string>
-    <string name="uiGeyserOutput">间歇泉平均产量</string>
+    <string name="uiGeyserOutput">间歇泉产量</string>
     <string name="uiItemDescriptionCount">数量</string>
     <string name="uiItemDescriptionOutput">产量(克/秒)</string>
     <string name="uiItemDescriptionSpaceDestination">太空目的地</string>
@@ -33,6 +33,12 @@
     <string name="uiCopiedToClipboard">已复制到剪贴簿!</string>
     <string name="uiGeyserDetailEmitDetails">每{overallTime}中喷发{eruptionTime}产量{emitRate}</string>
     <string name="uiGeyserDetailActiveDetails">每{overallCycles}中活跃{activeCycles}</string>
+    <string name="uiLoginWithSteam">连结 steam 帐号</string>
+    <string name="uiConnected">帐号已连结</string>
+    <string name="uiCoordinateNotFound">种子码 {coordinate} 在资料库中没有找到.</string>
+    <string name="uiRequestCoordinateButton">请求添加此种子码</string>
+    <string name="uiCoordinateRequested">种子码请求已提交</string>
+    <string name="uiCoordinateRequestFailed">种子码请求失败</string>
 
     <!-- GameModes -->
     <string name="gameModeBaseGameStandard">标准</string>
