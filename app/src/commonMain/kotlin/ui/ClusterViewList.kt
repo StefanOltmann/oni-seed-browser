@@ -47,6 +47,7 @@ fun ClusterViewList(
     showStarMap: MutableState<Cluster?>,
     showAsteroidMap: MutableState<Asteroid?>,
     showMniUrl: Boolean = false,
+    showFavoriteIcon: Boolean,
     writeToClipboard: (String) -> Unit
 ) {
 
@@ -69,6 +70,7 @@ fun ClusterViewList(
                     showStarMap,
                     showAsteroidMap,
                     showMniUrl,
+                    showFavoriteIcon,
                     writeToClipboard
                 )
             }
