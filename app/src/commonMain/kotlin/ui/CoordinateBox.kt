@@ -19,7 +19,6 @@
 
 package ui
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
@@ -30,7 +29,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -53,7 +51,7 @@ import kotlin.math.roundToInt
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import oni_seed_browser.app.generated.resources.Res
-import oni_seed_browser.app.generated.resources.space_hexagon
+import oni_seed_browser.app.generated.resources.icon_starmap
 import oni_seed_browser.app.generated.resources.uiCopiedToClipboard
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -183,11 +181,11 @@ fun CoordinateBox(
                             coroutineScope.launch {
 
                                 /*
-                             * Perform the operation on the backend and if that
-                             * is successful show the change in the UI.
-                             *
-                             * We want to keep backend and frontend in sync here.
-                             */
+                                 * Perform the operation on the backend and if that
+                                 * is successful show the change in the UI.
+                                 *
+                                 * We want to keep backend and frontend in sync here.
+                                 */
 
                                 if (favorite) {
 
@@ -226,13 +224,8 @@ private fun ShowMapButton(
             .noRippleClickable(showMapClicked)
     ) {
 
-        Image(
-            painter = painterResource(Res.drawable.space_hexagon),
-            contentDescription = null
-        )
-
         Icon(
-            imageVector = Icons.Default.Search,
+            painter = painterResource(Res.drawable.icon_starmap),
             contentDescription = null,
             tint = if (hovered.value)
                 hoverColor

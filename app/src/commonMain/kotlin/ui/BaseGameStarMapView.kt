@@ -129,7 +129,7 @@ fun BaseGameStarMapView(
 
                     for (distance in 17 downTo 0) {
 
-                        val entries = entriesPerDistance[distance] ?: continue
+                        val entries = entriesPerDistance[distance]
 
                         Row(
                             verticalAlignment = Alignment.CenterVertically
@@ -170,37 +170,39 @@ fun BaseGameStarMapView(
                                 .defaultPadding()
                         ) {
 
-                            for (entry in entries) {
+                            if (entries != null) {
 
-                                Column(
-                                    horizontalAlignment = Alignment.CenterHorizontally
-                                ) {
+                                for (entry in entries) {
 
-                                    Box(
-                                        contentAlignment = Alignment.Center,
-                                        modifier = Modifier
-                                            .size(CIRCLE_SIZE_DP.dp)
-                                            .border(0.dp, circleColor, CircleShape)
+                                    Column(
+                                        horizontalAlignment = Alignment.CenterHorizontally
                                     ) {
 
-                                        Image(
-                                            painter = painterResource(getVanillaSpacePOIDrawable(entry.id)),
-                                            contentDescription = null
+                                        Box(
+                                            contentAlignment = Alignment.Center,
+                                            modifier = Modifier
+                                                .size(CIRCLE_SIZE_DP.dp)
+                                                .border(0.dp, circleColor, CircleShape)
+                                        ) {
+
+                                            Image(
+                                                painter = painterResource(getVanillaSpacePOIDrawable(entry.id)),
+                                                contentDescription = null
+                                            )
+                                        }
+
+                                        HalfSpacer()
+
+                                        Text(
+                                            text = stringResource(entry.id.stringResource),
+                                            style = MaterialTheme.typography.bodySmall,
+                                            color = MaterialTheme.colorScheme.onBackground,
+                                            maxLines = 1,
+                                            overflow = TextOverflow.Ellipsis,
+                                            modifier = Modifier.height(24.dp)
                                         )
                                     }
-
-                                    HalfSpacer()
-
-                                    Text(
-                                        text = stringResource(entry.id.stringResource),
-                                        style = MaterialTheme.typography.bodySmall,
-                                        color = MaterialTheme.colorScheme.onBackground,
-                                        maxLines = 1,
-                                        overflow = TextOverflow.Ellipsis,
-                                        modifier = Modifier.height(24.dp)
-                                    )
                                 }
-
                             }
                         }
                     }
