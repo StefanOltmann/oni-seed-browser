@@ -34,6 +34,8 @@ interface WebClient {
      */
     suspend fun request(coordinate: String): Boolean
 
+    suspend fun findFavoredClusters(): List<Cluster>
+
     suspend fun findFavoredCoordinates(): List<String>
 
     suspend fun rate(coordinate: String, like: Boolean): Boolean

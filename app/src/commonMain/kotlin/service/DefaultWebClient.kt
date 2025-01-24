@@ -128,6 +128,16 @@ object DefaultWebClient : WebClient {
         return response.status.isSuccess()
     }
 
+    override suspend fun findFavoredClusters(): List<Cluster> {
+
+        val response = httpClient.get("$BASE_API_URL/favored-clusters")
+
+        if (!response.status.isSuccess())
+            error("Requesting favored clusters failed with HTTP ${response.status}: ${response.bodyAsText()}")
+
+        return response.body()
+    }
+
     override suspend fun findFavoredCoordinates(): List<String> {
 
         val response = httpClient.get("$BASE_API_URL/favored-coordinates")

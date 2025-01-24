@@ -6,17 +6,25 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.outlined.FavoriteBorder
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.produceState
@@ -31,10 +39,12 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import kotlinx.serialization.json.Json
 import model.Asteroid
 import model.Cluster
+import model.filter.FilterQuery
 import oni_seed_browser.app.generated.resources.Res
 import oni_seed_browser.app.generated.resources.background_space
 import oni_seed_browser.app.generated.resources.uiCoordinateNotFound
@@ -52,6 +62,7 @@ import ui.theme.HalfSpacer
 import ui.theme.defaultPadding
 import ui.theme.defaultRoundedCornerShape
 import ui.theme.doubleSpacing
+import ui.theme.halfPadding
 
 @Composable
 fun ContentView(
@@ -140,6 +151,8 @@ fun ContentView(
         val isGettingNewResults = remember { mutableStateOf(false) }
 
         val clusters = remember { mutableStateOf(emptyList<Cluster>()) }
+
+        val showFavorites = remember { mutableStateOf(false) }
 
         LaunchedEffect(urlHash.value) {
 
@@ -264,6 +277,24 @@ fun ContentView(
 
                     FillSpacer()
 
+                    Icon(
+                        imageVector = if (showFavorites.value)
+                            Icons.Filled.Favorite
+                        else
+                            Icons.Outlined.FavoriteBorder,
+                        contentDescription = null,
+                        tint = if (showFavorites.value)
+                            Color.Red
+                        else
+                            MaterialTheme.colorScheme.onBackground.copy(alpha = 0.3f),
+                        modifier = Modifier
+                            .halfPadding()
+                            .size(32.dp)
+                            .noRippleClickable {
+                                showFavorites.value = !showFavorites.value
+                            }
+                    )
+
                     LoginWithSteamButton(
                         connected = steamId.value != null
                     )
@@ -296,139 +327,202 @@ fun ContentView(
                     }
                 }
 
-                val search: suspend () -> Unit = {
+                if (showFavorites.value) {
 
-                    println("Searching...")
+                    val favoriteClusters = produceState(emptyList<Cluster>()) {
 
-                    try {
+                        try {
 
-                        val filterQuery = filterQueryState.value
+                            value = DefaultWebClient.findFavoredClusters()
 
-                        isGettingNewResults.value = true
+                        } catch (ex: Exception) {
 
-                        errorMessage.value = null
+                            ex.printStackTrace()
 
-                        /* Reset the data */
-                        clusters.value = emptyList()
-
-                        val searchResultWorlds = DefaultWebClient.search(filterQuery)
-
-                        val sortedWorlds = searchResultWorlds.sortedByDescending { it.getRating() }
-
-                        clusters.value = sortedWorlds
-
-                    } catch (ex: Exception) {
-
-                        ex.printStackTrace()
-
-                        errorMessage.value = ex.stackTraceToString()
-
-                    } finally {
-                        isGettingNewResults.value = false
-                    }
-                }
-
-                HalfSpacer()
-
-                FilterPanel(
-                    worldCount = worldCount.value,
-                    filterQueryState = filterQueryState,
-                    onSearchButtonPressed = {
-                        coroutineScope.launch { search() }
-                    }
-                )
-
-                if (isGettingNewResults.value) {
-
-                    Box(
-                        contentAlignment = Alignment.Center,
-                        modifier = Modifier.weight(1F)
-                    ) {
-
-                        Text(
-                            text = stringResource(Res.string.uiSearching),
-                            style = MaterialTheme.typography.headlineSmall,
-                            color = MaterialTheme.colorScheme.onBackground,
-                            maxLines = 1,
-                            overflow = TextOverflow.Ellipsis
-                        )
-                    }
-
-                } else if (clusters.value.isEmpty()) {
-
-                    Box(
-                        contentAlignment = Alignment.Center,
-                        modifier = Modifier.weight(1F)
-                    ) {
-
-                        val coordinate = urlHash.value
-
-                        if (coordinate == null) {
-
-                            Text(
-                                text = stringResource(Res.string.uiNoResults),
-                                style = MaterialTheme.typography.headlineSmall,
-                                color = MaterialTheme.colorScheme.onBackground,
-                                maxLines = 1,
-                                overflow = TextOverflow.Ellipsis
-                            )
-
-                        } else {
-
-                            Column(
-                                horizontalAlignment = Alignment.CenterHorizontally
-                            ) {
-
-                                Text(
-                                    text = stringResource(Res.string.uiCoordinateNotFound)
-                                        .replace("{coordinate}", coordinate),
-                                    style = MaterialTheme.typography.headlineSmall,
-                                    color = MaterialTheme.colorScheme.onBackground,
-                                    maxLines = 1,
-                                    overflow = TextOverflow.Ellipsis
-                                )
-
-                                DoubleSpacer()
-
-                                RequestCoordinateButton(
-                                    enabled = steamId.value != null,
-                                    coordinate = coordinate
-                                )
-                            }
+                            errorMessage.value = ex.stackTraceToString()
                         }
+                    }
+
+                    Box(
+                        modifier = Modifier.weight(1F)
+                    ) {
+
+                        ClusterViewList(
+                            lazyListState,
+                            favoriteClusters.value,
+                            useCompactLayout.value,
+                            favoredCoordinates,
+                            showStarMap,
+                            showAsteroidMap,
+                            showFavoriteIcon = steamId.value != null,
+                            showMniUrl = isMniEmbedded.value,
+                            writeToClipboard = writeToClipboard
+                        )
                     }
 
                 } else {
 
-                    Row(
-                        modifier = Modifier.weight(1F)
-                    ) {
-
-                        Column(
-                            horizontalAlignment = Alignment.CenterHorizontally,
-                            modifier = Modifier.weight(1F)
-                        ) {
-
-                            Box(
-                                modifier = Modifier.weight(1F)
-                            ) {
-
-                                ClusterViewList(
-                                    lazyListState,
-                                    clusters.value,
-                                    useCompactLayout.value,
-                                    favoredCoordinates,
-                                    showStarMap,
-                                    showAsteroidMap,
-                                    showFavoriteIcon = steamId.value != null,
-                                    showMniUrl = isMniEmbedded.value,
-                                    writeToClipboard = writeToClipboard
-                                )
-                            }
-                        }
-                    }
+                    MainPanel(
+                        filterQueryState,
+                        isGettingNewResults,
+                        errorMessage,
+                        clusters,
+                        worldCount,
+                        coroutineScope,
+                        urlHash,
+                        steamId,
+                        lazyListState,
+                        useCompactLayout,
+                        favoredCoordinates,
+                        showStarMap,
+                        showAsteroidMap,
+                        isMniEmbedded,
+                        writeToClipboard
+                    )
                 }
             }
+        }
+    }
+}
+
+@Composable
+private fun ColumnScope.MainPanel(
+    filterQueryState: MutableState<FilterQuery>,
+    isGettingNewResults: MutableState<Boolean>,
+    errorMessage: MutableState<String?>,
+    clusters: MutableState<List<Cluster>>,
+    worldCount: State<Long?>,
+    coroutineScope: CoroutineScope,
+    urlHash: State<String?>,
+    steamId: State<String?>,
+    lazyListState: LazyListState,
+    useCompactLayout: MutableState<Boolean>,
+    favoredCoordinates: MutableState<List<String>>,
+    showStarMap: MutableState<Cluster?>,
+    showAsteroidMap: MutableState<Asteroid?>,
+    isMniEmbedded: State<Boolean>,
+    writeToClipboard: (String) -> Unit
+) {
+
+    val search: suspend () -> Unit = {
+
+        println("Searching...")
+
+        try {
+
+            val filterQuery = filterQueryState.value
+
+            isGettingNewResults.value = true
+
+            errorMessage.value = null
+
+            /* Reset the data */
+            clusters.value = emptyList()
+
+            val searchResultWorlds = DefaultWebClient.search(filterQuery)
+
+            val sortedWorlds = searchResultWorlds.sortedByDescending { it.getRating() }
+
+            clusters.value = sortedWorlds
+
+        } catch (ex: Exception) {
+
+            ex.printStackTrace()
+
+            errorMessage.value = ex.stackTraceToString()
+
+        } finally {
+            isGettingNewResults.value = false
+        }
+    }
+
+    HalfSpacer()
+
+    FilterPanel(
+        worldCount = worldCount.value,
+        filterQueryState = filterQueryState,
+        onSearchButtonPressed = {
+            coroutineScope.launch { search() }
+        }
+    )
+
+    if (isGettingNewResults.value) {
+
+        Box(
+            contentAlignment = Alignment.Center,
+            modifier = Modifier.Companion.weight(1F)
+        ) {
+
+            Text(
+                text = stringResource(Res.string.uiSearching),
+                style = MaterialTheme.typography.headlineSmall,
+                color = MaterialTheme.colorScheme.onBackground,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
+            )
+        }
+
+    } else if (clusters.value.isEmpty()) {
+
+        Box(
+            contentAlignment = Alignment.Center,
+            modifier = Modifier.Companion.weight(1F)
+        ) {
+
+            val coordinate = urlHash.value
+
+            if (coordinate == null) {
+
+                Text(
+                    text = stringResource(Res.string.uiNoResults),
+                    style = MaterialTheme.typography.headlineSmall,
+                    color = MaterialTheme.colorScheme.onBackground,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
+                )
+
+            } else {
+
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+
+                    Text(
+                        text = stringResource(Res.string.uiCoordinateNotFound)
+                            .replace("{coordinate}", coordinate),
+                        style = MaterialTheme.typography.headlineSmall,
+                        color = MaterialTheme.colorScheme.onBackground,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
+
+                    DoubleSpacer()
+
+                    RequestCoordinateButton(
+                        enabled = steamId.value != null,
+                        coordinate = coordinate
+                    )
+                }
+            }
+        }
+
+    } else {
+
+        Box(
+            modifier = Modifier.weight(1F)
+        ) {
+
+            ClusterViewList(
+                lazyListState,
+                clusters.value,
+                useCompactLayout.value,
+                favoredCoordinates,
+                showStarMap,
+                showAsteroidMap,
+                showFavoriteIcon = steamId.value != null,
+                showMniUrl = isMniEmbedded.value,
+                writeToClipboard = writeToClipboard
+            )
         }
     }
 }
