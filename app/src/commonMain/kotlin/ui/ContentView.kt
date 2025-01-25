@@ -37,6 +37,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.CoroutineScope
@@ -48,6 +49,7 @@ import model.filter.FilterQuery
 import oni_seed_browser.app.generated.resources.Res
 import oni_seed_browser.app.generated.resources.background_space
 import oni_seed_browser.app.generated.resources.uiCoordinateNotFound
+import oni_seed_browser.app.generated.resources.uiNoFavoredClustersFound
 import oni_seed_browser.app.generated.resources.uiNoResults
 import oni_seed_browser.app.generated.resources.uiSearching
 import oni_seed_browser.app.generated.resources.uiTitle
@@ -277,23 +279,26 @@ fun ContentView(
 
                     FillSpacer()
 
-                    Icon(
-                        imageVector = if (showFavorites.value)
-                            Icons.Filled.Favorite
-                        else
-                            Icons.Outlined.FavoriteBorder,
-                        contentDescription = null,
-                        tint = if (showFavorites.value)
-                            Color.Red
-                        else
-                            MaterialTheme.colorScheme.onBackground.copy(alpha = 0.3f),
-                        modifier = Modifier
-                            .halfPadding()
-                            .size(32.dp)
-                            .noRippleClickable {
-                                showFavorites.value = !showFavorites.value
-                            }
-                    )
+                    if (steamId.value != null) {
+
+                        Icon(
+                            imageVector = if (showFavorites.value)
+                                Icons.Filled.Favorite
+                            else
+                                Icons.Outlined.FavoriteBorder,
+                            contentDescription = null,
+                            tint = if (showFavorites.value)
+                                MaterialTheme.colorScheme.onBackground
+                            else
+                                MaterialTheme.colorScheme.onBackground.copy(alpha = 0.3f),
+                            modifier = Modifier
+                                .halfPadding()
+                                .size(32.dp)
+                                .noRippleClickable {
+                                    showFavorites.value = !showFavorites.value
+                                }
+                        )
+                    }
 
                     LoginWithSteamButton(
                         connected = steamId.value != null
@@ -329,7 +334,7 @@ fun ContentView(
 
                 if (showFavorites.value) {
 
-                    val favoriteClusters = produceState(emptyList<Cluster>()) {
+                    val favoredClustersState = produceState(emptyList<Cluster>()) {
 
                         try {
 
@@ -344,20 +349,36 @@ fun ContentView(
                     }
 
                     Box(
+                        contentAlignment = Alignment.Center,
                         modifier = Modifier.weight(1F)
                     ) {
 
-                        ClusterViewList(
-                            lazyListState,
-                            favoriteClusters.value,
-                            useCompactLayout.value,
-                            favoredCoordinates,
-                            showStarMap,
-                            showAsteroidMap,
-                            showFavoriteIcon = steamId.value != null,
-                            showMniUrl = isMniEmbedded.value,
-                            writeToClipboard = writeToClipboard
-                        )
+                        val favoredClusters = favoredClustersState.value
+
+                        if (favoredClusters.isNotEmpty()) {
+
+                            ClusterViewList(
+                                lazyListState,
+                                favoredClustersState.value,
+                                useCompactLayout.value,
+                                favoredCoordinates,
+                                showStarMap,
+                                showAsteroidMap,
+                                showFavoriteIcon = steamId.value != null,
+                                showMniUrl = isMniEmbedded.value,
+                                writeToClipboard = writeToClipboard
+                            )
+
+                        } else {
+
+                            Text(
+                                text = stringResource(Res.string.uiNoFavoredClustersFound),
+                                style = MaterialTheme.typography.headlineSmall,
+                                color = MaterialTheme.colorScheme.onBackground,
+                                textAlign = TextAlign.Center,
+                                overflow = TextOverflow.Ellipsis
+                            )
+                        }
                     }
 
                 } else {
