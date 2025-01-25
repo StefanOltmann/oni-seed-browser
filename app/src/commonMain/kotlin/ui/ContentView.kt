@@ -366,97 +366,104 @@ fun ContentView(
 
                     }
 
-                    HorizontalSeparator()
+                    if (steamId.value != null) {
 
-                    DefaultSpacer()
+                        /*
+                         * Logged-in users can change their name.
+                         */
 
-                    val usernameChangeSuccess = remember { mutableStateOf(false) }
+                        HorizontalSeparator()
 
-                    val usernameInDatabase = remember { mutableStateOf("") }
+                        DefaultSpacer()
 
-                    val username = remember { mutableStateOf("") }
+                        val usernameChangeSuccess = remember { mutableStateOf(false) }
 
-                    LaunchedEffect(true) {
+                        val usernameInDatabase = remember { mutableStateOf("") }
 
-                        val result = DefaultWebClient.getUsername() ?: ""
+                        val username = remember { mutableStateOf("") }
 
-                        username.value = result
-                        usernameInDatabase.value = result
-                    }
+                        LaunchedEffect(true) {
 
-                    Row(
-                        horizontalArrangement = Arrangement.spacedBy(defaultSpacing),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
+                            val result = DefaultWebClient.getUsername() ?: ""
 
-                        TextField(
-                            value = username.value,
-                            onValueChange = { newName ->
-                                username.value = newName
-                            },
-                            label = {
-                                Text(stringResource(Res.string.uiUsernameLabel))
-                            },
-                            placeholder = {
-                                Text("Anonymous")
-                            },
-                            singleLine = true,
-                            textStyle = MaterialTheme.typography.bodyLarge.copy(
-                                color = MaterialTheme.colorScheme.onBackground
-                            ),
-                            shape = defaultRoundedCornerShape,
-                            colors = TextFieldDefaults.colors().copy(
-                                /* Background */
-                                unfocusedContainerColor = MaterialTheme.colorScheme.background,
-                                focusedContainerColor = MaterialTheme.colorScheme.surfaceContainer,
-                                /* No indicators */
-                                focusedIndicatorColor = Color.Transparent,
-                                unfocusedIndicatorColor = Color.Transparent,
-                                errorIndicatorColor = Color.Transparent,
-                                disabledIndicatorColor = Color.Transparent,
-                                /* Text colors */
-                                focusedTextColor = lightGray,
-                                unfocusedTextColor = lightGray,
-                                errorTextColor = lightGray,
-                                disabledTextColor = lightGray,
-                                focusedLabelColor = lightGray,
-                                unfocusedLabelColor = lightGray,
-                                errorLabelColor = lightGray,
-                                disabledLabelColor = lightGray,
-                                cursorColor = lightGray
-                            ),
-                            modifier = Modifier
-                                .height(60.dp)
-                                .width(240.dp)
-                        )
-
-                        SetUsernameButton(
-                            /* Enable button if there is something to change. */
-                            enabled = username.value != usernameInDatabase.value,
-                            onClick = {
-
-                                coroutineScope.launch {
-
-                                    usernameChangeSuccess.value =
-                                        DefaultWebClient.setUsername(username.value)
-
-                                    if (usernameChangeSuccess.value)
-                                        usernameInDatabase.value = username.value
-                                }
-                            }
-                        )
-
-                        if (usernameChangeSuccess.value) {
-
-                            Icon(
-                                imageVector = Icons.Default.CheckCircle,
-                                contentDescription = null,
-                                tint = Color.Green
-                            )
+                            username.value = result
+                            usernameInDatabase.value = result
                         }
-                    }
 
-                    DoubleSpacer()
+                        Row(
+                            horizontalArrangement = Arrangement.spacedBy(defaultSpacing),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+
+                            TextField(
+                                value = username.value,
+                                onValueChange = { newName ->
+                                    username.value = newName
+                                },
+                                label = {
+                                    Text(stringResource(Res.string.uiUsernameLabel))
+                                },
+                                placeholder = {
+                                    Text("Anonymous")
+                                },
+                                singleLine = true,
+                                textStyle = MaterialTheme.typography.bodyLarge.copy(
+                                    color = MaterialTheme.colorScheme.onBackground
+                                ),
+                                shape = defaultRoundedCornerShape,
+                                colors = TextFieldDefaults.colors().copy(
+                                    /* Background */
+                                    unfocusedContainerColor = MaterialTheme.colorScheme.background,
+                                    focusedContainerColor = MaterialTheme.colorScheme.surfaceContainer,
+                                    /* No indicators */
+                                    focusedIndicatorColor = Color.Transparent,
+                                    unfocusedIndicatorColor = Color.Transparent,
+                                    errorIndicatorColor = Color.Transparent,
+                                    disabledIndicatorColor = Color.Transparent,
+                                    /* Text colors */
+                                    focusedTextColor = lightGray,
+                                    unfocusedTextColor = lightGray,
+                                    errorTextColor = lightGray,
+                                    disabledTextColor = lightGray,
+                                    focusedLabelColor = lightGray,
+                                    unfocusedLabelColor = lightGray,
+                                    errorLabelColor = lightGray,
+                                    disabledLabelColor = lightGray,
+                                    cursorColor = lightGray
+                                ),
+                                modifier = Modifier
+                                    .height(60.dp)
+                                    .width(240.dp)
+                            )
+
+                            SetUsernameButton(
+                                /* Enable button if there is something to change. */
+                                enabled = username.value != usernameInDatabase.value,
+                                onClick = {
+
+                                    coroutineScope.launch {
+
+                                        usernameChangeSuccess.value =
+                                            DefaultWebClient.setUsername(username.value)
+
+                                        if (usernameChangeSuccess.value)
+                                            usernameInDatabase.value = username.value
+                                    }
+                                }
+                            )
+
+                            if (usernameChangeSuccess.value) {
+
+                                Icon(
+                                    imageVector = Icons.Default.CheckCircle,
+                                    contentDescription = null,
+                                    tint = Color.Green
+                                )
+                            }
+                        }
+
+                        DoubleSpacer()
+                    }
 
                 } else if (showFavorites.value) {
 
