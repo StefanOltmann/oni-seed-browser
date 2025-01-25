@@ -287,10 +287,7 @@ fun ContentView(
                             else
                                 Icons.Outlined.FavoriteBorder,
                             contentDescription = null,
-                            tint = if (showFavorites.value)
-                                MaterialTheme.colorScheme.onBackground
-                            else
-                                MaterialTheme.colorScheme.onBackground.copy(alpha = 0.3f),
+                            tint = MaterialTheme.colorScheme.onBackground,
                             modifier = Modifier
                                 .halfPadding()
                                 .size(32.dp)
