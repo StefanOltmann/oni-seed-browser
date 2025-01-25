@@ -304,7 +304,11 @@ fun ContentView(
                                 .halfPadding()
                                 .size(32.dp)
                                 .noRippleClickable {
+
                                     showFavorites.value = !showFavorites.value
+
+                                    if (showFavorites.value)
+                                        showLeaderboard.value = false
                                 }
                         )
                     }
@@ -320,7 +324,11 @@ fun ContentView(
                             .halfPadding()
                             .size(32.dp)
                             .noRippleClickable {
+
                                 showLeaderboard.value = !showLeaderboard.value
+
+                                if (showLeaderboard.value)
+                                    showFavorites.value = false
                             }
                     )
 
