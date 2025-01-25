@@ -155,6 +155,7 @@ fun ContentView(
         val clusters = remember { mutableStateOf(emptyList<Cluster>()) }
 
         val showFavorites = remember { mutableStateOf(false) }
+        val showLeaderboard = remember { mutableStateOf(false) }
 
         LaunchedEffect(urlHash.value) {
 
@@ -297,6 +298,21 @@ fun ContentView(
                         )
                     }
 
+//                    Icon(
+//                        imageVector = if (showLeaderboard.value)
+//                           IconLeaderboardFilled
+//                        else
+//                            IconLeaderboardOutlined,
+//                        contentDescription = null,
+//                        tint = MaterialTheme.colorScheme.onBackground,
+//                        modifier = Modifier
+//                            .halfPadding()
+//                            .size(32.dp)
+//                            .noRippleClickable {
+//                                showLeaderboard.value = !showLeaderboard.value
+//                            }
+//                    )
+
                     LoginWithSteamButton(
                         connected = steamId.value != null
                     )
@@ -331,52 +347,17 @@ fun ContentView(
 
                 if (showFavorites.value) {
 
-                    val favoredClustersState = produceState(emptyList<Cluster>()) {
-
-                        try {
-
-                            value = DefaultWebClient.findFavoredClusters()
-
-                        } catch (ex: Exception) {
-
-                            ex.printStackTrace()
-
-                            errorMessage.value = ex.stackTraceToString()
-                        }
-                    }
-
-                    Box(
-                        contentAlignment = Alignment.Center,
-                        modifier = Modifier.weight(1F)
-                    ) {
-
-                        val favoredClusters = favoredClustersState.value
-
-                        if (favoredClusters.isNotEmpty()) {
-
-                            ClusterViewList(
-                                lazyListState,
-                                favoredClustersState.value,
-                                useCompactLayout.value,
-                                favoredCoordinates,
-                                showStarMap,
-                                showAsteroidMap,
-                                showFavoriteIcon = steamId.value != null,
-                                showMniUrl = isMniEmbedded.value,
-                                writeToClipboard = writeToClipboard
-                            )
-
-                        } else {
-
-                            Text(
-                                text = stringResource(Res.string.uiNoFavoredClustersFound),
-                                style = MaterialTheme.typography.headlineSmall,
-                                color = MaterialTheme.colorScheme.onBackground,
-                                textAlign = TextAlign.Center,
-                                overflow = TextOverflow.Ellipsis
-                            )
-                        }
-                    }
+                    FavoritesPanel(
+                        errorMessage,
+                        lazyListState,
+                        useCompactLayout,
+                        favoredCoordinates,
+                        showStarMap,
+                        showAsteroidMap,
+                        steamId,
+                        isMniEmbedded,
+                        writeToClipboard
+                    )
 
                 } else {
 
@@ -399,6 +380,67 @@ fun ContentView(
                     )
                 }
             }
+        }
+    }
+}
+
+@Composable
+private fun ColumnScope.FavoritesPanel(
+    errorMessage: MutableState<String?>,
+    lazyListState: LazyListState,
+    useCompactLayout: MutableState<Boolean>,
+    favoredCoordinates: MutableState<List<String>>,
+    showStarMap: MutableState<Cluster?>,
+    showAsteroidMap: MutableState<Asteroid?>,
+    steamId: State<String?>,
+    isMniEmbedded: State<Boolean>,
+    writeToClipboard: (String) -> Unit
+) {
+
+    val favoredClustersState = produceState(emptyList<Cluster>()) {
+
+        try {
+
+            value = DefaultWebClient.findFavoredClusters()
+
+        } catch (ex: Exception) {
+
+            ex.printStackTrace()
+
+            errorMessage.value = ex.stackTraceToString()
+        }
+    }
+
+    Box(
+        contentAlignment = Alignment.Center,
+        modifier = Modifier.Companion.weight(1F)
+    ) {
+
+        val favoredClusters = favoredClustersState.value
+
+        if (favoredClusters.isNotEmpty()) {
+
+            ClusterViewList(
+                lazyListState,
+                favoredClustersState.value,
+                useCompactLayout.value,
+                favoredCoordinates,
+                showStarMap,
+                showAsteroidMap,
+                showFavoriteIcon = steamId.value != null,
+                showMniUrl = isMniEmbedded.value,
+                writeToClipboard = writeToClipboard
+            )
+
+        } else {
+
+            Text(
+                text = stringResource(Res.string.uiNoFavoredClustersFound),
+                style = MaterialTheme.typography.headlineSmall,
+                color = MaterialTheme.colorScheme.onBackground,
+                textAlign = TextAlign.Center,
+                overflow = TextOverflow.Ellipsis
+            )
         }
     }
 }
