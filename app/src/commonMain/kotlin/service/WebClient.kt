@@ -44,4 +44,8 @@ interface WebClient {
 
     suspend fun getSteamId(): String?
 
+    suspend fun getUsername(): String?
+
+    suspend fun setUsername(username: String): Boolean
+
 }

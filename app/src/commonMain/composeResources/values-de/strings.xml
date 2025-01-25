@@ -39,7 +39,11 @@
     <string name="uiRequestCoordinateButton">Das Hinzufügen dieser Koordinate anfragen</string>
     <string name="uiCoordinateRequested">Koordinate angefragt</string>
     <string name="uiCoordinateRequestFailed">Anfrage der Koordinate fehlgeschlagen</string>
-    <string name="uiNoFavoredClustersFound">Deine Favoriten werden hier angezeigt.\nNutze das Herz-Icon um welche zu markieren.</string>
+    <string name="uiNoFavoredClustersFound">Deine Favoriten werden hier angezeigt.\nNutze das Herz-Icon um welche zu
+        markieren.
+    </string>
+    <string name="uiSetUsername">Name festlegen</string>
+    <string name="uiUsernameLabel">Name</string>
 
     <!-- GameModes -->
     <string name="gameModeBaseGameStandard">Standard</string>

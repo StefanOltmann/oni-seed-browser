@@ -3,6 +3,7 @@ package ui
 import AppStorage
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
@@ -12,16 +13,20 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
@@ -53,18 +58,24 @@ import oni_seed_browser.app.generated.resources.uiNoFavoredClustersFound
 import oni_seed_browser.app.generated.resources.uiNoResults
 import oni_seed_browser.app.generated.resources.uiSearching
 import oni_seed_browser.app.generated.resources.uiTitle
+import oni_seed_browser.app.generated.resources.uiUsernameLabel
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import service.DefaultWebClient
 import service.sampleWorldsJson
 import ui.filter.FilterPanel
+import ui.icons.IconLeaderboardFilled
+import ui.icons.IconLeaderboardOutlined
+import ui.theme.DefaultSpacer
 import ui.theme.DoubleSpacer
 import ui.theme.FillSpacer
 import ui.theme.HalfSpacer
 import ui.theme.defaultPadding
 import ui.theme.defaultRoundedCornerShape
+import ui.theme.defaultSpacing
 import ui.theme.doubleSpacing
 import ui.theme.halfPadding
+import ui.theme.lightGray
 
 @Composable
 fun ContentView(
@@ -298,20 +309,20 @@ fun ContentView(
                         )
                     }
 
-//                    Icon(
-//                        imageVector = if (showLeaderboard.value)
-//                           IconLeaderboardFilled
-//                        else
-//                            IconLeaderboardOutlined,
-//                        contentDescription = null,
-//                        tint = MaterialTheme.colorScheme.onBackground,
-//                        modifier = Modifier
-//                            .halfPadding()
-//                            .size(32.dp)
-//                            .noRippleClickable {
-//                                showLeaderboard.value = !showLeaderboard.value
-//                            }
-//                    )
+                    Icon(
+                        imageVector = if (showLeaderboard.value)
+                            IconLeaderboardFilled
+                        else
+                            IconLeaderboardOutlined,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.onBackground,
+                        modifier = Modifier
+                            .halfPadding()
+                            .size(32.dp)
+                            .noRippleClickable {
+                                showLeaderboard.value = !showLeaderboard.value
+                            }
+                    )
 
                     LoginWithSteamButton(
                         connected = steamId.value != null
@@ -345,7 +356,109 @@ fun ContentView(
                     }
                 }
 
-                if (showFavorites.value) {
+                if (showLeaderboard.value) {
+
+                    Box(
+                        modifier = Modifier.weight(1F)
+                    ) {
+
+                        LeaderboardViewList()
+
+                    }
+
+                    HorizontalSeparator()
+
+                    DefaultSpacer()
+
+                    val usernameChangeSuccess = remember { mutableStateOf(false) }
+
+                    val usernameInDatabase = remember { mutableStateOf("") }
+
+                    val username = remember { mutableStateOf("") }
+
+                    LaunchedEffect(true) {
+
+                        val result = DefaultWebClient.getUsername() ?: ""
+
+                        username.value = result
+                        usernameInDatabase.value = result
+                    }
+
+                    Row(
+                        horizontalArrangement = Arrangement.spacedBy(defaultSpacing),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+
+                        TextField(
+                            value = username.value,
+                            onValueChange = { newName ->
+                                username.value = newName
+                            },
+                            label = {
+                                Text(stringResource(Res.string.uiUsernameLabel))
+                            },
+                            placeholder = {
+                                Text("Anonymous")
+                            },
+                            singleLine = true,
+                            textStyle = MaterialTheme.typography.bodyLarge.copy(
+                                color = MaterialTheme.colorScheme.onBackground
+                            ),
+                            shape = defaultRoundedCornerShape,
+                            colors = TextFieldDefaults.colors().copy(
+                                /* Background */
+                                unfocusedContainerColor = MaterialTheme.colorScheme.background,
+                                focusedContainerColor = MaterialTheme.colorScheme.surfaceContainer,
+                                /* No indicators */
+                                focusedIndicatorColor = Color.Transparent,
+                                unfocusedIndicatorColor = Color.Transparent,
+                                errorIndicatorColor = Color.Transparent,
+                                disabledIndicatorColor = Color.Transparent,
+                                /* Text colors */
+                                focusedTextColor = lightGray,
+                                unfocusedTextColor = lightGray,
+                                errorTextColor = lightGray,
+                                disabledTextColor = lightGray,
+                                focusedLabelColor = lightGray,
+                                unfocusedLabelColor = lightGray,
+                                errorLabelColor = lightGray,
+                                disabledLabelColor = lightGray,
+                                cursorColor = lightGray
+                            ),
+                            modifier = Modifier
+                                .height(60.dp)
+                                .width(240.dp)
+                        )
+
+                        SetUsernameButton(
+                            /* Enable button if there is something to change. */
+                            enabled = username.value != usernameInDatabase.value,
+                            onClick = {
+
+                                coroutineScope.launch {
+
+                                    usernameChangeSuccess.value =
+                                        DefaultWebClient.setUsername(username.value)
+
+                                    if (usernameChangeSuccess.value)
+                                        usernameInDatabase.value = username.value
+                                }
+                            }
+                        )
+
+                        if (usernameChangeSuccess.value) {
+
+                            Icon(
+                                imageVector = Icons.Default.CheckCircle,
+                                contentDescription = null,
+                                tint = Color.Green
+                            )
+                        }
+                    }
+
+                    DoubleSpacer()
+
+                } else if (showFavorites.value) {
 
                     FavoritesPanel(
                         errorMessage,

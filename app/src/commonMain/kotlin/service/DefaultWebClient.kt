@@ -202,4 +202,30 @@ object DefaultWebClient : WebClient {
 
         return response.bodyAsText()
     }
+
+    override suspend fun getUsername(): String? {
+
+        val response = httpClient.get("$BASE_API_URL/username")
+
+        if (response.status != HttpStatusCode.OK)
+            return null
+
+        return response.bodyAsText()
+    }
+
+
+    override suspend fun setUsername(username: String): Boolean {
+
+        val response = httpClient.post("$BASE_API_URL/username") {
+            contentType(ContentType.Application.Json)
+            setBody(username)
+        }
+
+        val success = response.status.isSuccess()
+
+        if (!success)
+            println("Request failed with HTTP ${response.status}: ${response.bodyAsText()}")
+
+        return success
+    }
 }
