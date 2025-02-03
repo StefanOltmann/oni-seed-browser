@@ -34,6 +34,8 @@ interface WebClient {
      */
     suspend fun request(coordinate: String): Boolean
 
+    suspend fun findFavoredClusters(): List<Cluster>
+
     suspend fun findFavoredCoordinates(): List<String>
 
     suspend fun rate(coordinate: String, like: Boolean): Boolean
@@ -41,5 +43,9 @@ interface WebClient {
     suspend fun search(filterQuery: FilterQuery): List<Cluster>
 
     suspend fun getSteamId(): String?
+
+    suspend fun getUsername(): String?
+
+    suspend fun setUsername(username: String): Boolean
 
 }

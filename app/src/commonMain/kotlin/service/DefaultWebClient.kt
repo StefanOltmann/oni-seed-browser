@@ -128,6 +128,16 @@ object DefaultWebClient : WebClient {
         return response.status.isSuccess()
     }
 
+    override suspend fun findFavoredClusters(): List<Cluster> {
+
+        val response = httpClient.get("$BASE_API_URL/favored-clusters")
+
+        if (!response.status.isSuccess())
+            error("Requesting favored clusters failed with HTTP ${response.status}: ${response.bodyAsText()}")
+
+        return response.body()
+    }
+
     override suspend fun findFavoredCoordinates(): List<String> {
 
         val response = httpClient.get("$BASE_API_URL/favored-coordinates")
@@ -191,5 +201,31 @@ object DefaultWebClient : WebClient {
             return null
 
         return response.bodyAsText()
+    }
+
+    override suspend fun getUsername(): String? {
+
+        val response = httpClient.get("$BASE_API_URL/username")
+
+        if (response.status != HttpStatusCode.OK)
+            return null
+
+        return response.bodyAsText()
+    }
+
+
+    override suspend fun setUsername(username: String): Boolean {
+
+        val response = httpClient.post("$BASE_API_URL/username") {
+            contentType(ContentType.Application.Json)
+            setBody(username)
+        }
+
+        val success = response.status.isSuccess()
+
+        if (!success)
+            println("Request failed with HTTP ${response.status}: ${response.bodyAsText()}")
+
+        return success
     }
 }
