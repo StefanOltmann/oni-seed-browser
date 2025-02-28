@@ -370,8 +370,9 @@ fun ContentView(
                         modifier = Modifier.weight(1F)
                     ) {
 
-                        LeaderboardViewList()
-
+                        LeaderboardViewList(
+                            errorMessage
+                        )
                     }
 
                     if (steamId.value != null) {
