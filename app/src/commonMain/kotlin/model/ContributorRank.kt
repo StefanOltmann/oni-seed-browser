@@ -17,21 +17,26 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package model.filter
+package model
 
-import io.github.stefanoltmann.app.generated.resources.Res
-import io.github.stefanoltmann.app.generated.resources.uiGeyserCount
-import io.github.stefanoltmann.app.generated.resources.uiGeyserOutput
-import io.github.stefanoltmann.app.generated.resources.uiSpaceDestinationCount
-import io.github.stefanoltmann.app.generated.resources.uiWorldTrait
-import org.jetbrains.compose.resources.StringResource
+import kotlinx.serialization.Serializable
 
-enum class FilterItemType(
-    val stringResource: StringResource
-) {
+@Serializable
+data class ContributorRank(
 
-    WORLD_TRAIT(Res.string.uiWorldTrait),
-    GEYSER_COUNT(Res.string.uiGeyserCount),
-    GEYSER_OUTPUT(Res.string.uiGeyserOutput),
-    SPACE_DESTINATION_COUNT(Res.string.uiSpaceDestinationCount)
-}
+    /**
+     * Ranking, starting with 1
+     */
+    val rank: Int,
+
+    /**
+     * The username.
+     */
+    val username: String,
+
+    /**
+     * Count of contributed maps
+     */
+    val mapCount: Int
+
+)

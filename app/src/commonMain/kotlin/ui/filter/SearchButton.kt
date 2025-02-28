@@ -31,8 +31,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import oni_seed_browser.app.generated.resources.Res
-import oni_seed_browser.app.generated.resources.uiSearch
+import io.github.stefanoltmann.app.generated.resources.Res
+import io.github.stefanoltmann.app.generated.resources.uiSearch
 import org.jetbrains.compose.resources.stringResource
 import ui.noRippleClickable
 import ui.theme.ctaColor

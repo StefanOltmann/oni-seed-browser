@@ -19,13 +19,13 @@
 
 package model.filter
 
+import io.github.stefanoltmann.app.generated.resources.Res
+import io.github.stefanoltmann.app.generated.resources.gameModeBaseGameStandard
+import io.github.stefanoltmann.app.generated.resources.gameModeSpacedOutClassic
+import io.github.stefanoltmann.app.generated.resources.gameModeSpacedOutSpacedOut
+import io.github.stefanoltmann.app.generated.resources.gameModeTheLab
 import model.ClusterType
 import model.Dlc
-import oni_seed_browser.app.generated.resources.Res
-import oni_seed_browser.app.generated.resources.gameModeBaseGameStandard
-import oni_seed_browser.app.generated.resources.gameModeSpacedOutClassic
-import oni_seed_browser.app.generated.resources.gameModeSpacedOutSpacedOut
-import oni_seed_browser.app.generated.resources.gameModeTheLab
 import org.jetbrains.compose.resources.StringResource
 
 enum class GameModeType(

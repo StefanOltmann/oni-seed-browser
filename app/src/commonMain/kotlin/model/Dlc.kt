@@ -19,11 +19,11 @@
 
 package model
 
+import io.github.stefanoltmann.app.generated.resources.Res
+import io.github.stefanoltmann.app.generated.resources.logo_frosty_planet_banner
+import io.github.stefanoltmann.app.generated.resources.logo_oni
+import io.github.stefanoltmann.app.generated.resources.logo_spaced_out
 import kotlinx.serialization.Serializable
-import oni_seed_browser.app.generated.resources.Res
-import oni_seed_browser.app.generated.resources.logo_frosty_planet_banner
-import oni_seed_browser.app.generated.resources.logo_oni
-import oni_seed_browser.app.generated.resources.logo_spaced_out
 import org.jetbrains.compose.resources.DrawableResource
 
 @Suppress("UNUSED")

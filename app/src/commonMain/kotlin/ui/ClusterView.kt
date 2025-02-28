@@ -47,12 +47,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import io.github.stefanoltmann.app.generated.resources.Res
+import io.github.stefanoltmann.app.generated.resources.uiCopiedToClipboard
 import kotlin.math.max
 import kotlinx.coroutines.delay
 import model.Asteroid
 import model.Cluster
-import oni_seed_browser.app.generated.resources.Res
-import oni_seed_browser.app.generated.resources.uiCopiedToClipboard
 import org.jetbrains.compose.resources.stringResource
 import ui.icons.ContentCopy
 import ui.theme.DefaultSpacer

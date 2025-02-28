@@ -20,27 +20,27 @@
 package model
 
 import androidx.compose.ui.graphics.Color
+import io.github.stefanoltmann.app.generated.resources.Res
+import io.github.stefanoltmann.app.generated.resources.zoneTypeBarren
+import io.github.stefanoltmann.app.generated.resources.zoneTypeBoggyMarsh
+import io.github.stefanoltmann.app.generated.resources.zoneTypeCarrotQuarry
+import io.github.stefanoltmann.app.generated.resources.zoneTypeForest
+import io.github.stefanoltmann.app.generated.resources.zoneTypeFrozenWastes
+import io.github.stefanoltmann.app.generated.resources.zoneTypeIceCaves
+import io.github.stefanoltmann.app.generated.resources.zoneTypeMagmaCore
+import io.github.stefanoltmann.app.generated.resources.zoneTypeMetallic
+import io.github.stefanoltmann.app.generated.resources.zoneTypeMoo
+import io.github.stefanoltmann.app.generated.resources.zoneTypeOcean
+import io.github.stefanoltmann.app.generated.resources.zoneTypeOilField
+import io.github.stefanoltmann.app.generated.resources.zoneTypeRadioactive
+import io.github.stefanoltmann.app.generated.resources.zoneTypeRust
+import io.github.stefanoltmann.app.generated.resources.zoneTypeSandstone
+import io.github.stefanoltmann.app.generated.resources.zoneTypeSpace
+import io.github.stefanoltmann.app.generated.resources.zoneTypeSugarWoods
+import io.github.stefanoltmann.app.generated.resources.zoneTypeSwamp
+import io.github.stefanoltmann.app.generated.resources.zoneTypeToxicJungle
+import io.github.stefanoltmann.app.generated.resources.zoneTypeWasteland
 import kotlinx.serialization.Serializable
-import oni_seed_browser.app.generated.resources.Res
-import oni_seed_browser.app.generated.resources.zoneTypeBarren
-import oni_seed_browser.app.generated.resources.zoneTypeBoggyMarsh
-import oni_seed_browser.app.generated.resources.zoneTypeCarrotQuarry
-import oni_seed_browser.app.generated.resources.zoneTypeForest
-import oni_seed_browser.app.generated.resources.zoneTypeFrozenWastes
-import oni_seed_browser.app.generated.resources.zoneTypeIceCaves
-import oni_seed_browser.app.generated.resources.zoneTypeMagmaCore
-import oni_seed_browser.app.generated.resources.zoneTypeMetallic
-import oni_seed_browser.app.generated.resources.zoneTypeMoo
-import oni_seed_browser.app.generated.resources.zoneTypeOcean
-import oni_seed_browser.app.generated.resources.zoneTypeOilField
-import oni_seed_browser.app.generated.resources.zoneTypeRadioactive
-import oni_seed_browser.app.generated.resources.zoneTypeRust
-import oni_seed_browser.app.generated.resources.zoneTypeSandstone
-import oni_seed_browser.app.generated.resources.zoneTypeSpace
-import oni_seed_browser.app.generated.resources.zoneTypeSugarWoods
-import oni_seed_browser.app.generated.resources.zoneTypeSwamp
-import oni_seed_browser.app.generated.resources.zoneTypeToxicJungle
-import oni_seed_browser.app.generated.resources.zoneTypeWasteland
 import org.jetbrains.compose.resources.StringResource
 
 @Suppress("UNUSED")

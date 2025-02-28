@@ -43,6 +43,7 @@ import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.cbor.Cbor
 import kotlinx.serialization.json.Json
 import model.Cluster
+import model.ContributorRank
 import model.RateCoordinateRequest
 import model.filter.FilterQuery
 
@@ -213,7 +214,6 @@ object DefaultWebClient : WebClient {
         return response.bodyAsText()
     }
 
-
     override suspend fun setUsername(username: String): Boolean {
 
         val response = httpClient.post("$BASE_API_URL/username") {
@@ -227,5 +227,15 @@ object DefaultWebClient : WebClient {
             println("Request failed with HTTP ${response.status}: ${response.bodyAsText()}")
 
         return success
+    }
+
+    override suspend fun findContributorRanking(): List<ContributorRank> {
+
+        val response = httpClient.get("$BASE_API_URL/contributor-ranking")
+
+        if (!response.status.isSuccess())
+            error("Requesting contributor rankings failed with HTTP ${response.status}: ${response.bodyAsText()}")
+
+        return response.body()
     }
 }

@@ -45,20 +45,20 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import io.github.stefanoltmann.app.generated.resources.Res
+import io.github.stefanoltmann.app.generated.resources.background_space
+import io.github.stefanoltmann.app.generated.resources.uiCoordinateNotFound
+import io.github.stefanoltmann.app.generated.resources.uiNoFavoredClustersFound
+import io.github.stefanoltmann.app.generated.resources.uiNoResults
+import io.github.stefanoltmann.app.generated.resources.uiSearching
+import io.github.stefanoltmann.app.generated.resources.uiTitle
+import io.github.stefanoltmann.app.generated.resources.uiUsernameLabel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import kotlinx.serialization.json.Json
 import model.Asteroid
 import model.Cluster
 import model.filter.FilterQuery
-import oni_seed_browser.app.generated.resources.Res
-import oni_seed_browser.app.generated.resources.background_space
-import oni_seed_browser.app.generated.resources.uiCoordinateNotFound
-import oni_seed_browser.app.generated.resources.uiNoFavoredClustersFound
-import oni_seed_browser.app.generated.resources.uiNoResults
-import oni_seed_browser.app.generated.resources.uiSearching
-import oni_seed_browser.app.generated.resources.uiTitle
-import oni_seed_browser.app.generated.resources.uiUsernameLabel
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import service.DefaultWebClient
@@ -370,8 +370,9 @@ fun ContentView(
                         modifier = Modifier.weight(1F)
                     ) {
 
-                        LeaderboardViewList()
-
+                        LeaderboardViewList(
+                            errorMessage
+                        )
                     }
 
                     if (steamId.value != null) {

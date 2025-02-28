@@ -36,6 +36,9 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import io.github.stefanoltmann.app.generated.resources.Res
+import io.github.stefanoltmann.app.generated.resources.uiCount
+import io.github.stefanoltmann.app.generated.resources.uiOutput
 import model.GeyserType
 import model.WorldTrait
 import model.filter.FilterCondition
@@ -44,9 +47,6 @@ import model.filter.FilterItemGeyserOutput
 import model.filter.FilterItemType
 import model.filter.FilterItemWorldTrait
 import model.filter.FilterQuery
-import oni_seed_browser.app.generated.resources.Res
-import oni_seed_browser.app.generated.resources.uiCount
-import oni_seed_browser.app.generated.resources.uiOutput
 import org.jetbrains.compose.resources.stringResource
 import ui.getAsteroidTypeDrawable
 import ui.getGeyserDrawable
