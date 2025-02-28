@@ -39,6 +39,14 @@
     <string name="uiRequestCoordinateButton">请求添加此种子码</string>
     <string name="uiCoordinateRequested">种子码请求已提交</string>
     <string name="uiCoordinateRequestFailed">种子码请求失败</string>
+    <string name="uiNoFavoredClustersFound">您的收藏将显示在这里.\n使用爱心图示标记一些.</string>
+    <string name="uiSetUsername">设定使用者名称</string>
+    <string name="uiUsernameLabel">使用者名称</string>
+    <string name="uiLoading">载入中...</string>
+    <string name="uiLeaderBoardExplainer">这是我们的荣誉殿堂,纪念所有透过运行模组为我们的资料库贡献过种子的所有人. 感谢大家!</string>
+    <string name="uiLeaderBoardRank">排名</string>
+    <string name="uiLeaderBoardUsername">使用者名称</string>
+    <string name="uiLeaderBoardCount">数量</string>
 
     <!-- GameModes -->
     <string name="gameModeBaseGameStandard">标准</string>
