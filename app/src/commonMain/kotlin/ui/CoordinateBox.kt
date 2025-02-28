@@ -47,12 +47,12 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import io.github.stefanoltmann.app.generated.resources.Res
+import io.github.stefanoltmann.app.generated.resources.icon_starmap
+import io.github.stefanoltmann.app.generated.resources.uiCopiedToClipboard
 import kotlin.math.roundToInt
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import oni_seed_browser.app.generated.resources.Res
-import oni_seed_browser.app.generated.resources.icon_starmap
-import oni_seed_browser.app.generated.resources.uiCopiedToClipboard
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import service.DefaultWebClient

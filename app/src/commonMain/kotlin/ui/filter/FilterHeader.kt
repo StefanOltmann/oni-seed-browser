@@ -40,9 +40,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import oni_seed_browser.app.generated.resources.Res
-import oni_seed_browser.app.generated.resources.uiFilter
-import oni_seed_browser.app.generated.resources.uiSeedsInDatabase
+import io.github.stefanoltmann.app.generated.resources.Res
+import io.github.stefanoltmann.app.generated.resources.uiFilter
+import io.github.stefanoltmann.app.generated.resources.uiSeedsInDatabase
 import org.jetbrains.compose.resources.stringResource
 import ui.theme.DefaultSpacer
 import ui.theme.DoubleSpacer

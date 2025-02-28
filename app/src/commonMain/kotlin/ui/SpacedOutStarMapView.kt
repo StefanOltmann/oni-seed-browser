@@ -43,6 +43,8 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import io.github.stefanoltmann.app.generated.resources.Res
+import io.github.stefanoltmann.app.generated.resources.background_space
 import kotlin.math.PI
 import kotlin.math.cos
 import kotlin.math.sin
@@ -50,8 +52,6 @@ import kotlin.math.sqrt
 import model.AsteroidType
 import model.Cluster
 import model.SpacedOutSpacePOI
-import oni_seed_browser.app.generated.resources.Res
-import oni_seed_browser.app.generated.resources.background_space
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import ui.theme.defaultPadding

@@ -19,11 +19,11 @@
 
 package model.filter
 
-import oni_seed_browser.app.generated.resources.Res
-import oni_seed_browser.app.generated.resources.uiGeyserCount
-import oni_seed_browser.app.generated.resources.uiGeyserOutput
-import oni_seed_browser.app.generated.resources.uiSpaceDestinationCount
-import oni_seed_browser.app.generated.resources.uiWorldTrait
+import io.github.stefanoltmann.app.generated.resources.Res
+import io.github.stefanoltmann.app.generated.resources.uiGeyserCount
+import io.github.stefanoltmann.app.generated.resources.uiGeyserOutput
+import io.github.stefanoltmann.app.generated.resources.uiSpaceDestinationCount
+import io.github.stefanoltmann.app.generated.resources.uiWorldTrait
 import org.jetbrains.compose.resources.StringResource
 
 enum class FilterItemType(

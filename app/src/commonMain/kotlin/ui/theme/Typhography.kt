@@ -25,12 +25,12 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.intl.Locale
-import oni_seed_browser.app.generated.resources.Res
-import oni_seed_browser.app.generated.resources.economica_bold
-import oni_seed_browser.app.generated.resources.economica_bold_italic
-import oni_seed_browser.app.generated.resources.economica_italic
-import oni_seed_browser.app.generated.resources.economica_regular
-import oni_seed_browser.app.generated.resources.noto_sans_sc_regular
+import io.github.stefanoltmann.app.generated.resources.Res
+import io.github.stefanoltmann.app.generated.resources.economica_bold
+import io.github.stefanoltmann.app.generated.resources.economica_bold_italic
+import io.github.stefanoltmann.app.generated.resources.economica_italic
+import io.github.stefanoltmann.app.generated.resources.economica_regular
+import io.github.stefanoltmann.app.generated.resources.noto_sans_sc_regular
 import org.jetbrains.compose.resources.Font
 
 @Composable

@@ -36,9 +36,9 @@ import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import oni_seed_browser.app.generated.resources.Res
-import oni_seed_browser.app.generated.resources.uiAdd
-import oni_seed_browser.app.generated.resources.uiRule
+import io.github.stefanoltmann.app.generated.resources.Res
+import io.github.stefanoltmann.app.generated.resources.uiAdd
+import io.github.stefanoltmann.app.generated.resources.uiRule
 import org.jetbrains.compose.resources.stringResource
 import ui.noRippleClickable
 import ui.onHover

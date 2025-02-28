@@ -26,8 +26,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
-import oni_seed_browser.app.generated.resources.Res
-import oni_seed_browser.app.generated.resources.uiTitle
+import io.github.stefanoltmann.app.generated.resources.Res
+import io.github.stefanoltmann.app.generated.resources.uiTitle
 import org.jetbrains.compose.resources.stringResource
 import ui.App
 

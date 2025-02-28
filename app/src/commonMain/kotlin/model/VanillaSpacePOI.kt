@@ -19,31 +19,31 @@
 
 package model
 
-import oni_seed_browser.app.generated.resources.Res
-import oni_seed_browser.app.generated.resources.vanillaSpacePoiCarbonaceousAsteroid
-import oni_seed_browser.app.generated.resources.vanillaSpacePoiChlorinePlanet
-import oni_seed_browser.app.generated.resources.vanillaSpacePoiDLC2CeresSpaceDestination
-import oni_seed_browser.app.generated.resources.vanillaSpacePoiDustyMoon
-import oni_seed_browser.app.generated.resources.vanillaSpacePoiEarth
-import oni_seed_browser.app.generated.resources.vanillaSpacePoiForestPlanet
-import oni_seed_browser.app.generated.resources.vanillaSpacePoiGasGiant
-import oni_seed_browser.app.generated.resources.vanillaSpacePoiGoldAsteroid
-import oni_seed_browser.app.generated.resources.vanillaSpacePoiHeliumGiant
-import oni_seed_browser.app.generated.resources.vanillaSpacePoiIceGiant
-import oni_seed_browser.app.generated.resources.vanillaSpacePoiIcyDwarf
-import oni_seed_browser.app.generated.resources.vanillaSpacePoiMetallicAsteroid
-import oni_seed_browser.app.generated.resources.vanillaSpacePoiOilyAsteroid
-import oni_seed_browser.app.generated.resources.vanillaSpacePoiOrganicDwarf
-import oni_seed_browser.app.generated.resources.vanillaSpacePoiRedDwarf
-import oni_seed_browser.app.generated.resources.vanillaSpacePoiRockyAsteroid
-import oni_seed_browser.app.generated.resources.vanillaSpacePoiRustPlanet
-import oni_seed_browser.app.generated.resources.vanillaSpacePoiSaltDesertPlanet
-import oni_seed_browser.app.generated.resources.vanillaSpacePoiSaltDwarf
-import oni_seed_browser.app.generated.resources.vanillaSpacePoiSatellite
-import oni_seed_browser.app.generated.resources.vanillaSpacePoiShinyPlanet
-import oni_seed_browser.app.generated.resources.vanillaSpacePoiTerraPlanet
-import oni_seed_browser.app.generated.resources.vanillaSpacePoiVolcanoPlanet
-import oni_seed_browser.app.generated.resources.vanillaSpacePoiWormhole
+import io.github.stefanoltmann.app.generated.resources.Res
+import io.github.stefanoltmann.app.generated.resources.vanillaSpacePoiCarbonaceousAsteroid
+import io.github.stefanoltmann.app.generated.resources.vanillaSpacePoiChlorinePlanet
+import io.github.stefanoltmann.app.generated.resources.vanillaSpacePoiDLC2CeresSpaceDestination
+import io.github.stefanoltmann.app.generated.resources.vanillaSpacePoiDustyMoon
+import io.github.stefanoltmann.app.generated.resources.vanillaSpacePoiEarth
+import io.github.stefanoltmann.app.generated.resources.vanillaSpacePoiForestPlanet
+import io.github.stefanoltmann.app.generated.resources.vanillaSpacePoiGasGiant
+import io.github.stefanoltmann.app.generated.resources.vanillaSpacePoiGoldAsteroid
+import io.github.stefanoltmann.app.generated.resources.vanillaSpacePoiHeliumGiant
+import io.github.stefanoltmann.app.generated.resources.vanillaSpacePoiIceGiant
+import io.github.stefanoltmann.app.generated.resources.vanillaSpacePoiIcyDwarf
+import io.github.stefanoltmann.app.generated.resources.vanillaSpacePoiMetallicAsteroid
+import io.github.stefanoltmann.app.generated.resources.vanillaSpacePoiOilyAsteroid
+import io.github.stefanoltmann.app.generated.resources.vanillaSpacePoiOrganicDwarf
+import io.github.stefanoltmann.app.generated.resources.vanillaSpacePoiRedDwarf
+import io.github.stefanoltmann.app.generated.resources.vanillaSpacePoiRockyAsteroid
+import io.github.stefanoltmann.app.generated.resources.vanillaSpacePoiRustPlanet
+import io.github.stefanoltmann.app.generated.resources.vanillaSpacePoiSaltDesertPlanet
+import io.github.stefanoltmann.app.generated.resources.vanillaSpacePoiSaltDwarf
+import io.github.stefanoltmann.app.generated.resources.vanillaSpacePoiSatellite
+import io.github.stefanoltmann.app.generated.resources.vanillaSpacePoiShinyPlanet
+import io.github.stefanoltmann.app.generated.resources.vanillaSpacePoiTerraPlanet
+import io.github.stefanoltmann.app.generated.resources.vanillaSpacePoiVolcanoPlanet
+import io.github.stefanoltmann.app.generated.resources.vanillaSpacePoiWormhole
 import org.jetbrains.compose.resources.StringResource
 
 enum class VanillaSpacePOI(

@@ -33,11 +33,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.unit.dp
+import io.github.stefanoltmann.app.generated.resources.Res
+import io.github.stefanoltmann.app.generated.resources.uiCoordinateRequestFailed
+import io.github.stefanoltmann.app.generated.resources.uiCoordinateRequested
+import io.github.stefanoltmann.app.generated.resources.uiRequestCoordinateButton
 import kotlinx.coroutines.launch
-import oni_seed_browser.app.generated.resources.Res
-import oni_seed_browser.app.generated.resources.uiCoordinateRequestFailed
-import oni_seed_browser.app.generated.resources.uiCoordinateRequested
-import oni_seed_browser.app.generated.resources.uiRequestCoordinateButton
 import org.jetbrains.compose.resources.stringResource
 import service.DefaultWebClient
 import ui.theme.DefaultSpacer

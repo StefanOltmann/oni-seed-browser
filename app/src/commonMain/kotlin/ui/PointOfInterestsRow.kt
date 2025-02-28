@@ -40,10 +40,10 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.min
 import androidx.compose.ui.unit.times
+import io.github.stefanoltmann.app.generated.resources.Res
+import io.github.stefanoltmann.app.generated.resources.poi_artifact_filled
 import model.PointOfInterest
 import model.PointOfInterestType
-import oni_seed_browser.app.generated.resources.Res
-import oni_seed_browser.app.generated.resources.poi_artifact_filled
 import org.jetbrains.compose.resources.painterResource
 import ui.theme.DoubleSpacer
 import ui.theme.FillSpacer

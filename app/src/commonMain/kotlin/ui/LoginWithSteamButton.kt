@@ -36,9 +36,9 @@ import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import oni_seed_browser.app.generated.resources.Res
-import oni_seed_browser.app.generated.resources.uiConnected
-import oni_seed_browser.app.generated.resources.uiLoginWithSteam
+import io.github.stefanoltmann.app.generated.resources.Res
+import io.github.stefanoltmann.app.generated.resources.uiConnected
+import io.github.stefanoltmann.app.generated.resources.uiLoginWithSteam
 import org.jetbrains.compose.resources.stringResource
 import ui.icons.IconSteam
 import ui.theme.DefaultSpacer

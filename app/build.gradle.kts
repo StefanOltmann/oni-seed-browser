@@ -6,7 +6,30 @@ plugins {
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.pluginCompose)
     alias(libs.plugins.kotlinSerialization)
+    id("me.qoomon.git-versioning") version "6.4.3"
+    id("dev.hydraulic.conveyor") version "1.12"
 }
+
+group = "io.github.stefanoltmann"
+version = "1.0.0"
+
+gitVersioning.apply {
+
+    refs {
+        tag("v(?<version>.*)") {
+            version = "\${ref.version}"
+        }
+    }
+}
+
+//dependencies {
+//
+//    /* Conveyor */
+//    linuxAmd64(compose.desktop.linux_x64)
+//    macAmd64(compose.desktop.macos_x64)
+//    macAarch64(compose.desktop.macos_arm64)
+//    windowsAmd64(compose.desktop.windows_x64)
+//}
 
 kotlin {
 
@@ -88,7 +111,7 @@ compose.desktop {
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
             packageName = "de.stefan-oltmann.oni-seed-browser"
-            packageVersion = "1.0.0"
+            packageVersion = version.toString()
         }
     }
 }
