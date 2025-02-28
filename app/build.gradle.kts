@@ -33,7 +33,7 @@ gitVersioning.apply {
 
 kotlin {
 
-    jvm("desktop")
+    jvm()
 
     @OptIn(org.jetbrains.kotlin.gradle.ExperimentalWasmDsl::class)
     wasmJs {
@@ -58,9 +58,9 @@ kotlin {
 
     sourceSets {
 
-        val desktopMain by getting
+        val jvmMain by getting
 
-        desktopMain.dependencies {
+        jvmMain.dependencies {
 
             implementation(compose.desktop.currentOs)
 
