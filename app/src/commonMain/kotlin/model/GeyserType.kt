@@ -73,181 +73,182 @@ enum class GeyserType(
      * Sorted by order to be displayed
      *
      * The min and max average values for emit rate were
-     * taken from a database query over 410k maps.
+     * taken from a database query over 410k maps
+     * and calculated using a standard deviation.
      */
 
     COOL_STEAM(
         type = "steam",
         stringResource = Res.string.geyserTypeCoolSteamVent,
         rating = Rating.GOOD, // Good thing to have for water production
-        minAvgEmitRate = 673,
-        maxAvgEmitRate = 2627
+        minAvgEmitRate = 1228,
+        maxAvgEmitRate = 1682
     ),
     HYDROGEN(
         type = "hot_hydrogen",
         stringResource = Res.string.geyserTypeHydrogenVent,
         rating = Rating.VERY_GOOD, // Free energy
-        minAvgEmitRate = 48,
-        maxAvgEmitRate = 181
+        minAvgEmitRate = 92,
+        maxAvgEmitRate = 118
     ),
     NATURAL_GAS(
         type = "methane",
         stringResource = Res.string.geyserTypeNaturalGasGeyser,
         rating = Rating.VERY_GOOD, // Free energy & for cooking
-        minAvgEmitRate = 48,
-        maxAvgEmitRate = 183
+        minAvgEmitRate = 85,
+        maxAvgEmitRate = 127
     ),
     CHLORINE(
         type = "chlorine_gas",
         stringResource = Res.string.geyserTypeChlorineGasVent,
         rating = Rating.GOOD, // Has its uses
-        minAvgEmitRate = 47,
-        maxAvgEmitRate = 180
+        minAvgEmitRate = 92,
+        maxAvgEmitRate = 120
     ),
     HOT_STEAM(
         type = "hot_steam",
         stringResource = Res.string.geyserTypeSteamVent,
         rating = Rating.GOOD, // Usable energy, harder to handle.
-        minAvgEmitRate = 353,
-        maxAvgEmitRate = 1304
+        minAvgEmitRate = 611,
+        maxAvgEmitRate = 821
     ),
     HOT_CO2(
         type = "hot_co2",
         stringResource = Res.string.geyserTypeCarbonDioxideVent,
         rating = Rating.VERY_BAD, // mostly useless
-        minAvgEmitRate = 51,
-        maxAvgEmitRate = 178
+        minAvgEmitRate = 92,
+        maxAvgEmitRate = 118
     ),
     HOT_POLLUTED_O2(
         type = "hot_po2",
         stringResource = Res.string.geyserTypeHotPollutedOxygenVent,
         rating = Rating.VERY_BAD, // Crap
-        minAvgEmitRate = 48,
-        maxAvgEmitRate = 179
+        minAvgEmitRate = 93,
+        maxAvgEmitRate = 119
     ),
     INFECTIOUS_POLLUTED_O2(
         type = "slimy_po2",
         stringResource = Res.string.geyserTypeInfectiousPollutedOxygenVent,
         rating = Rating.BAD, // Usually does not produce enough to be helpful.
-        minAvgEmitRate = 51,
-        maxAvgEmitRate = 184
+        minAvgEmitRate = 93,
+        maxAvgEmitRate = 119
     ),
     WATER(
         type = "hot_water",
         stringResource = Res.string.geyserTypeWaterGeyser,
         rating = Rating.VERY_GOOD, // We love free water
-        minAvgEmitRate = 1433,
-        maxAvgEmitRate = 5104
+        minAvgEmitRate = 2471,
+        maxAvgEmitRate = 3263
     ),
     COOL_SLUSH_WATER(
         type = "slush_water",
         stringResource = Res.string.geyserTypeCoolSlushGeyser,
         rating = Rating.VERY_GOOD, // Cool polluted water, free from germs.
-        minAvgEmitRate = 722,
-        maxAvgEmitRate = 2564
+        minAvgEmitRate = 1264,
+        maxAvgEmitRate = 1662
     ),
     POLLUTED_WATER(
         type = "filthy_water",
         stringResource = Res.string.geyserTypePollutedWaterVent,
         rating = Rating.VERY_GOOD, // Many plants can consume it directly.
-        minAvgEmitRate = 1382,
-        maxAvgEmitRate = 5218
+        minAvgEmitRate = 2536,
+        maxAvgEmitRate = 3304
     ),
     COOL_SALT_WATER(
         type = "slush_salt_water",
         stringResource = Res.string.geyserTypeCoolSaltSlushGeyser,
         /* Brine brings coolness and salt. */
         rating = Rating.VERY_GOOD,
-        minAvgEmitRate = 704,
-        maxAvgEmitRate = 2610
+        minAvgEmitRate = 1277,
+        maxAvgEmitRate = 1649
     ),
     HOT_SALT_WATER(
         type = "salt_water",
         stringResource = Res.string.geyserTypeSaltWaterGeyser,
         rating = Rating.GOOD, // Free salt
-        minAvgEmitRate = 1379,
-        maxAvgEmitRate = 5181
+        minAvgEmitRate = 2577,
+        maxAvgEmitRate = 3361
     ),
     LIQUID_CO2(
         type = "liquid_co2",
         stringResource = Res.string.geyserTypeCarbonDioxideGeyser,
         rating = Rating.NEUTRAL, // Source of coolness, but heats up very fast
-        minAvgEmitRate = 67,
-        maxAvgEmitRate = 265
+        minAvgEmitRate = 130,
+        maxAvgEmitRate = 170
     ),
     LEAKY_OIL_FISSURE(
         type = "oil_drip",
         stringResource = Res.string.geyserTypeLeakyOilFissure,
         rating = Rating.NEUTRAL, // Doesn't matter if it's there. Does not produce a lot.
-        minAvgEmitRate = 1,
-        maxAvgEmitRate = 326
+        minAvgEmitRate = 148,
+        maxAvgEmitRate = 216
     ),
     LIQUID_SULFUR_GEYSER(
         type = "liquid_sulfur",
         stringResource = Res.string.geyserTypeLiquidSulfurGeyser,
-        minAvgEmitRate = 734,
-        maxAvgEmitRate = 2632
+        minAvgEmitRate = 1347,
+        maxAvgEmitRate = 1847
     ),
     IRON_VOLCANO(
         type = "molten_iron",
         stringResource = Res.string.geyserTypeIronVolcano,
         rating = Rating.GOOD, // Metal geysers are good.
-        minAvgEmitRate = 139,
-        maxAvgEmitRate = 518
+        minAvgEmitRate = 262,
+        maxAvgEmitRate = 344
     ),
     COPPER_VOLCANO(
         type = "molten_copper",
         stringResource = Res.string.geyserTypeCopperVolcano,
         rating = Rating.GOOD, // Metal geysers are good.
-        minAvgEmitRate = 144,
-        maxAvgEmitRate = 508
+        minAvgEmitRate = 273,
+        maxAvgEmitRate = 349
     ),
     GOLD_VOLCANO(
         type = "molten_gold",
         stringResource = Res.string.geyserTypeGoldVolcano,
         rating = Rating.GOOD, // Metal geysers are good.
-        minAvgEmitRate = 143,
-        maxAvgEmitRate = 524
+        minAvgEmitRate = 268,
+        maxAvgEmitRate = 352
     ),
     ALUMINIUM_VOLCANO(
         type = "molten_aluminum",
         stringResource = Res.string.geyserTypeAluminiumVolcano,
         rating = Rating.GOOD, // Metal geysers are good.
-        minAvgEmitRate = 149,
-        maxAvgEmitRate = 513
+        minAvgEmitRate = 269,
+        maxAvgEmitRate = 351
     ),
     COBALT_VOLCANO(
         type = "molten_cobalt",
         stringResource = Res.string.geyserTypeCobaltVolcano,
         rating = Rating.GOOD, // Metal geysers are good.
-        minAvgEmitRate = 135,
-        maxAvgEmitRate = 519
+        minAvgEmitRate = 267,
+        maxAvgEmitRate = 351
     ),
     TUNGSTEN_VOLCANO(
         type = "molten_tungsten",
         stringResource = Res.string.geyserTypeTungstenVolcano,
         rating = Rating.GOOD, // Metal geysers are good.
-        minAvgEmitRate = 137,
-        maxAvgEmitRate = 527
+        minAvgEmitRate = 259,
+        maxAvgEmitRate = 341
     ),
     NIOBIUM_VOLCANO(
         type = "molten_niobium",
         stringResource = Res.string.geyserTypeNiobiumVolcano,
         rating = Rating.GOOD, // Metal geysers are good.
-        minAvgEmitRate = 563,
-        maxAvgEmitRate = 2093
+        minAvgEmitRate = 1035,
+        maxAvgEmitRate = 1365
     ),
     VOLCANO(
         type = "big_volcano",
         stringResource = Res.string.geyserTypeVolcano,
-        minAvgEmitRate = 564,
-        maxAvgEmitRate = 2068
+        minAvgEmitRate = 1037,
+        maxAvgEmitRate = 1349
     ),
     MINOR_VOLCANO(
         type = "small_volcano",
         stringResource = Res.string.geyserTypeMinorVolcano,
-        minAvgEmitRate = 290,
-        maxAvgEmitRate = 1029
+        minAvgEmitRate = 518,
+        maxAvgEmitRate = 668
     ),
     OIL_RESERVOIR(
         type = "OilWell",
