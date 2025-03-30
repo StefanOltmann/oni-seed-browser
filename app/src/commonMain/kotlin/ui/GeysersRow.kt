@@ -35,31 +35,39 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.min
 import androidx.compose.ui.unit.times
 import model.Geyser
+import model.GeyserType
 import org.jetbrains.compose.resources.painterResource
 import ui.theme.FillSpacer
 import ui.theme.anthracite
 import ui.theme.gray3
 import ui.theme.halfSpacing
 
+val badRatingBackground = Color(0xFF43383E)
+
 @Composable
 fun GeysersRow(
     geysers: List<Geyser>,
     maxWidth: Dp,
-    isStarterAstroid: Boolean
+    isStarterAsteroid: Boolean
 ) {
 
-    val geyserByTypeMap = geysers.groupBy { it.id }
+    val sortedGeysers = geysers.sortedBy { it.id }
 
-    val sortedGeyserTypes = geyserByTypeMap.keys.sorted()
+    val sortedGeysersWithoutOilWells = sortedGeysers.filterNot { it.id == GeyserType.OIL_RESERVOIR }
+
+    val oilWellCount = sortedGeysers.size - sortedGeysersWithoutOilWells.size
+
+    val geyserCount = sortedGeysersWithoutOilWells.size + oilWellCount.coerceIn(0, 1)
 
     val spacingPerGeyser = min(
-        (maxWidth - sortedGeyserTypes.size.times(48.dp)) / (sortedGeyserTypes.size - 1),
+        (maxWidth - geyserCount.times(48.dp)) / (geyserCount - 1),
         halfSpacing
     )
 
@@ -69,12 +77,10 @@ fun GeysersRow(
         modifier = Modifier.height(48.dp)
     ) {
 
-        for (geyserType in sortedGeyserTypes) {
-
-            val count = geyserByTypeMap[geyserType]!!.size
+        for (geyser in sortedGeysersWithoutOilWells) {
 
             TooltipContainer(
-                tooltipContent = { GeyserTooltip(geyserType, count) },
+                tooltipContent = { GeyserTooltip(geyser.id, 1, geyser.avgEmitRate) },
                 yOffset = -5
             ) {
 
@@ -83,8 +89,8 @@ fun GeysersRow(
                     modifier = Modifier
                         .size(48.dp)
                         .background(
-                            if (geyserType.rating.isNegative())
-                                geyserType.rating.color.copy(alpha = 0.1F)
+                            if (geyser.id.rating.isNegative())
+                                badRatingBackground
                             else
                                 gray3,
                             CircleShape
@@ -97,13 +103,45 @@ fun GeysersRow(
                 ) {
 
                     Image(
-                        painter = painterResource(getGeyserDrawable(geyserType)),
+                        painter = painterResource(getGeyserDrawable(geyser.id)),
+                        contentDescription = null,
+                        alignment = Alignment.BottomCenter,
+                        modifier = Modifier.padding()
+                    )
+                }
+            }
+        }
+
+        if (oilWellCount > 0) {
+
+            TooltipContainer(
+                tooltipContent = { GeyserTooltip(GeyserType.OIL_RESERVOIR, oilWellCount, 3333) },
+                yOffset = -5
+            ) {
+
+                Box(
+                    contentAlignment = Alignment.Center,
+                    modifier = Modifier
+                        .size(48.dp)
+                        .background(
+                            gray3,
+                            CircleShape
+                        )
+                        .border(
+                            1.dp,
+                            anthracite,
+                            CircleShape
+                        )
+                ) {
+
+                    Image(
+                        painter = painterResource(getGeyserDrawable(GeyserType.OIL_RESERVOIR)),
                         contentDescription = null,
                         alignment = Alignment.BottomCenter,
                         modifier = Modifier.padding()
                     )
 
-                    if (count > 1) {
+                    if (oilWellCount > 1) {
 
                         Box(
                             contentAlignment = Alignment.Center,
@@ -117,7 +155,7 @@ fun GeysersRow(
                         ) {
 
                             Text(
-                                text = "$count",
+                                text = "$oilWellCount",
                                 style = MaterialTheme.typography.bodyLarge,
                                 color = MaterialTheme.colorScheme.onBackground,
                                 fontWeight = FontWeight.Bold,
@@ -129,7 +167,7 @@ fun GeysersRow(
             }
         }
 
-        if (isStarterAstroid)
+        if (isStarterAsteroid)
             FillSpacer()
     }
 }

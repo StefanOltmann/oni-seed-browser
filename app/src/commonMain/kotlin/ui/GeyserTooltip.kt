@@ -28,6 +28,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
+import io.github.stefanoltmann.app.generated.resources.Res
+import io.github.stefanoltmann.app.generated.resources.uiGeyserDetailGramPerSecond
 import model.GeyserType
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -37,7 +39,8 @@ import ui.theme.HalfSpacer
 @Composable
 fun GeyserTooltip(
     geyserType: GeyserType,
-    count: Int
+    count: Int,
+    avgEmitRate: Int
 ) {
 
     GenericTooltip {
@@ -69,9 +72,35 @@ fun GeyserTooltip(
 
         Text(
             text = stringResource(geyserType.stringResource),
-            style = MaterialTheme.typography.bodyLarge,
+            style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.onBackground
         )
+
+        HalfSpacer()
+
+        Text(
+            text = "•",
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onBackground
+        )
+
+        HalfSpacer()
+
+        Text(
+            text = avgEmitRate.toString(),
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onBackground
+        )
+
+        HalfSpacer()
+
+        Text(
+            text = stringResource(Res.string.uiGeyserDetailGramPerSecond),
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onBackground
+        )
+
+        HalfSpacer()
 
         DefaultSpacer()
     }

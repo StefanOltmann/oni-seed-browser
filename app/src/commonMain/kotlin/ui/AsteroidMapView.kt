@@ -378,7 +378,7 @@ fun AsteroidMap(
                     Modifier
 
                 TooltipContainer(
-                    tooltipContent = { GeyserTooltip(geyser.id, 1) },
+                    tooltipContent = { GeyserTooltip(geyser.id, 1, geyser.avgEmitRate) },
                     yOffset = 10,
                     modifier = Modifier
                         .offset(
