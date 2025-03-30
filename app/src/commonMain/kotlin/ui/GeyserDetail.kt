@@ -59,6 +59,7 @@ import ui.theme.cardColorBackground
 import ui.theme.defaultRoundedCornerShape
 import ui.theme.doubleSpacing
 import ui.theme.gray3
+import ui.theme.halfPadding
 import ui.theme.lightGrayTransparentBorderColor
 
 private val boldSpanStyle = SpanStyle(fontWeight = FontWeight.Bold)
@@ -114,10 +115,13 @@ fun GeyserDetail(
                         )
                 ) {
 
+                    /* Show it for all geyser types in detail screen. */
+                    AvgEmitRateRatingIndicator(geyser)
+
                     Image(
                         painter = painterResource(getGeyserDrawable(geyser.id)),
                         contentDescription = null,
-                        modifier = Modifier.size(48.dp)
+                        modifier = Modifier.halfPadding()
                     )
                 }
 

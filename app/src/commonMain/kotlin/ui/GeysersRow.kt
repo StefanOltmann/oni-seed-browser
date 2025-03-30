@@ -25,11 +25,12 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -47,9 +48,17 @@ import org.jetbrains.compose.resources.painterResource
 import ui.theme.FillSpacer
 import ui.theme.anthracite
 import ui.theme.gray3
+import ui.theme.halfPadding
 import ui.theme.halfSpacing
 
 val badRatingBackground = Color(0xFF43383E)
+
+const val GOOD_AVG_EMIT_RATE_THRESHOLD = 0.7F
+const val MEDIUM_AVG_EMIT_RATE_THRESHOLD = 0.5F
+
+val goodAvgEmitRateColor = Color.Green.copy(alpha = 0.4F)
+val mediumAvgEmitRateColor = Color.Yellow.copy(alpha = 0.4F)
+val badAvgEmitRateColor = Color.Red.copy(alpha = 0.4F)
 
 @Composable
 fun GeysersRow(
@@ -102,11 +111,18 @@ fun GeysersRow(
                         )
                 ) {
 
+                    /*
+                     * For good geysers, show the amount in they produce
+                     * with a circular progress indicator.
+                     */
+                    if (!geyser.id.rating.isNegative())
+                        AvgEmitRateRatingIndicator(geyser)
+
                     Image(
                         painter = painterResource(getGeyserDrawable(geyser.id)),
                         contentDescription = null,
                         alignment = Alignment.BottomCenter,
-                        modifier = Modifier.padding()
+                        modifier = Modifier.halfPadding()
                     )
                 }
             }
@@ -138,7 +154,7 @@ fun GeysersRow(
                         painter = painterResource(getGeyserDrawable(GeyserType.OIL_RESERVOIR)),
                         contentDescription = null,
                         alignment = Alignment.BottomCenter,
-                        modifier = Modifier.padding()
+                        modifier = Modifier.halfPadding()
                     )
 
                     if (oilWellCount > 1) {
@@ -170,4 +186,20 @@ fun GeysersRow(
         if (isStarterAsteroid)
             FillSpacer()
     }
+}
+
+@Composable
+fun AvgEmitRateRatingIndicator(geyser: Geyser) {
+
+    CircularProgressIndicator(
+        progress = { geyser.avgEmitRateRating },
+        modifier = Modifier.fillMaxSize(),
+        color = if (geyser.avgEmitRateRating > GOOD_AVG_EMIT_RATE_THRESHOLD)
+            goodAvgEmitRateColor
+        else if (geyser.avgEmitRateRating > MEDIUM_AVG_EMIT_RATE_THRESHOLD)
+            mediumAvgEmitRateColor
+        else
+            badAvgEmitRateColor,
+        gapSize = 0.dp
+    )
 }

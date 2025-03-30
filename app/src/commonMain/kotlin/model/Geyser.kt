@@ -55,6 +55,9 @@ data class Geyser(
 
     val overallCycles = activeCycles + dormancyCycles
 
+    val avgEmitRateRating: Float =
+        (avgEmitRate - id.minAvgEmitRate).toFloat() / (id.maxAvgEmitRate - id.minAvgEmitRate)
+
     override fun toString(): String =
         "${id.stringResource} @ $x,$y"
 }
