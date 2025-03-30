@@ -53,12 +53,19 @@ import ui.theme.halfSpacing
 
 val badRatingBackground = Color(0xFF43383E)
 
-const val GOOD_AVG_EMIT_RATE_THRESHOLD = 0.7F
-const val MEDIUM_AVG_EMIT_RATE_THRESHOLD = 0.4F
+/**
+ * Good geysers are a bit above average.
+ */
+const val GOOD_AVG_EMIT_RATE_THRESHOLD = 0.55F
 
-val goodAvgEmitRateColor = Color.Green.copy(alpha = 0.4F)
-val mediumAvgEmitRateColor = Color.Yellow.copy(alpha = 0.4F)
-val badAvgEmitRateColor = Color.Red.copy(alpha = 0.4F)
+/**
+ * Bad geysers are in the lowest third.
+ */
+const val MEDIUM_AVG_EMIT_RATE_THRESHOLD = 0.33F
+
+val goodAvgEmitRateColor = Color.Green.copy(alpha = 0.5F)
+val mediumAvgEmitRateColor = Color.Yellow.copy(alpha = 0.5F)
+val badAvgEmitRateColor = Color.Red.copy(alpha = 0.5F)
 
 @Composable
 fun GeysersRow(

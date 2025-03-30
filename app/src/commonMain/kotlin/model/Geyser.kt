@@ -55,8 +55,12 @@ data class Geyser(
 
     val overallCycles = activeCycles + dormancyCycles
 
+    /**
+     * Rating of geyser output in a range of 0.01F to 1.00F
+     */
     val avgEmitRateRating: Float =
-        (avgEmitRate - id.minAvgEmitRate).toFloat() / (id.maxAvgEmitRate - id.minAvgEmitRate)
+        ((avgEmitRate - id.minAvgEmitRate).toFloat() / (id.maxAvgEmitRate - id.minAvgEmitRate))
+            .coerceIn(minimumValue = 0.01F, maximumValue = 1.0F)
 
     override fun toString(): String =
         "${id.stringResource} @ $x,$y"
