@@ -76,7 +76,7 @@ fun GeyserDetail(
             .padding(horizontal = doubleSpacing)
             .background(
                 if (geyser.id.rating.isNegative())
-                    geyser.id.rating.color.copy(alpha = 0.2F)
+                    geyser.id.rating.color.copy(alpha = 0.1F)
                 else
                     cardColorBackground,
                 defaultRoundedCornerShape

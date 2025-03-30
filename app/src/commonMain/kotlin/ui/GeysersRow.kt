@@ -83,15 +83,15 @@ fun GeysersRow(
                     modifier = Modifier
                         .size(48.dp)
                         .background(
-                            gray3,
+                            if (geyserType.rating.isNegative())
+                                geyserType.rating.color.copy(alpha = 0.1F)
+                            else
+                                gray3,
                             CircleShape
                         )
                         .border(
-                            if (geyserType.rating.isNegative()) 2.dp else 1.dp,
-                            if (geyserType.rating.isNegative())
-                                geyserType.rating.color
-                            else
-                                anthracite,
+                            1.dp,
+                            anthracite,
                             CircleShape
                         )
                 ) {
