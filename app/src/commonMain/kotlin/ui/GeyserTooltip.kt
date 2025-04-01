@@ -30,6 +30,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -155,9 +156,28 @@ fun GeyserTooltip(
                                 .width(200.dp)
                         )
 
+                        val percentLowAvg = (geyserType.lowAvgEmitRate - geyserType.minAvgEmitRate) * 100.0 /
+                            (geyserType.maxAvgEmitRate - geyserType.minAvgEmitRate)
+
+                        Box(
+                            modifier = Modifier
+                                .background(
+                                    Color.Red.copy(alpha = 0.3F),
+                                    RoundedCornerShape(
+                                        topStart = 8.dp,
+                                        bottomStart = 8.dp
+                                    )
+                                )
+                                .height(8.dp)
+                                .width((percentLowAvg * 2).dp)
+                        )
+
                         val percentMeanAvg = (geyserType.meanAvgEmitRate - geyserType.minAvgEmitRate) * 100.0 /
                             (geyserType.maxAvgEmitRate - geyserType.minAvgEmitRate)
 
+                        /*
+                         * Indicator in the bar where the mean average is
+                         */
                         Box(
                             modifier = Modifier
                                 .offset(
