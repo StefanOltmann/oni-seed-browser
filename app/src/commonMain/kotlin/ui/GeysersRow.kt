@@ -201,9 +201,9 @@ fun AvgEmitRateRatingIndicator(geyser: Geyser) {
     CircularProgressIndicator(
         progress = { geyser.avgEmitRateRating },
         modifier = Modifier.fillMaxSize(),
-        color = if (geyser.avgEmitRateRating > GOOD_AVG_EMIT_RATE_THRESHOLD)
+        color = if (geyser.avgEmitRateRating >= GOOD_AVG_EMIT_RATE_THRESHOLD)
             goodAvgEmitRateColor
-        else if (geyser.avgEmitRateRating > MEDIUM_AVG_EMIT_RATE_THRESHOLD)
+        else if (geyser.avgEmitRateRating >= MEDIUM_AVG_EMIT_RATE_THRESHOLD)
             mediumAvgEmitRateColor
         else
             badAvgEmitRateColor,
