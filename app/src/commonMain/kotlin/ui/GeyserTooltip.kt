@@ -154,7 +154,8 @@ fun GeyserTooltip(
                                 .width(200.dp)
                         )
 
-                        val percent = avgEmitRate * 100.0 / geyserType.maxAvgEmitRate
+                        val percent = (avgEmitRate - geyserType.minAvgEmitRate) * 100.0 /
+                            (geyserType.maxAvgEmitRate - geyserType.minAvgEmitRate)
 
                         /*
                          * Indicator above the bar where this value is.
