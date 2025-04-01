@@ -63,9 +63,9 @@ const val GOOD_AVG_EMIT_RATE_THRESHOLD = 0.5F
  */
 const val MEDIUM_AVG_EMIT_RATE_THRESHOLD = 0.33F
 
-val goodAvgEmitRateColor = Color.Green.copy(alpha = 0.5F)
-val mediumAvgEmitRateColor = Color.Yellow.copy(alpha = 0.5F)
-val badAvgEmitRateColor = Color.Red.copy(alpha = 0.5F)
+val goodAvgEmitRateColor = Color.Green
+val mediumAvgEmitRateColor = Color.Yellow
+val badAvgEmitRateColor = Color(0xFFFF4C4C) // lighter red
 
 @Composable
 fun GeysersRow(
@@ -195,18 +195,21 @@ fun GeysersRow(
     }
 }
 
+fun getAvgEmitRateRatingColor(avgEmitRateRating: Float): Color =
+    if (avgEmitRateRating >= GOOD_AVG_EMIT_RATE_THRESHOLD)
+        goodAvgEmitRateColor
+    else if (avgEmitRateRating >= MEDIUM_AVG_EMIT_RATE_THRESHOLD)
+        mediumAvgEmitRateColor
+    else
+        badAvgEmitRateColor
+
 @Composable
 fun AvgEmitRateRatingIndicator(geyser: Geyser) {
 
     CircularProgressIndicator(
         progress = { geyser.avgEmitRateRating },
         modifier = Modifier.fillMaxSize(),
-        color = if (geyser.avgEmitRateRating >= GOOD_AVG_EMIT_RATE_THRESHOLD)
-            goodAvgEmitRateColor
-        else if (geyser.avgEmitRateRating >= MEDIUM_AVG_EMIT_RATE_THRESHOLD)
-            mediumAvgEmitRateColor
-        else
-            badAvgEmitRateColor,
+        color = getAvgEmitRateRatingColor(geyser.avgEmitRateRating).copy(alpha = 0.6F),
         gapSize = 0.dp
     )
 }

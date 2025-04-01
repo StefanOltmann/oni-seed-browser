@@ -69,6 +69,10 @@ fun GeyserTooltip(
 
         Column {
 
+            val avgEmitRateRating = geyserType.getAvgEmitRateRating(avgEmitRate)
+
+            val avgEmitRateColor = getAvgEmitRateRatingColor(avgEmitRateRating)
+
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.padding(horizontal = defaultSpacing)
@@ -116,7 +120,7 @@ fun GeyserTooltip(
                 Text(
                     text = avgEmitRate.toString(),
                     style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onBackground
+                    color = avgEmitRateColor
                 )
 
                 HalfSpacer()
@@ -124,7 +128,7 @@ fun GeyserTooltip(
                 Text(
                     text = stringResource(Res.string.uiGeyserDetailGramPerSecond),
                     style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onBackground
+                    color = avgEmitRateColor
                 )
 
                 HalfSpacer()
@@ -226,7 +230,7 @@ fun GeyserTooltip(
                                     x = (percentThisValue * 2).dp,
                                     y = -8.dp
                                 )
-                                .background(Color.Red, TriangleShapeDown)
+                                .background(avgEmitRateColor, TriangleShapeDown)
                                 .size(8.dp)
                         )
                     }
