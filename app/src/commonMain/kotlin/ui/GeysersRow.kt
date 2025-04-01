@@ -65,7 +65,7 @@ const val MEDIUM_AVG_EMIT_RATE_THRESHOLD = 0.33F
 
 val goodAvgEmitRateColor = Color.Green
 val mediumAvgEmitRateColor = Color.Yellow
-val badAvgEmitRateColor = Color(0xFFFF4C4C) // lighter red
+val badAvgEmitRateColor = Color(0xFFffa192) // lighter red
 
 @Composable
 fun GeysersRow(
@@ -205,6 +205,9 @@ fun getAvgEmitRateRatingColor(avgEmitRateRating: Float): Color =
 
 @Composable
 fun AvgEmitRateRatingIndicator(geyser: Geyser) {
+
+    if (geyser.id == GeyserType.OIL_RESERVOIR)
+        return
 
     CircularProgressIndicator(
         progress = { geyser.avgEmitRateRating },
