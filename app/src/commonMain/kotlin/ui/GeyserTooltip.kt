@@ -51,6 +51,7 @@ import model.GeyserType
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import ui.theme.HalfSpacer
+import ui.theme.anthracite
 import ui.theme.defaultRoundedCornerShape
 import ui.theme.defaultSpacing
 import ui.theme.halfSpacing
@@ -149,12 +150,24 @@ fun GeyserTooltip(
 
                         Box(
                             modifier = Modifier
-                                .background(lightGray, defaultRoundedCornerShape)
+                                .background(anthracite, defaultRoundedCornerShape)
                                 .height(8.dp)
                                 .width(200.dp)
                         )
 
-                        val percent = (avgEmitRate - geyserType.minAvgEmitRate) * 100.0 /
+                        val percentMeanAvg = (geyserType.meanAvgEmitRate - geyserType.minAvgEmitRate) * 100.0 /
+                            (geyserType.maxAvgEmitRate - geyserType.minAvgEmitRate)
+
+                        Box(
+                            modifier = Modifier
+                                .offset(
+                                    x = (percentMeanAvg * 2).dp
+                                )
+                                .background(lightGray, TriangleShapeUp)
+                                .size(8.dp)
+                        )
+
+                        val percentThisValue = (avgEmitRate - geyserType.minAvgEmitRate) * 100.0 /
                             (geyserType.maxAvgEmitRate - geyserType.minAvgEmitRate)
 
                         /*
@@ -163,10 +176,10 @@ fun GeyserTooltip(
                         Box(
                             modifier = Modifier
                                 .offset(
-                                    x = (percent * 2).dp,
+                                    x = (percentThisValue * 2).dp,
                                     y = -8.dp
                                 )
-                                .background(Color.Red, TriangleShape)
+                                .background(Color.Red, TriangleShapeDown)
                                 .size(8.dp)
                         )
                     }
@@ -186,7 +199,7 @@ fun GeyserTooltip(
     }
 }
 
-private object TriangleShape : Shape {
+private object TriangleShapeDown : Shape {
 
     override fun createOutline(
         size: Size,
@@ -198,6 +211,25 @@ private object TriangleShape : Shape {
             moveTo(size.width / 2, size.height)
             lineTo(0f, 0f)
             lineTo(size.width, 0f)
+            close()
+        }
+
+        return Outline.Generic(path)
+    }
+}
+
+private object TriangleShapeUp : Shape {
+
+    override fun createOutline(
+        size: Size,
+        layoutDirection: LayoutDirection,
+        density: Density
+    ): Outline {
+
+        val path = Path().apply {
+            moveTo(size.width / 2, 0f)
+            lineTo(0f, size.height)
+            lineTo(size.width, size.height)
             close()
         }
 

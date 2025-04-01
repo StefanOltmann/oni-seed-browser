@@ -54,9 +54,9 @@ import ui.theme.halfSpacing
 val badRatingBackground = Color(0xFF43383E)
 
 /**
- * Good geysers are a bit above average.
+ * Good geysers are at least average
  */
-const val GOOD_AVG_EMIT_RATE_THRESHOLD = 0.55F
+const val GOOD_AVG_EMIT_RATE_THRESHOLD = 0.5F
 
 /**
  * Bad geysers are in the lowest third.
