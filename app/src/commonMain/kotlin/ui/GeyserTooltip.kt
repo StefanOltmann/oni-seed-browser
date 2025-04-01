@@ -176,33 +176,6 @@ fun GeyserTooltip(
                                 .width((percentLowAvg * 2).dp)
                         )
 
-                        val percentHighAvg = (
-                            geyserType.highAvgEmitRate -
-                                geyserType.minAvgEmitRate -
-                                geyserType.avgEmitRateStdDev
-                            ) * 100.0 /
-                            (
-                                geyserType.maxAvgEmitRate -
-                                    geyserType.minAvgEmitRate -
-                                    geyserType.avgEmitRateStdDev
-                                )
-
-                        Box(
-                            modifier = Modifier
-                                .offset(
-                                    x = (100.0 - percentHighAvg).times(2).dp
-                                )
-                                .background(
-                                    Color.Green.copy(alpha = 0.3F),
-                                    RoundedCornerShape(
-                                        topEnd = 8.dp,
-                                        bottomEnd = 8.dp
-                                    )
-                                )
-                                .height(8.dp)
-                                .width((percentHighAvg * 2).dp)
-                        )
-
                         val percentMeanAvg = (geyserType.meanAvgEmitRate - geyserType.minAvgEmitRate) * 100.0 /
                             (geyserType.maxAvgEmitRate - geyserType.minAvgEmitRate)
 
