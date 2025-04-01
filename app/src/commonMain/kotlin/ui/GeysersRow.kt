@@ -97,7 +97,7 @@ fun GeysersRow(
 
             TooltipContainer(
                 tooltipContent = { GeyserTooltip(geyser.id, 1, geyser.avgEmitRate) },
-                yOffset = -5
+                yOffset = 16
             ) {
 
                 Box(
