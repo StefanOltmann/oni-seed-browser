@@ -27,7 +27,7 @@
     <string name="uiBiomeDetails">Biom details</string>
     <string name="uiGeyserDetails">Geysir details</string>
     <string name="uiGeyserDetailGramPerSecond">g/s</string>
-    <string name="uiGeyserDetailKilogramPerCycle">kg/Zyklus</string>
+    <string name="uiGeyserDetailTonsPerCycle">t/Zyklus</string>
     <string name="uiGeyserDetailOnAverage">im Durchschnitt</string>
     <string name="uiGeyserDetailSecondsShort">s</string>
     <string name="uiGeyserDetailCycles">Zyklen</string>

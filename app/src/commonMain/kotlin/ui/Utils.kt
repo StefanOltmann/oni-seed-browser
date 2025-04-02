@@ -33,8 +33,8 @@ import androidx.compose.ui.input.pointer.onPointerEvent
 import kotlin.math.pow
 import kotlin.math.roundToInt
 
-const val SECONDS_PER_CYCLE: Int = 600
-const val GRAMS_PER_KG: Int = 1000
+const val SECONDS_PER_CYCLE: Float = 600F
+const val GRAMS_PER_TON: Float = 1_000_000F
 
 @OptIn(ExperimentalComposeUiApi::class)
 fun Modifier.onHover(hovered: MutableState<Boolean>) = this
@@ -55,11 +55,23 @@ fun Modifier.noRippleClickable(onClick: (() -> Unit)): Modifier = this
         onClick = onClick
     )
 
-fun calcKgPerCycle(gramPerSecond: Int): Int =
-    ((gramPerSecond / GRAMS_PER_KG.toFloat()) * SECONDS_PER_CYCLE).roundToInt()
+fun calcTonsPerCycle(gramPerSecond: Int): Float =
+    (gramPerSecond / GRAMS_PER_TON) * SECONDS_PER_CYCLE
 
 fun Float.toString(numOfDec: Int): String {
-    val integerDigits = this.toInt()
-    val floatDigits = ((this - integerDigits) * 10f.pow(numOfDec)).roundToInt()
-    return "$integerDigits.$floatDigits"
+
+    require(numOfDec >= 0) { "Number of decimals must be non-negative" }
+
+    val factor = 10f.pow(numOfDec)
+    val roundedValue = (this * factor).roundToInt() / factor
+
+    val parts = roundedValue.toString().split('.')
+    val integerPart = parts[0]
+    val decimalPart = if (parts.size > 1) parts[1] else "0"
+
+    return if (numOfDec > 0) {
+        "$integerPart.${decimalPart.padEnd(numOfDec, '0')}"
+    } else {
+        integerPart
+    }
 }
