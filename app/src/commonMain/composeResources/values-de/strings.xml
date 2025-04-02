@@ -27,6 +27,7 @@
     <string name="uiBiomeDetails">Biom details</string>
     <string name="uiGeyserDetails">Geysir details</string>
     <string name="uiGeyserDetailGramPerSecond">g/s</string>
+    <string name="uiGeyserDetailKilogramPerCycle">kg/Zyklus</string>
     <string name="uiGeyserDetailOnAverage">im Durchschnitt</string>
     <string name="uiGeyserDetailSecondsShort">s</string>
     <string name="uiGeyserDetailCycles">Zyklen</string>
@@ -45,7 +46,9 @@
     <string name="uiSetUsername">Name festlegen</string>
     <string name="uiUsernameLabel">Name</string>
     <string name="uiLoading">Lädt...</string>
-    <string name="uiLeaderBoardExplainer">Dies ist unsere Hall of Fame für alle, die durch das Ausführen des Mods Karten zu unserer Datenbank beigetragen haben. Vielen Dank an euch alle!</string>
+    <string name="uiLeaderBoardExplainer">Dies ist unsere Hall of Fame für alle, die durch das Ausführen des Mods Karten
+        zu unserer Datenbank beigetragen haben. Vielen Dank an euch alle!
+    </string>
     <string name="uiLeaderBoardRank">Rang</string>
     <string name="uiLeaderBoardUsername">Benutzername</string>
     <string name="uiLeaderBoardCount">Anzahl</string>

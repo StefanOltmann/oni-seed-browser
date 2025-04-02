@@ -30,6 +30,11 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.ColorMatrix
 import androidx.compose.ui.input.pointer.PointerEventType
 import androidx.compose.ui.input.pointer.onPointerEvent
+import kotlin.math.pow
+import kotlin.math.roundToInt
+
+const val SECONDS_PER_CYCLE: Int = 600
+const val GRAMS_PER_KG: Int = 1000
 
 @OptIn(ExperimentalComposeUiApi::class)
 fun Modifier.onHover(hovered: MutableState<Boolean>) = this
@@ -50,3 +55,11 @@ fun Modifier.noRippleClickable(onClick: (() -> Unit)): Modifier = this
         onClick = onClick
     )
 
+fun calcKgPerCycle(gramPerSecond: Int): Int =
+    ((gramPerSecond / GRAMS_PER_KG.toFloat()) * SECONDS_PER_CYCLE).roundToInt()
+
+fun Float.toString(numOfDec: Int): String {
+    val integerDigits = this.toInt()
+    val floatDigits = ((this - integerDigits) * 10f.pow(numOfDec)).roundToInt()
+    return "$integerDigits.$floatDigits"
+}

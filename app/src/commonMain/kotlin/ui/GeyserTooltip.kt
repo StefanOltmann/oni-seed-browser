@@ -48,6 +48,7 @@ import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import io.github.stefanoltmann.app.generated.resources.Res
 import io.github.stefanoltmann.app.generated.resources.uiGeyserDetailGramPerSecond
+import io.github.stefanoltmann.app.generated.resources.uiGeyserDetailKilogramPerCycle
 import model.GeyserType
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -129,6 +130,15 @@ fun GeyserTooltip(
                     text = stringResource(Res.string.uiGeyserDetailGramPerSecond),
                     style = MaterialTheme.typography.bodyMedium,
                     color = avgEmitRateColor
+                )
+
+                HalfSpacer()
+
+                Text(
+                    text = "(" + calcKgPerCycle(avgEmitRate).toString() + " " +
+                        stringResource(Res.string.uiGeyserDetailKilogramPerCycle) + ")",
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onBackground.copy(0.7F)
                 )
 
                 HalfSpacer()

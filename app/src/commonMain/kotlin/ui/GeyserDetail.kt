@@ -48,8 +48,6 @@ import io.github.stefanoltmann.app.generated.resources.uiGeyserDetailEmitDetails
 import io.github.stefanoltmann.app.generated.resources.uiGeyserDetailGramPerSecond
 import io.github.stefanoltmann.app.generated.resources.uiGeyserDetailOnAverage
 import io.github.stefanoltmann.app.generated.resources.uiGeyserDetailSecondsShort
-import kotlin.math.pow
-import kotlin.math.roundToInt
 import model.Geyser
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -284,10 +282,4 @@ fun GeyserDetail(
             }
         }
     }
-}
-
-private fun Float.toString(numOfDec: Int): String {
-    val integerDigits = this.toInt()
-    val floatDigits = ((this - integerDigits) * 10f.pow(numOfDec)).roundToInt()
-    return "$integerDigits.$floatDigits"
 }
