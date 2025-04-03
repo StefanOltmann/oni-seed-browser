@@ -135,7 +135,7 @@ fun GeyserTooltip(
                 HalfSpacer()
 
                 Text(
-                    text = "(" + calcTonsPerCycle(avgEmitRate).toString(numOfDec = 2) + " " +
+                    text = "(" + calcTonsPerCycle(avgEmitRate).toString(decimals = 2) + " " +
                         stringResource(Res.string.uiGeyserDetailTonsPerCycle) + ")",
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onBackground.copy(0.7F)
