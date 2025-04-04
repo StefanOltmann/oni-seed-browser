@@ -96,8 +96,18 @@ fun GeysersRow(
         for (geyser in sortedGeysersWithoutOilWells) {
 
             TooltipContainer(
-                tooltipContent = { GeyserTooltip(geyser.id, 1, geyser.avgEmitRate) },
-                yOffset = 16
+                tooltipContent = {
+                    GeyserTooltip(
+                        geyserType = geyser.id,
+                        count = 1,
+                        avgEmitRate = geyser.avgEmitRate,
+                        storageTankTons = geyser.storageTankTons
+                    )
+                },
+                yOffset = if (geyser.storageTankTons != null)
+                    32
+                else
+                    16
             ) {
 
                 Box(
@@ -138,7 +148,14 @@ fun GeysersRow(
         if (oilWellCount > 0) {
 
             TooltipContainer(
-                tooltipContent = { GeyserTooltip(GeyserType.OIL_RESERVOIR, oilWellCount, 3333) },
+                tooltipContent = {
+                    GeyserTooltip(
+                        geyserType = GeyserType.OIL_RESERVOIR,
+                        count = oilWellCount,
+                        avgEmitRate = 3333,
+                        storageTankTons = 0f
+                    )
+                },
                 yOffset = -5
             ) {
 

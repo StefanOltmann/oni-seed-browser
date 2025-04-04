@@ -50,6 +50,7 @@
     <string name="uiLeaderBoardRank">Rank</string>
     <string name="uiLeaderBoardUsername">Username</string>
     <string name="uiLeaderBoardCount">Count</string>
+    <string name="uiStorageTankForDormancy">Storage tank for dormancy</string>
 
     <!-- GameModes -->
     <string name="gameModeBaseGameStandard">Standard</string>

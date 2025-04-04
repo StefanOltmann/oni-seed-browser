@@ -379,8 +379,20 @@ fun AsteroidMap(
                     Modifier
 
                 TooltipContainer(
-                    tooltipContent = { GeyserTooltip(geyser.id, 1, geyser.avgEmitRate) },
-                    yOffset = if (geyser.id == GeyserType.OIL_RESERVOIR) 10 else 32,
+                    tooltipContent = {
+                        GeyserTooltip(
+                            geyserType = geyser.id,
+                            count = 1,
+                            avgEmitRate = geyser.avgEmitRate,
+                            storageTankTons = geyser.storageTankTons
+                        )
+                    },
+                    yOffset = if (geyser.id == GeyserType.OIL_RESERVOIR)
+                        10
+                    else if (geyser.storageTankTons != null)
+                        48
+                    else
+                        32,
                     modifier = Modifier
                         .offset(
                             x = (geyser.x * viewScale).dp - halfIconSize,

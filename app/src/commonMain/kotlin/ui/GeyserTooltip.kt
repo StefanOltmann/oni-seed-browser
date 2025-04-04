@@ -31,6 +31,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -49,13 +50,16 @@ import androidx.compose.ui.unit.dp
 import io.github.stefanoltmann.app.generated.resources.Res
 import io.github.stefanoltmann.app.generated.resources.uiGeyserDetailGramPerSecond
 import io.github.stefanoltmann.app.generated.resources.uiGeyserDetailTonsPerCycle
+import io.github.stefanoltmann.app.generated.resources.uiStorageTankForDormancy
 import model.GeyserType
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
+import ui.theme.DefaultSpacer
 import ui.theme.HalfSpacer
 import ui.theme.anthracite
 import ui.theme.defaultRoundedCornerShape
 import ui.theme.defaultSpacing
+import ui.theme.doubleSpacing
 import ui.theme.halfSpacing
 import ui.theme.lightGray
 
@@ -63,7 +67,8 @@ import ui.theme.lightGray
 fun GeyserTooltip(
     geyserType: GeyserType,
     count: Int,
-    avgEmitRate: Int
+    avgEmitRate: Int,
+    storageTankTons: Float?
 ) {
 
     GenericTooltip {
@@ -84,6 +89,21 @@ fun GeyserTooltip(
                 AvgEmitRateScaleRow(geyserType, avgEmitRate, avgEmitRateColor)
 
                 HalfSpacer()
+
+                if (storageTankTons != null) {
+
+                    HorizontalDivider(
+                        modifier = Modifier
+                            .offset(x = 8.dp)
+                            .width(272.dp),
+                        thickness = 1.dp,
+                        color = lightGray
+                    )
+
+                    StorageTankRow(geyserType, storageTankTons)
+
+                    DefaultSpacer()
+                }
             }
         }
     }
@@ -253,6 +273,27 @@ private fun AvgEmitRateScaleRow(
             color = MaterialTheme.colorScheme.onBackground,
             textAlign = TextAlign.Center,
             modifier = Modifier.width(40.dp).offset(y = -2.dp)
+        )
+    }
+}
+
+@Composable
+private fun StorageTankRow(
+    geyserType: GeyserType,
+    storageTankTons: Float
+) {
+
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier.padding(horizontal = doubleSpacing)
+    ) {
+
+        Text(
+            text = stringResource(Res.string.uiStorageTankForDormancy) + ": " +
+                storageTankTons.toString(decimals = 2) + "t",
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onBackground,
+            textAlign = TextAlign.Center
         )
     }
 }

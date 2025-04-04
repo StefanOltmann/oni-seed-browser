@@ -52,6 +52,7 @@
     <string name="uiLeaderBoardRank">Rang</string>
     <string name="uiLeaderBoardUsername">Benutzername</string>
     <string name="uiLeaderBoardCount">Anzahl</string>
+    <string name="uiStorageTankForDormancy">Speicher für Ruhephase</string>
 
     <!-- GameModes -->
     <string name="gameModeBaseGameStandard">Standard</string>
