@@ -72,164 +72,188 @@ fun GeyserTooltip(
 
             val avgEmitRateRating = geyserType.getAvgEmitRateRating(avgEmitRate)
 
-            val avgEmitRateColor = getAvgEmitRateRatingColor(avgEmitRateRating)
+            val avgEmitRateColor = if (geyserType == GeyserType.OIL_RESERVOIR)
+                goodAvgEmitRateColor
+            else
+                getAvgEmitRateRatingColor(avgEmitRateRating)
 
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.padding(horizontal = defaultSpacing)
-            ) {
-
-                if (count > 1) {
-
-                    HalfSpacer()
-
-                    Text(
-                        text = count.toString() + "x",
-                        style = MaterialTheme.typography.bodyLarge,
-                        color = MaterialTheme.colorScheme.onBackground
-                    )
-
-                    HalfSpacer()
-                }
-
-                Image(
-                    painter = painterResource(getGeyserDrawable(geyserType)),
-                    contentDescription = null,
-                    modifier = Modifier
-                        .size(32.dp)
-                        .clip(CircleShape)
-                )
-
-                HalfSpacer()
-
-                Text(
-                    text = stringResource(geyserType.stringResource),
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onBackground
-                )
-
-                HalfSpacer()
-
-                Text(
-                    text = "•",
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onBackground
-                )
-
-                HalfSpacer()
-
-                Text(
-                    text = avgEmitRate.toString(),
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = avgEmitRateColor
-                )
-
-                HalfSpacer()
-
-                Text(
-                    text = stringResource(Res.string.uiGeyserDetailGramPerSecond),
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = avgEmitRateColor
-                )
-
-                HalfSpacer()
-
-                Text(
-                    text = "(" + calcTonsPerCycle(avgEmitRate).toString(numOfDec = 2) + " " +
-                        stringResource(Res.string.uiGeyserDetailTonsPerCycle) + ")",
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onBackground.copy(0.7F)
-                )
-
-                HalfSpacer()
-            }
+            GeyserInfoHeaderRow(count, geyserType, avgEmitRate, avgEmitRateColor)
 
             if (geyserType != GeyserType.OIL_RESERVOIR) {
 
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier.padding(horizontal = halfSpacing)
-                ) {
-
-                    Text(
-                        text = geyserType.minAvgEmitRate.toString(),
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onBackground,
-                        textAlign = TextAlign.Center,
-                        modifier = Modifier.width(40.dp).offset(y = -2.dp)
-                    )
-
-                    Box(
-                        contentAlignment = Alignment.CenterStart
-                    ) {
-
-                        Box(
-                            modifier = Modifier
-                                .background(anthracite, defaultRoundedCornerShape)
-                                .height(8.dp)
-                                .width(200.dp)
-                        )
-
-                        val percentLowAvg = (geyserType.lowAvgEmitRate - geyserType.minAvgEmitRate) * 100.0 /
-                            (geyserType.maxAvgEmitRate - geyserType.minAvgEmitRate)
-
-                        Box(
-                            modifier = Modifier
-                                .background(
-                                    Color.Red.copy(alpha = 0.3F),
-                                    RoundedCornerShape(
-                                        topStart = 8.dp,
-                                        bottomStart = 8.dp
-                                    )
-                                )
-                                .height(8.dp)
-                                .width((percentLowAvg * 2).dp)
-                        )
-
-                        val percentMeanAvg = (geyserType.meanAvgEmitRate - geyserType.minAvgEmitRate) * 100.0 /
-                            (geyserType.maxAvgEmitRate - geyserType.minAvgEmitRate)
-
-                        /*
-                         * Indicator in the bar where the mean average is
-                         */
-                        Box(
-                            modifier = Modifier
-                                .offset(
-                                    x = (percentMeanAvg * 2).dp
-                                )
-                                .background(lightGray, TriangleShapeUp)
-                                .size(8.dp)
-                        )
-
-                        val percentThisValue = (avgEmitRate - geyserType.minAvgEmitRate) * 100.0 /
-                            (geyserType.maxAvgEmitRate - geyserType.minAvgEmitRate)
-
-                        /*
-                         * Indicator above the bar where this value is.
-                         */
-                        Box(
-                            modifier = Modifier
-                                .offset(
-                                    x = (percentThisValue * 2).dp,
-                                    y = -8.dp
-                                )
-                                .background(avgEmitRateColor, TriangleShapeDown)
-                                .size(8.dp)
-                        )
-                    }
-
-                    Text(
-                        text = geyserType.maxAvgEmitRate.toString(),
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onBackground,
-                        textAlign = TextAlign.Center,
-                        modifier = Modifier.width(40.dp).offset(y = -2.dp)
-                    )
-                }
+                AvgEmitRateScaleRow(geyserType, avgEmitRate, avgEmitRateColor)
 
                 HalfSpacer()
             }
         }
+    }
+}
+
+@Composable
+private fun GeyserInfoHeaderRow(
+    count: Int,
+    geyserType: GeyserType,
+    avgEmitRate: Int,
+    avgEmitRateColor: Color
+) {
+
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier.padding(horizontal = defaultSpacing)
+    ) {
+
+        if (count > 1) {
+
+            HalfSpacer()
+
+            Text(
+                text = count.toString() + "x",
+                style = MaterialTheme.typography.bodyLarge,
+                color = MaterialTheme.colorScheme.onBackground
+            )
+
+            HalfSpacer()
+        }
+
+        Image(
+            painter = painterResource(getGeyserDrawable(geyserType)),
+            contentDescription = null,
+            modifier = Modifier
+                .size(32.dp)
+                .clip(CircleShape)
+        )
+
+        HalfSpacer()
+
+        Text(
+            text = stringResource(geyserType.stringResource),
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onBackground
+        )
+
+        HalfSpacer()
+
+        Text(
+            text = "•",
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onBackground
+        )
+
+        HalfSpacer()
+
+        Text(
+            text = avgEmitRate.toString(),
+            style = MaterialTheme.typography.bodyMedium,
+            color = avgEmitRateColor
+        )
+
+        HalfSpacer()
+
+        Text(
+            text = stringResource(Res.string.uiGeyserDetailGramPerSecond),
+            style = MaterialTheme.typography.bodyMedium,
+            color = avgEmitRateColor
+        )
+
+        HalfSpacer()
+
+        Text(
+            text = "(" + calcTonsPerCycle(avgEmitRate).toString(numOfDec = 2) + " " +
+                stringResource(Res.string.uiGeyserDetailTonsPerCycle) + ")",
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onBackground.copy(0.7F)
+        )
+
+        HalfSpacer()
+    }
+}
+
+@Composable
+private fun AvgEmitRateScaleRow(
+    geyserType: GeyserType,
+    avgEmitRate: Int,
+    avgEmitRateColor: Color
+) {
+
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier.padding(horizontal = halfSpacing)
+    ) {
+
+        Text(
+            text = geyserType.minAvgEmitRate.toString(),
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onBackground,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.width(40.dp).offset(y = -2.dp)
+        )
+
+        Box(
+            contentAlignment = Alignment.CenterStart
+        ) {
+
+            Box(
+                modifier = Modifier
+                    .background(anthracite, defaultRoundedCornerShape)
+                    .height(8.dp)
+                    .width(200.dp)
+            )
+
+            val percentLowAvg = (geyserType.lowAvgEmitRate - geyserType.minAvgEmitRate) * 100.0 /
+                (geyserType.maxAvgEmitRate - geyserType.minAvgEmitRate)
+
+            Box(
+                modifier = Modifier
+                    .background(
+                        Color.Red.copy(alpha = 0.3F),
+                        RoundedCornerShape(
+                            topStart = 8.dp,
+                            bottomStart = 8.dp
+                        )
+                    )
+                    .height(8.dp)
+                    .width((percentLowAvg * 2).dp)
+            )
+
+            val percentMeanAvg = (geyserType.meanAvgEmitRate - geyserType.minAvgEmitRate) * 100.0 /
+                (geyserType.maxAvgEmitRate - geyserType.minAvgEmitRate)
+
+            /*
+             * Indicator in the bar where the mean average is
+             */
+            Box(
+                modifier = Modifier
+                    .offset(
+                        x = (percentMeanAvg * 2).dp
+                    )
+                    .background(lightGray, TriangleShapeUp)
+                    .size(8.dp)
+            )
+
+            val percentThisValue = (avgEmitRate - geyserType.minAvgEmitRate) * 100.0 /
+                (geyserType.maxAvgEmitRate - geyserType.minAvgEmitRate)
+
+            /*
+             * Indicator above the bar where this value is.
+             */
+            Box(
+                modifier = Modifier
+                    .offset(
+                        x = (percentThisValue * 2).dp,
+                        y = -8.dp
+                    )
+                    .background(avgEmitRateColor, TriangleShapeDown)
+                    .size(8.dp)
+            )
+        }
+
+        Text(
+            text = geyserType.maxAvgEmitRate.toString(),
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onBackground,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.width(40.dp).offset(y = -2.dp)
+        )
     }
 }
 
