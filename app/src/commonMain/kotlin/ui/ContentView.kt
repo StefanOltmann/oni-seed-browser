@@ -80,7 +80,8 @@ import ui.theme.lightGray
 @Composable
 fun ContentView(
     urlHash: State<String?>,
-    isMniEmbedded: State<Boolean>,
+    isMniEmbedded: Boolean,
+    jwt: String?,
     /**
      * Note: LocalClipboardManager does not work for Compose for Web
      * in all browsers for some reason. That's why we use a workaround here.
@@ -522,7 +523,7 @@ private fun ColumnScope.FavoritesPanel(
     showStarMap: MutableState<Cluster?>,
     showAsteroidMap: MutableState<Asteroid?>,
     steamId: State<String?>,
-    isMniEmbedded: State<Boolean>,
+    isMniEmbedded: Boolean,
     writeToClipboard: (String) -> Unit
 ) {
 
@@ -557,7 +558,7 @@ private fun ColumnScope.FavoritesPanel(
                 showStarMap,
                 showAsteroidMap,
                 showFavoriteIcon = steamId.value != null,
-                showMniUrl = isMniEmbedded.value,
+                showMniUrl = isMniEmbedded,
                 writeToClipboard = writeToClipboard
             )
 
@@ -589,7 +590,7 @@ private fun ColumnScope.MainPanel(
     favoredCoordinates: MutableState<List<String>>,
     showStarMap: MutableState<Cluster?>,
     showAsteroidMap: MutableState<Asteroid?>,
-    isMniEmbedded: State<Boolean>,
+    isMniEmbedded: Boolean,
     writeToClipboard: (String) -> Unit
 ) {
 
@@ -709,7 +710,7 @@ private fun ColumnScope.MainPanel(
                 showStarMap,
                 showAsteroidMap,
                 showFavoriteIcon = steamId.value != null,
-                showMniUrl = isMniEmbedded.value,
+                showMniUrl = isMniEmbedded,
                 writeToClipboard = writeToClipboard
             )
         }

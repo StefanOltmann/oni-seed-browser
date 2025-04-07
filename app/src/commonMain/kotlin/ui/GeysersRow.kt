@@ -104,10 +104,7 @@ fun GeysersRow(
                         storageTankTons = geyser.storageTankTons
                     )
                 },
-                yOffset = if (geyser.storageTankTons != null)
-                    32
-                else
-                    16
+                yOffset = 32
             ) {
 
                 Box(

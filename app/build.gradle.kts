@@ -63,6 +63,8 @@ kotlin {
         wasmJsMain.dependencies {
 
             implementation(libs.ktor.js)
+
+            implementation("com.appstractive:jwt-kt-wasm-js:1.1.0")
         }
 
         commonMain.dependencies {

@@ -389,10 +389,8 @@ fun AsteroidMap(
                     },
                     yOffset = if (geyser.id == GeyserType.OIL_RESERVOIR)
                         10
-                    else if (geyser.storageTankTons != null)
-                        48
                     else
-                        32,
+                        48,
                     modifier = Modifier
                         .offset(
                             x = (geyser.x * viewScale).dp - halfIconSize,
