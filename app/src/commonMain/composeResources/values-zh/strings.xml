@@ -27,6 +27,7 @@
     <string name="uiBiomeDetails">生态详情</string>
     <string name="uiGeyserDetails">间歇泉详情</string>
     <string name="uiGeyserDetailGramPerSecond">克/秒</string>
+    <string name="uiGeyserDetailTonsPerCycle">吨/周期</string>
     <string name="uiGeyserDetailOnAverage">平均产量</string>
     <string name="uiGeyserDetailSecondsShort">秒</string>
     <string name="uiGeyserDetailCycles">周期</string>
@@ -49,6 +50,7 @@
     <string name="uiLeaderBoardRank">排名</string>
     <string name="uiLeaderBoardUsername">使用者名称</string>
     <string name="uiLeaderBoardCount">数量</string>
+    <string name="uiStorageTankForDormancy">休眠储存罐</string>
 
     <!-- GameModes -->
     <string name="gameModeBaseGameStandard">标准</string>
