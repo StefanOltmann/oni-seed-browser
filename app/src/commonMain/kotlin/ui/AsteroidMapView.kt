@@ -79,6 +79,7 @@ import kotlinx.coroutines.launch
 import model.Asteroid
 import model.BiomePaths
 import model.Geyser
+import model.GeyserType
 import model.ZoneType
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -378,8 +379,18 @@ fun AsteroidMap(
                     Modifier
 
                 TooltipContainer(
-                    tooltipContent = { GeyserTooltip(geyser.id, 1) },
-                    yOffset = 10,
+                    tooltipContent = {
+                        GeyserTooltip(
+                            geyserType = geyser.id,
+                            count = 1,
+                            avgEmitRate = geyser.avgEmitRate,
+                            storageTankTons = geyser.storageTankTons
+                        )
+                    },
+                    yOffset = if (geyser.id == GeyserType.OIL_RESERVOIR)
+                        10
+                    else
+                        48,
                     modifier = Modifier
                         .offset(
                             x = (geyser.x * viewScale).dp - halfIconSize,

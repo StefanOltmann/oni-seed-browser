@@ -30,6 +30,12 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.ColorMatrix
 import androidx.compose.ui.input.pointer.PointerEventType
 import androidx.compose.ui.input.pointer.onPointerEvent
+import kotlin.math.abs
+import kotlin.math.pow
+import kotlin.math.roundToLong
+
+const val SECONDS_PER_CYCLE: Float = 600F
+const val GRAMS_PER_TON: Float = 1_000_000F
 
 @OptIn(ExperimentalComposeUiApi::class)
 fun Modifier.onHover(hovered: MutableState<Boolean>) = this
@@ -50,3 +56,24 @@ fun Modifier.noRippleClickable(onClick: (() -> Unit)): Modifier = this
         onClick = onClick
     )
 
+fun calcTonsPerCycle(gramPerSecond: Int): Float =
+    (gramPerSecond / GRAMS_PER_TON) * SECONDS_PER_CYCLE
+
+fun Float.toString(decimals: Int): String {
+
+    require(decimals >= 0) { "Number of decimals must be non-negative" }
+
+    val factor = 10.0.pow(decimals).toLong()
+    val scaled = (this * factor).roundToLong()
+    val sign = if (scaled < 0) "-" else ""
+    val absScaled = abs(scaled)
+
+    val whole = absScaled / factor
+    val fraction = absScaled % factor
+
+    return if (decimals > 0) {
+        "$sign$whole.${fraction.toString().padStart(decimals, '0')}"
+    } else {
+        "$sign$whole"
+    }
+}

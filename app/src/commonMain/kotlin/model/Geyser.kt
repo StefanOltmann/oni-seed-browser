@@ -21,6 +21,8 @@ package model
 
 import kotlinx.serialization.Serializable
 import serializer.GeyserTypeSerializer
+import ui.GRAMS_PER_TON
+import ui.SECONDS_PER_CYCLE
 
 @Suppress("UNUSED")
 @Serializable
@@ -32,19 +34,35 @@ data class Geyser(
     val x: Int,
     val y: Int,
 
+    /** Emit rate in gram per second when active. */
     val emitRate: Int,
+
+    /** Average emit rate in gram per second. */
     val avgEmitRate: Int,
 
+    /** Idle time after eruption in seconds. */
     val idleTime: Int,
+
+    /** Duration of eruption in seconds. */
     val eruptionTime: Int,
 
+    /** Count of dormancy cycles. */
     val dormancyCycles: Float,
+
+    /** Count of active cycles. */
     val activeCycles: Float
 ) {
 
     val overallTime = idleTime + eruptionTime
 
     val overallCycles = activeCycles + dormancyCycles
+
+    /**
+     * Rating of geyser output in a range of 0.01F to 1.00F
+     */
+    val avgEmitRateRating: Float = id.getAvgEmitRateRating(avgEmitRate)
+
+    val storageTankTons: Float = (dormancyCycles * avgEmitRate * SECONDS_PER_CYCLE) / GRAMS_PER_TON
 
     override fun toString(): String =
         "${id.stringResource} @ $x,$y"

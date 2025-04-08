@@ -1,0 +1,132 @@
+[
+  {
+    "_id": "OilWell",
+    "minAvgEmitRate": 3333,
+    "maxAvgEmitRate": 3333
+  },
+  {
+    "_id": "big_volcano",
+    "minAvgEmitRate": 533,
+    "maxAvgEmitRate": 2133
+  },
+  {
+    "_id": "chlorine_gas",
+    "minAvgEmitRate": 47,
+    "maxAvgEmitRate": 187
+  },
+  {
+    "_id": "filthy_water",
+    "minAvgEmitRate": 1333,
+    "maxAvgEmitRate": 5333
+  },
+  {
+    "_id": "hot_co2",
+    "minAvgEmitRate": 47,
+    "maxAvgEmitRate": 187
+  },
+  {
+    "_id": "hot_hydrogen",
+    "minAvgEmitRate": 47,
+    "maxAvgEmitRate": 187
+  },
+  {
+    "_id": "hot_po2",
+    "minAvgEmitRate": 47,
+    "maxAvgEmitRate": 187
+  },
+  {
+    "_id": "hot_steam",
+    "minAvgEmitRate": 333,
+    "maxAvgEmitRate": 1333
+  },
+  {
+    "_id": "hot_water",
+    "minAvgEmitRate": 1333,
+    "maxAvgEmitRate": 5333
+  },
+  {
+    "_id": "liquid_co2",
+    "minAvgEmitRate": 67,
+    "maxAvgEmitRate": 267
+  },
+  {
+    "_id": "liquid_sulfur",
+    "minAvgEmitRate": 667,
+    "maxAvgEmitRate": 2667
+  },
+  {
+    "_id": "methane",
+    "minAvgEmitRate": 47,
+    "maxAvgEmitRate": 187
+  },
+  {
+    "_id": "molten_aluminum",
+    "minAvgEmitRate": 133,
+    "maxAvgEmitRate": 533
+  },
+  {
+    "_id": "molten_cobalt",
+    "minAvgEmitRate": 133,
+    "maxAvgEmitRate": 533
+  },
+  {
+    "_id": "molten_copper",
+    "minAvgEmitRate": 133,
+    "maxAvgEmitRate": 533
+  },
+  {
+    "_id": "molten_gold",
+    "minAvgEmitRate": 133,
+    "maxAvgEmitRate": 533
+  },
+  {
+    "_id": "molten_iron",
+    "minAvgEmitRate": 133,
+    "maxAvgEmitRate": 533
+  },
+  {
+    "_id": "molten_niobium",
+    "minAvgEmitRate": 533,
+    "maxAvgEmitRate": 2133
+  },
+  {
+    "_id": "molten_tungsten",
+    "minAvgEmitRate": 133,
+    "maxAvgEmitRate": 533
+  },
+  {
+    "_id": "oil_drip",
+    "minAvgEmitRate": 1,
+    "maxAvgEmitRate": 333
+  },
+  {
+    "_id": "salt_water",
+    "minAvgEmitRate": 1333,
+    "maxAvgEmitRate": 5333
+  },
+  {
+    "_id": "slimy_po2",
+    "minAvgEmitRate": 47,
+    "maxAvgEmitRate": 187
+  },
+  {
+    "_id": "slush_salt_water",
+    "minAvgEmitRate": 667,
+    "maxAvgEmitRate": 2667
+  },
+  {
+    "_id": "slush_water",
+    "minAvgEmitRate": 667,
+    "maxAvgEmitRate": 2667
+  },
+  {
+    "_id": "small_volcano",
+    "minAvgEmitRate": 267,
+    "maxAvgEmitRate": 1067
+  },
+  {
+    "_id": "steam",
+    "minAvgEmitRate": 667,
+    "maxAvgEmitRate": 2667
+  }
+]

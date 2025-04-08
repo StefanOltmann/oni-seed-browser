@@ -48,8 +48,6 @@ import io.github.stefanoltmann.app.generated.resources.uiGeyserDetailEmitDetails
 import io.github.stefanoltmann.app.generated.resources.uiGeyserDetailGramPerSecond
 import io.github.stefanoltmann.app.generated.resources.uiGeyserDetailOnAverage
 import io.github.stefanoltmann.app.generated.resources.uiGeyserDetailSecondsShort
-import kotlin.math.pow
-import kotlin.math.roundToInt
 import model.Geyser
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -59,6 +57,7 @@ import ui.theme.cardColorBackground
 import ui.theme.defaultRoundedCornerShape
 import ui.theme.doubleSpacing
 import ui.theme.gray3
+import ui.theme.halfPadding
 import ui.theme.lightGrayTransparentBorderColor
 
 private val boldSpanStyle = SpanStyle(fontWeight = FontWeight.Bold)
@@ -76,7 +75,7 @@ fun GeyserDetail(
             .padding(horizontal = doubleSpacing)
             .background(
                 if (geyser.id.rating.isNegative())
-                    geyser.id.rating.color.copy(alpha = 0.2F)
+                    badRatingBackground
                 else
                     cardColorBackground,
                 defaultRoundedCornerShape
@@ -114,10 +113,13 @@ fun GeyserDetail(
                         )
                 ) {
 
+                    /* Show it for all geyser types in detail screen. */
+                    AvgEmitRateRatingIndicator(geyser)
+
                     Image(
                         painter = painterResource(getGeyserDrawable(geyser.id)),
                         contentDescription = null,
-                        modifier = Modifier.size(48.dp)
+                        modifier = Modifier.halfPadding()
                     )
                 }
 
@@ -280,10 +282,4 @@ fun GeyserDetail(
             }
         }
     }
-}
-
-private fun Float.toString(numOfDec: Int): String {
-    val integerDigits = this.toInt()
-    val floatDigits = ((this - integerDigits) * 10f.pow(numOfDec)).roundToInt()
-    return "$integerDigits.$floatDigits"
 }

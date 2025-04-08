@@ -17,12 +17,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.window.CanvasBasedWindow
+import com.appstractive.jwt.JWT
+import com.appstractive.jwt.from
+import com.appstractive.jwt.issuer
 import kotlinx.browser.document
 import kotlinx.browser.window
 import ui.App
@@ -34,15 +36,25 @@ fun main() {
 
         val params = remember { getQueryParameters() }
 
-        val isMniEmbedded = derivedStateOf { params["embedded"] == "mni" }
+        val isMniEmbedded = remember { params["embedded"] == "mni" }
+
+        val jwt: String? = remember {
+
+            val token = params["token"]
+
+            if (!token.isNullOrBlank() && isTokenValid(token))
+                token
+            else
+                null
+        }
 
         /* Some debug values */
         println("Running on domain: ${document.domain}")
         println("Users language: " + Locale.current.language)
         println("Users language tag: " + Locale.current.toLanguageTag())
         println("Users region: " + Locale.current.region)
-        println("Parameters: $params")
         println("Cookies: ${document.cookie}")
+        println("Parameters: $params")
 
         val urlHash = remember {
             mutableStateOf(document.location?.hash?.drop(1)?.ifBlank { null })
@@ -56,10 +68,36 @@ fun main() {
         App(
             urlHash = urlHash,
             isMniEmbedded = isMniEmbedded,
+            jwt = jwt,
             writeToClipboard = {
                 window.navigator.clipboard.writeText(it)
             }
         )
+    }
+}
+
+/*
+ * Not a real verification, just a quick check
+ * if the given String is a JWT.
+ * The server will do the real check.
+ */
+private fun isTokenValid(token: String): Boolean {
+
+    try {
+
+        val jwt: JWT = JWT.from(token)
+
+        val steamId = jwt.claims["steamId"]
+
+        println("Steam ID (JWT): $steamId")
+
+        return jwt.issuer == "mapsnotincluded"
+
+    } catch (ex: Exception) {
+
+        ex.printStackTrace()
+
+        return false
     }
 }
 

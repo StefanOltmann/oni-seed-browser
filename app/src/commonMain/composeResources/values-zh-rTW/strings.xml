@@ -43,7 +43,9 @@
     <string name="uiSetUsername">設定使用者名稱</string>
     <string name="uiUsernameLabel">使用者名稱</string>
     <string name="uiLoading">載入中...</string>
-    <string name="uiLeaderBoardExplainer">這是我們的榮譽殿堂,紀念所有透過運行模組為我們的資料庫貢獻過種子的所有人. 感謝大家!</string>
+    <string name="uiLeaderBoardExplainer">這是我們的榮譽殿堂,紀念所有透過運行模組為我們的資料庫貢獻過種子的所有人.
+        感謝大家!
+    </string>
     <string name="uiLeaderBoardRank">排名</string>
     <string name="uiLeaderBoardUsername">使用者名稱</string>
     <string name="uiLeaderBoardCount">數量</string>

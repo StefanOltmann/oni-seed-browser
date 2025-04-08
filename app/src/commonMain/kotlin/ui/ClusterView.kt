@@ -206,7 +206,9 @@ private fun AsteroidsGrid(
             verticalArrangement = Arrangement.spacedBy(defaultSpacing)
         ) {
 
-            val firstAsteroid = cluster.asteroids.first()
+            val asteroidsIterator = cluster.asteroids.iterator()
+
+            val firstAsteroid = asteroidsIterator.next()
 
             /* First Asteroid should span the whole column. */
             AsteroidView(
@@ -218,7 +220,21 @@ private fun AsteroidsGrid(
                 }
             )
 
-            val remainingAsteroids = cluster.asteroids.drop(1)
+            if (asteroidsIterator.hasNext()) {
+
+                val secondAsteroid = asteroidsIterator.next()
+
+                AsteroidView(
+                    asteroid = secondAsteroid,
+                    isStarterAsteroid = false,
+                    useCompactLayout = useCompactLayout,
+                    showMap = {
+                        showAsteroidMap.value = secondAsteroid
+                    }
+                )
+            }
+
+            val remainingAsteroids = asteroidsIterator.asSequence().toList()
 
             val asteroidsPerColumn = remainingAsteroids.chunked(gridLayoutColumnCount)
 

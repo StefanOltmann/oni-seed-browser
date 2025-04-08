@@ -27,6 +27,7 @@
     <string name="uiBiomeDetails">Biome details</string>
     <string name="uiGeyserDetails">Geyser details</string>
     <string name="uiGeyserDetailGramPerSecond">g/s</string>
+    <string name="uiGeyserDetailTonsPerCycle">t/cycle</string>
     <string name="uiGeyserDetailOnAverage">on average</string>
     <string name="uiGeyserDetailSecondsShort">s</string>
     <string name="uiGeyserDetailCycles">cycles</string>
@@ -43,10 +44,13 @@
     <string name="uiSetUsername">Set username</string>
     <string name="uiUsernameLabel">Username</string>
     <string name="uiLoading">Loading...</string>
-    <string name="uiLeaderBoardExplainer">This is our hall of fame for all the people that contributed maps to our database by running the map collection mod. Thank you all!</string>
+    <string name="uiLeaderBoardExplainer">This is our hall of fame for all the people that contributed maps to our
+        database by running the map collection mod. Thank you all!
+    </string>
     <string name="uiLeaderBoardRank">Rank</string>
     <string name="uiLeaderBoardUsername">Username</string>
     <string name="uiLeaderBoardCount">Count</string>
+    <string name="uiStorageTankForDormancy">Storage tank for dormancy</string>
 
     <!-- GameModes -->
     <string name="gameModeBaseGameStandard">Standard</string>

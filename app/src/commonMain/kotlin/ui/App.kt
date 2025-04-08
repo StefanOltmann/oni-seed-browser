@@ -37,7 +37,8 @@ val logoIconHeight = 80.dp
 @Composable
 fun App(
     urlHash: State<String?>,
-    isMniEmbedded: State<Boolean>,
+    isMniEmbedded: Boolean,
+    jwt: String?,
     /**
      * Note: LocalClipboardManager does not work for Compose for Web
      * in all browsers for some reason. That's why we use a workaround here.
@@ -59,6 +60,7 @@ fun App(
                 ContentView(
                     urlHash,
                     isMniEmbedded,
+                    jwt,
                     writeToClipboard
                 )
             }
