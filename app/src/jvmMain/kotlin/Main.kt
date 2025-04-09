@@ -45,7 +45,8 @@ fun main() = application {
 
         App(
             urlHash = remember { mutableStateOf(null) },
-            isMniEmbedded = remember { mutableStateOf(false) },
+            isMniEmbedded = false,
+            jwt = null,
             writeToClipboard = {
                 clipboardManager.setText(AnnotatedString(it))
             }
