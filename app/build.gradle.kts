@@ -64,7 +64,10 @@ kotlin {
 
             implementation(libs.ktor.js)
 
+            /* Cryptography (JWT) */
+            implementation("dev.whyoleg.cryptography:cryptography-provider-webcrypto:0.4.0")
             implementation("com.appstractive:jwt-kt-wasm-js:1.1.0")
+            implementation("com.appstractive:jwt-rsa-kt:1.1.0")
         }
 
         commonMain.dependencies {

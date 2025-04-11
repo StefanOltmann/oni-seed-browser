@@ -17,6 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.ExperimentalComposeUiApi
@@ -24,10 +25,25 @@ import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.window.CanvasBasedWindow
 import com.appstractive.jwt.JWT
 import com.appstractive.jwt.from
-import com.appstractive.jwt.issuer
+import com.appstractive.jwt.signatures.rs256
+import com.appstractive.jwt.verify
 import kotlinx.browser.document
 import kotlinx.browser.window
 import ui.App
+
+private val JWT_PUBLIC_KEY =
+    """
+        -----BEGIN PUBLIC KEY-----
+        MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAssCfiAkLu
+        dGa1okEQ4tyy7S9zPlH0PKoG/nRLCXcV4PGBnApj8+jj63ZtcYL/v
+        IkOcLp/FuFUqm0EGXFNzl2EpKCFSMGeJ9yVj4TjJNKaOUrVivj8xM
+        8/M6emy4bJ5svpJ2XXW9olkiU/KJ+JflgACVjFUTYt2AetuOALGE4
+        MY+9XelGwccXoyB+rklBtiGCvZxZm4UN/7Bvp7oqKJiW+xanFEpOB
+        r9seK565FTxtbSLtIWs2apkvVri5RAoSP4mh1YUXhB/+LOGYwu4Tm
+        01p5D9qfA3k3EQw2gk7DHJNzcc2MrLJufA1WuM7+9LEyuLFB6waly
+        vylenVV56w7ugOQIDAQAB
+        -----END PUBLIC KEY-----
+    """.trimIndent()
 
 @OptIn(ExperimentalComposeUiApi::class)
 fun main() {
@@ -38,14 +54,14 @@ fun main() {
 
         val isMniEmbedded = remember { params["embedded"] == "mni" }
 
-        val jwt: String? = remember {
+        val jwt = remember { mutableStateOf<String?>(null) }
+
+        LaunchedEffect(true) {
 
             val token = params["token"]
 
             if (!token.isNullOrBlank() && isTokenValid(token))
-                token
-            else
-                null
+                jwt.value = token
         }
 
         /* Some debug values */
@@ -68,7 +84,7 @@ fun main() {
         App(
             urlHash = urlHash,
             isMniEmbedded = isMniEmbedded,
-            jwt = jwt,
+            jwt = jwt.value,
             writeToClipboard = {
                 window.navigator.clipboard.writeText(it)
             }
@@ -76,12 +92,7 @@ fun main() {
     }
 }
 
-/*
- * Not a real verification, just a quick check
- * if the given String is a JWT.
- * The server will do the real check.
- */
-private fun isTokenValid(token: String): Boolean {
+private suspend fun isTokenValid(token: String): Boolean {
 
     try {
 
@@ -89,9 +100,19 @@ private fun isTokenValid(token: String): Boolean {
 
         val steamId = jwt.claims["steamId"]
 
-        println("Steam ID (JWT): $steamId")
+        val verified = jwt.verify {
 
-        return jwt.issuer == "mapsnotincluded"
+            rs256 { pem(JWT_PUBLIC_KEY) }
+
+            issuer("mapsnotincluded")
+        }
+
+        if (verified)
+            println("Steam ID: $steamId (verified)")
+        else
+            println("Steam ID unverified due to invalid JWT.")
+
+        return verified
 
     } catch (ex: Exception) {
 
