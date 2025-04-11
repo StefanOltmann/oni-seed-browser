@@ -60,7 +60,6 @@ fun App(
                 ContentView(
                     urlHash,
                     isMniEmbedded,
-                    jwt,
                     writeToClipboard
                 )
             }

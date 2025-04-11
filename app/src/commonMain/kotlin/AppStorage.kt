@@ -31,6 +31,7 @@ private val jsonPretty = Json {
 
 private const val CLIENT_ID_SETTINGS_KEY = "id"
 private const val FILTER_SETTINGS_KEY = "filter"
+private const val TOKEN_SETTINGS_KEY = "token"
 
 object AppStorage {
 
@@ -54,6 +55,16 @@ object AppStorage {
 
         return newId
     }
+
+    fun getToken(): String? =
+        settings.getStringOrNull(TOKEN_SETTINGS_KEY)
+
+    fun setToken(token: String) {
+        settings.putString(TOKEN_SETTINGS_KEY, token)
+    }
+
+    fun clearToken() =
+        settings.remove(TOKEN_SETTINGS_KEY)
 
     fun loadFilter(): FilterQuery {
 

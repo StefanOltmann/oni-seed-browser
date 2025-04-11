@@ -58,10 +58,33 @@ fun main() {
 
         LaunchedEffect(true) {
 
-            val token = params["token"]
+            val tokenParameter = params["token"]
 
-            if (!token.isNullOrBlank() && isTokenValid(token))
-                jwt.value = token
+            if (!tokenParameter.isNullOrBlank() && isTokenValid(tokenParameter)) {
+
+                /* The token was checked and can be saved to storage. */
+                AppStorage.setToken(tokenParameter)
+
+                /* Update the UI */
+                jwt.value = tokenParameter
+
+            } else {
+
+                /* Check for stored token */
+
+                val storedToken = AppStorage.getToken()
+
+                if (!storedToken.isNullOrBlank()) {
+
+                    /*
+                     * Set it to the UI if valid or remove it from store.
+                     */
+                    if (isTokenValid(storedToken))
+                        jwt.value = storedToken
+                    else
+                        AppStorage.clearToken()
+                }
+            }
         }
 
         /* Some debug values */
