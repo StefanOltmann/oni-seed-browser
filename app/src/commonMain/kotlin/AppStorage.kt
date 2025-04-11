@@ -29,9 +29,11 @@ private val jsonPretty = Json {
     encodeDefaults = true
 }
 
-private const val CLIENT_ID_SETTINGS_KEY = "id"
-private const val FILTER_SETTINGS_KEY = "filter"
-private const val TOKEN_SETTINGS_KEY = "token"
+// TODO Replace with JWT security
+private const val CLIENT_ID_SETTINGS_KEY = "mni_client_id"
+
+private const val FILTER_SETTINGS_KEY = "mni_filter"
+private const val TOKEN_SETTINGS_KEY = "mni_token"
 
 object AppStorage {
 
@@ -49,6 +51,24 @@ object AppStorage {
         if (existingId != null)
             return existingId
 
+        /*
+         * Check for old key
+         */
+
+        val existingOldId = settings.getStringOrNull("id")
+
+        if (existingOldId != null) {
+
+            settings.putString(CLIENT_ID_SETTINGS_KEY, existingOldId)
+            settings.remove("id") // old key
+
+            return existingOldId
+        }
+
+        /*
+         * Generate and set a new key
+         */
+
         val newId = Uuid.random().toString()
 
         settings.putString(CLIENT_ID_SETTINGS_KEY, newId)
@@ -60,6 +80,9 @@ object AppStorage {
         settings.getStringOrNull(TOKEN_SETTINGS_KEY)
 
     fun setToken(token: String) {
+
+        settings.remove("token") // old key
+
         settings.putString(TOKEN_SETTINGS_KEY, token)
     }
 
@@ -69,6 +92,7 @@ object AppStorage {
     fun loadFilter(): FilterQuery {
 
         val json = settings.getStringOrNull(FILTER_SETTINGS_KEY)
+            ?: settings.getStringOrNull("filter") // Old key
             ?: return FilterQuery.ALL
 
         return try {
@@ -95,6 +119,8 @@ object AppStorage {
             val json = jsonPretty.encodeToString(filterQuery)
 
             settings.putString(FILTER_SETTINGS_KEY, json)
+
+            settings.remove("filter") // old key
 
         } catch (ex: Exception) {
 
