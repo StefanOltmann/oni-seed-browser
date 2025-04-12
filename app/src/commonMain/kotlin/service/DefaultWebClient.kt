@@ -77,7 +77,12 @@ object DefaultWebClient : WebClient {
                 append(HttpHeaders.AccessControlAllowOrigin, "*")
 
                 /* Auth */
-                append("Client-ID", AppStorage.clientId)
+                append("Client-ID", AppStorage.clientId) // deprecated
+
+                val token = AppStorage.getToken()
+
+                if (token != null)
+                    append("token", token)
             }
         }
 

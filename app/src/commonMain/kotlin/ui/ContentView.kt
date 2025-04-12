@@ -81,6 +81,7 @@ import ui.theme.lightGray
 fun ContentView(
     urlHash: State<String?>,
     isMniEmbedded: Boolean,
+    connected: Boolean,
     /**
      * Note: LocalClipboardManager does not work for Compose for Web
      * in all browsers for some reason. That's why we use a workaround here.
@@ -104,22 +105,6 @@ fun ContentView(
             try {
 
                 value = DefaultWebClient.countSeeds()
-
-            } catch (ex: Throwable) {
-
-                /* We MUST catch Throwable here to prevent UI freezes. */
-
-                ex.printStackTrace()
-
-                errorMessage.value = ex.stackTraceToString()
-            }
-        }
-
-        val steamId = produceState<String?>(null) {
-
-            try {
-
-                value = DefaultWebClient.getSteamId()
 
             } catch (ex: Throwable) {
 
@@ -291,7 +276,7 @@ fun ContentView(
 
                     FillSpacer()
 
-                    if (steamId.value != null) {
+                    if (connected) {
 
                         Icon(
                             imageVector = if (showFavorites.value)
@@ -333,7 +318,7 @@ fun ContentView(
                     )
 
                     LoginWithSteamButton(
-                        connected = steamId.value != null
+                        connected = connected
                     )
 
                     DoubleSpacer()
@@ -375,7 +360,7 @@ fun ContentView(
                         )
                     }
 
-                    if (steamId.value != null) {
+                    if (connected) {
 
                         /*
                          * Logged-in users can change their name.
@@ -483,7 +468,7 @@ fun ContentView(
                         favoredCoordinates,
                         showStarMap,
                         showAsteroidMap,
-                        steamId,
+                        connected,
                         isMniEmbedded,
                         writeToClipboard
                     )
@@ -498,7 +483,7 @@ fun ContentView(
                         worldCount,
                         coroutineScope,
                         urlHash,
-                        steamId,
+                        connected,
                         lazyListState,
                         useCompactLayout,
                         favoredCoordinates,
@@ -521,7 +506,7 @@ private fun ColumnScope.FavoritesPanel(
     favoredCoordinates: MutableState<List<String>>,
     showStarMap: MutableState<Cluster?>,
     showAsteroidMap: MutableState<Asteroid?>,
-    steamId: State<String?>,
+    connected: Boolean,
     isMniEmbedded: Boolean,
     writeToClipboard: (String) -> Unit
 ) {
@@ -556,7 +541,7 @@ private fun ColumnScope.FavoritesPanel(
                 favoredCoordinates,
                 showStarMap,
                 showAsteroidMap,
-                showFavoriteIcon = steamId.value != null,
+                showFavoriteIcon = connected,
                 showMniUrl = isMniEmbedded,
                 writeToClipboard = writeToClipboard
             )
@@ -583,7 +568,7 @@ private fun ColumnScope.MainPanel(
     worldCount: State<Long?>,
     coroutineScope: CoroutineScope,
     urlHash: State<String?>,
-    steamId: State<String?>,
+    connected: Boolean,
     lazyListState: LazyListState,
     useCompactLayout: MutableState<Boolean>,
     favoredCoordinates: MutableState<List<String>>,
@@ -688,7 +673,7 @@ private fun ColumnScope.MainPanel(
                     DoubleSpacer()
 
                     RequestCoordinateButton(
-                        enabled = steamId.value != null,
+                        enabled = connected,
                         coordinate = coordinate
                     )
                 }
@@ -708,7 +693,7 @@ private fun ColumnScope.MainPanel(
                 favoredCoordinates,
                 showStarMap,
                 showAsteroidMap,
-                showFavoriteIcon = steamId.value != null,
+                showFavoriteIcon = connected,
                 showMniUrl = isMniEmbedded,
                 writeToClipboard = writeToClipboard
             )

@@ -54,7 +54,7 @@ fun main() {
 
         val isMniEmbedded = remember { params["embedded"] == "mni" }
 
-        val jwt = remember { mutableStateOf<String?>(null) }
+        val connected = remember { mutableStateOf<Boolean>(false) }
 
         LaunchedEffect(true) {
 
@@ -66,7 +66,7 @@ fun main() {
                 AppStorage.setToken(tokenParameter)
 
                 /* Update the UI */
-                jwt.value = tokenParameter
+                connected.value = true
 
             } else {
 
@@ -80,7 +80,7 @@ fun main() {
                      * Set it to the UI if valid or remove it from store.
                      */
                     if (isTokenValid(storedToken))
-                        jwt.value = storedToken
+                        connected.value = true
                     else
                         AppStorage.clearToken()
                 }
@@ -107,7 +107,7 @@ fun main() {
         App(
             urlHash = urlHash,
             isMniEmbedded = isMniEmbedded,
-            jwt = jwt.value,
+            connected = connected.value,
             writeToClipboard = {
                 window.navigator.clipboard.writeText(it)
             }
