@@ -67,8 +67,10 @@ fun LoginWithSteamButton(
             )
             .noRippleClickable {
 
-                if (!connected)
-                    uriHandler.openUri("https://ingest.mapsnotincluded.org/login")
+                if (connected)
+                    return@noRippleClickable
+
+                uriHandler.openUri("https://ingest.mapsnotincluded.org/connect/0")
             }
     ) {
 
