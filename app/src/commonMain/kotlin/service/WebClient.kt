@@ -20,7 +20,7 @@
 package service
 
 import model.Cluster
-import model.ContributorRank
+import model.Contributor
 import model.filter.FilterQuery
 
 interface WebClient {
@@ -49,6 +49,6 @@ interface WebClient {
 
     suspend fun setUsername(username: String): Boolean
 
-    suspend fun findContributorRanking(): List<ContributorRank>
+    suspend fun findContributors(): List<Contributor>
 
 }

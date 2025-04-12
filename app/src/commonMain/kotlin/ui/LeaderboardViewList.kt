@@ -31,7 +31,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollbarAdapter
 import androidx.compose.material3.MaterialTheme
@@ -52,7 +52,7 @@ import io.github.stefanoltmann.app.generated.resources.uiLeaderBoardExplainer
 import io.github.stefanoltmann.app.generated.resources.uiLeaderBoardRank
 import io.github.stefanoltmann.app.generated.resources.uiLeaderBoardUsername
 import io.github.stefanoltmann.app.generated.resources.uiLoading
-import model.ContributorRank
+import model.Contributor
 import org.jetbrains.compose.resources.stringResource
 import service.DefaultWebClient
 import ui.theme.DefaultSpacer
@@ -70,11 +70,11 @@ fun LeaderboardViewList(
     errorMessage: MutableState<String?>
 ) {
 
-    val contributorRankingState = produceState(emptyList<ContributorRank>()) {
+    val contributorsState = produceState(emptyList<Contributor>()) {
 
         try {
 
-            value = DefaultWebClient.findContributorRanking()
+            value = DefaultWebClient.findContributors()
 
         } catch (ex: Exception) {
 
@@ -84,9 +84,9 @@ fun LeaderboardViewList(
         }
     }
 
-    val contributorRanking = contributorRankingState.value
+    val contributors = contributorsState.value
 
-    if (contributorRanking.isEmpty()) {
+    if (contributors.isEmpty()) {
 
         Text(
             text = stringResource(Res.string.uiLoading),
@@ -172,14 +172,16 @@ fun LeaderboardViewList(
                 modifier = Modifier.padding(doubleSpacing)
             ) {
 
-                items(contributorRanking) { rank ->
+                itemsIndexed(contributors) { index, contributor ->
+
+                    val rank = index + 1
 
                     Row {
 
                         FillSpacer()
 
                         Text(
-                            text = rank.rank.toString(),
+                            text = rank.toString(),
                             style = MaterialTheme.typography.bodyLarge,
                             fontSize = contributorListFontSize,
                             color = lightGray,
@@ -195,7 +197,7 @@ fun LeaderboardViewList(
                         DoubleSpacer()
 
                         Text(
-                            text = rank.username,
+                            text = contributor.username,
                             style = MaterialTheme.typography.bodyLarge,
                             fontSize = contributorListFontSize,
                             color = lightGray,
@@ -207,7 +209,7 @@ fun LeaderboardViewList(
                         DoubleSpacer()
 
                         Text(
-                            text = rank.mapCount.toString(),
+                            text = contributor.mapCount.toString(),
                             style = MaterialTheme.typography.bodyLarge,
                             fontSize = contributorListFontSize,
                             color = lightGray,

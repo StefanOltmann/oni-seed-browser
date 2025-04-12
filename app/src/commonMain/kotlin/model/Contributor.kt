@@ -22,15 +22,15 @@ package model
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class ContributorRank(
+data class Contributor(
 
     /**
-     * Ranking, starting with 1
+     * Hashed steam id
      */
-    val rank: Int,
+    val steamIdHash: String,
 
     /**
-     * The username.
+     * Chosen username or shortened steam id
      */
     val username: String,
 
