@@ -17,8 +17,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import kotlin.uuid.ExperimentalUuidApi
-import kotlin.uuid.Uuid
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import model.filter.FilterQuery
@@ -29,51 +27,21 @@ private val jsonPretty = Json {
     encodeDefaults = true
 }
 
-// TODO Replace with JWT security
-private const val CLIENT_ID_SETTINGS_KEY = "mni_client_id"
-
 private const val FILTER_SETTINGS_KEY = "mni_filter"
 private const val TOKEN_SETTINGS_KEY = "mni_token"
 
 object AppStorage {
 
-    val clientId: String = getOrCreateClientId()
-
     init {
-        println("Client ID: $clientId")
+
+        /* Remove old stuff */
+        removeClientId()
     }
 
-    @OptIn(ExperimentalUuidApi::class)
-    private fun getOrCreateClientId(): String {
+    private fun removeClientId() {
 
-        val existingId = settings.getStringOrNull(CLIENT_ID_SETTINGS_KEY)
-
-        if (existingId != null)
-            return existingId
-
-        /*
-         * Check for old key
-         */
-
-        val existingOldId = settings.getStringOrNull("id")
-
-        if (existingOldId != null) {
-
-            settings.putString(CLIENT_ID_SETTINGS_KEY, existingOldId)
-            settings.remove("id") // old key
-
-            return existingOldId
-        }
-
-        /*
-         * Generate and set a new key
-         */
-
-        val newId = Uuid.random().toString()
-
-        settings.putString(CLIENT_ID_SETTINGS_KEY, newId)
-
-        return newId
+        settings.remove("id")
+        settings.remove("mni_client_id")
     }
 
     fun getToken(): String? =

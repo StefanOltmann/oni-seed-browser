@@ -122,7 +122,8 @@ fun ContentView(
 
             try {
 
-                favoredCoordinates.value = DefaultWebClient.findFavoredCoordinates()
+                if (connected)
+                    favoredCoordinates.value = DefaultWebClient.findFavoredCoordinates()
 
             } catch (ex: Throwable) {
 
