@@ -28,7 +28,9 @@ data class Cluster(
 
     val coordinate: String,
 
+    /* Can be NULL if uploaded from EPIC */
     val uploaderSteamIdHash: String? = null,
+
     val uploadDate: Long? = null,
 
     val gameVersion: Int,
