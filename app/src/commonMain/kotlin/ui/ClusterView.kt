@@ -27,6 +27,7 @@ import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -34,6 +35,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
@@ -61,9 +63,11 @@ import ui.theme.HalfSpacer
 import ui.theme.anthraticeTransparentBackgroundColor
 import ui.theme.defaultRoundedCornerShape
 import ui.theme.defaultSpacing
+import ui.theme.doubleSpacing
 import ui.theme.halfSpacing
 import ui.theme.hoverColor
 import ui.theme.lightGrayTransparentBorderColor
+import util.formatDate
 
 val widthPerWorld: Dp = 380.dp
 
@@ -78,6 +82,7 @@ fun ClusterView(
     showAsteroidMap: MutableState<Asteroid?>,
     showMniUrl: Boolean,
     showFavoriteIcon: Boolean,
+    steamIdToUsernameMap: Map<String, String>,
     writeToClipboard: (String) -> Unit
 ) {
 
@@ -174,6 +179,46 @@ fun ClusterView(
                     modifier = Modifier
                         .onHover(hovered)
                         .size(16.dp)
+                )
+            }
+
+            val username = steamIdToUsernameMap[cluster.uploaderSteamIdHash]
+
+            if (username != null) {
+
+                VerticalDivider(
+                    thickness = 1.dp,
+                    color = MaterialTheme.colorScheme.onBackground,
+                    modifier = Modifier
+                        .height(doubleSpacing)
+                        .padding(horizontal = defaultSpacing)
+                )
+
+                Text(
+                    text = username,
+                    style = MaterialTheme.typography.bodyMedium,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.onBackground
+                )
+            }
+
+            val uploadDate = cluster.uploadDate
+
+            if (uploadDate != null) {
+
+                VerticalDivider(
+                    thickness = 1.dp,
+                    color = MaterialTheme.colorScheme.onBackground,
+                    modifier = Modifier
+                        .height(doubleSpacing)
+                        .padding(horizontal = defaultSpacing)
+                )
+
+                Text(
+                    text = formatDate(uploadDate),
+                    style = MaterialTheme.typography.bodyMedium,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.onBackground
                 )
             }
         }

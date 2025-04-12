@@ -88,6 +88,9 @@ kotlin {
 
             /* Settings */
             implementation(libs.multiplatformSettings)
+
+            /* Date formatting */
+            implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.6.2")
         }
 
         commonTest.dependencies {

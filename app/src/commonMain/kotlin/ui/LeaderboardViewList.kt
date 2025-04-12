@@ -37,8 +37,6 @@ import androidx.compose.foundation.rememberScrollbarAdapter
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.produceState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -54,7 +52,6 @@ import io.github.stefanoltmann.app.generated.resources.uiLeaderBoardUsername
 import io.github.stefanoltmann.app.generated.resources.uiLoading
 import model.Contributor
 import org.jetbrains.compose.resources.stringResource
-import service.DefaultWebClient
 import ui.theme.DefaultSpacer
 import ui.theme.DoubleSpacer
 import ui.theme.FillSpacer
@@ -67,24 +64,8 @@ private val contributorListFontSize = 20.sp
 
 @Composable
 fun LeaderboardViewList(
-    errorMessage: MutableState<String?>
+    contributors: List<Contributor>
 ) {
-
-    val contributorsState = produceState(emptyList<Contributor>()) {
-
-        try {
-
-            value = DefaultWebClient.findContributors()
-
-        } catch (ex: Exception) {
-
-            ex.printStackTrace()
-
-            errorMessage.value = ex.stackTraceToString()
-        }
-    }
-
-    val contributors = contributorsState.value
 
     if (contributors.isEmpty()) {
 

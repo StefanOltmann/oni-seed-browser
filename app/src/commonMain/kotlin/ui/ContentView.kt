@@ -59,6 +59,7 @@ import kotlinx.coroutines.launch
 import kotlinx.serialization.json.Json
 import model.Asteroid
 import model.Cluster
+import model.Contributor
 import model.filter.FilterQuery
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -95,46 +96,66 @@ fun ContentView(
     val density = LocalDensity.current.density
     val useCompactLayout = remember { mutableStateOf(false) }
 
+    val contributorsState = produceState(emptyList<Contributor>()) {
+
+        try {
+
+            value = DefaultWebClient.findContributors()
+
+        } catch (ex: Exception) {
+
+            ex.printStackTrace()
+
+            errorMessage.value = ex.stackTraceToString()
+        }
+    }
+
+    val contributors = contributorsState.value
+
+    val steamIdToUsernameMap: Map<String, String> = remember(contributors) {
+        contributors.associate { it.steamIdHash to it.username }
+    }
+
+    val worldCount = produceState<Long?>(null) {
+
+        try {
+
+            value = DefaultWebClient.countSeeds()
+
+        } catch (ex: Throwable) {
+
+            /* We MUST catch Throwable here to prevent UI freezes. */
+
+            ex.printStackTrace()
+
+            errorMessage.value = ex.stackTraceToString()
+        }
+    }
+
+    val favoredCoordinates = remember { mutableStateOf(emptyList<String>()) }
+
+    LaunchedEffect(connected) {
+
+        try {
+
+            if (connected)
+                favoredCoordinates.value = DefaultWebClient.findFavoredCoordinates()
+
+        } catch (ex: Throwable) {
+
+            /* We MUST catch Throwable here to prevent UI freezes. */
+
+            ex.printStackTrace()
+
+            errorMessage.value = ex.stackTraceToString()
+        }
+    }
+
     Box(
         modifier = Modifier.onSizeChanged {
             useCompactLayout.value = it.width / density < 400
         }
     ) {
-
-        val worldCount = produceState<Long?>(null) {
-
-            try {
-
-                value = DefaultWebClient.countSeeds()
-
-            } catch (ex: Throwable) {
-
-                /* We MUST catch Throwable here to prevent UI freezes. */
-
-                ex.printStackTrace()
-
-                errorMessage.value = ex.stackTraceToString()
-            }
-        }
-
-        val favoredCoordinates = remember { mutableStateOf(emptyList<String>()) }
-
-        LaunchedEffect(connected) {
-
-            try {
-
-                if (connected)
-                    favoredCoordinates.value = DefaultWebClient.findFavoredCoordinates()
-
-            } catch (ex: Throwable) {
-
-                /* We MUST catch Throwable here to prevent UI freezes. */
-
-                ex.printStackTrace()
-
-                errorMessage.value = ex.stackTraceToString()
-            }
-        }
 
         val coroutineScope = rememberCoroutineScope()
 
@@ -377,9 +398,7 @@ fun ContentView(
                         modifier = Modifier.weight(1F)
                     ) {
 
-                        LeaderboardViewList(
-                            errorMessage
-                        )
+                        LeaderboardViewList(contributors)
                     }
 
                     if (connected) {
@@ -492,6 +511,7 @@ fun ContentView(
                         showAsteroidMap,
                         connected,
                         isMniEmbedded,
+                        steamIdToUsernameMap,
                         writeToClipboard
                     )
 
@@ -512,6 +532,7 @@ fun ContentView(
                         showStarMap,
                         showAsteroidMap,
                         isMniEmbedded,
+                        steamIdToUsernameMap,
                         writeToClipboard
                     )
                 }
@@ -530,6 +551,7 @@ private fun ColumnScope.FavoritesPanel(
     showAsteroidMap: MutableState<Asteroid?>,
     connected: Boolean,
     isMniEmbedded: Boolean,
+    steamIdToUsernameMap: Map<String, String>,
     writeToClipboard: (String) -> Unit
 ) {
 
@@ -565,6 +587,7 @@ private fun ColumnScope.FavoritesPanel(
                 showAsteroidMap,
                 showFavoriteIcon = connected,
                 showMniUrl = isMniEmbedded,
+                steamIdToUsernameMap = steamIdToUsernameMap,
                 writeToClipboard = writeToClipboard
             )
 
@@ -597,6 +620,7 @@ private fun ColumnScope.MainPanel(
     showStarMap: MutableState<Cluster?>,
     showAsteroidMap: MutableState<Asteroid?>,
     isMniEmbedded: Boolean,
+    steamIdToUsernameMap: Map<String, String>,
     writeToClipboard: (String) -> Unit
 ) {
 
@@ -717,6 +741,7 @@ private fun ColumnScope.MainPanel(
                 showAsteroidMap,
                 showFavoriteIcon = connected,
                 showMniUrl = isMniEmbedded,
+                steamIdToUsernameMap = steamIdToUsernameMap,
                 writeToClipboard = writeToClipboard
             )
         }
