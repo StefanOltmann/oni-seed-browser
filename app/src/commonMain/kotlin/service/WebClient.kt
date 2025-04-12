@@ -43,8 +43,6 @@ interface WebClient {
 
     suspend fun search(filterQuery: FilterQuery): List<Cluster>
 
-    suspend fun getSteamId(): String?
-
     suspend fun getUsername(): String?
 
     suspend fun setUsername(username: String): Boolean

@@ -199,16 +199,6 @@ object DefaultWebClient : WebClient {
         return response.body()
     }
 
-    override suspend fun getSteamId(): String? {
-
-        val response = httpClient.get("$BASE_API_URL/steamid")
-
-        if (response.status != HttpStatusCode.OK)
-            return null
-
-        return response.bodyAsText()
-    }
-
     override suspend fun getUsername(): String? {
 
         val response = httpClient.get("$BASE_API_URL/username")
