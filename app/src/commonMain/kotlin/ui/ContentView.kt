@@ -118,7 +118,7 @@ fun ContentView(
 
         val favoredCoordinates = remember { mutableStateOf(emptyList<String>()) }
 
-        LaunchedEffect(true) {
+        LaunchedEffect(connected) {
 
             try {
 
