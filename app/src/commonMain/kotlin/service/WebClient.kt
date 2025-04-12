@@ -27,6 +27,8 @@ interface WebClient {
 
     suspend fun countSeeds(): Long?
 
+    suspend fun findLatestClusters(): List<Cluster>
+
     suspend fun find(coordinate: String): Cluster?
 
     /*

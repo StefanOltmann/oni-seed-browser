@@ -1,6 +1,7 @@
 package ui
 
 import AppStorage
+import START_WITH_LATEST_MAPS
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -172,6 +173,26 @@ fun ContentView(
                         clusters.value = listOf(world)
                     else
                         clusters.value = emptyList()
+
+                } catch (ex: Throwable) {
+
+                    /* We MUST catch Throwable here to prevent UI freezes. */
+
+                    ex.printStackTrace()
+
+                    errorMessage.value = ex.stackTraceToString()
+
+                } finally {
+                    isGettingNewResults.value = false
+                }
+
+            } else if (START_WITH_LATEST_MAPS) {
+
+                try {
+
+                    isGettingNewResults.value = true
+
+                    clusters.value = DefaultWebClient.findLatestClusters()
 
                 } catch (ex: Throwable) {
 
