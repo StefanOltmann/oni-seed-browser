@@ -398,7 +398,7 @@ fun ContentView(
                         modifier = Modifier.weight(1F)
                     ) {
 
-                        LeaderboardViewList(contributors)
+                        LeaderboardViewList(errorMessage)
                     }
 
                     if (connected) {

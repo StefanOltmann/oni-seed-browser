@@ -37,6 +37,10 @@ import androidx.compose.foundation.rememberScrollbarAdapter
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.produceState
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -50,8 +54,13 @@ import io.github.stefanoltmann.app.generated.resources.uiLeaderBoardExplainer
 import io.github.stefanoltmann.app.generated.resources.uiLeaderBoardRank
 import io.github.stefanoltmann.app.generated.resources.uiLeaderBoardUsername
 import io.github.stefanoltmann.app.generated.resources.uiLoading
+import kotlin.time.Clock
+import kotlin.time.ExperimentalTime
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
 import model.Contributor
 import org.jetbrains.compose.resources.stringResource
+import service.DefaultWebClient
 import ui.theme.DefaultSpacer
 import ui.theme.DoubleSpacer
 import ui.theme.FillSpacer
@@ -59,13 +68,42 @@ import ui.theme.defaultPadding
 import ui.theme.defaultRoundedCornerShape
 import ui.theme.doubleSpacing
 import ui.theme.lightGray
+import util.formatDate
+
+const val CONTRIBUTOR_LIST_UPDATE_INTERVAL_MS: Long = 60000
 
 private val contributorListFontSize = 20.sp
 
+@OptIn(ExperimentalTime::class)
 @Composable
 fun LeaderboardViewList(
-    contributors: List<Contributor>
+    errorMessage: MutableState<String?>
 ) {
+
+    val lastRefreshTime = remember { mutableStateOf(0L) }
+
+    val contributorsState = produceState(emptyList<Contributor>()) {
+
+        try {
+
+            while (isActive) {
+
+                lastRefreshTime.value = Clock.System.now().toEpochMilliseconds()
+
+                value = DefaultWebClient.findContributors()
+
+                delay(CONTRIBUTOR_LIST_UPDATE_INTERVAL_MS)
+            }
+
+        } catch (ex: Exception) {
+
+            ex.printStackTrace()
+
+            errorMessage.value = ex.stackTraceToString()
+        }
+    }
+
+    val contributors = contributorsState.value
 
     if (contributors.isEmpty()) {
 
@@ -93,6 +131,21 @@ fun LeaderboardViewList(
             modifier = Modifier
                 .defaultPadding()
                 .width(400.dp)
+        )
+
+        DefaultSpacer()
+
+        Text(
+            text = formatDate(lastRefreshTime.value),
+            style = MaterialTheme.typography.bodyMedium,
+            color = lightGray,
+            textAlign = TextAlign.Center,
+            modifier = Modifier
+                .background(
+                    Color.Black,
+                    defaultRoundedCornerShape
+                )
+                .defaultPadding()
         )
 
         DefaultSpacer()
@@ -182,7 +235,7 @@ fun LeaderboardViewList(
                             style = MaterialTheme.typography.bodyLarge,
                             fontSize = contributorListFontSize,
                             color = if (contributor.username == null)
-                                lightGray.copy(0.7F)
+                                lightGray.copy(0.3F)
                             else
                                 lightGray,
                             maxLines = 1,

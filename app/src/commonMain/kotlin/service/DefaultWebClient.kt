@@ -233,6 +233,8 @@ object DefaultWebClient : WebClient {
 
     override suspend fun findContributors(): List<Contributor> {
 
+        println("WebClient: findContributors()")
+
         val response = httpClient.get("$BASE_API_URL/contributors")
 
         if (!response.status.isSuccess())
