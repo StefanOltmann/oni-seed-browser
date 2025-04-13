@@ -182,6 +182,21 @@ fun ClusterView(
                 )
             }
 
+            VerticalDivider(
+                thickness = 1.dp,
+                color = MaterialTheme.colorScheme.onBackground,
+                modifier = Modifier
+                    .height(doubleSpacing)
+                    .padding(horizontal = defaultSpacing)
+            )
+
+            Text(
+                text = "V " + cluster.gameVersion,
+                style = MaterialTheme.typography.bodyMedium,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.onBackground
+            )
+
             val username = steamIdToUsernameMap[cluster.uploaderSteamIdHash]
 
             if (username != null) {
