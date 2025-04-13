@@ -56,6 +56,7 @@ import io.github.stefanoltmann.app.generated.resources.uiLeaderBoardUsername
 import io.github.stefanoltmann.app.generated.resources.uiLoading
 import kotlin.time.Clock
 import kotlin.time.ExperimentalTime
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import model.Contributor
@@ -94,6 +95,10 @@ fun LeaderboardViewList(
 
                 delay(CONTRIBUTOR_LIST_UPDATE_INTERVAL_MS)
             }
+
+        } catch (ignore: CancellationException) {
+
+            // That's fine.
 
         } catch (ex: Exception) {
 
