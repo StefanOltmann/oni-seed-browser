@@ -112,7 +112,7 @@ fun ContentView(
 
     val contributors = contributorsState.value
 
-    val steamIdToUsernameMap: Map<String, String> = remember(contributors) {
+    val steamIdToUsernameMap: Map<String, String?> = remember(contributors) {
         contributors.associate { it.steamIdHash to it.username }
     }
 
@@ -551,7 +551,7 @@ private fun ColumnScope.FavoritesPanel(
     showAsteroidMap: MutableState<Asteroid?>,
     connected: Boolean,
     isMniEmbedded: Boolean,
-    steamIdToUsernameMap: Map<String, String>,
+    steamIdToUsernameMap: Map<String, String?>,
     writeToClipboard: (String) -> Unit
 ) {
 
@@ -620,7 +620,7 @@ private fun ColumnScope.MainPanel(
     showStarMap: MutableState<Cluster?>,
     showAsteroidMap: MutableState<Asteroid?>,
     isMniEmbedded: Boolean,
-    steamIdToUsernameMap: Map<String, String>,
+    steamIdToUsernameMap: Map<String, String?>,
     writeToClipboard: (String) -> Unit
 ) {
 

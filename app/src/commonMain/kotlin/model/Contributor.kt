@@ -30,9 +30,9 @@ data class Contributor(
     val steamIdHash: String,
 
     /**
-     * Chosen username or shortened steam id
+     * Chosen username or NULL, if anonymous
      */
-    val username: String,
+    val username: String?,
 
     /**
      * Count of contributed maps

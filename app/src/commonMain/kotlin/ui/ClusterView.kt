@@ -82,7 +82,7 @@ fun ClusterView(
     showAsteroidMap: MutableState<Asteroid?>,
     showMniUrl: Boolean,
     showFavoriteIcon: Boolean,
-    steamIdToUsernameMap: Map<String, String>,
+    steamIdToUsernameMap: Map<String, String?>,
     writeToClipboard: (String) -> Unit
 ) {
 

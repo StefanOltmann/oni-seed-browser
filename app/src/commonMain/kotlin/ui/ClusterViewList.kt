@@ -48,7 +48,7 @@ fun ClusterViewList(
     showAsteroidMap: MutableState<Asteroid?>,
     showMniUrl: Boolean = false,
     showFavoriteIcon: Boolean,
-    steamIdToUsernameMap: Map<String, String>,
+    steamIdToUsernameMap: Map<String, String?>,
     writeToClipboard: (String) -> Unit
 ) {
 

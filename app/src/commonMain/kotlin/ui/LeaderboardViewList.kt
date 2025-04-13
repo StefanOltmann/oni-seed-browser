@@ -178,10 +178,13 @@ fun LeaderboardViewList(
                         DoubleSpacer()
 
                         Text(
-                            text = contributor.username,
+                            text = contributor.username ?: "Anonymous",
                             style = MaterialTheme.typography.bodyLarge,
                             fontSize = contributorListFontSize,
-                            color = lightGray,
+                            color = if (contributor.username == null)
+                                lightGray.copy(0.7F)
+                            else
+                                lightGray,
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis,
                             modifier = Modifier.width(160.dp)
