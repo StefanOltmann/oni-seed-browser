@@ -44,6 +44,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalClipboardManager
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -57,6 +58,7 @@ import model.Asteroid
 import model.Cluster
 import org.jetbrains.compose.resources.stringResource
 import ui.icons.ContentCopy
+import ui.icons.IconExternalLink
 import ui.theme.DefaultSpacer
 import ui.theme.FillSpacer
 import ui.theme.HalfSpacer
@@ -126,14 +128,7 @@ fun ClusterView(
 
         Row(
             verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier
-                .offset(y = -4.dp)
-                .noRippleClickable {
-
-                    clipboardManager.setText(AnnotatedString(url))
-
-                    urlWasCopied.value = true
-                }
+            modifier = Modifier.offset(y = -4.dp)
         ) {
 
             /*
@@ -151,36 +146,68 @@ fun ClusterView(
 
             Spacer(modifier = Modifier.width(defaultSpacing + halfSpacing))
 
-            Text(
-                text = if (urlWasCopied.value)
-                    stringResource(Res.string.uiCopiedToClipboard)
-                else
-                    url,
-                style = MaterialTheme.typography.bodyMedium,
-                fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.onBackground,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis
-            )
+            Row(
+                modifier = Modifier.noRippleClickable {
 
-            DefaultSpacer()
+                    clipboardManager.setText(AnnotatedString(url))
 
-            if (!urlWasCopied.value) {
+                    urlWasCopied.value = true
+                }
+            ) {
 
-                val hovered = remember { mutableStateOf(false) }
-
-                Icon(
-                    imageVector = ContentCopy,
-                    contentDescription = null,
-                    tint = if (hovered.value)
-                        hoverColor
+                Text(
+                    text = if (urlWasCopied.value)
+                        stringResource(Res.string.uiCopiedToClipboard)
                     else
-                        MaterialTheme.colorScheme.onBackground,
-                    modifier = Modifier
-                        .onHover(hovered)
-                        .size(16.dp)
+                        url,
+                    style = MaterialTheme.typography.bodyMedium,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.onBackground,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
                 )
+
+                DefaultSpacer()
+
+                if (!urlWasCopied.value) {
+
+                    val copyHovered = remember { mutableStateOf(false) }
+
+                    Icon(
+                        imageVector = ContentCopy,
+                        contentDescription = null,
+                        tint = if (copyHovered.value)
+                            hoverColor
+                        else
+                            MaterialTheme.colorScheme.onBackground,
+                        modifier = Modifier
+                            .onHover(copyHovered)
+                            .size(16.dp)
+                            .offset(y = 2.dp)
+                    )
+                }
             }
+
+            HalfSpacer()
+
+            val openHovered = remember { mutableStateOf(false) }
+
+            val uriHandler = LocalUriHandler.current
+
+            Icon(
+                imageVector = IconExternalLink,
+                contentDescription = null,
+                tint = if (openHovered.value)
+                    hoverColor
+                else
+                    MaterialTheme.colorScheme.onBackground,
+                modifier = Modifier
+                    .onHover(openHovered)
+                    .size(16.dp)
+                    .noRippleClickable {
+                        uriHandler.openUri(url)
+                    }
+            )
 
             VerticalDivider(
                 thickness = 1.dp,
@@ -237,9 +264,9 @@ fun ClusterView(
                 )
             }
         }
-
-        HalfSpacer()
     }
+
+    HalfSpacer()
 }
 
 @Composable
