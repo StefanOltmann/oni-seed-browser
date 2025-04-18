@@ -360,9 +360,13 @@ fun ContentView(
                             }
                     )
 
-                    LoginWithSteamButton(
-                        connected = connected
-                    )
+                    /*
+                     * Only show the login button in the standalone version.
+                     */
+                    if (connected || (!connected && !isMniEmbedded))
+                        LoginWithSteamButton(
+                            connected = connected
+                        )
 
                     DoubleSpacer()
                 }
