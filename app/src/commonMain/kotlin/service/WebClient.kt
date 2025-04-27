@@ -20,12 +20,14 @@
 package service
 
 import model.Cluster
-import model.ContributorRank
+import model.Contributor
 import model.filter.FilterQuery
 
 interface WebClient {
 
     suspend fun countSeeds(): Long?
+
+    suspend fun findLatestClusters(): List<Cluster>
 
     suspend fun find(coordinate: String): Cluster?
 
@@ -43,12 +45,10 @@ interface WebClient {
 
     suspend fun search(filterQuery: FilterQuery): List<Cluster>
 
-    suspend fun getSteamId(): String?
-
     suspend fun getUsername(): String?
 
     suspend fun setUsername(username: String): Boolean
 
-    suspend fun findContributorRanking(): List<ContributorRank>
+    suspend fun findContributors(): List<Contributor>
 
 }

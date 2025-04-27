@@ -17,8 +17,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import kotlin.uuid.ExperimentalUuidApi
-import kotlin.uuid.Uuid
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import model.filter.FilterQuery
@@ -29,35 +27,40 @@ private val jsonPretty = Json {
     encodeDefaults = true
 }
 
-private const val CLIENT_ID_SETTINGS_KEY = "id"
-private const val FILTER_SETTINGS_KEY = "filter"
+private const val FILTER_SETTINGS_KEY = "mni_filter"
+private const val TOKEN_SETTINGS_KEY = "mni_token"
 
 object AppStorage {
 
-    val clientId: String = getOrCreateClientId()
-
     init {
-        println("Client ID: $clientId")
+
+        /* Remove old stuff */
+        removeClientId()
     }
 
-    @OptIn(ExperimentalUuidApi::class)
-    private fun getOrCreateClientId(): String {
+    private fun removeClientId() {
 
-        val existingId = settings.getStringOrNull(CLIENT_ID_SETTINGS_KEY)
-
-        if (existingId != null)
-            return existingId
-
-        val newId = Uuid.random().toString()
-
-        settings.putString(CLIENT_ID_SETTINGS_KEY, newId)
-
-        return newId
+        settings.remove("id")
+        settings.remove("mni_client_id")
     }
+
+    fun getToken(): String? =
+        settings.getStringOrNull(TOKEN_SETTINGS_KEY)
+
+    fun setToken(token: String) {
+
+        settings.remove("token") // old key
+
+        settings.putString(TOKEN_SETTINGS_KEY, token)
+    }
+
+    fun clearToken() =
+        settings.remove(TOKEN_SETTINGS_KEY)
 
     fun loadFilter(): FilterQuery {
 
         val json = settings.getStringOrNull(FILTER_SETTINGS_KEY)
+            ?: settings.getStringOrNull("filter") // Old key
             ?: return FilterQuery.ALL
 
         return try {
@@ -84,6 +87,8 @@ object AppStorage {
             val json = jsonPretty.encodeToString(filterQuery)
 
             settings.putString(FILTER_SETTINGS_KEY, json)
+
+            settings.remove("filter") // old key
 
         } catch (ex: Exception) {
 

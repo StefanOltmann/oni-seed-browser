@@ -1,6 +1,7 @@
 package ui
 
 import AppStorage
+import START_WITH_LATEST_MAPS
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -58,6 +59,7 @@ import kotlinx.coroutines.launch
 import kotlinx.serialization.json.Json
 import model.Asteroid
 import model.Cluster
+import model.Contributor
 import model.filter.FilterQuery
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -81,7 +83,7 @@ import ui.theme.lightGray
 fun ContentView(
     urlHash: State<String?>,
     isMniEmbedded: Boolean,
-    jwt: String?,
+    connected: Boolean,
     /**
      * Note: LocalClipboardManager does not work for Compose for Web
      * in all browsers for some reason. That's why we use a workaround here.
@@ -94,61 +96,66 @@ fun ContentView(
     val density = LocalDensity.current.density
     val useCompactLayout = remember { mutableStateOf(false) }
 
+    val contributorsState = produceState(emptyList<Contributor>()) {
+
+        try {
+
+            value = DefaultWebClient.findContributors()
+
+        } catch (ex: Exception) {
+
+            ex.printStackTrace()
+
+            errorMessage.value = ex.stackTraceToString()
+        }
+    }
+
+    val contributors = contributorsState.value
+
+    val steamIdToUsernameMap: Map<String, String?> = remember(contributors) {
+        contributors.associate { it.steamIdHash to it.username }
+    }
+
+    val worldCount = produceState<Long?>(null) {
+
+        try {
+
+            value = DefaultWebClient.countSeeds()
+
+        } catch (ex: Throwable) {
+
+            /* We MUST catch Throwable here to prevent UI freezes. */
+
+            ex.printStackTrace()
+
+            errorMessage.value = ex.stackTraceToString()
+        }
+    }
+
+    val favoredCoordinates = remember { mutableStateOf(emptyList<String>()) }
+
+    LaunchedEffect(connected) {
+
+        try {
+
+            if (connected)
+                favoredCoordinates.value = DefaultWebClient.findFavoredCoordinates()
+
+        } catch (ex: Throwable) {
+
+            /* We MUST catch Throwable here to prevent UI freezes. */
+
+            ex.printStackTrace()
+
+            errorMessage.value = ex.stackTraceToString()
+        }
+    }
+
     Box(
         modifier = Modifier.onSizeChanged {
             useCompactLayout.value = it.width / density < 400
         }
     ) {
-
-        val worldCount = produceState<Long?>(null) {
-
-            try {
-
-                value = DefaultWebClient.countSeeds()
-
-            } catch (ex: Throwable) {
-
-                /* We MUST catch Throwable here to prevent UI freezes. */
-
-                ex.printStackTrace()
-
-                errorMessage.value = ex.stackTraceToString()
-            }
-        }
-
-        val steamId = produceState<String?>(null) {
-
-            try {
-
-                value = DefaultWebClient.getSteamId()
-
-            } catch (ex: Throwable) {
-
-                /* We MUST catch Throwable here to prevent UI freezes. */
-
-                ex.printStackTrace()
-
-                errorMessage.value = ex.stackTraceToString()
-            }
-        }
-
-        val favoredCoordinates = remember { mutableStateOf(emptyList<String>()) }
-
-        LaunchedEffect(true) {
-
-            try {
-
-                favoredCoordinates.value = DefaultWebClient.findFavoredCoordinates()
-
-            } catch (ex: Throwable) {
-
-                /* We MUST catch Throwable here to prevent UI freezes. */
-
-                ex.printStackTrace()
-
-                errorMessage.value = ex.stackTraceToString()
-            }
-        }
 
         val coroutineScope = rememberCoroutineScope()
 
@@ -187,6 +194,26 @@ fun ContentView(
                         clusters.value = listOf(world)
                     else
                         clusters.value = emptyList()
+
+                } catch (ex: Throwable) {
+
+                    /* We MUST catch Throwable here to prevent UI freezes. */
+
+                    ex.printStackTrace()
+
+                    errorMessage.value = ex.stackTraceToString()
+
+                } finally {
+                    isGettingNewResults.value = false
+                }
+
+            } else if (START_WITH_LATEST_MAPS) {
+
+                try {
+
+                    isGettingNewResults.value = true
+
+                    clusters.value = DefaultWebClient.findLatestClusters()
 
                 } catch (ex: Throwable) {
 
@@ -292,7 +319,7 @@ fun ContentView(
 
                     FillSpacer()
 
-                    if (steamId.value != null) {
+                    if (connected) {
 
                         Icon(
                             imageVector = if (showFavorites.value)
@@ -333,9 +360,13 @@ fun ContentView(
                             }
                     )
 
-                    LoginWithSteamButton(
-                        connected = steamId.value != null
-                    )
+                    /*
+                     * Only show the login button in the standalone version.
+                     */
+                    if (connected || (!connected && !isMniEmbedded))
+                        LoginWithSteamButton(
+                            connected = connected
+                        )
 
                     DoubleSpacer()
                 }
@@ -371,12 +402,10 @@ fun ContentView(
                         modifier = Modifier.weight(1F)
                     ) {
 
-                        LeaderboardViewList(
-                            errorMessage
-                        )
+                        LeaderboardViewList(errorMessage)
                     }
 
-                    if (steamId.value != null) {
+                    if (connected) {
 
                         /*
                          * Logged-in users can change their name.
@@ -484,8 +513,9 @@ fun ContentView(
                         favoredCoordinates,
                         showStarMap,
                         showAsteroidMap,
-                        steamId,
+                        connected,
                         isMniEmbedded,
+                        steamIdToUsernameMap,
                         writeToClipboard
                     )
 
@@ -499,13 +529,14 @@ fun ContentView(
                         worldCount,
                         coroutineScope,
                         urlHash,
-                        steamId,
+                        connected,
                         lazyListState,
                         useCompactLayout,
                         favoredCoordinates,
                         showStarMap,
                         showAsteroidMap,
                         isMniEmbedded,
+                        steamIdToUsernameMap,
                         writeToClipboard
                     )
                 }
@@ -522,8 +553,9 @@ private fun ColumnScope.FavoritesPanel(
     favoredCoordinates: MutableState<List<String>>,
     showStarMap: MutableState<Cluster?>,
     showAsteroidMap: MutableState<Asteroid?>,
-    steamId: State<String?>,
+    connected: Boolean,
     isMniEmbedded: Boolean,
+    steamIdToUsernameMap: Map<String, String?>,
     writeToClipboard: (String) -> Unit
 ) {
 
@@ -557,8 +589,9 @@ private fun ColumnScope.FavoritesPanel(
                 favoredCoordinates,
                 showStarMap,
                 showAsteroidMap,
-                showFavoriteIcon = steamId.value != null,
+                showFavoriteIcon = connected,
                 showMniUrl = isMniEmbedded,
+                steamIdToUsernameMap = steamIdToUsernameMap,
                 writeToClipboard = writeToClipboard
             )
 
@@ -584,13 +617,14 @@ private fun ColumnScope.MainPanel(
     worldCount: State<Long?>,
     coroutineScope: CoroutineScope,
     urlHash: State<String?>,
-    steamId: State<String?>,
+    connected: Boolean,
     lazyListState: LazyListState,
     useCompactLayout: MutableState<Boolean>,
     favoredCoordinates: MutableState<List<String>>,
     showStarMap: MutableState<Cluster?>,
     showAsteroidMap: MutableState<Asteroid?>,
     isMniEmbedded: Boolean,
+    steamIdToUsernameMap: Map<String, String?>,
     writeToClipboard: (String) -> Unit
 ) {
 
@@ -689,7 +723,7 @@ private fun ColumnScope.MainPanel(
                     DoubleSpacer()
 
                     RequestCoordinateButton(
-                        enabled = steamId.value != null,
+                        enabled = connected,
                         coordinate = coordinate
                     )
                 }
@@ -709,8 +743,9 @@ private fun ColumnScope.MainPanel(
                 favoredCoordinates,
                 showStarMap,
                 showAsteroidMap,
-                showFavoriteIcon = steamId.value != null,
+                showFavoriteIcon = connected,
                 showMniUrl = isMniEmbedded,
+                steamIdToUsernameMap = steamIdToUsernameMap,
                 writeToClipboard = writeToClipboard
             )
         }

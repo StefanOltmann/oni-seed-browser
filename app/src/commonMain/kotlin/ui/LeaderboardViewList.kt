@@ -31,14 +31,16 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollbarAdapter
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.produceState
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -52,7 +54,12 @@ import io.github.stefanoltmann.app.generated.resources.uiLeaderBoardExplainer
 import io.github.stefanoltmann.app.generated.resources.uiLeaderBoardRank
 import io.github.stefanoltmann.app.generated.resources.uiLeaderBoardUsername
 import io.github.stefanoltmann.app.generated.resources.uiLoading
-import model.ContributorRank
+import kotlin.time.Clock
+import kotlin.time.ExperimentalTime
+import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
+import model.Contributor
 import org.jetbrains.compose.resources.stringResource
 import service.DefaultWebClient
 import ui.theme.DefaultSpacer
@@ -62,19 +69,36 @@ import ui.theme.defaultPadding
 import ui.theme.defaultRoundedCornerShape
 import ui.theme.doubleSpacing
 import ui.theme.lightGray
+import util.formatDate
+
+const val CONTRIBUTOR_LIST_UPDATE_INTERVAL_MS: Long = 60000
 
 private val contributorListFontSize = 20.sp
 
+@OptIn(ExperimentalTime::class)
 @Composable
 fun LeaderboardViewList(
     errorMessage: MutableState<String?>
 ) {
 
-    val contributorRankingState = produceState(emptyList<ContributorRank>()) {
+    val lastRefreshTime = remember { mutableStateOf(0L) }
+
+    val contributorsState = produceState(emptyList<Contributor>()) {
 
         try {
 
-            value = DefaultWebClient.findContributorRanking()
+            while (isActive) {
+
+                lastRefreshTime.value = Clock.System.now().toEpochMilliseconds()
+
+                value = DefaultWebClient.findContributors()
+
+                delay(CONTRIBUTOR_LIST_UPDATE_INTERVAL_MS)
+            }
+
+        } catch (ignore: CancellationException) {
+
+            // That's fine.
 
         } catch (ex: Exception) {
 
@@ -84,9 +108,9 @@ fun LeaderboardViewList(
         }
     }
 
-    val contributorRanking = contributorRankingState.value
+    val contributors = contributorsState.value
 
-    if (contributorRanking.isEmpty()) {
+    if (contributors.isEmpty()) {
 
         Text(
             text = stringResource(Res.string.uiLoading),
@@ -112,6 +136,21 @@ fun LeaderboardViewList(
             modifier = Modifier
                 .defaultPadding()
                 .width(400.dp)
+        )
+
+        DefaultSpacer()
+
+        Text(
+            text = formatDate(lastRefreshTime.value),
+            style = MaterialTheme.typography.bodyMedium,
+            color = lightGray,
+            textAlign = TextAlign.Center,
+            modifier = Modifier
+                .background(
+                    Color.Black,
+                    defaultRoundedCornerShape
+                )
+                .defaultPadding()
         )
 
         DefaultSpacer()
@@ -172,14 +211,16 @@ fun LeaderboardViewList(
                 modifier = Modifier.padding(doubleSpacing)
             ) {
 
-                items(contributorRanking) { rank ->
+                itemsIndexed(contributors) { index, contributor ->
+
+                    val rank = index + 1
 
                     Row {
 
                         FillSpacer()
 
                         Text(
-                            text = rank.rank.toString(),
+                            text = rank.toString(),
                             style = MaterialTheme.typography.bodyLarge,
                             fontSize = contributorListFontSize,
                             color = lightGray,
@@ -195,10 +236,13 @@ fun LeaderboardViewList(
                         DoubleSpacer()
 
                         Text(
-                            text = rank.username,
+                            text = contributor.username ?: "Anonymous",
                             style = MaterialTheme.typography.bodyLarge,
                             fontSize = contributorListFontSize,
-                            color = lightGray,
+                            color = if (contributor.username == null)
+                                lightGray.copy(0.3F)
+                            else
+                                lightGray,
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis,
                             modifier = Modifier.width(160.dp)
@@ -207,7 +251,7 @@ fun LeaderboardViewList(
                         DoubleSpacer()
 
                         Text(
-                            text = rank.mapCount.toString(),
+                            text = contributor.mapCount.toString(),
                             style = MaterialTheme.typography.bodyLarge,
                             fontSize = contributorListFontSize,
                             color = lightGray,

@@ -64,7 +64,10 @@ kotlin {
 
             implementation(libs.ktor.js)
 
+            /* Cryptography (JWT) */
+            implementation("dev.whyoleg.cryptography:cryptography-provider-webcrypto:0.4.0")
             implementation("com.appstractive:jwt-kt-wasm-js:1.1.0")
+            implementation("com.appstractive:jwt-rsa-kt:1.1.0")
         }
 
         commonMain.dependencies {
@@ -85,6 +88,9 @@ kotlin {
 
             /* Settings */
             implementation(libs.multiplatformSettings)
+
+            /* Date formatting */
+            implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.6.2")
         }
 
         commonTest.dependencies {

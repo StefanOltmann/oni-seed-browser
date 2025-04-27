@@ -27,6 +27,7 @@ import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -34,6 +35,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
@@ -42,6 +44,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalClipboardManager
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -55,15 +58,18 @@ import model.Asteroid
 import model.Cluster
 import org.jetbrains.compose.resources.stringResource
 import ui.icons.ContentCopy
+import ui.icons.IconExternalLink
 import ui.theme.DefaultSpacer
 import ui.theme.FillSpacer
 import ui.theme.HalfSpacer
 import ui.theme.anthraticeTransparentBackgroundColor
 import ui.theme.defaultRoundedCornerShape
 import ui.theme.defaultSpacing
+import ui.theme.doubleSpacing
 import ui.theme.halfSpacing
 import ui.theme.hoverColor
 import ui.theme.lightGrayTransparentBorderColor
+import util.formatDate
 
 val widthPerWorld: Dp = 380.dp
 
@@ -78,6 +84,7 @@ fun ClusterView(
     showAsteroidMap: MutableState<Asteroid?>,
     showMniUrl: Boolean,
     showFavoriteIcon: Boolean,
+    steamIdToUsernameMap: Map<String, String?>,
     writeToClipboard: (String) -> Unit
 ) {
 
@@ -121,14 +128,7 @@ fun ClusterView(
 
         Row(
             verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier
-                .offset(y = -4.dp)
-                .noRippleClickable {
-
-                    clipboardManager.setText(AnnotatedString(url))
-
-                    urlWasCopied.value = true
-                }
+            modifier = Modifier.offset(y = -4.dp)
         ) {
 
             /*
@@ -146,40 +146,127 @@ fun ClusterView(
 
             Spacer(modifier = Modifier.width(defaultSpacing + halfSpacing))
 
-            Text(
-                text = if (urlWasCopied.value)
-                    stringResource(Res.string.uiCopiedToClipboard)
+            Row(
+                modifier = Modifier.noRippleClickable {
+
+                    clipboardManager.setText(AnnotatedString(url))
+
+                    urlWasCopied.value = true
+                }
+            ) {
+
+                Text(
+                    text = if (urlWasCopied.value)
+                        stringResource(Res.string.uiCopiedToClipboard)
+                    else
+                        url,
+                    style = MaterialTheme.typography.bodyMedium,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.onBackground,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
+                )
+
+                DefaultSpacer()
+
+                if (!urlWasCopied.value) {
+
+                    val copyHovered = remember { mutableStateOf(false) }
+
+                    Icon(
+                        imageVector = ContentCopy,
+                        contentDescription = null,
+                        tint = if (copyHovered.value)
+                            hoverColor
+                        else
+                            MaterialTheme.colorScheme.onBackground,
+                        modifier = Modifier
+                            .onHover(copyHovered)
+                            .size(16.dp)
+                            .offset(y = 2.dp)
+                    )
+                }
+            }
+
+            HalfSpacer()
+
+            val openHovered = remember { mutableStateOf(false) }
+
+            val uriHandler = LocalUriHandler.current
+
+            Icon(
+                imageVector = IconExternalLink,
+                contentDescription = null,
+                tint = if (openHovered.value)
+                    hoverColor
                 else
-                    url,
-                style = MaterialTheme.typography.bodyMedium,
-                fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.onBackground,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis
+                    MaterialTheme.colorScheme.onBackground,
+                modifier = Modifier
+                    .onHover(openHovered)
+                    .size(16.dp)
+                    .noRippleClickable {
+                        uriHandler.openUri(url)
+                    }
             )
 
-            DefaultSpacer()
+            VerticalDivider(
+                thickness = 1.dp,
+                color = MaterialTheme.colorScheme.onBackground,
+                modifier = Modifier
+                    .height(doubleSpacing)
+                    .padding(horizontal = defaultSpacing)
+            )
 
-            if (!urlWasCopied.value) {
+            Text(
+                text = "V " + cluster.gameVersion,
+                style = MaterialTheme.typography.bodyMedium,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.onBackground
+            )
 
-                val hovered = remember { mutableStateOf(false) }
+            val username = steamIdToUsernameMap[cluster.uploaderSteamIdHash]
 
-                Icon(
-                    imageVector = ContentCopy,
-                    contentDescription = null,
-                    tint = if (hovered.value)
-                        hoverColor
-                    else
-                        MaterialTheme.colorScheme.onBackground,
+            if (username != null) {
+
+                VerticalDivider(
+                    thickness = 1.dp,
+                    color = MaterialTheme.colorScheme.onBackground,
                     modifier = Modifier
-                        .onHover(hovered)
-                        .size(16.dp)
+                        .height(doubleSpacing)
+                        .padding(horizontal = defaultSpacing)
+                )
+
+                Text(
+                    text = username,
+                    style = MaterialTheme.typography.bodyMedium,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.onBackground
+                )
+            }
+
+            val uploadDate = cluster.uploadDate
+
+            if (uploadDate != null) {
+
+                VerticalDivider(
+                    thickness = 1.dp,
+                    color = MaterialTheme.colorScheme.onBackground,
+                    modifier = Modifier
+                        .height(doubleSpacing)
+                        .padding(horizontal = defaultSpacing)
+                )
+
+                Text(
+                    text = formatDate(uploadDate),
+                    style = MaterialTheme.typography.bodyMedium,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.onBackground
                 )
             }
         }
-
-        HalfSpacer()
     }
+
+    HalfSpacer()
 }
 
 @Composable

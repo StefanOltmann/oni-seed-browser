@@ -19,7 +19,6 @@
 
 package ui
 
-import AppStorage.clientId
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.offset
@@ -68,8 +67,10 @@ fun LoginWithSteamButton(
             )
             .noRippleClickable {
 
-                if (!connected)
-                    uriHandler.openUri("https://ingest.mapsnotincluded.org/login/$clientId")
+                if (connected)
+                    return@noRippleClickable
+
+                uriHandler.openUri("https://ingest.mapsnotincluded.org/connect/0")
             }
     ) {
 

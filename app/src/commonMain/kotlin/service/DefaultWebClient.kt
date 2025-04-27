@@ -43,7 +43,7 @@ import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.cbor.Cbor
 import kotlinx.serialization.json.Json
 import model.Cluster
-import model.ContributorRank
+import model.Contributor
 import model.RateCoordinateRequest
 import model.filter.FilterQuery
 
@@ -77,7 +77,9 @@ object DefaultWebClient : WebClient {
                 append(HttpHeaders.AccessControlAllowOrigin, "*")
 
                 /* Auth */
-                append("Client-ID", AppStorage.clientId)
+                AppStorage.getToken()?.let { token ->
+                    append("token", token)
+                }
             }
         }
 
@@ -97,6 +99,16 @@ object DefaultWebClient : WebClient {
 
         if (response.status != HttpStatusCode.OK)
             return null
+
+        return response.body()
+    }
+
+    override suspend fun findLatestClusters(): List<Cluster> {
+
+        val response = httpClient.get("$BASE_API_URL/latest")
+
+        if (!response.status.isSuccess())
+            error("Requesting latest clusters failed with HTTP ${response.status}: ${response.bodyAsText()}")
 
         return response.body()
     }
@@ -194,16 +206,6 @@ object DefaultWebClient : WebClient {
         return response.body()
     }
 
-    override suspend fun getSteamId(): String? {
-
-        val response = httpClient.get("$BASE_API_URL/steamid")
-
-        if (response.status != HttpStatusCode.OK)
-            return null
-
-        return response.bodyAsText()
-    }
-
     override suspend fun getUsername(): String? {
 
         val response = httpClient.get("$BASE_API_URL/username")
@@ -229,12 +231,14 @@ object DefaultWebClient : WebClient {
         return success
     }
 
-    override suspend fun findContributorRanking(): List<ContributorRank> {
+    override suspend fun findContributors(): List<Contributor> {
 
-        val response = httpClient.get("$BASE_API_URL/contributor-ranking")
+        println("WebClient: findContributors()")
+
+        val response = httpClient.get("$BASE_API_URL/contributors")
 
         if (!response.status.isSuccess())
-            error("Requesting contributor rankings failed with HTTP ${response.status}: ${response.bodyAsText()}")
+            error("Requesting contributors failed with HTTP ${response.status}: ${response.bodyAsText()}")
 
         return response.body()
     }
