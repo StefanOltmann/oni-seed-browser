@@ -22,9 +22,15 @@ gitVersioning.apply {
     }
 }
 
+
+
 kotlin {
 
     jvm()
+
+    jvmToolchain {
+        languageVersion.set(JavaLanguageVersion.of(22))
+    }
 
     @OptIn(org.jetbrains.kotlin.gradle.ExperimentalWasmDsl::class)
     wasmJs {
