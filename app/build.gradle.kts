@@ -30,9 +30,7 @@ kotlin {
 
     jvm()
 
-    jvmToolchain {
-        languageVersion.set(JavaLanguageVersion.of(22))
-    }
+    jvmToolchain(jdkVersion = 22)
 
     if (buildTarget == "web") {
 
@@ -123,8 +121,13 @@ compose.desktop {
         mainClass = "MainKt"
 
         nativeDistributions {
+
+            includeAllModules = true
+
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
+
             packageName = "de.stefan-oltmann.oni-seed-browser"
+
             packageVersion = version.toString()
         }
     }
