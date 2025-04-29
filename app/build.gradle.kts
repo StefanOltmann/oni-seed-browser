@@ -115,11 +115,23 @@ compose.desktop {
     }
 }
 
-//dependencies {
-//
-//    /* Conveyor */
-//    linuxAmd64(compose.desktop.linux_x64)
-//    macAmd64(compose.desktop.macos_x64)
-//    macAarch64(compose.desktop.macos_arm64)
-//    windowsAmd64(compose.desktop.windows_x64)
-//}
+// region Work around temporary Compose bugs.
+configurations.all {
+    attributes {
+        // https://github.com/JetBrains/compose-jb/issues/1404#issuecomment-1146894731
+        attribute(Attribute.of("ui", String::class.java), "awt")
+    }
+}
+// endregion
+
+dependencies {
+
+    if (System.getenv("BUILD_DESKTOP") == "true") {
+
+        /* Conveyor */
+        linuxAmd64(compose.desktop.linux_x64)
+        macAmd64(compose.desktop.macos_x64)
+        macAarch64(compose.desktop.macos_arm64)
+        windowsAmd64(compose.desktop.windows_x64)
+    }
+}

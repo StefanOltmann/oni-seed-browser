@@ -1,0 +1,39 @@
+name: Build
+
+on:
+  push:
+    tags:
+      - '*'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: List all files
+        run: find .
+      - name: Run Gradle build
+        env:
+          BUILD_DESKTOP: "true"
+        run: |
+          chmod +x gradlew
+          ./gradlew build
+      - name: Run Conveyor
+        uses: hydraulic-software/conveyor/actions/build@v16.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          command: make copied-site
+          signing_key: ${{ secrets.SIGNING_KEY }}
+          agree_to_license: 1
+  
