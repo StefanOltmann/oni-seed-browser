@@ -20,6 +20,8 @@ jobs:
       - name: List all files
         run: find .
       - name: Run Gradle build
+        env:
+          BUILD_TARGET: "web"
         run: |
           chmod +x gradlew
           ./gradlew build allTests wasmJsBrowserDistribution

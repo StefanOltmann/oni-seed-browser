@@ -1,4 +1,5 @@
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
+import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 
 plugins {
@@ -22,7 +23,8 @@ gitVersioning.apply {
     }
 }
 
-
+// Work around missing WASM support in Hydraulic Conveyor
+val buildTarget: String? = System.getenv("BUILD_TARGET")
 
 kotlin {
 
@@ -32,25 +34,28 @@ kotlin {
         languageVersion.set(JavaLanguageVersion.of(22))
     }
 
-    @OptIn(org.jetbrains.kotlin.gradle.ExperimentalWasmDsl::class)
-    wasmJs {
+    if (buildTarget == "web") {
 
-        moduleName = "app"
+        @OptIn(ExperimentalWasmDsl::class)
+        wasmJs {
 
-        browser {
-            commonWebpackConfig {
-                outputFileName = "app.js"
-                devServer = (devServer ?: KotlinWebpackConfig.DevServer()).apply {
-                    static = (static ?: mutableListOf()).apply {
-                        // Serve sources to debug inside browser
-                        add(project.rootDir.path)
-                        add(project.projectDir.path)
+            moduleName = "app"
+
+            browser {
+                commonWebpackConfig {
+                    outputFileName = "app.js"
+                    devServer = (devServer ?: KotlinWebpackConfig.DevServer()).apply {
+                        static = (static ?: mutableListOf()).apply {
+                            // Serve sources to debug inside browser
+                            add(project.rootDir.path)
+                            add(project.projectDir.path)
+                        }
                     }
                 }
             }
-        }
 
-        binaries.executable()
+            binaries.executable()
+        }
     }
 
     sourceSets {
@@ -64,16 +69,20 @@ kotlin {
             implementation(libs.ktor.java)
         }
 
-        val wasmJsMain by getting
+        if (buildTarget == "web") {
 
-        wasmJsMain.dependencies {
+            val wasmJsMain by getting
 
-            implementation(libs.ktor.js)
+            wasmJsMain.dependencies {
 
-            /* Cryptography (JWT) */
-            implementation("dev.whyoleg.cryptography:cryptography-provider-webcrypto:0.4.0")
-            implementation("com.appstractive:jwt-kt-wasm-js:1.1.0")
-            implementation("com.appstractive:jwt-rsa-kt:1.1.0")
+                implementation(libs.ktor.js)
+
+                /* Cryptography (JWT) */
+                implementation("dev.whyoleg.cryptography:cryptography-provider-webcrypto:0.4.0")
+                implementation("com.appstractive:jwt-kt-wasm-js:1.1.0")
+                implementation("com.appstractive:jwt-rsa-kt:1.1.0")
+
+            }
         }
 
         commonMain.dependencies {
@@ -132,7 +141,7 @@ configurations.all {
 
 dependencies {
 
-    if (System.getenv("BUILD_DESKTOP") == "true") {
+    if (buildTarget == "desktop") {
 
         /* Conveyor */
         linuxAmd64(compose.desktop.linux_x64)

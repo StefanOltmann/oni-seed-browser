@@ -24,10 +24,10 @@ jobs:
         run: find .
       - name: Run Gradle build
         env:
-          BUILD_DESKTOP: "true"
+          BUILD_TARGET: "desktop"
         run: |
           chmod +x gradlew
-          ./gradlew createDistributable
+          ./gradlew build allTests createReleaseDistributable
       - name: Run Conveyor
         uses: hydraulic-software/conveyor/actions/build@v16.0
         env:
