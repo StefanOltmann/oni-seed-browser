@@ -1,4 +1,4 @@
-name: Build
+name: Build Desktop app
 
 on:
   push:
@@ -27,7 +27,7 @@ jobs:
           BUILD_DESKTOP: "true"
         run: |
           chmod +x gradlew
-          ./gradlew build
+          ./gradlew createDistributable
       - name: Run Conveyor
         uses: hydraulic-software/conveyor/actions/build@v16.0
         env:
