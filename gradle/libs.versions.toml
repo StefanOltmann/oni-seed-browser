@@ -1,5 +1,5 @@
 [versions]
-compose-plugin = "1.7.3"
+compose-multiplatform = "1.7.3"
 kotlin = "2.1.20"
 ktor = "3.0.0" # Ktor 3.0.3 introduces a bug that breaks https://stefan-oltmann.de/oni-seed-browser/#SNDST-A-440396283-0-0-0
 detekt = "1.23.8"
@@ -20,7 +20,7 @@ multiplatformSettings = { module = "com.russhwolf:multiplatform-settings", versi
 
 [plugins]
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
-pluginCompose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
-jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "compose-plugin" }
+composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "compose-multiplatform" }
+composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
