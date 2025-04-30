@@ -30,7 +30,7 @@ kotlin {
 
     jvm()
 
-    jvmToolchain(jdkVersion = 22)
+    jvmToolchain(jdkVersion = 17)
 
     if (buildTarget == "web") {
 
@@ -40,13 +40,17 @@ kotlin {
             moduleName = "app"
 
             browser {
+
+                val rootDirPath = project.rootDir.path
+                val projectDirPath = project.projectDir.path
+
                 commonWebpackConfig {
                     outputFileName = "app.js"
                     devServer = (devServer ?: KotlinWebpackConfig.DevServer()).apply {
                         static = (static ?: mutableListOf()).apply {
                             // Serve sources to debug inside browser
-                            add(project.rootDir.path)
-                            add(project.projectDir.path)
+                            add(rootDirPath)
+                            add(projectDirPath)
                         }
                     }
                 }
@@ -57,31 +61,6 @@ kotlin {
     }
 
     sourceSets {
-
-        val jvmMain by getting
-
-        jvmMain.dependencies {
-
-            implementation(compose.desktop.currentOs)
-
-            implementation(libs.ktor.java)
-        }
-
-        if (buildTarget == "web") {
-
-            val wasmJsMain by getting
-
-            wasmJsMain.dependencies {
-
-                implementation(libs.ktor.js)
-
-                /* Cryptography (JWT) */
-                implementation("dev.whyoleg.cryptography:cryptography-provider-webcrypto:0.4.0")
-                implementation("com.appstractive:jwt-kt-wasm-js:1.1.0")
-                implementation("com.appstractive:jwt-rsa-kt:1.1.0")
-
-            }
-        }
 
         commonMain.dependencies {
 
@@ -111,6 +90,28 @@ kotlin {
             /* Unit Tests */
             implementation(libs.kotlin.test)
         }
+
+        jvmMain.dependencies {
+
+            implementation(compose.desktop.currentOs)
+            implementation(libs.kotlinx.coroutines.swing)
+            implementation(libs.ktor.java)
+        }
+
+        if (buildTarget == "web") {
+
+            val wasmJsMain by getting
+
+            wasmJsMain.dependencies {
+
+                implementation(libs.ktor.js)
+
+                /* Cryptography (JWT) */
+                implementation("dev.whyoleg.cryptography:cryptography-provider-webcrypto:0.4.0")
+                implementation("com.appstractive:jwt-kt-wasm-js:1.1.0")
+                implementation("com.appstractive:jwt-rsa-kt:1.1.0")
+            }
+        }
     }
 }
 
@@ -126,21 +127,12 @@ compose.desktop {
 
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
 
-            packageName = "de.stefan-oltmann.oni-seed-browser"
+            packageName = "ONI Seed Browser"
 
             packageVersion = version.toString()
         }
     }
 }
-
-// region Work around temporary Compose bugs.
-configurations.all {
-    attributes {
-        // https://github.com/JetBrains/compose-jb/issues/1404#issuecomment-1146894731
-        attribute(Attribute.of("ui", String::class.java), "awt")
-    }
-}
-// endregion
 
 dependencies {
 
@@ -153,3 +145,12 @@ dependencies {
         windowsAmd64(compose.desktop.windows_x64)
     }
 }
+
+// region Work around temporary Compose bugs.
+configurations.all {
+    attributes {
+        // https://github.com/JetBrains/compose-jb/issues/1404#issuecomment-1146894731
+        attribute(Attribute.of("ui", String::class.java), "awt")
+    }
+}
+// endregion
