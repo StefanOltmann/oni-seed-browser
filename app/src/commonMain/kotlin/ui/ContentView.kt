@@ -84,6 +84,7 @@ fun ContentView(
     urlHash: State<String?>,
     isMniEmbedded: Boolean,
     connected: Boolean,
+    localPort: Int?,
     /**
      * Note: LocalClipboardManager does not work for Compose for Web
      * in all browsers for some reason. That's why we use a workaround here.
@@ -365,7 +366,8 @@ fun ContentView(
                      */
                     if (connected || (!connected && !isMniEmbedded))
                         LoginWithSteamButton(
-                            connected = connected
+                            connected = connected,
+                            localPort = localPort
                         )
 
                     DoubleSpacer()

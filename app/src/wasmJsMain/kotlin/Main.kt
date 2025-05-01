@@ -23,35 +23,19 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.window.ComposeViewport
-import com.appstractive.jwt.JWT
-import com.appstractive.jwt.from
-import com.appstractive.jwt.signatures.rs256
-import com.appstractive.jwt.verify
 import kotlinx.browser.document
 import kotlinx.browser.window
 import org.w3c.dom.HTMLElement
 import ui.App
-
-private val JWT_PUBLIC_KEY =
-    """
-        -----BEGIN PUBLIC KEY-----
-        MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAssCfiAkLu
-        dGa1okEQ4tyy7S9zPlH0PKoG/nRLCXcV4PGBnApj8+jj63ZtcYL/v
-        IkOcLp/FuFUqm0EGXFNzl2EpKCFSMGeJ9yVj4TjJNKaOUrVivj8xM
-        8/M6emy4bJ5svpJ2XXW9olkiU/KJ+JflgACVjFUTYt2AetuOALGE4
-        MY+9XelGwccXoyB+rklBtiGCvZxZm4UN/7Bvp7oqKJiW+xanFEpOB
-        r9seK565FTxtbSLtIWs2apkvVri5RAoSP4mh1YUXhB/+LOGYwu4Tm
-        01p5D9qfA3k3EQw2gk7DHJNzcc2MrLJufA1WuM7+9LEyuLFB6waly
-        vylenVV56w7ugOQIDAQAB
-        -----END PUBLIC KEY-----
-    """.trimIndent()
+import util.getQueryParameters
+import util.isTokenValid
 
 @OptIn(ExperimentalComposeUiApi::class)
 fun main() {
 
     ComposeViewport(document.body!!) {
 
-        val params = remember { getQueryParameters() }
+        val params = remember { getQueryParameters(window.location.search) }
 
         val isMniEmbedded = remember { params["embedded"] == "mni" }
 
@@ -111,63 +95,12 @@ fun main() {
             urlHash = urlHash,
             isMniEmbedded = isMniEmbedded,
             connected = connected.value,
+            localPort = null,
             writeToClipboard = {
                 window.navigator.clipboard.writeText(it)
             }
         )
     }
-}
-
-private suspend fun isTokenValid(token: String): Boolean {
-
-    try {
-
-        val jwt: JWT = JWT.from(token)
-
-        val steamId = jwt.claims["steamId"]
-
-        val verified = jwt.verify {
-
-            rs256 { pem(JWT_PUBLIC_KEY) }
-
-            issuer("mapsnotincluded")
-        }
-
-        if (verified)
-            println("Steam ID: $steamId (verified)")
-        else
-            println("Steam ID unverified due to invalid JWT.")
-
-        return verified
-
-    } catch (ex: Exception) {
-
-        ex.printStackTrace()
-
-        return false
-    }
-}
-
-private fun getQueryParameters(): Map<String, String> {
-
-    val search = window.location.search
-
-    if (search.isBlank() || !search.startsWith("?"))
-        return emptyMap()
-
-    return search
-        .removePrefix("?")
-        .split("&")
-        .mapNotNull {
-
-            val (key, value) = it.split("=")
-
-            if (key.isNotEmpty())
-                key to value
-            else
-                null
-        }
-        .toMap()
 }
 
 /**

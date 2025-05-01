@@ -31,7 +31,7 @@ kotlin {
 
     jvmToolchain(jdkVersion = 17)
 
-    if (buildTarget == "web") {
+    if (buildTarget != "desktop") {
 
         @OptIn(ExperimentalWasmDsl::class)
         wasmJs {
@@ -82,6 +82,10 @@ kotlin {
 
             /* Date formatting */
             implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.6.2")
+
+            /* Cryptography (JWT) */
+            implementation("com.appstractive:jwt-kt:1.1.0")
+            implementation("com.appstractive:jwt-rsa-kt:1.1.0")
         }
 
         commonTest.dependencies {
@@ -97,7 +101,7 @@ kotlin {
             implementation(libs.ktor.java)
         }
 
-        if (buildTarget == "web") {
+        if (buildTarget != "desktop") {
 
             wasmJsMain.dependencies {
 
@@ -106,7 +110,6 @@ kotlin {
                 /* Cryptography (JWT) */
                 implementation("dev.whyoleg.cryptography:cryptography-provider-webcrypto:0.4.0")
                 implementation("com.appstractive:jwt-kt-wasm-js:1.1.0")
-                implementation("com.appstractive:jwt-rsa-kt:1.1.0")
             }
         }
     }

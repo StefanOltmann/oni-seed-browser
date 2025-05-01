@@ -17,6 +17,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalClipboardManager
@@ -26,12 +28,22 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
+import com.sun.net.httpserver.HttpExchange
+import com.sun.net.httpserver.HttpHandler
+import com.sun.net.httpserver.HttpServer
 import io.github.stefanoltmann.app.generated.resources.Res
 import io.github.stefanoltmann.app.generated.resources.app_icon
 import io.github.stefanoltmann.app.generated.resources.uiTitle
+import io.ktor.http.HttpStatusCode
+import java.net.InetSocketAddress
+import kotlinx.coroutines.runBlocking
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import ui.App
+import util.getQueryParameters
+import util.isTokenValid
+
+private var currentServer: HttpServer? = null
 
 fun main() = application {
 
@@ -46,13 +58,109 @@ fun main() = application {
 
         val clipboardManager = LocalClipboardManager.current
 
+        val connected = remember { mutableStateOf(false) }
+
+        val localPort = remember { mutableStateOf<Int?>(null) }
+
+        /*
+         * Check for stored tokens on start
+         */
+        LaunchedEffect(true) {
+
+            val storedToken = AppStorage.getToken()
+
+            if (!storedToken.isNullOrBlank()) {
+
+                /*
+                 * Set it to the UI if valid or remove it from store.
+                 */
+                if (isTokenValid(storedToken))
+                    connected.value = true
+                else
+                    AppStorage.clearToken()
+            }
+
+            /*
+             * Start a local webservice if we are not connected.
+             */
+            if (!connected.value) {
+
+                localPort.value = startLocalWebservice(connected)
+
+                println("Local webservice started on port: ${localPort.value}")
+            }
+        }
+
         App(
             urlHash = remember { mutableStateOf(null) },
             isMniEmbedded = false,
-            connected = false,
+            connected = connected.value,
+            localPort = localPort.value,
             writeToClipboard = {
                 clipboardManager.setText(AnnotatedString(it))
             }
         )
+    }
+}
+
+fun startLocalWebservice(
+    connected: MutableState<Boolean>
+): Int {
+
+    require(currentServer == null) { "Server was already started." }
+
+    val loopbackAddress = InetSocketAddress("127.0.0.1", 0)
+
+    val server = HttpServer.create(loopbackAddress, 0)
+
+    server.createContext("/", DefaultHttpHandler(connected))
+
+    server.start()
+
+    currentServer = server
+
+    return server.address.port
+}
+
+private class DefaultHttpHandler(
+    val connected: MutableState<Boolean>
+) : HttpHandler {
+
+    override fun handle(exchange: HttpExchange) = runBlocking {
+
+        val path = exchange.requestURI.toString()
+
+        println("Received request for path: $path")
+
+        val queryParams = getQueryParameters(path)
+
+        val tokenParameter = queryParams["token"]
+
+        if (!tokenParameter.isNullOrBlank()) {
+
+            println("Token parameter: $tokenParameter")
+
+            if (tokenParameter.isNotEmpty() && isTokenValid(tokenParameter)) {
+
+                /* The token was checked and can be saved to storage. */
+                AppStorage.setToken(tokenParameter)
+
+                /* Update the UI */
+                connected.value = true
+            }
+        }
+
+        val response = if (connected.value)
+            "Logged in!".encodeToByteArray()
+        else
+            "Login failed!".encodeToByteArray()
+
+        exchange.sendResponseHeaders(HttpStatusCode.OK.value, response.size.toLong())
+
+        exchange.responseHeaders["Content-Type"] = "text/plain; charset=utf-8"
+
+        exchange.responseBody.use {
+            it.write(response)
+        }
     }
 }

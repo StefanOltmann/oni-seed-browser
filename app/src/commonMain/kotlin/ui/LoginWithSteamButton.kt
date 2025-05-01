@@ -47,7 +47,8 @@ import ui.theme.minimalRoundedCornerShape
 
 @Composable
 fun LoginWithSteamButton(
-    connected: Boolean
+    connected: Boolean,
+    localPort: Int?
 ) {
 
     val hovered = remember { mutableStateOf(false) }
@@ -70,7 +71,10 @@ fun LoginWithSteamButton(
                 if (connected)
                     return@noRippleClickable
 
-                uriHandler.openUri("https://ingest.mapsnotincluded.org/connect/0")
+                if (localPort == null)
+                    uriHandler.openUri("https://ingest.mapsnotincluded.org/connect/0")
+                else
+                    uriHandler.openUri("https://ingest.mapsnotincluded.org/connect/$localPort")
             }
     ) {
 

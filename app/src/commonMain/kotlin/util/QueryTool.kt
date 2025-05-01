@@ -19,29 +19,22 @@
 
 package util
 
-import kotlinx.datetime.Instant
-import kotlinx.datetime.LocalDateTime
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.format
-import kotlinx.datetime.format.FormatStringsInDatetimeFormats
-import kotlinx.datetime.format.byUnicodePattern
-import kotlinx.datetime.toLocalDateTime
+fun getQueryParameters(path: String): Map<String, String> {
 
-private const val DATE_PATTERN = "yyyy-MM-dd HH:mm"
+    if (path.isBlank() || !path.contains("?"))
+        return emptyMap()
 
-private val timeZone = TimeZone.currentSystemDefault()
+    return path
+        .substringAfter("?")
+        .split("&")
+        .mapNotNull {
 
-@OptIn(FormatStringsInDatetimeFormats::class)
-private val dateTimeFormat = LocalDateTime.Format {
-    byUnicodePattern(DATE_PATTERN)
+            val (key, value) = it.split("=")
+
+            if (key.isNotEmpty())
+                key to value
+            else
+                null
+        }
+        .toMap()
 }
-
-fun formatDate(timestamp: Long): String {
-
-    val localDateTime = Instant
-        .fromEpochMilliseconds(timestamp)
-        .toLocalDateTime(timeZone)
-
-    return localDateTime.format(dateTimeFormat)
-}
-
