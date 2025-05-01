@@ -25,9 +25,6 @@ gitVersioning.apply {
 
 val buildTarget: String? = System.getenv("BUILD_TARGET")
 
-if (buildTarget == null)
-    error("BUILD_TARGET environment variable not set. Please set it to 'desktop' or 'web'.")
-
 kotlin {
 
     jvm()
