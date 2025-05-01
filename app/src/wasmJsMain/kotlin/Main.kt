@@ -29,6 +29,7 @@ import com.appstractive.jwt.signatures.rs256
 import com.appstractive.jwt.verify
 import kotlinx.browser.document
 import kotlinx.browser.window
+import org.w3c.dom.HTMLElement
 import ui.App
 
 private val JWT_PUBLIC_KEY =
@@ -104,6 +105,8 @@ fun main() {
             urlHash.value = it.newURL.substringAfter('#', "").ifBlank { null }
         }
 
+        hideLoader()
+
         App(
             urlHash = urlHash,
             isMniEmbedded = isMniEmbedded,
@@ -165,4 +168,19 @@ private fun getQueryParameters(): Map<String, String> {
                 null
         }
         .toMap()
+}
+
+/**
+ * Function to hide the loader and show the app
+ */
+fun hideLoader() {
+
+    val loader = document.getElementById("loader") as? HTMLElement
+    val app = document.getElementById("app") as? HTMLElement
+
+    /* Hide the loader */
+    loader?.style?.display = "none"
+
+    /* Show the app */
+    app?.style?.display = "block"
 }
