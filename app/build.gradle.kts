@@ -23,7 +23,7 @@ gitVersioning.apply {
     }
 }
 
-val buildTarget = System.getProperty("BUILD_TARGET") ?: ""
+val buildTarget = System.getenv("BUILD_TARGET") ?: "desktop"
 
 kotlin {
 
