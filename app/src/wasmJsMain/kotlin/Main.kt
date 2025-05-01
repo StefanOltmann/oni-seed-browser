@@ -22,7 +22,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.text.intl.Locale
-import androidx.compose.ui.window.CanvasBasedWindow
 import androidx.compose.ui.window.ComposeViewport
 import com.appstractive.jwt.JWT
 import com.appstractive.jwt.from
@@ -56,7 +55,7 @@ fun main() {
 
         val isMniEmbedded = remember { params["embedded"] == "mni" }
 
-        val connected = remember { mutableStateOf<Boolean>(false) }
+        val connected = remember { mutableStateOf(false) }
 
         LaunchedEffect(true) {
 
