@@ -28,7 +28,6 @@ import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
 import io.github.stefanoltmann.app.generated.resources.Res
 import io.github.stefanoltmann.app.generated.resources.app_icon
-import io.github.stefanoltmann.app.generated.resources.logo_oni
 import io.github.stefanoltmann.app.generated.resources.uiTitle
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
