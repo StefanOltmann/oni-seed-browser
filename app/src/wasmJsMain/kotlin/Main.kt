@@ -23,6 +23,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.window.CanvasBasedWindow
+import androidx.compose.ui.window.ComposeViewport
 import com.appstractive.jwt.JWT
 import com.appstractive.jwt.from
 import com.appstractive.jwt.signatures.rs256
@@ -49,7 +50,7 @@ private val JWT_PUBLIC_KEY =
 @OptIn(ExperimentalComposeUiApi::class)
 fun main() {
 
-    CanvasBasedWindow(canvasElementId = "ComposeTarget") {
+    ComposeViewport(document.body!!) {
 
         val params = remember { getQueryParameters() }
 
