@@ -23,7 +23,10 @@ gitVersioning.apply {
     }
 }
 
-val buildTarget = System.getenv("BUILD_TARGET") ?: "desktop"
+val buildTarget: String? = System.getenv("BUILD_TARGET")
+
+if (buildTarget == null)
+    error("BUILD_TARGET environment variable not set. Please set it to 'desktop' or 'web'.")
 
 kotlin {
 
@@ -31,29 +34,32 @@ kotlin {
 
     jvmToolchain(jdkVersion = 17)
 
-    @OptIn(ExperimentalWasmDsl::class)
-    wasmJs {
+    if (buildTarget == "web") {
 
-        moduleName = "app"
+        @OptIn(ExperimentalWasmDsl::class)
+        wasmJs {
 
-        browser {
+            moduleName = "app"
 
-            val rootDirPath = project.rootDir.path
-            val projectDirPath = project.projectDir.path
+            browser {
 
-            commonWebpackConfig {
-                outputFileName = "app.js"
-                devServer = (devServer ?: KotlinWebpackConfig.DevServer()).apply {
-                    static = (static ?: mutableListOf()).apply {
-                        // Serve sources to debug inside browser
-                        add(rootDirPath)
-                        add(projectDirPath)
+                val rootDirPath = project.rootDir.path
+                val projectDirPath = project.projectDir.path
+
+                commonWebpackConfig {
+                    outputFileName = "app.js"
+                    devServer = (devServer ?: KotlinWebpackConfig.DevServer()).apply {
+                        static = (static ?: mutableListOf()).apply {
+                            // Serve sources to debug inside browser
+                            add(rootDirPath)
+                            add(projectDirPath)
+                        }
                     }
                 }
             }
-        }
 
-        binaries.executable()
+            binaries.executable()
+        }
     }
 
     sourceSets {
@@ -94,14 +100,17 @@ kotlin {
             implementation(libs.ktor.java)
         }
 
-        wasmJsMain.dependencies {
+        if (buildTarget == "web") {
 
-            implementation(libs.ktor.js)
+            wasmJsMain.dependencies {
 
-            /* Cryptography (JWT) */
-            implementation("dev.whyoleg.cryptography:cryptography-provider-webcrypto:0.4.0")
-            implementation("com.appstractive:jwt-kt-wasm-js:1.1.0")
-            implementation("com.appstractive:jwt-rsa-kt:1.1.0")
+                implementation(libs.ktor.js)
+
+                /* Cryptography (JWT) */
+                implementation("dev.whyoleg.cryptography:cryptography-provider-webcrypto:0.4.0")
+                implementation("com.appstractive:jwt-kt-wasm-js:1.1.0")
+                implementation("com.appstractive:jwt-rsa-kt:1.1.0")
+            }
         }
     }
 }
@@ -128,13 +137,11 @@ compose.desktop {
 dependencies {
 
     /*
-     * This is required because the wasmJS target can't build
-     * with this Desktop-specific configuration in place.
-     * It's a Hydraulic Conveyor bug.
+     * Workaround for a bug in Hydraulic Conveyor 18:
+     * It does not support wasmJS target.
      */
     if (buildTarget == "desktop") {
 
-        /* Conveyor */
         linuxAmd64(compose.desktop.linux_x64)
         macAmd64(compose.desktop.macos_x64)
         macAarch64(compose.desktop.macos_arm64)

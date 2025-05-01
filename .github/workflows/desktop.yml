@@ -9,7 +9,7 @@ permissions:
   contents: write
     
 env:
-  BUILD_TARGET: "desktop"
+  BUILD_TARGET: 'desktop'
 
 jobs:
   build:

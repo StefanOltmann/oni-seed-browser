@@ -5,7 +5,7 @@ on:
     branches: [ "main" ]
       
 env:
-  BUILD_TARGET: "web"
+  BUILD_TARGET: 'web'
 
 jobs:
   
