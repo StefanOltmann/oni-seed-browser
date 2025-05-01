@@ -17,7 +17,7 @@ version = "1.0.0"
 gitVersioning.apply {
 
     refs {
-        tag("v(?<version>.*)") {
+        tag("(?<version>.*)") {
             version = "\${ref.version}"
         }
     }

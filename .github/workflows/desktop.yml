@@ -7,6 +7,9 @@ on:
 
 permissions:
   contents: write
+    
+env:
+  BUILD_TARGET: "desktop"
 
 jobs:
   build:
@@ -23,13 +26,11 @@ jobs:
       - name: List all files
         run: find .
       - name: Run Gradle build
-        env:
-          BUILD_TARGET: "desktop"
         run: |
           chmod +x gradlew
           ./gradlew build allTests createDistributable
       - name: Run Conveyor
-        uses: hydraulic-software/conveyor/actions/build@v16.0
+        uses: hydraulic-software/conveyor/actions/build@v18.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
