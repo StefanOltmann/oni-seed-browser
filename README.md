@@ -3,6 +3,10 @@
 [![Kotlin](https://img.shields.io/badge/kotlin-2.0.21-blue.svg?logo=kotlin)](httpw://kotlinlang.org)
 ![WASM](https://img.shields.io/badge/-WASM-gray.svg?style=flat)
 
+<a href="https://apps.microsoft.com/detail/9NJTQ8KXTSG3?mode=popup">
+    <img src="https://get.microsoft.com/images/en-us%20dark.svg" alt="Download from Microsoft Store">
+</a>
+
 This is a game map seed browser for the game [Oxygen Not Included](https://www.klei.com/games/oxygen-not-included).
 
 It's part of the [MapsNotIncluded.org](https://mapsnotincluded.org) initiative.
