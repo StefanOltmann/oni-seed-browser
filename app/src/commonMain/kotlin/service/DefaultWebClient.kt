@@ -45,6 +45,7 @@ import kotlinx.serialization.json.Json
 import model.Cluster
 import model.Contributor
 import model.RateCoordinateRequest
+import model.RatedCluster
 import model.filter.FilterQuery
 
 const val BASE_API_URL = "https://ingest.mapsnotincluded.org"
@@ -106,6 +107,16 @@ object DefaultWebClient : WebClient {
     override suspend fun findLatestClusters(): List<Cluster> {
 
         val response = httpClient.get("$BASE_API_URL/latest")
+
+        if (!response.status.isSuccess())
+            error("Requesting latest clusters failed with HTTP ${response.status}: ${response.bodyAsText()}")
+
+        return response.body()
+    }
+
+    override suspend fun findTopRatedClusters(): List<RatedCluster> {
+
+        val response = httpClient.get("$BASE_API_URL/top")
 
         if (!response.status.isSuccess())
             error("Requesting latest clusters failed with HTTP ${response.status}: ${response.bodyAsText()}")

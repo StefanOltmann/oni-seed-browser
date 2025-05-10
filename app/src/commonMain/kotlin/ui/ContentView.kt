@@ -1,7 +1,7 @@
 package ui
 
 import AppStorage
-import START_WITH_LATEST_MAPS
+import START_WITH_TOP_RATED_MAPS
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -208,13 +208,17 @@ fun ContentView(
                     isGettingNewResults.value = false
                 }
 
-            } else if (START_WITH_LATEST_MAPS) {
+            } else if (START_WITH_TOP_RATED_MAPS) {
 
                 try {
 
                     isGettingNewResults.value = true
 
-                    clusters.value = DefaultWebClient.findLatestClusters()
+                    val topRatedClusters = DefaultWebClient.findTopRatedClusters()
+
+                    // TODO Show overall liked count
+
+                    clusters.value = topRatedClusters.map { it.cluster }
 
                 } catch (ex: Throwable) {
 

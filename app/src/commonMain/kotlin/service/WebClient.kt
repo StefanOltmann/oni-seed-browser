@@ -21,6 +21,7 @@ package service
 
 import model.Cluster
 import model.Contributor
+import model.RatedCluster
 import model.filter.FilterQuery
 
 interface WebClient {
@@ -28,6 +29,8 @@ interface WebClient {
     suspend fun countSeeds(): Long?
 
     suspend fun findLatestClusters(): List<Cluster>
+
+    suspend fun findTopRatedClusters(): List<RatedCluster>
 
     suspend fun find(coordinate: String): Cluster?
 
