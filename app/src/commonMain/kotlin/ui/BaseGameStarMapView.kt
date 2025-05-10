@@ -106,6 +106,7 @@ fun BaseGameStarMapView(
                 totalCount = 0,
                 coordinate = cluster.coordinate,
                 favoriteCoordinates = favoriteCoordinates,
+                likeCount = null,
                 showMapClicked = null,
                 showFavoriteIcon = false,
                 writeToClipboard = writeToClipboard

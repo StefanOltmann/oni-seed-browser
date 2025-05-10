@@ -177,6 +177,8 @@ fun ContentView(
         val showFavorites = remember { mutableStateOf(false) }
         val showLeaderboard = remember { mutableStateOf(false) }
 
+        val likeCounts: MutableState<Map<String, Int>?> = remember { mutableStateOf(null) }
+
         LaunchedEffect(urlHash.value) {
 
             val urlHashValue = urlHash.value
@@ -195,6 +197,9 @@ fun ContentView(
                         clusters.value = listOf(world)
                     else
                         clusters.value = emptyList()
+
+                    /* Reset */
+                    likeCounts.value = null
 
                 } catch (ex: Throwable) {
 
@@ -216,9 +221,10 @@ fun ContentView(
 
                     val topRatedClusters = DefaultWebClient.findTopRatedClusters()
 
-                    // TODO Show overall liked count
-
                     clusters.value = topRatedClusters.map { it.cluster }
+
+                    likeCounts.value =
+                        topRatedClusters.associate { it.cluster.coordinate to it.likeCount }
 
                 } catch (ex: Throwable) {
 
@@ -239,7 +245,12 @@ fun ContentView(
                 val parsedClusters = Json.decodeFromString<List<Cluster>>(sampleWorldsJson)
 
                 /* DLCs first */
-                clusters.value = parsedClusters.sortedWith(compareBy({ it.cluster.isBaseGame() }, { it.cluster }))
+                clusters.value = parsedClusters.sortedWith(
+                    compareBy({ it.cluster.isBaseGame() }, { it.cluster })
+                )
+
+                /* Reset */
+                likeCounts.value = null
             }
         }
 
@@ -532,6 +543,7 @@ fun ContentView(
                         isGettingNewResults,
                         errorMessage,
                         clusters,
+                        likeCounts,
                         worldCount,
                         coroutineScope,
                         urlHash,
@@ -589,12 +601,13 @@ private fun ColumnScope.FavoritesPanel(
         if (favoredClusters.isNotEmpty()) {
 
             ClusterViewList(
-                lazyListState,
-                favoredClustersState.value,
-                useCompactLayout.value,
-                favoredCoordinates,
-                showStarMap,
-                showAsteroidMap,
+                lazyListState = lazyListState,
+                clusters = favoredClustersState.value,
+                useCompactLayout = useCompactLayout.value,
+                favoriteCoordinates = favoredCoordinates,
+                likeCounts = null,
+                showStarMap = showStarMap,
+                showAsteroidMap = showAsteroidMap,
                 showFavoriteIcon = connected,
                 showMniUrl = isMniEmbedded,
                 steamIdToUsernameMap = steamIdToUsernameMap,
@@ -620,6 +633,7 @@ private fun ColumnScope.MainPanel(
     isGettingNewResults: MutableState<Boolean>,
     errorMessage: MutableState<String?>,
     clusters: MutableState<List<Cluster>>,
+    likeCounts: MutableState<Map<String, Int>?>,
     worldCount: State<Long?>,
     coroutineScope: CoroutineScope,
     urlHash: State<String?>,
@@ -654,6 +668,9 @@ private fun ColumnScope.MainPanel(
             val sortedWorlds = searchResultWorlds.sortedByDescending { it.getRating() }
 
             clusters.value = sortedWorlds
+
+            /* Reset */
+            likeCounts.value = null
 
         } catch (ex: Exception) {
 
@@ -743,12 +760,13 @@ private fun ColumnScope.MainPanel(
         ) {
 
             ClusterViewList(
-                lazyListState,
-                clusters.value,
-                useCompactLayout.value,
-                favoredCoordinates,
-                showStarMap,
-                showAsteroidMap,
+                lazyListState = lazyListState,
+                clusters = clusters.value,
+                useCompactLayout = useCompactLayout.value,
+                favoriteCoordinates = favoredCoordinates,
+                likeCounts = likeCounts,
+                showStarMap = showStarMap,
+                showAsteroidMap = showAsteroidMap,
                 showFavoriteIcon = connected,
                 showMniUrl = isMniEmbedded,
                 steamIdToUsernameMap = steamIdToUsernameMap,

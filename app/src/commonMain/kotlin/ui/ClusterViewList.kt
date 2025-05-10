@@ -44,6 +44,7 @@ fun ClusterViewList(
     clusters: List<Cluster>,
     useCompactLayout: Boolean,
     favoriteCoordinates: MutableState<List<String>>,
+    likeCounts: MutableState<Map<String, Int>?>?,
     showStarMap: MutableState<Cluster?>,
     showAsteroidMap: MutableState<Asteroid?>,
     showMniUrl: Boolean = false,
@@ -63,17 +64,18 @@ fun ClusterViewList(
             itemsIndexed(clusters) { index, cluster ->
 
                 ClusterView(
-                    cluster,
-                    index + 1,
-                    clusters.size,
-                    useCompactLayout,
-                    favoriteCoordinates,
-                    showStarMap,
-                    showAsteroidMap,
-                    showMniUrl,
-                    showFavoriteIcon,
-                    steamIdToUsernameMap,
-                    writeToClipboard
+                    cluster = cluster,
+                    index = index + 1,
+                    totalCount = clusters.size,
+                    useCompactLayout = useCompactLayout,
+                    favoriteCoordinates = favoriteCoordinates,
+                    likeCount = likeCounts?.value?.get(cluster.coordinate),
+                    showStarMap = showStarMap,
+                    showAsteroidMap = showAsteroidMap,
+                    showMniUrl = showMniUrl,
+                    showFavoriteIcon = showFavoriteIcon,
+                    steamIdToUsernameMap = steamIdToUsernameMap,
+                    writeToClipboard = writeToClipboard
                 )
             }
         }
