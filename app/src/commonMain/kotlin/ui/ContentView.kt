@@ -43,6 +43,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -67,6 +68,7 @@ import org.jetbrains.compose.resources.stringResource
 import service.DefaultWebClient
 import service.sampleWorldsJson
 import ui.filter.FilterPanel
+import ui.icons.IconKofi
 import ui.icons.IconLeaderboardFilled
 import ui.icons.IconLeaderboardOutlined
 import ui.theme.DefaultSpacer
@@ -357,6 +359,25 @@ fun ContentView(
                     }
 
                     FillSpacer()
+
+                    val uriHandler = LocalUriHandler.current
+
+                    Box(
+                        contentAlignment = Alignment.Center,
+                        modifier = Modifier
+                            .size(32.dp)
+                            .noRippleClickable {
+                                uriHandler.openUri("https://ko-fi.com/StefanOltmann")
+                            }
+                    ) {
+
+                        Image(
+                            imageVector = IconKofi,
+                            contentDescription = null
+                        )
+                    }
+
+                    DefaultSpacer()
 
                     if (connected) {
 

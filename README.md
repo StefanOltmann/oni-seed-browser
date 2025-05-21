@@ -3,6 +3,10 @@
 [![Kotlin](https://img.shields.io/badge/kotlin-2.0.21-blue.svg?logo=kotlin)](httpw://kotlinlang.org)
 ![WASM](https://img.shields.io/badge/-WASM-gray.svg?style=flat)
 
+<a href="https://ko-fi.com/StefanOltmann">
+    <img src="assets/support_me_on_kofi_dark.png" alt="Support me on Ko-fi" width="200">
+</a>
+<br>
 <a href="https://apps.microsoft.com/detail/9NJTQ8KXTSG3?mode=popup">
     <img src="https://get.microsoft.com/images/en-us%20dark.svg" alt="Download from Microsoft Store">
 </a>
