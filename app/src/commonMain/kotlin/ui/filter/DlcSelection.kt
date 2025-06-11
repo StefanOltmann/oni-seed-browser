@@ -39,9 +39,8 @@ fun DlcSelection(
     filterQueryState: MutableState<FilterQuery>
 ) {
 
-    val actualDlcs = Dlc.entries.filterNot { it.isMainVersion };
+    for (dlc in Dlc.selectableDlcs) {
 
-    for (dlc in actualDlcs) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(doubleSpacing, Alignment.CenterHorizontally)

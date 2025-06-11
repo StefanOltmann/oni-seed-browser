@@ -36,5 +36,11 @@ enum class Dlc(
     BaseGame("Base Game", true, Res.drawable.logo_oni),
     SpacedOut("Spaced Out", true, Res.drawable.logo_spaced_out),
     FrostyPlanet("Frosty Planet", false, Res.drawable.logo_frosty_planet_banner),
-    //BeachedMod("BeachedMod","Beached", false, Res.drawable.beached_logo)//Akis beached mod as placeholder test for future dlcs
+    BionicBooster("Bionic Booster", false, Res.drawable.logo_frosty_planet_banner),
+    PrehistoricPlanet("Prehistoric Planet", false, Res.drawable.logo_frosty_planet_banner);
+
+    companion object {
+
+        val selectableDlcs = listOf(FrostyPlanet)
+    }
 }

@@ -54,8 +54,8 @@ fun GameVersionSelection(
 
         val baseGameLogoHovered = remember { mutableStateOf(false) }
         val spacedOutLogoHovered = remember { mutableStateOf(false) }
-        val spacedOutDlcSelected = filterQueryState.value.dlcs.contains(Dlc.SpacedOut);
 
+        val spacedOutDlcSelected = filterQueryState.value.dlcs.contains(Dlc.SpacedOut)
 
         Image(
             painter = painterResource(Dlc.BaseGame.icon),
@@ -72,7 +72,7 @@ fun GameVersionSelection(
                     if (!spacedOutDlcSelected)
                         return@noRippleClickable
 
-                    val mainVersionsRemoved = filterQueryState.value.dlcs.filterNot { it.isMainVersion };
+                    val mainVersionsRemoved = filterQueryState.value.dlcs.filterNot { it.isMainVersion }
 
                     filterQueryState.value = filterQueryState.value.copy(
                         dlcs = mainVersionsRemoved + Dlc.BaseGame,
@@ -99,7 +99,7 @@ fun GameVersionSelection(
                     if (spacedOutDlcSelected)
                         return@noRippleClickable
 
-                    val mainVersionsRemoved = filterQueryState.value.dlcs.filterNot { it.isMainVersion };
+                    val mainVersionsRemoved = filterQueryState.value.dlcs.filterNot { it.isMainVersion }
 
                     filterQueryState.value = filterQueryState.value.copy(
                         dlcs = mainVersionsRemoved + Dlc.SpacedOut,
