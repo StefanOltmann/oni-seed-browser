@@ -44,7 +44,12 @@ data class Cluster(
 
     val starMapEntriesVanilla: List<StarMapEntryVanilla>?,
 
-    val starMapEntriesSpacedOut: List<StarMapEntrySpacedOut>?
+    val starMapEntriesSpacedOut: List<StarMapEntrySpacedOut>?,
+
+    /*
+     * Introduced on 2025-06-11
+     */
+    val mixingIds: List<String>? = null
 
 ) {
 
