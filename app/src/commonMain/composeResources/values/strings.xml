@@ -60,6 +60,7 @@
     <string name="clusterTypeBaseTerra">Terra</string>
     <string name="clusterTypeBaseCeres">Ceres</string>
     <string name="clusterTypeBaseBlastedCeres">Blasted Ceres</string>
+    <string name="clusterTypeBaseRelica">Relica</string>
     <string name="clusterTypeBaseOceania">Oceania</string>
     <string name="clusterTypeBaseRime">Rime</string>
     <string name="clusterTypeBaseVerdante">Verdante</string>
@@ -71,6 +72,7 @@
     <string name="clusterTypeDlcTerra">Terra</string>
     <string name="clusterTypeDlcCeres">Ceres</string>
     <string name="clusterTypeDlcBlastedCeres">Blasted Ceres</string>
+    <string name="clusterTypeDlcRelica">Relica</string>
     <string name="clusterTypeDlcOceania">Oceania</string>
     <string name="clusterTypeDlcSquelchy">Squelchy</string>
     <string name="clusterTypeDlcRime">Rime</string>
@@ -82,6 +84,7 @@
     <string name="clusterTypeDlcOasisse">Oasisse</string>
     <string name="clusterTypeDlcTerrania">Terrania</string>
     <string name="clusterTypeDlcCeresMinor">Ceres Minor</string>
+    <string name="clusterTypeDlcRelicaMinor">Relica Minor</string>
     <string name="clusterTypeDlcFolia">Folia</string>
     <string name="clusterTypeDlcQuagmiris">Quagmiris</string>
     <string name="clusterTypeDlcMetallicSwampyMoonlet">Metallic Swampy</string>
@@ -95,6 +98,7 @@
     <string name="asteroidTypeSandstoneDefault">Terra Asteroid</string>
     <string name="asteroidTypeCeresBaseGameAsteroid">Ceres Asteroid</string>
     <string name="asteroidTypeCeresBaseGameShatteredAsteroid">Blasted Ceres Asteroid</string>
+    <string name="asteroidTypePrehistoricBaseGameAsteroid">Relica Asteroid</string>
     <string name="asteroidTypeOceania">Oceania Asteroid</string>
     <string name="asteroidTypeSandstoneFrozen">Rime Asteroid</string>
     <string name="asteroidTypeForestLush">Verdante Asteroid</string>
@@ -106,6 +110,7 @@
     <string name="asteroidTypeVanillaSandstoneDefault">Terra Asteroid</string>
     <string name="asteroidTypeMediumRadioactiveVanillaWarpPlanet">Radioactive Swamp Asteroid</string>
     <string name="asteroidTypeCeresClassicAsteroid">Ceres Asteroid</string>
+    <string name="asteroidTypePrehistoricClassicAsteroid">Relica Asteroid</string>
     <string name="asteroidTypeMediumSwampy">Stinko Swamp Asteroid</string>
     <string name="asteroidTypeVanillaOceania">Oceania Asteroid</string>
     <string name="asteroidTypeMediumForestyWasteland">Glowood Wasteland Asteroid</string>
@@ -123,8 +128,10 @@
     <string name="asteroidTypeTerraMoonlet">Terrania Asteroid</string>
     <string name="asteroidTypeIdealLandingSite">Irradiated Forest Asteroid</string>
     <string name="asteroidTypeWarpOilySwamp">Oily Swamp Asteroid</string>
+    <string name="asteroidTypeWarpOilySandySwamp">Oily Sandy Swamp Asteroid</string>
     <string name="asteroidTypeRegolithMoonlet">Regolith Asteroid</string>
     <string name="asteroidTypeCeresSpacedOutAsteroid">Ceres Minor Asteroid</string>
+    <string name="asteroidTypePrehistoricSpacedOutAsteroid">Relica Minor Asteroid</string>
     <string name="asteroidTypeSwampyLandingSite">Irradiated Swampy Asteroid</string>
     <string name="asteroidTypeOilRichWarpTarget">Rusty Oil Asteroid</string>
     <string name="asteroidTypeForestMoonlet">Folia Asteroid</string>

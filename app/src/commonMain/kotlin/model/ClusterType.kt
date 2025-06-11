@@ -26,6 +26,7 @@ import io.github.stefanoltmann.app.generated.resources.clusterTypeBaseBlastedCer
 import io.github.stefanoltmann.app.generated.resources.clusterTypeBaseCeres
 import io.github.stefanoltmann.app.generated.resources.clusterTypeBaseOasisse
 import io.github.stefanoltmann.app.generated.resources.clusterTypeBaseOceania
+import io.github.stefanoltmann.app.generated.resources.clusterTypeBaseRelica
 import io.github.stefanoltmann.app.generated.resources.clusterTypeBaseRime
 import io.github.stefanoltmann.app.generated.resources.clusterTypeBaseTerra
 import io.github.stefanoltmann.app.generated.resources.clusterTypeBaseTheBadlands
@@ -45,6 +46,8 @@ import io.github.stefanoltmann.app.generated.resources.clusterTypeDlcOasisse
 import io.github.stefanoltmann.app.generated.resources.clusterTypeDlcOceania
 import io.github.stefanoltmann.app.generated.resources.clusterTypeDlcQuagmiris
 import io.github.stefanoltmann.app.generated.resources.clusterTypeDlcRadioactiveOceanMoonlet
+import io.github.stefanoltmann.app.generated.resources.clusterTypeDlcRelica
+import io.github.stefanoltmann.app.generated.resources.clusterTypeDlcRelicaMinor
 import io.github.stefanoltmann.app.generated.resources.clusterTypeDlcRime
 import io.github.stefanoltmann.app.generated.resources.clusterTypeDlcSquelchy
 import io.github.stefanoltmann.app.generated.resources.clusterTypeDlcTerra
@@ -87,6 +90,17 @@ enum class ClusterType(
         gameMode = GameModeType.BASEGAME_STANDARD,
         asteroidTypes = listOf(
             AsteroidType.CeresBaseGameAsteroid
+        )
+    ),
+
+    /** Relica */
+    BASE_RELICA(
+        prefix = "PRE-A",
+        requiredDlcs = listOf(Dlc.BaseGame, Dlc.PrehistoricPlanet),
+        nameStringResource = Res.string.clusterTypeBaseRelica,
+        gameMode = GameModeType.BASEGAME_STANDARD,
+        asteroidTypes = listOf(
+            AsteroidType.PrehistoricBaseGameAsteroid
         )
     ),
 
@@ -233,6 +247,24 @@ enum class ClusterType(
         nameStringResource = Res.string.clusterTypeDlcBlastedCeres,
         asteroidTypes = listOf(
             AsteroidType.CeresClassicShatteredAsteroid,
+            AsteroidType.MediumSwampy,
+            AsteroidType.TundraMoonlet,
+            AsteroidType.MarshyMoonlet,
+            AsteroidType.NiobiumMoonlet,
+            AsteroidType.MooMoonlet,
+            AsteroidType.WaterMoonlet,
+            AsteroidType.MiniRegolithMoonlet
+        )
+    ),
+
+    /** Ceres */
+    DLC_RELICA(
+        prefix = "V-PRE-C",
+        requiredDlcs = listOf(Dlc.SpacedOut, Dlc.PrehistoricPlanet),
+        gameMode = GameModeType.SPACEDOUT_CLASSIC,
+        nameStringResource = Res.string.clusterTypeDlcRelica,
+        asteroidTypes = listOf(
+            AsteroidType.PrehistoricClassicAsteroid,
             AsteroidType.MediumSwampy,
             AsteroidType.TundraMoonlet,
             AsteroidType.MarshyMoonlet,
@@ -434,6 +466,25 @@ enum class ClusterType(
             AsteroidType.CeresSpacedOutAsteroid,
             AsteroidType.SwampyLandingSite,
             AsteroidType.OilRichWarpTarget,
+            AsteroidType.TundraMoonlet,
+            AsteroidType.MarshyMoonlet,
+            AsteroidType.MooMoonlet,
+            AsteroidType.WaterMoonlet,
+            AsteroidType.NiobiumMoonlet,
+            AsteroidType.RegolithMoonlet
+        )
+    ),
+
+    /** Relica Minor */
+    DLC_RELICA_MINOR(
+        prefix = "PRE-C",
+        requiredDlcs = listOf(Dlc.SpacedOut, Dlc.PrehistoricPlanet),
+        gameMode = GameModeType.SPACEDOUT_SPACEDOUT,
+        nameStringResource = Res.string.clusterTypeDlcRelicaMinor,
+        asteroidTypes = listOf(
+            AsteroidType.PrehistoricSpacedOutAsteroid,
+            AsteroidType.IdealLandingSite,
+            AsteroidType.WarpOilySandySwamp,
             AsteroidType.TundraMoonlet,
             AsteroidType.MarshyMoonlet,
             AsteroidType.MooMoonlet,

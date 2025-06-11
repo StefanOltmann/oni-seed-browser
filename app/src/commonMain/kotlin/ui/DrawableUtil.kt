@@ -322,6 +322,7 @@ fun getClusterDrawable(clusterType: ClusterType): DrawableResource =
     when (clusterType) {
         ClusterType.BASE_TERRA -> Res.drawable.cluster_base_terra
         ClusterType.BASE_CERES -> Res.drawable.cluster_base_ceres
+        ClusterType.BASE_RELICA -> TODO()
         ClusterType.BASE_BLASTED_CERES -> Res.drawable.asteroid_blasted_ceres
         ClusterType.BASE_OCEANIA -> Res.drawable.cluster_base_oceania
         ClusterType.BASE_RIME -> Res.drawable.cluster_base_rime
@@ -333,8 +334,10 @@ fun getClusterDrawable(clusterType: ClusterType): DrawableResource =
         ClusterType.BASE_OASISSE -> Res.drawable.cluster_base_oasisse
         ClusterType.DLC_TERRA -> Res.drawable.cluster_spacedout_terra
         ClusterType.DLC_CERES -> Res.drawable.asteroid_spacedout_ceres
+        ClusterType.DLC_RELICA -> TODO()
         ClusterType.DLC_BLASTED_CERES -> Res.drawable.asteroid_blasted_ceres_spaced_out
         ClusterType.DLC_CERES_MINOR -> Res.drawable.asteroid_spacedout_ceres_minor
+        ClusterType.DLC_RELICA_MINOR -> TODO()
         ClusterType.DLC_OCEANIA -> Res.drawable.cluster_spacedout_oceania
         ClusterType.DLC_SQUELCHY -> Res.drawable.cluster_spacedout_squelchy
         ClusterType.DLC_RIME -> Res.drawable.cluster_spacedout_rime
@@ -421,6 +424,10 @@ fun getAsteroidTypeDrawable(asteroidType: AsteroidType): DrawableResource =
         AsteroidType.MiniShatteredStartAsteroid -> Res.drawable.asteroid_mini_shattered_start
         AsteroidType.MiniShatteredWarpAsteroid -> Res.drawable.asteroid_mini_shattered_warp
         AsteroidType.MiniShatteredGeoAsteroid -> Res.drawable.asteroid_mini_shattered_geo
+        AsteroidType.PrehistoricBaseGameAsteroid -> TODO()
+        AsteroidType.PrehistoricClassicAsteroid -> TODO()
+        AsteroidType.WarpOilySandySwamp -> TODO()
+        AsteroidType.PrehistoricSpacedOutAsteroid -> TODO()
     }
 
 @Composable

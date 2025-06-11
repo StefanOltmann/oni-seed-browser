@@ -63,6 +63,9 @@ import io.github.stefanoltmann.app.generated.resources.asteroidTypeNiobiumMoonle
 import io.github.stefanoltmann.app.generated.resources.asteroidTypeOasis
 import io.github.stefanoltmann.app.generated.resources.asteroidTypeOceania
 import io.github.stefanoltmann.app.generated.resources.asteroidTypeOilRichWarpTarget
+import io.github.stefanoltmann.app.generated.resources.asteroidTypePrehistoricBaseGameAsteroid
+import io.github.stefanoltmann.app.generated.resources.asteroidTypePrehistoricClassicAsteroid
+import io.github.stefanoltmann.app.generated.resources.asteroidTypePrehistoricSpacedOutAsteroid
 import io.github.stefanoltmann.app.generated.resources.asteroidTypeRegolithMoonlet
 import io.github.stefanoltmann.app.generated.resources.asteroidTypeSandstoneDefault
 import io.github.stefanoltmann.app.generated.resources.asteroidTypeSandstoneFrozen
@@ -81,6 +84,7 @@ import io.github.stefanoltmann.app.generated.resources.asteroidTypeVanillaSandst
 import io.github.stefanoltmann.app.generated.resources.asteroidTypeVanillaSwampDefault
 import io.github.stefanoltmann.app.generated.resources.asteroidTypeVanillaVolcanic
 import io.github.stefanoltmann.app.generated.resources.asteroidTypeVolcanic
+import io.github.stefanoltmann.app.generated.resources.asteroidTypeWarpOilySandySwamp
 import io.github.stefanoltmann.app.generated.resources.asteroidTypeWarpOilySwamp
 import io.github.stefanoltmann.app.generated.resources.asteroidTypeWaterMoonlet
 import org.jetbrains.compose.resources.StringResource
@@ -100,6 +104,9 @@ enum class AsteroidType(
 
     /** Blasted Ceres Asteroid */
     CeresBaseGameShatteredAsteroid(Res.string.asteroidTypeCeresBaseGameShatteredAsteroid),
+
+    /** Relica Asteroid */
+    PrehistoricBaseGameAsteroid(Res.string.asteroidTypePrehistoricBaseGameAsteroid),
 
     /** Oceania Asteroid */
     Oceania(Res.string.asteroidTypeOceania),
@@ -133,6 +140,9 @@ enum class AsteroidType(
 
     /** Ceres Asteroid */
     CeresClassicAsteroid(Res.string.asteroidTypeCeresClassicAsteroid),
+
+    /** Relica Asteroid */
+    PrehistoricClassicAsteroid(Res.string.asteroidTypePrehistoricClassicAsteroid),
 
     /** Stinko Swamp Asteroid */
     MediumSwampy(Res.string.asteroidTypeMediumSwampy),
@@ -185,11 +195,16 @@ enum class AsteroidType(
     /** Oily Swamp Asteroid */
     WarpOilySwamp(Res.string.asteroidTypeWarpOilySwamp),
 
+    WarpOilySandySwamp(Res.string.asteroidTypeWarpOilySandySwamp),
+
     /** Regolith Asteroid */
     RegolithMoonlet(Res.string.asteroidTypeRegolithMoonlet),
 
     /** Ceres Minor Asteroid */
     CeresSpacedOutAsteroid(Res.string.asteroidTypeCeresSpacedOutAsteroid),
+
+    /** Relica Minor Asteroid */
+    PrehistoricSpacedOutAsteroid(Res.string.asteroidTypePrehistoricSpacedOutAsteroid),
 
     /** Irradiated Swampy Asteroid */
     SwampyLandingSite(Res.string.asteroidTypeSwampyLandingSite),
