@@ -29,6 +29,11 @@ import io.github.stefanoltmann.app.generated.resources.artifactSpacePoiGravitasS
 import io.github.stefanoltmann.app.generated.resources.artifactSpacePoiGravitasSpaceStation7
 import io.github.stefanoltmann.app.generated.resources.artifactSpacePoiGravitasSpaceStation8
 import io.github.stefanoltmann.app.generated.resources.artifactSpacePoiRussellsTeapot
+import io.github.stefanoltmann.app.generated.resources.dlc4ImpactorDebrisField1
+import io.github.stefanoltmann.app.generated.resources.dlc4ImpactorDebrisField2
+import io.github.stefanoltmann.app.generated.resources.dlc4ImpactorDebrisField3
+import io.github.stefanoltmann.app.generated.resources.dlc4PrehistoricMixingField
+import io.github.stefanoltmann.app.generated.resources.dlc4PrehistoricOreField
 import io.github.stefanoltmann.app.generated.resources.harvestableSpacePoiCarbonAsteroidField
 import io.github.stefanoltmann.app.generated.resources.harvestableSpacePoiChlorineCloud
 import io.github.stefanoltmann.app.generated.resources.harvestableSpacePoiDlc2CeresField
@@ -96,5 +101,10 @@ enum class SpacedOutSpacePOI(
     HarvestableSpacePOI_SandyOreField(Res.string.harvestableSpacePoiSandyOreField),
     HarvestableSpacePOI_SatelliteField(Res.string.harvestableSpacePoiSatelliteField),
     HarvestableSpacePOI_SwampyOreField(Res.string.harvestableSpacePoiSwampyOreField),
+    DLC4PrehistoricMixingField(Res.string.dlc4PrehistoricMixingField),
+    DLC4PrehistoricOreField(Res.string.dlc4PrehistoricOreField),
+    DLC4ImpactorDebrisField1(Res.string.dlc4ImpactorDebrisField1),
+    DLC4ImpactorDebrisField2(Res.string.dlc4ImpactorDebrisField2),
+    DLC4ImpactorDebrisField3(Res.string.dlc4ImpactorDebrisField3),
     TemporalTear(Res.string.temporalTear)
 }

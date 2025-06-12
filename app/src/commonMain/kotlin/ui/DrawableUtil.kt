@@ -481,6 +481,11 @@ fun getSpacedOutSpacePOIDrawable(spacedOutSpacePOI: SpacedOutSpacePOI): Drawable
         SpacedOutSpacePOI.HarvestableSpacePOI_SatelliteField -> Res.drawable.spacepoi_satellite_field
         SpacedOutSpacePOI.HarvestableSpacePOI_SwampyOreField -> Res.drawable.spacepoi_swampy_ore_field
         SpacedOutSpacePOI.TemporalTear -> Res.drawable.spacepoi_temporal_tear
+        SpacedOutSpacePOI.DLC4PrehistoricMixingField -> TODO()
+        SpacedOutSpacePOI.DLC4PrehistoricOreField -> TODO()
+        SpacedOutSpacePOI.DLC4ImpactorDebrisField1 -> TODO()
+        SpacedOutSpacePOI.DLC4ImpactorDebrisField2 -> TODO()
+        SpacedOutSpacePOI.DLC4ImpactorDebrisField3 -> TODO()
     }
 
 @Composable

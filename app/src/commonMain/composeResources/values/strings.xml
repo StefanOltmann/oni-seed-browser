@@ -298,6 +298,11 @@
     <string name="harvestableSpacePoiSandyOreField">Sandy Ore Field</string>
     <string name="harvestableSpacePoiSatelliteField">Space Debris</string>
     <string name="harvestableSpacePoiSwampyOreField">Swampy Ore Field</string>
+    <string name="dlc4PrehistoricMixingField">Conductive Ore Field</string>
+    <string name="dlc4PrehistoricOreField">Amber Field</string>
+    <string name="dlc4ImpactorDebrisField1">Demolior Debris</string>
+    <string name="dlc4ImpactorDebrisField2">Liquid Demolior Debris</string>
+    <string name="dlc4ImpactorDebrisField3">Molten Demolior Debris</string>
     <string name="temporalTear">Temporal Tear</string>
 
     <!-- Vanilla Space POI -->
