@@ -32,6 +32,9 @@ import io.github.stefanoltmann.app.generated.resources.zoneTypeMetallic
 import io.github.stefanoltmann.app.generated.resources.zoneTypeMoo
 import io.github.stefanoltmann.app.generated.resources.zoneTypeOcean
 import io.github.stefanoltmann.app.generated.resources.zoneTypeOilField
+import io.github.stefanoltmann.app.generated.resources.zoneTypePrehistoricGarden
+import io.github.stefanoltmann.app.generated.resources.zoneTypePrehistoricRaptor
+import io.github.stefanoltmann.app.generated.resources.zoneTypePrehistoricWetlands
 import io.github.stefanoltmann.app.generated.resources.zoneTypeRadioactive
 import io.github.stefanoltmann.app.generated.resources.zoneTypeRust
 import io.github.stefanoltmann.app.generated.resources.zoneTypeSandstone
@@ -76,13 +79,16 @@ enum class ZoneType(
     // RocketInterior(1Res.string. zoneType//,Color(0xFF9E48DF)),
     Metallic(15, Res.string.zoneTypeMetallic, Color(0xFFFFA007)),
     Moo(17, Res.string.zoneTypeMoo, Color(0xFF8EC039)),
+
+    /* Ceres */
     IceCaves(18, Res.string.zoneTypeIceCaves, Color(0xFFABCFEA)),
     CarrotQuarry(19, Res.string.zoneTypeCarrotQuarry, Color(0xFFCDA2C7)),
     SugarWoods(20, Res.string.zoneTypeSugarWoods, Color(0xFFA2CDA4)),
 
-//    PrehistoricGarden,
-//    PrehistoricRaptor,
-//    PrehistoricWetlands
+    /* Relica */
+    PrehistoricGarden(21, Res.string.zoneTypePrehistoricGarden, Color(0xFFFF9F07)),
+    PrehistoricRaptor(22, Res.string.zoneTypePrehistoricRaptor, Color(0xFF352F8C)),
+    PrehistoricWetlands(23, Res.string.zoneTypePrehistoricWetlands, Color(0xFF5B3510)),
 
     /* Most of the time right above the magma biome. */
     OilField(6, Res.string.zoneTypeOilField, Color(0xFF52321D)),

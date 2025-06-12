@@ -208,6 +208,9 @@
     <string name="zoneTypeSugarWoods">Nectar</string>
     <string name="zoneTypeOilField">Oily</string>
     <string name="zoneTypeMagmaCore">Magma</string>
+    <string name="zoneTypePrehistoricGarden">Garden Biome</string>
+    <string name="zoneTypePrehistoricRaptor">Feather Biome</string>
+    <string name="zoneTypePrehistoricWetlands">Wetlands Biome</string>
 
     <!-- Geyser types -->
     <string name="geyserTypeCoolSteamVent">Cool Steam Vent</string>

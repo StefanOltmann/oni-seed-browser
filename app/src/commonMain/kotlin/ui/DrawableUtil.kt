@@ -52,6 +52,7 @@ import io.github.stefanoltmann.app.generated.resources.biome_barren
 import io.github.stefanoltmann.app.generated.resources.biome_carrot_quarry
 import io.github.stefanoltmann.app.generated.resources.biome_forest
 import io.github.stefanoltmann.app.generated.resources.biome_frozen
+import io.github.stefanoltmann.app.generated.resources.biome_garden
 import io.github.stefanoltmann.app.generated.resources.biome_icecaves
 import io.github.stefanoltmann.app.generated.resources.biome_jungle
 import io.github.stefanoltmann.app.generated.resources.biome_magma
@@ -61,12 +62,14 @@ import io.github.stefanoltmann.app.generated.resources.biome_moo
 import io.github.stefanoltmann.app.generated.resources.biome_ocean
 import io.github.stefanoltmann.app.generated.resources.biome_oil
 import io.github.stefanoltmann.app.generated.resources.biome_radioactive
+import io.github.stefanoltmann.app.generated.resources.biome_raptor
 import io.github.stefanoltmann.app.generated.resources.biome_rust
 import io.github.stefanoltmann.app.generated.resources.biome_sandstone
 import io.github.stefanoltmann.app.generated.resources.biome_space
 import io.github.stefanoltmann.app.generated.resources.biome_sugarwoods
 import io.github.stefanoltmann.app.generated.resources.biome_swamp
 import io.github.stefanoltmann.app.generated.resources.biome_wasteland
+import io.github.stefanoltmann.app.generated.resources.biome_wetlands
 import io.github.stefanoltmann.app.generated.resources.building_anti_entropy_thermo_nullifier
 import io.github.stefanoltmann.app.generated.resources.building_cryotank
 import io.github.stefanoltmann.app.generated.resources.building_neural_vacillator
@@ -539,6 +542,9 @@ fun getZoneTypeDrawable(zoneType: ZoneType): DrawableResource =
         ZoneType.IceCaves -> Res.drawable.biome_icecaves
         ZoneType.CarrotQuarry -> Res.drawable.biome_carrot_quarry
         ZoneType.SugarWoods -> Res.drawable.biome_sugarwoods
+        ZoneType.PrehistoricGarden -> Res.drawable.biome_garden
+        ZoneType.PrehistoricRaptor -> Res.drawable.biome_raptor
+        ZoneType.PrehistoricWetlands -> Res.drawable.biome_wetlands
     }
 
 @Composable
