@@ -237,9 +237,9 @@ data class FilterQuery(
 
     companion object {
 
-        val ALL = FilterQuery(
+        val EMPTY = FilterQuery(
             cluster = null,
-            dlcs = listOf(Dlc.BaseGame, Dlc.FrostyPlanet),
+            dlcs = listOf(Dlc.BaseGame),
             mode = GameModeType.BASEGAME_STANDARD,
             rules = emptyList()
         )

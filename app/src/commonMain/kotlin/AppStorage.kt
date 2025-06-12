@@ -61,7 +61,7 @@ object AppStorage {
 
         val json = settings.getStringOrNull(FILTER_SETTINGS_KEY)
             ?: settings.getStringOrNull("filter") // Old key
-            ?: return FilterQuery.ALL
+            ?: return FilterQuery.EMPTY
 
         return try {
 
@@ -76,7 +76,7 @@ object AppStorage {
 
             ex.printStackTrace()
 
-            FilterQuery.ALL
+            FilterQuery.EMPTY
         }
     }
 

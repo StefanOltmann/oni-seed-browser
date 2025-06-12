@@ -91,7 +91,7 @@ fun ClusterSelection(
                                 cluster = if (isSelected) null else cluster,
 
                                 /* Reset the filter rules */
-                                rules = FilterQuery.ALL.rules
+                                rules = FilterQuery.EMPTY.rules
                             )
                     }
             ) {

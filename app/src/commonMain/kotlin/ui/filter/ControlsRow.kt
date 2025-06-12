@@ -49,10 +49,10 @@ fun ControlsRow(
         ResetButton(
             onClick = {
 
-                filterQueryState.value = FilterQuery.ALL
+                filterQueryState.value = FilterQuery.EMPTY
 
                 /* Save the reset to the storage. */
-                AppStorage.saveFilter(FilterQuery.ALL)
+                AppStorage.saveFilter(FilterQuery.EMPTY)
             }
         )
 
