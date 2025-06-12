@@ -32,6 +32,7 @@ import io.github.stefanoltmann.app.generated.resources.asteroid_mini_shattered_g
 import io.github.stefanoltmann.app.generated.resources.asteroid_mini_shattered_start
 import io.github.stefanoltmann.app.generated.resources.asteroid_mini_shattered_warp
 import io.github.stefanoltmann.app.generated.resources.asteroid_mixing_ceres
+import io.github.stefanoltmann.app.generated.resources.asteroid_mixing_relica
 import io.github.stefanoltmann.app.generated.resources.asteroid_moo
 import io.github.stefanoltmann.app.generated.resources.asteroid_oily_swamp
 import io.github.stefanoltmann.app.generated.resources.asteroid_radioactive_forest
@@ -45,6 +46,7 @@ import io.github.stefanoltmann.app.generated.resources.asteroid_spacedout_ceres_
 import io.github.stefanoltmann.app.generated.resources.asteroid_stinko_swamp
 import io.github.stefanoltmann.app.generated.resources.asteroid_superconductive
 import io.github.stefanoltmann.app.generated.resources.asteroid_tundra
+import io.github.stefanoltmann.app.generated.resources.asteroid_warp_oily_sandy_swamp
 import io.github.stefanoltmann.app.generated.resources.asteroid_water
 import io.github.stefanoltmann.app.generated.resources.biome_barren
 import io.github.stefanoltmann.app.generated.resources.biome_carrot_quarry
@@ -80,6 +82,8 @@ import io.github.stefanoltmann.app.generated.resources.cluster_base_aridio
 import io.github.stefanoltmann.app.generated.resources.cluster_base_ceres
 import io.github.stefanoltmann.app.generated.resources.cluster_base_oasisse
 import io.github.stefanoltmann.app.generated.resources.cluster_base_oceania
+import io.github.stefanoltmann.app.generated.resources.cluster_base_relica
+import io.github.stefanoltmann.app.generated.resources.cluster_base_relica_lab
 import io.github.stefanoltmann.app.generated.resources.cluster_base_rime
 import io.github.stefanoltmann.app.generated.resources.cluster_base_terra
 import io.github.stefanoltmann.app.generated.resources.cluster_base_the_badlands
@@ -98,6 +102,9 @@ import io.github.stefanoltmann.app.generated.resources.cluster_spacedout_oasisse
 import io.github.stefanoltmann.app.generated.resources.cluster_spacedout_oceania
 import io.github.stefanoltmann.app.generated.resources.cluster_spacedout_quagmiris
 import io.github.stefanoltmann.app.generated.resources.cluster_spacedout_radioactive_ocean_moonlet
+import io.github.stefanoltmann.app.generated.resources.cluster_spacedout_relica
+import io.github.stefanoltmann.app.generated.resources.cluster_spacedout_relica_lab
+import io.github.stefanoltmann.app.generated.resources.cluster_spacedout_relica_minor
 import io.github.stefanoltmann.app.generated.resources.cluster_spacedout_rime
 import io.github.stefanoltmann.app.generated.resources.cluster_spacedout_squelchy
 import io.github.stefanoltmann.app.generated.resources.cluster_spacedout_terra
@@ -322,8 +329,8 @@ fun getClusterDrawable(clusterType: ClusterType): DrawableResource =
     when (clusterType) {
         ClusterType.BASE_TERRA -> Res.drawable.cluster_base_terra
         ClusterType.BASE_CERES -> Res.drawable.cluster_base_ceres
-        ClusterType.BASE_RELICA -> TODO()
-        ClusterType.BASE_RELICA_LAB -> TODO()
+        ClusterType.BASE_RELICA -> Res.drawable.cluster_base_relica
+        ClusterType.BASE_RELICA_LAB -> Res.drawable.cluster_base_relica_lab
         ClusterType.BASE_BLASTED_CERES -> Res.drawable.asteroid_blasted_ceres
         ClusterType.BASE_OCEANIA -> Res.drawable.cluster_base_oceania
         ClusterType.BASE_RIME -> Res.drawable.cluster_base_rime
@@ -335,11 +342,11 @@ fun getClusterDrawable(clusterType: ClusterType): DrawableResource =
         ClusterType.BASE_OASISSE -> Res.drawable.cluster_base_oasisse
         ClusterType.DLC_TERRA -> Res.drawable.cluster_spacedout_terra
         ClusterType.DLC_CERES -> Res.drawable.asteroid_spacedout_ceres
-        ClusterType.DLC_RELICA -> TODO()
-        ClusterType.DLC_RELICA_LAB -> TODO()
+        ClusterType.DLC_RELICA -> Res.drawable.cluster_spacedout_relica
+        ClusterType.DLC_RELICA_LAB -> Res.drawable.cluster_spacedout_relica_lab
         ClusterType.DLC_BLASTED_CERES -> Res.drawable.asteroid_blasted_ceres_spaced_out
         ClusterType.DLC_CERES_MINOR -> Res.drawable.asteroid_spacedout_ceres_minor
-        ClusterType.DLC_RELICA_MINOR -> TODO()
+        ClusterType.DLC_RELICA_MINOR -> Res.drawable.cluster_spacedout_relica_minor
         ClusterType.DLC_OCEANIA -> Res.drawable.cluster_spacedout_oceania
         ClusterType.DLC_SQUELCHY -> Res.drawable.cluster_spacedout_squelchy
         ClusterType.DLC_RIME -> Res.drawable.cluster_spacedout_rime
@@ -426,13 +433,13 @@ fun getAsteroidTypeDrawable(asteroidType: AsteroidType): DrawableResource =
         AsteroidType.MiniShatteredStartAsteroid -> Res.drawable.asteroid_mini_shattered_start
         AsteroidType.MiniShatteredWarpAsteroid -> Res.drawable.asteroid_mini_shattered_warp
         AsteroidType.MiniShatteredGeoAsteroid -> Res.drawable.asteroid_mini_shattered_geo
-        AsteroidType.WarpOilySandySwamp -> TODO()
-        AsteroidType.PrehistoricBaseGameAsteroid -> TODO()
-        AsteroidType.PrehistoricClassicAsteroid -> TODO()
-        AsteroidType.PrehistoricSpacedOutAsteroid -> TODO()
-        AsteroidType.PrehistoricShatteredBaseGameAsteroid -> TODO()
-        AsteroidType.PrehistoricShatteredClassicAsteroid -> TODO()
-        AsteroidType.MixingPrehistoricAsteroid -> TODO()
+        AsteroidType.WarpOilySandySwamp -> Res.drawable.asteroid_warp_oily_sandy_swamp
+        AsteroidType.PrehistoricBaseGameAsteroid -> Res.drawable.cluster_base_relica
+        AsteroidType.PrehistoricShatteredBaseGameAsteroid -> Res.drawable.cluster_base_relica_lab
+        AsteroidType.PrehistoricClassicAsteroid -> Res.drawable.cluster_spacedout_relica
+        AsteroidType.PrehistoricShatteredClassicAsteroid -> Res.drawable.cluster_spacedout_relica_lab
+        AsteroidType.PrehistoricSpacedOutAsteroid -> Res.drawable.cluster_spacedout_relica_minor
+        AsteroidType.MixingPrehistoricAsteroid -> Res.drawable.asteroid_mixing_relica
     }
 
 @Composable

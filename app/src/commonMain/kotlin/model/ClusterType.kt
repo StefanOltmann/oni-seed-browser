@@ -270,7 +270,7 @@ enum class ClusterType(
         )
     ),
 
-    /** Ceres */
+    /** Relica */
     DLC_RELICA(
         prefix = "V-PRE-C",
         requiredDlcs = listOf(Dlc.SpacedOut, Dlc.PrehistoricPlanet),
@@ -291,7 +291,7 @@ enum class ClusterType(
     /** RelicAAAAAAAGHH */
     DLC_RELICA_LAB(
         prefix = "V-PRES-C",
-        requiredDlcs = listOf(Dlc.BaseGame, Dlc.PrehistoricPlanet),
+        requiredDlcs = listOf(Dlc.SpacedOut, Dlc.PrehistoricPlanet),
         gameMode = GameModeType.SPACEDOUT_THELAB,
         nameStringResource = Res.string.clusterTypeDlcRelicaLab,
         asteroidTypes = listOf(
