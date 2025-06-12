@@ -23,6 +23,7 @@ import io.github.stefanoltmann.app.generated.resources.Res
 import io.github.stefanoltmann.app.generated.resources.vanillaSpacePoiCarbonaceousAsteroid
 import io.github.stefanoltmann.app.generated.resources.vanillaSpacePoiChlorinePlanet
 import io.github.stefanoltmann.app.generated.resources.vanillaSpacePoiDLC2CeresSpaceDestination
+import io.github.stefanoltmann.app.generated.resources.vanillaSpacePoiDLC4PrehistoricSpaceDestination
 import io.github.stefanoltmann.app.generated.resources.vanillaSpacePoiDustyMoon
 import io.github.stefanoltmann.app.generated.resources.vanillaSpacePoiEarth
 import io.github.stefanoltmann.app.generated.resources.vanillaSpacePoiForestPlanet
@@ -53,6 +54,7 @@ enum class VanillaSpacePOI(
     CarbonaceousAsteroid(Res.string.vanillaSpacePoiCarbonaceousAsteroid),
     ChlorinePlanet(Res.string.vanillaSpacePoiChlorinePlanet),
     DLC2CeresSpaceDestination(Res.string.vanillaSpacePoiDLC2CeresSpaceDestination),
+    DLC4PrehistoricSpaceDestination(Res.string.vanillaSpacePoiDLC4PrehistoricSpaceDestination),
     DustyMoon(Res.string.vanillaSpacePoiDustyMoon),
     Earth(Res.string.vanillaSpacePoiEarth),
     ForestPlanet(Res.string.vanillaSpacePoiForestPlanet),

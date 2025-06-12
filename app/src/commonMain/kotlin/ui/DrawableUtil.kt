@@ -193,6 +193,7 @@ import io.github.stefanoltmann.app.generated.resources.spacepoi_temporal_tear
 import io.github.stefanoltmann.app.generated.resources.vanilla_spacepoi_carbonaceous_asteroid
 import io.github.stefanoltmann.app.generated.resources.vanilla_spacepoi_chlorine_planet
 import io.github.stefanoltmann.app.generated.resources.vanilla_spacepoi_dlc2_ceres_space_destination
+import io.github.stefanoltmann.app.generated.resources.vanilla_spacepoi_dlc4_prehistoric_space_destination
 import io.github.stefanoltmann.app.generated.resources.vanilla_spacepoi_dusty_moon
 import io.github.stefanoltmann.app.generated.resources.vanilla_spacepoi_earth
 import io.github.stefanoltmann.app.generated.resources.vanilla_spacepoi_forest_planet
@@ -497,6 +498,7 @@ fun getVanillaSpacePOIDrawable(vanillaSpacePOI: VanillaSpacePOI): DrawableResour
         VanillaSpacePOI.CarbonaceousAsteroid -> Res.drawable.vanilla_spacepoi_carbonaceous_asteroid
         VanillaSpacePOI.ChlorinePlanet -> Res.drawable.vanilla_spacepoi_chlorine_planet
         VanillaSpacePOI.DLC2CeresSpaceDestination -> Res.drawable.vanilla_spacepoi_dlc2_ceres_space_destination
+        VanillaSpacePOI.DLC4PrehistoricSpaceDestination -> Res.drawable.vanilla_spacepoi_dlc4_prehistoric_space_destination
         VanillaSpacePOI.DustyMoon -> Res.drawable.vanilla_spacepoi_dusty_moon
         VanillaSpacePOI.Earth -> Res.drawable.vanilla_spacepoi_earth
         VanillaSpacePOI.ForestPlanet -> Res.drawable.vanilla_spacepoi_forest_planet
