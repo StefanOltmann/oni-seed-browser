@@ -428,6 +428,8 @@ fun getAsteroidTypeDrawable(asteroidType: AsteroidType): DrawableResource =
         AsteroidType.PrehistoricClassicAsteroid -> TODO()
         AsteroidType.WarpOilySandySwamp -> TODO()
         AsteroidType.PrehistoricSpacedOutAsteroid -> TODO()
+        AsteroidType.PrehistoricShatteredBaseGameAsteroid -> TODO()
+        AsteroidType.MixingPrehistoricAsteroid -> TODO()
     }
 
 @Composable

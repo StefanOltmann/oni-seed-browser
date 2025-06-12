@@ -58,6 +58,7 @@ import io.github.stefanoltmann.app.generated.resources.asteroidTypeMiniShattered
 import io.github.stefanoltmann.app.generated.resources.asteroidTypeMiniShatteredStartAsteroid
 import io.github.stefanoltmann.app.generated.resources.asteroidTypeMiniShatteredWarpAsteroid
 import io.github.stefanoltmann.app.generated.resources.asteroidTypeMixingCeresAsteroid
+import io.github.stefanoltmann.app.generated.resources.asteroidTypeMixingPrehistoricAsteroid
 import io.github.stefanoltmann.app.generated.resources.asteroidTypeMooMoonlet
 import io.github.stefanoltmann.app.generated.resources.asteroidTypeNiobiumMoonlet
 import io.github.stefanoltmann.app.generated.resources.asteroidTypeOasis
@@ -65,6 +66,7 @@ import io.github.stefanoltmann.app.generated.resources.asteroidTypeOceania
 import io.github.stefanoltmann.app.generated.resources.asteroidTypeOilRichWarpTarget
 import io.github.stefanoltmann.app.generated.resources.asteroidTypePrehistoricBaseGameAsteroid
 import io.github.stefanoltmann.app.generated.resources.asteroidTypePrehistoricClassicAsteroid
+import io.github.stefanoltmann.app.generated.resources.asteroidTypePrehistoricShatteredBaseGameAsteroid
 import io.github.stefanoltmann.app.generated.resources.asteroidTypePrehistoricSpacedOutAsteroid
 import io.github.stefanoltmann.app.generated.resources.asteroidTypeRegolithMoonlet
 import io.github.stefanoltmann.app.generated.resources.asteroidTypeSandstoneDefault
@@ -293,6 +295,10 @@ enum class AsteroidType(
 
     MiniShatteredWarpAsteroid(Res.string.asteroidTypeMiniShatteredWarpAsteroid),
 
-    MiniShatteredGeoAsteroid(Res.string.asteroidTypeMiniShatteredGeoAsteroid)
+    MiniShatteredGeoAsteroid(Res.string.asteroidTypeMiniShatteredGeoAsteroid),
+
+    PrehistoricShatteredBaseGameAsteroid(Res.string.asteroidTypePrehistoricShatteredBaseGameAsteroid),
+
+    MixingPrehistoricAsteroid(Res.string.asteroidTypeMixingPrehistoricAsteroid)
 
 }

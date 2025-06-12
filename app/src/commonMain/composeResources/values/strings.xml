@@ -162,7 +162,9 @@
     <string name="asteroidTypeMiniShatteredStartAsteroid">Ceres Mantle Asteroid</string>
     <string name="asteroidTypeMiniShatteredWarpAsteroid">Sweet Ceres Asteroid</string>
     <string name="asteroidTypeMiniShatteredGeoAsteroid">Ceres Core Asteroid</string>
-
+    <string name="asteroidTypePrehistoricShatteredBaseGameAsteroid">RelicAAAAAAAGHH Asteroid</string>
+    <string name="asteroidTypeMixingPrehistoricAsteroid">Relica Fragment</string>
+    
     <!--  POI types -->
     <string name="pointOfInterestTypePrintingPod">Printing Pod</string>
     <string name="pointOfInterestTypeSupplyTeleporterInput">Supply Teleporter Input</string>
