@@ -289,6 +289,7 @@ fun getGeyserDrawable(geyserType: GeyserType): DrawableResource =
         GeyserType.HOT_POLLUTED_O2 -> Res.drawable.geyser_hot_polluted_oxygen_vent
         GeyserType.INFECTIOUS_POLLUTED_O2 -> Res.drawable.geyser_infectious_polluted_oxygen_vent
         GeyserType.CHLORINE -> Res.drawable.geyser_chlorine_gas_vent
+        GeyserType.CHLORINE_COOL -> Res.drawable.geyser_chlorine_gas_vent
         GeyserType.NATURAL_GAS -> Res.drawable.geyser_natural_gas_geyser
         GeyserType.COPPER_VOLCANO -> Res.drawable.geyser_copper_volcano
         GeyserType.IRON_VOLCANO -> Res.drawable.geyser_iron_volcano

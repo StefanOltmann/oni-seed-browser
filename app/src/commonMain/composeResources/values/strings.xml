@@ -214,6 +214,7 @@
     <string name="geyserTypeHydrogenVent">Hydrogen Vent</string>
     <string name="geyserTypeNaturalGasGeyser">Natural Gas Geyser</string>
     <string name="geyserTypeChlorineGasVent">Chlorine Gas Vent</string>
+    <string name="geyserTypeChlorineCoolGasVent">Chlorine Cool Gas Vent</string>
     <string name="geyserTypeSteamVent">Steam Vent</string>
     <string name="geyserTypeCarbonDioxideVent">Carbon Dioxide Vent</string>
     <string name="geyserTypeHotPollutedOxygenVent">Hot Polluted Oxygen Vent</string>

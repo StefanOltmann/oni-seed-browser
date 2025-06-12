@@ -23,6 +23,7 @@ import io.github.stefanoltmann.app.generated.resources.Res
 import io.github.stefanoltmann.app.generated.resources.geyserTypeAluminiumVolcano
 import io.github.stefanoltmann.app.generated.resources.geyserTypeCarbonDioxideGeyser
 import io.github.stefanoltmann.app.generated.resources.geyserTypeCarbonDioxideVent
+import io.github.stefanoltmann.app.generated.resources.geyserTypeChlorineCoolGasVent
 import io.github.stefanoltmann.app.generated.resources.geyserTypeChlorineGasVent
 import io.github.stefanoltmann.app.generated.resources.geyserTypeCobaltVolcano
 import io.github.stefanoltmann.app.generated.resources.geyserTypeCoolSaltSlushGeyser
@@ -114,6 +115,15 @@ enum class GeyserType(
     CHLORINE(
         type = "chlorine_gas",
         stringResource = Res.string.geyserTypeChlorineGasVent,
+        rating = Rating.GOOD, // Has its uses
+        minAvgEmitRate = 47,
+        maxAvgEmitRate = 187,
+        meanAvgEmitRate = 105,
+        avgEmitRateStdDev = 15 // data: 14
+    ),
+    CHLORINE_COOL(
+        type = "chlorine_gas_cool",
+        stringResource = Res.string.geyserTypeChlorineCoolGasVent,
         rating = Rating.GOOD, // Has its uses
         minAvgEmitRate = 47,
         maxAvgEmitRate = 187,
