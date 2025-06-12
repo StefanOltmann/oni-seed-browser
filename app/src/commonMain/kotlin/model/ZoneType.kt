@@ -80,6 +80,10 @@ enum class ZoneType(
     CarrotQuarry(19, Res.string.zoneTypeCarrotQuarry, Color(0xFFCDA2C7)),
     SugarWoods(20, Res.string.zoneTypeSugarWoods, Color(0xFFA2CDA4)),
 
+//    PrehistoricGarden,
+//    PrehistoricRaptor,
+//    PrehistoricWetlands
+
     /* Most of the time right above the magma biome. */
     OilField(6, Res.string.zoneTypeOilField, Color(0xFF52321D)),
 
