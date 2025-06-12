@@ -61,6 +61,7 @@
     <string name="clusterTypeBaseCeres">Ceres</string>
     <string name="clusterTypeBaseBlastedCeres">Blasted Ceres</string>
     <string name="clusterTypeBaseRelica">Relica</string>
+    <string name="clusterTypeBaseRelicaLab">RelicAAAAAAAGHH</string>
     <string name="clusterTypeBaseOceania">Oceania</string>
     <string name="clusterTypeBaseRime">Rime</string>
     <string name="clusterTypeBaseVerdante">Verdante</string>
@@ -73,6 +74,7 @@
     <string name="clusterTypeDlcCeres">Ceres</string>
     <string name="clusterTypeDlcBlastedCeres">Blasted Ceres</string>
     <string name="clusterTypeDlcRelica">Relica</string>
+    <string name="clusterTypeDlcRelicaLab">RelicAAAAAAAGHH</string>
     <string name="clusterTypeDlcOceania">Oceania</string>
     <string name="clusterTypeDlcSquelchy">Squelchy</string>
     <string name="clusterTypeDlcRime">Rime</string>
@@ -163,6 +165,7 @@
     <string name="asteroidTypeMiniShatteredWarpAsteroid">Sweet Ceres Asteroid</string>
     <string name="asteroidTypeMiniShatteredGeoAsteroid">Ceres Core Asteroid</string>
     <string name="asteroidTypePrehistoricShatteredBaseGameAsteroid">RelicAAAAAAAGHH Asteroid</string>
+    <string name="asteroidTypePrehistoricShatteredClassicAsteroid">RelicAAAAAAAGHH Asteroid</string>
     <string name="asteroidTypeMixingPrehistoricAsteroid">Relica Fragment</string>
     
     <!--  POI types -->

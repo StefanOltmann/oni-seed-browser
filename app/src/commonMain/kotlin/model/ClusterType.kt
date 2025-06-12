@@ -27,6 +27,7 @@ import io.github.stefanoltmann.app.generated.resources.clusterTypeBaseCeres
 import io.github.stefanoltmann.app.generated.resources.clusterTypeBaseOasisse
 import io.github.stefanoltmann.app.generated.resources.clusterTypeBaseOceania
 import io.github.stefanoltmann.app.generated.resources.clusterTypeBaseRelica
+import io.github.stefanoltmann.app.generated.resources.clusterTypeBaseRelicaLab
 import io.github.stefanoltmann.app.generated.resources.clusterTypeBaseRime
 import io.github.stefanoltmann.app.generated.resources.clusterTypeBaseTerra
 import io.github.stefanoltmann.app.generated.resources.clusterTypeBaseTheBadlands
@@ -47,6 +48,7 @@ import io.github.stefanoltmann.app.generated.resources.clusterTypeDlcOceania
 import io.github.stefanoltmann.app.generated.resources.clusterTypeDlcQuagmiris
 import io.github.stefanoltmann.app.generated.resources.clusterTypeDlcRadioactiveOceanMoonlet
 import io.github.stefanoltmann.app.generated.resources.clusterTypeDlcRelica
+import io.github.stefanoltmann.app.generated.resources.clusterTypeDlcRelicaLab
 import io.github.stefanoltmann.app.generated.resources.clusterTypeDlcRelicaMinor
 import io.github.stefanoltmann.app.generated.resources.clusterTypeDlcRime
 import io.github.stefanoltmann.app.generated.resources.clusterTypeDlcSquelchy
@@ -93,6 +95,17 @@ enum class ClusterType(
         )
     ),
 
+    /** Blasted Ceres */
+    BASE_BLASTED_CERES(
+        prefix = "CERS-A",
+        requiredDlcs = listOf(Dlc.BaseGame, Dlc.FrostyPlanet),
+        gameMode = GameModeType.BASEGAME_THELAB,
+        nameStringResource = Res.string.clusterTypeBaseBlastedCeres,
+        asteroidTypes = listOf(
+            AsteroidType.CeresBaseGameShatteredAsteroid
+        )
+    ),
+
     /** Relica */
     BASE_RELICA(
         prefix = "PRE-A",
@@ -104,14 +117,14 @@ enum class ClusterType(
         )
     ),
 
-    /** Blasted Ceres */
-    BASE_BLASTED_CERES(
-        prefix = "CERS-A",
-        requiredDlcs = listOf(Dlc.BaseGame, Dlc.FrostyPlanet),
+    /** RelicAAAAAAAGHH */
+    BASE_RELICA_LAB(
+        prefix = "PRES-A",
+        requiredDlcs = listOf(Dlc.BaseGame, Dlc.PrehistoricPlanet),
+        nameStringResource = Res.string.clusterTypeBaseRelicaLab,
         gameMode = GameModeType.BASEGAME_THELAB,
-        nameStringResource = Res.string.clusterTypeBaseBlastedCeres,
         asteroidTypes = listOf(
-            AsteroidType.CeresBaseGameShatteredAsteroid
+            AsteroidType.PrehistoricShatteredBaseGameAsteroid
         )
     ),
 
@@ -265,6 +278,24 @@ enum class ClusterType(
         nameStringResource = Res.string.clusterTypeDlcRelica,
         asteroidTypes = listOf(
             AsteroidType.PrehistoricClassicAsteroid,
+            AsteroidType.MediumSwampy,
+            AsteroidType.TundraMoonlet,
+            AsteroidType.MarshyMoonlet,
+            AsteroidType.NiobiumMoonlet,
+            AsteroidType.MooMoonlet,
+            AsteroidType.WaterMoonlet,
+            AsteroidType.MiniRegolithMoonlet
+        )
+    ),
+
+    /** RelicAAAAAAAGHH */
+    DLC_RELICA_LAB(
+        prefix = "V-PRES-C",
+        requiredDlcs = listOf(Dlc.BaseGame, Dlc.PrehistoricPlanet),
+        gameMode = GameModeType.SPACEDOUT_THELAB,
+        nameStringResource = Res.string.clusterTypeDlcRelicaLab,
+        asteroidTypes = listOf(
+            AsteroidType.PrehistoricShatteredClassicAsteroid,
             AsteroidType.MediumSwampy,
             AsteroidType.TundraMoonlet,
             AsteroidType.MarshyMoonlet,

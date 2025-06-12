@@ -67,6 +67,7 @@ import io.github.stefanoltmann.app.generated.resources.asteroidTypeOilRichWarpTa
 import io.github.stefanoltmann.app.generated.resources.asteroidTypePrehistoricBaseGameAsteroid
 import io.github.stefanoltmann.app.generated.resources.asteroidTypePrehistoricClassicAsteroid
 import io.github.stefanoltmann.app.generated.resources.asteroidTypePrehistoricShatteredBaseGameAsteroid
+import io.github.stefanoltmann.app.generated.resources.asteroidTypePrehistoricShatteredClassicAsteroid
 import io.github.stefanoltmann.app.generated.resources.asteroidTypePrehistoricSpacedOutAsteroid
 import io.github.stefanoltmann.app.generated.resources.asteroidTypeRegolithMoonlet
 import io.github.stefanoltmann.app.generated.resources.asteroidTypeSandstoneDefault
@@ -298,6 +299,8 @@ enum class AsteroidType(
     MiniShatteredGeoAsteroid(Res.string.asteroidTypeMiniShatteredGeoAsteroid),
 
     PrehistoricShatteredBaseGameAsteroid(Res.string.asteroidTypePrehistoricShatteredBaseGameAsteroid),
+
+    PrehistoricShatteredClassicAsteroid(Res.string.asteroidTypePrehistoricShatteredClassicAsteroid),
 
     MixingPrehistoricAsteroid(Res.string.asteroidTypeMixingPrehistoricAsteroid)
 
