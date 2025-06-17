@@ -1,6 +1,6 @@
 /*
- * ONI Seed Browser
- * Copyright (C) 2025 Stefan Oltmann
+ * Oxygen Not Included Seed Browser
+ * Copyright (C) 2025 The Maps Not Included Authors
  * https://stefan-oltmann.de/oni-seed-browser
  *
  * This program is free software: you can redistribute it and/or modify
@@ -15,6 +15,8 @@
  *
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * See the AUTHORS file in the project root for a full list of contributors.
  */
 
 package ui
@@ -38,6 +40,7 @@ val logoIconHeight = 80.dp
 fun App(
     urlHash: State<String?>,
     isMniEmbedded: Boolean,
+    isAnonymous: Boolean,
     connected: Boolean,
     localPort: Int?,
     /**
@@ -67,7 +70,9 @@ fun App(
                 )
             }
 
-            Footer()
+            Footer(
+                isAnonymous = isAnonymous
+            )
         }
     }
 }
