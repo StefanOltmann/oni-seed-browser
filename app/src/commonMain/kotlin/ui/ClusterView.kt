@@ -50,9 +50,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import getPlatformType
 import io.github.stefanoltmann.app.generated.resources.Res
 import io.github.stefanoltmann.app.generated.resources.uiCopiedToClipboard
 import kotlin.math.max
+import kotlin.uuid.ExperimentalUuidApi
+import kotlin.uuid.Uuid
 import kotlinx.coroutines.delay
 import model.Asteroid
 import model.Cluster
@@ -70,9 +73,11 @@ import ui.theme.halfSpacing
 import ui.theme.hoverColor
 import ui.theme.lightGrayTransparentBorderColor
 import util.formatDate
+import web.LeafletPlaceholderBox
 
 val widthPerWorld: Dp = 380.dp
 
+@OptIn(ExperimentalUuidApi::class)
 @Composable
 fun ClusterView(
     cluster: Cluster,
@@ -264,6 +269,26 @@ fun ClusterView(
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onBackground
                 )
+            }
+        }
+
+        val platformType = getPlatformType();
+        when (platformType) {
+            PlatformType.Android -> println("Running on Android")
+            PlatformType.iOS -> println("Running on iOS")
+            PlatformType.Desktop -> println("Running on Desktop")
+            PlatformType.WebJs -> println("Running on Web (JS)")
+            PlatformType.WebWasm -> {
+                println("Running on Web (WASM)")
+
+                // TODO: implement actual UUIDs!
+                val uploadUuid = Uuid.random()
+
+                // TODO: implement base URL lookups!
+                val dataImageBaseUrl = cluster.coordinate
+
+                // Render the Leaflet placeholder
+                LeafletPlaceholderBox(cluster = cluster, index = index, uploadUuid = uploadUuid, dataImageBaseUrl = dataImageBaseUrl)
             }
         }
     }

@@ -1,3 +1,24 @@
+/*
+ * Oxygen Not Included Seed Browser
+ * Copyright (C) 2025 The Maps Not Included Authors
+ * https://stefan-oltmann.de/oni-seed-browser
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * See the AUTHORS file in the project root for a full list of contributors.
+ */
+
 package ui
 
 import AppStorage
@@ -81,6 +102,7 @@ import ui.theme.defaultSpacing
 import ui.theme.doubleSpacing
 import ui.theme.halfPadding
 import ui.theme.lightGray
+import web.registerShowClusterViewList
 
 @Composable
 fun ContentView(
@@ -182,6 +204,9 @@ fun ContentView(
 
         val likeCounts: MutableState<Map<String, Int>?> = remember { mutableStateOf(null) }
 
+        // TODO: These showX variables should REALLY be a finite-state automaton
+        val showClusterViewList = remember { mutableStateOf(false) }
+
         LaunchedEffect(urlHash.value) {
 
             val urlHashValue = urlHash.value
@@ -278,6 +303,14 @@ fun ContentView(
                 likeCounts.value = null
             }
         }
+
+        showClusterViewList.value = (
+            showStarMap.value == null &&
+                showAsteroidMap.value == null &&
+                !showFavorites.value &&
+                !showLeaderboard.value
+            )
+        registerShowClusterViewList(showClusterViewList.value)
 
         val worldForStarMapView = showStarMap.value
 
