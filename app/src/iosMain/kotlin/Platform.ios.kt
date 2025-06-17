@@ -19,8 +19,4 @@
  * See the AUTHORS file in the project root for a full list of contributors.
  */
 
-import com.russhwolf.settings.Settings
-import com.russhwolf.settings.StorageSettings
-
-actual val settings: Settings = StorageSettings()
-actual fun getPlatformType(): PlatformType = PlatformType.WebWasm
+actual fun getPlatformType(): PlatformType = PlatformType.iOS
