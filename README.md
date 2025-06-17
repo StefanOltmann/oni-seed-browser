@@ -25,7 +25,7 @@ https://github.com/stefanoltmann/oni-seed-browser-backend
 To run the project you'll need the following installed:
 
 - [IntelliJ IDEA Community Edition 2024.3 or later](https://www.jetbrains.com/idea/download)
-- [Java 17 SDK](https://adoptium.net/de/temurin/releases/?version=17&package=jdk)
+- [Java 21 SDK](https://adoptium.net/de/temurin/releases/?version=21&package=jdk)
 
 1. In IDEA you use `File` -> `New` -> `Project from Version Control...`
 2. Enter the following URL: `https://github.com/StefanOltmann/oni-seed-browser.git`
