@@ -1,6 +1,6 @@
 /*
- * ONI Seed Browser
- * Copyright (C) 2025 Stefan Oltmann
+ * Oxygen Not Included Seed Browser
+ * Copyright (C) 2025 The Maps Not Included Authors
  * https://stefan-oltmann.de/oni-seed-browser
  *
  * This program is free software: you can redistribute it and/or modify
@@ -15,6 +15,8 @@
  *
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * See the AUTHORS file in the project root for a full list of contributors.
  */
 
 package model
@@ -49,6 +51,7 @@ import io.github.stefanoltmann.app.generated.resources.geyserTypeVolcano
 import io.github.stefanoltmann.app.generated.resources.geyserTypeWaterGeyser
 import kotlinx.serialization.Serializable
 import org.jetbrains.compose.resources.StringResource
+import ui.ElementType
 
 @Suppress("UNUSED")
 @Serializable
@@ -59,6 +62,9 @@ enum class GeyserType(
 
     /** i18n resource */
     val stringResource: StringResource,
+
+    /** Emitted element type */
+    val emittedElementType: ElementType,
 
     /** Rating we assigned if a geyser is useful or bad. */
     val rating: Rating = Rating.NEUTRAL,
@@ -88,6 +94,7 @@ enum class GeyserType(
     COOL_STEAM(
         type = "steam",
         stringResource = Res.string.geyserTypeCoolSteamVent,
+        emittedElementType = ElementType.STEAM,
         rating = Rating.GOOD, // Good thing to have for water production
         minAvgEmitRate = 667,
         maxAvgEmitRate = 2667,
@@ -97,6 +104,7 @@ enum class GeyserType(
     HYDROGEN(
         type = "hot_hydrogen",
         stringResource = Res.string.geyserTypeHydrogenVent,
+        emittedElementType = ElementType.HYDROGEN_GAS,
         rating = Rating.VERY_GOOD, // Free energy
         minAvgEmitRate = 47,
         maxAvgEmitRate = 187,
@@ -106,6 +114,7 @@ enum class GeyserType(
     NATURAL_GAS(
         type = "methane",
         stringResource = Res.string.geyserTypeNaturalGasGeyser,
+        emittedElementType = ElementType.NATURAL_GAS,
         rating = Rating.VERY_GOOD, // Free energy & for cooking
         minAvgEmitRate = 47,
         maxAvgEmitRate = 187,
@@ -115,6 +124,7 @@ enum class GeyserType(
     CHLORINE(
         type = "chlorine_gas",
         stringResource = Res.string.geyserTypeChlorineGasVent,
+        emittedElementType = ElementType.CHLORINE_GAS,
         rating = Rating.GOOD, // Has its uses
         minAvgEmitRate = 47,
         maxAvgEmitRate = 187,
@@ -124,6 +134,7 @@ enum class GeyserType(
     CHLORINE_COOL(
         type = "chlorine_gas_cool",
         stringResource = Res.string.geyserTypeChlorineCoolGasVent,
+        emittedElementType = ElementType.CHLORINE_GAS,
         rating = Rating.GOOD, // Has its uses
         minAvgEmitRate = 47,
         maxAvgEmitRate = 187,
@@ -133,6 +144,7 @@ enum class GeyserType(
     HOT_STEAM(
         type = "hot_steam",
         stringResource = Res.string.geyserTypeSteamVent,
+        emittedElementType = ElementType.STEAM,
         rating = Rating.GOOD, // Usable energy, harder to handle.
         minAvgEmitRate = 333,
         maxAvgEmitRate = 1333,
@@ -142,6 +154,7 @@ enum class GeyserType(
     HOT_CO2(
         type = "hot_co2",
         stringResource = Res.string.geyserTypeCarbonDioxideVent,
+        emittedElementType = ElementType.CARBON_DIOXIDE,
         rating = Rating.VERY_BAD, // mostly useless
         minAvgEmitRate = 47,
         maxAvgEmitRate = 187,
@@ -151,6 +164,7 @@ enum class GeyserType(
     HOT_POLLUTED_O2(
         type = "hot_po2",
         stringResource = Res.string.geyserTypeHotPollutedOxygenVent,
+        emittedElementType = ElementType.POLLUTED_OXYGEN,
         rating = Rating.VERY_BAD, // Crap
         minAvgEmitRate = 47,
         maxAvgEmitRate = 187,
@@ -160,6 +174,7 @@ enum class GeyserType(
     INFECTIOUS_POLLUTED_O2(
         type = "slimy_po2",
         stringResource = Res.string.geyserTypeInfectiousPollutedOxygenVent,
+        emittedElementType = ElementType.POLLUTED_OXYGEN,
         rating = Rating.BAD, // Usually does not produce enough to be helpful.
         minAvgEmitRate = 47,
         maxAvgEmitRate = 187,
@@ -169,6 +184,7 @@ enum class GeyserType(
     WATER(
         type = "hot_water",
         stringResource = Res.string.geyserTypeWaterGeyser,
+        emittedElementType = ElementType.WATER,
         rating = Rating.VERY_GOOD, // We love free water
         minAvgEmitRate = 1333,
         maxAvgEmitRate = 5333,
@@ -178,6 +194,7 @@ enum class GeyserType(
     COOL_SLUSH_WATER(
         type = "slush_water",
         stringResource = Res.string.geyserTypeCoolSlushGeyser,
+        emittedElementType = ElementType.POLLUTED_WATER,
         rating = Rating.VERY_GOOD, // Cool polluted water, free from germs.
         minAvgEmitRate = 667,
         maxAvgEmitRate = 2667,
@@ -187,6 +204,7 @@ enum class GeyserType(
     POLLUTED_WATER(
         type = "filthy_water",
         stringResource = Res.string.geyserTypePollutedWaterVent,
+        emittedElementType = ElementType.POLLUTED_WATER,
         rating = Rating.VERY_GOOD, // Many plants can consume it directly.
         minAvgEmitRate = 1333,
         maxAvgEmitRate = 5333,
@@ -196,6 +214,7 @@ enum class GeyserType(
     COOL_SALT_WATER(
         type = "slush_salt_water",
         stringResource = Res.string.geyserTypeCoolSaltSlushGeyser,
+        emittedElementType = ElementType.SALT_WATER,
         /* Brine brings coolness and salt. */
         rating = Rating.VERY_GOOD,
         minAvgEmitRate = 667,
@@ -206,6 +225,7 @@ enum class GeyserType(
     HOT_SALT_WATER(
         type = "salt_water",
         stringResource = Res.string.geyserTypeSaltWaterGeyser,
+        emittedElementType = ElementType.SALT_WATER,
         rating = Rating.GOOD, // Free salt
         minAvgEmitRate = 1333,
         maxAvgEmitRate = 5333,
@@ -215,6 +235,7 @@ enum class GeyserType(
     LIQUID_CO2(
         type = "liquid_co2",
         stringResource = Res.string.geyserTypeCarbonDioxideGeyser,
+        emittedElementType = ElementType.CARBON_DIOXIDE,
         rating = Rating.NEUTRAL, // Source of coolness, but heats up very fast
         minAvgEmitRate = 67,
         maxAvgEmitRate = 267,
@@ -224,6 +245,7 @@ enum class GeyserType(
     LEAKY_OIL_FISSURE(
         type = "oil_drip",
         stringResource = Res.string.geyserTypeLeakyOilFissure,
+        emittedElementType = ElementType.CRUDE_OIL,
         rating = Rating.NEUTRAL, // Doesn't matter if it's there. Does not produce a lot.
         minAvgEmitRate = 1,
         maxAvgEmitRate = 333,
@@ -233,6 +255,7 @@ enum class GeyserType(
     LIQUID_SULFUR_GEYSER(
         type = "liquid_sulfur",
         stringResource = Res.string.geyserTypeLiquidSulfurGeyser,
+        emittedElementType = ElementType.LIQUID_SULFUR,
         minAvgEmitRate = 667,
         maxAvgEmitRate = 2667,
         meanAvgEmitRate = 1500, // data: 1597
@@ -241,6 +264,7 @@ enum class GeyserType(
     IRON_VOLCANO(
         type = "molten_iron",
         stringResource = Res.string.geyserTypeIronVolcano,
+        emittedElementType = ElementType.MOLTEN_IRON,
         rating = Rating.GOOD, // Metal geysers are good.
         minAvgEmitRate = 133,
         maxAvgEmitRate = 533,
@@ -250,6 +274,7 @@ enum class GeyserType(
     COPPER_VOLCANO(
         type = "molten_copper",
         stringResource = Res.string.geyserTypeCopperVolcano,
+        emittedElementType = ElementType.MOLTEN_COPPER,
         rating = Rating.GOOD, // Metal geysers are good.
         minAvgEmitRate = 133,
         maxAvgEmitRate = 533,
@@ -259,6 +284,7 @@ enum class GeyserType(
     GOLD_VOLCANO(
         type = "molten_gold",
         stringResource = Res.string.geyserTypeGoldVolcano,
+        emittedElementType = ElementType.MOLTEN_GOLD,
         rating = Rating.GOOD, // Metal geysers are good.
         minAvgEmitRate = 133,
         maxAvgEmitRate = 533,
@@ -268,6 +294,7 @@ enum class GeyserType(
     ALUMINIUM_VOLCANO(
         type = "molten_aluminum",
         stringResource = Res.string.geyserTypeAluminiumVolcano,
+        emittedElementType = ElementType.MOLTEN_ALUMINUM,
         rating = Rating.GOOD, // Metal geysers are good.
         minAvgEmitRate = 133,
         maxAvgEmitRate = 533,
@@ -277,6 +304,7 @@ enum class GeyserType(
     COBALT_VOLCANO(
         type = "molten_cobalt",
         stringResource = Res.string.geyserTypeCobaltVolcano,
+        emittedElementType = ElementType.MOLTEN_COBALT,
         rating = Rating.GOOD, // Metal geysers are good.
         minAvgEmitRate = 133,
         maxAvgEmitRate = 533,
@@ -286,6 +314,7 @@ enum class GeyserType(
     TUNGSTEN_VOLCANO(
         type = "molten_tungsten",
         stringResource = Res.string.geyserTypeTungstenVolcano,
+        emittedElementType = ElementType.MOLTEN_TUNGSTEN,
         rating = Rating.GOOD, // Metal geysers are good.
         minAvgEmitRate = 133,
         maxAvgEmitRate = 533,
@@ -295,6 +324,7 @@ enum class GeyserType(
     NIOBIUM_VOLCANO(
         type = "molten_niobium",
         stringResource = Res.string.geyserTypeNiobiumVolcano,
+        emittedElementType = ElementType.MOLTEN_NIOBIUM,
         rating = Rating.GOOD, // Metal geysers are good.
         minAvgEmitRate = 533,
         maxAvgEmitRate = 2133,
@@ -304,6 +334,7 @@ enum class GeyserType(
     VOLCANO(
         type = "big_volcano",
         stringResource = Res.string.geyserTypeVolcano,
+        emittedElementType = ElementType.MAGMA,
         minAvgEmitRate = 533,
         maxAvgEmitRate = 2133,
         meanAvgEmitRate = 1100, // data: 1193
@@ -312,6 +343,7 @@ enum class GeyserType(
     MINOR_VOLCANO(
         type = "small_volcano",
         stringResource = Res.string.geyserTypeMinorVolcano,
+        emittedElementType = ElementType.MAGMA,
         minAvgEmitRate = 267,
         maxAvgEmitRate = 1067,
         meanAvgEmitRate = 550, // data: 593
@@ -320,6 +352,7 @@ enum class GeyserType(
     OIL_RESERVOIR(
         type = "OilWell",
         stringResource = Res.string.geyserTypeOilReservoir,
+        emittedElementType = ElementType.CRUDE_OIL,
         rating = Rating.GOOD, // Rated good, because the more the better.
         minAvgEmitRate = 3333,
         maxAvgEmitRate = 3333,
