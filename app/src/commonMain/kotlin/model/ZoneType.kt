@@ -86,9 +86,9 @@ enum class ZoneType(
     SugarWoods(20, Res.string.zoneTypeSugarWoods, Color(0xFFA2CDA4)),
 
     /* Relica */
-    PrehistoricGarden(21, Res.string.zoneTypePrehistoricGarden, Color(0xFFFF9F07)),
+    PrehistoricGarden(21, Res.string.zoneTypePrehistoricGarden, Color(0xFF006127)),
     PrehistoricRaptor(22, Res.string.zoneTypePrehistoricRaptor, Color(0xFF352F8C)),
-    PrehistoricWetlands(23, Res.string.zoneTypePrehistoricWetlands, Color(0xFF5B3510)),
+    PrehistoricWetlands(23, Res.string.zoneTypePrehistoricWetlands, Color(0xFF645906)),
 
     /* Most of the time right above the magma biome. */
     OilField(6, Res.string.zoneTypeOilField, Color(0xFF52321D)),
