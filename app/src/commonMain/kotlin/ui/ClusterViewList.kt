@@ -46,7 +46,7 @@ fun ClusterViewList(
     favoriteCoordinates: MutableState<List<String>>,
     likeCounts: MutableState<Map<String, Int>?>?,
     showStarMap: MutableState<Cluster?>,
-    showAsteroidMap: MutableState<Asteroid?>,
+    showAsteroidMap: MutableState<Pair<Cluster, Asteroid>?>,
     showMniUrl: Boolean = false,
     showFavoriteIcon: Boolean,
     steamIdToUsernameMap: Map<String, String?>,

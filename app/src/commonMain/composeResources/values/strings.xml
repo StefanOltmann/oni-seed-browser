@@ -49,6 +49,7 @@
     <string name="uiLeaderBoardUsername">Username</string>
     <string name="uiLeaderBoardCount">Count</string>
     <string name="uiStorageTankForDormancy">Storage tank for dormancy</string>
+    <string name="uiShowInAlternativeViewer">Show in alternative viewer</string>
 
     <!-- GameModes -->
     <string name="gameModeBaseGameStandard">Standard</string>
@@ -167,7 +168,7 @@
     <string name="asteroidTypePrehistoricShatteredBaseGameAsteroid">RelicAAAAAAAGHH Asteroid</string>
     <string name="asteroidTypePrehistoricShatteredClassicAsteroid">RelicAAAAAAAGHH Asteroid</string>
     <string name="asteroidTypeMixingPrehistoricAsteroid">Relica Fragment</string>
-    
+
     <!--  POI types -->
     <string name="pointOfInterestTypePrintingPod">Printing Pod</string>
     <string name="pointOfInterestTypeSupplyTeleporterInput">Supply Teleporter Input</string>

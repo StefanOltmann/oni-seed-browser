@@ -82,7 +82,7 @@ fun ClusterView(
     favoriteCoordinates: MutableState<List<String>>,
     likeCount: Int?,
     showStarMap: MutableState<Cluster?>,
-    showAsteroidMap: MutableState<Asteroid?>,
+    showAsteroidMap: MutableState<Pair<Cluster, Asteroid>?>,
     showMniUrl: Boolean,
     showFavoriteIcon: Boolean,
     steamIdToUsernameMap: Map<String, String?>,
@@ -275,7 +275,7 @@ fun ClusterView(
 private fun AsteroidsGrid(
     cluster: Cluster,
     useCompactLayout: Boolean,
-    showAsteroidMap: MutableState<Asteroid?>
+    showAsteroidMap: MutableState<Pair<Cluster, Asteroid>?>
 ) {
 
     BoxWithConstraints(
@@ -305,7 +305,7 @@ private fun AsteroidsGrid(
                 isStarterAsteroid = true,
                 useCompactLayout = useCompactLayout,
                 showMap = {
-                    showAsteroidMap.value = firstAsteroid
+                    showAsteroidMap.value = cluster to firstAsteroid
                 }
             )
 
@@ -318,7 +318,7 @@ private fun AsteroidsGrid(
                     isStarterAsteroid = false,
                     useCompactLayout = useCompactLayout,
                     showMap = {
-                        showAsteroidMap.value = secondAsteroid
+                        showAsteroidMap.value = cluster to secondAsteroid
                     }
                 )
             }
@@ -344,7 +344,7 @@ private fun AsteroidsGrid(
                                 isStarterAsteroid = false,
                                 useCompactLayout = useCompactLayout,
                                 showMap = {
-                                    showAsteroidMap.value = asteroid
+                                    showAsteroidMap.value = cluster to asteroid
                                 }
                             )
                         }

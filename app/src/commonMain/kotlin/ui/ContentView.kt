@@ -171,7 +171,7 @@ fun ContentView(
 
         val showStarMap = remember { mutableStateOf<Cluster?>(null) }
 
-        val showAsteroidMap = remember { mutableStateOf<Asteroid?>(null) }
+        val showAsteroidMap = remember { mutableStateOf<Pair<Cluster, Asteroid>?>(null) }
 
         val isGettingNewResults = remember { mutableStateOf(false) }
 
@@ -309,10 +309,20 @@ fun ContentView(
 
         if (asteroidForMapView != null) {
 
-            AsteroidMapPopup(
-                asteroid = asteroidForMapView,
-                onCloseClicked = { showAsteroidMap.value = null }
-            )
+            Column {
+
+                Box(
+                    modifier = Modifier.weight(1F)
+                ) {
+
+                    AsteroidMapPopup(
+                        asteroid = asteroidForMapView.second,
+                        onCloseClicked = { showAsteroidMap.value = null }
+                    )
+                }
+
+                AlternativeMapViewerLinkBox(asteroidForMapView.first.coordinate)
+            }
 
             return
         }
@@ -614,7 +624,7 @@ private fun ColumnScope.FavoritesPanel(
     useCompactLayout: MutableState<Boolean>,
     favoredCoordinates: MutableState<List<String>>,
     showStarMap: MutableState<Cluster?>,
-    showAsteroidMap: MutableState<Asteroid?>,
+    showAsteroidMap: MutableState<Pair<Cluster, Asteroid>?>,
     connected: Boolean,
     isMniEmbedded: Boolean,
     steamIdToUsernameMap: Map<String, String?>,
@@ -686,7 +696,7 @@ private fun ColumnScope.MainPanel(
     useCompactLayout: MutableState<Boolean>,
     favoredCoordinates: MutableState<List<String>>,
     showStarMap: MutableState<Cluster?>,
-    showAsteroidMap: MutableState<Asteroid?>,
+    showAsteroidMap: MutableState<Pair<Cluster, Asteroid>?>,
     isMniEmbedded: Boolean,
     steamIdToUsernameMap: Map<String, String?>,
     writeToClipboard: (String) -> Unit

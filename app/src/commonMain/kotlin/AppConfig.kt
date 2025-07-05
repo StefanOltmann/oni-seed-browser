@@ -10,3 +10,5 @@ const val START_WITH_TOP_RATED_MAPS = false
  * if top-rated maps are disabled.
  */
 const val START_WITH_LATEST_MAPS = true
+
+const val ALTERNATIVE_MAP_VIEWER_URL = "https://m45sci.xyz/u/dist/oni-view/view.html"
