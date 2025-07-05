@@ -36,7 +36,7 @@ kotlin {
         @OptIn(ExperimentalWasmDsl::class)
         wasmJs {
 
-            moduleName = "app"
+            outputModuleName = "app"
 
             browser {
 
@@ -69,6 +69,9 @@ kotlin {
             implementation(compose.material3)
             implementation(compose.ui)
             implementation(compose.components.resources)
+
+            /* Icons */
+            implementation("org.jetbrains.compose.material:material-icons-core:1.7.3")
 
             /* REST */
             implementation(libs.ktor.core)
