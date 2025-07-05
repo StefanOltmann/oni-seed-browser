@@ -20,6 +20,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import io.github.stefanoltmann.app.generated.resources.Res
 import io.github.stefanoltmann.app.generated.resources.uiShowInAlternativeViewer
+import model.AsteroidType
 import org.jetbrains.compose.resources.stringResource
 import ui.icons.IconExternalLink
 import ui.theme.HalfSpacer
@@ -27,7 +28,8 @@ import ui.theme.hoverColor
 
 @Composable
 fun AlternativeMapViewerLinkBox(
-    coordinate: String
+    coordinate: String,
+    asteroidType: AsteroidType
 ) {
 
     val uriHandler = LocalUriHandler.current
@@ -42,7 +44,11 @@ fun AlternativeMapViewerLinkBox(
             .fillMaxWidth()
             .background(MaterialTheme.colorScheme.background)
             .noRippleClickable {
-                uriHandler.openUri(ALTERNATIVE_MAP_VIEWER_URL + "?coord=" + coordinate)
+                uriHandler.openUri(
+                    ALTERNATIVE_MAP_VIEWER_URL
+                        + "?coord=" + coordinate
+                        + "&asteroid=" + asteroidType.name
+                )
             }
     ) {
 

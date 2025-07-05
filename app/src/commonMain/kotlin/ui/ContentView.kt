@@ -321,7 +321,10 @@ fun ContentView(
                     )
                 }
 
-                AlternativeMapViewerLinkBox(asteroidForMapView.first.coordinate)
+                AlternativeMapViewerLinkBox(
+                    coordinate = asteroidForMapView.first.coordinate,
+                    asteroidType = asteroidForMapView.second.id
+                )
             }
 
             return

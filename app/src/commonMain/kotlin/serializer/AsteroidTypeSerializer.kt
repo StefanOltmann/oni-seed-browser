@@ -30,7 +30,7 @@ import model.AsteroidType
 object AsteroidTypeSerializer : KSerializer<AsteroidType> {
 
     override val descriptor: SerialDescriptor =
-        PrimitiveSerialDescriptor("GeyserType", PrimitiveKind.STRING)
+        PrimitiveSerialDescriptor("AsteroidType", PrimitiveKind.STRING)
 
     override fun serialize(encoder: Encoder, value: AsteroidType) =
         encoder.encodeString(value.name)
