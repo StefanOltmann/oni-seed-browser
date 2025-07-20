@@ -30,7 +30,7 @@ jobs:
           chmod +x gradlew
           ./gradlew build allTests createDistributable
       - name: Run Conveyor
-        uses: hydraulic-software/conveyor/actions/build@v18.0
+        uses: hydraulic-software/conveyor/actions/build@v18.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
