@@ -1,6 +1,6 @@
 /*
- * ONI Seed Browser
- * Copyright (C) 2025 Stefan Oltmann
+ * Oxygen Not Included Seed Browser
+ * Copyright (C) 2025 The Maps Not Included Authors
  * https://stefan-oltmann.de/oni-seed-browser
  *
  * This program is free software: you can redistribute it and/or modify
@@ -15,6 +15,8 @@
  *
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * See the AUTHORS file in the project root for a full list of contributors.
  */
 
 package ui
@@ -96,47 +98,12 @@ fun GeyserDetail(
 
             HalfSpacer()
 
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.height(48.dp)
-            ) {
-
-                DefaultSpacer()
-
-                Box(
-                    contentAlignment = Alignment.Center,
-                    modifier = Modifier
-                        .size(48.dp)
-                        .background(
-                            gray3.copy(alpha = 0.2F),
-                            CircleShape
-                        )
-                ) {
-
-                    /* Show it for all geyser types in detail screen. */
-                    AvgEmitRateRatingIndicator(geyser)
-
-                    Image(
-                        painter = painterResource(getGeyserDrawable(geyser.id)),
-                        contentDescription = null,
-                        modifier = Modifier.halfPadding()
-                    )
-                }
-
-                if (!compactLayout) {
-
-                    DefaultSpacer()
-
-                    Text(
-                        text = stringResource(geyser.id.stringResource),
-                        style = MaterialTheme.typography.bodyLarge,
-                        color = MaterialTheme.colorScheme.onBackground,
-                        /* Can span two lines */
-                        maxLines = 2,
-                        overflow = TextOverflow.Ellipsis
-                    )
-                }
-            }
+            GeyserIconView(
+                geysers = listOf(geyser),
+                backgroundAlpha = 1.0F,
+                alwaysShowAvgEmitRateRatingIndicator = true,
+                showGeyserName = !compactLayout
+            )
 
             if (compactLayout) {
 

@@ -1,6 +1,6 @@
 /*
- * ONI Seed Browser
- * Copyright (C) 2025 Stefan Oltmann
+ * Oxygen Not Included Seed Browser
+ * Copyright (C) 2025 The Maps Not Included Authors
  * https://stefan-oltmann.de/oni-seed-browser
  *
  * This program is free software: you can redistribute it and/or modify
@@ -15,6 +15,8 @@
  *
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * See the AUTHORS file in the project root for a full list of contributors.
  */
 
 package ui
@@ -37,6 +39,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.compositeOver
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -78,6 +81,8 @@ fun GeysersRow(
 
     val sortedGeysersWithoutOilWells = sortedGeysers.filterNot { it.id == GeyserType.OIL_RESERVOIR }
 
+    val sortedGeysersOnlyOilWells = sortedGeysers.filter { it.id == GeyserType.OIL_RESERVOIR }
+
     val oilWellCount = sortedGeysers.size - sortedGeysersWithoutOilWells.size
 
     val geyserCount = sortedGeysersWithoutOilWells.size + oilWellCount.coerceIn(0, 1)
@@ -107,38 +112,12 @@ fun GeysersRow(
                 yOffset = 32
             ) {
 
-                Box(
-                    contentAlignment = Alignment.Center,
-                    modifier = Modifier
-                        .size(48.dp)
-                        .background(
-                            if (geyser.id.rating.isNegative())
-                                badRatingBackground
-                            else
-                                gray3,
-                            CircleShape
-                        )
-                        .border(
-                            1.dp,
-                            anthracite,
-                            CircleShape
-                        )
-                ) {
-
-                    /*
-                     * For good geysers, show the amount in they produce
-                     * with a circular progress indicator.
-                     */
-                    if (!geyser.id.rating.isNegative())
-                        AvgEmitRateRatingIndicator(geyser)
-
-                    Image(
-                        painter = painterResource(getGeyserDrawable(geyser.id)),
-                        contentDescription = null,
-                        alignment = Alignment.BottomCenter,
-                        modifier = Modifier.halfPadding()
-                    )
-                }
+                GeyserIconView(
+                    geysers = listOf(geyser),
+                    backgroundAlpha = 1.0F,
+                    alwaysShowAvgEmitRateRatingIndicator = false,
+                    showGeyserName = false
+                )
             }
         }
 
@@ -155,52 +134,12 @@ fun GeysersRow(
                 },
                 yOffset = -5
             ) {
-
-                Box(
-                    contentAlignment = Alignment.Center,
-                    modifier = Modifier
-                        .size(48.dp)
-                        .background(
-                            gray3,
-                            CircleShape
-                        )
-                        .border(
-                            1.dp,
-                            anthracite,
-                            CircleShape
-                        )
-                ) {
-
-                    Image(
-                        painter = painterResource(getGeyserDrawable(GeyserType.OIL_RESERVOIR)),
-                        contentDescription = null,
-                        alignment = Alignment.BottomCenter,
-                        modifier = Modifier.halfPadding()
-                    )
-
-                    if (oilWellCount > 1) {
-
-                        Box(
-                            contentAlignment = Alignment.Center,
-                            modifier = Modifier
-                                .size(20.dp)
-                                .offset(y = 14.dp)
-                                .background(
-                                    countBackground,
-                                    CircleShape
-                                )
-                        ) {
-
-                            Text(
-                                text = "$oilWellCount",
-                                style = MaterialTheme.typography.bodyLarge,
-                                color = MaterialTheme.colorScheme.onBackground,
-                                fontWeight = FontWeight.Bold,
-                                modifier = Modifier.offset(y = -4.dp)
-                            )
-                        }
-                    }
-                }
+                GeyserIconView(
+                    geysers = sortedGeysersOnlyOilWells,
+                    backgroundAlpha = 1.0F,
+                    alwaysShowAvgEmitRateRatingIndicator = false,
+                    showGeyserName = false
+                )
             }
         }
 
