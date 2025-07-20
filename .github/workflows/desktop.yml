@@ -5,6 +5,9 @@ on:
     tags:
       - '*'
 
+permissions:
+  contents: write
+
 env:
   BUILD_TARGET: 'desktop'
 
@@ -29,7 +32,7 @@ jobs:
       - name: Run Conveyor
         uses: hydraulic-software/conveyor/actions/build@v18.0
         env:
-          GITHUB_TOKEN: ${{ secrets.CONVEYOR_PAT }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           command: make copied-site
           signing_key: ${{ secrets.SIGNING_KEY }}
