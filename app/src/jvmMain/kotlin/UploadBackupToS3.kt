@@ -16,6 +16,8 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+import io.minio.MinioClient
+import io.minio.PutObjectArgs
 import kotlin.time.measureTime
 import kotlinx.io.buffered
 import kotlinx.io.files.Path
@@ -52,7 +54,20 @@ fun main() {
 
             println("${bytes.size} bytes -> ${compressedBytes.size} bytes")
 
-            println(cluster.toString())
+            val minioClient =
+                MinioClient.builder()
+                    .endpoint("http://s3.tebi.io")
+                    .credentials("", "")
+                    .build()
+
+            minioClient.putObject(
+                PutObjectArgs
+                    .builder()
+                    .bucket("oni")
+                    .`object`("${cluster.coordinate}.json.zlib")
+                    .stream(compressedBytes.inputStream(), compressedBytes.size.toLong(), -1)
+                    .build()
+            )
         }
     }
 

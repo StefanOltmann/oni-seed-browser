@@ -102,6 +102,8 @@ kotlin {
             implementation(compose.desktop.currentOs)
             implementation(libs.kotlinx.coroutines.swing)
             implementation(libs.ktor.java)
+
+            implementation("io.minio:minio:8.5.17")
         }
 
         if (buildTarget != "desktop") {
