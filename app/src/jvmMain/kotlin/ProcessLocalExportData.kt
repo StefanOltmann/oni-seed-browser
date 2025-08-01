@@ -1,12 +1,3 @@
-import kotlin.time.measureTime
-import kotlinx.io.buffered
-import kotlinx.io.files.Path
-import kotlinx.io.files.SystemFileSystem
-import kotlinx.serialization.ExperimentalSerializationApi
-import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.io.decodeFromSource
-import model.Cluster
-
 /*
  * ONI Seed Browser
  * Copyright (C) 2025 Stefan Oltmann
@@ -25,6 +16,15 @@ import model.Cluster
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+import kotlin.time.measureTime
+import kotlinx.io.buffered
+import kotlinx.io.files.Path
+import kotlinx.io.files.SystemFileSystem
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.io.decodeFromSource
+import model.Cluster
 
 /*
  * Work on the data export
@@ -43,6 +43,14 @@ fun main() {
         process(exportDataFolder) { cluster ->
 
             // TODO Do something with the data here
+
+            val json = Json.encodeToString(cluster)
+
+            val bytes = json.encodeToByteArray()
+
+            val compressedBytes = zlibCompress(bytes)
+
+            println("${bytes.size} bytes -> ${compressedBytes.size} bytes")
 
             println(cluster.toString())
         }
