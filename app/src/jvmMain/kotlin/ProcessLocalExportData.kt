@@ -1,4 +1,3 @@
-import java.io.PrintWriter
 import kotlin.time.measureTime
 import kotlinx.io.buffered
 import kotlinx.io.files.Path
@@ -7,7 +6,6 @@ import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.io.decodeFromSource
 import model.Cluster
-import model.GeyserType
 
 /*
  * ONI Seed Browser
