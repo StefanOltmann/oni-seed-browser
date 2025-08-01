@@ -16,6 +16,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+import io.minio.ListObjectsArgs
 import io.minio.MinioClient
 import io.minio.PutObjectArgs
 import kotlin.time.measureTime
@@ -42,9 +43,37 @@ fun main() {
 
     val time = measureTime {
 
+        val minioClient =
+            MinioClient.builder()
+                .endpoint("http://s3.tebi.io")
+                .credentials("", "")
+                .build()
+
+        val objects = minioClient.listObjects(
+            ListObjectsArgs.builder()
+                .bucket("oni")
+                .build()
+        )
+
+        val existingNames = mutableSetOf<String>()
+
+        for (result in objects) {
+
+            val item = result.get()
+
+            existingNames.add(item.objectName())
+        }
+
+        println("Existing names: ${existingNames.size}")
+
         process(exportDataFolder) { cluster ->
 
-            // TODO Do something with the data here
+            val name = "${cluster.coordinate}.json.zlib"
+
+            if (existingNames.contains(name)) {
+                println("Skipping $name")
+                return@process
+            }
 
             val json = Json.encodeToString(cluster)
 
@@ -54,17 +83,11 @@ fun main() {
 
             println("${bytes.size} bytes -> ${compressedBytes.size} bytes")
 
-            val minioClient =
-                MinioClient.builder()
-                    .endpoint("http://s3.tebi.io")
-                    .credentials("", "")
-                    .build()
-
             minioClient.putObject(
                 PutObjectArgs
                     .builder()
                     .bucket("oni")
-                    .`object`("${cluster.coordinate}.json.zlib")
+                    .`object`(name)
                     .stream(compressedBytes.inputStream(), compressedBytes.size.toLong(), -1)
                     .build()
             )
