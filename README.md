@@ -1,6 +1,6 @@
 # ONI Seed Browser
 
-[![Kotlin](https://img.shields.io/badge/kotlin-2.0.21-blue.svg?logo=kotlin)](httpw://kotlinlang.org)
+[![Kotlin](https://img.shields.io/badge/kotlin-2.2.0-blue.svg?logo=kotlin)](httpw://kotlinlang.org)
 ![WASM](https://img.shields.io/badge/-WASM-gray.svg?style=flat)
 
 <a href="https://ko-fi.com/StefanOltmann">
