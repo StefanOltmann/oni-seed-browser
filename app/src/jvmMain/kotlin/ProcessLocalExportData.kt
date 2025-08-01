@@ -28,50 +28,26 @@ import model.GeyserType
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-private val datafileRegex = Regex("data-[0-9]+.json")
-
 /*
  * Work on the data export
  */
 fun main() {
 
-    val exportDataFolder = Path(System.getProperty("user.home") + "/Downloads/data")
+    val exportDataFolder = Path("D:/onidata")
 
     if (!SystemFileSystem.exists(exportDataFolder)) {
         println("Please create folder $exportDataFolder")
         return
     }
 
-    println("Looking into folder $exportDataFolder")
-
-    val printWriter = PrintWriter("build/export.csv")
-
-    printWriter.println("geyser;avgEmitRate")
-    // printWriter.println("cluster;asteroid;geyser;avgEmitRate")
-
     val time = measureTime {
 
         process(exportDataFolder) { cluster ->
 
-            for (asteroid in cluster.asteroids) {
+            // TODO Do something with the data here
 
-                for (geyser in asteroid.geysers) {
-
-                    /* Skip oil reservoirs, because their output is fixed. */
-                    if (geyser.id == GeyserType.OIL_RESERVOIR)
-                        continue
-
-                    printWriter.println("${geyser.id};${geyser.avgEmitRate}")
-
-                    // printWriter.println("${cluster.cluster};${asteroid.id};${geyser.id};${geyser.avgEmitRate}")
-                }
-            }
-
-            printWriter.flush()
+            println(cluster.toString())
         }
-
-        printWriter.flush()
-        printWriter.close()
     }
 
     println("Operation took $time")
@@ -85,7 +61,7 @@ private fun process(
 
     val dataFiles = SystemFileSystem
         .list(exportDataFolder)
-        .filter { it.name.matches(datafileRegex) }
+        .filter { it.name.endsWith(".json") }
         .sortedBy { it.name }
 
     for (file in dataFiles) {
