@@ -47,7 +47,7 @@ fun main() {
 
         val minioClient =
             MinioClient.builder()
-                .endpoint("http://s3.tebi.io")
+                .endpoint("http://minio:9000")
                 .credentials("", "")
                 .build()
 
@@ -97,6 +97,12 @@ fun main() {
                     .builder()
                     .bucket("oni")
                     .`object`(name)
+                    .headers(
+                        mapOf(
+                            "Content-Type" to "application/json",
+                            "Content-Encoding" to "gzip"
+                        )
+                    )
                     .stream(gzippedBytes.inputStream(), gzippedBytes.size.toLong(), -1)
                     .build()
             )
