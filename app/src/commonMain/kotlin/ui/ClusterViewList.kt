@@ -92,7 +92,7 @@ fun ClusterViewList(
 
                 Box(
                     /* This makes the transition from placeholder to content smoother. */
-                    modifier = Modifier.animateContentSize()
+                    // modifier = Modifier.animateContentSize()
                 ) {
 
                     if (cluster == null) {
@@ -100,7 +100,7 @@ fun ClusterViewList(
                         Box(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .height(100.dp)
+                                .height(800.dp)
                         )
 
                     } else {
