@@ -84,6 +84,8 @@ object DefaultWebClient : WebClient {
         }
     }
 
+    private val clusterCache = LinkedHashMap<String, Cluster?>()
+
     override suspend fun countSeeds(): Long? {
 
         val response = httpClient.get(COUNT_URL)
@@ -105,6 +107,10 @@ object DefaultWebClient : WebClient {
     }
 
     override suspend fun find(coordinate: String): Cluster? {
+
+        /* Respond from cache when possible. */
+        if (clusterCache.contains(coordinate))
+            return clusterCache[coordinate]
 
         val response = httpClient.get("$FIND_URL/$coordinate") {
             contentType(ContentType.Application.Json)
