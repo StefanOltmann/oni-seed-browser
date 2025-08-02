@@ -19,6 +19,7 @@
 
 package ui
 
+import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.VerticalScrollbar
 import androidx.compose.foundation.defaultScrollbarStyle
 import androidx.compose.foundation.layout.Arrangement
@@ -89,30 +90,36 @@ fun ClusterViewList(
 
                 val cluster = clusterState.value
 
-                if (cluster == null) {
+                Box(
+                    /* This makes the transition from placeholder to content smoother. */
+                    modifier = Modifier.animateContentSize()
+                ) {
 
-                    Box(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(1248.dp)
-                    )
+                    if (cluster == null) {
 
-                } else {
+                        Box(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(1000.dp)
+                        )
 
-                    ClusterView(
-                        cluster = cluster,
-                        index = index + 1,
-                        totalCount = clusters.size,
-                        useCompactLayout = useCompactLayout,
-                        favoriteCoordinates = favoriteCoordinates,
-                        likeCount = likeCounts?.value?.get(coordinate),
-                        showStarMap = showStarMap,
-                        showAsteroidMap = showAsteroidMap,
-                        showMniUrl = showMniUrl,
-                        showFavoriteIcon = showFavoriteIcon,
-                        steamIdToUsernameMap = steamIdToUsernameMap,
-                        writeToClipboard = writeToClipboard
-                    )
+                    } else {
+
+                        ClusterView(
+                            cluster = cluster,
+                            index = index + 1,
+                            totalCount = clusters.size,
+                            useCompactLayout = useCompactLayout,
+                            favoriteCoordinates = favoriteCoordinates,
+                            likeCount = likeCounts?.value?.get(coordinate),
+                            showStarMap = showStarMap,
+                            showAsteroidMap = showAsteroidMap,
+                            showMniUrl = showMniUrl,
+                            showFavoriteIcon = showFavoriteIcon,
+                            steamIdToUsernameMap = steamIdToUsernameMap,
+                            writeToClipboard = writeToClipboard
+                        )
+                    }
                 }
             }
         }
