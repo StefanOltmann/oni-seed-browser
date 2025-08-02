@@ -19,11 +19,14 @@
 
 package ui
 
+import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.VerticalScrollbar
 import androidx.compose.foundation.defaultScrollbarStyle
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
@@ -31,17 +34,21 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.rememberScrollbarAdapter
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.produceState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import kotlin.coroutines.cancellation.CancellationException
 import model.Asteroid
 import model.Cluster
+import service.DefaultWebClient
 import ui.theme.doubleSpacing
 import ui.theme.lightGray
 
 @Composable
 fun ClusterViewList(
     lazyListState: LazyListState,
-    clusters: List<Cluster>,
+    clusters: List<String>,
     useCompactLayout: Boolean,
     favoriteCoordinates: MutableState<List<String>>,
     likeCounts: MutableState<Map<String, Int>?>?,
@@ -61,22 +68,59 @@ fun ClusterViewList(
             modifier = Modifier.padding(doubleSpacing)
         ) {
 
-            itemsIndexed(clusters) { index, cluster ->
+            itemsIndexed(clusters) { index, coordinate ->
 
-                ClusterView(
-                    cluster = cluster,
-                    index = index + 1,
-                    totalCount = clusters.size,
-                    useCompactLayout = useCompactLayout,
-                    favoriteCoordinates = favoriteCoordinates,
-                    likeCount = likeCounts?.value?.get(cluster.coordinate),
-                    showStarMap = showStarMap,
-                    showAsteroidMap = showAsteroidMap,
-                    showMniUrl = showMniUrl,
-                    showFavoriteIcon = showFavoriteIcon,
-                    steamIdToUsernameMap = steamIdToUsernameMap,
-                    writeToClipboard = writeToClipboard
-                )
+                val clusterState = produceState<Cluster?>(initialValue = null) {
+
+                    try {
+
+                        value = DefaultWebClient.find(coordinate)
+
+                    } catch (ignore: CancellationException) {
+
+                        /* User scrolled fast. That's fine. */
+
+                    } catch (ex: Throwable) {
+
+                        /* We MUST catch Throwable here to prevent UI freezes. */
+
+                        ex.printStackTrace()
+                    }
+                }
+
+                val cluster = clusterState.value
+
+                Box(
+                    /* This makes the transition from placeholder to content smoother. */
+                    // modifier = Modifier.animateContentSize()
+                ) {
+
+                    if (cluster == null) {
+
+                        Box(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(800.dp)
+                        )
+
+                    } else {
+
+                        ClusterView(
+                            cluster = cluster,
+                            index = index + 1,
+                            totalCount = clusters.size,
+                            useCompactLayout = useCompactLayout,
+                            favoriteCoordinates = favoriteCoordinates,
+                            likeCount = likeCounts?.value?.get(coordinate),
+                            showStarMap = showStarMap,
+                            showAsteroidMap = showAsteroidMap,
+                            showMniUrl = showMniUrl,
+                            showFavoriteIcon = showFavoriteIcon,
+                            steamIdToUsernameMap = steamIdToUsernameMap,
+                            writeToClipboard = writeToClipboard
+                        )
+                    }
+                }
             }
         }
 

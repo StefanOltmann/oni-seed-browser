@@ -2,7 +2,6 @@ package ui
 
 import AppStorage
 import START_WITH_LATEST_MAPS
-import START_WITH_TOP_RATED_MAPS
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -175,7 +174,7 @@ fun ContentView(
 
         val isGettingNewResults = remember { mutableStateOf(false) }
 
-        val clusters = remember { mutableStateOf(emptyList<Cluster>()) }
+        val clusters = remember { mutableStateOf(emptyList<String>()) }
 
         val showFavorites = remember { mutableStateOf(false) }
         val showLeaderboard = remember { mutableStateOf(false) }
@@ -197,37 +196,12 @@ fun ContentView(
                     val world = DefaultWebClient.find(urlHashValue)
 
                     if (world != null)
-                        clusters.value = listOf(world)
+                        clusters.value = listOf(world.coordinate)
                     else
                         clusters.value = emptyList()
 
                     /* Reset */
                     likeCounts.value = null
-
-                } catch (ex: Throwable) {
-
-                    /* We MUST catch Throwable here to prevent UI freezes. */
-
-                    ex.printStackTrace()
-
-                    errorMessage.value = ex.stackTraceToString()
-
-                } finally {
-                    isGettingNewResults.value = false
-                }
-
-            } else if (START_WITH_TOP_RATED_MAPS) {
-
-                try {
-
-                    isGettingNewResults.value = true
-
-                    val topRatedClusters = DefaultWebClient.findTopRatedClusters()
-
-                    clusters.value = topRatedClusters.map { it.cluster }
-
-                    likeCounts.value =
-                        topRatedClusters.associate { it.cluster.coordinate to it.likeCount }
 
                 } catch (ex: Throwable) {
 
@@ -265,14 +239,7 @@ fun ContentView(
 
             } else {
 
-                println("Load demo data...")
-
-                val parsedClusters = Json.decodeFromString<List<Cluster>>(sampleWorldsJson)
-
-                /* DLCs first */
-                clusters.value = parsedClusters.sortedWith(
-                    compareBy({ it.cluster.isBaseGame() }, { it.cluster })
-                )
+                clusters.value = emptyList<String>()
 
                 /* Reset */
                 likeCounts.value = null
@@ -634,32 +601,16 @@ private fun ColumnScope.FavoritesPanel(
     writeToClipboard: (String) -> Unit
 ) {
 
-    val favoredClustersState = produceState(emptyList<Cluster>()) {
-
-        try {
-
-            value = DefaultWebClient.findFavoredClusters()
-
-        } catch (ex: Exception) {
-
-            ex.printStackTrace()
-
-            errorMessage.value = ex.stackTraceToString()
-        }
-    }
-
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier.Companion.weight(1F)
     ) {
 
-        val favoredClusters = favoredClustersState.value
-
-        if (favoredClusters.isNotEmpty()) {
+        if (favoredCoordinates.value.isNotEmpty()) {
 
             ClusterViewList(
                 lazyListState = lazyListState,
-                clusters = favoredClustersState.value,
+                clusters = favoredCoordinates.value,
                 useCompactLayout = useCompactLayout.value,
                 favoriteCoordinates = favoredCoordinates,
                 likeCounts = null,
@@ -689,7 +640,7 @@ private fun ColumnScope.MainPanel(
     filterQueryState: MutableState<FilterQuery>,
     isGettingNewResults: MutableState<Boolean>,
     errorMessage: MutableState<String?>,
-    clusters: MutableState<List<Cluster>>,
+    clusters: MutableState<List<String>>,
     likeCounts: MutableState<Map<String, Int>?>,
     worldCount: State<Long?>,
     coroutineScope: CoroutineScope,
@@ -722,9 +673,7 @@ private fun ColumnScope.MainPanel(
 
             val searchResultWorlds = DefaultWebClient.search(filterQuery)
 
-            val sortedWorlds = searchResultWorlds.sortedByDescending { it.getRating() }
-
-            clusters.value = sortedWorlds
+            clusters.value = searchResultWorlds
 
             /* Reset */
             likeCounts.value = null

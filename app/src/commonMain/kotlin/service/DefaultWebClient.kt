@@ -37,30 +37,21 @@ import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.contentType
 import io.ktor.http.isSuccess
-import io.ktor.serialization.kotlinx.cbor.cbor
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.ExperimentalSerializationApi
-import kotlinx.serialization.cbor.Cbor
 import kotlinx.serialization.json.Json
 import model.Cluster
 import model.Contributor
 import model.RateCoordinateRequest
-import model.RatedCluster
 import model.filter.FilterQuery
 
 const val BASE_API_URL = "https://ingest.mapsnotincluded.org"
 const val FIND_URL = "$BASE_API_URL/coordinate"
 const val REQUEST_URL = "$BASE_API_URL/request-coordinate"
-const val SEARCH_URL = "$BASE_API_URL/search"
+const val SEARCH_URL = "$BASE_API_URL/search/v2"
 const val COUNT_URL = "$BASE_API_URL/count"
 
 private val strictAllFieldsJson = Json {
-    ignoreUnknownKeys = false
-    encodeDefaults = true
-}
-
-@OptIn(ExperimentalSerializationApi::class)
-private val strictAllFieldsCbor = Cbor {
     ignoreUnknownKeys = false
     encodeDefaults = true
 }
@@ -86,13 +77,14 @@ object DefaultWebClient : WebClient {
 
         install(ContentNegotiation) {
             json(strictAllFieldsJson)
-            cbor(strictAllFieldsCbor)
         }
 
         install(ContentEncoding) {
             gzip(1.0f)
         }
     }
+
+    private val clusterCache = LruCache<String, Cluster?>(100)
 
     override suspend fun countSeeds(): Long? {
 
@@ -104,19 +96,9 @@ object DefaultWebClient : WebClient {
         return response.body()
     }
 
-    override suspend fun findLatestClusters(): List<Cluster> {
+    override suspend fun findLatestClusters(): List<String> {
 
-        val response = httpClient.get("$BASE_API_URL/latest")
-
-        if (!response.status.isSuccess())
-            error("Requesting latest clusters failed with HTTP ${response.status}: ${response.bodyAsText()}")
-
-        return response.body()
-    }
-
-    override suspend fun findTopRatedClusters(): List<RatedCluster> {
-
-        val response = httpClient.get("$BASE_API_URL/top")
+        val response = httpClient.get("$BASE_API_URL/latest/v2")
 
         if (!response.status.isSuccess())
             error("Requesting latest clusters failed with HTTP ${response.status}: ${response.bodyAsText()}")
@@ -126,18 +108,26 @@ object DefaultWebClient : WebClient {
 
     override suspend fun find(coordinate: String): Cluster? {
 
-        println("Find: $coordinate")
+        val cachedCluster = clusterCache.get(coordinate)
+
+        /* Respond from cache when possible. */
+        if (cachedCluster != null)
+            return cachedCluster
 
         val response = httpClient.get("$FIND_URL/$coordinate") {
-            contentType(ContentType.Application.Cbor)
-            accept(ContentType.Application.Cbor)
+            contentType(ContentType.Application.Json)
+            accept(ContentType.Application.Json)
             header(HttpHeaders.AcceptEncoding, "gzip")
         }
 
         if (response.status != HttpStatusCode.OK)
             return null
 
-        return response.body()
+        val cluster: Cluster? = response.body()
+
+        clusterCache.put(coordinate, cluster)
+
+        return cluster
     }
 
     override suspend fun request(coordinate: String): Boolean {
@@ -152,19 +142,9 @@ object DefaultWebClient : WebClient {
         return response.status.isSuccess()
     }
 
-    override suspend fun findFavoredClusters(): List<Cluster> {
-
-        val response = httpClient.get("$BASE_API_URL/favored-clusters")
-
-        if (!response.status.isSuccess())
-            error("Requesting favored clusters failed with HTTP ${response.status}: ${response.bodyAsText()}")
-
-        return response.body()
-    }
-
     override suspend fun findFavoredCoordinates(): List<String> {
 
-        val response = httpClient.get("$BASE_API_URL/favored-coordinates")
+        val response = httpClient.get("$BASE_API_URL/favored")
 
         if (!response.status.isSuccess())
             error("Requesting favored coordinates failed with HTTP ${response.status}: ${response.bodyAsText()}")
@@ -194,21 +174,20 @@ object DefaultWebClient : WebClient {
         return success
     }
 
-    override suspend fun search(filterQuery: FilterQuery): List<Cluster> {
+    override suspend fun search(filterQuery: FilterQuery): List<String> {
 
         val response = httpClient.post(SEARCH_URL) {
 
             /* Filter MUST be sent as JSON, because CBOR causes issues here. */
             contentType(ContentType.Application.Json)
 
-            /* Response can be in CBOR */
-            accept(ContentType.Application.Cbor)
+            /* Response can be in JSON */
+            accept(ContentType.Application.Json)
 
             /* Always zip */
             header(HttpHeaders.AcceptEncoding, "gzip")
 
             setBody(filterQuery)
-
         }
 
         if (!response.status.isSuccess())

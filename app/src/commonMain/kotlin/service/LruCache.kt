@@ -19,34 +19,36 @@
 
 package service
 
-import model.Cluster
-import model.Contributor
-import model.filter.FilterQuery
+class LruCache<K, V>(
+    private val maxSize: Int
+) {
 
-interface WebClient {
+    private val map = LinkedHashMap<K, V>()
 
-    suspend fun countSeeds(): Long?
+    fun get(key: K): V? {
 
-    suspend fun findLatestClusters(): List<String>
+        val value = map.remove(key)
 
-    suspend fun find(coordinate: String): Cluster?
+        /* Re-insert to mark as recently used */
+        if (value != null)
+            map[key] = value
 
-    /*
-     * Requests a coordinate and returns if the request was valid.
-     * Can be invalid if coordinate has the wrong syntax.
-     */
-    suspend fun request(coordinate: String): Boolean
+        return value
+    }
 
-    suspend fun findFavoredCoordinates(): List<String>
+    fun put(key: K, value: V) {
 
-    suspend fun rate(coordinate: String, like: Boolean): Boolean
+        if (map.containsKey(key)) {
 
-    suspend fun search(filterQuery: FilterQuery): List<String>
+            map.remove(key)
 
-    suspend fun getUsername(): String?
+        } else if (map.size >= maxSize) {
 
-    suspend fun setUsername(username: String): Boolean
+            val oldestKey = map.keys.first()
 
-    suspend fun findContributors(): List<Contributor>
+            map.remove(oldestKey)
+        }
 
+        map[key] = value
+    }
 }
