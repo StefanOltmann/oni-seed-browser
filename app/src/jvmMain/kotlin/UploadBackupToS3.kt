@@ -19,6 +19,8 @@
 import io.minio.ListObjectsArgs
 import io.minio.MinioClient
 import io.minio.PutObjectArgs
+import java.io.ByteArrayOutputStream
+import java.util.zip.GZIPOutputStream
 import kotlin.time.measureTime
 import kotlinx.io.buffered
 import kotlinx.io.files.Path
@@ -68,7 +70,7 @@ fun main() {
 
         process(exportDataFolder) { cluster ->
 
-            val name = "${cluster.coordinate}.json.zlib"
+            val name = "${cluster.coordinate}.json.gz"
 
             if (existingNames.contains(name)) {
                 println("Skipping $name")
@@ -79,16 +81,23 @@ fun main() {
 
             val bytes = json.encodeToByteArray()
 
-            val compressedBytes = zlibCompress(bytes)
+            val gzippedBytes = ByteArrayOutputStream().use { byteStream ->
 
-            println("${bytes.size} bytes -> ${compressedBytes.size} bytes")
+                GZIPOutputStream(byteStream).use { gzipStream ->
+                    gzipStream.write(bytes)
+                    gzipStream.finish()
+                }
+                byteStream.toByteArray()
+            }
+
+            println("${bytes.size} bytes -> ${gzippedBytes.size} bytes")
 
             minioClient.putObject(
                 PutObjectArgs
                     .builder()
                     .bucket("oni")
                     .`object`(name)
-                    .stream(compressedBytes.inputStream(), compressedBytes.size.toLong(), -1)
+                    .stream(gzippedBytes.inputStream(), gzippedBytes.size.toLong(), -1)
                     .build()
             )
         }
