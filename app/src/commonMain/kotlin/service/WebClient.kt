@@ -30,8 +30,6 @@ interface WebClient {
 
     suspend fun findLatestClusters(): List<String>
 
-    suspend fun findTopRatedClusters(): List<RatedCluster>
-
     suspend fun find(coordinate: String): Cluster?
 
     /*

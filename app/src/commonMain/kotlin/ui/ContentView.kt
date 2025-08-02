@@ -216,31 +216,6 @@ fun ContentView(
                     isGettingNewResults.value = false
                 }
 
-            } else if (START_WITH_TOP_RATED_MAPS) {
-
-                try {
-
-                    isGettingNewResults.value = true
-
-                    val topRatedClusters = DefaultWebClient.findTopRatedClusters()
-
-                    clusters.value = topRatedClusters.map { it.cluster.coordinate }
-
-                    likeCounts.value =
-                        topRatedClusters.associate { it.cluster.coordinate to it.likeCount }
-
-                } catch (ex: Throwable) {
-
-                    /* We MUST catch Throwable here to prevent UI freezes. */
-
-                    ex.printStackTrace()
-
-                    errorMessage.value = ex.stackTraceToString()
-
-                } finally {
-                    isGettingNewResults.value = false
-                }
-
             } else if (START_WITH_LATEST_MAPS) {
 
                 try {

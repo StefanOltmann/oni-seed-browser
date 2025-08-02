@@ -118,16 +118,6 @@ object DefaultWebClient : WebClient {
         return clusters.map { it.coordinate }
     }
 
-    override suspend fun findTopRatedClusters(): List<RatedCluster> {
-
-        val response = httpClient.get("$BASE_API_URL/top")
-
-        if (!response.status.isSuccess())
-            error("Requesting latest clusters failed with HTTP ${response.status}: ${response.bodyAsText()}")
-
-        return response.body()
-    }
-
     override suspend fun find(coordinate: String): Cluster? {
 
         println("Find: $coordinate")
