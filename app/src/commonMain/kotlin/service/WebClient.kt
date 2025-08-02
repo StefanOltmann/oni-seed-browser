@@ -21,7 +21,6 @@ package service
 
 import model.Cluster
 import model.Contributor
-import model.RatedCluster
 import model.filter.FilterQuery
 
 interface WebClient {

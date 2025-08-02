@@ -48,7 +48,7 @@ import model.filter.FilterQuery
 const val BASE_API_URL = "https://ingest.mapsnotincluded.org"
 const val FIND_URL = "$BASE_API_URL/coordinate"
 const val REQUEST_URL = "$BASE_API_URL/request-coordinate"
-const val SEARCH_URL = "$BASE_API_URL/search"
+const val SEARCH_URL = "$BASE_API_URL/search/v2"
 const val COUNT_URL = "$BASE_API_URL/count"
 
 private val strictAllFieldsJson = Json {
@@ -182,17 +182,12 @@ object DefaultWebClient : WebClient {
             header(HttpHeaders.AcceptEncoding, "gzip")
 
             setBody(filterQuery)
-
         }
 
         if (!response.status.isSuccess())
             error("Search returned status code ${response.status}: ${response.bodyAsText()}")
 
-        // TODO Change to List<String> endpoint
-
-        val clusters: List<Cluster> = response.body()
-
-        return clusters.map { it.coordinate }
+        return response.body()
     }
 
     override suspend fun getUsername(): String? {
