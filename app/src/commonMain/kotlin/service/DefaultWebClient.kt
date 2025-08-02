@@ -123,7 +123,11 @@ object DefaultWebClient : WebClient {
         if (response.status != HttpStatusCode.OK)
             return null
 
-        return response.body()
+        val cluster: Cluster? = response.body()
+
+        clusterCache.put(coordinate, cluster)
+
+        return cluster
     }
 
     override suspend fun request(coordinate: String): Boolean {

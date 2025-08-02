@@ -100,7 +100,7 @@ fun ClusterViewList(
                         Box(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .height(1000.dp)
+                                .height(100.dp)
                         )
 
                     } else {
