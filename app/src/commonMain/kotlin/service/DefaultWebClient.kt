@@ -96,21 +96,15 @@ object DefaultWebClient : WebClient {
 
     override suspend fun findLatestClusters(): List<String> {
 
-        val response = httpClient.get("$BASE_API_URL/latest")
+        val response = httpClient.get("$BASE_API_URL/latest/v2")
 
         if (!response.status.isSuccess())
             error("Requesting latest clusters failed with HTTP ${response.status}: ${response.bodyAsText()}")
 
-        // TODO Change to coordinate endpoint
-
-        val clusters: List<Cluster> = response.body()
-
-        return clusters.map { it.coordinate }
+        return response.body()
     }
 
     override suspend fun find(coordinate: String): Cluster? {
-
-        println("Find: $coordinate")
 
         val response = httpClient.get("$FIND_URL/$coordinate") {
             contentType(ContentType.Application.Json)
@@ -138,7 +132,7 @@ object DefaultWebClient : WebClient {
 
     override suspend fun findFavoredCoordinates(): List<String> {
 
-        val response = httpClient.get("$BASE_API_URL/favored-coordinates")
+        val response = httpClient.get("$BASE_API_URL/favored")
 
         if (!response.status.isSuccess())
             error("Requesting favored coordinates failed with HTTP ${response.status}: ${response.bodyAsText()}")

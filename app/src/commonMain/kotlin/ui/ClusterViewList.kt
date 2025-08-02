@@ -38,6 +38,7 @@ import androidx.compose.runtime.produceState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import kotlin.coroutines.cancellation.CancellationException
 import model.Asteroid
 import model.Cluster
 import service.DefaultWebClient
@@ -71,7 +72,20 @@ fun ClusterViewList(
 
                 val clusterState = produceState<Cluster?>(initialValue = null) {
 
-                    value = DefaultWebClient.find(coordinate)
+                    try {
+
+                        value = DefaultWebClient.find(coordinate)
+
+                    } catch (ignore: CancellationException) {
+
+                        /* User scrolled fast. That's fine. */
+
+                    } catch (ex: Throwable) {
+
+                        /* We MUST catch Throwable here to prevent UI freezes. */
+
+                        ex.printStackTrace()
+                    }
                 }
 
                 val cluster = clusterState.value
@@ -79,14 +93,10 @@ fun ClusterViewList(
                 if (cluster == null) {
 
                     Box(
-                        contentAlignment = Alignment.Center,
                         modifier = Modifier
                             .fillMaxWidth()
-                            .height(200.dp)
-                    ) {
-
-                        Text("Loading $coordinate ...")
-                    }
+                            .height(1248.dp)
+                    )
 
                 } else {
 
