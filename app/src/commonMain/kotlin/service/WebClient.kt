@@ -28,25 +28,23 @@ interface WebClient {
 
     suspend fun countSeeds(): Long?
 
-    suspend fun findLatestClusters(): List<Cluster>
+    suspend fun findLatestClusters(): List<String>
 
     suspend fun findTopRatedClusters(): List<RatedCluster>
 
     suspend fun find(coordinate: String): Cluster?
 
     /*
-     * Requests a coordinate and returns if request was valid.
-     * Can be invalid if coordinate has wrong syntax.
+     * Requests a coordinate and returns if the request was valid.
+     * Can be invalid if coordinate has the wrong syntax.
      */
     suspend fun request(coordinate: String): Boolean
-
-    suspend fun findFavoredClusters(): List<Cluster>
 
     suspend fun findFavoredCoordinates(): List<String>
 
     suspend fun rate(coordinate: String, like: Boolean): Boolean
 
-    suspend fun search(filterQuery: FilterQuery): List<Cluster>
+    suspend fun search(filterQuery: FilterQuery): List<String>
 
     suspend fun getUsername(): String?
 

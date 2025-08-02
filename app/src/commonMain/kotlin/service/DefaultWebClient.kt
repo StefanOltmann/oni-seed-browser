@@ -104,14 +104,18 @@ object DefaultWebClient : WebClient {
         return response.body()
     }
 
-    override suspend fun findLatestClusters(): List<Cluster> {
+    override suspend fun findLatestClusters(): List<String> {
 
         val response = httpClient.get("$BASE_API_URL/latest")
 
         if (!response.status.isSuccess())
             error("Requesting latest clusters failed with HTTP ${response.status}: ${response.bodyAsText()}")
 
-        return response.body()
+        // TODO Change to coordinate endpoint
+
+        val clusters: List<Cluster> = response.body()
+
+        return clusters.map { it.coordinate }
     }
 
     override suspend fun findTopRatedClusters(): List<RatedCluster> {
@@ -152,16 +156,6 @@ object DefaultWebClient : WebClient {
         return response.status.isSuccess()
     }
 
-    override suspend fun findFavoredClusters(): List<Cluster> {
-
-        val response = httpClient.get("$BASE_API_URL/favored-clusters")
-
-        if (!response.status.isSuccess())
-            error("Requesting favored clusters failed with HTTP ${response.status}: ${response.bodyAsText()}")
-
-        return response.body()
-    }
-
     override suspend fun findFavoredCoordinates(): List<String> {
 
         val response = httpClient.get("$BASE_API_URL/favored-coordinates")
@@ -194,7 +188,7 @@ object DefaultWebClient : WebClient {
         return success
     }
 
-    override suspend fun search(filterQuery: FilterQuery): List<Cluster> {
+    override suspend fun search(filterQuery: FilterQuery): List<String> {
 
         val response = httpClient.post(SEARCH_URL) {
 
@@ -214,7 +208,11 @@ object DefaultWebClient : WebClient {
         if (!response.status.isSuccess())
             error("Search returned status code ${response.status}: ${response.bodyAsText()}")
 
-        return response.body()
+        // TODO Change to List<String> endpoint
+
+        val clusters: List<Cluster> = response.body()
+
+        return clusters.map { it.coordinate }
     }
 
     override suspend fun getUsername(): String? {
