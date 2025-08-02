@@ -2,7 +2,6 @@ package ui
 
 import AppStorage
 import START_WITH_LATEST_MAPS
-import START_WITH_TOP_RATED_MAPS
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement

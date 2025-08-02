@@ -37,15 +37,12 @@ import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.contentType
 import io.ktor.http.isSuccess
-import io.ktor.serialization.kotlinx.cbor.cbor
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.ExperimentalSerializationApi
-import kotlinx.serialization.cbor.Cbor
 import kotlinx.serialization.json.Json
 import model.Cluster
 import model.Contributor
 import model.RateCoordinateRequest
-import model.RatedCluster
 import model.filter.FilterQuery
 
 const val BASE_API_URL = "https://ingest.mapsnotincluded.org"
@@ -55,12 +52,6 @@ const val SEARCH_URL = "$BASE_API_URL/search"
 const val COUNT_URL = "$BASE_API_URL/count"
 
 private val strictAllFieldsJson = Json {
-    ignoreUnknownKeys = false
-    encodeDefaults = true
-}
-
-@OptIn(ExperimentalSerializationApi::class)
-private val strictAllFieldsCbor = Cbor {
     ignoreUnknownKeys = false
     encodeDefaults = true
 }
@@ -86,7 +77,6 @@ object DefaultWebClient : WebClient {
 
         install(ContentNegotiation) {
             json(strictAllFieldsJson)
-            cbor(strictAllFieldsCbor)
         }
 
         install(ContentEncoding) {
@@ -123,8 +113,8 @@ object DefaultWebClient : WebClient {
         println("Find: $coordinate")
 
         val response = httpClient.get("$FIND_URL/$coordinate") {
-            contentType(ContentType.Application.Cbor)
-            accept(ContentType.Application.Cbor)
+            contentType(ContentType.Application.Json)
+            accept(ContentType.Application.Json)
             header(HttpHeaders.AcceptEncoding, "gzip")
         }
 
@@ -185,8 +175,8 @@ object DefaultWebClient : WebClient {
             /* Filter MUST be sent as JSON, because CBOR causes issues here. */
             contentType(ContentType.Application.Json)
 
-            /* Response can be in CBOR */
-            accept(ContentType.Application.Cbor)
+            /* Response can be in JSON */
+            accept(ContentType.Application.Json)
 
             /* Always zip */
             header(HttpHeaders.AcceptEncoding, "gzip")
