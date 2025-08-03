@@ -45,6 +45,12 @@ import ui.theme.HalfSpacer
 import ui.theme.halfPadding
 import ui.theme.minimalRoundedCornerShape
 
+private const val LOGIN_BASE_URL: String =
+    "https://hvmxaeh5fhkkovjoaishzqzp6q0ghxko.lambda-url.eu-west-1.on.aws/login?redirect="
+
+private const val PUBLIC_LOGIN_URL: String =
+    LOGIN_BASE_URL + "https://mapsnotincluded.github.io/oni-seed-browser/"
+
 @Composable
 fun LoginWithSteamButton(
     connected: Boolean,
@@ -72,9 +78,9 @@ fun LoginWithSteamButton(
                     return@noRippleClickable
 
                 if (localPort == null)
-                    uriHandler.openUri("https://ingest.mapsnotincluded.org/connect/0")
+                    uriHandler.openUri(PUBLIC_LOGIN_URL)
                 else
-                    uriHandler.openUri("https://ingest.mapsnotincluded.org/connect/$localPort")
+                    uriHandler.openUri(LOGIN_BASE_URL + "http://localhost:$localPort")
             }
     ) {
 
