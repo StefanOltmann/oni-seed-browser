@@ -3,6 +3,7 @@ package util
 import com.appstractive.jwt.JWT
 import com.appstractive.jwt.from
 import com.appstractive.jwt.signatures.rs256
+import com.appstractive.jwt.subject
 import com.appstractive.jwt.verify
 
 private val JWT_PUBLIC_KEY =
@@ -25,13 +26,11 @@ suspend fun isTokenValid(token: String): Boolean {
 
         val jwt: JWT = JWT.from(token)
 
-        val steamId = jwt.claims["steamId"]
+        val steamId = jwt.subject ?: jwt.claims["steamId"]
 
         val verified = jwt.verify {
 
             rs256 { pem(JWT_PUBLIC_KEY) }
-
-            issuer("mapsnotincluded")
         }
 
         if (verified)
