@@ -46,7 +46,7 @@ import ui.theme.halfPadding
 import ui.theme.minimalRoundedCornerShape
 
 private const val LOGIN_BASE_URL: String =
-    "https://hvmxaeh5fhkkovjoaishzqzp6q0ghxko.lambda-url.eu-west-1.on.aws/login?redirect="
+    "https://steam.stefanoltmann.workers.dev/login?redirect="
 
 private const val PUBLIC_LOGIN_URL: String =
     LOGIN_BASE_URL + "https://mapsnotincluded.github.io/oni-seed-browser/"
