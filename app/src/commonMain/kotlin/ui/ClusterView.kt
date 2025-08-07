@@ -267,7 +267,7 @@ fun ClusterView(
                 )
             }
 
-            if (cluster.uploaderAuthenticated == true) {
+            if (cluster.uploaderAuthenticated != null && cluster.uploaderAuthenticated) {
 
                 VerticalDivider(
                     thickness = 1.dp,
