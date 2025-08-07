@@ -46,69 +46,69 @@
     addEventListener("error", (event) => unhandledError(event, event.error));
     addEventListener("unhandledrejection", (event) => unhandledError(event, event.reason));
 
-    // /*
-    //  * Register service worker for offline functionality
-    //  */
-    //
-    // if ('serviceWorker' in navigator) {
-    //
-    //     window.addEventListener('load', () => {
-    //
-    //         /*
-    //          * Check if we're in development mode by looking for webpack dev server
-    //          */
-    //         const isDevelopment = window.location.hostname === 'localhost' ||
-    //             window.location.hostname === '127.0.0.1' ||
-    //             window.location.port !== '';
-    //
-    //         if (isDevelopment) {
-    //
-    //             /*
-    //              * In development mode, unregister any existing service workers to prevent infinite loops
-    //              */
-    //
-    //             console.log('Development mode detected, not registering service worker');
-    //
-    //             navigator.serviceWorker.getRegistrations().then(registrations => {
-    //                 for (let registration of registrations) {
-    //                     registration.unregister();
-    //                     console.log('Unregistered service worker in development mode');
-    //                 }
-    //             });
-    //
-    //         } else {
-    //
-    //             /*
-    //              * Only register service worker in production mode
-    //              */
-    //
-    //             navigator.serviceWorker.register('./service-worker.js', {updateViaCache: 'none'})
-    //                 .then(registration => {
-    //
-    //                     console.log('Service Worker registered with scope:', registration.scope);
-    //
-    //                     /*
-    //                      * Check for updates on page load
-    //                      */
-    //                     registration.update();
-    //
-    //                     /*
-    //                      * Don't let the service worker control the page on first load
-    //                      * This prevents refresh loops in production mode
-    //                      */
-    //                     if (registration.active) {
-    //
-    //                         if (!navigator.serviceWorker.controller) {
-    //                             console.log('Service worker is active but not controlling the page');
-    //                         }
-    //                     }
-    //                 })
-    //                 .catch(error => {
-    //                     console.error('Service Worker registration failed:', error);
-    //                 });
-    //         }
-    //     });
-    // }
+    /*
+     * Register service worker for offline functionality
+     */
+
+    if ('serviceWorker' in navigator) {
+
+        window.addEventListener('load', () => {
+
+            /*
+             * Check if we're in development mode by looking for webpack dev server
+             */
+            const isDevelopment = window.location.hostname === 'localhost' ||
+                window.location.hostname === '127.0.0.1' ||
+                window.location.port !== '';
+
+            if (isDevelopment) {
+
+                /*
+                 * In development mode, unregister any existing service workers to prevent infinite loops
+                 */
+
+                console.log('Development mode detected, not registering service worker');
+
+                navigator.serviceWorker.getRegistrations().then(registrations => {
+                    for (let registration of registrations) {
+                        registration.unregister();
+                        console.log('Unregistered service worker in development mode');
+                    }
+                });
+
+            } else {
+
+                /*
+                 * Only register service worker in production mode
+                 */
+
+                navigator.serviceWorker.register('./service-worker.js', {updateViaCache: 'none'})
+                    .then(registration => {
+
+                        console.log('Service Worker registered with scope:', registration.scope);
+
+                        /*
+                         * Check for updates on page load
+                         */
+                        registration.update();
+
+                        /*
+                         * Don't let the service worker control the page on first load
+                         * This prevents refresh loops in production mode
+                         */
+                        if (registration.active) {
+
+                            if (!navigator.serviceWorker.controller) {
+                                console.log('Service worker is active but not controlling the page');
+                            }
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Service Worker registration failed:', error);
+                    });
+            }
+        });
+    }
 
 </script>
 
