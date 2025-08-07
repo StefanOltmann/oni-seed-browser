@@ -58,6 +58,7 @@ import model.Asteroid
 import model.Cluster
 import org.jetbrains.compose.resources.stringResource
 import ui.icons.ContentCopy
+import ui.icons.IconAuthenticated
 import ui.icons.IconExternalLink
 import ui.theme.DefaultSpacer
 import ui.theme.FillSpacer
@@ -263,6 +264,24 @@ fun ClusterView(
                     style = MaterialTheme.typography.bodyMedium,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onBackground
+                )
+            }
+
+            if (cluster.uploaderAuthenticated == true) {
+
+                VerticalDivider(
+                    thickness = 1.dp,
+                    color = MaterialTheme.colorScheme.onBackground,
+                    modifier = Modifier
+                        .height(doubleSpacing)
+                        .padding(horizontal = defaultSpacing)
+                )
+
+                Icon(
+                    imageVector = IconAuthenticated,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.onBackground,
+                    modifier = Modifier.size(16.dp)
                 )
             }
         }
