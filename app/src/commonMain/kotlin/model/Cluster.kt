@@ -31,6 +31,9 @@ data class Cluster(
     /* Can be NULL if uploaded from EPIC */
     val uploaderSteamIdHash: String? = null,
 
+    /* Can be NULL for old data */
+    val uploaderAuthenticated: Boolean? = null,
+
     val uploadDate: Long? = null,
 
     val gameVersion: Int,
