@@ -57,7 +57,6 @@ import io.github.stefanoltmann.app.generated.resources.uiTitle
 import io.github.stefanoltmann.app.generated.resources.uiUsernameLabel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
-import kotlinx.serialization.json.Json
 import model.Asteroid
 import model.Cluster
 import model.Contributor
@@ -65,7 +64,6 @@ import model.filter.FilterQuery
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import service.DefaultWebClient
-import service.sampleWorldsJson
 import ui.filter.FilterPanel
 import ui.icons.IconKofi
 import ui.icons.IconLeaderboardFilled

@@ -87,7 +87,7 @@ kotlin {
 
             /* Cryptography (JWT) */
             implementation("com.appstractive:jwt-kt:1.1.0")
-            implementation("com.appstractive:jwt-rsa-kt:1.1.0")
+            implementation("com.appstractive:jwt-ecdsa-kt:1.1.0")
         }
 
         commonTest.dependencies {
