@@ -109,16 +109,11 @@ fun ClusterView(
 
         HalfSpacer()
 
-        val asteroid = showAsteroidMap.value
-
-        if (asteroid == null) {
-
-            AsteroidsGrid(
-                cluster,
-                useCompactLayout,
-                showAsteroidMap
-            )
-        }
+        AsteroidsGrid(
+            cluster,
+            useCompactLayout,
+            showAsteroidMap
+        )
 
         val clipboardManager = LocalClipboardManager.current
 

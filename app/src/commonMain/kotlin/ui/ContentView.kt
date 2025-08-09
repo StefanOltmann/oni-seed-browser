@@ -15,8 +15,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyListState
-import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -38,9 +36,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onSizeChanged
+import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.font.FontWeight
@@ -164,8 +165,6 @@ fun ContentView(
             mutableStateOf(AppStorage.loadFilter())
         }
 
-        val lazyListState = rememberLazyListState()
-
         val showStarMap = remember { mutableStateOf<Cluster?>(null) }
 
         val showAsteroidMap = remember { mutableStateOf<Pair<Cluster, Asteroid>?>(null) }
@@ -242,57 +241,6 @@ fun ContentView(
                 /* Reset */
                 likeCounts.value = null
             }
-        }
-
-        val worldForStarMapView = showStarMap.value
-
-        if (worldForStarMapView != null) {
-
-            if (worldForStarMapView.starMapEntriesSpacedOut != null) {
-
-                SpacedOutStarMapView(
-                    cluster = worldForStarMapView,
-                    favoriteCoordinates = favoredCoordinates,
-                    onCloseClicked = { showStarMap.value = null },
-                    writeToClipboard = writeToClipboard
-                )
-
-            } else {
-
-                BaseGameStarMapView(
-                    cluster = worldForStarMapView,
-                    favoriteCoordinates = favoredCoordinates,
-                    onCloseClicked = { showStarMap.value = null },
-                    writeToClipboard = writeToClipboard
-                )
-            }
-
-            return
-        }
-
-        val asteroidForMapView = showAsteroidMap.value
-
-        if (asteroidForMapView != null) {
-
-            Column {
-
-                Box(
-                    modifier = Modifier.weight(1F)
-                ) {
-
-                    AsteroidMapPopup(
-                        asteroid = asteroidForMapView.second,
-                        onCloseClicked = { showAsteroidMap.value = null }
-                    )
-                }
-
-                AlternativeMapViewerLinkBox(
-                    coordinate = asteroidForMapView.first.coordinate,
-                    asteroidType = asteroidForMapView.second.id
-                )
-            }
-
-            return
         }
 
         Box {
@@ -546,8 +494,6 @@ fun ContentView(
                 } else if (showFavorites.value) {
 
                     FavoritesPanel(
-                        errorMessage,
-                        lazyListState,
                         useCompactLayout,
                         favoredCoordinates,
                         showStarMap,
@@ -570,7 +516,6 @@ fun ContentView(
                         coroutineScope,
                         urlHash,
                         connected,
-                        lazyListState,
                         useCompactLayout,
                         favoredCoordinates,
                         showStarMap,
@@ -581,14 +526,66 @@ fun ContentView(
                     )
                 }
             }
+
+            Box(
+                Modifier.background(Color.Black)
+            ) {
+
+                val worldForStarMapView = showStarMap.value
+
+                if (worldForStarMapView != null) {
+
+                    if (worldForStarMapView.starMapEntriesSpacedOut != null) {
+
+                        SpacedOutStarMapView(
+                            cluster = worldForStarMapView,
+                            favoriteCoordinates = favoredCoordinates,
+                            onCloseClicked = { showStarMap.value = null },
+                            writeToClipboard = writeToClipboard
+                        )
+
+                    } else {
+
+                        BaseGameStarMapView(
+                            cluster = worldForStarMapView,
+                            favoriteCoordinates = favoredCoordinates,
+                            onCloseClicked = { showStarMap.value = null },
+                            writeToClipboard = writeToClipboard
+                        )
+                    }
+
+                } else {
+
+                    val asteroidForMapView = showAsteroidMap.value
+
+                    if (asteroidForMapView != null) {
+
+                        Column {
+
+                            Box(
+                                modifier = Modifier.weight(1F)
+                            ) {
+
+                                AsteroidMapPopup(
+                                    asteroid = asteroidForMapView.second,
+                                    onCloseClicked = { showAsteroidMap.value = null }
+                                )
+                            }
+
+                            AlternativeMapViewerLinkBox(
+                                coordinate = asteroidForMapView.first.coordinate,
+                                asteroidType = asteroidForMapView.second.id
+                            )
+                        }
+                    }
+                }
+            }
         }
     }
 }
 
 @Composable
 private fun ColumnScope.FavoritesPanel(
-    errorMessage: MutableState<String?>,
-    lazyListState: LazyListState,
     useCompactLayout: MutableState<Boolean>,
     favoredCoordinates: MutableState<List<String>>,
     showStarMap: MutableState<Cluster?>,
@@ -607,7 +604,6 @@ private fun ColumnScope.FavoritesPanel(
         if (favoredCoordinates.value.isNotEmpty()) {
 
             ClusterViewList(
-                lazyListState = lazyListState,
                 clusters = favoredCoordinates.value,
                 useCompactLayout = useCompactLayout.value,
                 favoriteCoordinates = favoredCoordinates,
@@ -644,7 +640,6 @@ private fun ColumnScope.MainPanel(
     coroutineScope: CoroutineScope,
     urlHash: State<String?>,
     connected: Boolean,
-    lazyListState: LazyListState,
     useCompactLayout: MutableState<Boolean>,
     favoredCoordinates: MutableState<List<String>>,
     showStarMap: MutableState<Cluster?>,
@@ -764,7 +759,6 @@ private fun ColumnScope.MainPanel(
         ) {
 
             ClusterViewList(
-                lazyListState = lazyListState,
                 clusters = clusters.value,
                 useCompactLayout = useCompactLayout.value,
                 favoriteCoordinates = favoredCoordinates,
