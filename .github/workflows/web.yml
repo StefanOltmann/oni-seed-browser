@@ -13,30 +13,45 @@ jobs:
     name: Build Kotlin/Wasm
     runs-on: ubuntu-latest
     steps:
+
       - name: Set up JDK
         uses: actions/setup-java@v2
         with:
           distribution: 'temurin'
           java-version: '17'
+
       - name: Checkout code
         uses: actions/checkout@v3
+
       - name: List all files
         run: find .
+
       - name: Run Gradle build
         run: |
           chmod +x gradlew
           ./gradlew build allTests wasmJsBrowserDistribution
+
       - name: Fix permissions
         run: |
           chmod -v -R +rX "app/build/dist/wasmJs/productionExecutable/" | while read line; do
             echo "::warning title=Invalid file permissions automatically fixed::$line"
           done
+
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: app/build/dist/wasmJs/productionExecutable/
+
+      # Deploy to Cloudflare Pages
+      - name: Publish to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy app/build/dist/wasmJs/productionExecutable --project-name=oni-seed-browser
   
-  deploy:
+  deploy_gh_pages:
+    name: Deploy to GitHub Pages
     needs: build
     permissions:
       pages: write
