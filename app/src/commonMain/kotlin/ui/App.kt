@@ -29,7 +29,7 @@ import androidx.compose.ui.unit.dp
 import ui.theme.AppTypography
 import ui.theme.appColorScheme
 
-const val ORIGINAL_URL = "https://stefan-oltmann.de/oni-seed-browser/#"
+const val ORIGINAL_URL = "https://oni-seed-browser.stefanoltmann.de/#"
 const val MNI_URL = "https://mapsnotincluded.org/map-explorer/"
 
 val logoIconHeight = 80.dp
