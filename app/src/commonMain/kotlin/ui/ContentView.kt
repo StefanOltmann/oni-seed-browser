@@ -341,7 +341,7 @@ fun ContentView(
                     /*
                      * Only show the login button in the standalone version.
                      */
-                    if (connectedUserId != null || (connectedUserId == null && !isMniEmbedded))
+                    if (connectedUserId != null || !isMniEmbedded)
                         LoginWithSteamButton(
                             connectedUserId = connectedUserId,
                             localPort = localPort
