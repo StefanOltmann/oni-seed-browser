@@ -244,8 +244,6 @@ fun ClusterView(
 
             val uploadDate = cluster.uploadDate
 
-            if (uploadDate != null) {
-
                 VerticalDivider(
                     thickness = 1.dp,
                     color = MaterialTheme.colorScheme.onBackground,
@@ -260,9 +258,8 @@ fun ClusterView(
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onBackground
                 )
-            }
 
-            if (cluster.uploaderAuthenticated != null && cluster.uploaderAuthenticated) {
+            if (cluster.uploaderAuthenticated) {
 
                 VerticalDivider(
                     thickness = 1.dp,

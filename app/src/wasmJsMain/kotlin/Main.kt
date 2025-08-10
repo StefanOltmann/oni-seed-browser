@@ -51,7 +51,7 @@ fun main() {
                 else
                     null
 
-            if (validSteamHashParameter != null) {
+            if (!tokenParameter.isNullOrBlank() && validSteamHashParameter != null) {
 
                 /* The token was checked and can be saved to storage. */
                 AppStorage.setToken(tokenParameter)
