@@ -51,6 +51,8 @@ const val COUNT_URL = "$BASE_API_URL/count"
 
 const val USERNAME_REGISTRY_URL = "https://steam.name.stefanoltmann.de/registry"
 
+const val TOKEN_HEADER = "token"
+
 private val strictAllFieldsJson = Json {
     ignoreUnknownKeys = false
     encodeDefaults = true
@@ -102,16 +104,11 @@ object DefaultWebClient : WebClient {
 
         val response = httpClient.get("$FIND_URL/$coordinate") {
 
-            /* For CORS */
-            header(HttpHeaders.AccessControlAllowOrigin, "*")
-            header(HttpHeaders.AcceptEncoding, "gzip")
-
             /* Auth */
             AppStorage.getToken()?.let { token ->
-                header("token", token)
+                header(TOKEN_HEADER, token)
             }
 
-            contentType(ContentType.Application.Json)
             accept(ContentType.Application.Json)
         }
 
@@ -131,12 +128,9 @@ object DefaultWebClient : WebClient {
 
         val response = httpClient.post(REQUEST_URL) {
 
-            /* For CORS */
-            header(HttpHeaders.AccessControlAllowOrigin, "*")
-
             /* Auth */
             AppStorage.getToken()?.let { token ->
-                header("token", token)
+                header(TOKEN_HEADER, token)
             }
 
             contentType(ContentType.Text.Plain)
@@ -150,12 +144,9 @@ object DefaultWebClient : WebClient {
 
         val response = httpClient.get("$BASE_API_URL/favored") {
 
-            /* For CORS */
-            header(HttpHeaders.AccessControlAllowOrigin, "*")
-
             /* Auth */
             AppStorage.getToken()?.let { token ->
-                header("token", token)
+                header(TOKEN_HEADER, token)
             }
         }
 
@@ -171,12 +162,9 @@ object DefaultWebClient : WebClient {
 
         val response = httpClient.post("$BASE_API_URL/rate-coordinate") {
 
-            /* For CORS */
-            header(HttpHeaders.AccessControlAllowOrigin, "*")
-
             /* Auth */
             AppStorage.getToken()?.let { token ->
-                header("token", token)
+                header(TOKEN_HEADER, token)
             }
 
             contentType(ContentType.Application.Json)
@@ -199,12 +187,6 @@ object DefaultWebClient : WebClient {
     override suspend fun search(filterQuery: FilterQuery): List<String> {
 
         val response = httpClient.post(SEARCH_URL) {
-
-            /* For CORS */
-            header(HttpHeaders.AccessControlAllowOrigin, "*")
-
-            /* Always zip */
-            header(HttpHeaders.AcceptEncoding, "gzip")
 
             contentType(ContentType.Application.Json)
             accept(ContentType.Application.Json)
@@ -235,9 +217,6 @@ object DefaultWebClient : WebClient {
 
         val response = httpClient.post(USERNAME_REGISTRY_URL) {
 
-            /* For CORS */
-            header(HttpHeaders.AccessControlAllowOrigin, "*")
-
             contentType(ContentType.Text.Plain)
             setBody(username.ifBlank { "" })
         }
@@ -257,9 +236,6 @@ object DefaultWebClient : WebClient {
         println("WebClient: findContributors()")
 
         val response = httpClient.get("$BASE_API_URL/contributors") {
-
-            /* For CORS */
-            header(HttpHeaders.AccessControlAllowOrigin, "*")
             accept(ContentType.Application.Json)
         }
 
