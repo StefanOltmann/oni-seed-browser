@@ -201,11 +201,7 @@ object DefaultWebClient : WebClient {
 
     override suspend fun getUsernameMap(): Map<String, String> {
 
-        val response = httpClient.get(USERNAME_REGISTRY_URL) {
-
-            contentType(ContentType.Application.Json)
-            accept(ContentType.Application.Json)
-        }
+        val response = httpClient.get(USERNAME_REGISTRY_URL)
 
         if (!response.status.isSuccess())
             error("Username registry returned status ${response.status}: ${response.bodyAsText()}")
@@ -216,6 +212,11 @@ object DefaultWebClient : WebClient {
     override suspend fun setUsername(username: String): Boolean {
 
         val response = httpClient.post(USERNAME_REGISTRY_URL) {
+
+            /* Auth */
+            AppStorage.getToken()?.let { token ->
+                header(TOKEN_HEADER, token)
+            }
 
             contentType(ContentType.Text.Plain)
             setBody(username.ifBlank { "" })
