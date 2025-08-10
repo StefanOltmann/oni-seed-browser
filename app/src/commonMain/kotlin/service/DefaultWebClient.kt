@@ -221,9 +221,6 @@ object DefaultWebClient : WebClient {
 
         val response = httpClient.get(USERNAME_REGISTRY_URL) {
 
-            /* For CORS */
-            header(HttpHeaders.AccessControlAllowOrigin, "*")
-
             contentType(ContentType.Application.Json)
             accept(ContentType.Application.Json)
         }
