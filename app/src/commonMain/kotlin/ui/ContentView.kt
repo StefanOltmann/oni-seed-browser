@@ -57,7 +57,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import model.Asteroid
 import model.Cluster
-import model.Contributor
 import model.filter.FilterQuery
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
