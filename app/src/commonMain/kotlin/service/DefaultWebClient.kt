@@ -51,6 +51,8 @@ const val REQUEST_URL = "$BASE_API_URL/request-coordinate"
 const val SEARCH_URL = "$BASE_API_URL/search/v2"
 const val COUNT_URL = "$BASE_API_URL/count"
 
+const val USERNAME_REGISTRY_URL = "https://steam.name.stefanoltmann.de/registry"
+
 private val strictAllFieldsJson = Json {
     ignoreUnknownKeys = false
     encodeDefaults = true
@@ -196,27 +198,35 @@ object DefaultWebClient : WebClient {
         return response.body()
     }
 
-    override suspend fun getUsername(): String? {
+    override suspend fun getUsernameMap(): Map<String, String> {
 
-        val response = httpClient.get("$BASE_API_URL/username")
+        val response = httpClient.get(USERNAME_REGISTRY_URL) {
+            contentType(ContentType.Application.Json)
+            /* Not a real secret, just to stop bots. */
+            header("x-api-key", "AXm5h4d7JfUIzrd")
+        }
 
-        if (response.status != HttpStatusCode.OK)
-            return null
+        if (!response.status.isSuccess())
+            error("Username registry returned status ${response.status}: ${response.bodyAsText()}")
 
-        return response.bodyAsText()
+        return response.body()
     }
 
     override suspend fun setUsername(username: String): Boolean {
 
-        val response = httpClient.post("$BASE_API_URL/username") {
-            contentType(ContentType.Application.Json)
-            setBody(username)
+        val response = httpClient.post(USERNAME_REGISTRY_URL) {
+            contentType(ContentType.Text.Plain)
+            /* Not a real secret, just to stop bots. */
+            header("x-api-key", "AXm5h4d7JfUIzrd")
+            setBody(username.ifBlank { "" })
         }
 
         val success = response.status.isSuccess()
 
         if (!success)
             println("Request failed with HTTP ${response.status}: ${response.bodyAsText()}")
+        else
+            println("Username set to $username")
 
         return success
     }

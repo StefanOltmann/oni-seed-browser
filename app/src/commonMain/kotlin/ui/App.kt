@@ -38,7 +38,7 @@ val logoIconHeight = 80.dp
 fun App(
     urlHash: State<String?>,
     isMniEmbedded: Boolean,
-    connected: Boolean,
+    connectedUserId: String?,
     localPort: Int?,
     /**
      * Note: LocalClipboardManager does not work for Compose for Web
@@ -61,7 +61,7 @@ fun App(
                 ContentView(
                     urlHash,
                     isMniEmbedded,
-                    connected,
+                    connectedUserId,
                     localPort,
                     writeToClipboard
                 )

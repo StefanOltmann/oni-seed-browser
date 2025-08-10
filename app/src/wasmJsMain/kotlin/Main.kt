@@ -28,7 +28,7 @@ import kotlinx.browser.window
 import org.w3c.dom.HTMLElement
 import ui.App
 import util.getQueryParameters
-import util.isTokenValid
+import util.getValidSteamHash
 
 @OptIn(ExperimentalComposeUiApi::class)
 fun main() {
@@ -39,19 +39,25 @@ fun main() {
 
         val isMniEmbedded = remember { params["embedded"] == "mni" }
 
-        val connected = remember { mutableStateOf(false) }
+        val connectedUserId = remember { mutableStateOf<String?>(null) }
 
         LaunchedEffect(true) {
 
             val tokenParameter = params["token"]
 
-            if (!tokenParameter.isNullOrBlank() && isTokenValid(tokenParameter)) {
+            val validSteamHashParameter: String? =
+                if (!tokenParameter.isNullOrBlank())
+                    getValidSteamHash(tokenParameter)
+                else
+                    null
+
+            if (validSteamHashParameter != null) {
 
                 /* The token was checked and can be saved to storage. */
                 AppStorage.setToken(tokenParameter)
 
                 /* Update the UI */
-                connected.value = true
+                connectedUserId.value = validSteamHashParameter
 
             } else {
 
@@ -61,11 +67,13 @@ fun main() {
 
                 if (!storedToken.isNullOrBlank()) {
 
+                    val validSteamHash = getValidSteamHash(storedToken)
+
                     /*
                      * Set it to the UI if valid or remove it from store.
                      */
-                    if (isTokenValid(storedToken))
-                        connected.value = true
+                    if (validSteamHash != null)
+                        connectedUserId.value = validSteamHash
                     else
                         AppStorage.clearToken()
                 }
@@ -94,7 +102,7 @@ fun main() {
         App(
             urlHash = urlHash,
             isMniEmbedded = isMniEmbedded,
-            connected = connected.value,
+            connectedUserId = connectedUserId.value,
             localPort = null,
             writeToClipboard = {
                 window.navigator.clipboard.writeText(it)

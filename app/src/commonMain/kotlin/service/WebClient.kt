@@ -43,7 +43,7 @@ interface WebClient {
 
     suspend fun search(filterQuery: FilterQuery): List<String>
 
-    suspend fun getUsername(): String?
+    suspend fun getUsernameMap(): Map<String, String>
 
     suspend fun setUsername(username: String): Boolean
 

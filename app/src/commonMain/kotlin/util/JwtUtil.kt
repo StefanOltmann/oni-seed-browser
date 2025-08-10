@@ -5,6 +5,8 @@ import com.appstractive.jwt.from
 import com.appstractive.jwt.signatures.es256
 import com.appstractive.jwt.subject
 import com.appstractive.jwt.verify
+import kotlinx.serialization.json.contentOrNull
+import kotlinx.serialization.json.jsonPrimitive
 
 private val JWT_PUBLIC_KEY =
     """
@@ -13,7 +15,7 @@ private val JWT_PUBLIC_KEY =
         -----END PUBLIC KEY-----
     """.trimIndent()
 
-suspend fun isTokenValid(token: String): Boolean {
+suspend fun getValidSteamHash(token: String): String? {
 
     try {
 
@@ -31,12 +33,24 @@ suspend fun isTokenValid(token: String): Boolean {
         else
             println("Steam ID unverified due to invalid JWT.")
 
-        return verified
+        if (!verified)
+            return null
+
+        val hash = jwt.claims["hash"]?.jsonPrimitive?.contentOrNull
+
+        if (hash == null) {
+
+            println("Token valid, but old. User needs a new token. Hash is null: $jwt")
+
+            return null
+        }
+
+        return hash
 
     } catch (ex: Exception) {
 
         ex.printStackTrace()
 
-        return false
+        return null
     }
 }

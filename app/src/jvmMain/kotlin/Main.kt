@@ -41,7 +41,7 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import ui.App
 import util.getQueryParameters
-import util.isTokenValid
+import util.getValidSteamHash
 
 private var currentServer: HttpServer? = null
 
@@ -58,7 +58,7 @@ fun main() = application {
 
         val clipboardManager = LocalClipboardManager.current
 
-        val connected = remember { mutableStateOf(false) }
+        val connectedUserId = remember { mutableStateOf<String?>(null) }
 
         val localPort = remember { mutableStateOf<Int?>(null) }
 
@@ -71,11 +71,13 @@ fun main() = application {
 
             if (!storedToken.isNullOrBlank()) {
 
+                val validSteamHash = getValidSteamHash(storedToken)
+
                 /*
                  * Set it to the UI if valid or remove it from store.
                  */
-                if (isTokenValid(storedToken))
-                    connected.value = true
+                if (validSteamHash != null)
+                    connectedUserId.value = validSteamHash
                 else
                     AppStorage.clearToken()
             }
@@ -83,9 +85,9 @@ fun main() = application {
             /*
              * Start a local webservice if we are not connected.
              */
-            if (!connected.value) {
+            if (connectedUserId.value == null) {
 
-                localPort.value = startLocalWebservice(connected)
+                localPort.value = startLocalWebservice(connectedUserId)
 
                 println("Local webservice started on port: ${localPort.value}")
             }
@@ -94,7 +96,7 @@ fun main() = application {
         App(
             urlHash = remember { mutableStateOf(null) },
             isMniEmbedded = false,
-            connected = connected.value,
+            connectedUserId = connectedUserId.value,
             localPort = localPort.value,
             writeToClipboard = {
                 clipboardManager.setText(AnnotatedString(it))
@@ -104,7 +106,7 @@ fun main() = application {
 }
 
 fun startLocalWebservice(
-    connected: MutableState<Boolean>
+    connectedUserId: MutableState<String?>
 ): Int {
 
     require(currentServer == null) { "Server was already started." }
@@ -113,7 +115,7 @@ fun startLocalWebservice(
 
     val server = HttpServer.create(loopbackAddress, 0)
 
-    server.createContext("/", DefaultHttpHandler(connected))
+    server.createContext("/", DefaultHttpHandler(connectedUserId))
 
     server.start()
 
@@ -123,7 +125,7 @@ fun startLocalWebservice(
 }
 
 private class DefaultHttpHandler(
-    val connected: MutableState<Boolean>
+    val connectedUserId: MutableState<String?>
 ) : HttpHandler {
 
     override fun handle(exchange: HttpExchange) = runBlocking {
@@ -140,17 +142,19 @@ private class DefaultHttpHandler(
 
             println("Token parameter: $tokenParameter")
 
-            if (tokenParameter.isNotEmpty() && isTokenValid(tokenParameter)) {
+            val validSteamHashParameter: String? = getValidSteamHash(tokenParameter)
+
+            if (validSteamHashParameter != null) {
 
                 /* The token was checked and can be saved to storage. */
                 AppStorage.setToken(tokenParameter)
 
                 /* Update the UI */
-                connected.value = true
+                connectedUserId.value = validSteamHashParameter
             }
         }
 
-        val response = if (connected.value)
+        val response = if (connectedUserId.value != null)
             "Logged in!".encodeToByteArray()
         else
             "Login failed!".encodeToByteArray()

@@ -53,7 +53,7 @@ private const val PUBLIC_LOGIN_URL: String =
 
 @Composable
 fun LoginWithSteamButton(
-    connected: Boolean,
+    connectedUserId: String?,
     localPort: Int?
 ) {
 
@@ -66,7 +66,7 @@ fun LoginWithSteamButton(
         modifier = Modifier
             .onHover(hovered)
             .background(
-                if (!connected && hovered.value)
+                if (connectedUserId == null && hovered.value)
                     MaterialTheme.colorScheme.surface
                 else
                     MaterialTheme.colorScheme.background,
@@ -74,7 +74,7 @@ fun LoginWithSteamButton(
             )
             .noRippleClickable {
 
-                if (connected)
+                if (connectedUserId != null)
                     return@noRippleClickable
 
                 if (localPort == null)
@@ -97,7 +97,7 @@ fun LoginWithSteamButton(
 
         HalfSpacer()
 
-        if (!connected) {
+        if (connectedUserId == null) {
 
             Text(
                 text = stringResource(Res.string.uiLoginWithSteam),
