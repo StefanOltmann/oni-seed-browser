@@ -24,11 +24,9 @@ import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.plugins.compression.ContentEncoding
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
-import io.ktor.client.plugins.defaultRequest
 import io.ktor.client.request.accept
 import io.ktor.client.request.get
 import io.ktor.client.request.header
-import io.ktor.client.request.headers
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
 import io.ktor.client.statement.bodyAsText
@@ -62,20 +60,6 @@ object DefaultWebClient : WebClient {
 
     @OptIn(ExperimentalSerializationApi::class)
     private val httpClient = HttpClient {
-
-        defaultRequest {
-
-            headers {
-
-                /* For CORS */
-                append(HttpHeaders.AccessControlAllowOrigin, "*")
-
-                /* Auth */
-                AppStorage.getToken()?.let { token ->
-                    append("token", token)
-                }
-            }
-        }
 
         install(ContentNegotiation) {
             json(strictAllFieldsJson)
@@ -117,9 +101,18 @@ object DefaultWebClient : WebClient {
             return cachedCluster
 
         val response = httpClient.get("$FIND_URL/$coordinate") {
+
+            /* For CORS */
+            header(HttpHeaders.AccessControlAllowOrigin, "*")
+            header(HttpHeaders.AcceptEncoding, "gzip")
+
+            /* Auth */
+            AppStorage.getToken()?.let { token ->
+                header("token", token)
+            }
+
             contentType(ContentType.Application.Json)
             accept(ContentType.Application.Json)
-            header(HttpHeaders.AcceptEncoding, "gzip")
         }
 
         if (response.status != HttpStatusCode.OK)
@@ -137,6 +130,15 @@ object DefaultWebClient : WebClient {
         println("Request: $coordinate")
 
         val response = httpClient.post(REQUEST_URL) {
+
+            /* For CORS */
+            header(HttpHeaders.AccessControlAllowOrigin, "*")
+
+            /* Auth */
+            AppStorage.getToken()?.let { token ->
+                header("token", token)
+            }
+
             contentType(ContentType.Text.Plain)
             setBody(coordinate)
         }
@@ -146,7 +148,16 @@ object DefaultWebClient : WebClient {
 
     override suspend fun findFavoredCoordinates(): List<String> {
 
-        val response = httpClient.get("$BASE_API_URL/favored")
+        val response = httpClient.get("$BASE_API_URL/favored") {
+
+            /* For CORS */
+            header(HttpHeaders.AccessControlAllowOrigin, "*")
+
+            /* Auth */
+            AppStorage.getToken()?.let { token ->
+                header("token", token)
+            }
+        }
 
         if (!response.status.isSuccess())
             error("Requesting favored coordinates failed with HTTP ${response.status}: ${response.bodyAsText()}")
@@ -159,6 +170,15 @@ object DefaultWebClient : WebClient {
         println((if (like) "Like" else "Unlike") + " " + coordinate)
 
         val response = httpClient.post("$BASE_API_URL/rate-coordinate") {
+
+            /* For CORS */
+            header(HttpHeaders.AccessControlAllowOrigin, "*")
+
+            /* Auth */
+            AppStorage.getToken()?.let { token ->
+                header("token", token)
+            }
+
             contentType(ContentType.Application.Json)
             setBody(
                 RateCoordinateRequest(
@@ -180,15 +200,14 @@ object DefaultWebClient : WebClient {
 
         val response = httpClient.post(SEARCH_URL) {
 
-            /* Filter MUST be sent as JSON, because CBOR causes issues here. */
-            contentType(ContentType.Application.Json)
-
-            /* Response can be in JSON */
-            accept(ContentType.Application.Json)
+            /* For CORS */
+            header(HttpHeaders.AccessControlAllowOrigin, "*")
 
             /* Always zip */
             header(HttpHeaders.AcceptEncoding, "gzip")
 
+            contentType(ContentType.Application.Json)
+            accept(ContentType.Application.Json)
             setBody(filterQuery)
         }
 
@@ -201,9 +220,12 @@ object DefaultWebClient : WebClient {
     override suspend fun getUsernameMap(): Map<String, String> {
 
         val response = httpClient.get(USERNAME_REGISTRY_URL) {
+
+            /* For CORS */
+            header(HttpHeaders.AccessControlAllowOrigin, "*")
+
             contentType(ContentType.Application.Json)
-            /* Not a real secret, just to stop bots. */
-            header("x-api-key", "AXm5h4d7JfUIzrd")
+            accept(ContentType.Application.Json)
         }
 
         if (!response.status.isSuccess())
@@ -215,9 +237,11 @@ object DefaultWebClient : WebClient {
     override suspend fun setUsername(username: String): Boolean {
 
         val response = httpClient.post(USERNAME_REGISTRY_URL) {
+
+            /* For CORS */
+            header(HttpHeaders.AccessControlAllowOrigin, "*")
+
             contentType(ContentType.Text.Plain)
-            /* Not a real secret, just to stop bots. */
-            header("x-api-key", "AXm5h4d7JfUIzrd")
             setBody(username.ifBlank { "" })
         }
 
@@ -235,7 +259,12 @@ object DefaultWebClient : WebClient {
 
         println("WebClient: findContributors()")
 
-        val response = httpClient.get("$BASE_API_URL/contributors")
+        val response = httpClient.get("$BASE_API_URL/contributors") {
+
+            /* For CORS */
+            header(HttpHeaders.AccessControlAllowOrigin, "*")
+            accept(ContentType.Application.Json)
+        }
 
         if (!response.status.isSuccess())
             error("Requesting contributors failed with HTTP ${response.status}: ${response.bodyAsText()}")
