@@ -76,7 +76,9 @@ object DefaultWebClient : WebClient {
 
     override suspend fun countSeeds(): Long? {
 
-        val response = httpClient.get(COUNT_URL)
+        val response = httpClient.get(COUNT_URL) {
+            accept(ContentType.Text.Plain)
+        }
 
         if (response.status != HttpStatusCode.OK)
             return null
@@ -86,7 +88,9 @@ object DefaultWebClient : WebClient {
 
     override suspend fun findLatestClusters(): List<String> {
 
-        val response = httpClient.get("$BASE_API_URL/latest/v2")
+        val response = httpClient.get("$BASE_API_URL/latest/v2") {
+            accept(ContentType.Application.Json)
+        }
 
         if (!response.status.isSuccess())
             error("Requesting latest clusters failed with HTTP ${response.status}: ${response.bodyAsText()}")
@@ -103,12 +107,6 @@ object DefaultWebClient : WebClient {
             return cachedCluster
 
         val response = httpClient.get("$FIND_URL/$coordinate") {
-
-            /* Auth */
-            AppStorage.getToken()?.let { token ->
-                header(TOKEN_HEADER, token)
-            }
-
             accept(ContentType.Application.Json)
         }
 
@@ -123,8 +121,6 @@ object DefaultWebClient : WebClient {
     }
 
     override suspend fun request(coordinate: String): Boolean {
-
-        println("Request: $coordinate")
 
         val response = httpClient.post(REQUEST_URL) {
 
@@ -148,6 +144,8 @@ object DefaultWebClient : WebClient {
             AppStorage.getToken()?.let { token ->
                 header(TOKEN_HEADER, token)
             }
+
+            accept(ContentType.Application.Json)
         }
 
         if (!response.status.isSuccess())
@@ -201,7 +199,9 @@ object DefaultWebClient : WebClient {
 
     override suspend fun getUsernameMap(): Map<String, String> {
 
-        val response = httpClient.get(USERNAME_REGISTRY_URL)
+        val response = httpClient.get(USERNAME_REGISTRY_URL) {
+            accept(ContentType.Application.Json)
+        }
 
         if (!response.status.isSuccess())
             error("Username registry returned status ${response.status}: ${response.bodyAsText()}")
