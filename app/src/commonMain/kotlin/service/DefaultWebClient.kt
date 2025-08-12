@@ -44,7 +44,8 @@ import model.RateCoordinateRequest
 import model.filter.FilterQuery
 
 const val BASE_API_URL = "https://ingest.mapsnotincluded.org"
-const val FIND_URL = "$BASE_API_URL/coordinate"
+const val FIND_URL = "https://s3.tebi.io/oni-worlds"
+const val FIND_URL_FALLBACK = "$BASE_API_URL/coordinate"
 const val REQUEST_URL = "$BASE_API_URL/request-coordinate"
 const val SEARCH_URL = "$BASE_API_URL/search/v2"
 const val COUNT_URL = "$BASE_API_URL/count"
@@ -106,8 +107,20 @@ object DefaultWebClient : WebClient {
         if (cachedCluster != null)
             return cachedCluster
 
-        val response = httpClient.get("$FIND_URL/$coordinate") {
+        var response = httpClient.get("$FIND_URL/$coordinate") {
             accept(ContentType.Application.Json)
+        }
+
+        if (response.status != HttpStatusCode.OK) {
+
+            println("$coordinate not found on S3, trying fallback URL.")
+
+            response = httpClient.get("$FIND_URL_FALLBACK/$coordinate") {
+                accept(ContentType.Application.Json)
+            }
+
+        } else {
+            println("$coordinate found on S3.")
         }
 
         if (response.status != HttpStatusCode.OK)
