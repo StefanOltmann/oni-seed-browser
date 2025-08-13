@@ -31,7 +31,6 @@ import io.ktor.client.request.post
 import io.ktor.client.request.setBody
 import io.ktor.client.statement.bodyAsText
 import io.ktor.http.ContentType
-import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.contentType
 import io.ktor.http.isSuccess
@@ -43,9 +42,10 @@ import model.Contributor
 import model.RateCoordinateRequest
 import model.filter.FilterQuery
 
+const val FIND_URL_MAIN = "https://data.mapsnotincluded.org/oni-worlds"
+const val FIND_URL_MIRROR = "https://s3.tebi.io/oni-worlds"
+
 const val BASE_API_URL = "https://ingest.mapsnotincluded.org"
-const val FIND_URL = "https://s3.tebi.io/oni-worlds"
-const val FIND_URL_FALLBACK = "$BASE_API_URL/coordinate"
 const val REQUEST_URL = "$BASE_API_URL/request-coordinate"
 const val SEARCH_URL = "$BASE_API_URL/search/v2"
 const val COUNT_URL = "$BASE_API_URL/count"
@@ -107,15 +107,21 @@ object DefaultWebClient : WebClient {
         if (cachedCluster != null)
             return cachedCluster
 
-        var response = httpClient.get("$FIND_URL/$coordinate") {
+        /*
+         * First, ask the mirror for data.
+         */
+        var response = httpClient.get("$FIND_URL_MIRROR/$coordinate") {
             accept(ContentType.Application.Json)
         }
 
+        /*
+         * If it's not available on the mirror, ask the main repo.
+         */
         if (response.status != HttpStatusCode.OK) {
 
             println("$coordinate not found on S3, trying fallback URL.")
 
-            response = httpClient.get("$FIND_URL_FALLBACK/$coordinate") {
+            response = httpClient.get("$FIND_URL_MAIN/$coordinate") {
                 accept(ContentType.Application.Json)
             }
 
