@@ -28,7 +28,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import kotlin.math.min
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -39,12 +38,17 @@ import kotlinx.coroutines.withContext
 import model.Asteroid
 import model.Cluster
 import service.DefaultWebClient
+import ui.theme.defaultSpacing
 import ui.theme.doubleSpacing
 import ui.theme.lightGray
 
-private const val PAGE_SIZE = 3
-private const val SCROLL_THRESHOLD_PX = 250
-private const val PER_ITEM_RETRY = 1
+private const val SCROLL_THRESHOLD_PX = 150
+
+/**
+ * A short delay to avoid overloading the server, which might respond
+ * with HTTP 429 (Too Many Requests) if we request too quickly.
+ */
+private const val FETCH_DELAY_MS: Long = 250
 
 @Composable
 fun ClusterViewList(
@@ -65,6 +69,9 @@ fun ClusterViewList(
     var isLoading by remember { mutableStateOf(false) }
     val scrollState = rememberScrollState()
 
+    /*
+     * Initial fetch of the first cluster.
+     */
     LaunchedEffect(clusters) {
 
         displayed.clear()
@@ -75,12 +82,15 @@ fun ClusterViewList(
 
             isLoading = true
 
-            val newIndex = fetchPageWithRetries(clusters, 0, PAGE_SIZE, displayed)
+            try {
 
-            if (newIndex != null)
-                nextCoordinateIndex = newIndex
+                if (fetchPage(clusters, 0, displayed))
+                    nextCoordinateIndex += 1
 
-            isLoading = false
+            } finally {
+
+                isLoading = false
+            }
         }
     }
 
@@ -98,10 +108,8 @@ fun ClusterViewList(
 
                     try {
 
-                        val newIndex = fetchPageWithRetries(clusters, nextCoordinateIndex, PAGE_SIZE, displayed)
-
-                        if (newIndex != null)
-                            nextCoordinateIndex = newIndex
+                        if (fetchPage(clusters, nextCoordinateIndex, displayed))
+                            nextCoordinateIndex += 1
 
                     } finally {
                         isLoading = false
@@ -116,7 +124,7 @@ fun ClusterViewList(
                 .fillMaxWidth()
                 .verticalScroll(scrollState)
                 .padding(doubleSpacing),
-            verticalArrangement = Arrangement.spacedBy(doubleSpacing)
+            verticalArrangement = Arrangement.spacedBy(defaultSpacing)
         ) {
 
             displayed.forEachIndexed { idx, cluster ->
@@ -139,10 +147,10 @@ fun ClusterViewList(
 
             if (isLoading && nextCoordinateIndex < clusters.size)
                 Box(
+                    contentAlignment = Alignment.Center,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(vertical = doubleSpacing),
-                    contentAlignment = Alignment.Center
+                        .padding(vertical = doubleSpacing)
                 ) {
                     CircularProgressIndicator()
                 }
@@ -159,54 +167,33 @@ fun ClusterViewList(
     }
 }
 
-private suspend fun fetchPageWithRetries(
+private suspend fun fetchPage(
     clusters: List<String>,
-    startIndex: Int,
-    pageSize: Int,
+    index: Int,
     displayed: MutableList<Cluster>
-): Int? {
+): Boolean {
 
-    if (startIndex >= clusters.size)
-        return null
+    if (index >= clusters.size)
+        return false
 
-    /*
-     * A short delay to avoid overloading the server, which might respond
-     * with Too Many Requests (429) if we request too quickly.
-     */
-    delay(300)
+    delay(FETCH_DELAY_MS)
 
-    val end = min(startIndex + pageSize, clusters.size)
+    val coordinate = clusters[index]
 
-    for (index in startIndex until end) {
+    try {
 
-        val coordinate = clusters[index]
-        var attempt = 0
-        var succeeded = false
-
-        while (attempt <= PER_ITEM_RETRY && !succeeded) {
-
-            attempt++
-
-            try {
-
-                val cluster = withContext(Dispatchers.Default) {
-                    DefaultWebClient.find(coordinate)
-                }
-
-                if (cluster != null) {
-
-                    displayed.add(cluster)
-
-                    succeeded = true
-                }
-
-            } catch (ex: CancellationException) {
-                throw ex
-            } catch (ex: Throwable) {
-                ex.printStackTrace()
-            }
+        val cluster = withContext(Dispatchers.Default) {
+            DefaultWebClient.find(coordinate)
         }
+
+        if (cluster != null)
+            displayed.add(cluster)
+
+    } catch (ex: CancellationException) {
+        throw ex
+    } catch (ex: Throwable) {
+        ex.printStackTrace()
     }
 
-    return end
+    return true
 }
