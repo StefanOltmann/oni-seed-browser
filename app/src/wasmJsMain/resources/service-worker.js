@@ -2,7 +2,7 @@
  * Service Worker for ONI Seed Browser app
  */
 
-const CACHE_NAME = 'oni-seed-browser-cache-v27';
+const CACHE_NAME = 'oni-seed-browser-cache-v28';
 
 const ASSETS_TO_CACHE = [
     './',

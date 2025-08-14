@@ -43,7 +43,7 @@ import model.RateCoordinateRequest
 import model.filter.FilterQuery
 
 const val FIND_URL_MAIN = "https://data.mapsnotincluded.org/oni-worlds"
-const val FIND_URL_MIRROR = "https://s3.tebi.io/oni-worlds"
+const val FIND_URL_MIRROR = "https://oni-worlds.stefanoltmann.de"
 
 const val BASE_API_URL = "https://ingest.mapsnotincluded.org"
 const val REQUEST_URL = "$BASE_API_URL/request-coordinate"
