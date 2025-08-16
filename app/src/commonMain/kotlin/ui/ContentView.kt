@@ -381,7 +381,10 @@ fun ContentView(
                         modifier = Modifier.weight(1F)
                     ) {
 
-                        LeaderboardViewList(errorMessage)
+                        LeaderboardViewList(
+                            steamIdToUsernameMap = steamIdToUsernameMap.value,
+                            errorMessage = errorMessage
+                        )
                     }
 
                     if (connectedUserId != null) {

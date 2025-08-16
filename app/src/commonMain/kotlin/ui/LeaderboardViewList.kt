@@ -59,7 +59,6 @@ import kotlin.time.ExperimentalTime
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
-import model.Contributor
 import org.jetbrains.compose.resources.stringResource
 import service.DefaultWebClient
 import ui.theme.DefaultSpacer
@@ -78,12 +77,13 @@ private val contributorListFontSize = 20.sp
 @OptIn(ExperimentalTime::class)
 @Composable
 fun LeaderboardViewList(
+    steamIdToUsernameMap: Map<String, String>,
     errorMessage: MutableState<String?>
 ) {
 
     val lastRefreshTime = remember { mutableStateOf(0L) }
 
-    val contributorsState = produceState(emptyList<Contributor>()) {
+    val contributorsState = produceState(emptyList()) {
 
         try {
 
@@ -91,12 +91,16 @@ fun LeaderboardViewList(
 
                 lastRefreshTime.value = Clock.System.now().toEpochMilliseconds()
 
-                value = DefaultWebClient.findContributors()
+                value = DefaultWebClient.findContributors().map {
+                    it.copy(
+                        username = steamIdToUsernameMap[it.steamIdHash]
+                    )
+                }
 
                 delay(CONTRIBUTOR_LIST_UPDATE_INTERVAL_MS)
             }
 
-        } catch (ignore: CancellationException) {
+        } catch (_: CancellationException) {
 
             // That's fine.
 
