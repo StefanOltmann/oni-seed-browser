@@ -67,7 +67,7 @@ object AppStorage {
 
             jsonPretty.decodeFromString<FilterQuery>(json)
 
-        } catch (ex: Exception) {
+        } catch (ex: Throwable) {
 
             /*
              * If parsing a stored filter query fails for any reason,

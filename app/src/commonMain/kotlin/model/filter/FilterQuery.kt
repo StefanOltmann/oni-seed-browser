@@ -40,7 +40,7 @@ data class FilterQuery(
 
     val mode: GameModeType = GameModeType.BASEGAME_STANDARD,
 
-    val remix: String = "0",
+    val remix: String? = "0",
 
     /**
      * List of connected OR-rules.
