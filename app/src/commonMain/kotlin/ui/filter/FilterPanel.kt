@@ -140,6 +140,16 @@ fun FilterPanel(
 
                         DefaultSpacer()
 
+                        RemixSelection(
+                            filterQueryState = filterQueryState
+                        )
+
+                        DefaultSpacer()
+
+                        HorizontalSeparator()
+
+                        DefaultSpacer()
+
                         RuleEditor(
                             filterQueryState = filterQueryState,
                             filterSelection = filterSelection

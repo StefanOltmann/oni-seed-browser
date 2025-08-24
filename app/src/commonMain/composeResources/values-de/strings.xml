@@ -50,6 +50,7 @@
     <string name="uiLeaderBoardCount">Anzahl</string>
     <string name="uiStorageTankForDormancy">Speicher für Ruhephase</string>
     <string name="uiShowInAlternativeViewer">In einem alternativen Tool anzeigen</string>
+    <string name="uiRemix">Remix</string>
 
     <!-- GameModes -->
     <string name="gameModeBaseGameStandard">Standard</string>

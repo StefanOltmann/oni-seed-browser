@@ -29,7 +29,7 @@ import serializer.ClusterTypeSerializer
 data class FilterQuery(
 
     /*
-     * Note: To restore the filter from local storage
+     * Note: To restore the filter from local storage,
      * no fields should be marked as transient.
      */
 
@@ -39,6 +39,8 @@ data class FilterQuery(
     val dlcs: List<Dlc>,
 
     val mode: GameModeType = GameModeType.BASEGAME_STANDARD,
+
+    val remix: String = "0",
 
     /**
      * List of connected OR-rules.
@@ -241,6 +243,7 @@ data class FilterQuery(
             cluster = null,
             dlcs = listOf(Dlc.BaseGame),
             mode = GameModeType.BASEGAME_STANDARD,
+            remix = "0",
             rules = emptyList()
         )
     }

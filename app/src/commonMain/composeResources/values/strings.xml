@@ -50,6 +50,7 @@
     <string name="uiLeaderBoardCount">Count</string>
     <string name="uiStorageTankForDormancy">Storage tank for dormancy</string>
     <string name="uiShowInAlternativeViewer">Show in alternative viewer</string>
+    <string name="uiRemix">Remix</string>
 
     <!-- GameModes -->
     <string name="gameModeBaseGameStandard">Standard</string>

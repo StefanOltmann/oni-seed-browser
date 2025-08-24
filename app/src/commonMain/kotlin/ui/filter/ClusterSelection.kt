@@ -90,6 +90,9 @@ fun ClusterSelection(
                                 /* Select the cluster or deselect everything */
                                 cluster = if (isSelected) null else cluster,
 
+                                /* Reset the remix */
+                                remix = "0",
+
                                 /* Reset the filter rules */
                                 rules = FilterQuery.EMPTY.rules
                             )

@@ -244,20 +244,20 @@ fun ClusterView(
 
             val uploadDate = cluster.uploadDate
 
-                VerticalDivider(
-                    thickness = 1.dp,
-                    color = MaterialTheme.colorScheme.onBackground,
-                    modifier = Modifier
-                        .height(doubleSpacing)
-                        .padding(horizontal = defaultSpacing)
-                )
+            VerticalDivider(
+                thickness = 1.dp,
+                color = MaterialTheme.colorScheme.onBackground,
+                modifier = Modifier
+                    .height(doubleSpacing)
+                    .padding(horizontal = defaultSpacing)
+            )
 
-                Text(
-                    text = formatDate(uploadDate),
-                    style = MaterialTheme.typography.bodyMedium,
-                    fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.onBackground
-                )
+            Text(
+                text = formatDate(uploadDate),
+                style = MaterialTheme.typography.bodyMedium,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.onBackground
+            )
 
             if (cluster.uploaderAuthenticated) {
 
