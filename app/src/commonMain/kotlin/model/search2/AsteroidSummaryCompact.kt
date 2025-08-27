@@ -24,12 +24,14 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.protobuf.ProtoNumber
 import kotlinx.serialization.protobuf.ProtoPacked
 import model.AsteroidType
+import serializer.AsteroidTypeIdSerializer
 
 @Serializable
 @OptIn(ExperimentalSerializationApi::class)
 class AsteroidSummaryCompact(
 
     @ProtoNumber(1)
+    @Serializable(with = AsteroidTypeIdSerializer::class)
     val id: AsteroidType,
 
     @ProtoNumber(2)

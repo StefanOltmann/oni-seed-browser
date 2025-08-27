@@ -95,209 +95,211 @@ import org.jetbrains.compose.resources.StringResource
 /**
  * See https://oxygennotincluded.fandom.com/wiki/Planetoid_Clusters
  */
-enum class AsteroidType {
+enum class AsteroidType(
+    val id: Byte
+) {
 
     /** Terra Asteroid */
-    SandstoneDefault,
+    SandstoneDefault(0),
 
     /** Ceres Asteroid */
-    CeresBaseGameAsteroid,
+    CeresBaseGameAsteroid(1),
 
     /** Blasted Ceres Asteroid */
-    CeresBaseGameShatteredAsteroid,
+    CeresBaseGameShatteredAsteroid(2),
 
     /** Oceania Asteroid */
-    Oceania,
+    Oceania(3),
 
     /** Rime Asteroid */
-    SandstoneFrozen,
+    SandstoneFrozen(4),
 
     /** Verdante Asteroid */
-    ForestLush,
+    ForestLush(5),
 
     /** Arboria Asteroid */
-    ForestDefault,
+    ForestDefault(6),
 
     /** Volcanea Asteroid */
-    Volcanic,
+    Volcanic(7),
 
     /** The Badlands Asteroid */
-    Badlands,
+    Badlands(8),
 
     /** Aridio Asteroid */
-    ForestHot,
+    ForestHot(9),
 
     /** Oasisse Asteroid */
-    Oasis,
+    Oasis(10),
 
     /** Terra Asteroid */
-    VanillaSandstoneDefault,
+    VanillaSandstoneDefault(11),
 
     /** Radioactive Swamp Asteroid */
-    MediumRadioactiveVanillaWarpPlanet,
+    MediumRadioactiveVanillaWarpPlanet(12),
 
     /** Ceres Asteroid */
-    CeresClassicAsteroid,
+    CeresClassicAsteroid(13),
 
     /** Stinko Swamp Asteroid */
-    MediumSwampy,
+    MediumSwampy(14),
 
     /** Oceania Asteroid */
-    VanillaOceania,
+    VanillaOceania(15),
 
     /** Glowood Wasteland Asteroid */
-    MediumForestyWasteland,
+    MediumForestyWasteland(16),
 
     /** Squelchy Asteroid */
-    VanillaSwampDefault,
+    VanillaSwampDefault(17),
 
     /** Radioactive Forest Asteroid */
-    MediumForestyRadioactiveVanillaWarpPlanet,
+    MediumForestyRadioactiveVanillaWarpPlanet(18),
 
     /** Rime Asteroid */
-    VanillaSandstoneFrozen,
+    VanillaSandstoneFrozen(19),
 
     /** Verdante Asteroid */
-    VanillaForestDefault,
+    VanillaForestDefault(20),
 
     /** Radioactive Terra Asteroid */
-    MediumSandyRadioactiveVanillaWarpPlanet,
+    MediumSandyRadioactiveVanillaWarpPlanet(21),
 
     /** Arboria Asteroid */
-    VanillaArboria,
+    VanillaArboria(22),
 
     /** Volcanea Asteroid */
-    VanillaVolcanic,
+    VanillaVolcanic(23),
 
     /** The Badlands Asteroid */
-    VanillaBadlands,
+    VanillaBadlands(24),
 
     /** Aridio Asteroid */
-    VanillaAridio,
+    VanillaAridio(25),
 
     /** Radioactive Terrabog Asteroid */
-    MediumSandySwamp,
+    MediumSandySwamp(26),
 
     /** Oasisse Asteroid */
-    VanillaOasis,
+    VanillaOasis(27),
 
     /** Terrania Asteroid */
-    TerraMoonlet,
+    TerraMoonlet(28),
 
     /** Irradiated Forest Asteroid */
-    IdealLandingSite,
+    IdealLandingSite(29),
 
     /** Oily Swamp Asteroid */
-    WarpOilySwamp,
+    WarpOilySwamp(30),
 
     /** Regolith Asteroid */
-    RegolithMoonlet,
+    RegolithMoonlet(31),
 
     /** Ceres Minor Asteroid */
-    CeresSpacedOutAsteroid,
+    CeresSpacedOutAsteroid(32),
 
     /** Irradiated Swampy Asteroid */
-    SwampyLandingSite,
+    SwampyLandingSite(33),
 
     /** Rusty Oil Asteroid */
-    OilRichWarpTarget,
+    OilRichWarpTarget(34),
 
     /** Folia Asteroid */
-    ForestMoonlet,
+    ForestMoonlet(35),
 
     /** Quagmiris Asteroid */
-    SwampMoonlet,
+    SwampMoonlet(36),
 
     /** Irradiated Marsh Asteroid */
-    MetalHeavyLandingSite,
+    MetalHeavyLandingSite(37),
 
     /** The Desolands Asteroid */
-    MiniBadlands,
+    MiniBadlands(38),
 
     /** Metallic Swampy Asteroid */
-    MiniMetallicSwampyStart,
+    MiniMetallicSwampyStart(39),
 
     /** Frozen Forest Asteroid */
-    MiniForestFrozenWarp,
+    MiniForestFrozenWarp(40),
 
     /** Flipped Asteroid */
-    MiniFlipped,
+    MiniFlipped(41),
 
     /** Radioactive Ocean Asteroid */
-    MiniRadioactiveOcean,
+    MiniRadioactiveOcean(42),
 
     /** The Desolands Asteroid */
-    MiniBadlandsStart,
+    MiniBadlandsStart(43),
 
     /** Radioactive Ocean Asteroid */
-    MiniRadioactiveOceanWarp,
+    MiniRadioactiveOceanWarp(44),
 
     /** Metallic Swampy Asteroid */
-    MiniMetallicSwampy,
+    MiniMetallicSwampy(45),
 
     /** Frozen Forest Asteroid */
-    MiniForestFrozen,
+    MiniForestFrozen(46),
 
     /** Metallic Swampy Asteroid */
-    MiniBadlandsWarp,
+    MiniBadlandsWarp(47),
 
     /** Frozen Forest Asteroid */
-    MiniForestFrozenStart,
+    MiniForestFrozenStart(48),
 
     /** Flipped Asteroid */
-    MiniFlippedStart,
+    MiniFlippedStart(49),
 
     /** Radioactive Ocean Asteroid */
-    MiniRadioactiveOceanStart,
+    MiniRadioactiveOceanStart(50),
 
     /** Flipped Asteroid */
-    MiniFlippedWarp,
+    MiniFlippedWarp(51),
 
     /**
      * Common outer asteroids
      */
 
     /** Tundra Asteroid */
-    TundraMoonlet,
+    TundraMoonlet(52),
 
     /** Marshy Asteroid */
-    MarshyMoonlet,
+    MarshyMoonlet(53),
 
     /** Superconductive Asteroid */
-    NiobiumMoonlet,
+    NiobiumMoonlet(54),
 
     /** Moo Asteroid */
-    MooMoonlet,
+    MooMoonlet(55),
 
     /** Water Asteroid */
-    WaterMoonlet,
+    WaterMoonlet(56),
 
     /** Regolith Asteroid */
-    MiniRegolithMoonlet,
+    MiniRegolithMoonlet(57),
 
-    MixingCeresAsteroid,
+    MixingCeresAsteroid(58),
 
-    CeresClassicShatteredAsteroid,
+    CeresClassicShatteredAsteroid(59),
 
-    MiniShatteredStartAsteroid,
+    MiniShatteredStartAsteroid(60),
 
-    MiniShatteredWarpAsteroid,
+    MiniShatteredWarpAsteroid(61),
 
-    MiniShatteredGeoAsteroid,
+    MiniShatteredGeoAsteroid(62),
 
-    PrehistoricBaseGameAsteroid,
+    PrehistoricBaseGameAsteroid(63),
 
-    PrehistoricClassicAsteroid,
+    PrehistoricClassicAsteroid(64),
 
-    PrehistoricSpacedOutAsteroid,
+    PrehistoricSpacedOutAsteroid(65),
 
-    PrehistoricShatteredBaseGameAsteroid,
+    PrehistoricShatteredBaseGameAsteroid(66),
 
-    PrehistoricShatteredClassicAsteroid,
+    PrehistoricShatteredClassicAsteroid(67),
 
-    MixingPrehistoricAsteroid,
+    MixingPrehistoricAsteroid(68),
 
-    WarpOilySandySwamp;
+    WarpOilySandySwamp(69);
 
     fun getStringResource(): StringResource = when(this) {
         SandstoneDefault -> Res.string.asteroidTypeSandstoneDefault
