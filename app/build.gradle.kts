@@ -47,7 +47,7 @@ kotlin {
                     outputFileName = "app.js"
                     devServer = (devServer ?: KotlinWebpackConfig.DevServer()).apply {
                         static = (static ?: mutableListOf()).apply {
-                            // Serve sources to debug inside browser
+                            // Serve sources to debug inside the browser
                             add(rootDirPath)
                             add(projectDirPath)
                         }
@@ -111,6 +111,8 @@ kotlin {
             wasmJsMain.dependencies {
 
                 implementation(libs.ktor.js)
+
+                implementation("org.jetbrains.kotlin-wrappers:kotlin-browser:2025.8.20")
 
                 /* Cryptography (JWT) */
                 implementation("dev.whyoleg.cryptography:cryptography-provider-webcrypto:0.4.0")
