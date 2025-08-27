@@ -106,9 +106,6 @@ enum class AsteroidType {
     /** Blasted Ceres Asteroid */
     CeresBaseGameShatteredAsteroid,
 
-    /** Relica Asteroid */
-    PrehistoricBaseGameAsteroid,
-
     /** Oceania Asteroid */
     Oceania,
 
@@ -141,9 +138,6 @@ enum class AsteroidType {
 
     /** Ceres Asteroid */
     CeresClassicAsteroid,
-
-    /** Relica Asteroid */
-    PrehistoricClassicAsteroid,
 
     /** Stinko Swamp Asteroid */
     MediumSwampy,
@@ -196,16 +190,11 @@ enum class AsteroidType {
     /** Oily Swamp Asteroid */
     WarpOilySwamp,
 
-    WarpOilySandySwamp,
-
     /** Regolith Asteroid */
     RegolithMoonlet,
 
     /** Ceres Minor Asteroid */
     CeresSpacedOutAsteroid,
-
-    /** Relica Minor Asteroid */
-    PrehistoricSpacedOutAsteroid,
 
     /** Irradiated Swampy Asteroid */
     SwampyLandingSite,
@@ -296,11 +285,19 @@ enum class AsteroidType {
 
     MiniShatteredGeoAsteroid,
 
+    PrehistoricBaseGameAsteroid,
+
+    PrehistoricClassicAsteroid,
+
+    PrehistoricSpacedOutAsteroid,
+
     PrehistoricShatteredBaseGameAsteroid,
 
     PrehistoricShatteredClassicAsteroid,
 
-    MixingPrehistoricAsteroid;
+    MixingPrehistoricAsteroid,
+
+    WarpOilySandySwamp;
 
     fun getStringResource(): StringResource = when(this) {
         SandstoneDefault -> Res.string.asteroidTypeSandstoneDefault
