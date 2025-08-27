@@ -95,213 +95,283 @@ import org.jetbrains.compose.resources.StringResource
 /**
  * See https://oxygennotincluded.fandom.com/wiki/Planetoid_Clusters
  */
-enum class AsteroidType(
-    val stringResource: StringResource
-) {
+enum class AsteroidType {
 
     /** Terra Asteroid */
-    SandstoneDefault(Res.string.asteroidTypeSandstoneDefault),
+    SandstoneDefault,
 
     /** Ceres Asteroid */
-    CeresBaseGameAsteroid(Res.string.asteroidTypeCeresBaseGameAsteroid),
+    CeresBaseGameAsteroid,
 
     /** Blasted Ceres Asteroid */
-    CeresBaseGameShatteredAsteroid(Res.string.asteroidTypeCeresBaseGameShatteredAsteroid),
+    CeresBaseGameShatteredAsteroid,
 
     /** Relica Asteroid */
-    PrehistoricBaseGameAsteroid(Res.string.asteroidTypePrehistoricBaseGameAsteroid),
+    PrehistoricBaseGameAsteroid,
 
     /** Oceania Asteroid */
-    Oceania(Res.string.asteroidTypeOceania),
+    Oceania,
 
     /** Rime Asteroid */
-    SandstoneFrozen(Res.string.asteroidTypeSandstoneFrozen),
+    SandstoneFrozen,
 
     /** Verdante Asteroid */
-    ForestLush(Res.string.asteroidTypeForestLush),
+    ForestLush,
 
     /** Arboria Asteroid */
-    ForestDefault(Res.string.asteroidTypeForestDefault),
+    ForestDefault,
 
     /** Volcanea Asteroid */
-    Volcanic(Res.string.asteroidTypeVolcanic),
+    Volcanic,
 
     /** The Badlands Asteroid */
-    Badlands(Res.string.asteroidTypeBadlands),
+    Badlands,
 
     /** Aridio Asteroid */
-    ForestHot(Res.string.asteroidTypeForestHot),
+    ForestHot,
 
     /** Oasisse Asteroid */
-    Oasis(Res.string.asteroidTypeOasis),
+    Oasis,
 
     /** Terra Asteroid */
-    VanillaSandstoneDefault(Res.string.asteroidTypeVanillaSandstoneDefault),
+    VanillaSandstoneDefault,
 
     /** Radioactive Swamp Asteroid */
-    MediumRadioactiveVanillaWarpPlanet(Res.string.asteroidTypeMediumRadioactiveVanillaWarpPlanet),
+    MediumRadioactiveVanillaWarpPlanet,
 
     /** Ceres Asteroid */
-    CeresClassicAsteroid(Res.string.asteroidTypeCeresClassicAsteroid),
+    CeresClassicAsteroid,
 
     /** Relica Asteroid */
-    PrehistoricClassicAsteroid(Res.string.asteroidTypePrehistoricClassicAsteroid),
+    PrehistoricClassicAsteroid,
 
     /** Stinko Swamp Asteroid */
-    MediumSwampy(Res.string.asteroidTypeMediumSwampy),
+    MediumSwampy,
 
     /** Oceania Asteroid */
-    VanillaOceania(Res.string.asteroidTypeVanillaOceania),
+    VanillaOceania,
 
     /** Glowood Wasteland Asteroid */
-    MediumForestyWasteland(Res.string.asteroidTypeMediumForestyWasteland),
+    MediumForestyWasteland,
 
     /** Squelchy Asteroid */
-    VanillaSwampDefault(Res.string.asteroidTypeVanillaSwampDefault),
+    VanillaSwampDefault,
 
     /** Radioactive Forest Asteroid */
-    MediumForestyRadioactiveVanillaWarpPlanet(Res.string.asteroidTypeMediumForestyRadioactiveVanillaWarpPlanet),
+    MediumForestyRadioactiveVanillaWarpPlanet,
 
     /** Rime Asteroid */
-    VanillaSandstoneFrozen(Res.string.asteroidTypeVanillaSandstoneFrozen),
+    VanillaSandstoneFrozen,
 
     /** Verdante Asteroid */
-    VanillaForestDefault(Res.string.asteroidTypeVanillaForestDefault),
+    VanillaForestDefault,
 
     /** Radioactive Terra Asteroid */
-    MediumSandyRadioactiveVanillaWarpPlanet(Res.string.asteroidTypeMediumSandyRadioactiveVanillaWarpPlanet),
+    MediumSandyRadioactiveVanillaWarpPlanet,
 
     /** Arboria Asteroid */
-    VanillaArboria(Res.string.asteroidTypeVanillaArboria),
+    VanillaArboria,
 
     /** Volcanea Asteroid */
-    VanillaVolcanic(Res.string.asteroidTypeVanillaVolcanic),
+    VanillaVolcanic,
 
     /** The Badlands Asteroid */
-    VanillaBadlands(Res.string.asteroidTypeVanillaBadlands),
+    VanillaBadlands,
 
     /** Aridio Asteroid */
-    VanillaAridio(Res.string.asteroidTypeVanillaAridio),
+    VanillaAridio,
 
     /** Radioactive Terrabog Asteroid */
-    MediumSandySwamp(Res.string.asteroidTypeMediumSandySwamp),
+    MediumSandySwamp,
 
     /** Oasisse Asteroid */
-    VanillaOasis(Res.string.asteroidTypeVanillaOasis),
+    VanillaOasis,
 
     /** Terrania Asteroid */
-    TerraMoonlet(Res.string.asteroidTypeTerraMoonlet),
+    TerraMoonlet,
 
     /** Irradiated Forest Asteroid */
-    IdealLandingSite(Res.string.asteroidTypeIdealLandingSite),
+    IdealLandingSite,
 
     /** Oily Swamp Asteroid */
-    WarpOilySwamp(Res.string.asteroidTypeWarpOilySwamp),
+    WarpOilySwamp,
 
-    WarpOilySandySwamp(Res.string.asteroidTypeWarpOilySandySwamp),
+    WarpOilySandySwamp,
 
     /** Regolith Asteroid */
-    RegolithMoonlet(Res.string.asteroidTypeRegolithMoonlet),
+    RegolithMoonlet,
 
     /** Ceres Minor Asteroid */
-    CeresSpacedOutAsteroid(Res.string.asteroidTypeCeresSpacedOutAsteroid),
+    CeresSpacedOutAsteroid,
 
     /** Relica Minor Asteroid */
-    PrehistoricSpacedOutAsteroid(Res.string.asteroidTypePrehistoricSpacedOutAsteroid),
+    PrehistoricSpacedOutAsteroid,
 
     /** Irradiated Swampy Asteroid */
-    SwampyLandingSite(Res.string.asteroidTypeSwampyLandingSite),
+    SwampyLandingSite,
 
     /** Rusty Oil Asteroid */
-    OilRichWarpTarget(Res.string.asteroidTypeOilRichWarpTarget),
+    OilRichWarpTarget,
 
     /** Folia Asteroid */
-    ForestMoonlet(Res.string.asteroidTypeForestMoonlet),
+    ForestMoonlet,
 
     /** Quagmiris Asteroid */
-    SwampMoonlet(Res.string.asteroidTypeSwampMoonlet),
+    SwampMoonlet,
 
     /** Irradiated Marsh Asteroid */
-    MetalHeavyLandingSite(Res.string.asteroidTypeMetalHeavyLandingSite),
+    MetalHeavyLandingSite,
 
     /** The Desolands Asteroid */
-    MiniBadlands(Res.string.asteroidTypeMiniBadlands),
+    MiniBadlands,
 
     /** Metallic Swampy Asteroid */
-    MiniMetallicSwampyStart(Res.string.asteroidTypeMiniMetallicSwampyStart),
+    MiniMetallicSwampyStart,
 
     /** Frozen Forest Asteroid */
-    MiniForestFrozenWarp(Res.string.asteroidTypeMiniForestFrozenWarp),
+    MiniForestFrozenWarp,
 
     /** Flipped Asteroid */
-    MiniFlipped(Res.string.asteroidTypeMiniFlipped),
+    MiniFlipped,
 
     /** Radioactive Ocean Asteroid */
-    MiniRadioactiveOcean(Res.string.asteroidTypeMiniRadioactiveOcean),
+    MiniRadioactiveOcean,
 
     /** The Desolands Asteroid */
-    MiniBadlandsStart(Res.string.asteroidTypeMiniBadlandsStart),
+    MiniBadlandsStart,
 
     /** Radioactive Ocean Asteroid */
-    MiniRadioactiveOceanWarp(Res.string.asteroidTypeMiniRadioactiveOceanWarp),
+    MiniRadioactiveOceanWarp,
 
     /** Metallic Swampy Asteroid */
-    MiniMetallicSwampy(Res.string.asteroidTypeMiniMetallicSwampy),
+    MiniMetallicSwampy,
 
     /** Frozen Forest Asteroid */
-    MiniForestFrozen(Res.string.asteroidTypeMiniForestFrozen),
+    MiniForestFrozen,
 
     /** Metallic Swampy Asteroid */
-    MiniBadlandsWarp(Res.string.asteroidTypeMiniBadlandsWarp),
+    MiniBadlandsWarp,
 
     /** Frozen Forest Asteroid */
-    MiniForestFrozenStart(Res.string.asteroidTypeMiniForestFrozenStart),
+    MiniForestFrozenStart,
 
     /** Flipped Asteroid */
-    MiniFlippedStart(Res.string.asteroidTypeMiniFlippedStart),
+    MiniFlippedStart,
 
     /** Radioactive Ocean Asteroid */
-    MiniRadioactiveOceanStart(Res.string.asteroidTypeMiniRadioactiveOceanStart),
+    MiniRadioactiveOceanStart,
 
     /** Flipped Asteroid */
-    MiniFlippedWarp(Res.string.asteroidTypeMiniFlippedWarp),
+    MiniFlippedWarp,
 
     /**
      * Common outer asteroids
      */
 
     /** Tundra Asteroid */
-    TundraMoonlet(Res.string.asteroidTypeTundraMoonlet),
+    TundraMoonlet,
 
     /** Marshy Asteroid */
-    MarshyMoonlet(Res.string.asteroidTypeMarshyMoonlet),
+    MarshyMoonlet,
 
     /** Superconductive Asteroid */
-    NiobiumMoonlet(Res.string.asteroidTypeNiobiumMoonlet),
+    NiobiumMoonlet,
 
     /** Moo Asteroid */
-    MooMoonlet(Res.string.asteroidTypeMooMoonlet),
+    MooMoonlet,
 
     /** Water Asteroid */
-    WaterMoonlet(Res.string.asteroidTypeWaterMoonlet),
+    WaterMoonlet,
 
     /** Regolith Asteroid */
-    MiniRegolithMoonlet(Res.string.asteroidTypeMiniRegolithMoonlet),
+    MiniRegolithMoonlet,
 
-    MixingCeresAsteroid(Res.string.asteroidTypeMixingCeresAsteroid),
+    MixingCeresAsteroid,
 
-    CeresClassicShatteredAsteroid(Res.string.asteroidTypeCeresClassicShatteredAsteroid),
+    CeresClassicShatteredAsteroid,
 
-    MiniShatteredStartAsteroid(Res.string.asteroidTypeMiniShatteredStartAsteroid),
+    MiniShatteredStartAsteroid,
 
-    MiniShatteredWarpAsteroid(Res.string.asteroidTypeMiniShatteredWarpAsteroid),
+    MiniShatteredWarpAsteroid,
 
-    MiniShatteredGeoAsteroid(Res.string.asteroidTypeMiniShatteredGeoAsteroid),
+    MiniShatteredGeoAsteroid,
 
-    PrehistoricShatteredBaseGameAsteroid(Res.string.asteroidTypePrehistoricShatteredBaseGameAsteroid),
+    PrehistoricShatteredBaseGameAsteroid,
 
-    PrehistoricShatteredClassicAsteroid(Res.string.asteroidTypePrehistoricShatteredClassicAsteroid),
+    PrehistoricShatteredClassicAsteroid,
 
-    MixingPrehistoricAsteroid(Res.string.asteroidTypeMixingPrehistoricAsteroid)
+    MixingPrehistoricAsteroid;
 
+    fun getStringResource(): StringResource = when(this) {
+        SandstoneDefault -> Res.string.asteroidTypeSandstoneDefault
+        CeresBaseGameAsteroid -> Res.string.asteroidTypeCeresBaseGameAsteroid
+        CeresBaseGameShatteredAsteroid -> Res.string.asteroidTypeCeresBaseGameShatteredAsteroid
+        PrehistoricBaseGameAsteroid -> Res.string.asteroidTypePrehistoricBaseGameAsteroid
+        Oceania -> Res.string.asteroidTypeOceania
+        SandstoneFrozen -> Res.string.asteroidTypeSandstoneFrozen
+        ForestLush -> Res.string.asteroidTypeForestLush
+        ForestDefault -> Res.string.asteroidTypeForestDefault
+        Volcanic -> Res.string.asteroidTypeVolcanic
+        Badlands -> Res.string.asteroidTypeBadlands
+        ForestHot -> Res.string.asteroidTypeForestHot
+        Oasis -> Res.string.asteroidTypeOasis
+        VanillaSandstoneDefault -> Res.string.asteroidTypeVanillaSandstoneDefault
+        MediumRadioactiveVanillaWarpPlanet -> Res.string.asteroidTypeMediumRadioactiveVanillaWarpPlanet
+        CeresClassicAsteroid -> Res.string.asteroidTypeCeresClassicAsteroid
+        PrehistoricClassicAsteroid -> Res.string.asteroidTypePrehistoricClassicAsteroid
+        MediumSwampy -> Res.string.asteroidTypeMediumSwampy
+        VanillaOceania -> Res.string.asteroidTypeVanillaOceania
+        MediumForestyWasteland -> Res.string.asteroidTypeMediumForestyWasteland
+        VanillaSwampDefault -> Res.string.asteroidTypeVanillaSwampDefault
+        MediumForestyRadioactiveVanillaWarpPlanet -> Res.string.asteroidTypeMediumForestyRadioactiveVanillaWarpPlanet
+        VanillaSandstoneFrozen -> Res.string.asteroidTypeVanillaSandstoneFrozen
+        VanillaForestDefault -> Res.string.asteroidTypeVanillaForestDefault
+        MediumSandyRadioactiveVanillaWarpPlanet -> Res.string.asteroidTypeMediumSandyRadioactiveVanillaWarpPlanet
+        VanillaArboria -> Res.string.asteroidTypeVanillaArboria
+        VanillaVolcanic -> Res.string.asteroidTypeVanillaVolcanic
+        VanillaBadlands -> Res.string.asteroidTypeVanillaBadlands
+        VanillaAridio -> Res.string.asteroidTypeVanillaAridio
+        MediumSandySwamp -> Res.string.asteroidTypeMediumSandySwamp
+        VanillaOasis -> Res.string.asteroidTypeVanillaOasis
+        TerraMoonlet -> Res.string.asteroidTypeTerraMoonlet
+        IdealLandingSite -> Res.string.asteroidTypeIdealLandingSite
+        WarpOilySwamp -> Res.string.asteroidTypeWarpOilySwamp
+        WarpOilySandySwamp -> Res.string.asteroidTypeWarpOilySandySwamp
+        RegolithMoonlet -> Res.string.asteroidTypeRegolithMoonlet
+        CeresSpacedOutAsteroid -> Res.string.asteroidTypeCeresSpacedOutAsteroid
+        PrehistoricSpacedOutAsteroid -> Res.string.asteroidTypePrehistoricSpacedOutAsteroid
+        SwampyLandingSite -> Res.string.asteroidTypeSwampyLandingSite
+        OilRichWarpTarget -> Res.string.asteroidTypeOilRichWarpTarget
+        ForestMoonlet -> Res.string.asteroidTypeForestMoonlet
+        SwampMoonlet -> Res.string.asteroidTypeSwampMoonlet
+        MetalHeavyLandingSite -> Res.string.asteroidTypeMetalHeavyLandingSite
+        MiniBadlands -> Res.string.asteroidTypeMiniBadlands
+        MiniMetallicSwampyStart -> Res.string.asteroidTypeMiniMetallicSwampyStart
+        MiniForestFrozenWarp -> Res.string.asteroidTypeMiniForestFrozenWarp
+        MiniFlipped -> Res.string.asteroidTypeMiniFlipped
+        MiniRadioactiveOcean -> Res.string.asteroidTypeMiniRadioactiveOcean
+        MiniBadlandsStart -> Res.string.asteroidTypeMiniBadlandsStart
+        MiniRadioactiveOceanWarp -> Res.string.asteroidTypeMiniRadioactiveOceanWarp
+        MiniMetallicSwampy -> Res.string.asteroidTypeMiniMetallicSwampy
+        MiniForestFrozen -> Res.string.asteroidTypeMiniForestFrozen
+        MiniBadlandsWarp -> Res.string.asteroidTypeMiniBadlandsWarp
+        MiniForestFrozenStart -> Res.string.asteroidTypeMiniForestFrozenStart
+        MiniFlippedStart -> Res.string.asteroidTypeMiniFlippedStart
+        MiniRadioactiveOceanStart -> Res.string.asteroidTypeMiniRadioactiveOceanStart
+        MiniFlippedWarp -> Res.string.asteroidTypeMiniFlippedWarp
+        TundraMoonlet -> Res.string.asteroidTypeTundraMoonlet
+        MarshyMoonlet -> Res.string.asteroidTypeMarshyMoonlet
+        NiobiumMoonlet -> Res.string.asteroidTypeNiobiumMoonlet
+        MooMoonlet -> Res.string.asteroidTypeMooMoonlet
+        WaterMoonlet -> Res.string.asteroidTypeWaterMoonlet
+        MiniRegolithMoonlet -> Res.string.asteroidTypeMiniRegolithMoonlet
+        MixingCeresAsteroid -> Res.string.asteroidTypeMixingCeresAsteroid
+        CeresClassicShatteredAsteroid -> Res.string.asteroidTypeCeresClassicShatteredAsteroid
+        MiniShatteredStartAsteroid -> Res.string.asteroidTypeMiniShatteredStartAsteroid
+        MiniShatteredWarpAsteroid -> Res.string.asteroidTypeMiniShatteredWarpAsteroid
+        MiniShatteredGeoAsteroid -> Res.string.asteroidTypeMiniShatteredGeoAsteroid
+        PrehistoricShatteredBaseGameAsteroid -> Res.string.asteroidTypePrehistoricShatteredBaseGameAsteroid
+        PrehistoricShatteredClassicAsteroid -> Res.string.asteroidTypePrehistoricShatteredClassicAsteroid
+        MixingPrehistoricAsteroid -> Res.string.asteroidTypeMixingPrehistoricAsteroid
+    }
 }

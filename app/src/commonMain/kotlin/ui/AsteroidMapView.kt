@@ -148,7 +148,7 @@ fun AsteroidMapPopup(
             ) {
 
                 Text(
-                    text = stringResource(asteroid.id.stringResource),
+                    text = stringResource(asteroid.id.getStringResource()),
                     style = MaterialTheme.typography.headlineLarge,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onBackground,
