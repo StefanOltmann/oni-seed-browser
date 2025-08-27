@@ -28,29 +28,29 @@ data class FilterRule(
     val asteroid: AsteroidType,
 
     /* Items */
-    val geyserCount: FilterItemGeyserCount?,
-    val geyserOutput: FilterItemGeyserOutput?,
-    val worldTrait: FilterItemWorldTrait?,
-    val spaceDestinationCount: FilterItemSpaceDestinationCount? // only base game
+    val geyserCount: FilterItemGeyserCount? = null,
+    val goodGeyserCount: FilterItemGoodGeyserCount? = null,
+    val worldTrait: FilterItemWorldTrait? = null,
+    val zoneType: FilterItemZoneType? = null
 ) {
 
     fun hasItemSet(): Boolean =
         geyserCount != null ||
-            geyserOutput != null ||
+            goodGeyserCount != null ||
             worldTrait != null ||
-            spaceDestinationCount != null
+            zoneType != null
 
     fun hasValueSet(): Boolean =
         geyserCount?.count != null ||
-            geyserOutput?.outputInGramPerSecond != null ||
-            worldTrait != null || // always has a value
-            spaceDestinationCount?.count != null
+            goodGeyserCount?.count != null ||
+            zoneType != null || // always has a value
+            worldTrait != null // always has a value
 
     fun switchCondition() =
         copy(
-            geyserOutput = geyserOutput?.switchCondition(),
             geyserCount = geyserCount?.switchCondition(),
+            goodGeyserCount = goodGeyserCount?.switchCondition(),
             worldTrait = worldTrait?.switchCondition(),
-            spaceDestinationCount = spaceDestinationCount?.switchCondition()
+            zoneType = zoneType?.switchCondition()
         )
 }

@@ -1,5 +1,5 @@
 /*
- * ONI Seed Browser
+ * ONI Seed Browser Backend
  * Copyright (C) 2025 Stefan Oltmann
  * https://stefan-oltmann.de/oni-seed-browser
  *
@@ -17,27 +17,46 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package model.filter
+package model
 
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.Transient
+object WorldTraitMask {
 
-/**
- * Basegame-only filter
- */
-@Serializable
-data class FilterItemSpaceDestinationCount(
+    fun toMask(traits: Collection<WorldTrait>): Int {
 
-    val poi: String,
+        var mask = 0
 
-    val condition: FilterCondition,
-    val count: Int
+        for (trait in traits) {
 
-) : FilterItem {
+            val bit = 1 shl trait.ordinal
 
-    @Transient
-    override val type: FilterItemType = FilterItemType.SPACE_DESTINATION_COUNT
+            mask = mask or bit
+        }
 
-    override fun switchCondition() =
-        copy(condition = condition.next())
+        return mask
+    }
+
+    fun fromMask(mask: Int): List<WorldTrait> {
+
+        if (mask == 0)
+            return emptyList()
+
+        val result = ArrayList<WorldTrait>()
+
+        for (trait in WorldTrait.entries) {
+
+            val bit = 1 shl trait.ordinal
+
+            if ((mask and bit) != 0)
+                result.add(trait)
+        }
+
+        return result
+    }
+
+    fun has(mask: Int, trait: WorldTrait): Boolean {
+
+        val bit = 1 shl trait.ordinal
+
+        return (mask and bit) != 0
+    }
 }

@@ -19,19 +19,25 @@
 
 package model.filter
 
-import io.github.stefanoltmann.app.generated.resources.Res
-import io.github.stefanoltmann.app.generated.resources.uiGeyserCount
-import io.github.stefanoltmann.app.generated.resources.uiGoodGeyserCount
-import io.github.stefanoltmann.app.generated.resources.uiWorldTrait
-import io.github.stefanoltmann.app.generated.resources.uiZoneType
-import org.jetbrains.compose.resources.StringResource
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
+import model.GeyserType
+import serializer.GeyserTypeSerializer
 
-enum class FilterItemType(
-    val stringResource: StringResource
-) {
+@Serializable
+data class FilterItemGoodGeyserCount(
 
-    WORLD_TRAIT(Res.string.uiWorldTrait),
-    ZONE_TYPE(Res.string.uiZoneType),
-    GEYSER_COUNT(Res.string.uiGeyserCount),
-    GOOD_GEYSER_COUNT(Res.string.uiGoodGeyserCount)
+    @Serializable(with = GeyserTypeSerializer::class)
+    val geyser: GeyserType,
+
+    val condition: FilterCondition,
+    val count: Int?
+
+) : FilterItem {
+
+    @Transient
+    override val type: FilterItemType = FilterItemType.GOOD_GEYSER_COUNT
+
+    override fun switchCondition() =
+        copy(condition = condition.next())
 }

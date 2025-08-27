@@ -37,7 +37,7 @@ data class BiomePaths(
 
                 firstZone = false
 
-                append(zoneType)
+                append(zoneType.name)
                 append(':')
 
                 var firstEntry = true

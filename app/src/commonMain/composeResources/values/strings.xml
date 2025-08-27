@@ -19,6 +19,7 @@
     <string name="uiGeyserCount">Geyser Count</string>
     <string name="uiGeyserOutput">Geyser Output</string>
     <string name="uiItemDescriptionCount">Count</string>
+    <string name="uiItemDescriptionGoodCount">Count (good)</string>
     <string name="uiItemDescriptionOutput">Output (g/s)</string>
     <string name="uiItemDescriptionSpaceDestination">Space destination</string>
     <string name="uiOutput">output</string>
@@ -51,6 +52,8 @@
     <string name="uiStorageTankForDormancy">Storage tank for dormancy</string>
     <string name="uiShowInAlternativeViewer">Show in alternative viewer</string>
     <string name="uiRemix">Remix</string>
+    <string name="uiZoneType">Biome</string>
+    <string name="uiGoodGeyserCount">Geyser Count (good)</string>
 
     <!-- GameModes -->
     <string name="gameModeBaseGameStandard">Standard</string>

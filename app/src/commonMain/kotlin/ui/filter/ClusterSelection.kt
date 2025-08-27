@@ -91,7 +91,7 @@ fun ClusterSelection(
                                 cluster = if (isSelected) null else cluster,
 
                                 /* Reset the remix */
-                                remix = "0",
+                                remix = null,
 
                                 /* Reset the filter rules */
                                 rules = FilterQuery.EMPTY.rules
@@ -114,7 +114,7 @@ fun ClusterSelection(
                 HalfSpacer()
 
                 /*
-                 * We need more space for the chinese or korean description here.
+                 * We need more space for the Chinese or Korean description here.
                  */
                 val style = if (Locale.current.language == "zh" || Locale.current.language == "ko")
                     MaterialTheme.typography.bodySmall
@@ -132,7 +132,7 @@ fun ClusterSelection(
                     textAlign = TextAlign.Center,
                     overflow = TextOverflow.Ellipsis,
                     maxLines = 1,
-                    modifier = Modifier.width(120.dp)
+                    modifier = Modifier.width(160.dp)
                 )
             }
         }

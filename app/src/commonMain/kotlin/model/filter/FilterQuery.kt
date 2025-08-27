@@ -40,7 +40,7 @@ data class FilterQuery(
 
     val mode: GameModeType = GameModeType.BASEGAME_STANDARD,
 
-    val remix: String? = "0",
+    val remix: String? = null,
 
     /**
      * List of connected OR-rules.
@@ -99,9 +99,9 @@ data class FilterQuery(
 
         subRules[ruleIndex] = subRules[ruleIndex].copy(
             geyserCount = filterItem as? FilterItemGeyserCount,
-            geyserOutput = filterItem as? FilterItemGeyserOutput,
+            goodGeyserCount = filterItem as? FilterItemGoodGeyserCount,
             worldTrait = filterItem as? FilterItemWorldTrait,
-            spaceDestinationCount = filterItem as? FilterItemSpaceDestinationCount
+            zoneType = filterItem as? FilterItemZoneType
         )
 
         return copy(
@@ -138,8 +138,8 @@ data class FilterQuery(
             geyserCount = ruleAtIndex.geyserCount?.copy(
                 count = value
             ),
-            geyserOutput = ruleAtIndex.geyserOutput?.copy(
-                outputInGramPerSecond = value
+            goodGeyserCount = ruleAtIndex.goodGeyserCount?.copy(
+                count = value
             )
         )
 
@@ -161,9 +161,9 @@ data class FilterQuery(
                 FilterRule(
                     asteroid = cluster.asteroidTypes.first(),
                     geyserCount = null,
-                    geyserOutput = null,
+                    goodGeyserCount = null,
                     worldTrait = null,
-                    spaceDestinationCount = null
+                    zoneType = null
                 )
             )
         )
@@ -187,9 +187,9 @@ data class FilterQuery(
             FilterRule(
                 asteroid = cluster.asteroidTypes.first(),
                 geyserCount = null,
-                geyserOutput = null,
+                goodGeyserCount = null,
                 worldTrait = null,
-                spaceDestinationCount = null
+                zoneType = null
             )
         )
 
@@ -243,7 +243,7 @@ data class FilterQuery(
             cluster = null,
             dlcs = listOf(Dlc.BaseGame),
             mode = GameModeType.BASEGAME_STANDARD,
-            remix = "0",
+            remix = null,
             rules = emptyList()
         )
     }

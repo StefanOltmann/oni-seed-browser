@@ -19,6 +19,7 @@
     <string name="uiGeyserCount">Geysir Anzahl</string>
     <string name="uiGeyserOutput">Geysir Ausgabe</string>
     <string name="uiItemDescriptionCount">Anzahl</string>
+    <string name="uiItemDescriptionGoodCount">Anzahl (gut)</string>
     <string name="uiItemDescriptionOutput">Ausgabe (g/s)</string>
     <string name="uiItemDescriptionSpaceDestination">Space destination</string>
     <string name="uiOutput">Ausgabe</string>
@@ -51,6 +52,8 @@
     <string name="uiStorageTankForDormancy">Speicher für Ruhephase</string>
     <string name="uiShowInAlternativeViewer">In einem alternativen Tool anzeigen</string>
     <string name="uiRemix">Remix</string>
+    <string name="uiZoneType">Biom</string>
+    <string name="uiGoodGeyserCount">Geyser Anzahl (gut)</string>
 
     <!-- GameModes -->
     <string name="gameModeBaseGameStandard">Standard</string>

@@ -38,19 +38,21 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import io.github.stefanoltmann.app.generated.resources.Res
 import io.github.stefanoltmann.app.generated.resources.uiCount
-import io.github.stefanoltmann.app.generated.resources.uiOutput
 import model.GeyserType
 import model.WorldTrait
+import model.ZoneType
 import model.filter.FilterCondition
 import model.filter.FilterItemGeyserCount
-import model.filter.FilterItemGeyserOutput
+import model.filter.FilterItemGoodGeyserCount
 import model.filter.FilterItemType
 import model.filter.FilterItemWorldTrait
+import model.filter.FilterItemZoneType
 import model.filter.FilterQuery
 import org.jetbrains.compose.resources.stringResource
 import ui.getAsteroidTypeDrawable
 import ui.getGeyserDrawable
 import ui.getWorldTraitDrawable
+import ui.getZoneTypeDrawable
 import ui.theme.defaultPadding
 import ui.theme.defaultRoundedCornerShape
 
@@ -106,10 +108,6 @@ fun OverlayContent(
 
                 for (filterItemType in FilterItemType.entries) {
 
-                    /* TODO Add support later */
-                    if (filterItemType == FilterItemType.SPACE_DESTINATION_COUNT)
-                        continue
-
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.SpaceEvenly,
@@ -162,6 +160,31 @@ fun OverlayContent(
                             )
                         }
 
+                    } else if (filterItemType == FilterItemType.ZONE_TYPE) {
+
+                        for (zoneType in ZoneType.entries) {
+
+                            FilterSelectionEntryItem(
+                                image = getZoneTypeDrawable(zoneType),
+                                text = stringResource(zoneType.stringResource),
+                                onClick = {
+
+                                    /* Update the query */
+                                    filterQueryState.value = filterQueryState.value.setFilterItem(
+                                        rulesIndex = filterSelectionValue.rulesIndex,
+                                        ruleIndex = filterSelectionValue.ruleIndex,
+                                        filterItem = FilterItemZoneType(
+                                            zoneType = zoneType,
+                                            has = true
+                                        )
+                                    )
+
+                                    /* Close pop-up */
+                                    filterSelection.value = null
+                                }
+                            )
+                        }
+
                     } else {
 
                         for (geyserType in GeyserType.entries) {
@@ -170,22 +193,23 @@ fun OverlayContent(
                                 image = getGeyserDrawable(geyserType),
                                 text = stringResource(geyserType.stringResource) + when (filterItemType) {
                                     FilterItemType.GEYSER_COUNT -> " " + stringResource(Res.string.uiCount)
-                                    FilterItemType.GEYSER_OUTPUT -> " " + stringResource(Res.string.uiOutput)
+                                    FilterItemType.GOOD_GEYSER_COUNT -> " " + stringResource(Res.string.uiCount)
                                     else -> ""
                                 },
                                 onClick = {
 
                                     val filterItem = when (filterItemType) {
+
                                         FilterItemType.GEYSER_COUNT -> FilterItemGeyserCount(
                                             geyser = geyserType,
                                             condition = FilterCondition.AT_LEAST,
                                             count = 1
                                         )
 
-                                        FilterItemType.GEYSER_OUTPUT -> FilterItemGeyserOutput(
+                                        FilterItemType.GOOD_GEYSER_COUNT -> FilterItemGoodGeyserCount(
                                             geyser = geyserType,
                                             condition = FilterCondition.AT_LEAST,
-                                            outputInGramPerSecond = 1
+                                            count = 1
                                         )
 
                                         else -> error("Illegal item type for geysers: $filterItemType")

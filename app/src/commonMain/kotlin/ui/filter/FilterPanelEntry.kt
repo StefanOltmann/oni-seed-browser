@@ -50,8 +50,7 @@ import io.github.stefanoltmann.app.generated.resources.Res
 import io.github.stefanoltmann.app.generated.resources.uiHas
 import io.github.stefanoltmann.app.generated.resources.uiHasNot
 import io.github.stefanoltmann.app.generated.resources.uiItemDescriptionCount
-import io.github.stefanoltmann.app.generated.resources.uiItemDescriptionOutput
-import io.github.stefanoltmann.app.generated.resources.uiItemDescriptionSpaceDestination
+import io.github.stefanoltmann.app.generated.resources.uiItemDescriptionGoodCount
 import model.filter.FilterRule
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -138,7 +137,7 @@ fun FilterPanelEntry(
                 }
             }
 
-            if (rule.geyserCount != null || rule.geyserOutput != null || rule.worldTrait != null) {
+            if (rule.geyserCount != null || rule.goodGeyserCount != null || rule.worldTrait != null || rule.zoneType != null) {
 
                 VerticalSeparator()
 
@@ -160,7 +159,7 @@ fun FilterPanelEntry(
 
                         Text(
                             text = getConditionDescription(rule),
-                            style = if (rule.worldTrait != null)
+                            style = if (rule.worldTrait != null || rule.zoneType != null)
                                 MaterialTheme.typography.bodyLarge
                             else
                                 MaterialTheme.typography.headlineMedium,
@@ -175,7 +174,7 @@ fun FilterPanelEntry(
                     }
                 }
 
-                if (rule.geyserCount != null || rule.geyserOutput != null) {
+                if (rule.geyserCount != null || rule.goodGeyserCount != null) {
 
                     VerticalSeparator()
 
@@ -183,12 +182,12 @@ fun FilterPanelEntry(
 
                     val value = when {
                         rule.geyserCount != null -> rule.geyserCount.count
-                        rule.geyserOutput != null -> rule.geyserOutput.outputInGramPerSecond
+                        rule.goodGeyserCount != null -> rule.goodGeyserCount.count
                         else -> 0
                     }
 
                     BasicTextField(
-                        value = value?.toString() ?: "",
+                        value = value.toString(),
                         onValueChange = onValueChanged,
                         cursorBrush = SolidColor(MaterialTheme.colorScheme.onBackground),
                         singleLine = true,
@@ -236,16 +235,15 @@ private fun getItemDescription(rule: FilterRule): String =
             stringResource(Res.string.uiItemDescriptionCount) + ": " +
                 stringResource(rule.geyserCount.geyser.stringResource)
 
-        rule.geyserOutput != null ->
-            stringResource(Res.string.uiItemDescriptionOutput) + ": " +
-                stringResource(rule.geyserOutput.geyser.stringResource)
+        rule.goodGeyserCount != null ->
+            stringResource(Res.string.uiItemDescriptionGoodCount) + ": " +
+                stringResource(rule.goodGeyserCount.geyser.stringResource)
 
         rule.worldTrait != null ->
             stringResource(rule.worldTrait.worldTrait.stringResource)
 
-        rule.spaceDestinationCount != null ->
-            stringResource(Res.string.uiItemDescriptionSpaceDestination) + ": " +
-                rule.spaceDestinationCount.poi
+        rule.zoneType != null ->
+            stringResource(rule.zoneType.zoneType.stringResource)
 
         else -> "-/-"
     }
@@ -264,13 +262,20 @@ private fun VerticalSeparator() {
 @Composable
 private fun getConditionDescription(rule: FilterRule): String =
     when {
+
         rule.geyserCount != null -> rule.geyserCount.condition.displayString
-        rule.geyserOutput != null -> rule.geyserOutput.condition.displayString
+
+        rule.goodGeyserCount != null -> rule.goodGeyserCount.condition.displayString
+
         rule.worldTrait != null -> if (rule.worldTrait.has)
             stringResource(Res.string.uiHas)
         else
             stringResource(Res.string.uiHasNot)
 
-        rule.spaceDestinationCount != null -> "Space destination: ${rule.spaceDestinationCount.poi}"
+        rule.zoneType != null -> if (rule.zoneType.has)
+            stringResource(Res.string.uiHas)
+        else
+            stringResource(Res.string.uiHasNot)
+
         else -> "-/-"
     }

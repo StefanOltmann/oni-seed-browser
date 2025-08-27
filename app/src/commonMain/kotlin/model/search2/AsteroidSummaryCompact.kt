@@ -1,5 +1,5 @@
 /*
- * ONI Seed Browser
+ * ONI Seed Browser Backend
  * Copyright (C) 2025 Stefan Oltmann
  * https://stefan-oltmann.de/oni-seed-browser
  *
@@ -17,25 +17,43 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package model.filter
+package model.search2
 
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.Transient
-import model.WorldTrait
+import kotlinx.serialization.protobuf.ProtoNumber
+import kotlinx.serialization.protobuf.ProtoPacked
+import model.AsteroidType
 
 @Serializable
-data class FilterItemWorldTrait(
+@OptIn(ExperimentalSerializationApi::class)
+class AsteroidSummaryCompact(
 
-    /** True, if the condition is positive */
-    val has: Boolean,
+    @ProtoNumber(1)
+    val id: AsteroidType,
 
-    val worldTrait: WorldTrait
+    @ProtoNumber(2)
+    val worldTraitsBitMask: Int,
 
-) : FilterItem {
+    @ProtoNumber(3)
+    val zoneTypesBitMask: Int,
 
-    @Transient
-    override val type: FilterItemType = FilterItemType.WORLD_TRAIT
+    /**
+     * Count of all geysers
+     *
+     * Index = GeyserType ordinal
+     */
+    @ProtoNumber(4)
+    @ProtoPacked
+    val geyserCounts: ByteArray,
 
-    override fun switchCondition() =
-        copy(has = !has)
-}
+    /**
+     * Count of all good (= avg or better) geysers
+     *
+     * Index = GeyserType ordinal
+     */
+    @ProtoNumber(5)
+    @ProtoPacked
+    val goodGeyserCounts: ByteArray
+
+)

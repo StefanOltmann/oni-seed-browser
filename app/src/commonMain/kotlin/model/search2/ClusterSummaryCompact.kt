@@ -1,5 +1,5 @@
 /*
- * ONI Seed Browser
+ * ONI Seed Browser Backend
  * Copyright (C) 2025 Stefan Oltmann
  * https://stefan-oltmann.de/oni-seed-browser
  *
@@ -17,27 +17,23 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package model.filter
+package model.search2
 
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.Transient
-import model.GeyserType
-import serializer.GeyserTypeSerializer
+import kotlinx.serialization.protobuf.ProtoNumber
 
 @Serializable
-data class FilterItemGeyserOutput(
+@OptIn(ExperimentalSerializationApi::class)
+class ClusterSummaryCompact(
 
-    @Serializable(with = GeyserTypeSerializer::class)
-    val geyser: GeyserType,
+    @ProtoNumber(1)
+    val seed: Int,
 
-    val condition: FilterCondition,
-    val outputInGramPerSecond: Int?
+    @ProtoNumber(2)
+    val remix: String? = null,
 
-) : FilterItem {
+    @ProtoNumber(3)
+    val asteroidSummaries: Array<AsteroidSummaryCompact>
 
-    @Transient
-    override val type: FilterItemType = FilterItemType.GEYSER_OUTPUT
-
-    override fun switchCondition() =
-        copy(condition = condition.next())
-}
+)

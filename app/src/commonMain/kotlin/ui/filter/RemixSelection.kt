@@ -81,10 +81,10 @@ fun RemixSelection(
         ) {
 
             BasicTextField(
-                value = filterQueryState.value.remix ?: "",
+                value = filterQueryState.value.remix ?: "-/-",
                 onValueChange = {
                     filterQueryState.value = filterQueryState.value.copy(
-                        remix = it.uppercase().take(6)
+                        remix = it.uppercase().take(6).ifBlank { null }
                     )
                 },
                 cursorBrush = SolidColor(MaterialTheme.colorScheme.onBackground),

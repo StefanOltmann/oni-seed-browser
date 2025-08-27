@@ -57,7 +57,7 @@ enum class ZoneType(
      * Ordered by how they should appear in the biome list.
      */
 
-    /** Default starting area, should always come first. */
+    /** Default starting area should always come first. */
     Sandstone(3, Res.string.zoneTypeSandstone, Color(0xFFF2BB47)),
     Barren(16, Res.string.zoneTypeBarren, Color(0xFF97752C)),
 

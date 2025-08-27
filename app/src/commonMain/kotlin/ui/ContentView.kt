@@ -652,6 +652,8 @@ private fun ColumnScope.MainPanel(
 
             val filterQuery = filterQueryState.value
 
+            println("Filter query: $filterQuery")
+
             isGettingNewResults.value = true
 
             errorMessage.value = null

@@ -1,5 +1,5 @@
 /*
- * ONI Seed Browser
+ * ONI Seed Browser Backend
  * Copyright (C) 2025 Stefan Oltmann
  * https://stefan-oltmann.de/oni-seed-browser
  *
@@ -19,19 +19,23 @@
 
 package model.filter
 
-import io.github.stefanoltmann.app.generated.resources.Res
-import io.github.stefanoltmann.app.generated.resources.uiGeyserCount
-import io.github.stefanoltmann.app.generated.resources.uiGoodGeyserCount
-import io.github.stefanoltmann.app.generated.resources.uiWorldTrait
-import io.github.stefanoltmann.app.generated.resources.uiZoneType
-import org.jetbrains.compose.resources.StringResource
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
+import model.ZoneType
 
-enum class FilterItemType(
-    val stringResource: StringResource
-) {
+@Serializable
+data class FilterItemZoneType(
 
-    WORLD_TRAIT(Res.string.uiWorldTrait),
-    ZONE_TYPE(Res.string.uiZoneType),
-    GEYSER_COUNT(Res.string.uiGeyserCount),
-    GOOD_GEYSER_COUNT(Res.string.uiGoodGeyserCount)
+    /** True, if the condition is positive */
+    val has: Boolean,
+
+    val zoneType: ZoneType
+
+) : FilterItem {
+
+    @Transient
+    override val type: FilterItemType = FilterItemType.ZONE_TYPE
+
+    override fun switchCondition() =
+        copy(has = !has)
 }
