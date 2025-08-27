@@ -29,6 +29,7 @@ import io.ktor.client.request.get
 import io.ktor.client.request.header
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
+import io.ktor.client.statement.bodyAsBytes
 import io.ktor.client.statement.bodyAsText
 import io.ktor.http.ContentType
 import io.ktor.http.HttpStatusCode
@@ -36,14 +37,19 @@ import io.ktor.http.contentType
 import io.ktor.http.isSuccess
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.decodeFromByteArray
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.protobuf.ProtoBuf
 import model.Cluster
 import model.Contributor
 import model.RateCoordinateRequest
 import model.filter.FilterQuery
+import model.search2.SearchIndex
 
 const val FIND_URL_MAIN = "https://data.mapsnotincluded.org/oni-worlds"
 const val FIND_URL_MIRROR = "https://oni-worlds.stefanoltmann.de"
+
+const val SEARCH_INDEX_URL_MAIN = "https://data.mapsnotincluded.org/oni-search"
 
 const val BASE_API_URL = "https://ingest.mapsnotincluded.org"
 const val REQUEST_URL = "$BASE_API_URL/request-coordinate"
@@ -74,6 +80,8 @@ object DefaultWebClient : WebClient {
     }
 
     private val clusterCache = LruCache<String, Cluster?>(100)
+
+    private var currentSearchIndex: SearchIndex? = null
 
     override suspend fun countSeeds(): Long? {
 
@@ -201,19 +209,23 @@ object DefaultWebClient : WebClient {
         return success
     }
 
+    @OptIn(ExperimentalSerializationApi::class)
     override suspend fun search(filterQuery: FilterQuery): List<String> {
 
-        val response = httpClient.post(SEARCH_URL) {
+        val cluster = filterQuery.cluster ?: return emptyList()
 
-            contentType(ContentType.Application.Json)
-            accept(ContentType.Application.Json)
-            setBody(filterQuery)
-        }
+        val searchIndexUrl = SEARCH_INDEX_URL_MAIN + "/" + cluster.prefix
+
+        val response = httpClient.get(searchIndexUrl)
 
         if (!response.status.isSuccess())
-            error("Search returned status code ${response.status}: ${response.bodyAsText()}")
+            error("Search index for $cluster not found.")
 
-        return response.body()
+        val bytes = response.bodyAsBytes()
+
+        val searchIndex: SearchIndex = ProtoBuf.decodeFromByteArray(bytes)
+
+        return searchIndex.match(filterQuery)
     }
 
     override suspend fun getUsernameMap(): Map<String, String> {

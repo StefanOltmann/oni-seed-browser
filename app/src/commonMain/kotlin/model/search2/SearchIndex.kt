@@ -44,7 +44,7 @@ class SearchIndex(
 
         /* Cluster type must match this index; otherwise nothing can match */
         if (filterQuery.cluster != clusterType)
-            return emptyList()
+            error("Cluster type mismatch: ${filterQuery.cluster} != $clusterType.")
 
         /* If no rules are specified, all clusters match. */
         if (filterQuery.rules.isEmpty())
@@ -85,7 +85,10 @@ class SearchIndex(
                     /* Find the requested asteroid summary by enum name or ignore this rule. */
                     val asteroidSummary = clusterSummary.asteroidSummaries.firstOrNull {
                         it.id == orRule.asteroid
-                    } ?: continue
+                    }
+
+                    if (asteroidSummary == null)
+                        error("Asteroid summary not found for: ${orRule.asteroid} in ${clusterSummary.asteroidSummaries.map { it.id }}.")
 
                     val matchesRule = when {
 
