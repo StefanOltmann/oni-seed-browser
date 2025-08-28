@@ -36,6 +36,8 @@ import io.ktor.http.HttpStatusCode
 import io.ktor.http.contentType
 import io.ktor.http.isSuccess
 import io.ktor.serialization.kotlinx.json.json
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.decodeFromByteArray
 import kotlinx.serialization.json.Json
@@ -210,30 +212,20 @@ object DefaultWebClient : WebClient {
     }
 
     @OptIn(ExperimentalSerializationApi::class)
-    override suspend fun search(filterQuery: FilterQuery): List<String> {
+    override suspend fun search(filterQuery: FilterQuery): List<String> =
+        withContext(Dispatchers.Default) {
 
-        val cluster = filterQuery.cluster ?: return emptyList()
+            val cluster = filterQuery.cluster ?: return@withContext emptyList()
 
-        if (currentSearchIndex?.clusterType == cluster)
-            return currentSearchIndex!!.match(filterQuery)
+            if (currentSearchIndex?.clusterType == cluster)
+                return@withContext currentSearchIndex!!.match(filterQuery)
 
-        val searchIndexUrl = SEARCH_INDEX_URL_MAIN + "/" + cluster.prefix
+            val searchIndex = findSearchIndex(cluster)
 
-        val response = httpClient.get(searchIndexUrl)
+            currentSearchIndex = searchIndex
 
-        if (!response.status.isSuccess())
-            error("Search index for $cluster not found.")
-
-        val bytes = response.bodyAsBytes()
-
-        println("Downloaded ${bytes.size} bytes from $searchIndexUrl")
-
-        val searchIndex: SearchIndex = ProtoBuf.decodeFromByteArray(bytes)
-
-        currentSearchIndex = searchIndex
-
-        return searchIndex.match(filterQuery)
-    }
+            return@withContext searchIndex.match(filterQuery)
+        }
 
     override suspend fun getUsernameMap(): Map<String, String> {
 
