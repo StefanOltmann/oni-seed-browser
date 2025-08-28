@@ -214,6 +214,9 @@ object DefaultWebClient : WebClient {
 
         val cluster = filterQuery.cluster ?: return emptyList()
 
+        if (currentSearchIndex?.clusterType == cluster)
+            return currentSearchIndex!!.match(filterQuery)
+
         val searchIndexUrl = SEARCH_INDEX_URL_MAIN + "/" + cluster.prefix
 
         val response = httpClient.get(searchIndexUrl)
@@ -226,6 +229,8 @@ object DefaultWebClient : WebClient {
         println("Downloaded ${bytes.size} bytes from $searchIndexUrl")
 
         val searchIndex: SearchIndex = ProtoBuf.decodeFromByteArray(bytes)
+
+        currentSearchIndex = searchIndex
 
         return searchIndex.match(filterQuery)
     }
