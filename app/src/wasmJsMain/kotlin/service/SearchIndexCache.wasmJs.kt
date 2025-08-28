@@ -5,14 +5,24 @@ import io.ktor.client.request.get
 import io.ktor.client.request.head
 import io.ktor.client.statement.bodyAsBytes
 import io.ktor.http.isSuccess
+import js.typedarrays.toByteArray
 import kotlinx.serialization.decodeFromByteArray
 import kotlinx.serialization.protobuf.ProtoBuf
 import model.ClusterType
 import model.search2.SearchIndex
+import web.cache.add
+import web.cache.caches
+import web.cache.match
+import web.cache.open
+import web.http.bytes
 
 private val httpClient = HttpClient()
 
+private const val CACHE_NAME = "search-index-cache-v1"
+
 actual suspend fun findSearchIndex(clusterType: ClusterType): SearchIndex {
+
+    val cache = caches.open(CACHE_NAME)
 
     val searchIndexUrl = SEARCH_INDEX_URL_MAIN + "/" + clusterType.prefix
 
@@ -21,18 +31,30 @@ actual suspend fun findSearchIndex(clusterType: ClusterType): SearchIndex {
     val lastModifiedMillis = responseHead.headers.lastModifiedMillis() ?:
         error("[SEARCH] No last modified date found for $searchIndexUrl")
 
-    val response = httpClient.get(searchIndexUrl)
+    println("[SEARCH] Index for ${clusterType.prefix} was last modified on $lastModifiedMillis")
 
-    if (!response.status.isSuccess())
-        error("Search index for $clusterType not found.")
+    val cacheResponse = cache.match(searchIndexUrl)
 
-    val bytes = response.bodyAsBytes()
+    if (cacheResponse != null) {
 
-    println("Downloaded ${bytes.size} bytes from $searchIndexUrl")
+        // FIXME Check if the last modified date is still valid
 
-    val searchIndex: SearchIndex = ProtoBuf.decodeFromByteArray(bytes)
+        println("[SEARCH] Cache HIT: " + cacheResponse.headers.entries().toString())
 
-    // TODO Implement caching
+    } else {
 
-    return searchIndex
+        println("[SEARCH] Cache MISS: $searchIndexUrl")
+    }
+
+    /*
+     * Download the file
+     */
+    cache.add(searchIndexUrl)
+
+    val response = cache.match(searchIndexUrl) ?:
+        error("[SEARCH] No cache entry found at $searchIndexUrl")
+
+    val bytes = response.bytes().toByteArray()
+
+    return ProtoBuf.decodeFromByteArray(bytes)
 }
