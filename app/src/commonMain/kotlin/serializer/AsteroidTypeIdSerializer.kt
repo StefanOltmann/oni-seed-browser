@@ -35,6 +35,10 @@ object AsteroidTypeIdSerializer : KSerializer<AsteroidType> {
     override fun serialize(encoder: Encoder, value: AsteroidType) =
         encoder.encodeByte(value.id)
 
-    override fun deserialize(decoder: Decoder): AsteroidType =
-        AsteroidType.entries.find { it.id == decoder.decodeByte() } ?: error("Unknown id ${decoder.decodeByte()}")
+    override fun deserialize(decoder: Decoder): AsteroidType {
+
+        val id = decoder.decodeByte()
+
+        return AsteroidType.entries.find { it.id == id } ?: error("Unknown id $id")
+    }
 }

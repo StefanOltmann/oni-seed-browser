@@ -223,6 +223,8 @@ object DefaultWebClient : WebClient {
 
         val bytes = response.bodyAsBytes()
 
+        println("Downloaded ${bytes.size} bytes from $searchIndexUrl")
+
         val searchIndex: SearchIndex = ProtoBuf.decodeFromByteArray(bytes)
 
         return searchIndex.match(filterQuery)
