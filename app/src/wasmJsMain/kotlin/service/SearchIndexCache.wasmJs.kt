@@ -1,10 +1,8 @@
 package service
 
 import io.ktor.client.HttpClient
-import io.ktor.client.request.get
 import io.ktor.client.request.head
-import io.ktor.client.statement.bodyAsBytes
-import io.ktor.http.isSuccess
+import js.date.Date
 import js.typedarrays.toByteArray
 import kotlinx.serialization.decodeFromByteArray
 import kotlinx.serialization.protobuf.ProtoBuf
@@ -37,14 +35,24 @@ actual suspend fun findSearchIndex(clusterType: ClusterType): SearchIndex {
 
     if (cacheResponse != null) {
 
-        // FIXME Check if the last modified date is still valid
+        /*
+         * Check if the cache is still valid
+         */
 
-        println("[SEARCH] Cache HIT: " + cacheResponse.headers.entries().toString())
+        val cachedLastModifiedMillis = cacheResponse.headers.get("Last-Modified")?.let { Date.parse(it).toLong() }
+            ?: error("[SEARCH] No last modified date found for $searchIndexUrl")
 
-    } else {
+        if (cachedLastModifiedMillis == lastModifiedMillis) {
 
-        println("[SEARCH] Cache MISS: $searchIndexUrl")
+            println("[SEARCH] Cache HIT: $searchIndexUrl")
+
+            val bytes = cacheResponse.bytes().toByteArray()
+
+            return ProtoBuf.decodeFromByteArray(bytes)
+        }
     }
+
+    println("[SEARCH] Cache MISS: $searchIndexUrl")
 
     /*
      * Download the file
