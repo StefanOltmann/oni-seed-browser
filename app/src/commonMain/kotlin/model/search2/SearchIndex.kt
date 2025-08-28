@@ -82,13 +82,13 @@ class SearchIndex(
 
                 for (orRule in orRules) {
 
-                    /* Find the requested asteroid summary by enum name or ignore this rule. */
+                    /*
+                     * Find the requested asteroid summary by enum name or ignore this rule.
+                     * Due to mixing the wanted Asteroid may not be found in this cluster summary.
+                     */
                     val asteroidSummary = clusterSummary.asteroidSummaries.firstOrNull {
                         it.id == orRule.asteroid
-                    }
-
-                    if (asteroidSummary == null)
-                        error("Asteroid summary not found for: ${orRule.asteroid} in ${clusterSummary.asteroidSummaries.map { it.id }}.")
+                    } ?: continue
 
                     val matchesRule = when {
 
