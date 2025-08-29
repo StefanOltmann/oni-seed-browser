@@ -46,9 +46,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.rememberScrollbarAdapter
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
-import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -64,7 +61,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -105,8 +101,6 @@ fun AsteroidMapPopup(
 
     val coroutineScope = rememberCoroutineScope()
 
-    val useCompactLayout = remember { mutableStateOf(false) }
-
     val density = LocalDensity.current.density
 
     Box(
@@ -137,9 +131,6 @@ fun AsteroidMapPopup(
         Column(
             verticalArrangement = Arrangement.Center,
             modifier = Modifier.fillMaxWidth()
-                .onSizeChanged {
-                    useCompactLayout.value = it.width / density < 900
-                }
         ) {
 
             Box(
@@ -167,28 +158,11 @@ fun AsteroidMapPopup(
                 horizontalArrangement = Arrangement.spacedBy(defaultSpacing),
                 modifier = Modifier.defaultPadding()
             ) {
-
-                if (useCompactLayout.value && !biomeDrawerExpanded.value) {
-
-                    /* When the other drawer is expanded, hide this one to save horizontal space */
-                    if (!geyserDrawerExpanded.value)
-                        DrawerButton(
-                            Icons.AutoMirrored.Filled.KeyboardArrowRight,
-                            onClick = {
-                                biomeDrawerExpanded.value = true
-                                geyserDrawerExpanded.value = false
-                            }
-                        )
-
-                } else {
-
-                    AsteroidBiomeDetails(
-                        biomePaths,
-                        highlightedZoneType,
-                        useCompactLayout.value,
-                        biomeDrawerExpanded
-                    )
-                }
+                AsteroidBiomeDetails(
+                    biomePaths,
+                    highlightedZoneType,
+                    biomeDrawerExpanded
+                )
 
                 Box(
                     modifier = Modifier.weight(1F)
@@ -216,28 +190,13 @@ fun AsteroidMapPopup(
                         highlightedZoneType = highlightedZoneType
                     )
                 }
-                if (useCompactLayout.value && !geyserDrawerExpanded.value) {
 
-                    /* When the other drawer is expanded, hide this one to save horizontal space */
-                    if (!biomeDrawerExpanded.value)
-                        DrawerButton(
-                            Icons.AutoMirrored.Filled.KeyboardArrowLeft,
-                            onClick = {
-                                biomeDrawerExpanded.value = false
-                                geyserDrawerExpanded.value = true
-                            }
-                        )
-
-                } else {
-
-                    AsteroidGeysersDetails(
-                        sortedGeysers,
-                        geyserListLazyListState,
-                        highlightedGeyser,
-                        useCompactLayout.value,
-                        geyserDrawerExpanded
-                    )
-                }
+                AsteroidGeysersDetails(
+                    sortedGeysers,
+                    geyserListLazyListState,
+                    highlightedGeyser,
+                    geyserDrawerExpanded
+                )
             }
         }
     }
@@ -456,28 +415,19 @@ private fun DrawerButton(
 private fun AsteroidBiomeDetails(
     biomePaths: BiomePaths,
     highlightedZoneType: MutableState<ZoneType?>,
-    useCompactLayout: Boolean,
     biomeDrawerExpanded: MutableState<Boolean>,
 ) {
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
-            .width(
-                if (useCompactLayout)
-                    compactSidebarWidth
-                else
-                    defaultSidebarWidth
-            )
+            .width(defaultSidebarWidth)
             .fillMaxHeight()
             .background(anthraticeTransparentBackgroundColor, defaultRoundedCornerShape)
             .border(0.dp, lightGrayTransparentBorderColor, defaultRoundedCornerShape)
     ) {
 
         DefaultSpacer()
-
-        if (useCompactLayout)
-            CloseButton(onClick = { biomeDrawerExpanded.value = false })
 
         Text(
             text = stringResource(Res.string.uiBiomeDetails),
@@ -527,8 +477,7 @@ private fun AsteroidBiomeDetails(
                                 else
                                     lightGrayTransparentBorderColor,
                                 defaultRoundedCornerShape
-                            ),
-                        useCompactLayout = useCompactLayout
+                            )
                     )
                 }
 
@@ -552,26 +501,17 @@ private fun AsteroidGeysersDetails(
     geysers: List<Geyser>,
     geyserListLazyListState: LazyListState,
     highlightedGeyser: MutableState<Geyser?>,
-    useCompactLayout: Boolean,
     geyserDrawerExpanded: MutableState<Boolean>
 ) {
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
-            .width(
-                if (useCompactLayout)
-                    compactSidebarWidth
-                else
-                    defaultSidebarWidth
-            )
+            .width(defaultSidebarWidth)
             .fillMaxHeight()
             .background(anthraticeTransparentBackgroundColor, defaultRoundedCornerShape)
             .border(0.dp, lightGrayTransparentBorderColor, defaultRoundedCornerShape)
     ) {
-
-        if (useCompactLayout)
-            CloseButton(onClick = { geyserDrawerExpanded.value = false })
 
         DefaultSpacer()
 
@@ -620,8 +560,7 @@ private fun AsteroidGeysersDetails(
                                 else
                                     lightGrayTransparentBorderColor,
                                 defaultRoundedCornerShape
-                            ),
-                        useCompactLayout
+                            )
                     )
                 }
             }

@@ -92,7 +92,7 @@ fun ContentView(
     val errorMessage = remember { mutableStateOf<String?>(null) }
 
     val density = LocalDensity.current.density
-    val useCompactLayout = remember { mutableStateOf(false) }
+    val displayTooSmall = remember { mutableStateOf(false) }
 
     val steamIdToUsernameMap = produceState(emptyMap()) {
 
@@ -146,10 +146,40 @@ fun ContentView(
     }
 
     Box(
-        modifier = Modifier.onSizeChanged {
-            useCompactLayout.value = it.width / density < 400
-        }
+        contentAlignment = Alignment.Center,
+        modifier = Modifier
+            .fillMaxSize()
+            .onSizeChanged {
+                displayTooSmall.value = (it.width / density) < (800 - 16)
+            }
     ) {
+
+        /* Background */
+        Image(
+            painter = painterResource(Res.drawable.background_space),
+            contentDescription = null,
+            contentScale = ContentScale.Crop,
+            modifier = Modifier
+                .fillMaxSize()
+                /* Avoid the white background while the image loads. */
+                .background(Color(0xFF181828))
+        )
+
+        /*
+         * We dropped support for small screens. It never looked good.
+         */
+        if (displayTooSmall.value) {
+
+            Text(
+                text = "Please view the page on a bigger screen to see the content.",
+                style = MaterialTheme.typography.headlineSmall,
+                color = MaterialTheme.colorScheme.onBackground,
+                overflow = TextOverflow.Ellipsis,
+                modifier = Modifier.padding(16.dp)
+            )
+
+            return@Box
+        }
 
         val coroutineScope = rememberCoroutineScope()
 
@@ -236,17 +266,6 @@ fun ContentView(
         }
 
         Box {
-
-            /* Background */
-            Image(
-                painter = painterResource(Res.drawable.background_space),
-                contentDescription = null,
-                contentScale = ContentScale.Crop,
-                modifier = Modifier
-                    .fillMaxSize()
-                    /* Avoid white background while the image loads. */
-                    .background(Color(0xFF181828))
-            )
 
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
@@ -489,7 +508,6 @@ fun ContentView(
                 } else if (showFavorites.value) {
 
                     FavoritesPanel(
-                        useCompactLayout,
                         favoredCoordinates,
                         showStarMap,
                         showAsteroidMap,
@@ -511,7 +529,6 @@ fun ContentView(
                         coroutineScope,
                         urlHash,
                         connectedUserId,
-                        useCompactLayout,
                         favoredCoordinates,
                         showStarMap,
                         showAsteroidMap,
@@ -581,7 +598,6 @@ fun ContentView(
 
 @Composable
 private fun ColumnScope.FavoritesPanel(
-    useCompactLayout: MutableState<Boolean>,
     favoredCoordinates: MutableState<List<String>>,
     showStarMap: MutableState<Cluster?>,
     showAsteroidMap: MutableState<Pair<Cluster, Asteroid>?>,
@@ -600,7 +616,6 @@ private fun ColumnScope.FavoritesPanel(
 
             ClusterViewList(
                 clusters = favoredCoordinates.value,
-                useCompactLayout = useCompactLayout.value,
                 favoriteCoordinates = favoredCoordinates,
                 likeCounts = null,
                 showStarMap = showStarMap,
@@ -635,7 +650,6 @@ private fun ColumnScope.MainPanel(
     coroutineScope: CoroutineScope,
     urlHash: State<String?>,
     connectedUserId: String?,
-    useCompactLayout: MutableState<Boolean>,
     favoredCoordinates: MutableState<List<String>>,
     showStarMap: MutableState<Cluster?>,
     showAsteroidMap: MutableState<Pair<Cluster, Asteroid>?>,
@@ -757,7 +771,6 @@ private fun ColumnScope.MainPanel(
 
             ClusterViewList(
                 clusters = clusters.value,
-                useCompactLayout = useCompactLayout.value,
                 favoriteCoordinates = favoredCoordinates,
                 likeCounts = likeCounts,
                 showStarMap = showStarMap,

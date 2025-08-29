@@ -53,7 +53,6 @@ private const val FETCH_DELAY_MS: Long = 250
 @Composable
 fun ClusterViewList(
     clusters: List<String>,
-    useCompactLayout: Boolean,
     favoriteCoordinates: MutableState<List<String>>,
     likeCounts: MutableState<Map<String, Int>?>?,
     showStarMap: MutableState<Cluster?>,
@@ -133,7 +132,6 @@ fun ClusterViewList(
                     cluster = cluster,
                     index = idx + 1,
                     totalCount = clusters.size,
-                    useCompactLayout = useCompactLayout,
                     favoriteCoordinates = favoriteCoordinates,
                     likeCount = likeCounts?.value?.get(cluster.coordinate),
                     showStarMap = showStarMap,

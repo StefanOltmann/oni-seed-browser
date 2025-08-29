@@ -58,8 +58,7 @@ private val defaultHalfRoundedCornerShape = RoundedCornerShape(
 @Composable
 fun ZoneTypeDetail(
     zoneType: ZoneType,
-    modifier: Modifier = Modifier,
-    useCompactLayout: Boolean
+    modifier: Modifier = Modifier
 ) {
 
     Box(
@@ -86,12 +85,7 @@ fun ZoneTypeDetail(
             Box(
                 modifier = Modifier
                     .width(16.dp)
-                    .height(
-                        if (useCompactLayout)
-                            32.dp
-                        else
-                            48.dp
-                    )
+                    .height(48.dp)
                     .background(
                         zoneType.color,
                         defaultHalfRoundedCornerShape
@@ -100,21 +94,17 @@ fun ZoneTypeDetail(
 
             HalfSpacer()
 
-            if (!useCompactLayout)
-                Image(
-                    painter = painterResource(getZoneTypeDrawable(zoneType)),
-                    contentDescription = null,
-                    modifier = Modifier.size(48.dp)
-                )
+            Image(
+                painter = painterResource(getZoneTypeDrawable(zoneType)),
+                contentDescription = null,
+                modifier = Modifier.size(48.dp)
+            )
 
             DefaultSpacer()
 
             Text(
                 text = stringResource(zoneType.stringResource),
-                style = if (useCompactLayout)
-                    MaterialTheme.typography.titleMedium
-                else
-                    MaterialTheme.typography.headlineSmall,
+                style = MaterialTheme.typography.headlineSmall,
                 color = MaterialTheme.colorScheme.onBackground,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis

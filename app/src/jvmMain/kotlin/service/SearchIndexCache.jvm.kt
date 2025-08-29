@@ -7,7 +7,6 @@ import io.ktor.client.statement.bodyAsBytes
 import io.ktor.http.isSuccess
 import java.io.File
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.decodeFromByteArray
 import kotlinx.serialization.protobuf.ProtoBuf
@@ -48,8 +47,8 @@ actual suspend fun findSearchIndex(clusterType: ClusterType): SearchIndex {
 
     val responseHead = httpClient.head(searchIndexUrl)
 
-    val lastModifiedMillis = responseHead.headers.lastModifiedMillis() ?:
-        error("[SEARCH] No last modified date found for $searchIndexUrl")
+    val lastModifiedMillis =
+        responseHead.headers.lastModifiedMillis() ?: error("[SEARCH] No last modified date found for $searchIndexUrl")
 
     if (lastModifiedMillis == cacheFile.lastModified()) {
 

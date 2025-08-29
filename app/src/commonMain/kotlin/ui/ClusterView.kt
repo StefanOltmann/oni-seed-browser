@@ -79,7 +79,6 @@ fun ClusterView(
     cluster: Cluster,
     index: Int,
     totalCount: Int,
-    useCompactLayout: Boolean,
     favoriteCoordinates: MutableState<List<String>>,
     likeCount: Int?,
     showStarMap: MutableState<Cluster?>,
@@ -111,7 +110,6 @@ fun ClusterView(
 
         AsteroidsGrid(
             cluster,
-            useCompactLayout,
             showAsteroidMap
         )
 
@@ -285,7 +283,6 @@ fun ClusterView(
 @Composable
 private fun AsteroidsGrid(
     cluster: Cluster,
-    useCompactLayout: Boolean,
     showAsteroidMap: MutableState<Pair<Cluster, Asteroid>?>
 ) {
 
@@ -314,7 +311,6 @@ private fun AsteroidsGrid(
             AsteroidView(
                 asteroid = firstAsteroid,
                 isStarterAsteroid = true,
-                useCompactLayout = useCompactLayout,
                 showMap = {
                     showAsteroidMap.value = cluster to firstAsteroid
                 }
@@ -327,7 +323,6 @@ private fun AsteroidsGrid(
                 AsteroidView(
                     asteroid = secondAsteroid,
                     isStarterAsteroid = false,
-                    useCompactLayout = useCompactLayout,
                     showMap = {
                         showAsteroidMap.value = cluster to secondAsteroid
                     }
@@ -353,7 +348,6 @@ private fun AsteroidsGrid(
                             AsteroidView(
                                 asteroid = asteroid,
                                 isStarterAsteroid = false,
-                                useCompactLayout = useCompactLayout,
                                 showMap = {
                                     showAsteroidMap.value = cluster to asteroid
                                 }

@@ -67,7 +67,6 @@ val countBackground = Color.Black.copy(alpha = 0.3F)
 fun AsteroidView(
     asteroid: Asteroid,
     isStarterAsteroid: Boolean,
-    useCompactLayout: Boolean,
     showMap: () -> Unit
 ) {
 
@@ -150,56 +149,16 @@ fun AsteroidView(
                         overflow = TextOverflow.Ellipsis
                     )
 
-                    if (!useCompactLayout)
-                        WorldTraitsRow(asteroid.worldTraits)
-                }
-
-                if (!useCompactLayout) {
-
-                    HalfSpacer()
-
-                    GeysersRow(asteroid.geysers, maxWidth, isStarterAsteroid)
-
-                    HalfSpacer()
-
-                    PointOfInterestsRow(asteroid.pointsOfInterest, maxWidth, isStarterAsteroid)
-
-                } else if (maxWidth > 100.dp) {
-
-                    HalfSpacer()
-
                     WorldTraitsRow(asteroid.worldTraits)
-
-                    val geyserCount = asteroid.geysers.count()
-
-                    if (geyserCount > 0) {
-
-                        HalfSpacer()
-
-                        Text(
-                            text = "${geyserCount}x Geysers",
-                            style = MaterialTheme.typography.bodyLarge,
-                            color = MaterialTheme.colorScheme.onBackground,
-                            maxLines = 1,
-                            overflow = TextOverflow.Ellipsis
-                        )
-                    }
-
-                    val poiCount = asteroid.pointsOfInterest.count()
-
-                    if (poiCount > 0) {
-
-                        HalfSpacer()
-
-                        Text(
-                            text = "${poiCount}x POIs",
-                            style = MaterialTheme.typography.bodyLarge,
-                            color = MaterialTheme.colorScheme.onBackground,
-                            maxLines = 1,
-                            overflow = TextOverflow.Ellipsis
-                        )
-                    }
                 }
+
+                HalfSpacer()
+
+                GeysersRow(asteroid.geysers, maxWidth, isStarterAsteroid)
+
+                HalfSpacer()
+
+                PointOfInterestsRow(asteroid.pointsOfInterest, maxWidth, isStarterAsteroid)
             }
         }
     }

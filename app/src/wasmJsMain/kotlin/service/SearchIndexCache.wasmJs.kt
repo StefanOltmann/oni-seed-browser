@@ -26,8 +26,8 @@ actual suspend fun findSearchIndex(clusterType: ClusterType): SearchIndex {
 
     val responseHead = httpClient.head(searchIndexUrl)
 
-    val lastModifiedMillis = responseHead.headers.lastModifiedMillis() ?:
-        error("[SEARCH] No last modified date found for $searchIndexUrl")
+    val lastModifiedMillis =
+        responseHead.headers.lastModifiedMillis() ?: error("[SEARCH] No last modified date found for $searchIndexUrl")
 
     println("[SEARCH] Index for ${clusterType.prefix} was last modified on $lastModifiedMillis")
 
@@ -59,8 +59,7 @@ actual suspend fun findSearchIndex(clusterType: ClusterType): SearchIndex {
      */
     cache.add(searchIndexUrl)
 
-    val response = cache.match(searchIndexUrl) ?:
-        error("[SEARCH] No cache entry found at $searchIndexUrl")
+    val response = cache.match(searchIndexUrl) ?: error("[SEARCH] No cache entry found at $searchIndexUrl")
 
     val bytes = response.bytes().toByteArray()
 

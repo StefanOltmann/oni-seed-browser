@@ -301,7 +301,7 @@ enum class AsteroidType(
 
     WarpOilySandySwamp(69);
 
-    fun getStringResource(): StringResource = when(this) {
+    fun getStringResource(): StringResource = when (this) {
         SandstoneDefault -> Res.string.asteroidTypeSandstoneDefault
         CeresBaseGameAsteroid -> Res.string.asteroidTypeCeresBaseGameAsteroid
         CeresBaseGameShatteredAsteroid -> Res.string.asteroidTypeCeresBaseGameShatteredAsteroid

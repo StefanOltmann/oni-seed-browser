@@ -49,12 +49,14 @@ fun main() = application {
 
     Window(
         state = rememberWindowState(
-            size = DpSize(1200.dp, 800.dp)
+            size = DpSize(800.dp, 800.dp)
         ),
         title = stringResource(Res.string.uiTitle),
         icon = painterResource(Res.drawable.app_icon),
         onCloseRequest = ::exitApplication
     ) {
+
+        this.window.minimumSize = java.awt.Dimension(800, 800)
 
         val clipboardManager = LocalClipboardManager.current
 
