@@ -2,12 +2,12 @@ package service
 
 import io.ktor.client.HttpClient
 import io.ktor.client.request.get
-import io.ktor.client.request.head
 import io.ktor.client.statement.bodyAsBytes
 import io.ktor.http.isSuccess
 import java.io.File
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.decodeFromByteArray
 import kotlinx.serialization.protobuf.ProtoBuf
 import model.ClusterType
@@ -39,16 +39,31 @@ private val localAppData: File by lazy {
     }
 }
 
+@OptIn(ExperimentalSerializationApi::class)
 actual suspend fun findSearchIndex(clusterType: ClusterType): SearchIndex {
 
     val searchIndexUrl = SEARCH_INDEX_URL_MAIN + "/" + clusterType.prefix
 
     val cacheFile = File(localAppData, clusterType.prefix)
 
-    val responseHead = httpClient.head(searchIndexUrl)
+    val lastModifiedMillis = getLastModifiedMillisServer(httpClient, searchIndexUrl)
 
-    val lastModifiedMillis =
-        responseHead.headers.lastModifiedMillis() ?: error("[SEARCH] No last modified date found for $searchIndexUrl")
+    if (lastModifiedMillis == null) {
+
+        if (cacheFile.exists()) {
+
+            println("[SEARCH] Use cached file for ${clusterType.prefix} as we are offline.")
+
+            return ProtoBuf.decodeFromByteArray(cacheFile.readBytes())
+        }
+
+        println("[SEARCH] No cache file for ${clusterType.prefix} and we are offline.")
+
+        /*
+         * Return an empty search index as we are offline.
+         */
+        return SearchIndex(clusterType)
+    }
 
     if (lastModifiedMillis == cacheFile.lastModified()) {
 

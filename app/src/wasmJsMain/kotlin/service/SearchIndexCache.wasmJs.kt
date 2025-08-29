@@ -1,7 +1,6 @@
 package service
 
 import io.ktor.client.HttpClient
-import io.ktor.client.request.head
 import js.date.Date
 import js.typedarrays.toByteArray
 import kotlinx.serialization.ExperimentalSerializationApi
@@ -26,14 +25,31 @@ actual suspend fun findSearchIndex(clusterType: ClusterType): SearchIndex {
 
     val searchIndexUrl = SEARCH_INDEX_URL_MAIN + "/" + clusterType.prefix
 
-    val responseHead = httpClient.head(searchIndexUrl)
+    val lastModifiedMillis = getLastModifiedMillisServer(httpClient, searchIndexUrl)
 
-    val lastModifiedMillis =
-        responseHead.headers.lastModifiedMillis() ?: error("[SEARCH] No last modified date found for $searchIndexUrl")
-
-    println("[SEARCH] Index for ${clusterType.prefix} was last modified on $lastModifiedMillis")
+    if (lastModifiedMillis != null)
+        println("[SEARCH] Index for ${clusterType.prefix} was last modified on $lastModifiedMillis")
 
     val cacheResponse = cache.match(searchIndexUrl)
+
+    if (lastModifiedMillis == null) {
+
+        if (cacheResponse != null) {
+
+            println("[SEARCH] Use cached file for ${clusterType.prefix} as we are offline.")
+
+            val bytes = cacheResponse.bytes().toByteArray()
+
+            return ProtoBuf.decodeFromByteArray(bytes)
+        }
+
+        println("[SEARCH] No cache file for ${clusterType.prefix} and we are offline.")
+
+        /*
+         * Return an empty search index as we are offline.
+         */
+        return SearchIndex(clusterType)
+    }
 
     if (cacheResponse != null) {
 
