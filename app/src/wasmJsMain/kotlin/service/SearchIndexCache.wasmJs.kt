@@ -4,6 +4,7 @@ import io.ktor.client.HttpClient
 import io.ktor.client.request.head
 import js.date.Date
 import js.typedarrays.toByteArray
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.decodeFromByteArray
 import kotlinx.serialization.protobuf.ProtoBuf
 import model.ClusterType
@@ -18,6 +19,7 @@ private val httpClient = HttpClient()
 
 private const val CACHE_NAME = "search-index-cache-v1"
 
+@OptIn(ExperimentalSerializationApi::class)
 actual suspend fun findSearchIndex(clusterType: ClusterType): SearchIndex {
 
     val cache = caches.open(CACHE_NAME)
