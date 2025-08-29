@@ -38,8 +38,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.layout.onSizeChanged
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -90,9 +88,6 @@ fun ContentView(
 ) {
 
     val errorMessage = remember { mutableStateOf<String?>(null) }
-
-    val density = LocalDensity.current.density
-    val displayTooSmall = remember { mutableStateOf(false) }
 
     val steamIdToUsernameMap = produceState(emptyMap()) {
 
@@ -149,9 +144,6 @@ fun ContentView(
         contentAlignment = Alignment.Center,
         modifier = Modifier
             .fillMaxSize()
-            .onSizeChanged {
-                displayTooSmall.value = (it.width / density) < (800 - 16)
-            }
     ) {
 
         /* Background */
@@ -164,22 +156,6 @@ fun ContentView(
                 /* Avoid the white background while the image loads. */
                 .background(Color(0xFF181828))
         )
-
-        /*
-         * We dropped support for small screens. It never looked good.
-         */
-        if (displayTooSmall.value) {
-
-            Text(
-                text = "Please view the page on a bigger screen to see the content.",
-                style = MaterialTheme.typography.headlineSmall,
-                color = MaterialTheme.colorScheme.onBackground,
-                overflow = TextOverflow.Ellipsis,
-                modifier = Modifier.padding(16.dp)
-            )
-
-            return@Box
-        }
 
         val coroutineScope = rememberCoroutineScope()
 
