@@ -45,10 +45,10 @@ import model.RateCoordinateRequest
 import model.filter.FilterQuery
 import model.search2.SearchIndex
 
-const val FIND_URL_MAIN = "https://data.mapsnotincluded.org/oni-worlds"
+// const val FIND_URL_MAIN = "https://data.mapsnotincluded.org/oni-worlds"
 const val FIND_URL_MIRROR = "https://oni-worlds.stefanoltmann.de"
 
-const val SEARCH_INDEX_URL_MAIN = "https://data.mapsnotincluded.org/oni-search"
+// const val SEARCH_INDEX_URL_MAIN = "https://data.mapsnotincluded.org/oni-search"
 const val SEARCH_INDEX_URL_MIRROR = "https://oni-search.stefanoltmann.de"
 
 const val INGEST_SERVER_URL = "https://ingest.mapsnotincluded.org"
@@ -118,24 +118,24 @@ object DefaultWebClient : WebClient {
         /*
          * First, ask the mirror for data.
          */
-        var response = httpClient.get("$FIND_URL_MIRROR/$coordinate") {
+        val response = httpClient.get("$FIND_URL_MIRROR/$coordinate") {
             accept(ContentType.Application.Json)
         }
 
-        /*
-         * If it's not available on the mirror, ask the main repo.
-         */
-        if (response.status != HttpStatusCode.OK) {
-
-            println("$coordinate not found on S3, trying fallback URL.")
-
-            response = httpClient.get("$FIND_URL_MAIN/$coordinate") {
-                accept(ContentType.Application.Json)
-            }
-
-        } else {
-            println("$coordinate found on S3.")
-        }
+//        /*
+//         * If it's not available on the mirror, ask the main repo.
+//         */
+//        if (response.status != HttpStatusCode.OK) {
+//
+//            println("$coordinate not found on S3, trying fallback URL.")
+//
+//            response = httpClient.get("$FIND_URL_MAIN/$coordinate") {
+//                accept(ContentType.Application.Json)
+//            }
+//
+//        } else {
+//            println("$coordinate found on S3.")
+//        }
 
         if (response.status != HttpStatusCode.OK)
             return null
