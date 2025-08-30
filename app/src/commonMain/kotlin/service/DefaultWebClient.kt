@@ -29,7 +29,6 @@ import io.ktor.client.request.get
 import io.ktor.client.request.header
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
-import io.ktor.client.statement.bodyAsBytes
 import io.ktor.client.statement.bodyAsText
 import io.ktor.http.ContentType
 import io.ktor.http.HttpStatusCode
@@ -39,9 +38,7 @@ import io.ktor.serialization.kotlinx.json.json
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.ExperimentalSerializationApi
-import kotlinx.serialization.decodeFromByteArray
 import kotlinx.serialization.json.Json
-import kotlinx.serialization.protobuf.ProtoBuf
 import model.Cluster
 import model.Contributor
 import model.RateCoordinateRequest
@@ -52,11 +49,11 @@ const val FIND_URL_MAIN = "https://data.mapsnotincluded.org/oni-worlds"
 const val FIND_URL_MIRROR = "https://oni-worlds.stefanoltmann.de"
 
 const val SEARCH_INDEX_URL_MAIN = "https://data.mapsnotincluded.org/oni-search"
+const val SEARCH_INDEX_URL_MIRROR = "https://oni-search.stefanoltmann.de"
 
-const val BASE_API_URL = "https://ingest.mapsnotincluded.org"
-const val REQUEST_URL = "$BASE_API_URL/request-coordinate"
-const val SEARCH_URL = "$BASE_API_URL/search/v2"
-const val COUNT_URL = "$BASE_API_URL/count"
+const val INGEST_SERVER_URL = "https://ingest.mapsnotincluded.org"
+const val REQUEST_URL = "$INGEST_SERVER_URL/request-coordinate"
+const val COUNT_URL = "$INGEST_SERVER_URL/count"
 
 const val USERNAME_REGISTRY_URL = "https://steam.name.stefanoltmann.de/registry"
 
@@ -99,7 +96,7 @@ object DefaultWebClient : WebClient {
 
     override suspend fun findLatestClusters(): List<String> {
 
-        val response = httpClient.get("$BASE_API_URL/latest/v2") {
+        val response = httpClient.get("$INGEST_SERVER_URL/latest/v2") {
             accept(ContentType.Application.Json)
         }
 
@@ -167,7 +164,7 @@ object DefaultWebClient : WebClient {
 
     override suspend fun findFavoredCoordinates(): List<String> {
 
-        val response = httpClient.get("$BASE_API_URL/favored") {
+        val response = httpClient.get("$INGEST_SERVER_URL/favored") {
 
             /* Auth */
             AppStorage.getToken()?.let { token ->
@@ -187,7 +184,7 @@ object DefaultWebClient : WebClient {
 
         println((if (like) "Like" else "Unlike") + " " + coordinate)
 
-        val response = httpClient.post("$BASE_API_URL/rate-coordinate") {
+        val response = httpClient.post("$INGEST_SERVER_URL/rate-coordinate") {
 
             /* Auth */
             AppStorage.getToken()?.let { token ->
@@ -266,7 +263,7 @@ object DefaultWebClient : WebClient {
 
         println("WebClient: findContributors()")
 
-        val response = httpClient.get("$BASE_API_URL/contributors") {
+        val response = httpClient.get("$INGEST_SERVER_URL/contributors") {
             accept(ContentType.Application.Json)
         }
 

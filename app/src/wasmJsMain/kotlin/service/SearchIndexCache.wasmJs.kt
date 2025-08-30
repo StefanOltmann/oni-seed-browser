@@ -23,7 +23,8 @@ actual suspend fun findSearchIndex(clusterType: ClusterType): SearchIndex {
 
     val cache = caches.open(CACHE_NAME)
 
-    val searchIndexUrl = SEARCH_INDEX_URL_MAIN + "/" + clusterType.prefix
+    // TODO Fall back to main, if mirror is offline
+    val searchIndexUrl = SEARCH_INDEX_URL_MIRROR + "/" + clusterType.prefix
 
     val lastModifiedMillis = getLastModifiedMillisServer(httpClient, searchIndexUrl)
 
