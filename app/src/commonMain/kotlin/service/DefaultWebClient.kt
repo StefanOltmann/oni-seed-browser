@@ -55,7 +55,8 @@ const val INGEST_SERVER_URL = "https://ingest.mapsnotincluded.org"
 const val REQUEST_URL = "$INGEST_SERVER_URL/request-coordinate"
 const val COUNT_URL = "$INGEST_SERVER_URL/count"
 
-const val USERNAME_REGISTRY_URL = "https://steam.name.stefanoltmann.de/registry"
+const val ALL_USER_NAMES_URL = "https://oni-users.stefanoltmann.de/names.json"
+const val CHANGE_NAME_ENDPOINT = "https://stefanoltmann.de/steam-names"
 
 const val TOKEN_HEADER = "token"
 
@@ -226,7 +227,7 @@ object DefaultWebClient : WebClient {
 
     override suspend fun getUsernameMap(): Map<String, String> {
 
-        val response = httpClient.get(USERNAME_REGISTRY_URL) {
+        val response = httpClient.get(ALL_USER_NAMES_URL) {
             accept(ContentType.Application.Json)
         }
 
@@ -238,7 +239,7 @@ object DefaultWebClient : WebClient {
 
     override suspend fun setUsername(username: String): Boolean {
 
-        val response = httpClient.post(USERNAME_REGISTRY_URL) {
+        val response = httpClient.post(CHANGE_NAME_ENDPOINT) {
 
             /* Auth */
             AppStorage.getToken()?.let { token ->
