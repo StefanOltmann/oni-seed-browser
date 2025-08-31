@@ -247,7 +247,7 @@ object DefaultWebClient : WebClient {
             }
 
             contentType(ContentType.Text.Plain)
-            setBody(username.ifBlank { "" })
+            setBody(username.ifBlank { "null" })
         }
 
         val success = response.status.isSuccess()
