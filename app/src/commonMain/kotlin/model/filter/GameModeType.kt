@@ -19,34 +19,16 @@
 
 package model.filter
 
-import io.github.stefanoltmann.app.generated.resources.Res
-import io.github.stefanoltmann.app.generated.resources.gameModeBaseGameStandard
-import io.github.stefanoltmann.app.generated.resources.gameModeSpacedOutClassic
-import io.github.stefanoltmann.app.generated.resources.gameModeSpacedOutSpacedOut
-import io.github.stefanoltmann.app.generated.resources.gameModeTheLab
 import model.ClusterType
 import model.Dlc
-import org.jetbrains.compose.resources.StringResource
 
-enum class GameModeType(
-    val nameStringResource: StringResource
-) {
+enum class GameModeType {
 
-    BASEGAME_STANDARD(
-        nameStringResource = Res.string.gameModeBaseGameStandard
-    ),
-    BASEGAME_THELAB(
-        nameStringResource = Res.string.gameModeTheLab
-    ),
-    SPACEDOUT_CLASSIC(
-        nameStringResource = Res.string.gameModeSpacedOutClassic
-    ),
-    SPACEDOUT_SPACEDOUT(
-        nameStringResource = Res.string.gameModeSpacedOutSpacedOut
-    ),
-    SPACEDOUT_THELAB(
-        nameStringResource = Res.string.gameModeTheLab
-    );
+    BASEGAME_STANDARD,
+    BASEGAME_THELAB,
+    SPACEDOUT_CLASSIC,
+    SPACEDOUT_SPACEDOUT,
+    SPACEDOUT_THELAB;
 
     fun doDlcSettingsAllowMode(currentDlc: List<Dlc>): Boolean {
 
