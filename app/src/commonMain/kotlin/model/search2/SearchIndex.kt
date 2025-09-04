@@ -46,12 +46,6 @@ class SearchIndex(
         if (filterQuery.cluster != clusterType)
             error("Cluster type mismatch: ${filterQuery.cluster} != $clusterType.")
 
-        /* If no rules are specified, all clusters match. */
-        if (filterQuery.rules.isEmpty())
-            return summaries.map {
-                clusterType.prefix + "-" + it.seed + "-0-0-" + (it.remix ?: "0")
-            }
-
         return summaries.filter { clusterSummary ->
 
             val effectiveRemix = clusterSummary.remix ?: "0"
@@ -61,6 +55,12 @@ class SearchIndex(
              */
             if (filterQuery.remix != null && filterQuery.remix != effectiveRemix)
                 return@filter false
+
+            /*
+             * If there are no filter rules, we have a match.
+             */
+            if (filterQuery.rules.isEmpty())
+                return@filter true
 
             /*
              * The outer loop iterates through groups that are connected by AND.
