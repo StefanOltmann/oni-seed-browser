@@ -195,7 +195,7 @@ fun BaseGameStarMapView(
                                         HalfSpacer()
 
                                         Text(
-                                            text = stringResource(entry.id.stringResource),
+                                            text = stringResource(getStringResource(entry.id)),
                                             style = MaterialTheme.typography.bodySmall,
                                             color = MaterialTheme.colorScheme.onBackground,
                                             maxLines = 1,

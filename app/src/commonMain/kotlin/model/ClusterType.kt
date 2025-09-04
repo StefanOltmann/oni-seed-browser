@@ -19,48 +19,8 @@
 
 package model
 
-import io.github.stefanoltmann.app.generated.resources.Res
-import io.github.stefanoltmann.app.generated.resources.clusterTypeBaseArboria
-import io.github.stefanoltmann.app.generated.resources.clusterTypeBaseAridio
-import io.github.stefanoltmann.app.generated.resources.clusterTypeBaseBlastedCeres
-import io.github.stefanoltmann.app.generated.resources.clusterTypeBaseCeres
-import io.github.stefanoltmann.app.generated.resources.clusterTypeBaseOasisse
-import io.github.stefanoltmann.app.generated.resources.clusterTypeBaseOceania
-import io.github.stefanoltmann.app.generated.resources.clusterTypeBaseRelica
-import io.github.stefanoltmann.app.generated.resources.clusterTypeBaseRelicaLab
-import io.github.stefanoltmann.app.generated.resources.clusterTypeBaseRime
-import io.github.stefanoltmann.app.generated.resources.clusterTypeBaseTerra
-import io.github.stefanoltmann.app.generated.resources.clusterTypeBaseTheBadlands
-import io.github.stefanoltmann.app.generated.resources.clusterTypeBaseVerdante
-import io.github.stefanoltmann.app.generated.resources.clusterTypeBaseVolcanea
-import io.github.stefanoltmann.app.generated.resources.clusterTypeDlcArboria
-import io.github.stefanoltmann.app.generated.resources.clusterTypeDlcAridio
-import io.github.stefanoltmann.app.generated.resources.clusterTypeDlcBlastedCeres
-import io.github.stefanoltmann.app.generated.resources.clusterTypeDlcCeres
-import io.github.stefanoltmann.app.generated.resources.clusterTypeDlcCeresMantle
-import io.github.stefanoltmann.app.generated.resources.clusterTypeDlcCeresMinor
-import io.github.stefanoltmann.app.generated.resources.clusterTypeDlcFlippedMoonlet
-import io.github.stefanoltmann.app.generated.resources.clusterTypeDlcFolia
-import io.github.stefanoltmann.app.generated.resources.clusterTypeDlcFrozenForestMoonlet
-import io.github.stefanoltmann.app.generated.resources.clusterTypeDlcMetallicSwampyMoonlet
-import io.github.stefanoltmann.app.generated.resources.clusterTypeDlcOasisse
-import io.github.stefanoltmann.app.generated.resources.clusterTypeDlcOceania
-import io.github.stefanoltmann.app.generated.resources.clusterTypeDlcQuagmiris
-import io.github.stefanoltmann.app.generated.resources.clusterTypeDlcRadioactiveOceanMoonlet
-import io.github.stefanoltmann.app.generated.resources.clusterTypeDlcRelica
-import io.github.stefanoltmann.app.generated.resources.clusterTypeDlcRelicaLab
-import io.github.stefanoltmann.app.generated.resources.clusterTypeDlcRelicaMinor
-import io.github.stefanoltmann.app.generated.resources.clusterTypeDlcRime
-import io.github.stefanoltmann.app.generated.resources.clusterTypeDlcSquelchy
-import io.github.stefanoltmann.app.generated.resources.clusterTypeDlcTerra
-import io.github.stefanoltmann.app.generated.resources.clusterTypeDlcTerrania
-import io.github.stefanoltmann.app.generated.resources.clusterTypeDlcTheBadlands
-import io.github.stefanoltmann.app.generated.resources.clusterTypeDlcTheDesolandsMoonlet
-import io.github.stefanoltmann.app.generated.resources.clusterTypeDlcVerdante
-import io.github.stefanoltmann.app.generated.resources.clusterTypeDlcVolcanea
 import kotlinx.serialization.Serializable
 import model.filter.GameModeType
-import org.jetbrains.compose.resources.StringResource
 
 @Suppress("UNUSED")
 @Serializable
@@ -68,7 +28,6 @@ enum class ClusterType(
     val prefix: String,
     val requiredDlcs: List<Dlc>,
     val gameMode: GameModeType,
-    val nameStringResource: StringResource,
     val asteroidTypes: List<AsteroidType>,
     val starMapRadius: Int = 12
 ) {
@@ -78,7 +37,6 @@ enum class ClusterType(
         prefix = "SNDST-A",
         requiredDlcs = listOf(Dlc.BaseGame),
         gameMode = GameModeType.BASEGAME_STANDARD,
-        nameStringResource = Res.string.clusterTypeBaseTerra,
         asteroidTypes = listOf(
             AsteroidType.SandstoneDefault
         )
@@ -88,7 +46,6 @@ enum class ClusterType(
     BASE_CERES(
         prefix = "CER-A",
         requiredDlcs = listOf(Dlc.BaseGame, Dlc.FrostyPlanet),
-        nameStringResource = Res.string.clusterTypeBaseCeres,
         gameMode = GameModeType.BASEGAME_STANDARD,
         asteroidTypes = listOf(
             AsteroidType.CeresBaseGameAsteroid
@@ -100,7 +57,6 @@ enum class ClusterType(
         prefix = "CERS-A",
         requiredDlcs = listOf(Dlc.BaseGame, Dlc.FrostyPlanet),
         gameMode = GameModeType.BASEGAME_THELAB,
-        nameStringResource = Res.string.clusterTypeBaseBlastedCeres,
         asteroidTypes = listOf(
             AsteroidType.CeresBaseGameShatteredAsteroid
         )
@@ -110,7 +66,6 @@ enum class ClusterType(
     BASE_RELICA(
         prefix = "PRE-A",
         requiredDlcs = listOf(Dlc.BaseGame, Dlc.PrehistoricPlanet),
-        nameStringResource = Res.string.clusterTypeBaseRelica,
         gameMode = GameModeType.BASEGAME_STANDARD,
         asteroidTypes = listOf(
             AsteroidType.PrehistoricBaseGameAsteroid
@@ -121,7 +76,6 @@ enum class ClusterType(
     BASE_RELICA_LAB(
         prefix = "PRES-A",
         requiredDlcs = listOf(Dlc.BaseGame, Dlc.PrehistoricPlanet),
-        nameStringResource = Res.string.clusterTypeBaseRelicaLab,
         gameMode = GameModeType.BASEGAME_THELAB,
         asteroidTypes = listOf(
             AsteroidType.PrehistoricShatteredBaseGameAsteroid
@@ -133,7 +87,6 @@ enum class ClusterType(
         prefix = "OCAN-A",
         requiredDlcs = listOf(Dlc.BaseGame),
         gameMode = GameModeType.BASEGAME_STANDARD,
-        nameStringResource = Res.string.clusterTypeBaseOceania,
         asteroidTypes = listOf(
             AsteroidType.Oceania
         )
@@ -144,7 +97,6 @@ enum class ClusterType(
         prefix = "S-FRZ",
         requiredDlcs = listOf(Dlc.BaseGame),
         gameMode = GameModeType.BASEGAME_STANDARD,
-        nameStringResource = Res.string.clusterTypeBaseRime,
         asteroidTypes = listOf(
             AsteroidType.SandstoneFrozen
         )
@@ -155,7 +107,6 @@ enum class ClusterType(
         prefix = "LUSH-A",
         requiredDlcs = listOf(Dlc.BaseGame),
         gameMode = GameModeType.BASEGAME_STANDARD,
-        nameStringResource = Res.string.clusterTypeBaseVerdante,
         asteroidTypes = listOf(
             AsteroidType.ForestLush
         )
@@ -166,7 +117,6 @@ enum class ClusterType(
         prefix = "FRST-A",
         requiredDlcs = listOf(Dlc.BaseGame),
         gameMode = GameModeType.BASEGAME_STANDARD,
-        nameStringResource = Res.string.clusterTypeBaseArboria,
         asteroidTypes = listOf(
             AsteroidType.ForestDefault
         )
@@ -177,7 +127,6 @@ enum class ClusterType(
         prefix = "VOLCA",
         requiredDlcs = listOf(Dlc.BaseGame),
         gameMode = GameModeType.BASEGAME_STANDARD,
-        nameStringResource = Res.string.clusterTypeBaseVolcanea,
         asteroidTypes = listOf(
             AsteroidType.Volcanic
         )
@@ -188,7 +137,6 @@ enum class ClusterType(
         prefix = "BAD-A",
         requiredDlcs = listOf(Dlc.BaseGame),
         gameMode = GameModeType.BASEGAME_STANDARD,
-        nameStringResource = Res.string.clusterTypeBaseTheBadlands,
         asteroidTypes = listOf(
             AsteroidType.Badlands
         )
@@ -199,7 +147,6 @@ enum class ClusterType(
         prefix = "HTFST-A",
         requiredDlcs = listOf(Dlc.BaseGame),
         gameMode = GameModeType.BASEGAME_STANDARD,
-        nameStringResource = Res.string.clusterTypeBaseAridio,
         asteroidTypes = listOf(
             AsteroidType.ForestHot
         )
@@ -210,7 +157,6 @@ enum class ClusterType(
         prefix = "OASIS-A",
         requiredDlcs = listOf(Dlc.BaseGame),
         gameMode = GameModeType.BASEGAME_STANDARD,
-        nameStringResource = Res.string.clusterTypeBaseOasisse,
         asteroidTypes = listOf(
             AsteroidType.Oasis
         )
@@ -221,7 +167,6 @@ enum class ClusterType(
         prefix = "V-SNDST-C",
         requiredDlcs = listOf(Dlc.SpacedOut),
         gameMode = GameModeType.SPACEDOUT_CLASSIC,
-        nameStringResource = Res.string.clusterTypeDlcTerra,
         asteroidTypes = listOf(
             AsteroidType.VanillaSandstoneDefault,
             AsteroidType.MediumRadioactiveVanillaWarpPlanet,
@@ -239,7 +184,6 @@ enum class ClusterType(
         prefix = "V-CER-C",
         requiredDlcs = listOf(Dlc.SpacedOut, Dlc.FrostyPlanet),
         gameMode = GameModeType.SPACEDOUT_CLASSIC,
-        nameStringResource = Res.string.clusterTypeDlcCeres,
         asteroidTypes = listOf(
             AsteroidType.CeresClassicAsteroid,
             AsteroidType.MediumSwampy,
@@ -257,7 +201,6 @@ enum class ClusterType(
         prefix = "V-CERS-C",
         requiredDlcs = listOf(Dlc.SpacedOut, Dlc.FrostyPlanet),
         gameMode = GameModeType.SPACEDOUT_THELAB,
-        nameStringResource = Res.string.clusterTypeDlcBlastedCeres,
         asteroidTypes = listOf(
             AsteroidType.CeresClassicShatteredAsteroid,
             AsteroidType.MediumSwampy,
@@ -275,7 +218,6 @@ enum class ClusterType(
         prefix = "V-PRE-C",
         requiredDlcs = listOf(Dlc.SpacedOut, Dlc.PrehistoricPlanet),
         gameMode = GameModeType.SPACEDOUT_CLASSIC,
-        nameStringResource = Res.string.clusterTypeDlcRelica,
         asteroidTypes = listOf(
             AsteroidType.PrehistoricClassicAsteroid,
             AsteroidType.MediumSwampy,
@@ -293,7 +235,6 @@ enum class ClusterType(
         prefix = "V-PRES-C",
         requiredDlcs = listOf(Dlc.SpacedOut, Dlc.PrehistoricPlanet),
         gameMode = GameModeType.SPACEDOUT_THELAB,
-        nameStringResource = Res.string.clusterTypeDlcRelicaLab,
         asteroidTypes = listOf(
             AsteroidType.PrehistoricShatteredClassicAsteroid,
             AsteroidType.MediumSwampy,
@@ -311,7 +252,6 @@ enum class ClusterType(
         prefix = "V-OCAN-C",
         requiredDlcs = listOf(Dlc.SpacedOut),
         gameMode = GameModeType.SPACEDOUT_CLASSIC,
-        nameStringResource = Res.string.clusterTypeDlcOceania,
         asteroidTypes = listOf(
             AsteroidType.VanillaOceania,
             AsteroidType.MediumForestyWasteland,

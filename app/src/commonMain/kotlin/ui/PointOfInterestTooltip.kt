@@ -74,7 +74,7 @@ fun PointOfInterestTooltip(
         HalfSpacer()
 
         Text(
-            text = stringResource(pointOfInterestType.stringResource),
+            text = stringResource(getStringResource(pointOfInterestType)),
             style = MaterialTheme.typography.bodyLarge,
             color = MaterialTheme.colorScheme.onBackground
         )
