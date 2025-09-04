@@ -19,19 +19,10 @@
 
 package model.filter
 
-import io.github.stefanoltmann.app.generated.resources.Res
-import io.github.stefanoltmann.app.generated.resources.uiGeyserCount
-import io.github.stefanoltmann.app.generated.resources.uiGoodGeyserCount
-import io.github.stefanoltmann.app.generated.resources.uiWorldTrait
-import io.github.stefanoltmann.app.generated.resources.uiZoneType
-import org.jetbrains.compose.resources.StringResource
+enum class FilterItemType {
 
-enum class FilterItemType(
-    val stringResource: StringResource
-) {
-
-    WORLD_TRAIT(Res.string.uiWorldTrait),
-    ZONE_TYPE(Res.string.uiZoneType),
-    GEYSER_COUNT(Res.string.uiGeyserCount),
-    GOOD_GEYSER_COUNT(Res.string.uiGoodGeyserCount)
+    WORLD_TRAIT,
+    ZONE_TYPE,
+    GEYSER_COUNT,
+    GOOD_GEYSER_COUNT
 }

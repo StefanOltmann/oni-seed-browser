@@ -51,6 +51,7 @@ import model.filter.FilterQuery
 import org.jetbrains.compose.resources.stringResource
 import ui.getAsteroidTypeDrawable
 import ui.getGeyserDrawable
+import ui.getStringResource
 import ui.getWorldTraitDrawable
 import ui.getZoneTypeDrawable
 import ui.theme.defaultPadding
@@ -122,7 +123,7 @@ fun OverlayContent(
                         )
 
                         Text(
-                            text = stringResource(filterItemType.stringResource).uppercase(),
+                            text = stringResource(getStringResource(filterItemType)).uppercase(),
                             style = MaterialTheme.typography.bodyLarge,
                             color = MaterialTheme.colorScheme.onBackground
                         )
