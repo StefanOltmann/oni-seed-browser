@@ -25,9 +25,11 @@ import io.ktor.client.call.body
 import io.ktor.client.plugins.compression.ContentEncoding
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.request.accept
+import io.ktor.client.request.delete
 import io.ktor.client.request.get
 import io.ktor.client.request.header
 import io.ktor.client.request.post
+import io.ktor.client.request.put
 import io.ktor.client.request.setBody
 import io.ktor.client.statement.bodyAsText
 import io.ktor.http.ContentType
@@ -41,22 +43,29 @@ import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import model.Cluster
 import model.Contributor
-import model.RateCoordinateRequest
 import model.filter.FilterQuery
 import model.search2.SearchIndex
 
-// const val FIND_URL_MAIN = "https://data.mapsnotincluded.org/oni-worlds"
-const val FIND_URL_MIRROR = "https://oni-worlds.stefanoltmann.de"
+const val FIND_URL = "https://oni-worlds.stefanoltmann.de"
 
-// const val SEARCH_INDEX_URL_MAIN = "https://data.mapsnotincluded.org/oni-search"
-const val SEARCH_INDEX_URL_MIRROR = "https://oni-search.stefanoltmann.de"
+const val SEARCH_INDEX_URL = "https://oni-search.stefanoltmann.de"
 
 const val INGEST_SERVER_URL = "https://ingest.mapsnotincluded.org"
 const val REQUEST_URL = "$INGEST_SERVER_URL/request-coordinate"
 const val COUNT_URL = "$INGEST_SERVER_URL/count"
 
+/**
+ * Cloudflare-based service.
+ * See https://github.com/StefanOltmann/cloudflare-steam-name-update-service
+ */
 const val ALL_USER_NAMES_URL = "https://oni-users.stefanoltmann.de/names.json"
 const val CHANGE_NAME_ENDPOINT = "https://stefanoltmann.de/steam-names"
+
+/**
+ * Cloudflare-based service.
+ * See https://github.com/StefanOltmann/cloudflare-oni-user-coordinate-like-service
+ */
+const val COORDINATE_FAVORITES_ENDPOINT = "https://stefanoltmann.de/oni-user-coordinate-likes"
 
 const val TOKEN_HEADER = "token"
 
@@ -118,7 +127,7 @@ object DefaultWebClient : WebClient {
         /*
          * First, ask the mirror for data.
          */
-        val response = httpClient.get("$FIND_URL_MIRROR/$coordinate") {
+        val response = httpClient.get("$FIND_URL/$coordinate") {
             accept(ContentType.Application.Json)
         }
 
@@ -165,7 +174,7 @@ object DefaultWebClient : WebClient {
 
     override suspend fun findFavoredCoordinates(): List<String> {
 
-        val response = httpClient.get("$INGEST_SERVER_URL/favored") {
+        val response = httpClient.get(COORDINATE_FAVORITES_ENDPOINT) {
 
             /* Auth */
             AppStorage.getToken()?.let { token ->
@@ -185,20 +194,31 @@ object DefaultWebClient : WebClient {
 
         println((if (like) "Like" else "Unlike") + " " + coordinate)
 
-        val response = httpClient.post("$INGEST_SERVER_URL/rate-coordinate") {
+        val response = if (like) {
 
-            /* Auth */
-            AppStorage.getToken()?.let { token ->
-                header(TOKEN_HEADER, token)
+            httpClient.put(COORDINATE_FAVORITES_ENDPOINT) {
+
+                /* Auth */
+                AppStorage.getToken()?.let { token ->
+                    header(TOKEN_HEADER, token)
+                }
+
+                contentType(ContentType.Text.Plain)
+                setBody(coordinate)
             }
 
-            contentType(ContentType.Application.Json)
-            setBody(
-                RateCoordinateRequest(
-                    coordinate = coordinate,
-                    like = like
-                )
-            )
+        } else {
+
+            httpClient.delete(COORDINATE_FAVORITES_ENDPOINT) {
+
+                /* Auth */
+                AppStorage.getToken()?.let { token ->
+                    header(TOKEN_HEADER, token)
+                }
+
+                contentType(ContentType.Text.Plain)
+                setBody(coordinate)
+            }
         }
 
         val success = response.status.isSuccess()
