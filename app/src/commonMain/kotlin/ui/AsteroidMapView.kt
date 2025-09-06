@@ -85,6 +85,7 @@ import ui.theme.defaultPadding
 import ui.theme.defaultRoundedCornerShape
 import ui.theme.defaultSpacing
 import ui.theme.doubleSpacing
+import ui.theme.getZoneColor
 import ui.theme.halfSpacing
 import ui.theme.hoverColor
 import ui.theme.lightGray
@@ -284,9 +285,9 @@ fun AsteroidMap(
                      * Only color the highlighted zone
                      */
                     val color = if (highlightedZoneType.value == null)
-                        zoneType.color
+                        getZoneColor(zoneType)
                     else if (isHighlighted)
-                        zoneType.color
+                        getZoneColor(zoneType)
                     else
                         Color.LightGray
 

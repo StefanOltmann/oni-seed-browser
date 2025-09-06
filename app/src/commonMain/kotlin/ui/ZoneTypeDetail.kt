@@ -45,6 +45,7 @@ import ui.theme.HalfSpacer
 import ui.theme.cardColorBackground
 import ui.theme.defaultRoundedCornerShape
 import ui.theme.doubleSpacing
+import ui.theme.getZoneColor
 import ui.theme.halfPadding
 import ui.theme.lightGrayTransparentBorderColor
 
@@ -87,7 +88,7 @@ fun ZoneTypeDetail(
                     .width(16.dp)
                     .height(48.dp)
                     .background(
-                        zoneType.color,
+                        getZoneColor(zoneType),
                         defaultHalfRoundedCornerShape
                     )
             )
