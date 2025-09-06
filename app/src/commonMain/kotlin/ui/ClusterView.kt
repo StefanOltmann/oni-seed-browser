@@ -250,14 +250,17 @@ fun ClusterView(
                     .padding(horizontal = defaultSpacing)
             )
 
-            Text(
-                text = formatDate(uploadDate),
-                style = MaterialTheme.typography.bodyMedium,
-                fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.onBackground
-            )
+            if (uploadDate != null) {
 
-            if (cluster.uploaderAuthenticated) {
+                Text(
+                    text = formatDate(uploadDate),
+                    style = MaterialTheme.typography.bodyMedium,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.onBackground
+                )
+            }
+
+            if (cluster.uploaderAuthenticated == true) {
 
                 VerticalDivider(
                     thickness = 1.dp,

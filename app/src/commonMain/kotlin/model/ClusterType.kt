@@ -20,7 +20,6 @@
 package model
 
 import kotlinx.serialization.Serializable
-import model.filter.GameModeType
 
 @Suppress("UNUSED")
 @Serializable

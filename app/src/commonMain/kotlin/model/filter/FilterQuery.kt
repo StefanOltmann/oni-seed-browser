@@ -23,6 +23,7 @@ import kotlinx.serialization.Serializable
 import model.AsteroidType
 import model.ClusterType
 import model.Dlc
+import model.GameModeType
 import model.serializer.ClusterTypePrefixSerializer
 
 @Serializable

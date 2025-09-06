@@ -240,13 +240,13 @@ import io.github.stefanoltmann.app.generated.resources.worldtrait_subsurface_oce
 import io.github.stefanoltmann.app.generated.resources.worldtrait_volcanoes
 import model.AsteroidType
 import model.ClusterType
+import model.GameModeType
 import model.GeyserType
 import model.PointOfInterestType
 import model.SpacedOutSpacePOI
 import model.VanillaSpacePOI
 import model.WorldTrait
 import model.ZoneType
-import model.filter.GameModeType
 import org.jetbrains.compose.resources.DrawableResource
 
 val WorldTrait.drawableResource: DrawableResource
