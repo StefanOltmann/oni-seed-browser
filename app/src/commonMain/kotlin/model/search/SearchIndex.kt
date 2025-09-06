@@ -8,8 +8,8 @@ import model.Cluster
 import model.ClusterType
 import model.Geyser
 import model.GeyserType
-import model.WorldTraitMask
-import model.ZoneTypeMask
+import model.WorldTrait
+import model.ZoneType
 import model.filter.FilterCondition
 import model.filter.FilterQuery
 
@@ -74,8 +74,8 @@ class SearchIndex(
                         add(
                             AsteroidSummaryCompact(
                                 id = asteroid.id,
-                                worldTraitsBitMask = WorldTraitMask.toMask(asteroid.worldTraits),
-                                zoneTypesBitMask = ZoneTypeMask.toMask(asteroid.getBiomes()),
+                                worldTraitsBitMask = WorldTrait.toMask(asteroid.worldTraits),
+                                zoneTypesBitMask = ZoneType.toMask(asteroid.getBiomes()),
                                 geyserCounts = GeyserType.entries.map {
                                     geyserCounts[it] ?: 0
                                 }.toByteArray(),
@@ -206,7 +206,7 @@ class SearchIndex(
 
                             val item = orRule.worldTrait
 
-                            val hasTrait = WorldTraitMask.has(asteroidSummary.worldTraitsBitMask, item.worldTrait)
+                            val hasTrait = WorldTrait.has(asteroidSummary.worldTraitsBitMask, item.worldTrait)
 
                             if (item.has)
                                 hasTrait
@@ -218,7 +218,7 @@ class SearchIndex(
 
                             val item = orRule.zoneType
 
-                            val hasZoneType = ZoneTypeMask.has(asteroidSummary.zoneTypesBitMask, item.zoneType)
+                            val hasZoneType = ZoneType.has(asteroidSummary.zoneTypesBitMask, item.zoneType)
 
                             if (item.has)
                                 hasZoneType

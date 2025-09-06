@@ -69,5 +69,46 @@ enum class ZoneType(
     /* Usually at the bottom of the map, so also listed at the bottom */
     MagmaCore(5);
 
+    companion object {
+
+        fun toMask(zoneTypes: Collection<ZoneType>): Int {
+
+            var mask = 0
+
+            for (zoneType in zoneTypes) {
+
+                val bit = 1 shl zoneType.ordinal
+
+                mask = mask or bit
+            }
+
+            return mask
+        }
+
+        fun fromMask(mask: Int): List<ZoneType> {
+
+            if (mask == 0)
+                return emptyList()
+
+            val result = ArrayList<ZoneType>()
+
+            for (zoneType in ZoneType.entries) {
+
+                val bit = 1 shl zoneType.ordinal
+
+                if ((mask and bit) != 0)
+                    result.add(zoneType)
+            }
+
+            return result
+        }
+
+        fun has(mask: Int, zoneType: ZoneType): Boolean {
+
+            val bit = 1 shl zoneType.ordinal
+
+            return (mask and bit) != 0
+        }
+    }
 }
 
