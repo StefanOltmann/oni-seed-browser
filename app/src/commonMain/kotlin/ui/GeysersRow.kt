@@ -78,7 +78,7 @@ fun GeysersRow(
 
     val sortedGeysersWithoutOilWells = sortedGeysers.filterNot { it.id == GeyserType.OIL_RESERVOIR }
 
-    val oilWellCount = sortedGeysers.size - sortedGeysersWithoutOilWells.size
+    val oilWellCount = (sortedGeysers.size - sortedGeysersWithoutOilWells.size).toByte()
 
     val geyserCount = sortedGeysersWithoutOilWells.size + oilWellCount.coerceIn(0, 1)
 

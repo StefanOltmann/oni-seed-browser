@@ -67,8 +67,8 @@ import ui.theme.lightGray
 @Composable
 fun GeyserTooltip(
     geyserType: GeyserType,
-    count: Int,
-    avgEmitRate: Int,
+    count: Byte,
+    avgEmitRate: Short,
     storageTankTons: Float?
 ) {
 
@@ -112,9 +112,9 @@ fun GeyserTooltip(
 
 @Composable
 private fun GeyserInfoHeaderRow(
-    count: Int,
+    count: Byte,
     geyserType: GeyserType,
-    avgEmitRate: Int,
+    avgEmitRate: Short,
     avgEmitRateColor: Color
 ) {
 
@@ -192,7 +192,7 @@ private fun GeyserInfoHeaderRow(
 @Composable
 private fun AvgEmitRateScaleRow(
     geyserType: GeyserType,
-    avgEmitRate: Int,
+    avgEmitRate: Short,
     avgEmitRateColor: Color
 ) {
 

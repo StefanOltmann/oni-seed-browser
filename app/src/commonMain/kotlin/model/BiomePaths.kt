@@ -89,8 +89,8 @@ data class BiomePaths(
 
                         points.add(
                             Point(
-                                x = pairSplit[0].toInt(),
-                                y = pairSplit[1].toInt()
+                                x = pairSplit[0].toInt().toShort(),
+                                y = pairSplit[1].toInt().toShort()
                             )
                         )
                     }
