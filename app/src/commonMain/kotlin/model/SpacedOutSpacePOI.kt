@@ -268,10 +268,10 @@ enum class SpacedOutSpacePOI(
     HarvestableSpacePOI_SandyOreField(101),
     HarvestableSpacePOI_SatelliteField(102),
     HarvestableSpacePOI_SwampyOreField(103),
-    DLC4PrehistoricMixingField(104),
-    DLC4PrehistoricOreField(105),
-    DLC4ImpactorDebrisField1(106),
-    DLC4ImpactorDebrisField2(107),
-    DLC4ImpactorDebrisField3(108),
+    HarvestableSpacePOI_DLC4PrehistoricMixingField(104),
+    HarvestableSpacePOI_DLC4PrehistoricOreField(105),
+    HarvestableSpacePOI_DLC4ImpactorDebrisField1(106),
+    HarvestableSpacePOI_DLC4ImpactorDebrisField2(107),
+    HarvestableSpacePOI_DLC4ImpactorDebrisField3(108),
     TemporalTear(109)
 }

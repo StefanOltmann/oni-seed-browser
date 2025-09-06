@@ -557,11 +557,11 @@ val SpacedOutSpacePOI.drawableResource: DrawableResource
         SpacedOutSpacePOI.HarvestableSpacePOI_SatelliteField -> Res.drawable.spacepoi_satellite_field
         SpacedOutSpacePOI.HarvestableSpacePOI_SwampyOreField -> Res.drawable.spacepoi_swampy_ore_field
         SpacedOutSpacePOI.TemporalTear -> Res.drawable.spacepoi_temporal_tear
-        SpacedOutSpacePOI.DLC4PrehistoricMixingField -> TODO()
-        SpacedOutSpacePOI.DLC4PrehistoricOreField -> TODO()
-        SpacedOutSpacePOI.DLC4ImpactorDebrisField1 -> TODO()
-        SpacedOutSpacePOI.DLC4ImpactorDebrisField2 -> TODO()
-        SpacedOutSpacePOI.DLC4ImpactorDebrisField3 -> TODO()
+        SpacedOutSpacePOI.HarvestableSpacePOI_DLC4PrehistoricMixingField -> Res.drawable.vanilla_spacepoi_dlc4_prehistoric_space_destination // FIXME Wrong asset
+        SpacedOutSpacePOI.HarvestableSpacePOI_DLC4PrehistoricOreField -> Res.drawable.vanilla_spacepoi_dlc4_prehistoric_space_destination // FIXME Wrong asset
+        SpacedOutSpacePOI.HarvestableSpacePOI_DLC4ImpactorDebrisField1 -> Res.drawable.spacepoi_artifact_1 // FIXME Wrong asset
+        SpacedOutSpacePOI.HarvestableSpacePOI_DLC4ImpactorDebrisField2 -> Res.drawable.spacepoi_artifact_1 // FIXME Wrong asset
+        SpacedOutSpacePOI.HarvestableSpacePOI_DLC4ImpactorDebrisField3 -> Res.drawable.spacepoi_artifact_1 // FIXME Wrong asset
     }
 
 val VanillaSpacePOI.drawableResource: DrawableResource

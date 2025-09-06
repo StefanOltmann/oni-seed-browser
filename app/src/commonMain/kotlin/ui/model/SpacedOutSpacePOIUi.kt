@@ -222,10 +222,10 @@ val SpacedOutSpacePOI.stringResource: StringResource
         SpacedOutSpacePOI.HarvestableSpacePOI_SandyOreField -> Res.string.harvestableSpacePoiSandyOreField
         SpacedOutSpacePOI.HarvestableSpacePOI_SatelliteField -> Res.string.harvestableSpacePoiSatelliteField
         SpacedOutSpacePOI.HarvestableSpacePOI_SwampyOreField -> Res.string.harvestableSpacePoiSwampyOreField
-        SpacedOutSpacePOI.DLC4PrehistoricMixingField -> Res.string.dlc4PrehistoricMixingField
-        SpacedOutSpacePOI.DLC4PrehistoricOreField -> Res.string.dlc4PrehistoricOreField
-        SpacedOutSpacePOI.DLC4ImpactorDebrisField1 -> Res.string.dlc4ImpactorDebrisField1
-        SpacedOutSpacePOI.DLC4ImpactorDebrisField2 -> Res.string.dlc4ImpactorDebrisField2
-        SpacedOutSpacePOI.DLC4ImpactorDebrisField3 -> Res.string.dlc4ImpactorDebrisField3
+        SpacedOutSpacePOI.HarvestableSpacePOI_DLC4PrehistoricMixingField -> Res.string.dlc4PrehistoricMixingField
+        SpacedOutSpacePOI.HarvestableSpacePOI_DLC4PrehistoricOreField -> Res.string.dlc4PrehistoricOreField
+        SpacedOutSpacePOI.HarvestableSpacePOI_DLC4ImpactorDebrisField1 -> Res.string.dlc4ImpactorDebrisField1
+        SpacedOutSpacePOI.HarvestableSpacePOI_DLC4ImpactorDebrisField2 -> Res.string.dlc4ImpactorDebrisField2
+        SpacedOutSpacePOI.HarvestableSpacePOI_DLC4ImpactorDebrisField3 -> Res.string.dlc4ImpactorDebrisField3
         SpacedOutSpacePOI.TemporalTear -> Res.string.temporalTear
     }
