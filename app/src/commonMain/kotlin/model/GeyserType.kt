@@ -60,9 +60,6 @@ enum class GeyserType(
     /** i18n resource */
     val stringResource: StringResource,
 
-    /** Rating we assigned if a geyser is useful or bad. */
-    val rating: Rating = Rating.NEUTRAL,
-
     /** Min average emit rate in grams per second. */
     val minAvgEmitRate: Int,
 
@@ -88,7 +85,6 @@ enum class GeyserType(
     COOL_STEAM(
         type = "steam",
         stringResource = Res.string.geyserTypeCoolSteamVent,
-        rating = Rating.GOOD, // Good thing to have for water production
         minAvgEmitRate = 667,
         maxAvgEmitRate = 2667,
         meanAvgEmitRate = 1500,
@@ -97,7 +93,6 @@ enum class GeyserType(
     HYDROGEN(
         type = "hot_hydrogen",
         stringResource = Res.string.geyserTypeHydrogenVent,
-        rating = Rating.VERY_GOOD, // Free energy
         minAvgEmitRate = 47,
         maxAvgEmitRate = 187,
         meanAvgEmitRate = 105, // According to wiki and data
@@ -106,7 +101,6 @@ enum class GeyserType(
     NATURAL_GAS(
         type = "methane",
         stringResource = Res.string.geyserTypeNaturalGasGeyser,
-        rating = Rating.VERY_GOOD, // Free energy & for cooking
         minAvgEmitRate = 47,
         maxAvgEmitRate = 187,
         meanAvgEmitRate = 105,
@@ -115,7 +109,6 @@ enum class GeyserType(
     CHLORINE(
         type = "chlorine_gas",
         stringResource = Res.string.geyserTypeChlorineGasVent,
-        rating = Rating.GOOD, // Has its uses
         minAvgEmitRate = 47,
         maxAvgEmitRate = 187,
         meanAvgEmitRate = 105,
@@ -124,7 +117,6 @@ enum class GeyserType(
     CHLORINE_COOL(
         type = "chlorine_gas_cool",
         stringResource = Res.string.geyserTypeChlorineCoolGasVent,
-        rating = Rating.GOOD, // Has its uses
         minAvgEmitRate = 47,
         maxAvgEmitRate = 187,
         meanAvgEmitRate = 105,
@@ -133,7 +125,6 @@ enum class GeyserType(
     HOT_STEAM(
         type = "hot_steam",
         stringResource = Res.string.geyserTypeSteamVent,
-        rating = Rating.GOOD, // Usable energy, harder to handle.
         minAvgEmitRate = 333,
         maxAvgEmitRate = 1333,
         meanAvgEmitRate = 750, // data: 716
@@ -142,7 +133,6 @@ enum class GeyserType(
     HOT_CO2(
         type = "hot_co2",
         stringResource = Res.string.geyserTypeCarbonDioxideVent,
-        rating = Rating.VERY_BAD, // mostly useless
         minAvgEmitRate = 47,
         maxAvgEmitRate = 187,
         meanAvgEmitRate = 105,
@@ -151,7 +141,6 @@ enum class GeyserType(
     HOT_POLLUTED_O2(
         type = "hot_po2",
         stringResource = Res.string.geyserTypeHotPollutedOxygenVent,
-        rating = Rating.VERY_BAD, // Crap
         minAvgEmitRate = 47,
         maxAvgEmitRate = 187,
         meanAvgEmitRate = 105,
@@ -160,7 +149,6 @@ enum class GeyserType(
     INFECTIOUS_POLLUTED_O2(
         type = "slimy_po2",
         stringResource = Res.string.geyserTypeInfectiousPollutedOxygenVent,
-        rating = Rating.BAD, // Usually does not produce enough to be helpful.
         minAvgEmitRate = 47,
         maxAvgEmitRate = 187,
         meanAvgEmitRate = 105,
@@ -169,7 +157,6 @@ enum class GeyserType(
     WATER(
         type = "hot_water",
         stringResource = Res.string.geyserTypeWaterGeyser,
-        rating = Rating.VERY_GOOD, // We love free water
         minAvgEmitRate = 1333,
         maxAvgEmitRate = 5333,
         meanAvgEmitRate = 3000, // data: 2867
@@ -178,7 +165,6 @@ enum class GeyserType(
     COOL_SLUSH_WATER(
         type = "slush_water",
         stringResource = Res.string.geyserTypeCoolSlushGeyser,
-        rating = Rating.VERY_GOOD, // Cool polluted water, free from germs.
         minAvgEmitRate = 667,
         maxAvgEmitRate = 2667,
         meanAvgEmitRate = 1500, // data: 1463
@@ -187,7 +173,6 @@ enum class GeyserType(
     POLLUTED_WATER(
         type = "filthy_water",
         stringResource = Res.string.geyserTypePollutedWaterVent,
-        rating = Rating.VERY_GOOD, // Many plants can consume it directly.
         minAvgEmitRate = 1333,
         maxAvgEmitRate = 5333,
         meanAvgEmitRate = 3000, // data: 2920
@@ -196,8 +181,6 @@ enum class GeyserType(
     COOL_SALT_WATER(
         type = "slush_salt_water",
         stringResource = Res.string.geyserTypeCoolSaltSlushGeyser,
-        /* Brine brings coolness and salt. */
-        rating = Rating.VERY_GOOD,
         minAvgEmitRate = 667,
         maxAvgEmitRate = 2667,
         meanAvgEmitRate = 1500, // data: 1463
@@ -206,7 +189,6 @@ enum class GeyserType(
     HOT_SALT_WATER(
         type = "salt_water",
         stringResource = Res.string.geyserTypeSaltWaterGeyser,
-        rating = Rating.GOOD, // Free salt
         minAvgEmitRate = 1333,
         maxAvgEmitRate = 5333,
         meanAvgEmitRate = 3000, // data: 2969
@@ -215,7 +197,6 @@ enum class GeyserType(
     LIQUID_CO2(
         type = "liquid_co2",
         stringResource = Res.string.geyserTypeCarbonDioxideGeyser,
-        rating = Rating.NEUTRAL, // Source of coolness, but heats up very fast
         minAvgEmitRate = 67,
         maxAvgEmitRate = 267,
         meanAvgEmitRate = 150,
@@ -224,7 +205,6 @@ enum class GeyserType(
     LEAKY_OIL_FISSURE(
         type = "oil_drip",
         stringResource = Res.string.geyserTypeLeakyOilFissure,
-        rating = Rating.NEUTRAL, // Doesn't matter if it's there. Does not produce a lot.
         minAvgEmitRate = 1,
         maxAvgEmitRate = 333,
         meanAvgEmitRate = 125, // data: 182
@@ -241,7 +221,6 @@ enum class GeyserType(
     IRON_VOLCANO(
         type = "molten_iron",
         stringResource = Res.string.geyserTypeIronVolcano,
-        rating = Rating.GOOD, // Metal geysers are good.
         minAvgEmitRate = 133,
         maxAvgEmitRate = 533,
         meanAvgEmitRate = 300,
@@ -250,7 +229,7 @@ enum class GeyserType(
     COPPER_VOLCANO(
         type = "molten_copper",
         stringResource = Res.string.geyserTypeCopperVolcano,
-        rating = Rating.GOOD, // Metal geysers are good.
+        // Metal geysers are good.
         minAvgEmitRate = 133,
         maxAvgEmitRate = 533,
         meanAvgEmitRate = 300,
@@ -259,7 +238,7 @@ enum class GeyserType(
     GOLD_VOLCANO(
         type = "molten_gold",
         stringResource = Res.string.geyserTypeGoldVolcano,
-        rating = Rating.GOOD, // Metal geysers are good.
+        // Metal geysers are good.
         minAvgEmitRate = 133,
         maxAvgEmitRate = 533,
         meanAvgEmitRate = 300,
@@ -268,7 +247,7 @@ enum class GeyserType(
     ALUMINIUM_VOLCANO(
         type = "molten_aluminum",
         stringResource = Res.string.geyserTypeAluminiumVolcano,
-        rating = Rating.GOOD, // Metal geysers are good.
+        // Metal geysers are good.
         minAvgEmitRate = 133,
         maxAvgEmitRate = 533,
         meanAvgEmitRate = 300,
@@ -277,7 +256,7 @@ enum class GeyserType(
     COBALT_VOLCANO(
         type = "molten_cobalt",
         stringResource = Res.string.geyserTypeCobaltVolcano,
-        rating = Rating.GOOD, // Metal geysers are good.
+        // Metal geysers are good.
         minAvgEmitRate = 133,
         maxAvgEmitRate = 533,
         meanAvgEmitRate = 300,
@@ -286,7 +265,7 @@ enum class GeyserType(
     TUNGSTEN_VOLCANO(
         type = "molten_tungsten",
         stringResource = Res.string.geyserTypeTungstenVolcano,
-        rating = Rating.GOOD, // Metal geysers are good.
+        // Metal geysers are good.
         minAvgEmitRate = 133,
         maxAvgEmitRate = 533,
         meanAvgEmitRate = 300,
@@ -295,7 +274,7 @@ enum class GeyserType(
     NIOBIUM_VOLCANO(
         type = "molten_niobium",
         stringResource = Res.string.geyserTypeNiobiumVolcano,
-        rating = Rating.GOOD, // Metal geysers are good.
+        // Metal geysers are good.
         minAvgEmitRate = 533,
         maxAvgEmitRate = 2133,
         meanAvgEmitRate = 1200,
@@ -320,7 +299,7 @@ enum class GeyserType(
     OIL_RESERVOIR(
         type = "OilWell",
         stringResource = Res.string.geyserTypeOilReservoir,
-        rating = Rating.GOOD, // Rated good, because the more the better.
+        // Rated good, because the more the better.
         minAvgEmitRate = 3333,
         maxAvgEmitRate = 3333,
         meanAvgEmitRate = 3333,

@@ -52,24 +52,4 @@ data class Cluster(
      */
     val mixingIds: List<String>? = null
 
-) {
-
-    /**
-     * Rating value for sorting, based on the starter asteroid.
-     */
-    fun getRating(): Int {
-
-        val startingAsteroid = asteroids.first()
-
-        var rating = 0
-
-        /* Rate traits higher than geysers; for that multiply. */
-        for (worldTrait in startingAsteroid.worldTraits)
-            rating += worldTrait.rating.value * 3
-
-        for (geyser in startingAsteroid.geysers)
-            rating += geyser.id.rating.value
-
-        return rating
-    }
-}
+)

@@ -73,10 +73,7 @@ fun GeyserDetail(
         modifier = Modifier
             .padding(horizontal = doubleSpacing)
             .background(
-                if (geyser.id.rating.isNegative())
-                    badRatingBackground
-                else
-                    cardColorBackground,
+                cardColorBackground,
                 defaultRoundedCornerShape
             )
             .border(

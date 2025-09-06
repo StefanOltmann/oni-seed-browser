@@ -112,10 +112,7 @@ fun GeysersRow(
                     modifier = Modifier
                         .size(48.dp)
                         .background(
-                            if (geyser.id.rating.isNegative())
-                                badRatingBackground
-                            else
-                                gray3,
+                            gray3,
                             CircleShape
                         )
                         .border(
@@ -125,12 +122,7 @@ fun GeysersRow(
                         )
                 ) {
 
-                    /*
-                     * For good geysers, show the amount in they produce
-                     * with a circular progress indicator.
-                     */
-                    if (!geyser.id.rating.isNegative())
-                        AvgEmitRateRatingIndicator(geyser)
+                    AvgEmitRateRatingIndicator(geyser)
 
                     Image(
                         painter = painterResource(geyser.id.drawableResource),

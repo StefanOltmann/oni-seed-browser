@@ -198,11 +198,6 @@ private fun WorldTraitsRow(worldTraits: List<WorldTrait>) {
                             anthraticeTransparentBackgroundColor,
                             minimalRoundedCornerShape
                         )
-                        .border(
-                            2.dp,
-                            worldTrait.rating.color,
-                            minimalRoundedCornerShape
-                        )
                         .size(24.dp)
                 ) {
 

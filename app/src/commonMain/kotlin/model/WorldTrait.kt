@@ -28,31 +28,30 @@ import kotlinx.serialization.Serializable
 @Suppress("UNUSED")
 @Serializable
 enum class WorldTrait(
-    val rating: Rating = Rating.NEUTRAL
 ) {
 
     BouldersLarge,
     BouldersMedium,
     BouldersMixed,
     BouldersSmall,
-    DeepOil(rating = Rating.VERY_GOOD), // More oil reservoirs
-    FrozenCore(rating = Rating.GOOD), // Frozen core helps early with CO2 and to cool down the planet
-    GeoActive(rating = Rating.VERY_GOOD), // More geyser output
-    Geodes(rating = Rating.VERY_GOOD), // Helpful materials.
-    GeoDormant(rating = Rating.VERY_BAD), // Less geyser output
+    DeepOil(),
+    FrozenCore(),
+    GeoActive(),
+    Geodes(),
+    GeoDormant(),
     GlaciersLarge,
-    IrregularOil(rating = Rating.VERY_GOOD), // More oil patches, easier to access.
-    MagmaVents(rating = Rating.BAD), // Makes the game harder
-    MetalPoor(rating = Rating.VERY_BAD), // Less metal
-    MetalRich(rating = Rating.VERY_GOOD), // More metal
+    IrregularOil(),
+    MagmaVents(),
+    MetalPoor(),
+    MetalRich(),
     MisalignedStart,
     SlimeSplats,
     SubsurfaceOcean,
-    Volcanoes(rating = Rating.BAD), // Makes the game harder, but more heat energy.
-    CrashedSatellites(rating = Rating.VERY_GOOD), // Lots of free radiation
+    Volcanoes(),
+    CrashedSatellites(),
     DistressSignal,
-    LushCore(rating = Rating.GOOD), // Access to pips
-    MetalCaves(rating = Rating.GOOD), // More free metal
-    RadioactiveCrust(rating = Rating.GOOD); // More free radiation
+    LushCore(),
+    MetalCaves(),
+    RadioactiveCrust();
 
 }
