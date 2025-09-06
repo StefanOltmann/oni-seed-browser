@@ -269,7 +269,6 @@ enum class ClusterType(
         prefix = "V-SWMP-C",
         requiredDlcs = listOf(Dlc.SpacedOut),
         gameMode = GameModeType.SPACEDOUT_CLASSIC,
-        nameStringResource = Res.string.clusterTypeDlcSquelchy,
         asteroidTypes = listOf(
             AsteroidType.VanillaSwampDefault,
             AsteroidType.MediumForestyRadioactiveVanillaWarpPlanet,
@@ -287,7 +286,6 @@ enum class ClusterType(
         prefix = "V-SFRZ-C",
         requiredDlcs = listOf(Dlc.SpacedOut),
         gameMode = GameModeType.SPACEDOUT_CLASSIC,
-        nameStringResource = Res.string.clusterTypeDlcRime,
         asteroidTypes = listOf(
             AsteroidType.VanillaSandstoneFrozen,
             AsteroidType.MediumSwampy,
@@ -305,7 +303,6 @@ enum class ClusterType(
         prefix = "V-LUSH-C",
         requiredDlcs = listOf(Dlc.SpacedOut),
         gameMode = GameModeType.SPACEDOUT_CLASSIC,
-        nameStringResource = Res.string.clusterTypeDlcVerdante,
         asteroidTypes = listOf(
             AsteroidType.VanillaForestDefault,
             AsteroidType.MediumSandyRadioactiveVanillaWarpPlanet,
@@ -323,7 +320,6 @@ enum class ClusterType(
         prefix = "V-FRST-C",
         requiredDlcs = listOf(Dlc.SpacedOut),
         gameMode = GameModeType.SPACEDOUT_CLASSIC,
-        nameStringResource = Res.string.clusterTypeDlcArboria,
         asteroidTypes = listOf(
             AsteroidType.VanillaArboria,
             AsteroidType.MediumSandyRadioactiveVanillaWarpPlanet,
@@ -341,7 +337,6 @@ enum class ClusterType(
         prefix = "V-VOLCA-C",
         requiredDlcs = listOf(Dlc.SpacedOut),
         gameMode = GameModeType.SPACEDOUT_CLASSIC,
-        nameStringResource = Res.string.clusterTypeDlcVolcanea,
         asteroidTypes = listOf(
             AsteroidType.VanillaVolcanic,
             AsteroidType.MediumRadioactiveVanillaWarpPlanet,
@@ -359,7 +354,6 @@ enum class ClusterType(
         prefix = "V-BAD-C",
         requiredDlcs = listOf(Dlc.SpacedOut),
         gameMode = GameModeType.SPACEDOUT_CLASSIC,
-        nameStringResource = Res.string.clusterTypeDlcTheBadlands,
         asteroidTypes = listOf(
             AsteroidType.VanillaBadlands,
             AsteroidType.MediumRadioactiveVanillaWarpPlanet,
@@ -377,7 +371,6 @@ enum class ClusterType(
         prefix = "V-HTFST-C",
         requiredDlcs = listOf(Dlc.SpacedOut),
         gameMode = GameModeType.SPACEDOUT_CLASSIC,
-        nameStringResource = Res.string.clusterTypeDlcAridio,
         asteroidTypes = listOf(
             AsteroidType.VanillaAridio,
             AsteroidType.MediumSandySwamp,
@@ -395,7 +388,6 @@ enum class ClusterType(
         prefix = "V-OASIS-C",
         requiredDlcs = listOf(Dlc.SpacedOut),
         gameMode = GameModeType.SPACEDOUT_CLASSIC,
-        nameStringResource = Res.string.clusterTypeDlcOasisse,
         asteroidTypes = listOf(
             AsteroidType.VanillaOasis,
             AsteroidType.MediumRadioactiveVanillaWarpPlanet,
@@ -413,7 +405,6 @@ enum class ClusterType(
         prefix = "SNDST-C",
         requiredDlcs = listOf(Dlc.SpacedOut),
         gameMode = GameModeType.SPACEDOUT_SPACEDOUT,
-        nameStringResource = Res.string.clusterTypeDlcTerrania,
         asteroidTypes = listOf(
             AsteroidType.TerraMoonlet,
             AsteroidType.IdealLandingSite,
@@ -432,7 +423,6 @@ enum class ClusterType(
         prefix = "CER-C",
         requiredDlcs = listOf(Dlc.SpacedOut, Dlc.FrostyPlanet),
         gameMode = GameModeType.SPACEDOUT_SPACEDOUT,
-        nameStringResource = Res.string.clusterTypeDlcCeresMinor,
         asteroidTypes = listOf(
             AsteroidType.CeresSpacedOutAsteroid,
             AsteroidType.SwampyLandingSite,
@@ -451,7 +441,6 @@ enum class ClusterType(
         prefix = "PRE-C",
         requiredDlcs = listOf(Dlc.SpacedOut, Dlc.PrehistoricPlanet),
         gameMode = GameModeType.SPACEDOUT_SPACEDOUT,
-        nameStringResource = Res.string.clusterTypeDlcRelicaMinor,
         asteroidTypes = listOf(
             AsteroidType.PrehistoricSpacedOutAsteroid,
             AsteroidType.IdealLandingSite,
@@ -470,7 +459,6 @@ enum class ClusterType(
         prefix = "FRST-C",
         requiredDlcs = listOf(Dlc.SpacedOut),
         gameMode = GameModeType.SPACEDOUT_SPACEDOUT,
-        nameStringResource = Res.string.clusterTypeDlcFolia,
         asteroidTypes = listOf(
             AsteroidType.ForestMoonlet,
             AsteroidType.SwampyLandingSite,
@@ -489,7 +477,6 @@ enum class ClusterType(
         prefix = "SWMP-C",
         requiredDlcs = listOf(Dlc.SpacedOut),
         gameMode = GameModeType.SPACEDOUT_SPACEDOUT,
-        nameStringResource = Res.string.clusterTypeDlcQuagmiris,
         asteroidTypes = listOf(
             AsteroidType.SwampMoonlet,
             AsteroidType.MetalHeavyLandingSite,
@@ -508,7 +495,6 @@ enum class ClusterType(
         prefix = "M-SWMP-C",
         requiredDlcs = listOf(Dlc.SpacedOut),
         gameMode = GameModeType.SPACEDOUT_SPACEDOUT,
-        nameStringResource = Res.string.clusterTypeDlcMetallicSwampyMoonlet,
         asteroidTypes = listOf(
             AsteroidType.MiniMetallicSwampyStart,
             AsteroidType.MiniBadlands,
@@ -530,7 +516,6 @@ enum class ClusterType(
         prefix = "M-BAD-C",
         requiredDlcs = listOf(Dlc.SpacedOut),
         gameMode = GameModeType.SPACEDOUT_SPACEDOUT,
-        nameStringResource = Res.string.clusterTypeDlcTheDesolandsMoonlet,
         asteroidTypes = listOf(
             AsteroidType.MiniBadlandsStart,
             AsteroidType.MiniRadioactiveOceanWarp,
@@ -552,7 +537,6 @@ enum class ClusterType(
         prefix = "M-FRZ-C",
         requiredDlcs = listOf(Dlc.SpacedOut),
         gameMode = GameModeType.SPACEDOUT_SPACEDOUT,
-        nameStringResource = Res.string.clusterTypeDlcFrozenForestMoonlet,
         asteroidTypes = listOf(
             AsteroidType.MiniForestFrozenStart,
             AsteroidType.MiniBadlandsWarp,
@@ -574,7 +558,6 @@ enum class ClusterType(
         prefix = "M-FLIP-C",
         requiredDlcs = listOf(Dlc.SpacedOut),
         gameMode = GameModeType.SPACEDOUT_SPACEDOUT,
-        nameStringResource = Res.string.clusterTypeDlcFlippedMoonlet,
         asteroidTypes = listOf(
             AsteroidType.MiniFlippedStart,
             AsteroidType.MiniBadlandsWarp,
@@ -596,7 +579,6 @@ enum class ClusterType(
         prefix = "M-RAD-C",
         requiredDlcs = listOf(Dlc.SpacedOut),
         gameMode = GameModeType.SPACEDOUT_SPACEDOUT,
-        nameStringResource = Res.string.clusterTypeDlcRadioactiveOceanMoonlet,
         asteroidTypes = listOf(
             AsteroidType.MiniRadioactiveOceanStart,
             AsteroidType.MiniBadlands,
@@ -618,7 +600,6 @@ enum class ClusterType(
         prefix = "M-CERS-C",
         requiredDlcs = listOf(Dlc.SpacedOut, Dlc.FrostyPlanet),
         gameMode = GameModeType.SPACEDOUT_SPACEDOUT,
-        nameStringResource = Res.string.clusterTypeDlcCeresMantle,
         asteroidTypes = listOf(
             AsteroidType.MiniShatteredStartAsteroid,
             AsteroidType.MiniShatteredWarpAsteroid,
