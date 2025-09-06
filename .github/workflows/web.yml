@@ -36,11 +36,15 @@ jobs:
           chmod -v -R +rX "app/build/dist/wasmJs/productionExecutable/" | while read line; do
             echo "::warning title=Invalid file permissions automatically fixed::$line"
           done
+          
+      - name: Rename
+        run: |
+          mv app/build/dist/wasmJs/productionExecutable app/build/dist/wasmJs/oni-seed-browser
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: app/build/dist/wasmJs/productionExecutable/
+          path: app/build/dist/wasmJs/oni-seed-browser/
 
       # Deploy to Cloudflare worker (static site)
       - name: Publish to Cloudflare Pages
