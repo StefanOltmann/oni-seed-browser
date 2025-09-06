@@ -77,7 +77,7 @@ enum class ZoneType(
 
             for (zoneType in zoneTypes) {
 
-                val bit = 1 shl zoneType.ordinal
+                val bit = 1 shl zoneType.id.toInt()
 
                 mask = mask or bit
             }
@@ -94,7 +94,7 @@ enum class ZoneType(
 
             for (zoneType in ZoneType.entries) {
 
-                val bit = 1 shl zoneType.ordinal
+                val bit = 1 shl zoneType.id.toInt()
 
                 if ((mask and bit) != 0)
                     result.add(zoneType)
@@ -105,7 +105,7 @@ enum class ZoneType(
 
         fun has(mask: Int, zoneType: ZoneType): Boolean {
 
-            val bit = 1 shl zoneType.ordinal
+            val bit = 1 shl zoneType.id.toInt()
 
             return (mask and bit) != 0
         }

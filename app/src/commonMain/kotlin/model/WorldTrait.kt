@@ -28,7 +28,7 @@ import kotlinx.serialization.Serializable
 @Suppress("UNUSED")
 @Serializable
 enum class WorldTrait(
-    id: Byte
+    val id: Byte
 ) {
 
     BouldersLarge(0),
@@ -63,7 +63,7 @@ enum class WorldTrait(
 
             for (trait in traits) {
 
-                val bit = 1 shl trait.ordinal
+                val bit = 1 shl trait.id.toInt()
 
                 mask = mask or bit
             }
@@ -80,7 +80,7 @@ enum class WorldTrait(
 
             for (trait in WorldTrait.entries) {
 
-                val bit = 1 shl trait.ordinal
+                val bit = 1 shl trait.id.toInt()
 
                 if ((mask and bit) != 0)
                     result.add(trait)
@@ -91,7 +91,7 @@ enum class WorldTrait(
 
         fun has(mask: Int, trait: WorldTrait): Boolean {
 
-            val bit = 1 shl trait.ordinal
+            val bit = 1 shl trait.id.toInt()
 
             return (mask and bit) != 0
         }
