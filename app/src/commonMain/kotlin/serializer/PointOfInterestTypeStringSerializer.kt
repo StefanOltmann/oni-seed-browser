@@ -25,21 +25,21 @@ import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
-import model.ClusterType
+import model.PointOfInterestType
 
-object ClusterTypeSerializer : KSerializer<ClusterType> {
+object PointOfInterestTypeStringSerializer : KSerializer<PointOfInterestType> {
 
     override val descriptor: SerialDescriptor =
-        PrimitiveSerialDescriptor("Cluster", PrimitiveKind.STRING)
+        PrimitiveSerialDescriptor("PointOfInterestType", PrimitiveKind.STRING)
 
-    override fun serialize(encoder: Encoder, value: ClusterType) =
-        encoder.encodeString(value.prefix)
+    override fun serialize(encoder: Encoder, value: PointOfInterestType) =
+        encoder.encodeString(value.id)
 
-    override fun deserialize(decoder: Decoder): ClusterType {
+    override fun deserialize(decoder: Decoder): PointOfInterestType {
 
-        val prefix = decoder.decodeString()
+        val id = decoder.decodeString()
 
-        return ClusterType.entries.find { it.prefix == prefix }
-            ?: throw IllegalArgumentException("Unknown prefix: $prefix")
+        return PointOfInterestType.entries.find { it.id == id }
+            ?: throw IllegalArgumentException("Unknown id: $id")
     }
 }

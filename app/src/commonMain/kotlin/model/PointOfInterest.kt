@@ -1,5 +1,5 @@
 /*
- * ONI Seed Browser
+ * ONI Seed Browser Backend
  * Copyright (C) 2025 Stefan Oltmann
  * https://stefan-oltmann.de/oni-seed-browser
  *
@@ -20,13 +20,12 @@
 package model
 
 import kotlinx.serialization.Serializable
-import serializer.PointOfInterestTypeSerializer
+import serializer.PointOfInterestTypeStringSerializer
 
-@Suppress("UNUSED")
 @Serializable
 data class PointOfInterest(
 
-    @Serializable(with = PointOfInterestTypeSerializer::class)
+    @Serializable(with = PointOfInterestTypeStringSerializer::class)
     val id: PointOfInterestType,
 
     val x: Int,

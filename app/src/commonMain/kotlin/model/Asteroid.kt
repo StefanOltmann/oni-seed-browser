@@ -1,5 +1,5 @@
 /*
- * ONI Seed Browser
+ * ONI Seed Browser Backend
  * Copyright (C) 2025 Stefan Oltmann
  * https://stefan-oltmann.de/oni-seed-browser
  *
@@ -20,13 +20,12 @@
 package model
 
 import kotlinx.serialization.Serializable
-import serializer.AsteroidTypeSerializer
+import serializer.AsteroidTypeStringSerializer
 
-@Suppress("UNUSED")
 @Serializable
 data class Asteroid(
 
-    @Serializable(with = AsteroidTypeSerializer::class)
+    @Serializable(with = AsteroidTypeStringSerializer::class)
     val id: AsteroidType,
 
     val offsetX: Int,
@@ -40,4 +39,9 @@ data class Asteroid(
 
     val pointsOfInterest: List<PointOfInterest>,
     val geysers: List<Geyser>
-)
+
+) {
+
+    fun getBiomes(): Set<ZoneType> =
+        BiomePaths.parse(biomePaths).polygonMap.keys
+}

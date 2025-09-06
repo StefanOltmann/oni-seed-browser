@@ -17,27 +17,24 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package model.filter
+package serializer
 
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.Transient
-import model.GeyserType
-import serializer.GeyserTypeStringSerializer
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.descriptors.PrimitiveKind
+import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
+import model.ClusterType
 
-@Serializable
-data class FilterItemGeyserCount(
+object ClusterTypeOrdinalSerializer : KSerializer<ClusterType> {
 
-    @Serializable(with = GeyserTypeStringSerializer::class)
-    val geyser: GeyserType,
+    override val descriptor: SerialDescriptor =
+        PrimitiveSerialDescriptor("ClusterTypeOrdinalSerializer", PrimitiveKind.BYTE)
 
-    val condition: FilterCondition,
-    val count: Int?
+    override fun serialize(encoder: Encoder, value: ClusterType) =
+        encoder.encodeByte(value.ordinal.toByte())
 
-) : FilterItem {
-
-    @Transient
-    override val type: FilterItemType = FilterItemType.GEYSER_COUNT
-
-    override fun switchCondition() =
-        copy(condition = condition.next())
+    override fun deserialize(decoder: Decoder): ClusterType =
+        ClusterType.entries[decoder.decodeInt()]
 }

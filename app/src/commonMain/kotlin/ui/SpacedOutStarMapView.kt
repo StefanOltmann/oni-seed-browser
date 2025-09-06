@@ -152,7 +152,7 @@ fun SpacedOutStarMapView(
                                 tooltipContent = {
                                     GenericTooltip {
                                         Text(
-                                            text = stringResource(asteroidType.getStringResource()),
+                                            text = stringResource(asteroidType.stringResource),
                                             style = MaterialTheme.typography.bodyLarge,
                                             color = MaterialTheme.colorScheme.onBackground,
                                             lineHeight = 0.sp,

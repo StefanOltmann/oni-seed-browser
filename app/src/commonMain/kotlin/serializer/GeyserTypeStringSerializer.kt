@@ -25,20 +25,21 @@ import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
-import model.AsteroidType
+import model.GeyserType
 
-object AsteroidTypeSerializer : KSerializer<AsteroidType> {
+object GeyserTypeStringSerializer : KSerializer<GeyserType> {
 
     override val descriptor: SerialDescriptor =
-        PrimitiveSerialDescriptor("AsteroidType", PrimitiveKind.STRING)
+        PrimitiveSerialDescriptor("GeyserTypeStringSerializer", PrimitiveKind.STRING)
 
-    override fun serialize(encoder: Encoder, value: AsteroidType) =
-        encoder.encodeString(value.name)
+    override fun serialize(encoder: Encoder, value: GeyserType) =
+        encoder.encodeString(value.type)
 
-    override fun deserialize(decoder: Decoder): AsteroidType {
+    override fun deserialize(decoder: Decoder): GeyserType {
 
         val type = decoder.decodeString()
 
-        return AsteroidType.valueOf(type)
+        return GeyserType.entries.find { it.type == type }
+            ?: throw IllegalArgumentException("Unknown type: $type")
     }
 }

@@ -23,7 +23,7 @@ import kotlinx.serialization.Serializable
 import model.AsteroidType
 import model.ClusterType
 import model.Dlc
-import serializer.ClusterTypeSerializer
+import serializer.ClusterTypePrefixSerializer
 
 @Serializable
 data class FilterQuery(
@@ -33,7 +33,7 @@ data class FilterQuery(
      * no fields should be marked as transient.
      */
 
-    @Serializable(with = ClusterTypeSerializer::class)
+    @Serializable(with = ClusterTypePrefixSerializer::class)
     val cluster: ClusterType?,
 
     val dlcs: List<Dlc>,

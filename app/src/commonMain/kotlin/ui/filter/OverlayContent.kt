@@ -87,7 +87,7 @@ fun OverlayContent(
 
                     FilterSelectionEntryItem(
                         image = asteroidType.drawableResource,
-                        text = stringResource(asteroidType.getStringResource()),
+                        text = stringResource(asteroidType.stringResource),
                         onClick = {
 
                             /* Update the query */

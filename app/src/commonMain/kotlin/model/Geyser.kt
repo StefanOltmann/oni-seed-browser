@@ -20,7 +20,7 @@
 package model
 
 import kotlinx.serialization.Serializable
-import serializer.GeyserTypeSerializer
+import serializer.GeyserTypeStringSerializer
 import ui.GRAMS_PER_TON
 import ui.SECONDS_PER_CYCLE
 
@@ -28,7 +28,7 @@ import ui.SECONDS_PER_CYCLE
 @Serializable
 data class Geyser(
 
-    @Serializable(with = GeyserTypeSerializer::class)
+    @Serializable(with = GeyserTypeStringSerializer::class)
     val id: GeyserType,
 
     val x: Int,

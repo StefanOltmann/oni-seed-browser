@@ -81,6 +81,7 @@ import model.ZoneType
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import ui.model.color
+import ui.model.stringResource
 import ui.theme.DefaultSpacer
 import ui.theme.anthraticeTransparentBackgroundColor
 import ui.theme.defaultPadding
@@ -141,7 +142,7 @@ fun AsteroidMapPopup(
             ) {
 
                 Text(
-                    text = stringResource(asteroid.id.getStringResource()),
+                    text = stringResource(asteroid.id.stringResource),
                     style = MaterialTheme.typography.headlineLarge,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onBackground,

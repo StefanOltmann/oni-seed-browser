@@ -22,12 +22,12 @@ package model.filter
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
 import model.GeyserType
-import serializer.GeyserTypeSerializer
+import serializer.GeyserTypeStringSerializer
 
 @Serializable
 data class FilterItemGoodGeyserCount(
 
-    @Serializable(with = GeyserTypeSerializer::class)
+    @Serializable(with = GeyserTypeStringSerializer::class)
     val geyser: GeyserType,
 
     val condition: FilterCondition,

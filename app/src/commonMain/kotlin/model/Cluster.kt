@@ -20,7 +20,7 @@
 package model
 
 import kotlinx.serialization.Serializable
-import serializer.ClusterTypeSerializer
+import serializer.ClusterTypePrefixSerializer
 
 @Suppress("UNUSED")
 @Serializable
@@ -36,7 +36,7 @@ data class Cluster(
 
     val gameVersion: Int,
 
-    @Serializable(with = ClusterTypeSerializer::class)
+    @Serializable(with = ClusterTypePrefixSerializer::class)
     val cluster: ClusterType,
 
     val dlcs: List<Dlc>,
