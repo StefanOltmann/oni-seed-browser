@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package serializer
+package model.serializer
 
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.descriptors.PrimitiveKind
@@ -25,20 +25,21 @@ import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
-import model.AsteroidType
+import model.PointOfInterestType
 
-object AsteroidTypeIdSerializer : KSerializer<AsteroidType> {
+object PointOfInterestTypeStringSerializer : KSerializer<PointOfInterestType> {
 
     override val descriptor: SerialDescriptor =
-        PrimitiveSerialDescriptor("AsteroidTypeIdSerializer", PrimitiveKind.BYTE)
+        PrimitiveSerialDescriptor("PointOfInterestType", PrimitiveKind.STRING)
 
-    override fun serialize(encoder: Encoder, value: AsteroidType) =
-        encoder.encodeByte(value.id)
+    override fun serialize(encoder: Encoder, value: PointOfInterestType) =
+        encoder.encodeString(value.id)
 
-    override fun deserialize(decoder: Decoder): AsteroidType {
+    override fun deserialize(decoder: Decoder): PointOfInterestType {
 
-        val id = decoder.decodeByte()
+        val id = decoder.decodeString()
 
-        return AsteroidType.entries.find { it.id == id } ?: error("Unknown id $id")
+        return PointOfInterestType.entries.find { it.id == id }
+            ?: throw IllegalArgumentException("Unknown id: $id")
     }
 }

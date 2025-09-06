@@ -4,7 +4,7 @@ import io.ktor.client.HttpClient
 import io.ktor.client.request.head
 import io.ktor.http.HttpStatusCode
 import model.ClusterType
-import model.search2.SearchIndex
+import model.search.SearchIndex
 
 expect suspend fun findSearchIndex(clusterType: ClusterType): SearchIndex
 

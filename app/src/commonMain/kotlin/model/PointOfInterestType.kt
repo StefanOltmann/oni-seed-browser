@@ -19,13 +19,13 @@
 
 package model
 
-
 /**
  * See https://oxygennotincluded.fandom.com/wiki/Planetoid_Clusters
  */
 enum class PointOfInterestType(
     val id: String
 ) {
+
     PRINTING_POD("Headquarters"),
     SUPPLY_TELEPORTER_INPUT("WarpConduitSender"),
     SUPPLY_TELEPORTER_OUTPUT("WarpConduitReceiver"),

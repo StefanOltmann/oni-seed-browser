@@ -17,14 +17,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package model.search2
+package model.search
 
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.protobuf.ProtoNumber
 import kotlinx.serialization.protobuf.ProtoPacked
 import model.AsteroidType
-import serializer.AsteroidTypeIdSerializer
+import model.serializer.AsteroidTypeIdSerializer
 
 @Serializable
 @OptIn(ExperimentalSerializationApi::class)

@@ -24,14 +24,13 @@ import kotlinx.serialization.Serializable
 @Suppress("UNUSED")
 @Serializable
 enum class Dlc(
-    val displayName: String,
     val isMainVersion: Boolean
 ) {
-    BaseGame("Base Game", true),
-    SpacedOut("Spaced Out", true),
-    FrostyPlanet("Frosty Planet", false),
-    BionicBooster("Bionic Booster", false),
-    PrehistoricPlanet("Prehistoric Planet", false);
+    BaseGame(true),
+    SpacedOut(true),
+    FrostyPlanet(false),
+    BionicBooster(false),
+    PrehistoricPlanet(false);
 
     companion object {
 

@@ -44,7 +44,7 @@ import kotlinx.serialization.json.Json
 import model.Cluster
 import model.Contributor
 import model.filter.FilterQuery
-import model.search2.SearchIndex
+import model.search.SearchIndex
 
 const val FIND_URL = "https://oni-worlds.stefanoltmann.de"
 

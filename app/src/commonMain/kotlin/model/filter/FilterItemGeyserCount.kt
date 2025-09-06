@@ -22,7 +22,7 @@ package model.filter
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
 import model.GeyserType
-import serializer.GeyserTypeStringSerializer
+import model.serializer.GeyserTypeStringSerializer
 
 @Serializable
 data class FilterItemGeyserCount(

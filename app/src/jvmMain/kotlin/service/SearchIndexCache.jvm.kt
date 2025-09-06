@@ -11,7 +11,7 @@ import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.decodeFromByteArray
 import kotlinx.serialization.protobuf.ProtoBuf
 import model.ClusterType
-import model.search2.SearchIndex
+import model.search.SearchIndex
 
 private val httpClient = HttpClient()
 

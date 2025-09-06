@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package serializer
+package model.serializer
 
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.descriptors.PrimitiveKind
@@ -25,21 +25,20 @@ import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
-import model.ClusterType
+import model.AsteroidType
 
-object ClusterTypePrefixSerializer : KSerializer<ClusterType> {
+object AsteroidTypeIdSerializer : KSerializer<AsteroidType> {
 
     override val descriptor: SerialDescriptor =
-        PrimitiveSerialDescriptor("ClusterTypePrefixSerializer", PrimitiveKind.STRING)
+        PrimitiveSerialDescriptor("AsteroidTypeIdSerializer", PrimitiveKind.BYTE)
 
-    override fun serialize(encoder: Encoder, value: ClusterType) =
-        encoder.encodeString(value.prefix)
+    override fun serialize(encoder: Encoder, value: AsteroidType) =
+        encoder.encodeByte(value.id)
 
-    override fun deserialize(decoder: Decoder): ClusterType {
+    override fun deserialize(decoder: Decoder): AsteroidType {
 
-        val prefix = decoder.decodeString()
+        val id = decoder.decodeByte()
 
-        return ClusterType.entries.find { it.prefix == prefix }
-            ?: throw IllegalArgumentException("Unknown prefix: $prefix")
+        return AsteroidType.entries.find { it.id == id } ?: error("Unknown id $id")
     }
 }

@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package serializer
+package model.serializer
 
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.descriptors.PrimitiveKind
@@ -25,21 +25,16 @@ import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
-import model.PointOfInterestType
+import model.ClusterType
 
-object PointOfInterestTypeStringSerializer : KSerializer<PointOfInterestType> {
+object ClusterTypeOrdinalSerializer : KSerializer<ClusterType> {
 
     override val descriptor: SerialDescriptor =
-        PrimitiveSerialDescriptor("PointOfInterestType", PrimitiveKind.STRING)
+        PrimitiveSerialDescriptor("ClusterTypeOrdinalSerializer", PrimitiveKind.BYTE)
 
-    override fun serialize(encoder: Encoder, value: PointOfInterestType) =
-        encoder.encodeString(value.id)
+    override fun serialize(encoder: Encoder, value: ClusterType) =
+        encoder.encodeByte(value.ordinal.toByte())
 
-    override fun deserialize(decoder: Decoder): PointOfInterestType {
-
-        val id = decoder.decodeString()
-
-        return PointOfInterestType.entries.find { it.id == id }
-            ?: throw IllegalArgumentException("Unknown id: $id")
-    }
+    override fun deserialize(decoder: Decoder): ClusterType =
+        ClusterType.entries[decoder.decodeInt()]
 }

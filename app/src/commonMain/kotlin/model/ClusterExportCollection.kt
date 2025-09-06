@@ -19,32 +19,12 @@
 
 package model
 
-enum class VanillaSpacePOI {
+enum class ClusterExportCollection(
+    val id: String
+) {
 
-    CarbonaceousAsteroid,
-    ChlorinePlanet,
-    DLC2CeresSpaceDestination,
-    DLC4PrehistoricSpaceDestination,
-    DustyMoon,
-    Earth,
-    ForestPlanet,
-    GasGiant,
-    GoldAsteroid,
-    HeliumGiant,
-    IceGiant,
-    IcyDwarf,
-    MetallicAsteroid,
-    OilyAsteriod,
-    OrganicDwarf,
-    RedDwarf,
-    RockyAsteroid,
-    RustPlanet,
-    SaltDesertPlanet,
-    SaltDwarf,
-    Satellite,
-    ShinyPlanet,
-    TerraPlanet,
-    VolcanoPlanet,
-    Wormhole
+    BASEGAME("basegame"),
+    CLASSIC_1("classic_1"),
+    CLASSIC_2("classic_2"),
+    SPACEDOUT("spacedout")
 }
-

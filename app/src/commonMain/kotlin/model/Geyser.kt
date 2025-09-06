@@ -20,7 +20,7 @@
 package model
 
 import kotlinx.serialization.Serializable
-import serializer.GeyserTypeStringSerializer
+import model.serializer.GeyserTypeStringSerializer
 import ui.GRAMS_PER_TON
 import ui.SECONDS_PER_CYCLE
 
@@ -64,6 +64,4 @@ data class Geyser(
 
     val storageTankTons: Float = (dormancyCycles * avgEmitRate * SECONDS_PER_CYCLE) / GRAMS_PER_TON
 
-    override fun toString(): String =
-        "${id.stringResource} @ $x,$y"
 }

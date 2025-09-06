@@ -7,7 +7,7 @@ import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.decodeFromByteArray
 import kotlinx.serialization.protobuf.ProtoBuf
 import model.ClusterType
-import model.search2.SearchIndex
+import model.search.SearchIndex
 import web.cache.add
 import web.cache.caches
 import web.cache.match

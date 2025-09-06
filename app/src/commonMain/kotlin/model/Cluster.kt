@@ -20,7 +20,7 @@
 package model
 
 import kotlinx.serialization.Serializable
-import serializer.ClusterTypePrefixSerializer
+import model.serializer.ClusterTypePrefixSerializer
 
 @Suppress("UNUSED")
 @Serializable

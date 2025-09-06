@@ -20,7 +20,7 @@
 package model
 
 import kotlinx.serialization.Serializable
-import serializer.AsteroidTypeStringSerializer
+import model.serializer.AsteroidTypeStringSerializer
 
 @Serializable
 data class Asteroid(

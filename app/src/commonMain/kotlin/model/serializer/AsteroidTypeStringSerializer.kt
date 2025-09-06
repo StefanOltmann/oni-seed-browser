@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package serializer
+package model.serializer
 
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.descriptors.PrimitiveKind
@@ -25,16 +25,20 @@ import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
-import model.GeyserType
+import model.AsteroidType
 
-object GeyserTypeOrdinalSerializer : KSerializer<GeyserType> {
+object AsteroidTypeStringSerializer : KSerializer<AsteroidType> {
 
     override val descriptor: SerialDescriptor =
-        PrimitiveSerialDescriptor("GeyserTypeOrdinalSerializer", PrimitiveKind.BYTE)
+        PrimitiveSerialDescriptor("AsteroidTypeStringSerializer", PrimitiveKind.STRING)
 
-    override fun serialize(encoder: Encoder, value: GeyserType) =
-        encoder.encodeByte(value.type.toByte())
+    override fun serialize(encoder: Encoder, value: AsteroidType) =
+        encoder.encodeString(value.name)
 
-    override fun deserialize(decoder: Decoder): GeyserType =
-        GeyserType.entries[decoder.decodeInt()]
+    override fun deserialize(decoder: Decoder): AsteroidType {
+
+        val type = decoder.decodeString()
+
+        return AsteroidType.valueOf(type)
+    }
 }

@@ -23,7 +23,7 @@ import kotlinx.serialization.Serializable
 import model.AsteroidType
 import model.ClusterType
 import model.Dlc
-import serializer.ClusterTypePrefixSerializer
+import model.serializer.ClusterTypePrefixSerializer
 
 @Serializable
 data class FilterQuery(

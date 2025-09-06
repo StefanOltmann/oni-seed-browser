@@ -1,4 +1,4 @@
-package model.search2
+package model.search
 
 import kotlin.time.Clock
 import kotlin.time.ExperimentalTime

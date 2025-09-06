@@ -21,7 +21,6 @@ package model
 
 import kotlinx.serialization.Serializable
 
-@Suppress("UNUSED")
 @Serializable
 data class StarMapEntryVanilla(
     val id: VanillaSpacePOI,
