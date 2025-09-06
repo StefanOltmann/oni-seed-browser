@@ -29,6 +29,7 @@ enum class ClusterType(
     val requiredDlcs: List<Dlc>,
     val gameMode: GameModeType,
     val asteroidTypes: List<AsteroidType>,
+    val exportCollection: ClusterExportCollection,
     val starMapRadius: Int = 12
 ) {
 
@@ -39,7 +40,8 @@ enum class ClusterType(
         gameMode = GameModeType.BASEGAME_STANDARD,
         asteroidTypes = listOf(
             AsteroidType.SandstoneDefault
-        )
+        ),
+        exportCollection = ClusterExportCollection.BASEGAME
     ),
 
     /** Ceres */
@@ -49,7 +51,8 @@ enum class ClusterType(
         gameMode = GameModeType.BASEGAME_STANDARD,
         asteroidTypes = listOf(
             AsteroidType.CeresBaseGameAsteroid
-        )
+        ),
+        exportCollection = ClusterExportCollection.BASEGAME
     ),
 
     /** Blasted Ceres */
@@ -59,7 +62,8 @@ enum class ClusterType(
         gameMode = GameModeType.BASEGAME_THELAB,
         asteroidTypes = listOf(
             AsteroidType.CeresBaseGameShatteredAsteroid
-        )
+        ),
+        exportCollection = ClusterExportCollection.BASEGAME
     ),
 
     /** Relica */
@@ -69,7 +73,8 @@ enum class ClusterType(
         gameMode = GameModeType.BASEGAME_STANDARD,
         asteroidTypes = listOf(
             AsteroidType.PrehistoricBaseGameAsteroid
-        )
+        ),
+        exportCollection = ClusterExportCollection.BASEGAME
     ),
 
     /** RelicAAAAAAAGHH */
@@ -79,7 +84,8 @@ enum class ClusterType(
         gameMode = GameModeType.BASEGAME_THELAB,
         asteroidTypes = listOf(
             AsteroidType.PrehistoricShatteredBaseGameAsteroid
-        )
+        ),
+        exportCollection = ClusterExportCollection.BASEGAME
     ),
 
     /** Oceania */
@@ -89,7 +95,8 @@ enum class ClusterType(
         gameMode = GameModeType.BASEGAME_STANDARD,
         asteroidTypes = listOf(
             AsteroidType.Oceania
-        )
+        ),
+        exportCollection = ClusterExportCollection.BASEGAME
     ),
 
     /** Rime */
@@ -99,7 +106,8 @@ enum class ClusterType(
         gameMode = GameModeType.BASEGAME_STANDARD,
         asteroidTypes = listOf(
             AsteroidType.SandstoneFrozen
-        )
+        ),
+        exportCollection = ClusterExportCollection.BASEGAME
     ),
 
     /** Verdante */
@@ -109,7 +117,8 @@ enum class ClusterType(
         gameMode = GameModeType.BASEGAME_STANDARD,
         asteroidTypes = listOf(
             AsteroidType.ForestLush
-        )
+        ),
+        exportCollection = ClusterExportCollection.BASEGAME
     ),
 
     /** Arboria */
@@ -119,7 +128,8 @@ enum class ClusterType(
         gameMode = GameModeType.BASEGAME_STANDARD,
         asteroidTypes = listOf(
             AsteroidType.ForestDefault
-        )
+        ),
+        exportCollection = ClusterExportCollection.BASEGAME
     ),
 
     /** Volcanea */
@@ -129,7 +139,8 @@ enum class ClusterType(
         gameMode = GameModeType.BASEGAME_STANDARD,
         asteroidTypes = listOf(
             AsteroidType.Volcanic
-        )
+        ),
+        exportCollection = ClusterExportCollection.BASEGAME
     ),
 
     /** The Badlands */
@@ -139,7 +150,8 @@ enum class ClusterType(
         gameMode = GameModeType.BASEGAME_STANDARD,
         asteroidTypes = listOf(
             AsteroidType.Badlands
-        )
+        ),
+        exportCollection = ClusterExportCollection.BASEGAME
     ),
 
     /** Aridio */
@@ -149,7 +161,8 @@ enum class ClusterType(
         gameMode = GameModeType.BASEGAME_STANDARD,
         asteroidTypes = listOf(
             AsteroidType.ForestHot
-        )
+        ),
+        exportCollection = ClusterExportCollection.BASEGAME
     ),
 
     /** Oasisse */
@@ -159,7 +172,8 @@ enum class ClusterType(
         gameMode = GameModeType.BASEGAME_STANDARD,
         asteroidTypes = listOf(
             AsteroidType.Oasis
-        )
+        ),
+        exportCollection = ClusterExportCollection.BASEGAME
     ),
 
     /** Terra */
@@ -176,7 +190,8 @@ enum class ClusterType(
             AsteroidType.MooMoonlet,
             AsteroidType.WaterMoonlet,
             AsteroidType.MiniRegolithMoonlet
-        )
+        ),
+        exportCollection = ClusterExportCollection.CLASSIC_1
     ),
 
     /** Ceres */
@@ -193,7 +208,8 @@ enum class ClusterType(
             AsteroidType.MooMoonlet,
             AsteroidType.WaterMoonlet,
             AsteroidType.MiniRegolithMoonlet
-        )
+        ),
+        exportCollection = ClusterExportCollection.CLASSIC_2
     ),
 
     /** Ceres (lab) */
@@ -210,7 +226,8 @@ enum class ClusterType(
             AsteroidType.MooMoonlet,
             AsteroidType.WaterMoonlet,
             AsteroidType.MiniRegolithMoonlet
-        )
+        ),
+        exportCollection = ClusterExportCollection.CLASSIC_2
     ),
 
     /** Relica */
@@ -227,7 +244,8 @@ enum class ClusterType(
             AsteroidType.MooMoonlet,
             AsteroidType.WaterMoonlet,
             AsteroidType.MiniRegolithMoonlet
-        )
+        ),
+        exportCollection = ClusterExportCollection.CLASSIC_2
     ),
 
     /** RelicAAAAAAAGHH */
@@ -244,7 +262,8 @@ enum class ClusterType(
             AsteroidType.MooMoonlet,
             AsteroidType.WaterMoonlet,
             AsteroidType.MiniRegolithMoonlet
-        )
+        ),
+        exportCollection = ClusterExportCollection.CLASSIC_2
     ),
 
     /** Oceania */
@@ -261,7 +280,8 @@ enum class ClusterType(
             AsteroidType.MooMoonlet,
             AsteroidType.WaterMoonlet,
             AsteroidType.MiniRegolithMoonlet
-        )
+        ),
+        exportCollection = ClusterExportCollection.CLASSIC_1
     ),
 
     /** Squelchy */
@@ -278,7 +298,8 @@ enum class ClusterType(
             AsteroidType.MooMoonlet,
             AsteroidType.WaterMoonlet,
             AsteroidType.MiniRegolithMoonlet
-        )
+        ),
+        exportCollection = ClusterExportCollection.CLASSIC_1
     ),
 
     /** Rime */
@@ -295,7 +316,8 @@ enum class ClusterType(
             AsteroidType.MooMoonlet,
             AsteroidType.WaterMoonlet,
             AsteroidType.MiniRegolithMoonlet
-        )
+        ),
+        exportCollection = ClusterExportCollection.CLASSIC_1
     ),
 
     /** Verdante */
@@ -312,7 +334,8 @@ enum class ClusterType(
             AsteroidType.MooMoonlet,
             AsteroidType.WaterMoonlet,
             AsteroidType.MiniRegolithMoonlet
-        )
+        ),
+        exportCollection = ClusterExportCollection.CLASSIC_1
     ),
 
     /** Arboria */
@@ -329,7 +352,8 @@ enum class ClusterType(
             AsteroidType.MooMoonlet,
             AsteroidType.WaterMoonlet,
             AsteroidType.MiniRegolithMoonlet
-        )
+        ),
+        exportCollection = ClusterExportCollection.CLASSIC_1
     ),
 
     /** Volcanea */
@@ -346,7 +370,8 @@ enum class ClusterType(
             AsteroidType.MooMoonlet,
             AsteroidType.WaterMoonlet,
             AsteroidType.MiniRegolithMoonlet
-        )
+        ),
+        exportCollection = ClusterExportCollection.CLASSIC_1
     ),
 
     /** The Badlands */
@@ -363,7 +388,8 @@ enum class ClusterType(
             AsteroidType.MooMoonlet,
             AsteroidType.WaterMoonlet,
             AsteroidType.MiniRegolithMoonlet
-        )
+        ),
+        exportCollection = ClusterExportCollection.CLASSIC_1
     ),
 
     /** Aridio */
@@ -380,7 +406,8 @@ enum class ClusterType(
             AsteroidType.MooMoonlet,
             AsteroidType.WaterMoonlet,
             AsteroidType.MiniRegolithMoonlet
-        )
+        ),
+        exportCollection = ClusterExportCollection.CLASSIC_1
     ),
 
     /** Oasisse */
@@ -397,7 +424,8 @@ enum class ClusterType(
             AsteroidType.MooMoonlet,
             AsteroidType.WaterMoonlet,
             AsteroidType.MiniRegolithMoonlet
-        )
+        ),
+        exportCollection = ClusterExportCollection.CLASSIC_1
     ),
 
     /** Terrania */
@@ -415,7 +443,8 @@ enum class ClusterType(
             AsteroidType.WaterMoonlet,
             AsteroidType.NiobiumMoonlet,
             AsteroidType.RegolithMoonlet
-        )
+        ),
+        exportCollection = ClusterExportCollection.SPACEDOUT
     ),
 
     /** Ceres Minor */
@@ -433,7 +462,8 @@ enum class ClusterType(
             AsteroidType.WaterMoonlet,
             AsteroidType.NiobiumMoonlet,
             AsteroidType.RegolithMoonlet
-        )
+        ),
+        exportCollection = ClusterExportCollection.SPACEDOUT
     ),
 
     /** Relica Minor */
@@ -451,7 +481,8 @@ enum class ClusterType(
             AsteroidType.WaterMoonlet,
             AsteroidType.NiobiumMoonlet,
             AsteroidType.RegolithMoonlet
-        )
+        ),
+        exportCollection = ClusterExportCollection.SPACEDOUT
     ),
 
     /** Folia */
@@ -469,7 +500,8 @@ enum class ClusterType(
             AsteroidType.WaterMoonlet,
             AsteroidType.NiobiumMoonlet,
             AsteroidType.RegolithMoonlet
-        )
+        ),
+        exportCollection = ClusterExportCollection.SPACEDOUT
     ),
 
     /** Quagmiris */
@@ -487,7 +519,8 @@ enum class ClusterType(
             AsteroidType.WaterMoonlet,
             AsteroidType.NiobiumMoonlet,
             AsteroidType.RegolithMoonlet
-        )
+        ),
+        exportCollection = ClusterExportCollection.SPACEDOUT
     ),
 
     /** Metallic Swampy Moonlet */
@@ -508,6 +541,7 @@ enum class ClusterType(
             AsteroidType.NiobiumMoonlet,
             AsteroidType.RegolithMoonlet
         ),
+        exportCollection = ClusterExportCollection.SPACEDOUT,
         starMapRadius = 14
     ),
 
@@ -529,6 +563,7 @@ enum class ClusterType(
             AsteroidType.NiobiumMoonlet,
             AsteroidType.RegolithMoonlet
         ),
+        exportCollection = ClusterExportCollection.SPACEDOUT,
         starMapRadius = 14
     ),
 
@@ -550,6 +585,7 @@ enum class ClusterType(
             AsteroidType.NiobiumMoonlet,
             AsteroidType.RegolithMoonlet
         ),
+        exportCollection = ClusterExportCollection.SPACEDOUT,
         starMapRadius = 14
     ),
 
@@ -571,6 +607,7 @@ enum class ClusterType(
             AsteroidType.NiobiumMoonlet,
             AsteroidType.RegolithMoonlet
         ),
+        exportCollection = ClusterExportCollection.SPACEDOUT,
         starMapRadius = 14
     ),
 
@@ -592,6 +629,7 @@ enum class ClusterType(
             AsteroidType.NiobiumMoonlet,
             AsteroidType.RegolithMoonlet
         ),
+        exportCollection = ClusterExportCollection.SPACEDOUT,
         starMapRadius = 14
     ),
 
@@ -612,6 +650,7 @@ enum class ClusterType(
             AsteroidType.NiobiumMoonlet,
             AsteroidType.RegolithMoonlet
         ),
+        exportCollection = ClusterExportCollection.SPACEDOUT,
         starMapRadius = 14
     );
 
