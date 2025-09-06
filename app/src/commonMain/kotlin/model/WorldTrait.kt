@@ -28,30 +28,31 @@ import kotlinx.serialization.Serializable
 @Suppress("UNUSED")
 @Serializable
 enum class WorldTrait(
+    id: Byte
 ) {
 
-    BouldersLarge,
-    BouldersMedium,
-    BouldersMixed,
-    BouldersSmall,
-    DeepOil(),
-    FrozenCore(),
-    GeoActive(),
-    Geodes(),
-    GeoDormant(),
-    GlaciersLarge,
-    IrregularOil(),
-    MagmaVents(),
-    MetalPoor(),
-    MetalRich(),
-    MisalignedStart,
-    SlimeSplats,
-    SubsurfaceOcean,
-    Volcanoes(),
-    CrashedSatellites(),
-    DistressSignal,
-    LushCore(),
-    MetalCaves(),
-    RadioactiveCrust();
+    BouldersLarge(0),
+    BouldersMedium(1),
+    BouldersMixed(2),
+    BouldersSmall(3),
+    DeepOil(4),
+    FrozenCore(5),
+    GeoActive(6),
+    Geodes(7),
+    GeoDormant(8),
+    GlaciersLarge(9),
+    IrregularOil(10),
+    MagmaVents(11),
+    MetalPoor(12),
+    MetalRich(13),
+    MisalignedStart(14),
+    SlimeSplats(15),
+    SubsurfaceOcean(16),
+    Volcanoes(17),
+    CrashedSatellites(18),
+    DistressSignal(19),
+    LushCore(20),
+    MetalCaves(21),
+    RadioactiveCrust(22);
 
 }

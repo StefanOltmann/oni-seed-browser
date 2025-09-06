@@ -19,32 +19,33 @@
 
 package model
 
-enum class VanillaSpacePOI {
+enum class VanillaSpacePOI(
+    id: Byte
+) {
 
-    CarbonaceousAsteroid,
-    ChlorinePlanet,
-    DLC2CeresSpaceDestination,
-    DLC4PrehistoricSpaceDestination,
-    DustyMoon,
-    Earth,
-    ForestPlanet,
-    GasGiant,
-    GoldAsteroid,
-    HeliumGiant,
-    IceGiant,
-    IcyDwarf,
-    MetallicAsteroid,
-    OilyAsteriod,
-    OrganicDwarf,
-    RedDwarf,
-    RockyAsteroid,
-    RustPlanet,
-    SaltDesertPlanet,
-    SaltDwarf,
-    Satellite,
-    ShinyPlanet,
-    TerraPlanet,
-    VolcanoPlanet,
-    Wormhole
+    CarbonaceousAsteroid(0),
+    ChlorinePlanet(1),
+    DLC2CeresSpaceDestination(2),
+    DLC4PrehistoricSpaceDestination(3),
+    DustyMoon(4),
+    Earth(5),
+    ForestPlanet(6),
+    GasGiant(7),
+    GoldAsteroid(8),
+    HeliumGiant(9),
+    IceGiant(10),
+    IcyDwarf(11),
+    MetallicAsteroid(12),
+    OilyAsteriod(13),
+    OrganicDwarf(14),
+    RedDwarf(15),
+    RockyAsteroid(16),
+    RustPlanet(17),
+    SaltDesertPlanet(18),
+    SaltDwarf(19),
+    Satellite(20),
+    ShinyPlanet(21),
+    TerraPlanet(22),
+    VolcanoPlanet(23),
+    Wormhole(24)
 }
-

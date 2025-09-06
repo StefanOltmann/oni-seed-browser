@@ -24,7 +24,7 @@ import kotlinx.serialization.Serializable
 @Suppress("UNUSED")
 @Serializable
 enum class ZoneType(
-    val id: Int
+    val id: Byte
 ) {
     /*
      * Ordered by how they should appear in the biome list.
