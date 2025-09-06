@@ -58,6 +58,7 @@ import ui.theme.defaultPadding
 import ui.theme.defaultSpacing
 import ui.theme.halfSpacing
 import ui.theme.lightGray
+import ui.model.stringResource
 
 private const val ROTATION_RADIANS = (30f * PI / 180).toFloat()
 

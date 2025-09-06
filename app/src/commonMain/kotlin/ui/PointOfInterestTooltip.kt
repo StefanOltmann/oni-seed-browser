@@ -33,6 +33,7 @@ import androidx.compose.ui.unit.dp
 import model.PointOfInterestType
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
+import ui.model.stringResource
 import ui.theme.DefaultSpacer
 import ui.theme.HalfSpacer
 import ui.theme.halfPadding

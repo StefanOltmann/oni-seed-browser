@@ -19,33 +19,7 @@
 
 package model
 
-import androidx.compose.ui.graphics.Color
-import io.github.stefanoltmann.app.generated.resources.Res
-import io.github.stefanoltmann.app.generated.resources.worldTraitBouldersLarge
-import io.github.stefanoltmann.app.generated.resources.worldTraitBouldersMedium
-import io.github.stefanoltmann.app.generated.resources.worldTraitBouldersMixed
-import io.github.stefanoltmann.app.generated.resources.worldTraitBouldersSmall
-import io.github.stefanoltmann.app.generated.resources.worldTraitCrashedSatellites
-import io.github.stefanoltmann.app.generated.resources.worldTraitDeepOil
-import io.github.stefanoltmann.app.generated.resources.worldTraitDistressSignal
-import io.github.stefanoltmann.app.generated.resources.worldTraitFrozenCore
-import io.github.stefanoltmann.app.generated.resources.worldTraitGeoActive
-import io.github.stefanoltmann.app.generated.resources.worldTraitGeoDormant
-import io.github.stefanoltmann.app.generated.resources.worldTraitGeodes
-import io.github.stefanoltmann.app.generated.resources.worldTraitGlaciersLarge
-import io.github.stefanoltmann.app.generated.resources.worldTraitIrregularOil
-import io.github.stefanoltmann.app.generated.resources.worldTraitLushCore
-import io.github.stefanoltmann.app.generated.resources.worldTraitMagmaVents
-import io.github.stefanoltmann.app.generated.resources.worldTraitMetalCaves
-import io.github.stefanoltmann.app.generated.resources.worldTraitMetalPoor
-import io.github.stefanoltmann.app.generated.resources.worldTraitMetalRich
-import io.github.stefanoltmann.app.generated.resources.worldTraitMisalignedStart
-import io.github.stefanoltmann.app.generated.resources.worldTraitRadioactiveCrust
-import io.github.stefanoltmann.app.generated.resources.worldTraitSlimeSplats
-import io.github.stefanoltmann.app.generated.resources.worldTraitSubsurfaceOcean
-import io.github.stefanoltmann.app.generated.resources.worldTraitVolcanoes
 import kotlinx.serialization.Serializable
-import org.jetbrains.compose.resources.StringResource
 
 /*
  * See https://oxygennotincluded.fandom.com/wiki/World_Trait
@@ -54,130 +28,31 @@ import org.jetbrains.compose.resources.StringResource
 @Suppress("UNUSED")
 @Serializable
 enum class WorldTrait(
-    val stringResource: StringResource,
-    val color: Color,
     val rating: Rating = Rating.NEUTRAL
 ) {
 
-    BouldersLarge(
-        stringResource = Res.string.worldTraitBouldersLarge,
-        color = Color(0xFFBDBDBD)
-    ),
-    BouldersMedium(
-        stringResource = Res.string.worldTraitBouldersMedium,
-        color = Color(0xFFBDBDBD)
-    ),
-    BouldersMixed(
-        stringResource = Res.string.worldTraitBouldersMixed,
-        color = Color(0xFFBDBDBD)
-    ),
-    BouldersSmall(
-        stringResource = Res.string.worldTraitBouldersSmall,
-        color = Color(0xFFBDBDBD)
-    ),
-    DeepOil(
-        stringResource = Res.string.worldTraitDeepOil,
-        color = Color(0xFF6E6E6E),
-        /* More oil reservoirs */
-        rating = Rating.VERY_GOOD
-    ),
-    FrozenCore(
-        stringResource = Res.string.worldTraitFrozenCore,
-        color = Color(0xFFA1D6ED),
-        /* Frozen core helps early with CO2 and to cool down the planet */
-        rating = Rating.GOOD
-    ),
-    GeoActive(
-        stringResource = Res.string.worldTraitGeoActive,
-        color = Color(0xFFECA649),
-        /* More geyser output */
-        rating = Rating.VERY_GOOD
-    ),
-    Geodes(
-        stringResource = Res.string.worldTraitGeodes,
-        color = Color(0xFFC47BF4),
-        /* Helpful materials. */
-        rating = Rating.VERY_GOOD
-    ),
-    GeoDormant(
-        stringResource = Res.string.worldTraitGeoDormant,
-        color = Color(0xFF8895A1),
-        /* Less geyser output */
-        rating = Rating.VERY_BAD
-    ),
-    GlaciersLarge(
-        stringResource = Res.string.worldTraitGlaciersLarge,
-        color = Color(0xFFA1D6ED)
-    ),
-    IrregularOil(
-        stringResource = Res.string.worldTraitIrregularOil,
-        color = Color(0xFF6C6C6C),
-        /* More oil patches, easier to access. */
-        rating = Rating.VERY_GOOD
-    ),
-    MagmaVents(
-        stringResource = Res.string.worldTraitMagmaVents,
-        color = Color(0xFFE7544D),
-        /* Makes the game harder */
-        rating = Rating.BAD
-    ),
-    MetalPoor(
-        stringResource = Res.string.worldTraitMetalPoor,
-        color = Color(0xFF8794A0),
-        /* Less metal */
-        rating = Rating.VERY_BAD
-    ),
-    MetalRich(
-        stringResource = Res.string.worldTraitMetalRich,
-        color = Color(0xFFD2AB4B),
-        /* More metal */
-        rating = Rating.VERY_GOOD
-    ),
-    MisalignedStart(
-        stringResource = Res.string.worldTraitMisalignedStart,
-        color = Color(0xFFE7DC93)
-    ),
-    SlimeSplats(
-        stringResource = Res.string.worldTraitSlimeSplats,
-        color = Color(0xFF8EB542)
-    ),
-    SubsurfaceOcean(
-        stringResource = Res.string.worldTraitSubsurfaceOcean,
-        color = Color(0xFF61CEF0)
-    ),
-    Volcanoes(
-        stringResource = Res.string.worldTraitVolcanoes,
-        color = Color(0xFFE7544D),
-        /* Makes the game harder, but more heat energy. */
-        rating = Rating.BAD
-    ),
-    CrashedSatellites(
-        stringResource = Res.string.worldTraitCrashedSatellites,
-        color = Color(0xFF7ED360),
-        /* Lots of free radiation */
-        rating = Rating.VERY_GOOD
-    ),
-    DistressSignal(
-        stringResource = Res.string.worldTraitDistressSignal,
-        color = Color(0xFF8794A0)
-    ),
-    LushCore(
-        stringResource = Res.string.worldTraitLushCore,
-        color = Color(0xFF66A052),
-        /* Access to pips */
-        rating = Rating.GOOD
-    ),
-    MetalCaves(
-        stringResource = Res.string.worldTraitMetalCaves,
-        color = Color(0xFFD2AB4B),
-        /* More free metal */
-        rating = Rating.GOOD
-    ),
-    RadioactiveCrust(
-        stringResource = Res.string.worldTraitRadioactiveCrust,
-        color = Color(0xFF7ED360),
-        /* More free radiation */
-        rating = Rating.GOOD
-    )
-}
+    BouldersLarge,
+    BouldersMedium,
+    BouldersMixed,
+    BouldersSmall,
+    DeepOil(rating = Rating.VERY_GOOD), // More oil reservoirs
+    FrozenCore(rating = Rating.GOOD), // Frozen core helps early with CO2 and to cool down the planet
+    GeoActive(rating = Rating.VERY_GOOD), // More geyser output
+    Geodes(rating = Rating.VERY_GOOD), // Helpful materials.
+    GeoDormant(rating = Rating.VERY_BAD), // Less geyser output
+    GlaciersLarge,
+    IrregularOil(rating = Rating.VERY_GOOD), // More oil patches, easier to access.
+    MagmaVents(rating = Rating.BAD), // Makes the game harder
+    MetalPoor(rating = Rating.VERY_BAD), // Less metal
+    MetalRich(rating = Rating.VERY_GOOD), // More metal
+    MisalignedStart,
+    SlimeSplats,
+    SubsurfaceOcean,
+    Volcanoes(rating = Rating.BAD), // Makes the game harder, but more heat energy.
+    CrashedSatellites(rating = Rating.VERY_GOOD), // Lots of free radiation
+    DistressSignal,
+    LushCore(rating = Rating.GOOD), // Access to pips
+    MetalCaves(rating = Rating.GOOD), // More free metal
+    RadioactiveCrust(rating = Rating.GOOD); // More free radiation
 
+}

@@ -19,62 +19,33 @@
 
 package model
 
-import io.github.stefanoltmann.app.generated.resources.Res
-import io.github.stefanoltmann.app.generated.resources.vanillaSpacePoiCarbonaceousAsteroid
-import io.github.stefanoltmann.app.generated.resources.vanillaSpacePoiChlorinePlanet
-import io.github.stefanoltmann.app.generated.resources.vanillaSpacePoiDLC2CeresSpaceDestination
-import io.github.stefanoltmann.app.generated.resources.vanillaSpacePoiDLC4PrehistoricSpaceDestination
-import io.github.stefanoltmann.app.generated.resources.vanillaSpacePoiDustyMoon
-import io.github.stefanoltmann.app.generated.resources.vanillaSpacePoiEarth
-import io.github.stefanoltmann.app.generated.resources.vanillaSpacePoiForestPlanet
-import io.github.stefanoltmann.app.generated.resources.vanillaSpacePoiGasGiant
-import io.github.stefanoltmann.app.generated.resources.vanillaSpacePoiGoldAsteroid
-import io.github.stefanoltmann.app.generated.resources.vanillaSpacePoiHeliumGiant
-import io.github.stefanoltmann.app.generated.resources.vanillaSpacePoiIceGiant
-import io.github.stefanoltmann.app.generated.resources.vanillaSpacePoiIcyDwarf
-import io.github.stefanoltmann.app.generated.resources.vanillaSpacePoiMetallicAsteroid
-import io.github.stefanoltmann.app.generated.resources.vanillaSpacePoiOilyAsteroid
-import io.github.stefanoltmann.app.generated.resources.vanillaSpacePoiOrganicDwarf
-import io.github.stefanoltmann.app.generated.resources.vanillaSpacePoiRedDwarf
-import io.github.stefanoltmann.app.generated.resources.vanillaSpacePoiRockyAsteroid
-import io.github.stefanoltmann.app.generated.resources.vanillaSpacePoiRustPlanet
-import io.github.stefanoltmann.app.generated.resources.vanillaSpacePoiSaltDesertPlanet
-import io.github.stefanoltmann.app.generated.resources.vanillaSpacePoiSaltDwarf
-import io.github.stefanoltmann.app.generated.resources.vanillaSpacePoiSatellite
-import io.github.stefanoltmann.app.generated.resources.vanillaSpacePoiShinyPlanet
-import io.github.stefanoltmann.app.generated.resources.vanillaSpacePoiTerraPlanet
-import io.github.stefanoltmann.app.generated.resources.vanillaSpacePoiVolcanoPlanet
-import io.github.stefanoltmann.app.generated.resources.vanillaSpacePoiWormhole
-import org.jetbrains.compose.resources.StringResource
 
-enum class VanillaSpacePOI(
-    val stringResource: StringResource
-) {
+enum class VanillaSpacePOI {
 
-    CarbonaceousAsteroid(Res.string.vanillaSpacePoiCarbonaceousAsteroid),
-    ChlorinePlanet(Res.string.vanillaSpacePoiChlorinePlanet),
-    DLC2CeresSpaceDestination(Res.string.vanillaSpacePoiDLC2CeresSpaceDestination),
-    DLC4PrehistoricSpaceDestination(Res.string.vanillaSpacePoiDLC4PrehistoricSpaceDestination),
-    DustyMoon(Res.string.vanillaSpacePoiDustyMoon),
-    Earth(Res.string.vanillaSpacePoiEarth),
-    ForestPlanet(Res.string.vanillaSpacePoiForestPlanet),
-    GasGiant(Res.string.vanillaSpacePoiGasGiant),
-    GoldAsteroid(Res.string.vanillaSpacePoiGoldAsteroid),
-    HeliumGiant(Res.string.vanillaSpacePoiHeliumGiant),
-    IceGiant(Res.string.vanillaSpacePoiIceGiant),
-    IcyDwarf(Res.string.vanillaSpacePoiIcyDwarf),
-    MetallicAsteroid(Res.string.vanillaSpacePoiMetallicAsteroid),
-    OilyAsteriod(Res.string.vanillaSpacePoiOilyAsteroid),
-    OrganicDwarf(Res.string.vanillaSpacePoiOrganicDwarf),
-    RedDwarf(Res.string.vanillaSpacePoiRedDwarf),
-    RockyAsteroid(Res.string.vanillaSpacePoiRockyAsteroid),
-    RustPlanet(Res.string.vanillaSpacePoiRustPlanet),
-    SaltDesertPlanet(Res.string.vanillaSpacePoiSaltDesertPlanet),
-    SaltDwarf(Res.string.vanillaSpacePoiSaltDwarf),
-    Satellite(Res.string.vanillaSpacePoiSatellite),
-    ShinyPlanet(Res.string.vanillaSpacePoiShinyPlanet),
-    TerraPlanet(Res.string.vanillaSpacePoiTerraPlanet),
-    VolcanoPlanet(Res.string.vanillaSpacePoiVolcanoPlanet),
-    Wormhole(Res.string.vanillaSpacePoiWormhole)
+    CarbonaceousAsteroid,
+    ChlorinePlanet,
+    DLC2CeresSpaceDestination,
+    DLC4PrehistoricSpaceDestination,
+    DustyMoon,
+    Earth,
+    ForestPlanet,
+    GasGiant,
+    GoldAsteroid,
+    HeliumGiant,
+    IceGiant,
+    IcyDwarf,
+    MetallicAsteroid,
+    OilyAsteriod,
+    OrganicDwarf,
+    RedDwarf,
+    RockyAsteroid,
+    RustPlanet,
+    SaltDesertPlanet,
+    SaltDwarf,
+    Satellite,
+    ShinyPlanet,
+    TerraPlanet,
+    VolcanoPlanet,
+    Wormhole
 }
 

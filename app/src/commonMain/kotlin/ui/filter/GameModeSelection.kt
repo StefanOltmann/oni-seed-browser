@@ -43,8 +43,8 @@ import model.filter.GameModeType
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import ui.getGameModeDrawable
-import ui.getStringResource
 import ui.grayScaleFilter
+import ui.model.stringResource
 import ui.noRippleClickable
 import ui.onHover
 import ui.theme.halfPadding
@@ -100,7 +100,7 @@ fun GameModeSelection(
                 )
 
                 Text(
-                    text = stringResource(getStringResource(gameMode)),
+                    text = stringResource(gameMode.stringResource),
                     style = MaterialTheme.typography.bodyLarge,
                     color = if (modeHovered.value || isSelected)
                         hoverColor

@@ -40,6 +40,8 @@ import androidx.compose.ui.unit.dp
 import model.ZoneType
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
+import ui.model.color
+import ui.model.stringResource
 import ui.theme.DefaultSpacer
 import ui.theme.HalfSpacer
 import ui.theme.cardColorBackground

@@ -40,6 +40,7 @@ import ui.logoIconHeight
 import ui.noRippleClickable
 import ui.onHover
 import ui.theme.defaultPadding
+import ui.model.icon
 
 @Composable
 fun GameVersionSelection(

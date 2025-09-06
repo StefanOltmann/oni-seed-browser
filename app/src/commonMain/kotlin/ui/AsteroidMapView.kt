@@ -73,12 +73,14 @@ import io.github.stefanoltmann.app.generated.resources.uiGeyserDetails
 import kotlin.math.min
 import kotlinx.coroutines.launch
 import model.Asteroid
+import model.AsteroidType
 import model.BiomePaths
 import model.Geyser
 import model.GeyserType
 import model.ZoneType
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
+import ui.model.color
 import ui.theme.DefaultSpacer
 import ui.theme.anthraticeTransparentBackgroundColor
 import ui.theme.defaultPadding

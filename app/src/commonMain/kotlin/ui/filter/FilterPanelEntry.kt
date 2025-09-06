@@ -55,6 +55,7 @@ import model.filter.FilterRule
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import ui.getAsteroidTypeDrawable
+import ui.model.stringResource
 import ui.noRippleClickable
 import ui.onHover
 import ui.theme.DefaultSpacer
