@@ -79,13 +79,13 @@ import model.GeyserType
 import model.ZoneType
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
+import ui.model.color
 import ui.theme.DefaultSpacer
 import ui.theme.anthraticeTransparentBackgroundColor
 import ui.theme.defaultPadding
 import ui.theme.defaultRoundedCornerShape
 import ui.theme.defaultSpacing
 import ui.theme.doubleSpacing
-import ui.theme.getZoneColor
 import ui.theme.halfSpacing
 import ui.theme.hoverColor
 import ui.theme.lightGray
@@ -284,10 +284,8 @@ fun AsteroidMap(
                     /*
                      * Only color the highlighted zone
                      */
-                    val color = if (highlightedZoneType.value == null)
-                        getZoneColor(zoneType)
-                    else if (isHighlighted)
-                        getZoneColor(zoneType)
+                    val color = if (isHighlighted)
+                        zoneType.color
                     else
                         Color.LightGray
 

@@ -40,12 +40,12 @@ import androidx.compose.ui.unit.dp
 import model.ZoneType
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
+import ui.model.color
 import ui.theme.DefaultSpacer
 import ui.theme.HalfSpacer
 import ui.theme.cardColorBackground
 import ui.theme.defaultRoundedCornerShape
 import ui.theme.doubleSpacing
-import ui.theme.getZoneColor
 import ui.theme.halfPadding
 import ui.theme.lightGrayTransparentBorderColor
 
@@ -88,7 +88,7 @@ fun ZoneTypeDetail(
                     .width(16.dp)
                     .height(48.dp)
                     .background(
-                        getZoneColor(zoneType),
+                        zoneType.color,
                         defaultHalfRoundedCornerShape
                     )
             )

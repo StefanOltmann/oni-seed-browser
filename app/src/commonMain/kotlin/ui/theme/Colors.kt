@@ -73,30 +73,3 @@ val appColorScheme = darkColorScheme(
     surfaceTint = surfaceTint,
     primary = Color(0xFF72bcd4)
 )
-
-fun getZoneColor(zoneType: ZoneType): Color {
-    return when (zoneType) {
-        Sandstone -> Color(0xFFF2BB47)
-        Barren -> Color(0xFF97752C)
-        Space -> Color(0xFF242424)
-        FrozenWastes -> Color(0xFF9DC9D6)
-        BoggyMarsh -> Color(0xFF7B974B)
-        ToxicJungle -> Color(0xFFCB95A3)
-        Ocean -> Color(0xFF4C4CFF)
-        Rust -> Color(0xFFFFA007)
-        Forest -> Color(0xFF8EC039)
-        Radioactive -> Color(0xFF4AE458)
-        Swamp -> Color(0xFFEB9B3F)
-        Wasteland -> Color(0xFFCC3636)
-        Metallic -> Color(0xFFFFA007)
-        Moo -> Color(0xFF8EC039)
-        IceCaves -> Color(0xFFABCFEA)
-        CarrotQuarry -> Color(0xFFCDA2C7)
-        SugarWoods -> Color(0xFFA2CDA4)
-        PrehistoricGarden -> Color(0xFF006127)
-        PrehistoricRaptor -> Color(0xFF352F8C)
-        PrehistoricWetlands -> Color(0xFF645906)
-        OilField -> Color(0xFF52321D)
-        MagmaCore -> Color(0xFFDE5A3B)
-    }
-}
