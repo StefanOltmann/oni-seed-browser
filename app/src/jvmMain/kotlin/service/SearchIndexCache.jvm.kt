@@ -42,8 +42,7 @@ private val localAppData: File by lazy {
 @OptIn(ExperimentalSerializationApi::class)
 actual suspend fun findSearchIndex(clusterType: ClusterType): SearchIndex {
 
-    // TODO Fall back to main, if mirror is offline
-    val searchIndexUrl = SEARCH_INDEX_URL_MIRROR + "/" + clusterType.prefix
+    val searchIndexUrl = SEARCH_INDEX_URL + "/" + clusterType.prefix
 
     val cacheFile = File(localAppData, clusterType.prefix)
 

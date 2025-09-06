@@ -42,13 +42,13 @@ jobs:
         with:
           path: app/build/dist/wasmJs/productionExecutable/
 
-      # Deploy to Cloudflare Pages
+      # Deploy to Cloudflare worker (static site)
       - name: Publish to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy app/build/dist/wasmJs/productionExecutable --project-name=oni-seed-browser
+          command: deploy
   
   deploy_gh_pages:
     name: Deploy to GitHub Pages

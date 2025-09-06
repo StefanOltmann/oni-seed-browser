@@ -1,0 +1,6 @@
+name = "oni-seed-browser"
+
+compatibility_date = "2025-07-30"
+
+[assets]
+directory = "app/build/dist/wasmJs/productionExecutable"
