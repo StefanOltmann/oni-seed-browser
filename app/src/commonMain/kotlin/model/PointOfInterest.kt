@@ -20,12 +20,10 @@
 package model
 
 import kotlinx.serialization.Serializable
-import model.serializer.PointOfInterestTypeStringSerializer
 
 @Serializable
 data class PointOfInterest(
 
-    @Serializable(with = PointOfInterestTypeStringSerializer::class)
     val id: PointOfInterestType,
 
     val x: Int,

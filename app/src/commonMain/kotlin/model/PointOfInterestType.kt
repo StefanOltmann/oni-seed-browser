@@ -22,36 +22,24 @@ package model
 /**
  * See https://oxygennotincluded.fandom.com/wiki/Planetoid_Clusters
  */
-enum class PointOfInterestType(
-    val id: String
-) {
+enum class PointOfInterestType {
 
-    PRINTING_POD("Headquarters"),
-    SUPPLY_TELEPORTER_INPUT("WarpConduitSender"),
-    SUPPLY_TELEPORTER_OUTPUT("WarpConduitReceiver"),
-    TELEPORTER_TRANSMITTER("WarpPortal"),
-    TELEPORTER_RECEIVER("WarpReceiver"),
-    NEURAL_VACILLATOR("GeneShuffler"),
-    ANTI_ENTROPY_THERMO_NULLIFIER("MassiveHeatSink"),
-    EXPERIMENT_52B("SapTree"),
-    ARTIFACT("GravitasPedestal"),
-    CRASHED_SATELLITE("PropSurfaceSatellite1"),
-    WRECKED_SATELLITE("PropSurfaceSatellite2"),
-    CRUSHED_SATELLITE("PropSurfaceSatellite3"),
-    TEMPORAL_TEAR_OPENER("TemporalTearOpener"),
-    CRYOTANK("CryoTank"),
-    PropFacilityStatue("PropFacilityStatue"),
-    GeothermalVentEntity("GeothermalVentEntity"),
-    GeothermalControllerEntity("GeothermalControllerEntity"),
-    POICeresTechUnlock("POICeresTechUnlock");
-
-    companion object {
-
-        @Suppress("CyclomaticComplexMethod", "kotlin:S1479")
-        fun of(id: String): PointOfInterestType {
-
-            return PointOfInterestType.entries.find { it.id == id }
-                ?: error("Unknown POI type: $id")
-        }
-    }
+    Headquarters,
+    WarpConduitSender,
+    WarpConduitReceiver,
+    WarpPortal,
+    WarpReceiver,
+    GeneShuffler,
+    MassiveHeatSink,
+    SapTree,
+    GravitasPedestal,
+    PropSurfaceSatellite1,
+    PropSurfaceSatellite2,
+    PropSurfaceSatellite3,
+    TemporalTearOpener,
+    CryoTank,
+    PropFacilityStatue,
+    GeothermalVentEntity,
+    GeothermalControllerEntity,
+    POICeresTechUnlock;
 }

@@ -309,20 +309,20 @@ val GeyserType.drawableResource: DrawableResource
 
 val PointOfInterestType.drawableResource: DrawableResource
     get() = when (this) {
-        PointOfInterestType.PRINTING_POD -> Res.drawable.building_printing_pod
-        PointOfInterestType.SUPPLY_TELEPORTER_INPUT -> Res.drawable.building_supply_teleporter_input
-        PointOfInterestType.SUPPLY_TELEPORTER_OUTPUT -> Res.drawable.building_supply_teleporter_output
-        PointOfInterestType.TELEPORTER_TRANSMITTER -> Res.drawable.building_teleporter_transmitter
-        PointOfInterestType.TELEPORTER_RECEIVER -> Res.drawable.building_teleporter_receiver
-        PointOfInterestType.NEURAL_VACILLATOR -> Res.drawable.building_neural_vacillator
-        PointOfInterestType.ANTI_ENTROPY_THERMO_NULLIFIER -> Res.drawable.building_anti_entropy_thermo_nullifier
-        PointOfInterestType.EXPERIMENT_52B -> Res.drawable.building_sap_tree
-        PointOfInterestType.ARTIFACT -> Res.drawable.poi_artifact_outline
-        PointOfInterestType.CRASHED_SATELLITE -> Res.drawable.poi_crashed_satellite
-        PointOfInterestType.WRECKED_SATELLITE -> Res.drawable.poi_wrecked_satellite
-        PointOfInterestType.CRUSHED_SATELLITE -> Res.drawable.poi_crushed_satellite
-        PointOfInterestType.TEMPORAL_TEAR_OPENER -> Res.drawable.building_temporal_tear_opener
-        PointOfInterestType.CRYOTANK -> Res.drawable.building_cryotank
+        PointOfInterestType.Headquarters -> Res.drawable.building_printing_pod
+        PointOfInterestType.WarpConduitSender -> Res.drawable.building_supply_teleporter_input
+        PointOfInterestType.WarpConduitReceiver -> Res.drawable.building_supply_teleporter_output
+        PointOfInterestType.WarpPortal -> Res.drawable.building_teleporter_transmitter
+        PointOfInterestType.WarpReceiver -> Res.drawable.building_teleporter_receiver
+        PointOfInterestType.GeneShuffler -> Res.drawable.building_neural_vacillator
+        PointOfInterestType.MassiveHeatSink -> Res.drawable.building_anti_entropy_thermo_nullifier
+        PointOfInterestType.SapTree -> Res.drawable.building_sap_tree
+        PointOfInterestType.GravitasPedestal -> Res.drawable.poi_artifact_outline
+        PointOfInterestType.PropSurfaceSatellite1 -> Res.drawable.poi_crashed_satellite
+        PointOfInterestType.PropSurfaceSatellite2 -> Res.drawable.poi_wrecked_satellite
+        PointOfInterestType.PropSurfaceSatellite3 -> Res.drawable.poi_crushed_satellite
+        PointOfInterestType.TemporalTearOpener -> Res.drawable.building_temporal_tear_opener
+        PointOfInterestType.CryoTank -> Res.drawable.building_cryotank
         PointOfInterestType.PropFacilityStatue -> Res.drawable.poi_prop_facility_statue
         PointOfInterestType.GeothermalVentEntity -> Res.drawable.poi_geothermal_vent_entity
         PointOfInterestType.GeothermalControllerEntity -> Res.drawable.poi_geothermal_controller_entity

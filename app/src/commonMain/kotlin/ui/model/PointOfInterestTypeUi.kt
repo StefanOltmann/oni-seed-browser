@@ -24,20 +24,20 @@ import org.jetbrains.compose.resources.StringResource
 
 val PointOfInterestType.stringResource: StringResource
     get() = when (this) {
-        PointOfInterestType.PRINTING_POD -> Res.string.pointOfInterestTypePrintingPod
-        PointOfInterestType.SUPPLY_TELEPORTER_INPUT -> Res.string.pointOfInterestTypeSupplyTeleporterInput
-        PointOfInterestType.SUPPLY_TELEPORTER_OUTPUT -> Res.string.pointOfInterestTypeSupplyTeleporterOutput
-        PointOfInterestType.TELEPORTER_TRANSMITTER -> Res.string.pointOfInterestTypeTeleporterTransmitter
-        PointOfInterestType.TELEPORTER_RECEIVER -> Res.string.pointOfInterestTypeTeleporterReceiver
-        PointOfInterestType.NEURAL_VACILLATOR -> Res.string.pointOfInterestTypeNeuralVacillator
-        PointOfInterestType.ANTI_ENTROPY_THERMO_NULLIFIER -> Res.string.pointOfInterestTypeAntiEntropyThermoNullifier
-        PointOfInterestType.EXPERIMENT_52B -> Res.string.pointOfInterestTypeExperiment52B
-        PointOfInterestType.ARTIFACT -> Res.string.pointOfInterestTypeArtifact
-        PointOfInterestType.CRASHED_SATELLITE -> Res.string.pointOfInterestTypeCrashedSatellite
-        PointOfInterestType.WRECKED_SATELLITE -> Res.string.pointOfInterestTypeWreckedSatellite
-        PointOfInterestType.CRUSHED_SATELLITE -> Res.string.pointOfInterestTypeCrushedSatellite
-        PointOfInterestType.TEMPORAL_TEAR_OPENER -> Res.string.pointOfInterestTypeTemporalTearOpener
-        PointOfInterestType.CRYOTANK -> Res.string.pointOfInterestTypeCryotank3000
+        PointOfInterestType.Headquarters -> Res.string.pointOfInterestTypePrintingPod
+        PointOfInterestType.WarpConduitSender -> Res.string.pointOfInterestTypeSupplyTeleporterInput
+        PointOfInterestType.WarpConduitReceiver -> Res.string.pointOfInterestTypeSupplyTeleporterOutput
+        PointOfInterestType.WarpPortal -> Res.string.pointOfInterestTypeTeleporterTransmitter
+        PointOfInterestType.WarpReceiver -> Res.string.pointOfInterestTypeTeleporterReceiver
+        PointOfInterestType.GeneShuffler -> Res.string.pointOfInterestTypeNeuralVacillator
+        PointOfInterestType.MassiveHeatSink -> Res.string.pointOfInterestTypeAntiEntropyThermoNullifier
+        PointOfInterestType.SapTree -> Res.string.pointOfInterestTypeExperiment52B
+        PointOfInterestType.GravitasPedestal -> Res.string.pointOfInterestTypeArtifact
+        PointOfInterestType.PropSurfaceSatellite1 -> Res.string.pointOfInterestTypeCrashedSatellite
+        PointOfInterestType.PropSurfaceSatellite2 -> Res.string.pointOfInterestTypeWreckedSatellite
+        PointOfInterestType.PropSurfaceSatellite3 -> Res.string.pointOfInterestTypeCrushedSatellite
+        PointOfInterestType.TemporalTearOpener -> Res.string.pointOfInterestTypeTemporalTearOpener
+        PointOfInterestType.CryoTank -> Res.string.pointOfInterestTypeCryotank3000
         PointOfInterestType.PropFacilityStatue -> Res.string.pointOfInterestTypePropFacilityStatue
         PointOfInterestType.GeothermalVentEntity -> Res.string.pointOfInterestTypeGeothermalVentEntity
         PointOfInterestType.GeothermalControllerEntity -> Res.string.pointOfInterestTypeGeothermalControllerEntity

@@ -122,7 +122,7 @@ fun PointOfInterestsRow(
                     Image(
                         painter = painterResource(
                             /* Use an alternative graphic for better contrast. */
-                            if (poiType == PointOfInterestType.ARTIFACT)
+                            if (poiType == PointOfInterestType.GravitasPedestal)
                                 Res.drawable.poi_artifact_filled
                             else
                                 poiType.drawableResource
