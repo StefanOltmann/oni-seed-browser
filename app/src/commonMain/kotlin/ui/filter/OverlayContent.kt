@@ -54,6 +54,7 @@ import ui.getGeyserDrawable
 import ui.getStringResource
 import ui.getWorldTraitDrawable
 import ui.getZoneTypeDrawable
+import ui.model.stringResource
 import ui.theme.defaultPadding
 import ui.theme.defaultRoundedCornerShape
 

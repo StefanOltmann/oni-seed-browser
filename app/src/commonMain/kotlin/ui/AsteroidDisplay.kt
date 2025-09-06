@@ -48,6 +48,7 @@ import model.Asteroid
 import model.WorldTrait
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
+import ui.model.stringResource
 import ui.theme.DefaultSpacer
 import ui.theme.HalfSpacer
 import ui.theme.anthraticeTransparentBackgroundColor

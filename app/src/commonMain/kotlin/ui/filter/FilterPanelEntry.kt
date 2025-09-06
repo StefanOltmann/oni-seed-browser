@@ -56,6 +56,7 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import ui.getAsteroidTypeDrawable
 import ui.getStringResource
+import ui.model.stringResource
 import ui.noRippleClickable
 import ui.onHover
 import ui.theme.DefaultSpacer
