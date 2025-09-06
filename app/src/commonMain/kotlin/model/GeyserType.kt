@@ -178,7 +178,6 @@ enum class GeyserType(
     ),
     COPPER_VOLCANO(
         type = "molten_copper",
-        // Metal geysers are good.
         minAvgEmitRate = 133,
         maxAvgEmitRate = 533,
         meanAvgEmitRate = 300,
@@ -186,7 +185,6 @@ enum class GeyserType(
     ),
     GOLD_VOLCANO(
         type = "molten_gold",
-        // Metal geysers are good.
         minAvgEmitRate = 133,
         maxAvgEmitRate = 533,
         meanAvgEmitRate = 300,
@@ -194,7 +192,6 @@ enum class GeyserType(
     ),
     ALUMINIUM_VOLCANO(
         type = "molten_aluminum",
-        // Metal geysers are good.
         minAvgEmitRate = 133,
         maxAvgEmitRate = 533,
         meanAvgEmitRate = 300,
@@ -202,7 +199,6 @@ enum class GeyserType(
     ),
     COBALT_VOLCANO(
         type = "molten_cobalt",
-        // Metal geysers are good.
         minAvgEmitRate = 133,
         maxAvgEmitRate = 533,
         meanAvgEmitRate = 300,
@@ -210,7 +206,6 @@ enum class GeyserType(
     ),
     TUNGSTEN_VOLCANO(
         type = "molten_tungsten",
-        // Metal geysers are good.
         minAvgEmitRate = 133,
         maxAvgEmitRate = 533,
         meanAvgEmitRate = 300,
@@ -240,7 +235,6 @@ enum class GeyserType(
     ),
     OIL_RESERVOIR(
         type = "OilWell",
-        // Rated good, because the more the better.
         minAvgEmitRate = 3333,
         maxAvgEmitRate = 3333,
         meanAvgEmitRate = 3333,
