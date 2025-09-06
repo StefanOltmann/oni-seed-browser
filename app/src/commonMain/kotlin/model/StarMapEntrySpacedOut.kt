@@ -23,7 +23,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class StarMapEntrySpacedOut(
-    val id: String,
-    val q: Int,
-    val r: Int
+    val id: SpacedOutSpacePOI,
+    val q: Byte,
+    val r: Byte
 )

@@ -36,7 +36,7 @@ jobs:
           chmod -v -R +rX "app/build/dist/wasmJs/productionExecutable/" | while read line; do
             echo "::warning title=Invalid file permissions automatically fixed::$line"
           done
-          
+
       - name: Rename
         run: |
           mv app/build/dist/wasmJs/productionExecutable app/build/dist/wasmJs/oni-seed-browser

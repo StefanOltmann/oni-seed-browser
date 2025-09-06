@@ -35,7 +35,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.Stroke
@@ -49,9 +48,7 @@ import kotlin.math.PI
 import kotlin.math.cos
 import kotlin.math.sin
 import kotlin.math.sqrt
-import model.AsteroidType
 import model.Cluster
-import model.SpacedOutSpacePOI
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import ui.model.stringResource
@@ -139,66 +136,29 @@ fun SpacedOutStarMapView(
                             .size(hexSize.times(LocalDensity.current.density).dp)
                     ) {
 
-                        val asteroidType = AsteroidType.entries.find { it.name == entry.id }
-
-                        val spacedOutSpacePOI = if (asteroidType == null)
-                            SpacedOutSpacePOI.entries.find { it.name == entry.id }
-                        else
-                            null
-
-                        if (asteroidType != null) {
-
-                            TooltipContainer(
-                                tooltipContent = {
-                                    GenericTooltip {
-                                        Text(
-                                            text = stringResource(asteroidType.stringResource),
-                                            style = MaterialTheme.typography.bodyLarge,
-                                            color = MaterialTheme.colorScheme.onBackground,
-                                            lineHeight = 0.sp,
-                                            modifier = Modifier.padding(
-                                                horizontal = defaultSpacing,
-                                                vertical = halfSpacing
-                                            )
+                        TooltipContainer(
+                            tooltipContent = {
+                                GenericTooltip {
+                                    Text(
+                                        text = stringResource(entry.id.stringResource),
+                                        style = MaterialTheme.typography.bodyLarge,
+                                        color = MaterialTheme.colorScheme.onBackground,
+                                        lineHeight = 0.sp,
+                                        modifier = Modifier.padding(
+                                            horizontal = defaultSpacing,
+                                            vertical = halfSpacing
                                         )
-                                    }
-                                },
-                                yOffset = 20
-                            ) {
+                                    )
+                                }
+                            },
+                            yOffset = 20
+                        ) {
 
-                                Image(
-                                    painter = painterResource(asteroidType.drawableResource),
-                                    contentDescription = null,
-                                    modifier = Modifier.scale(1.5f)
-                                )
-                            }
-
-                        } else if (spacedOutSpacePOI != null) {
-
-                            TooltipContainer(
-                                tooltipContent = {
-                                    GenericTooltip {
-                                        Text(
-                                            text = stringResource(spacedOutSpacePOI.stringResource),
-                                            style = MaterialTheme.typography.bodyLarge,
-                                            color = MaterialTheme.colorScheme.onBackground,
-                                            lineHeight = 0.sp,
-                                            modifier = Modifier.padding(
-                                                horizontal = defaultSpacing,
-                                                vertical = halfSpacing
-                                            )
-                                        )
-                                    }
-                                },
-                                yOffset = 20
-                            ) {
-
-                                Image(
-                                    painter = painterResource(spacedOutSpacePOI.drawableResource),
-                                    contentDescription = null,
-                                    modifier = Modifier.fillMaxSize()
-                                )
-                            }
+                            Image(
+                                painter = painterResource(entry.id.drawableResource),
+                                contentDescription = null,
+                                modifier = Modifier.fillMaxSize()
+                            )
                         }
                     }
                 }
