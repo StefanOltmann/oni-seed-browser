@@ -99,7 +99,7 @@ fun AsteroidView(
         ) {
 
             Image(
-                painter = painterResource(getAsteroidTypeDrawable(asteroid.id)),
+                painter = painterResource(asteroid.id.drawableResource),
                 contentDescription = null,
                 modifier = Modifier.size(108.dp)
             )
@@ -207,7 +207,7 @@ private fun WorldTraitsRow(worldTraits: List<WorldTrait>) {
                 ) {
 
                     Image(
-                        painter = painterResource(getWorldTraitDrawable(worldTrait)),
+                        painter = painterResource(worldTrait.drawableResource),
                         contentDescription = null,
                         modifier = Modifier.halfPadding()
                     )

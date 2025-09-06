@@ -1,5 +1,6 @@
 package ui.model
 
+import androidx.compose.runtime.Composable
 import io.github.stefanoltmann.app.generated.resources.Res
 import io.github.stefanoltmann.app.generated.resources.logo_frosty_planet_banner
 import io.github.stefanoltmann.app.generated.resources.logo_oni
@@ -9,6 +10,7 @@ import model.Dlc
 import org.jetbrains.compose.resources.DrawableResource
 
 val Dlc.icon: DrawableResource
+    @Composable
     get() = when (this) {
         Dlc.BaseGame -> Res.drawable.logo_oni
         Dlc.SpacedOut -> Res.drawable.logo_spaced_out

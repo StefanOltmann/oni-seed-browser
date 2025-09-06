@@ -19,7 +19,13 @@
 
 package model
 
+import io.github.stefanoltmann.app.generated.resources.Res
+import io.github.stefanoltmann.app.generated.resources.logo_frosty_planet_banner
+import io.github.stefanoltmann.app.generated.resources.logo_oni
+import io.github.stefanoltmann.app.generated.resources.logo_prehistoric_planet_banner
+import io.github.stefanoltmann.app.generated.resources.logo_spaced_out
 import kotlinx.serialization.Serializable
+import org.jetbrains.compose.resources.DrawableResource
 
 @Suppress("UNUSED")
 @Serializable

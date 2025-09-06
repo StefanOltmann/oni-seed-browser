@@ -318,7 +318,7 @@ fun AsteroidMap(
                 ) {
 
                     Image(
-                        painter = painterResource(getPointOfInterestDrawable(poi.id)),
+                        painter = painterResource(poi.id.drawableResource),
                         contentDescription = null,
                         modifier = Modifier.size(iconSize)
                     )
@@ -360,7 +360,7 @@ fun AsteroidMap(
                 ) {
 
                     Image(
-                        painter = painterResource(getGeyserDrawable(geyser.id)),
+                        painter = painterResource(geyser.id.drawableResource),
                         contentDescription = null,
                         modifier = Modifier
                             .size(iconSize)

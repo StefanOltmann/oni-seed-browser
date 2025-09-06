@@ -136,7 +136,7 @@ private fun GeyserInfoHeaderRow(
         }
 
         Image(
-            painter = painterResource(getGeyserDrawable(geyserType)),
+            painter = painterResource(geyserType.drawableResource),
             contentDescription = null,
             modifier = Modifier
                 .size(32.dp)

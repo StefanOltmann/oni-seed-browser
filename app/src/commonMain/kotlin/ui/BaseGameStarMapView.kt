@@ -188,7 +188,7 @@ fun BaseGameStarMapView(
                                         ) {
 
                                             Image(
-                                                painter = painterResource(getVanillaSpacePOIDrawable(entry.id)),
+                                                painter = painterResource(entry.id.drawableResource),
                                                 contentDescription = null
                                             )
                                         }

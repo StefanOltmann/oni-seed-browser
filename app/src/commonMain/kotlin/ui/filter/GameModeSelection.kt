@@ -42,7 +42,7 @@ import model.filter.FilterQuery
 import model.filter.GameModeType
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
-import ui.getGameModeDrawable
+import ui.drawableResource
 import ui.grayScaleFilter
 import ui.model.stringResource
 import ui.noRippleClickable
@@ -88,9 +88,7 @@ fun GameModeSelection(
             ) {
 
                 Image(
-                    painter = painterResource(
-                        getGameModeDrawable(gameMode)
-                    ),
+                    painter = painterResource(gameMode.drawableResource),
                     contentDescription = null,
                     colorFilter = if (modeHovered.value || isSelected)
                         null

@@ -50,10 +50,7 @@ import model.filter.FilterItemWorldTrait
 import model.filter.FilterItemZoneType
 import model.filter.FilterQuery
 import org.jetbrains.compose.resources.stringResource
-import ui.getAsteroidTypeDrawable
-import ui.getGeyserDrawable
-import ui.getWorldTraitDrawable
-import ui.getZoneTypeDrawable
+import ui.drawableResource
 import ui.model.stringResource
 import ui.theme.defaultPadding
 import ui.theme.defaultRoundedCornerShape
@@ -89,7 +86,7 @@ fun OverlayContent(
                 for (asteroidType in cluster.asteroidTypes) {
 
                     FilterSelectionEntryItem(
-                        image = getAsteroidTypeDrawable(asteroidType),
+                        image = asteroidType.drawableResource,
                         text = stringResource(asteroidType.getStringResource()),
                         onClick = {
 
@@ -142,7 +139,7 @@ fun OverlayContent(
                         for (worldTrait in WorldTrait.entries) {
 
                             FilterSelectionEntryItem(
-                                image = getWorldTraitDrawable(worldTrait),
+                                image = worldTrait.drawableResource,
                                 text = stringResource(worldTrait.stringResource),
                                 onClick = {
 
@@ -167,7 +164,7 @@ fun OverlayContent(
                         for (zoneType in ZoneType.entries) {
 
                             FilterSelectionEntryItem(
-                                image = getZoneTypeDrawable(zoneType),
+                                image = zoneType.drawableResource,
                                 text = stringResource(zoneType.stringResource),
                                 onClick = {
 
@@ -192,7 +189,7 @@ fun OverlayContent(
                         for (geyserType in GeyserType.entries) {
 
                             FilterSelectionEntryItem(
-                                image = getGeyserDrawable(geyserType),
+                                image = geyserType.drawableResource,
                                 text = stringResource(geyserType.stringResource) + when (filterItemType) {
                                     FilterItemType.GEYSER_COUNT -> " " + stringResource(Res.string.uiCount)
                                     FilterItemType.GOOD_GEYSER_COUNT -> " " + stringResource(Res.string.uiCount)

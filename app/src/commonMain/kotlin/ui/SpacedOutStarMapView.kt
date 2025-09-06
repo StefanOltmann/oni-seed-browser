@@ -167,7 +167,7 @@ fun SpacedOutStarMapView(
                             ) {
 
                                 Image(
-                                    painter = painterResource(getAsteroidTypeDrawable(asteroidType)),
+                                    painter = painterResource(asteroidType.drawableResource),
                                     contentDescription = null,
                                     modifier = Modifier.scale(1.5f)
                                 )
@@ -194,7 +194,7 @@ fun SpacedOutStarMapView(
                             ) {
 
                                 Image(
-                                    painter = painterResource(getSpacedOutSpacePOIDrawable(spacedOutSpacePOI)),
+                                    painter = painterResource(spacedOutSpacePOI.drawableResource),
                                     contentDescription = null,
                                     modifier = Modifier.fillMaxSize()
                                 )

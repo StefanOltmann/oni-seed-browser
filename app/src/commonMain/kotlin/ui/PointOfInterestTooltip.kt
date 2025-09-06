@@ -64,7 +64,7 @@ fun PointOfInterestTooltip(
         }
 
         Image(
-            painter = painterResource(getPointOfInterestDrawable(pointOfInterestType)),
+            painter = painterResource(pointOfInterestType.drawableResource),
             contentDescription = null,
             modifier = Modifier
                 .size(32.dp)

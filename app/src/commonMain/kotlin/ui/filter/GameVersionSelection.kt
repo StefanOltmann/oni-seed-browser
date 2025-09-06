@@ -37,10 +37,10 @@ import model.filter.GameModeType
 import org.jetbrains.compose.resources.painterResource
 import ui.grayScaleFilter
 import ui.logoIconHeight
+import ui.model.icon
 import ui.noRippleClickable
 import ui.onHover
 import ui.theme.defaultPadding
-import ui.model.icon
 
 @Composable
 fun GameVersionSelection(

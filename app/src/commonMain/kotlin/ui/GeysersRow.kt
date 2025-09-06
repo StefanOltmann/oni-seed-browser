@@ -133,7 +133,7 @@ fun GeysersRow(
                         AvgEmitRateRatingIndicator(geyser)
 
                     Image(
-                        painter = painterResource(getGeyserDrawable(geyser.id)),
+                        painter = painterResource(geyser.id.drawableResource),
                         contentDescription = null,
                         alignment = Alignment.BottomCenter,
                         modifier = Modifier.halfPadding()
@@ -172,7 +172,7 @@ fun GeysersRow(
                 ) {
 
                     Image(
-                        painter = painterResource(getGeyserDrawable(GeyserType.OIL_RESERVOIR)),
+                        painter = painterResource(GeyserType.OIL_RESERVOIR.drawableResource),
                         contentDescription = null,
                         alignment = Alignment.BottomCenter,
                         modifier = Modifier.halfPadding()

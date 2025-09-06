@@ -43,8 +43,8 @@ import model.ClusterType
 import model.filter.FilterQuery
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
+import ui.drawableResource
 import ui.model.stringResource
-import ui.getClusterDrawable
 import ui.grayScaleFilter
 import ui.noRippleClickable
 import ui.onHover
@@ -101,9 +101,7 @@ fun ClusterSelection(
             ) {
 
                 Image(
-                    painter = painterResource(
-                        getClusterDrawable(cluster)
-                    ),
+                    painter = painterResource(cluster.drawableResource),
                     contentDescription = null,
                     colorFilter = if (clusterHovered.value || isSelected)
                         null

@@ -249,8 +249,8 @@ import model.ZoneType
 import model.filter.GameModeType
 import org.jetbrains.compose.resources.DrawableResource
 
-fun getWorldTraitDrawable(worldTrait: WorldTrait): DrawableResource =
-    when (worldTrait) {
+val WorldTrait.drawableResource: DrawableResource
+    get() = when (this) {
         WorldTrait.BouldersLarge -> Res.drawable.worldtrait_boulders_large
         WorldTrait.BouldersMedium -> Res.drawable.worldtrait_boulders_medium
         WorldTrait.BouldersMixed -> Res.drawable.worldtrait_boulders_mixed
@@ -276,8 +276,8 @@ fun getWorldTraitDrawable(worldTrait: WorldTrait): DrawableResource =
         WorldTrait.RadioactiveCrust -> Res.drawable.worldtrait_radioactive_crust
     }
 
-fun getGeyserDrawable(geyserType: GeyserType): DrawableResource =
-    when (geyserType) {
+val GeyserType.drawableResource: DrawableResource
+    get() = when (this) {
         GeyserType.COOL_STEAM -> Res.drawable.geyser_cool_steam_vent
         GeyserType.HOT_STEAM -> Res.drawable.geyser_steam_vent
         GeyserType.WATER -> Res.drawable.geyser_water
@@ -307,8 +307,8 @@ fun getGeyserDrawable(geyserType: GeyserType): DrawableResource =
         GeyserType.OIL_RESERVOIR -> Res.drawable.geyser_oil_reservoir
     }
 
-fun getPointOfInterestDrawable(pointOfInterestType: PointOfInterestType): DrawableResource =
-    when (pointOfInterestType) {
+val PointOfInterestType.drawableResource: DrawableResource
+    get() = when (this) {
         PointOfInterestType.PRINTING_POD -> Res.drawable.building_printing_pod
         PointOfInterestType.SUPPLY_TELEPORTER_INPUT -> Res.drawable.building_supply_teleporter_input
         PointOfInterestType.SUPPLY_TELEPORTER_OUTPUT -> Res.drawable.building_supply_teleporter_output
@@ -329,9 +329,9 @@ fun getPointOfInterestDrawable(pointOfInterestType: PointOfInterestType): Drawab
         PointOfInterestType.POICeresTechUnlock -> Res.drawable.poi_ceres_tech_unlock
     }
 
-@Composable
-fun getClusterDrawable(clusterType: ClusterType): DrawableResource =
-    when (clusterType) {
+val ClusterType.drawableResource: DrawableResource
+    @Composable
+    get() = when (this) {
         ClusterType.BASE_TERRA -> Res.drawable.cluster_base_terra
         ClusterType.BASE_CERES -> Res.drawable.cluster_base_ceres
         ClusterType.BASE_RELICA -> Res.drawable.cluster_base_relica
@@ -372,9 +372,9 @@ fun getClusterDrawable(clusterType: ClusterType): DrawableResource =
         ClusterType.DLC_CERES_MANTLE -> Res.drawable.cluster_spacedout_ceres_mantle
     }
 
-@Composable
-fun getAsteroidTypeDrawable(asteroidType: AsteroidType): DrawableResource =
-    when (asteroidType) {
+val AsteroidType.drawableResource: DrawableResource
+    @Composable
+    get() = when (this) {
         AsteroidType.TerraMoonlet -> Res.drawable.cluster_spacedout_terrania
         AsteroidType.IdealLandingSite -> Res.drawable.asteroid_irradiated_forest
         AsteroidType.WarpOilySwamp -> Res.drawable.asteroid_oily_swamp
@@ -447,9 +447,9 @@ fun getAsteroidTypeDrawable(asteroidType: AsteroidType): DrawableResource =
         AsteroidType.MixingPrehistoricAsteroid -> Res.drawable.asteroid_mixing_relica
     }
 
-@Composable
-fun getSpacedOutSpacePOIDrawable(spacedOutSpacePOI: SpacedOutSpacePOI): DrawableResource =
-    when (spacedOutSpacePOI) {
+val SpacedOutSpacePOI.drawableResource: DrawableResource
+    @Composable
+    get() = when (this) {
         SpacedOutSpacePOI.ArtifactSpacePOI_GravitasSpaceStation1 -> Res.drawable.spacepoi_artifact_1
         SpacedOutSpacePOI.ArtifactSpacePOI_GravitasSpaceStation2 -> Res.drawable.spacepoi_artifact_2
         SpacedOutSpacePOI.ArtifactSpacePOI_GravitasSpaceStation3 -> Res.drawable.spacepoi_artifact_3
@@ -492,9 +492,9 @@ fun getSpacedOutSpacePOIDrawable(spacedOutSpacePOI: SpacedOutSpacePOI): Drawable
         SpacedOutSpacePOI.DLC4ImpactorDebrisField3 -> TODO()
     }
 
-@Composable
-fun getVanillaSpacePOIDrawable(vanillaSpacePOI: VanillaSpacePOI): DrawableResource =
-    when (vanillaSpacePOI) {
+val VanillaSpacePOI.drawableResource: DrawableResource
+    @Composable
+    get() = when (this) {
         VanillaSpacePOI.CarbonaceousAsteroid -> Res.drawable.vanilla_spacepoi_carbonaceous_asteroid
         VanillaSpacePOI.ChlorinePlanet -> Res.drawable.vanilla_spacepoi_chlorine_planet
         VanillaSpacePOI.DLC2CeresSpaceDestination -> Res.drawable.vanilla_spacepoi_dlc2_ceres_space_destination
@@ -522,9 +522,9 @@ fun getVanillaSpacePOIDrawable(vanillaSpacePOI: VanillaSpacePOI): DrawableResour
         VanillaSpacePOI.Wormhole -> Res.drawable.vanilla_spacepoi_wormhole
     }
 
-@Composable
-fun getZoneTypeDrawable(zoneType: ZoneType): DrawableResource =
-    when (zoneType) {
+val ZoneType.drawableResource: DrawableResource
+    @Composable
+    get() = when (this) {
         ZoneType.FrozenWastes -> Res.drawable.biome_frozen
         ZoneType.BoggyMarsh -> Res.drawable.biome_marsh
         ZoneType.Sandstone -> Res.drawable.biome_sandstone
@@ -549,9 +549,9 @@ fun getZoneTypeDrawable(zoneType: ZoneType): DrawableResource =
         ZoneType.PrehistoricWetlands -> Res.drawable.biome_wetlands
     }
 
-@Composable
-fun getGameModeDrawable(gameModeType: GameModeType): DrawableResource =
-    when (gameModeType) {
+val GameModeType.drawableResource: DrawableResource
+    @Composable
+    get() = when (this) {
         GameModeType.BASEGAME_STANDARD -> Res.drawable.gamemode_basegame_standard
         GameModeType.BASEGAME_THELAB -> Res.drawable.gamemode_basegame_thelab
         GameModeType.SPACEDOUT_CLASSIC -> Res.drawable.gamemode_spacedout_classic

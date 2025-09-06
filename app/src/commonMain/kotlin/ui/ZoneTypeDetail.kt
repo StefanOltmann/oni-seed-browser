@@ -97,7 +97,7 @@ fun ZoneTypeDetail(
             HalfSpacer()
 
             Image(
-                painter = painterResource(getZoneTypeDrawable(zoneType)),
+                painter = painterResource(zoneType.drawableResource),
                 contentDescription = null,
                 modifier = Modifier.size(48.dp)
             )

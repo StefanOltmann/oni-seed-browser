@@ -125,7 +125,7 @@ fun PointOfInterestsRow(
                             if (poiType == PointOfInterestType.ARTIFACT)
                                 Res.drawable.poi_artifact_filled
                             else
-                                getPointOfInterestDrawable(poiType)
+                                poiType.drawableResource
                         ),
                         contentDescription = null,
                         modifier = Modifier.padding(defaultSpacing)

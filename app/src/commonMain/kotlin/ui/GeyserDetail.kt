@@ -116,7 +116,7 @@ fun GeyserDetail(
                     AvgEmitRateRatingIndicator(geyser)
 
                     Image(
-                        painter = painterResource(getGeyserDrawable(geyser.id)),
+                        painter = painterResource(geyser.id.drawableResource),
                         contentDescription = null,
                         modifier = Modifier.halfPadding()
                     )
