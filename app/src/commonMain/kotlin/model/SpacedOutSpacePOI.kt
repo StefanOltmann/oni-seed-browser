@@ -19,7 +19,6 @@
 
 package model
 
-
 @Suppress("all")
 enum class SpacedOutSpacePOI {
 
