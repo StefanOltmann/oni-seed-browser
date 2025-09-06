@@ -77,7 +77,8 @@ actual suspend fun findSearchIndex(clusterType: ClusterType): SearchIndex {
      */
     cache.add(searchIndexUrl)
 
-    val response = cache.match(searchIndexUrl) ?: error("[SEARCH] No cache entry found at $searchIndexUrl")
+    val response = cache.match(searchIndexUrl)
+        ?: error("[SEARCH] No cache entry found at $searchIndexUrl")
 
     val bytes = response.bytes().toByteArray()
 

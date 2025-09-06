@@ -101,7 +101,15 @@ object DefaultWebClient : WebClient {
         if (response.status != HttpStatusCode.OK)
             return null
 
-        return response.body()
+        try {
+
+            return response.body()
+
+        } catch (ex: Exception) {
+            println("Error parsing count response: ${ex.message}")
+        }
+
+        return null
     }
 
     override suspend fun findLatestClusters(): List<String> {
@@ -187,7 +195,14 @@ object DefaultWebClient : WebClient {
         if (!response.status.isSuccess())
             error("Requesting favored coordinates failed with HTTP ${response.status}: ${response.bodyAsText()}")
 
-        return response.body()
+        try {
+
+            return response.body()
+
+        } catch (ex: Exception) {
+
+            throw Exception("Finding favored coordinates failed.", ex)
+        }
     }
 
     override suspend fun rate(coordinate: String, like: Boolean): Boolean {
@@ -254,7 +269,14 @@ object DefaultWebClient : WebClient {
         if (!response.status.isSuccess())
             error("Username registry returned status ${response.status}: ${response.bodyAsText()}")
 
-        return response.body()
+        try {
+
+            return response.body()
+
+        } catch (ex: Exception) {
+
+            throw Exception("Finding username map failed.", ex)
+        }
     }
 
     override suspend fun setUsername(username: String): Boolean {
@@ -291,6 +313,13 @@ object DefaultWebClient : WebClient {
         if (!response.status.isSuccess())
             error("Requesting contributors failed with HTTP ${response.status}: ${response.bodyAsText()}")
 
-        return response.body()
+        try {
+
+            return response.body()
+
+        } catch (ex: Exception) {
+
+            throw Exception("Finding contributors failed.", ex)
+        }
     }
 }
