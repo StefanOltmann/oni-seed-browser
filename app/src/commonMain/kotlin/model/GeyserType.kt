@@ -213,7 +213,6 @@ enum class GeyserType(
     ),
     NIOBIUM_VOLCANO(
         type = "molten_niobium",
-        // Metal geysers are good.
         minAvgEmitRate = 533,
         maxAvgEmitRate = 2133,
         meanAvgEmitRate = 1200,
