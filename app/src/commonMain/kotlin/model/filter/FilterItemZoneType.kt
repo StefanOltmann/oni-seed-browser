@@ -1,5 +1,5 @@
 /*
- * ONI Seed Browser Backend
+ * ONI Seed Browser
  * Copyright (C) 2025 Stefan Oltmann
  * https://stefan-oltmann.de/oni-seed-browser
  *
