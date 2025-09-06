@@ -167,7 +167,7 @@ fun OverlayContent(
 
                             FilterSelectionEntryItem(
                                 image = getZoneTypeDrawable(zoneType),
-                                text = stringResource(zoneType.stringResource),
+                                text = stringResource(getStringResource(zoneType)),
                                 onClick = {
 
                                     /* Update the query */

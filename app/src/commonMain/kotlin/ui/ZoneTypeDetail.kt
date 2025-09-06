@@ -103,7 +103,7 @@ fun ZoneTypeDetail(
             DefaultSpacer()
 
             Text(
-                text = stringResource(zoneType.stringResource),
+                text = stringResource(getStringResource(zoneType)),
                 style = MaterialTheme.typography.headlineSmall,
                 color = MaterialTheme.colorScheme.onBackground,
                 maxLines = 1,

@@ -50,7 +50,6 @@ import org.jetbrains.compose.resources.StringResource
 @Serializable
 enum class ZoneType(
     val id: Int,
-    val stringResource: StringResource,
     val color: Color
 ) {
     /*
@@ -58,41 +57,68 @@ enum class ZoneType(
      */
 
     /** Default starting area should always come first. */
-    Sandstone(3, Res.string.zoneTypeSandstone, Color(0xFFF2BB47)),
-    Barren(16, Res.string.zoneTypeBarren, Color(0xFF97752C)),
+    Sandstone(3, Color(0xFFF2BB47)),
+    Barren(16, Color(0xFF97752C)),
 
-    Space(7, Res.string.zoneTypeSpace, Color(0xFF242424)),
+    Space(7, Color(0xFF242424)),
 
-    FrozenWastes(0, Res.string.zoneTypeFrozenWastes, Color(0xFF9DC9D6)),
+    FrozenWastes(0, Color(0xFF9DC9D6)),
 
-    // CrystalCaverns(1Res.string. zoneType//(0xFFAC72C1)),
-    BoggyMarsh(2, Res.string.zoneTypeBoggyMarsh, Color(0xFF7B974B)),
-    ToxicJungle(4, Res.string.zoneTypeToxicJungle, Color(0xFFCB95A3)),
+    // CrystalCaverns(1, Color(0xFFAC72C1)),
+    BoggyMarsh(2, Color(0xFF7B974B)),
+    ToxicJungle(4, Color(0xFFCB95A3)),
 
-    Ocean(8, Res.string.zoneTypeOcean, Color(0xFF4C4CFF)),
-    Rust(9, Res.string.zoneTypeRust, Color(0xFFFFA007)),
-    Forest(10, Res.string.zoneTypeForest, Color(0xFF8EC039)),
-    Radioactive(11, Res.string.zoneTypeRadioactive, Color(0xFF4AE458)),
-    Swamp(12, Res.string.zoneTypeSwamp, Color(0xFFEB9B3F)),
-    Wasteland(13, Res.string.zoneTypeWasteland, Color(0xFFCC3636)),
+    Ocean(8, Color(0xFF4C4CFF)),
+    Rust(9, Color(0xFFFFA007)),
+    Forest(10, Color(0xFF8EC039)),
+    Radioactive(11, Color(0xFF4AE458)),
+    Swamp(12, Color(0xFFEB9B3F)),
+    Wasteland(13, Color(0xFFCC3636)),
 
-    // RocketInterior(1Res.string. zoneType//,Color(0xFF9E48DF)),
-    Metallic(15, Res.string.zoneTypeMetallic, Color(0xFFFFA007)),
-    Moo(17, Res.string.zoneTypeMoo, Color(0xFF8EC039)),
+    // RocketInterior(14, Color(0xFF9E48DF)),
+    Metallic(15, Color(0xFFFFA007)),
+    Moo(17, Color(0xFF8EC039)),
 
     /* Ceres */
-    IceCaves(18, Res.string.zoneTypeIceCaves, Color(0xFFABCFEA)),
-    CarrotQuarry(19, Res.string.zoneTypeCarrotQuarry, Color(0xFFCDA2C7)),
-    SugarWoods(20, Res.string.zoneTypeSugarWoods, Color(0xFFA2CDA4)),
+    IceCaves(18, Color(0xFFABCFEA)),
+    CarrotQuarry(19, Color(0xFFCDA2C7)),
+    SugarWoods(20, Color(0xFFA2CDA4)),
 
     /* Relica */
-    PrehistoricGarden(21, Res.string.zoneTypePrehistoricGarden, Color(0xFF006127)),
-    PrehistoricRaptor(22, Res.string.zoneTypePrehistoricRaptor, Color(0xFF352F8C)),
-    PrehistoricWetlands(23, Res.string.zoneTypePrehistoricWetlands, Color(0xFF645906)),
+    PrehistoricGarden(21, Color(0xFF006127)),
+    PrehistoricRaptor(22, Color(0xFF352F8C)),
+    PrehistoricWetlands(23, Color(0xFF645906)),
 
     /* Most of the time right above the magma biome. */
-    OilField(6, Res.string.zoneTypeOilField, Color(0xFF52321D)),
+    OilField(6, Color(0xFF52321D)),
 
     /* Usually at the bottom of the map, so also listed at the bottom */
-    MagmaCore(5, Res.string.zoneTypeMagmaCore, Color(0xFFDE5A3B)),
+    MagmaCore(5, Color(0xFFDE5A3B));
+
+    fun getStringResource(): StringResource {
+        return when (this) {
+            Sandstone -> Res.string.zoneTypeSandstone
+            Barren -> Res.string.zoneTypeBarren
+            Space -> Res.string.zoneTypeSpace
+            FrozenWastes -> Res.string.zoneTypeFrozenWastes
+            BoggyMarsh -> Res.string.zoneTypeBoggyMarsh
+            ToxicJungle -> Res.string.zoneTypeToxicJungle
+            Ocean -> Res.string.zoneTypeOcean
+            Rust -> Res.string.zoneTypeRust
+            Forest -> Res.string.zoneTypeForest
+            Radioactive -> Res.string.zoneTypeRadioactive
+            Swamp -> Res.string.zoneTypeSwamp
+            Wasteland -> Res.string.zoneTypeWasteland
+            Metallic -> Res.string.zoneTypeMetallic
+            Moo -> Res.string.zoneTypeMoo
+            IceCaves -> Res.string.zoneTypeIceCaves
+            CarrotQuarry -> Res.string.zoneTypeCarrotQuarry
+            SugarWoods -> Res.string.zoneTypeSugarWoods
+            PrehistoricGarden -> Res.string.zoneTypePrehistoricGarden
+            PrehistoricRaptor -> Res.string.zoneTypePrehistoricRaptor
+            PrehistoricWetlands -> Res.string.zoneTypePrehistoricWetlands
+            OilField -> Res.string.zoneTypeOilField
+            MagmaCore -> Res.string.zoneTypeMagmaCore
+        }
+    }
 }
