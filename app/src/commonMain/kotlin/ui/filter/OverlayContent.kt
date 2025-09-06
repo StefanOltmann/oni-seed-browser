@@ -38,6 +38,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import io.github.stefanoltmann.app.generated.resources.Res
 import io.github.stefanoltmann.app.generated.resources.uiCount
+import model.AsteroidType
 import model.GeyserType
 import model.WorldTrait
 import model.ZoneType
@@ -51,7 +52,6 @@ import model.filter.FilterQuery
 import org.jetbrains.compose.resources.stringResource
 import ui.getAsteroidTypeDrawable
 import ui.getGeyserDrawable
-import ui.getStringResource
 import ui.getWorldTraitDrawable
 import ui.getZoneTypeDrawable
 import ui.model.stringResource
@@ -124,7 +124,7 @@ fun OverlayContent(
                         )
 
                         Text(
-                            text = stringResource(getStringResource(filterItemType)).uppercase(),
+                            text = stringResource(filterItemType.stringResource).uppercase(),
                             style = MaterialTheme.typography.bodyLarge,
                             color = MaterialTheme.colorScheme.onBackground
                         )
@@ -168,7 +168,7 @@ fun OverlayContent(
 
                             FilterSelectionEntryItem(
                                 image = getZoneTypeDrawable(zoneType),
-                                text = stringResource(getStringResource(zoneType)),
+                                text = stringResource(zoneType.stringResource),
                                 onClick = {
 
                                     /* Update the query */

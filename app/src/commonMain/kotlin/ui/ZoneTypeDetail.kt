@@ -41,6 +41,7 @@ import model.ZoneType
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import ui.model.color
+import ui.model.stringResource
 import ui.theme.DefaultSpacer
 import ui.theme.HalfSpacer
 import ui.theme.cardColorBackground
@@ -104,7 +105,7 @@ fun ZoneTypeDetail(
             DefaultSpacer()
 
             Text(
-                text = stringResource(getStringResource(zoneType)),
+                text = stringResource(zoneType.stringResource),
                 style = MaterialTheme.typography.headlineSmall,
                 color = MaterialTheme.colorScheme.onBackground,
                 maxLines = 1,

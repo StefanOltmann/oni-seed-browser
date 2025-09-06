@@ -55,7 +55,6 @@ import model.filter.FilterRule
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import ui.getAsteroidTypeDrawable
-import ui.getStringResource
 import ui.model.stringResource
 import ui.noRippleClickable
 import ui.onHover
@@ -245,7 +244,7 @@ private fun getItemDescription(rule: FilterRule): String =
             stringResource(rule.worldTrait.worldTrait.stringResource)
 
         rule.zoneType != null ->
-            stringResource(getStringResource(rule.zoneType.zoneType))
+            stringResource(rule.zoneType.zoneType.stringResource)
 
         else -> "-/-"
     }

@@ -58,6 +58,7 @@ import ui.theme.defaultPadding
 import ui.theme.defaultSpacing
 import ui.theme.halfSpacing
 import ui.theme.lightGray
+import ui.model.stringResource
 
 private const val ROTATION_RADIANS = (30f * PI / 180).toFloat()
 
@@ -178,7 +179,7 @@ fun SpacedOutStarMapView(
                                 tooltipContent = {
                                     GenericTooltip {
                                         Text(
-                                            text = stringResource(getStringResource(spacedOutSpacePOI)),
+                                            text = stringResource(spacedOutSpacePOI.stringResource),
                                             style = MaterialTheme.typography.bodyLarge,
                                             color = MaterialTheme.colorScheme.onBackground,
                                             lineHeight = 0.sp,

@@ -60,6 +60,7 @@ import ui.theme.defaultPadding
 import ui.theme.defaultSpacing
 import ui.theme.doubleSpacing
 import ui.theme.lightGray
+import ui.model.stringResource
 
 private const val CIRCLE_SIZE_DP = 96
 
@@ -195,7 +196,7 @@ fun BaseGameStarMapView(
                                         HalfSpacer()
 
                                         Text(
-                                            text = stringResource(getStringResource(entry.id)),
+                                            text = stringResource(entry.id.stringResource),
                                             style = MaterialTheme.typography.bodySmall,
                                             color = MaterialTheme.colorScheme.onBackground,
                                             maxLines = 1,
