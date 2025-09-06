@@ -20,7 +20,7 @@
 package model
 
 enum class VanillaSpacePOI(
-    id: Byte
+    val id: Byte
 ) {
 
     CarbonaceousAsteroid(0),

@@ -21,7 +21,7 @@ package model
 
 @Suppress("all")
 enum class SpacedOutSpacePOI(
-    id: Byte
+    val id: Byte
 ) {
 
     /*

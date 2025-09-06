@@ -26,6 +26,7 @@ import kotlinx.serialization.Serializable
 enum class Dlc(
     val isMainVersion: Boolean
 ) {
+
     BaseGame(true),
     SpacedOut(true),
     FrostyPlanet(false),
