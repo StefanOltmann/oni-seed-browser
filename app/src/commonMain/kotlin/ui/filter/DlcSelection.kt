@@ -35,6 +35,7 @@ import org.jetbrains.compose.resources.painterResource
 import ui.grayScaleFilter
 import ui.noRippleClickable
 import ui.theme.doubleSpacing
+import ui.model.icon
 
 @Composable
 fun DlcSelection(

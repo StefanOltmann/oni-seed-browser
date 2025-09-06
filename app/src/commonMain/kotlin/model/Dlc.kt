@@ -19,26 +19,19 @@
 
 package model
 
-import io.github.stefanoltmann.app.generated.resources.Res
-import io.github.stefanoltmann.app.generated.resources.logo_frosty_planet_banner
-import io.github.stefanoltmann.app.generated.resources.logo_oni
-import io.github.stefanoltmann.app.generated.resources.logo_prehistoric_planet_banner
-import io.github.stefanoltmann.app.generated.resources.logo_spaced_out
 import kotlinx.serialization.Serializable
-import org.jetbrains.compose.resources.DrawableResource
 
 @Suppress("UNUSED")
 @Serializable
 enum class Dlc(
     val displayName: String,
-    val isMainVersion: Boolean,
-    val icon: DrawableResource
+    val isMainVersion: Boolean
 ) {
-    BaseGame("Base Game", true, Res.drawable.logo_oni),
-    SpacedOut("Spaced Out", true, Res.drawable.logo_spaced_out),
-    FrostyPlanet("Frosty Planet", false, Res.drawable.logo_frosty_planet_banner),
-    BionicBooster("Bionic Booster", false, Res.drawable.logo_frosty_planet_banner),
-    PrehistoricPlanet("Prehistoric Planet", false, Res.drawable.logo_prehistoric_planet_banner);
+    BaseGame("Base Game", true),
+    SpacedOut("Spaced Out", true),
+    FrostyPlanet("Frosty Planet", false),
+    BionicBooster("Bionic Booster", false),
+    PrehistoricPlanet("Prehistoric Planet", false);
 
     companion object {
 
