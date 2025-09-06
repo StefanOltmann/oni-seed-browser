@@ -3,6 +3,8 @@ package service
 import io.ktor.client.HttpClient
 import js.date.Date
 import js.typedarrays.toByteArray
+import kotlin.time.Clock
+import kotlin.time.ExperimentalTime
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.decodeFromByteArray
 import kotlinx.serialization.protobuf.ProtoBuf
@@ -18,7 +20,7 @@ private val httpClient = HttpClient()
 
 private const val CACHE_NAME = "search-index-cache-v1"
 
-@OptIn(ExperimentalSerializationApi::class)
+@OptIn(ExperimentalSerializationApi::class, ExperimentalTime::class)
 actual suspend fun findSearchIndex(clusterType: ClusterType): SearchIndex {
 
     val cache = caches.open(CACHE_NAME)
@@ -48,7 +50,7 @@ actual suspend fun findSearchIndex(clusterType: ClusterType): SearchIndex {
         /*
          * Return an empty search index as we are offline.
          */
-        return SearchIndex(clusterType)
+        return SearchIndex(clusterType, Clock.System.now().toEpochMilliseconds())
     }
 
     if (cacheResponse != null) {
