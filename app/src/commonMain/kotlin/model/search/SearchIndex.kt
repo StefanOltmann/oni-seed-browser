@@ -1,7 +1,5 @@
 package model.search
 
-import kotlin.time.Clock
-import kotlin.time.ExperimentalTime
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
@@ -15,7 +13,7 @@ import model.ZoneTypeMask
 import model.filter.FilterCondition
 import model.filter.FilterQuery
 
-@OptIn(ExperimentalTime::class, ExperimentalSerializationApi::class)
+@OptIn(ExperimentalSerializationApi::class)
 @Serializable
 class SearchIndex(
 
@@ -23,7 +21,7 @@ class SearchIndex(
     val clusterType: ClusterType,
 
     @ProtoNumber(2)
-    val timestamp: Long = Clock.System.now().toEpochMilliseconds()
+    val timestamp: Long
 
 ) {
 

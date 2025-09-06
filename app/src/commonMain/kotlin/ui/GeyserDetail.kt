@@ -51,6 +51,7 @@ import io.github.stefanoltmann.app.generated.resources.uiGeyserDetailSecondsShor
 import model.Geyser
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
+import ui.model.stringResource
 import ui.theme.DefaultSpacer
 import ui.theme.HalfSpacer
 import ui.theme.cardColorBackground

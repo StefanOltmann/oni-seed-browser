@@ -21,8 +21,6 @@ package model
 
 import kotlinx.serialization.Serializable
 import model.serializer.GeyserTypeStringSerializer
-import ui.GRAMS_PER_TON
-import ui.SECONDS_PER_CYCLE
 
 @Suppress("UNUSED")
 @Serializable

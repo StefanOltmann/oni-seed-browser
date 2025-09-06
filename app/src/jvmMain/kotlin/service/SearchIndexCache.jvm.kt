@@ -62,7 +62,10 @@ actual suspend fun findSearchIndex(clusterType: ClusterType): SearchIndex {
         /*
          * Return an empty search index as we are offline.
          */
-        return SearchIndex(clusterType)
+        return SearchIndex(
+            clusterType = clusterType,
+            timestamp = 0
+        )
     }
 
     if (lastModifiedMillis == cacheFile.lastModified()) {

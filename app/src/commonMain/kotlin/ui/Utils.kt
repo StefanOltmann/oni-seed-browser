@@ -33,9 +33,8 @@ import androidx.compose.ui.input.pointer.onPointerEvent
 import kotlin.math.abs
 import kotlin.math.pow
 import kotlin.math.roundToLong
-
-const val SECONDS_PER_CYCLE: Float = 600F
-const val GRAMS_PER_TON: Float = 1_000_000F
+import model.GRAMS_PER_TON
+import model.SECONDS_PER_CYCLE
 
 @OptIn(ExperimentalComposeUiApi::class)
 fun Modifier.onHover(hovered: MutableState<Boolean>) = this
