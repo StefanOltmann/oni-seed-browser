@@ -1,7 +1,7 @@
 /*
  * ONI Seed Browser
  * Copyright (C) 2025 Stefan Oltmann
- * https://stefan-oltmann.de/oni-seed-browser
+ * https://stefan-oltmann.de
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -38,7 +38,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import io.github.stefanoltmann.app.generated.resources.Res
 import io.github.stefanoltmann.app.generated.resources.uiCount
-import model.AsteroidType
 import model.GeyserType
 import model.WorldTrait
 import model.ZoneType

@@ -1,7 +1,7 @@
 /*
  * ONI Seed Browser
  * Copyright (C) 2025 Stefan Oltmann
- * https://stefan-oltmann.de/oni-seed-browser
+ * https://stefan-oltmann.de
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -73,7 +73,6 @@ import io.github.stefanoltmann.app.generated.resources.uiGeyserDetails
 import kotlin.math.min
 import kotlinx.coroutines.launch
 import model.Asteroid
-import model.AsteroidType
 import model.BiomePaths
 import model.Geyser
 import model.GeyserType

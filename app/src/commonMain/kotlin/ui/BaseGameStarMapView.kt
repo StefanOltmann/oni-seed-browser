@@ -1,7 +1,7 @@
 /*
  * ONI Seed Browser
  * Copyright (C) 2025 Stefan Oltmann
- * https://stefan-oltmann.de/oni-seed-browser
+ * https://stefan-oltmann.de
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -54,13 +54,13 @@ import model.Cluster
 import model.StarMapEntryVanilla
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
+import ui.model.stringResource
 import ui.theme.DefaultSpacer
 import ui.theme.HalfSpacer
 import ui.theme.defaultPadding
 import ui.theme.defaultSpacing
 import ui.theme.doubleSpacing
 import ui.theme.lightGray
-import ui.model.stringResource
 
 private const val CIRCLE_SIZE_DP = 96
 

@@ -1,7 +1,7 @@
 /*
  * ONI Seed Browser
  * Copyright (C) 2025 Stefan Oltmann
- * https://stefan-oltmann.de/oni-seed-browser
+ * https://stefan-oltmann.de
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -19,13 +19,7 @@
 
 package model
 
-import io.github.stefanoltmann.app.generated.resources.Res
-import io.github.stefanoltmann.app.generated.resources.logo_frosty_planet_banner
-import io.github.stefanoltmann.app.generated.resources.logo_oni
-import io.github.stefanoltmann.app.generated.resources.logo_prehistoric_planet_banner
-import io.github.stefanoltmann.app.generated.resources.logo_spaced_out
 import kotlinx.serialization.Serializable
-import org.jetbrains.compose.resources.DrawableResource
 
 @Suppress("UNUSED")
 @Serializable

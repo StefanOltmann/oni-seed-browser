@@ -1,7 +1,7 @@
 /*
  * ONI Seed Browser
  * Copyright (C) 2025 Stefan Oltmann
- * https://stefan-oltmann.de/oni-seed-browser
+ * https://stefan-oltmann.de
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -21,29 +21,6 @@ package ui.theme
 
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.ui.graphics.Color
-import model.ZoneType
-import model.ZoneType.Barren
-import model.ZoneType.BoggyMarsh
-import model.ZoneType.CarrotQuarry
-import model.ZoneType.Forest
-import model.ZoneType.FrozenWastes
-import model.ZoneType.IceCaves
-import model.ZoneType.MagmaCore
-import model.ZoneType.Metallic
-import model.ZoneType.Moo
-import model.ZoneType.Ocean
-import model.ZoneType.OilField
-import model.ZoneType.PrehistoricGarden
-import model.ZoneType.PrehistoricRaptor
-import model.ZoneType.PrehistoricWetlands
-import model.ZoneType.Radioactive
-import model.ZoneType.Rust
-import model.ZoneType.Sandstone
-import model.ZoneType.Space
-import model.ZoneType.SugarWoods
-import model.ZoneType.Swamp
-import model.ZoneType.ToxicJungle
-import model.ZoneType.Wasteland
 
 val lightGray = Color(0xFFF2F2F2)
 

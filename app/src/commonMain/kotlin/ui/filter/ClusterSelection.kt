@@ -1,7 +1,7 @@
 /*
  * ONI Seed Browser
  * Copyright (C) 2025 Stefan Oltmann
- * https://stefan-oltmann.de/oni-seed-browser
+ * https://stefan-oltmann.de
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -44,8 +44,8 @@ import model.filter.FilterQuery
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import ui.drawableResource
-import ui.model.stringResource
 import ui.grayScaleFilter
+import ui.model.stringResource
 import ui.noRippleClickable
 import ui.onHover
 import ui.theme.HalfSpacer
