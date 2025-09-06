@@ -2,7 +2,5 @@ name = "oni-seed-browser"
 
 compatibility_date = "2025-07-30"
 
-route = "stefanoltmann.de/oni-seed-browser/*"
-
 [assets]
 directory = "app/build/dist/wasmJs/"
