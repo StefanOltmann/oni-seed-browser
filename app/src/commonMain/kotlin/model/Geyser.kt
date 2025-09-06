@@ -36,13 +36,13 @@ data class Geyser(
     val emitRate: Int,
 
     /** Average emit rate in gram per second. */
-    val avgEmitRate: Int,
+    val avgEmitRate: Short,
 
     /** Idle time after eruption in seconds. */
-    val idleTime: Int,
+    val idleTime: Short,
 
     /** Duration of eruption in seconds. */
-    val eruptionTime: Int,
+    val eruptionTime: Short,
 
     /** Count of dormancy cycles. */
     val dormancyCycles: Float,

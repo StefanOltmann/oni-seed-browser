@@ -28,11 +28,11 @@ data class Asteroid(
     @Serializable(with = AsteroidTypeStringSerializer::class)
     val id: AsteroidType,
 
-    val offsetX: Int,
-    val offsetY: Int,
+    val offsetX: Short,
+    val offsetY: Short,
 
-    val sizeX: Int,
-    val sizeY: Int,
+    val sizeX: Short,
+    val sizeY: Short,
 
     val worldTraits: List<WorldTrait>,
     val biomePaths: String,
