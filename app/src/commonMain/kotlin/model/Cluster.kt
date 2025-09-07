@@ -42,17 +42,10 @@ data class Cluster(
     @Serializable(with = ClusterTypePrefixSerializer::class)
     val cluster: ClusterType,
 
-    val dlcs: List<Dlc>,
-
     val asteroids: List<Asteroid>,
 
     val starMapEntriesVanilla: List<StarMapEntryVanilla>?,
 
-    val starMapEntriesSpacedOut: List<StarMapEntrySpacedOut>?,
-
-    /*
-     * Introduced on 2025-06-11
-     */
-    val mixingIds: List<String>? = null
+    val starMapEntriesSpacedOut: List<StarMapEntrySpacedOut>?
 
 )

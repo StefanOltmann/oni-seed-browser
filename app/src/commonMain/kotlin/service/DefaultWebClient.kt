@@ -69,8 +69,11 @@ const val COORDINATE_FAVORITES_ENDPOINT = "https://stefanoltmann.de/oni-user-coo
 
 const val TOKEN_HEADER = "token"
 
-private val strictAllFieldsJson = Json {
-    ignoreUnknownKeys = false
+private val json = Json {
+
+    // We drop some old fields
+    ignoreUnknownKeys = true
+
     encodeDefaults = true
 }
 
@@ -80,7 +83,7 @@ object DefaultWebClient : WebClient {
     private val httpClient = HttpClient {
 
         install(ContentNegotiation) {
-            json(strictAllFieldsJson)
+            json(json)
         }
 
         install(ContentEncoding) {
