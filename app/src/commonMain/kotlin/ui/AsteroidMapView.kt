@@ -150,7 +150,7 @@ fun AsteroidMapPopup(
                 )
             }
 
-            val biomePaths = BiomePaths.parse(asteroid.biomePaths)
+            val biomePaths = asteroid.getBiomePaths()
 
             val geyserListLazyListState = rememberLazyListState()
 

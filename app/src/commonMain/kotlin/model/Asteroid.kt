@@ -46,6 +46,22 @@ data class Asteroid(
 
 ) {
 
+    fun getBiomePaths(): BiomePaths {
+
+        try {
+
+            val optimized = BiomePathsCompact.parse(biomePaths)
+
+            return BiomePathsCompact.toBiomePaths(optimized)
+
+        } catch (ex: Exception) {
+
+            println("Failed to parse biome paths in compact format. Falling back to old format.")
+        }
+
+        return BiomePaths.parse(biomePaths)
+    }
+
     fun getBiomes(): Set<ZoneType> =
-        BiomePaths.parse(biomePaths).polygonMap.keys
+        getBiomePaths().polygonMap.keys
 }
