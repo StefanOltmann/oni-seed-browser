@@ -72,6 +72,7 @@ const val TOKEN_HEADER = "token"
 private val json = Json {
 
     // We drop some old fields
+    // FIXME should not happen long-term
     ignoreUnknownKeys = true
 
     encodeDefaults = true
