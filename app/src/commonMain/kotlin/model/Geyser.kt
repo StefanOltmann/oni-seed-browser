@@ -51,15 +51,19 @@ data class Geyser(
     val activeCycles: Float
 ) {
 
+    @kotlinx.serialization.Transient
     val overallTime = idleTime + eruptionTime
 
+    @kotlinx.serialization.Transient
     val overallCycles = activeCycles + dormancyCycles
 
     /**
      * Rating of geyser output in a range of 0.01F to 1.00F
      */
+    @kotlinx.serialization.Transient
     val avgEmitRateRating: Float = id.getAvgEmitRateRating(avgEmitRate)
 
+    @kotlinx.serialization.Transient
     val storageTankTons: Float = (dormancyCycles * avgEmitRate * SECONDS_PER_CYCLE) / GRAMS_PER_TON
 
 }
