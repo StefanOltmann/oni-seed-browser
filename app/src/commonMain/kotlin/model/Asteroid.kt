@@ -34,7 +34,8 @@ data class Asteroid(
     val sizeX: Short,
     val sizeY: Short,
 
-    val worldTraits: List<WorldTrait>,
+    /* As part of the upload this will be set but set to NULL when converted. */
+    val worldTraits: List<WorldTrait>? = null,
 
     /* As part of the upload this will be NULL but be set when stored. */
     val worldTraitsBitmask: Int? = null,
@@ -45,6 +46,17 @@ data class Asteroid(
     val geysers: List<Geyser>
 
 ) {
+
+    fun getEffectiveWorldTraits(): List<WorldTrait> {
+
+        if (worldTraits != null)
+            return worldTraits
+
+        if (worldTraitsBitmask == null)
+            return emptyList()
+
+        return WorldTrait.fromMask(worldTraitsBitmask)
+    }
 
     fun getBiomePaths(): BiomePaths {
 

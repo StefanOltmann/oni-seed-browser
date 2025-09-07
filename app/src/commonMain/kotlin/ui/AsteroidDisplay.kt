@@ -150,7 +150,7 @@ fun AsteroidView(
                         overflow = TextOverflow.Ellipsis
                     )
 
-                    WorldTraitsRow(asteroid.worldTraits)
+                    WorldTraitsRow(asteroid.getEffectiveWorldTraits())
                 }
 
                 HalfSpacer()

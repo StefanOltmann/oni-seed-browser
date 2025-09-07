@@ -48,4 +48,36 @@ data class Cluster(
 
     val starMapEntriesSpacedOut: List<StarMapEntrySpacedOut>?
 
-)
+) {
+
+    fun withWorldTraitMask(): Cluster {
+
+        val optimizedAsteroids = mutableListOf<Asteroid>()
+
+        for (asteroid in asteroids) {
+
+            /*
+             * If world traits are already null, skip this step.
+             */
+            if (asteroid.worldTraits == null) {
+
+                optimizedAsteroids.add(asteroid)
+
+                continue
+            }
+
+            val worldTraitMask = WorldTrait.toMask(asteroid.worldTraits)
+
+            optimizedAsteroids.add(
+                asteroid.copy(
+                    worldTraits = null,
+                    worldTraitsBitmask = worldTraitMask
+                )
+            )
+        }
+
+        return copy(
+            asteroids = optimizedAsteroids
+        )
+    }
+}
