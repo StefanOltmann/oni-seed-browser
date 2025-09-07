@@ -17,8 +17,6 @@ data class Upload(
 
     val fileHashes: Map<String, String>,
 
-    @Deprecated("Call it 'cluster'")
-    val world: Cluster? = null,
+    val cluster: Cluster
 
-    val cluster: Cluster? = null
 )
