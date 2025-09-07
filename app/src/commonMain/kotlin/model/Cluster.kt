@@ -28,13 +28,13 @@ data class Cluster(
 
     val coordinate: String,
 
-    /* As part of the upload this will be NULL, but be set on a query. */
+    /* As part of the upload this will be NULL but be set when stored. */
     val uploaderSteamIdHash: String? = null,
 
-    /* As part of the upload this will be NULL, but be set on a query. */
+    /* As part of the upload this will be NULL but be set when stored. */
     val uploaderAuthenticated: Boolean? = null,
 
-    /* As part of the upload this will be NULL, but be set on a query. */
+    /* As part of the upload this will be NULL but be set when stored. */
     val uploadDate: Long? = null,
 
     val gameVersion: Int,
