@@ -29,16 +29,16 @@ enum class GeyserType(
     val type: String,
 
     /** Min average emit rate in grams per second. */
-    val minAvgEmitRate: Short,
+    val minAvgEmitRate: Int,
 
     /** Max average emit rate in grams per second. */
-    val maxAvgEmitRate: Short,
+    val maxAvgEmitRate: Int,
 
     /** Mean average emit rate in grams per second. */
-    val meanAvgEmitRate: Short,
+    val meanAvgEmitRate: Int,
 
     /** Standard deviation for average emit rate. */
-    val avgEmitRateStdDev: Short
+    val avgEmitRateStdDev: Int
 
 ) {
 
@@ -244,7 +244,7 @@ enum class GeyserType(
 
     val highAvgEmitRate = meanAvgEmitRate + avgEmitRateStdDev
 
-    fun getAvgEmitRateRating(avgEmitRate: Short): Float =
+    fun getAvgEmitRateRating(avgEmitRate: Int): Float =
         ((avgEmitRate - lowAvgEmitRate).toFloat() / (highAvgEmitRate - lowAvgEmitRate))
             .coerceIn(minimumValue = 0.01F, maximumValue = 1.0F)
 }

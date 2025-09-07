@@ -55,7 +55,7 @@ fun Modifier.noRippleClickable(onClick: (() -> Unit)): Modifier = this
         onClick = onClick
     )
 
-fun calcTonsPerCycle(gramPerSecond: Short): Float =
+fun calcTonsPerCycle(gramPerSecond: Int): Float =
     (gramPerSecond / GRAMS_PER_TON) * SECONDS_PER_CYCLE
 
 fun Float.toString(decimals: Int): String {
