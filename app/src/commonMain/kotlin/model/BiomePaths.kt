@@ -16,7 +16,6 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package model
 
 data class BiomePaths(
@@ -89,8 +88,8 @@ data class BiomePaths(
 
                         points.add(
                             Point(
-                                x = pairSplit[0].toInt().toShort(),
-                                y = pairSplit[1].toInt().toShort()
+                                x = pairSplit[0].toInt(),
+                                y = pairSplit[1].toInt()
                             )
                         )
                     }
