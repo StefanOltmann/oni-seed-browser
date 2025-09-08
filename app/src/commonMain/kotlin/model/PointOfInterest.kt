@@ -27,5 +27,5 @@ data class PointOfInterest(
     val id: PointOfInterestType,
 
     val x: Short,
-    val y: Short,
+    val y: Short
 )

@@ -74,10 +74,7 @@ class SearchIndex(
                         add(
                             AsteroidSummaryCompact(
                                 id = asteroid.id,
-                                worldTraitsBitMask = if (asteroid.worldTraits != null)
-                                    WorldTrait.toMask(asteroid.worldTraits)
-                                else
-                                    asteroid.worldTraitsBitmask!!,
+                                worldTraitsBitMask = asteroid.worldTraitsBitmask,
                                 zoneTypesBitMask = ZoneType.toMask(asteroid.getBiomes()),
                                 geyserCounts = GeyserType.entries.map {
                                     geyserCounts[it] ?: 0

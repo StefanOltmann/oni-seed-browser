@@ -19,11 +19,13 @@
 
 package model
 
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.Serializable
 import model.serializer.ClusterTypePrefixSerializer
 
 @Suppress("UNUSED")
 @Serializable
+@OptIn(ExperimentalSerializationApi::class)
 data class Cluster(
 
     val coordinate: String,

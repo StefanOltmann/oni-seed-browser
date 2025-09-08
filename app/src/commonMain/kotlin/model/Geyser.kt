@@ -53,19 +53,33 @@ data class Geyser(
      */
     val eruptionTime: Short,
 
-    /** Count of dormancy cycles. */
-    val dormancyCycles: Float,
+    val dormancyCycles: Float? = null,
 
-    /** Count of active cycles. */
-    val activeCycles: Float
+    /**
+     * Count of dormancy cycles.
+     * In our data values range from 0 to 135.
+     */
+    val dormancyCyclesRounded: Short? = null,
+
+    val activeCycles: Float? = null,
+
+    /**
+     * Count of active cycles.
+     * In our data values range from 0 to 180.
+     */
+    val activeCyclesRounded: Short? = null
 
 ) {
+
+    val dormancyCyclesToUse: Float = dormancyCyclesRounded?.toFloat() ?: dormancyCycles!!
+
+    val activeCyclesToUse: Float = activeCyclesRounded?.toFloat() ?: activeCycles!!
 
     @kotlinx.serialization.Transient
     val overallTime = idleTime + eruptionTime
 
     @kotlinx.serialization.Transient
-    val overallCycles = activeCycles + dormancyCycles
+    val overallCycles = activeCyclesToUse + dormancyCyclesToUse
 
     /**
      * Rating of geyser output in a range of 0.01F to 1.00F
@@ -74,6 +88,6 @@ data class Geyser(
     val avgEmitRateRating: Float = id.getAvgEmitRateRating(avgEmitRate)
 
     @kotlinx.serialization.Transient
-    val storageTankTons: Float = (dormancyCycles * avgEmitRate * SECONDS_PER_CYCLE) / GRAMS_PER_TON
+    val storageTankTons: Float = (dormancyCyclesToUse * avgEmitRate * SECONDS_PER_CYCLE) / GRAMS_PER_TON
 
 }
