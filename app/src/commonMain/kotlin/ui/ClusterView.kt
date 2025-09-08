@@ -257,20 +257,23 @@ fun ClusterView(
                 color = MaterialTheme.colorScheme.onBackground
             )
 
-            VerticalDivider(
-                thickness = 1.dp,
-                color = MaterialTheme.colorScheme.onBackground,
-                modifier = Modifier
-                    .height(doubleSpacing)
-                    .padding(horizontal = defaultSpacing)
-            )
+            if (cluster.uploaderAuthenticated) {
 
-            Icon(
-                imageVector = IconAuthenticated,
-                contentDescription = null,
-                tint = MaterialTheme.colorScheme.onBackground,
-                modifier = Modifier.size(16.dp)
-            )
+                VerticalDivider(
+                    thickness = 1.dp,
+                    color = MaterialTheme.colorScheme.onBackground,
+                    modifier = Modifier
+                        .height(doubleSpacing)
+                        .padding(horizontal = defaultSpacing)
+                )
+
+                Icon(
+                    imageVector = IconAuthenticated,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.onBackground,
+                    modifier = Modifier.size(16.dp)
+                )
+            }
         }
     }
 
