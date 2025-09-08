@@ -17,32 +17,33 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package model
+package model.server.upload
 
 import kotlinx.serialization.Serializable
-import model.serializer.ClusterTypePrefixSerializer
+import model.AsteroidType
+import model.WorldTrait
+import model.serializer.AsteroidTypeStringSerializer
 
-@Suppress("UNUSED")
+/**
+ * This is the format expected to be sent from the mod
+ */
 @Serializable
-data class Cluster(
+data class UploadAsteroid(
 
-    val coordinate: String,
+    @Serializable(with = AsteroidTypeStringSerializer::class)
+    val id: AsteroidType,
 
-    val uploaderSteamIdHash: String,
+    val offsetX: Short,
+    val offsetY: Short,
 
-    val uploaderAuthenticated: Boolean,
+    val sizeX: Short,
+    val sizeY: Short,
 
-    val uploadDate: Long,
+    val worldTraits: List<WorldTrait>,
 
-    val gameVersion: Int,
+    val biomePaths: String,
 
-    @Serializable(with = ClusterTypePrefixSerializer::class)
-    val cluster: ClusterType,
-
-    val asteroids: List<Asteroid>,
-
-    val starMapEntriesVanilla: List<StarMapEntryVanilla>?,
-
-    val starMapEntriesSpacedOut: List<StarMapEntrySpacedOut>?
+    val pointsOfInterest: List<UploadPointOfInterest>,
+    val geysers: List<UploadGeyser>
 
 )

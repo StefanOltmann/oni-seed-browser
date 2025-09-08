@@ -17,32 +17,45 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package model
+package model.server.upload
 
 import kotlinx.serialization.Serializable
-import model.serializer.ClusterTypePrefixSerializer
+import model.GeyserType
+import model.serializer.GeyserTypeStringSerializer
 
+/**
+ * This is the format expected to be sent from the mod
+ */
 @Suppress("UNUSED")
 @Serializable
-data class Cluster(
+data class UploadGeyser(
 
-    val coordinate: String,
+    @Serializable(with = GeyserTypeStringSerializer::class)
+    val id: GeyserType,
 
-    val uploaderSteamIdHash: String,
+    val x: Short,
+    val y: Short,
 
-    val uploaderAuthenticated: Boolean,
+    /**
+     * Emit rate in gram per second when active.
+     *
+     * Can be quite high for some geysers.
+     * Like 221888
+     */
+    val emitRate: Int,
 
-    val uploadDate: Long,
+    /** Average emit rate in gram per second. */
+    val avgEmitRate: Short,
 
-    val gameVersion: Int,
+    /** Idle time after eruption in seconds. */
+    val idleTime: Short,
 
-    @Serializable(with = ClusterTypePrefixSerializer::class)
-    val cluster: ClusterType,
+    /** Duration of eruption in seconds. */
+    val eruptionTime: Short,
 
-    val asteroids: List<Asteroid>,
+    /** Count of dormancy cycles. */
+    val dormancyCycles: Float,
 
-    val starMapEntriesVanilla: List<StarMapEntryVanilla>?,
-
-    val starMapEntriesSpacedOut: List<StarMapEntrySpacedOut>?
-
+    /** Count of active cycles. */
+    val activeCycles: Float
 )

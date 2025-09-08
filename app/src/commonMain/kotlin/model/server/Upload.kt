@@ -1,7 +1,7 @@
 package model.server
 
 import kotlinx.serialization.Serializable
-import model.Cluster
+import model.server.upload.UploadCluster
 
 /**
  * This is the format expected to be sent from the mod
@@ -17,6 +17,6 @@ data class Upload(
 
     val fileHashes: Map<String, String>,
 
-    val cluster: Cluster
+    val cluster: UploadCluster
 
 )

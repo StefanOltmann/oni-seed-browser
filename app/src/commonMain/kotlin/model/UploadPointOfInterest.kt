@@ -17,32 +17,16 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package model
+package model.server.upload
 
 import kotlinx.serialization.Serializable
-import model.serializer.ClusterTypePrefixSerializer
+import model.PointOfInterestType
 
-@Suppress("UNUSED")
 @Serializable
-data class Cluster(
+data class UploadPointOfInterest(
 
-    val coordinate: String,
+    val id: PointOfInterestType,
 
-    val uploaderSteamIdHash: String,
-
-    val uploaderAuthenticated: Boolean,
-
-    val uploadDate: Long,
-
-    val gameVersion: Int,
-
-    @Serializable(with = ClusterTypePrefixSerializer::class)
-    val cluster: ClusterType,
-
-    val asteroids: List<Asteroid>,
-
-    val starMapEntriesVanilla: List<StarMapEntryVanilla>?,
-
-    val starMapEntriesSpacedOut: List<StarMapEntrySpacedOut>?
-
+    val x: Short,
+    val y: Short,
 )

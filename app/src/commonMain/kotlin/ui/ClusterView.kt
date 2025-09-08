@@ -250,33 +250,27 @@ fun ClusterView(
                     .padding(horizontal = defaultSpacing)
             )
 
-            if (uploadDate != null) {
+            Text(
+                text = formatDate(uploadDate),
+                style = MaterialTheme.typography.bodyMedium,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.onBackground
+            )
 
-                Text(
-                    text = formatDate(uploadDate),
-                    style = MaterialTheme.typography.bodyMedium,
-                    fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.onBackground
-                )
-            }
+            VerticalDivider(
+                thickness = 1.dp,
+                color = MaterialTheme.colorScheme.onBackground,
+                modifier = Modifier
+                    .height(doubleSpacing)
+                    .padding(horizontal = defaultSpacing)
+            )
 
-            if (cluster.uploaderAuthenticated == true) {
-
-                VerticalDivider(
-                    thickness = 1.dp,
-                    color = MaterialTheme.colorScheme.onBackground,
-                    modifier = Modifier
-                        .height(doubleSpacing)
-                        .padding(horizontal = defaultSpacing)
-                )
-
-                Icon(
-                    imageVector = IconAuthenticated,
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.onBackground,
-                    modifier = Modifier.size(16.dp)
-                )
-            }
+            Icon(
+                imageVector = IconAuthenticated,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.onBackground,
+                modifier = Modifier.size(16.dp)
+            )
         }
     }
 

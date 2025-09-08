@@ -17,32 +17,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package model
+package model.server.upload
 
 import kotlinx.serialization.Serializable
-import model.serializer.ClusterTypePrefixSerializer
+import model.SpacedOutSpacePOI
 
-@Suppress("UNUSED")
+/**
+ * This is the format expected to be sent from the mod
+ */
 @Serializable
-data class Cluster(
-
-    val coordinate: String,
-
-    val uploaderSteamIdHash: String,
-
-    val uploaderAuthenticated: Boolean,
-
-    val uploadDate: Long,
-
-    val gameVersion: Int,
-
-    @Serializable(with = ClusterTypePrefixSerializer::class)
-    val cluster: ClusterType,
-
-    val asteroids: List<Asteroid>,
-
-    val starMapEntriesVanilla: List<StarMapEntryVanilla>?,
-
-    val starMapEntriesSpacedOut: List<StarMapEntrySpacedOut>?
-
+data class UploadStarMapEntrySpacedOut(
+    val id: SpacedOutSpacePOI,
+    val q: Byte,
+    val r: Byte
 )
