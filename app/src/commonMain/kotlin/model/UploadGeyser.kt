@@ -38,19 +38,23 @@ data class UploadGeyser(
 
     /**
      * Emit rate in gram per second when active.
-     *
-     * Can be quite high for some geysers.
-     * Like 221888
+     * In our data values range from 2 to 528019.
      */
     val emitRate: Int,
 
     /** Average emit rate in gram per second. */
     val avgEmitRate: Short,
 
-    /** Idle time after eruption in seconds. */
+    /**
+     * Idle time after eruption in seconds.
+     * In our data values range from 0 to 11930.
+     */
     val idleTime: Short,
 
-    /** Duration of eruption in seconds. */
+    /**
+     * Duration of eruption in seconds.
+     * In our data values range from 1 to 1014.
+     */
     val eruptionTime: Short,
 
     /** Count of dormancy cycles. */

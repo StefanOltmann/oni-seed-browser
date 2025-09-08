@@ -30,7 +30,7 @@ enum class ZoneType(
      * Ordered by how they should appear in the biome list.
      */
 
-    /** Default starting area should always come first. */
+    /** The default starting area should always come first. */
     Sandstone(3),
     Barren(16),
 
