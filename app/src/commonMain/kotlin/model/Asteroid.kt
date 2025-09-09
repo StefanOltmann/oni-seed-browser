@@ -20,12 +20,12 @@
 package model
 
 import kotlinx.serialization.Serializable
-import model.serializer.AsteroidTypeStringSerializer
+import model.serializer.AsteroidTypeSerializer
 
 @Serializable
 data class Asteroid(
 
-    @Serializable(with = AsteroidTypeStringSerializer::class)
+    @Serializable(with = AsteroidTypeSerializer::class)
     val id: AsteroidType,
 
     val offsetX: Short,

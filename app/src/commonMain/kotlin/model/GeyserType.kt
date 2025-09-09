@@ -25,6 +25,9 @@ import kotlinx.serialization.Serializable
 @Serializable
 enum class GeyserType(
 
+    /** Unique ID */
+    val id: Byte,
+
     /** Type descriptor as used by the game. */
     val type: String,
 
@@ -51,6 +54,7 @@ enum class GeyserType(
      */
 
     COOL_STEAM(
+        id = 0,
         type = "steam",
         minAvgEmitRate = 667,
         maxAvgEmitRate = 2667,
@@ -58,97 +62,111 @@ enum class GeyserType(
         avgEmitRateStdDev = 230
     ),
     HYDROGEN(
+        id = 1,
         type = "hot_hydrogen",
         minAvgEmitRate = 47,
         maxAvgEmitRate = 187,
-        meanAvgEmitRate = 105, // According to wiki and data
-        avgEmitRateStdDev = 15 // data: 13
+        meanAvgEmitRate = 105,
+        avgEmitRateStdDev = 15
     ),
     NATURAL_GAS(
+        id = 2,
         type = "methane",
         minAvgEmitRate = 47,
         maxAvgEmitRate = 187,
         meanAvgEmitRate = 105,
-        avgEmitRateStdDev = 15 // data: 14
+        avgEmitRateStdDev = 15
     ),
     CHLORINE(
+        id = 3,
         type = "chlorine_gas",
         minAvgEmitRate = 47,
         maxAvgEmitRate = 187,
         meanAvgEmitRate = 105,
-        avgEmitRateStdDev = 15 // data: 14
+        avgEmitRateStdDev = 15
     ),
     CHLORINE_COOL(
+        id = 4,
         type = "chlorine_gas_cool",
         minAvgEmitRate = 47,
         maxAvgEmitRate = 187,
         meanAvgEmitRate = 105,
-        avgEmitRateStdDev = 15 // data: 14
+        avgEmitRateStdDev = 15
     ),
     HOT_STEAM(
+        id = 5,
         type = "hot_steam",
         minAvgEmitRate = 333,
         maxAvgEmitRate = 1333,
-        meanAvgEmitRate = 750, // data: 716
-        avgEmitRateStdDev = 100 // data: 105
+        meanAvgEmitRate = 750,
+        avgEmitRateStdDev = 100
     ),
     HOT_CO2(
+        id = 6,
         type = "hot_co2",
         minAvgEmitRate = 47,
         maxAvgEmitRate = 187,
         meanAvgEmitRate = 105,
-        avgEmitRateStdDev = 15 // data: 13
+        avgEmitRateStdDev = 15
     ),
     HOT_POLLUTED_O2(
+        id = 7,
         type = "hot_po2",
         minAvgEmitRate = 47,
         maxAvgEmitRate = 187,
         meanAvgEmitRate = 105,
-        avgEmitRateStdDev = 15 // data: 13
+        avgEmitRateStdDev = 15
     ),
     INFECTIOUS_POLLUTED_O2(
+        id = 8,
         type = "slimy_po2",
         minAvgEmitRate = 47,
         maxAvgEmitRate = 187,
         meanAvgEmitRate = 105,
-        avgEmitRateStdDev = 15 // data: 13
+        avgEmitRateStdDev = 15
     ),
     WATER(
+        id = 9,
         type = "hot_water",
         minAvgEmitRate = 1333,
         maxAvgEmitRate = 5333,
-        meanAvgEmitRate = 3000, // data: 2867
-        avgEmitRateStdDev = 400 // data: 396
+        meanAvgEmitRate = 3000,
+        avgEmitRateStdDev = 400
     ),
     COOL_SLUSH_WATER(
+        id = 10,
         type = "slush_water",
         minAvgEmitRate = 667,
         maxAvgEmitRate = 2667,
-        meanAvgEmitRate = 1500, // data: 1463
-        avgEmitRateStdDev = 200 // data: 199
+        meanAvgEmitRate = 1500,
+        avgEmitRateStdDev = 200
     ),
     POLLUTED_WATER(
+        id = 11,
         type = "filthy_water",
         minAvgEmitRate = 1333,
         maxAvgEmitRate = 5333,
-        meanAvgEmitRate = 3000, // data: 2920
-        avgEmitRateStdDev = 400 // data: 384
+        meanAvgEmitRate = 3000,
+        avgEmitRateStdDev = 400
     ),
     COOL_SALT_WATER(
+        id = 12,
         type = "slush_salt_water",
         minAvgEmitRate = 667,
         maxAvgEmitRate = 2667,
-        meanAvgEmitRate = 1500, // data: 1463
-        avgEmitRateStdDev = 200, // data: 186
+        meanAvgEmitRate = 1500,
+        avgEmitRateStdDev = 200
     ),
     HOT_SALT_WATER(
+        id = 13,
         type = "salt_water",
         minAvgEmitRate = 1333,
         maxAvgEmitRate = 5333,
-        meanAvgEmitRate = 3000, // data: 2969
-        avgEmitRateStdDev = 400 // data: 392
+        meanAvgEmitRate = 3000,
+        avgEmitRateStdDev = 400
     ),
     LIQUID_CO2(
+        id = 14,
         type = "liquid_co2",
         minAvgEmitRate = 67,
         maxAvgEmitRate = 267,
@@ -156,62 +174,71 @@ enum class GeyserType(
         avgEmitRateStdDev = 20
     ),
     LEAKY_OIL_FISSURE(
+        id = 15,
         type = "oil_drip",
         minAvgEmitRate = 1,
         maxAvgEmitRate = 333,
-        meanAvgEmitRate = 125, // data: 182
-        avgEmitRateStdDev = 35 // data: 34
+        meanAvgEmitRate = 125,
+        avgEmitRateStdDev = 35
     ),
     LIQUID_SULFUR_GEYSER(
+        id = 16,
         type = "liquid_sulfur",
         minAvgEmitRate = 667,
         maxAvgEmitRate = 2667,
-        meanAvgEmitRate = 1500, // data: 1597
+        meanAvgEmitRate = 1500,
         avgEmitRateStdDev = 250
     ),
     IRON_VOLCANO(
+        id = 17,
         type = "molten_iron",
         minAvgEmitRate = 133,
         maxAvgEmitRate = 533,
         meanAvgEmitRate = 300,
-        avgEmitRateStdDev = 40 // data: 41
+        avgEmitRateStdDev = 40
     ),
     COPPER_VOLCANO(
+        id = 18,
         type = "molten_copper",
         minAvgEmitRate = 133,
         maxAvgEmitRate = 533,
         meanAvgEmitRate = 300,
-        avgEmitRateStdDev = 40 // data: 38
+        avgEmitRateStdDev = 40
     ),
     GOLD_VOLCANO(
+        id = 19,
         type = "molten_gold",
         minAvgEmitRate = 133,
         maxAvgEmitRate = 533,
         meanAvgEmitRate = 300,
-        avgEmitRateStdDev = 40 // data: 42
+        avgEmitRateStdDev = 40
     ),
     ALUMINIUM_VOLCANO(
+        id = 20,
         type = "molten_aluminum",
         minAvgEmitRate = 133,
         maxAvgEmitRate = 533,
         meanAvgEmitRate = 300,
-        avgEmitRateStdDev = 40 // data: 41
+        avgEmitRateStdDev = 40
     ),
     COBALT_VOLCANO(
+        id = 21,
         type = "molten_cobalt",
         minAvgEmitRate = 133,
         maxAvgEmitRate = 533,
         meanAvgEmitRate = 300,
-        avgEmitRateStdDev = 40 // data: 42
+        avgEmitRateStdDev = 40
     ),
     TUNGSTEN_VOLCANO(
+        id = 22,
         type = "molten_tungsten",
         minAvgEmitRate = 133,
         maxAvgEmitRate = 533,
         meanAvgEmitRate = 300,
-        avgEmitRateStdDev = 40 // data: 41
+        avgEmitRateStdDev = 40
     ),
     NIOBIUM_VOLCANO(
+        id = 23,
         type = "molten_niobium",
         minAvgEmitRate = 533,
         maxAvgEmitRate = 2133,
@@ -219,20 +246,23 @@ enum class GeyserType(
         avgEmitRateStdDev = 165
     ),
     VOLCANO(
+        id = 24,
         type = "big_volcano",
         minAvgEmitRate = 533,
         maxAvgEmitRate = 2133,
-        meanAvgEmitRate = 1100, // data: 1193
-        avgEmitRateStdDev = 150 // data: 156
+        meanAvgEmitRate = 1100,
+        avgEmitRateStdDev = 150
     ),
     MINOR_VOLCANO(
+        id = 25,
         type = "small_volcano",
         minAvgEmitRate = 267,
         maxAvgEmitRate = 1067,
-        meanAvgEmitRate = 550, // data: 593
+        meanAvgEmitRate = 550,
         avgEmitRateStdDev = 75
     ),
     OIL_RESERVOIR(
+        id = 26,
         type = "OilWell",
         minAvgEmitRate = 3333,
         maxAvgEmitRate = 3333,

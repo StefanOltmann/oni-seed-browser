@@ -21,7 +21,7 @@ package model
 
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.Serializable
-import model.serializer.ClusterTypePrefixSerializer
+import model.serializer.ClusterTypeSerializer
 
 @Suppress("UNUSED")
 @Serializable
@@ -38,7 +38,7 @@ data class Cluster(
 
     val gameVersion: Int,
 
-    @Serializable(with = ClusterTypePrefixSerializer::class)
+    @Serializable(with = ClusterTypeSerializer::class)
     val cluster: ClusterType,
 
     val asteroids: List<Asteroid>,

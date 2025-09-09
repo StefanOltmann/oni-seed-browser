@@ -27,14 +27,14 @@ import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import model.GeyserType
 
-object GeyserTypeOrdinalSerializer : KSerializer<GeyserType> {
+object GeyserTypeIdSerializer : KSerializer<GeyserType> {
 
     override val descriptor: SerialDescriptor =
-        PrimitiveSerialDescriptor("GeyserTypeOrdinalSerializer", PrimitiveKind.BYTE)
+        PrimitiveSerialDescriptor("GeyserTypeIdSerializer", PrimitiveKind.BYTE)
 
     override fun serialize(encoder: Encoder, value: GeyserType) =
-        encoder.encodeByte(value.type.toByte())
+        encoder.encodeByte(value.id)
 
     override fun deserialize(decoder: Decoder): GeyserType =
-        GeyserType.entries[decoder.decodeInt()]
+        GeyserType.entries.find { it.id == decoder.decodeByte() } ?: error("Unknown id")
 }

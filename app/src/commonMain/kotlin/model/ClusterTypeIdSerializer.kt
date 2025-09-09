@@ -27,14 +27,14 @@ import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import model.ClusterType
 
-object ClusterTypeOrdinalSerializer : KSerializer<ClusterType> {
+object ClusterTypeIdSerializer : KSerializer<ClusterType> {
 
     override val descriptor: SerialDescriptor =
-        PrimitiveSerialDescriptor("ClusterTypeOrdinalSerializer", PrimitiveKind.BYTE)
+        PrimitiveSerialDescriptor("ClusterTypeIdSerializer", PrimitiveKind.BYTE)
 
     override fun serialize(encoder: Encoder, value: ClusterType) =
-        encoder.encodeByte(value.ordinal.toByte())
+        encoder.encodeByte(value.id)
 
     override fun deserialize(decoder: Decoder): ClusterType =
-        ClusterType.entries[decoder.decodeInt()]
+        ClusterType.entries.find { it.id == decoder.decodeByte() } ?: error("Unknown id")
 }

@@ -37,6 +37,7 @@ import io.ktor.http.HttpStatusCode
 import io.ktor.http.contentType
 import io.ktor.http.isSuccess
 import io.ktor.serialization.kotlinx.json.json
+import io.ktor.serialization.kotlinx.protobuf.protobuf
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.ExperimentalSerializationApi
@@ -46,7 +47,7 @@ import model.Contributor
 import model.filter.FilterQuery
 import model.search.SearchIndex
 
-const val FIND_URL = "https://oni-worlds.stefanoltmann.de"
+const val FIND_URL = "https://oni-data.stefanoltmann.de"
 
 const val SEARCH_INDEX_URL = "https://oni-search.stefanoltmann.de"
 
@@ -85,6 +86,7 @@ object DefaultWebClient : WebClient {
 
         install(ContentNegotiation) {
             json(json)
+            protobuf()
         }
 
         install(ContentEncoding) {
@@ -136,27 +138,9 @@ object DefaultWebClient : WebClient {
         if (cachedCluster != null)
             return cachedCluster
 
-        /*
-         * First, ask the mirror for data.
-         */
         val response = httpClient.get("$FIND_URL/$coordinate") {
-            accept(ContentType.Application.Json)
+            accept(ContentType.Application.ProtoBuf)
         }
-
-//        /*
-//         * If it's not available on the mirror, ask the main repo.
-//         */
-//        if (response.status != HttpStatusCode.OK) {
-//
-//            println("$coordinate not found on S3, trying fallback URL.")
-//
-//            response = httpClient.get("$FIND_URL_MAIN/$coordinate") {
-//                accept(ContentType.Application.Json)
-//            }
-//
-//        } else {
-//            println("$coordinate found on S3.")
-//        }
 
         if (response.status != HttpStatusCode.OK)
             return null

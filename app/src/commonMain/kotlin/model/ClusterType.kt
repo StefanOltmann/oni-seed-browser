@@ -24,6 +24,7 @@ import kotlinx.serialization.Serializable
 @Suppress("UNUSED")
 @Serializable
 enum class ClusterType(
+    val id: Byte,
     val prefix: String,
     val requiredDlcs: List<Dlc>,
     val gameMode: GameModeType,
@@ -34,149 +35,137 @@ enum class ClusterType(
 
     /** Terra */
     BASE_TERRA(
+        id = 0,
         prefix = "SNDST-A",
         requiredDlcs = listOf(Dlc.BaseGame),
         gameMode = GameModeType.BASEGAME_STANDARD,
-        asteroidTypes = listOf(
-            AsteroidType.SandstoneDefault
-        ),
+        asteroidTypes = listOf(AsteroidType.SandstoneDefault),
         exportCollection = ClusterExportCollection.BASEGAME
     ),
 
     /** Ceres */
     BASE_CERES(
+        id = 1,
         prefix = "CER-A",
         requiredDlcs = listOf(Dlc.BaseGame, Dlc.FrostyPlanet),
         gameMode = GameModeType.BASEGAME_STANDARD,
-        asteroidTypes = listOf(
-            AsteroidType.CeresBaseGameAsteroid
-        ),
+        asteroidTypes = listOf(AsteroidType.CeresBaseGameAsteroid),
         exportCollection = ClusterExportCollection.BASEGAME
     ),
 
     /** Blasted Ceres */
     BASE_BLASTED_CERES(
+        id = 2,
         prefix = "CERS-A",
         requiredDlcs = listOf(Dlc.BaseGame, Dlc.FrostyPlanet),
         gameMode = GameModeType.BASEGAME_THELAB,
-        asteroidTypes = listOf(
-            AsteroidType.CeresBaseGameShatteredAsteroid
-        ),
+        asteroidTypes = listOf(AsteroidType.CeresBaseGameShatteredAsteroid),
         exportCollection = ClusterExportCollection.BASEGAME
     ),
 
     /** Relica */
     BASE_RELICA(
+        id = 3,
         prefix = "PRE-A",
         requiredDlcs = listOf(Dlc.BaseGame, Dlc.PrehistoricPlanet),
         gameMode = GameModeType.BASEGAME_STANDARD,
-        asteroidTypes = listOf(
-            AsteroidType.PrehistoricBaseGameAsteroid
-        ),
+        asteroidTypes = listOf(AsteroidType.PrehistoricBaseGameAsteroid),
         exportCollection = ClusterExportCollection.BASEGAME
     ),
 
     /** RelicAAAAAAAGHH */
     BASE_RELICA_LAB(
+        id = 4,
         prefix = "PRES-A",
         requiredDlcs = listOf(Dlc.BaseGame, Dlc.PrehistoricPlanet),
         gameMode = GameModeType.BASEGAME_THELAB,
-        asteroidTypes = listOf(
-            AsteroidType.PrehistoricShatteredBaseGameAsteroid
-        ),
+        asteroidTypes = listOf(AsteroidType.PrehistoricShatteredBaseGameAsteroid),
         exportCollection = ClusterExportCollection.BASEGAME
     ),
 
     /** Oceania */
     BASE_OCEANIA(
+        id = 5,
         prefix = "OCAN-A",
         requiredDlcs = listOf(Dlc.BaseGame),
         gameMode = GameModeType.BASEGAME_STANDARD,
-        asteroidTypes = listOf(
-            AsteroidType.Oceania
-        ),
+        asteroidTypes = listOf(AsteroidType.Oceania),
         exportCollection = ClusterExportCollection.BASEGAME
     ),
 
     /** Rime */
     BASE_RIME(
+        id = 6,
         prefix = "S-FRZ",
         requiredDlcs = listOf(Dlc.BaseGame),
         gameMode = GameModeType.BASEGAME_STANDARD,
-        asteroidTypes = listOf(
-            AsteroidType.SandstoneFrozen
-        ),
+        asteroidTypes = listOf(AsteroidType.SandstoneFrozen),
         exportCollection = ClusterExportCollection.BASEGAME
     ),
 
     /** Verdante */
     BASE_VERDANTE(
+        id = 7,
         prefix = "LUSH-A",
         requiredDlcs = listOf(Dlc.BaseGame),
         gameMode = GameModeType.BASEGAME_STANDARD,
-        asteroidTypes = listOf(
-            AsteroidType.ForestLush
-        ),
+        asteroidTypes = listOf(AsteroidType.ForestLush),
         exportCollection = ClusterExportCollection.BASEGAME
     ),
 
     /** Arboria */
     BASE_ARBORIA(
+        id = 8,
         prefix = "FRST-A",
         requiredDlcs = listOf(Dlc.BaseGame),
         gameMode = GameModeType.BASEGAME_STANDARD,
-        asteroidTypes = listOf(
-            AsteroidType.ForestDefault
-        ),
+        asteroidTypes = listOf(AsteroidType.ForestDefault),
         exportCollection = ClusterExportCollection.BASEGAME
     ),
 
     /** Volcanea */
     BASE_VOLCANEA(
+        id = 9,
         prefix = "VOLCA",
         requiredDlcs = listOf(Dlc.BaseGame),
         gameMode = GameModeType.BASEGAME_STANDARD,
-        asteroidTypes = listOf(
-            AsteroidType.Volcanic
-        ),
+        asteroidTypes = listOf(AsteroidType.Volcanic),
         exportCollection = ClusterExportCollection.BASEGAME
     ),
 
     /** The Badlands */
     BASE_THE_BADLANDS(
+        id = 10,
         prefix = "BAD-A",
         requiredDlcs = listOf(Dlc.BaseGame),
         gameMode = GameModeType.BASEGAME_STANDARD,
-        asteroidTypes = listOf(
-            AsteroidType.Badlands
-        ),
+        asteroidTypes = listOf(AsteroidType.Badlands),
         exportCollection = ClusterExportCollection.BASEGAME
     ),
 
     /** Aridio */
     BASE_ARIDIO(
+        id = 11,
         prefix = "HTFST-A",
         requiredDlcs = listOf(Dlc.BaseGame),
         gameMode = GameModeType.BASEGAME_STANDARD,
-        asteroidTypes = listOf(
-            AsteroidType.ForestHot
-        ),
+        asteroidTypes = listOf(AsteroidType.ForestHot),
         exportCollection = ClusterExportCollection.BASEGAME
     ),
 
     /** Oasisse */
     BASE_OASISSE(
+        id = 12,
         prefix = "OASIS-A",
         requiredDlcs = listOf(Dlc.BaseGame),
         gameMode = GameModeType.BASEGAME_STANDARD,
-        asteroidTypes = listOf(
-            AsteroidType.Oasis
-        ),
+        asteroidTypes = listOf(AsteroidType.Oasis),
         exportCollection = ClusterExportCollection.BASEGAME
     ),
 
     /** Terra */
     DLC_TERRA(
+        id = 13,
         prefix = "V-SNDST-C",
         requiredDlcs = listOf(Dlc.SpacedOut),
         gameMode = GameModeType.SPACEDOUT_CLASSIC,
@@ -195,6 +184,7 @@ enum class ClusterType(
 
     /** Ceres */
     DLC_CERES(
+        id = 14,
         prefix = "V-CER-C",
         requiredDlcs = listOf(Dlc.SpacedOut, Dlc.FrostyPlanet),
         gameMode = GameModeType.SPACEDOUT_CLASSIC,
@@ -213,6 +203,7 @@ enum class ClusterType(
 
     /** Ceres (lab) */
     DLC_BLASTED_CERES(
+        id = 15,
         prefix = "V-CERS-C",
         requiredDlcs = listOf(Dlc.SpacedOut, Dlc.FrostyPlanet),
         gameMode = GameModeType.SPACEDOUT_THELAB,
@@ -231,6 +222,7 @@ enum class ClusterType(
 
     /** Relica */
     DLC_RELICA(
+        id = 16,
         prefix = "V-PRE-C",
         requiredDlcs = listOf(Dlc.SpacedOut, Dlc.PrehistoricPlanet),
         gameMode = GameModeType.SPACEDOUT_CLASSIC,
@@ -249,6 +241,7 @@ enum class ClusterType(
 
     /** RelicAAAAAAAGHH */
     DLC_RELICA_LAB(
+        id = 17,
         prefix = "V-PRES-C",
         requiredDlcs = listOf(Dlc.SpacedOut, Dlc.PrehistoricPlanet),
         gameMode = GameModeType.SPACEDOUT_THELAB,
@@ -267,6 +260,7 @@ enum class ClusterType(
 
     /** Oceania */
     DLC_OCEANIA(
+        id = 18,
         prefix = "V-OCAN-C",
         requiredDlcs = listOf(Dlc.SpacedOut),
         gameMode = GameModeType.SPACEDOUT_CLASSIC,
@@ -285,6 +279,7 @@ enum class ClusterType(
 
     /** Squelchy */
     DLC_SQUELCHY(
+        id = 19,
         prefix = "V-SWMP-C",
         requiredDlcs = listOf(Dlc.SpacedOut),
         gameMode = GameModeType.SPACEDOUT_CLASSIC,
@@ -303,6 +298,7 @@ enum class ClusterType(
 
     /** Rime */
     DLC_RIME(
+        id = 20,
         prefix = "V-SFRZ-C",
         requiredDlcs = listOf(Dlc.SpacedOut),
         gameMode = GameModeType.SPACEDOUT_CLASSIC,
@@ -321,6 +317,7 @@ enum class ClusterType(
 
     /** Verdante */
     DLC_VERDANTE(
+        id = 21,
         prefix = "V-LUSH-C",
         requiredDlcs = listOf(Dlc.SpacedOut),
         gameMode = GameModeType.SPACEDOUT_CLASSIC,
@@ -339,6 +336,7 @@ enum class ClusterType(
 
     /** Arboria */
     DLC_ARBORIA(
+        id = 22,
         prefix = "V-FRST-C",
         requiredDlcs = listOf(Dlc.SpacedOut),
         gameMode = GameModeType.SPACEDOUT_CLASSIC,
@@ -357,6 +355,7 @@ enum class ClusterType(
 
     /** Volcanea */
     DLC_VOLCANEA(
+        id = 23,
         prefix = "V-VOLCA-C",
         requiredDlcs = listOf(Dlc.SpacedOut),
         gameMode = GameModeType.SPACEDOUT_CLASSIC,
@@ -375,6 +374,7 @@ enum class ClusterType(
 
     /** The Badlands */
     DLC_THE_BADLANDS(
+        id = 24,
         prefix = "V-BAD-C",
         requiredDlcs = listOf(Dlc.SpacedOut),
         gameMode = GameModeType.SPACEDOUT_CLASSIC,
@@ -393,6 +393,7 @@ enum class ClusterType(
 
     /** Aridio */
     DLC_ARIDIO(
+        id = 25,
         prefix = "V-HTFST-C",
         requiredDlcs = listOf(Dlc.SpacedOut),
         gameMode = GameModeType.SPACEDOUT_CLASSIC,
@@ -411,6 +412,7 @@ enum class ClusterType(
 
     /** Oasisse */
     DLC_OASISSE(
+        id = 26,
         prefix = "V-OASIS-C",
         requiredDlcs = listOf(Dlc.SpacedOut),
         gameMode = GameModeType.SPACEDOUT_CLASSIC,
@@ -429,6 +431,7 @@ enum class ClusterType(
 
     /** Terrania */
     DLC_TERRANIA(
+        id = 27,
         prefix = "SNDST-C",
         requiredDlcs = listOf(Dlc.SpacedOut),
         gameMode = GameModeType.SPACEDOUT_SPACEDOUT,
@@ -448,6 +451,7 @@ enum class ClusterType(
 
     /** Ceres Minor */
     DLC_CERES_MINOR(
+        id = 28,
         prefix = "CER-C",
         requiredDlcs = listOf(Dlc.SpacedOut, Dlc.FrostyPlanet),
         gameMode = GameModeType.SPACEDOUT_SPACEDOUT,
@@ -467,6 +471,7 @@ enum class ClusterType(
 
     /** Relica Minor */
     DLC_RELICA_MINOR(
+        id = 29,
         prefix = "PRE-C",
         requiredDlcs = listOf(Dlc.SpacedOut, Dlc.PrehistoricPlanet),
         gameMode = GameModeType.SPACEDOUT_SPACEDOUT,
@@ -486,6 +491,7 @@ enum class ClusterType(
 
     /** Folia */
     DLC_FOLIA(
+        id = 30,
         prefix = "FRST-C",
         requiredDlcs = listOf(Dlc.SpacedOut),
         gameMode = GameModeType.SPACEDOUT_SPACEDOUT,
@@ -505,6 +511,7 @@ enum class ClusterType(
 
     /** Quagmiris */
     DLC_QUAGMIRIS(
+        id = 31,
         prefix = "SWMP-C",
         requiredDlcs = listOf(Dlc.SpacedOut),
         gameMode = GameModeType.SPACEDOUT_SPACEDOUT,
@@ -524,6 +531,7 @@ enum class ClusterType(
 
     /** Metallic Swampy Moonlet */
     DLC_METALLIC_SWAMPY_MOONLET(
+        id = 32,
         prefix = "M-SWMP-C",
         requiredDlcs = listOf(Dlc.SpacedOut),
         gameMode = GameModeType.SPACEDOUT_SPACEDOUT,
@@ -546,6 +554,7 @@ enum class ClusterType(
 
     /** The Desolands Moonlet */
     DLC_THE_DESOLANDS_MOONLET(
+        id = 33,
         prefix = "M-BAD-C",
         requiredDlcs = listOf(Dlc.SpacedOut),
         gameMode = GameModeType.SPACEDOUT_SPACEDOUT,
@@ -568,6 +577,7 @@ enum class ClusterType(
 
     /** Frozen Forest Moonlet */
     DLC_FROZEN_FOREST_MOONLET(
+        id = 34,
         prefix = "M-FRZ-C",
         requiredDlcs = listOf(Dlc.SpacedOut),
         gameMode = GameModeType.SPACEDOUT_SPACEDOUT,
@@ -590,6 +600,7 @@ enum class ClusterType(
 
     /** Flipped Moonlet */
     DLC_FLIPPED_MOONLET(
+        id = 35,
         prefix = "M-FLIP-C",
         requiredDlcs = listOf(Dlc.SpacedOut),
         gameMode = GameModeType.SPACEDOUT_SPACEDOUT,
@@ -612,6 +623,7 @@ enum class ClusterType(
 
     /** Radioactive Ocean Moonlet */
     DLC_RADIOACTIVE_OCEAN_MOONLET(
+        id = 36,
         prefix = "M-RAD-C",
         requiredDlcs = listOf(Dlc.SpacedOut),
         gameMode = GameModeType.SPACEDOUT_SPACEDOUT,
@@ -632,8 +644,9 @@ enum class ClusterType(
         starMapRadius = 14
     ),
 
-    /** Radioactive Ocean Moonlet */
+    /** Ceres Mantle */
     DLC_CERES_MANTLE(
+        id = 37,
         prefix = "M-CERS-C",
         requiredDlcs = listOf(Dlc.SpacedOut, Dlc.FrostyPlanet),
         gameMode = GameModeType.SPACEDOUT_SPACEDOUT,

@@ -20,13 +20,13 @@
 package model
 
 import kotlinx.serialization.Serializable
-import model.serializer.GeyserTypeStringSerializer
+import model.serializer.GeyserTypeSerializer
 
 @Suppress("UNUSED")
 @Serializable
 data class Geyser(
 
-    @Serializable(with = GeyserTypeStringSerializer::class)
+    @Serializable(with = GeyserTypeSerializer::class)
     val id: GeyserType,
 
     val x: Short,
@@ -53,33 +53,25 @@ data class Geyser(
      */
     val eruptionTime: Short,
 
-    val dormancyCycles: Float? = null,
-
     /**
      * Count of dormancy cycles.
      * In our data values range from 0 to 135.
      */
-    val dormancyCyclesRounded: Short? = null,
-
-    val activeCycles: Float? = null,
+    val dormancyCyclesRounded: Short,
 
     /**
      * Count of active cycles.
      * In our data values range from 0 to 180.
      */
-    val activeCyclesRounded: Short? = null
+    val activeCyclesRounded: Short
 
 ) {
-
-    val dormancyCyclesToUse: Float = dormancyCyclesRounded?.toFloat() ?: dormancyCycles!!
-
-    val activeCyclesToUse: Float = activeCyclesRounded?.toFloat() ?: activeCycles!!
 
     @kotlinx.serialization.Transient
     val overallTime = idleTime + eruptionTime
 
     @kotlinx.serialization.Transient
-    val overallCycles = activeCyclesToUse + dormancyCyclesToUse
+    val overallCycles = activeCyclesRounded + dormancyCyclesRounded
 
     /**
      * Rating of geyser output in a range of 0.01F to 1.00F
@@ -88,6 +80,6 @@ data class Geyser(
     val avgEmitRateRating: Float = id.getAvgEmitRateRating(avgEmitRate)
 
     @kotlinx.serialization.Transient
-    val storageTankTons: Float = (dormancyCyclesToUse * avgEmitRate * SECONDS_PER_CYCLE) / GRAMS_PER_TON
+    val storageTankTons: Float = (dormancyCyclesRounded * avgEmitRate * SECONDS_PER_CYCLE) / GRAMS_PER_TON
 
 }
