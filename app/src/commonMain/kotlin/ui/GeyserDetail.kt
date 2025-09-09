@@ -223,10 +223,10 @@ fun GeyserDetail(
                         when (placeholder) {
 
                             "activeCycles" ->
-                                append("${geyser.activeCyclesRounded.toString(1)} $cyclesText")
+                                append("${geyser.activeCyclesRounded} $cyclesText")
 
                             "overallCycles" ->
-                                append("${(geyser.activeCyclesRounded + geyser.dormancyCyclesRounded).toString(1)} $cyclesText")
+                                append("${(geyser.activeCyclesRounded + geyser.dormancyCyclesRounded)} $cyclesText")
                         }
                         pop()
 

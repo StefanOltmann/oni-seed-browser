@@ -31,6 +31,7 @@ import io.ktor.client.request.header
 import io.ktor.client.request.post
 import io.ktor.client.request.put
 import io.ktor.client.request.setBody
+import io.ktor.client.statement.bodyAsBytes
 import io.ktor.client.statement.bodyAsText
 import io.ktor.http.ContentType
 import io.ktor.http.HttpStatusCode
@@ -41,7 +42,9 @@ import io.ktor.serialization.kotlinx.protobuf.protobuf
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.decodeFromByteArray
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.protobuf.ProtoBuf
 import model.Cluster
 import model.Contributor
 import model.filter.FilterQuery
@@ -130,6 +133,7 @@ object DefaultWebClient : WebClient {
         return response.body()
     }
 
+    @OptIn(ExperimentalSerializationApi::class)
     override suspend fun find(coordinate: String): Cluster? {
 
         val cachedCluster = clusterCache.get(coordinate)
@@ -145,7 +149,13 @@ object DefaultWebClient : WebClient {
         if (response.status != HttpStatusCode.OK)
             return null
 
-        val cluster: Cluster? = response.body()
+        val bytes = response.bodyAsBytes()
+
+        /*
+         * We need to receive the bytes first and then decode them.
+         * The body<Cluster> function does not work for Protobuf.
+         */
+        val cluster = ProtoBuf.decodeFromByteArray<Cluster>(bytes)
 
         clusterCache.put(coordinate, cluster)
 
