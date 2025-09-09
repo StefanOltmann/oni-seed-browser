@@ -35,6 +35,10 @@ object GeyserTypeIdSerializer : KSerializer<GeyserType> {
     override fun serialize(encoder: Encoder, value: GeyserType) =
         encoder.encodeByte(value.id)
 
-    override fun deserialize(decoder: Decoder): GeyserType =
-        GeyserType.entries.find { it.id == decoder.decodeByte() } ?: error("Unknown id")
+    override fun deserialize(decoder: Decoder): GeyserType {
+
+        val id: Byte = decoder.decodeByte()
+
+        return GeyserType.entries.find { it.id == id } ?: error("Unknown id: $id")
+    }
 }

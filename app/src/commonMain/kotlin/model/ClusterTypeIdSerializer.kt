@@ -35,6 +35,10 @@ object ClusterTypeIdSerializer : KSerializer<ClusterType> {
     override fun serialize(encoder: Encoder, value: ClusterType) =
         encoder.encodeByte(value.id)
 
-    override fun deserialize(decoder: Decoder): ClusterType =
-        ClusterType.entries.find { it.id == decoder.decodeByte() } ?: error("Unknown id")
+    override fun deserialize(decoder: Decoder): ClusterType {
+
+        val id: Byte = decoder.decodeByte()
+
+        return ClusterType.entries.find { it.id == id } ?: error("Unknown id: $id")
+    }
 }
