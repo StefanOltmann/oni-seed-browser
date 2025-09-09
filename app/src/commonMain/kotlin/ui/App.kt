@@ -58,9 +58,6 @@ fun App(
     writeToClipboard: (String) -> Unit
 ) {
 
-    Text("Sorry, we are down for maintenance. Please come back later.")
-    return
-
     MaterialTheme(
         colorScheme = appColorScheme,
         typography = AppTypography()
