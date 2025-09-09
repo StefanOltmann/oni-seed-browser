@@ -69,7 +69,7 @@ data class Asteroid(
 
             return BiomePathsCompact.toBiomePaths(optimized)
 
-        } catch (ex: Exception) {
+        } catch (_: Exception) {
 
             println("Failed to parse biome paths in compact format. Falling back to old format.")
         }
