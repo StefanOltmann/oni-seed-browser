@@ -19,50 +19,63 @@
 
 package model
 
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.protobuf.ProtoNumber
 import model.serializer.GeyserTypeSerializer
 
 @Suppress("UNUSED")
 @Serializable
+@OptIn(ExperimentalSerializationApi::class)
 data class Geyser(
 
+    @ProtoNumber(1)
     @Serializable(with = GeyserTypeSerializer::class)
     val id: GeyserType,
 
+    @ProtoNumber(2)
     val x: Short,
+
+    @ProtoNumber(3)
     val y: Short,
 
     /**
      * Emit rate in gram per second when active.
      * In our data values range from 2 to 528019.
      */
+    @ProtoNumber(4)
     val emitRate: Int,
 
     /** Average emit rate in gram per second. */
+    @ProtoNumber(5)
     val avgEmitRate: Short,
 
     /**
      * Idle time after eruption in seconds.
      * In our data values range from 0 to 11930.
      */
+    @ProtoNumber(6)
     val idleTime: Short,
 
     /**
      * Duration of eruption in seconds.
      * In our data values range from 1 to 1014.
      */
+    @ProtoNumber(7)
     val eruptionTime: Short,
 
     /**
      * Count of dormancy cycles.
      * In our data values range from 0 to 135.
      */
+    @ProtoNumber(8)
     val dormancyCyclesRounded: Short,
 
     /**
      * Count of active cycles.
      * In our data values range from 0 to 180.
      */
+    @ProtoNumber(9)
     val activeCyclesRounded: Short
 
 ) {

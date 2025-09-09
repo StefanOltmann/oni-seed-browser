@@ -19,13 +19,20 @@
 
 package model
 
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.protobuf.ProtoNumber
 
 @Serializable
+@OptIn(ExperimentalSerializationApi::class)
 data class PointOfInterest(
 
+    @ProtoNumber(1)
     val id: PointOfInterestType,
 
+    @ProtoNumber(2)
     val x: Short,
+
+    @ProtoNumber(3)
     val y: Short
 )

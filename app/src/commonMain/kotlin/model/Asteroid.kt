@@ -19,26 +19,41 @@
 
 package model
 
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.protobuf.ProtoNumber
 import model.serializer.AsteroidTypeSerializer
 
 @Serializable
+@OptIn(ExperimentalSerializationApi::class)
 data class Asteroid(
 
+    @ProtoNumber(1)
     @Serializable(with = AsteroidTypeSerializer::class)
     val id: AsteroidType,
 
+    @ProtoNumber(2)
     val offsetX: Short,
+
+    @ProtoNumber(3)
     val offsetY: Short,
 
+    @ProtoNumber(4)
     val sizeX: Short,
+
+    @ProtoNumber(5)
     val sizeY: Short,
 
+    @ProtoNumber(6)
     val worldTraitsBitmask: Int,
 
+    @ProtoNumber(7)
     val biomePaths: String,
 
+    @ProtoNumber(8)
     val pointsOfInterest: List<PointOfInterest>,
+
+    @ProtoNumber(9)
     val geysers: List<Geyser>
 
 ) {

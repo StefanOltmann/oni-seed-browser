@@ -21,6 +21,7 @@ package model
 
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.protobuf.ProtoNumber
 import model.serializer.ClusterTypeSerializer
 
 @Suppress("UNUSED")
@@ -28,23 +29,32 @@ import model.serializer.ClusterTypeSerializer
 @OptIn(ExperimentalSerializationApi::class)
 data class Cluster(
 
+    @ProtoNumber(1)
     val coordinate: String,
 
+    @ProtoNumber(2)
     val uploaderSteamIdHash: String,
 
+    @ProtoNumber(3)
     val uploaderAuthenticated: Boolean,
 
+    @ProtoNumber(4)
     val uploadDate: Long,
 
+    @ProtoNumber(5)
     val gameVersion: Int,
 
+    @ProtoNumber(6)
     @Serializable(with = ClusterTypeSerializer::class)
     val cluster: ClusterType,
 
+    @ProtoNumber(7)
     val asteroids: List<Asteroid>,
 
-    val starMapEntriesVanilla: List<StarMapEntryVanilla>?,
+    @ProtoNumber(8)
+    val starMapEntriesVanilla: List<StarMapEntryVanilla>,
 
-    val starMapEntriesSpacedOut: List<StarMapEntrySpacedOut>?
+    @ProtoNumber(9)
+    val starMapEntriesSpacedOut: List<StarMapEntrySpacedOut>
 
 )

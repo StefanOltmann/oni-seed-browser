@@ -19,10 +19,17 @@
 
 package model
 
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.protobuf.ProtoNumber
 
 @Serializable
+@OptIn(ExperimentalSerializationApi::class)
 data class StarMapEntryVanilla(
+
+    @ProtoNumber(1)
     val id: VanillaSpacePOI,
+
+    @ProtoNumber(2)
     val distance: Int
 )

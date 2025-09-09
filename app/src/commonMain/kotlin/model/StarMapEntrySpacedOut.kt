@@ -19,11 +19,20 @@
 
 package model
 
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.protobuf.ProtoNumber
 
 @Serializable
+@OptIn(ExperimentalSerializationApi::class)
 data class StarMapEntrySpacedOut(
+
+    @ProtoNumber(1)
     val id: SpacedOutSpacePOI,
+
+    @ProtoNumber(2)
     val q: Byte,
+
+    @ProtoNumber(3)
     val r: Byte
 )
