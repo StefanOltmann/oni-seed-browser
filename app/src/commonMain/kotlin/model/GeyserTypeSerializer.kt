@@ -7,8 +7,6 @@
 package model.serializer
 
 import kotlinx.serialization.KSerializer
-import kotlinx.serialization.descriptors.PrimitiveKind
-import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
@@ -22,7 +20,7 @@ object GeyserTypeSerializer : KSerializer<GeyserType> {
     private val nameSerializer = GeyserTypeStringSerializer
 
     override val descriptor: SerialDescriptor =
-        PrimitiveSerialDescriptor("GeyserTypeSerializer", PrimitiveKind.STRING)
+        idSerializer.descriptor
 
     override fun serialize(encoder: Encoder, value: GeyserType) {
         when (encoder) {

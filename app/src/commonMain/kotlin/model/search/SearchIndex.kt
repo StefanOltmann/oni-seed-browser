@@ -6,7 +6,6 @@ import kotlinx.serialization.Transient
 import kotlinx.serialization.protobuf.ProtoNumber
 import model.Cluster
 import model.ClusterType
-import model.Geyser
 import model.GeyserType
 import model.WorldTrait
 import model.ZoneType
@@ -44,52 +43,8 @@ class SearchIndex(
         if (cluster.cluster != clusterType)
             error("Cluster must be $clusterType, but is ${cluster.cluster}")
 
-        val seed = cluster.coordinate
-            .substringAfter(cluster.cluster.prefix + "-")
-            .substringBefore("-")
-            .toInt()
-
-        val remix = cluster.coordinate.substringAfterLast("-")
-
-        _summaries.add(
-            ClusterSummaryCompact(
-                seed = seed,
-                remix = if (remix == "0") null else remix,
-                asteroidSummaries = buildList {
-
-                    for (asteroid in cluster.asteroids) {
-
-                        val geyserCounts: Map<GeyserType, Byte> = asteroid.geysers
-                            .groupBy(Geyser::id)
-                            .map { it.key to it.value.size.toByte() }
-                            .toMap()
-
-                        val goodGeyserCounts: Map<GeyserType, Byte> = asteroid.geysers
-                            .groupBy(Geyser::id)
-                            .map {
-                                it.key to (it.value.count { g -> g.avgEmitRate >= g.id.meanAvgEmitRate }).toByte()
-                            }
-                            .toMap()
-
-                        add(
-                            AsteroidSummaryCompact(
-                                id = asteroid.id,
-                                worldTraitsBitMask = asteroid.worldTraitsBitmask,
-                                zoneTypesBitMask = ZoneType.toMask(asteroid.getBiomes()),
-                                geyserCounts = GeyserType.entries.map {
-                                    geyserCounts[it] ?: 0
-                                }.toByteArray(),
-                                goodGeyserCounts = GeyserType.entries.map {
-                                    goodGeyserCounts[it] ?: 0
-                                }.toByteArray()
-                            )
-                        )
-                    }
-                }.toTypedArray()
-            )
-        )
+        _summaries.add(ClusterSummaryCompact.create(cluster))
     }
-
 
     /**
      * Finds matching cluster summaries for the given filter query.

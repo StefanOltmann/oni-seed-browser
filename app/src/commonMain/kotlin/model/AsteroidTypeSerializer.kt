@@ -1,14 +1,6 @@
-/*
- * Hybrid serializer that uses:
- * - ID for Protobuf
- * - Name for JSON
- */
-
 package model.serializer
 
 import kotlinx.serialization.KSerializer
-import kotlinx.serialization.descriptors.PrimitiveKind
-import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
@@ -22,7 +14,7 @@ object AsteroidTypeSerializer : KSerializer<AsteroidType> {
     private val nameSerializer = AsteroidTypeStringSerializer
 
     override val descriptor: SerialDescriptor =
-        PrimitiveSerialDescriptor("AsteroidTypeSerializer", PrimitiveKind.STRING)
+        idSerializer.descriptor
 
     override fun serialize(encoder: Encoder, value: AsteroidType) {
         when (encoder) {

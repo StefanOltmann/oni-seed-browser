@@ -22,6 +22,10 @@ package model.search
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.protobuf.ProtoNumber
+import model.Cluster
+import model.Geyser
+import model.GeyserType
+import model.ZoneType
 
 @Serializable
 @OptIn(ExperimentalSerializationApi::class)
@@ -36,4 +40,54 @@ class ClusterSummaryCompact(
     @ProtoNumber(3)
     val asteroidSummaries: Array<AsteroidSummaryCompact>
 
-)
+) {
+
+    companion object {
+
+        fun create(cluster: Cluster): ClusterSummaryCompact {
+
+            val seed = cluster.coordinate
+                .substringAfter(cluster.cluster.prefix + "-")
+                .substringBefore("-")
+                .toInt()
+
+            val remix = cluster.coordinate.substringAfterLast("-")
+
+            return ClusterSummaryCompact(
+                seed = seed,
+                remix = if (remix == "0") null else remix,
+                asteroidSummaries = buildList {
+
+                    for (asteroid in cluster.asteroids) {
+
+                        val geyserCounts: Map<GeyserType, Byte> = asteroid.geysers
+                            .groupBy(Geyser::id)
+                            .map { it.key to it.value.size.toByte() }
+                            .toMap()
+
+                        val goodGeyserCounts: Map<GeyserType, Byte> = asteroid.geysers
+                            .groupBy(Geyser::id)
+                            .map {
+                                it.key to (it.value.count { g -> g.avgEmitRate >= g.id.meanAvgEmitRate }).toByte()
+                            }
+                            .toMap()
+
+                        add(
+                            AsteroidSummaryCompact(
+                                id = asteroid.id,
+                                worldTraitsBitMask = asteroid.worldTraitsBitmask,
+                                zoneTypesBitMask = ZoneType.toMask(asteroid.getBiomes()),
+                                geyserCounts = GeyserType.entries.map {
+                                    geyserCounts[it] ?: 0
+                                }.toByteArray(),
+                                goodGeyserCounts = GeyserType.entries.map {
+                                    goodGeyserCounts[it] ?: 0
+                                }.toByteArray()
+                            )
+                        )
+                    }
+                }.toTypedArray()
+            )
+        }
+    }
+}
