@@ -84,11 +84,11 @@ kotlin {
             implementation(libs.multiplatformSettings)
 
             /* Date formatting */
-            implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.6.2")
+            implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.7.1")
 
             /* Cryptography (JWT) */
-            implementation("com.appstractive:jwt-kt:1.1.0")
-            implementation("com.appstractive:jwt-ecdsa-kt:1.1.0")
+            implementation("com.appstractive:jwt-kt:1.2.1")
+            implementation("com.appstractive:jwt-ecdsa-kt:1.2.1")
         }
 
         commonTest.dependencies {

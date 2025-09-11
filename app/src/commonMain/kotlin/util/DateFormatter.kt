@@ -19,7 +19,8 @@
 
 package util
 
-import kotlinx.datetime.Instant
+import kotlin.time.ExperimentalTime
+import kotlin.time.Instant
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.format
@@ -36,6 +37,7 @@ private val dateTimeFormat = LocalDateTime.Format {
     byUnicodePattern(DATE_PATTERN)
 }
 
+@OptIn(ExperimentalTime::class)
 fun formatDate(timestamp: Long): String {
 
     val localDateTime = Instant

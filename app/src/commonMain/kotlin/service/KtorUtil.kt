@@ -1,11 +1,13 @@
 package service
 
 import io.ktor.http.Headers
+import kotlin.time.ExperimentalTime
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toInstant
 
 /* parse RFC 1123 date to epoch millis */
+@OptIn(ExperimentalTime::class)
 private fun parseHttpDateToMillis(date: String): Long {
 
     val parts = date.split(" ")
