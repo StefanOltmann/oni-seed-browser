@@ -63,9 +63,12 @@ fun ClusterViewList(
     writeToClipboard: (String) -> Unit
 ) {
 
-    val displayed = remember { mutableStateListOf<Cluster>() }
+    val displayedClusters = remember { mutableStateListOf<Cluster?>() }
+
     var nextCoordinateIndex by remember { mutableStateOf(0) }
+
     var isLoading by remember { mutableStateOf(false) }
+
     val scrollState = rememberScrollState()
 
     /*
@@ -73,7 +76,7 @@ fun ClusterViewList(
      */
     LaunchedEffect(clusters) {
 
-        displayed.clear()
+        displayedClusters.clear()
         nextCoordinateIndex = 0
         isLoading = false
 
@@ -83,7 +86,7 @@ fun ClusterViewList(
 
             try {
 
-                if (fetchPage(clusters, 0, displayed))
+                if (fetchPage(clusters, 0, displayedClusters))
                     nextCoordinateIndex += 1
 
             } finally {
@@ -107,7 +110,7 @@ fun ClusterViewList(
 
                     try {
 
-                        if (fetchPage(clusters, nextCoordinateIndex, displayed))
+                        if (fetchPage(clusters, nextCoordinateIndex, displayedClusters))
                             nextCoordinateIndex += 1
 
                     } finally {
@@ -126,21 +129,33 @@ fun ClusterViewList(
             verticalArrangement = Arrangement.spacedBy(defaultSpacing)
         ) {
 
-            displayed.forEachIndexed { idx, cluster ->
+            displayedClusters.forEachIndexed { idx, cluster ->
 
-                ClusterView(
-                    cluster = cluster,
-                    index = idx + 1,
-                    totalCount = clusters.size,
-                    favoriteCoordinates = favoriteCoordinates,
-                    likeCount = likeCounts?.value?.get(cluster.coordinate),
-                    showStarMap = showStarMap,
-                    showAsteroidMap = showAsteroidMap,
-                    showMniUrl = showMniUrl,
-                    showFavoriteIcon = showFavoriteIcon,
-                    steamIdToUsernameMap = steamIdToUsernameMap,
-                    writeToClipboard = writeToClipboard
-                )
+                /*
+                 * Skip removed clusters
+                 */
+                if (cluster != null) {
+
+                    ClusterView(
+                        cluster = cluster,
+                        index = idx + 1,
+                        totalCount = clusters.size,
+                        favoriteCoordinates = favoriteCoordinates,
+                        likeCount = likeCounts?.value?.get(cluster.coordinate),
+                        showStarMap = showStarMap,
+                        showAsteroidMap = showAsteroidMap,
+                        showMniUrl = showMniUrl,
+                        showFavoriteIcon = showFavoriteIcon,
+                        steamIdToUsernameMap = steamIdToUsernameMap,
+                        writeToClipboard = writeToClipboard
+                    )
+
+                } else {
+
+                    LaunchedEffect(true) {
+                        println("Skipping not found cluster at index $idx")
+                    }
+                }
             }
 
             if (isLoading && nextCoordinateIndex < clusters.size)
@@ -168,7 +183,7 @@ fun ClusterViewList(
 private suspend fun fetchPage(
     clusters: List<String>,
     index: Int,
-    displayed: MutableList<Cluster>
+    displayed: MutableList<Cluster?>
 ): Boolean {
 
     if (index >= clusters.size)
@@ -184,8 +199,7 @@ private suspend fun fetchPage(
             DefaultWebClient.find(coordinate)
         }
 
-        if (cluster != null)
-            displayed.add(cluster)
+        displayed.add(cluster)
 
     } catch (ex: CancellationException) {
         throw ex
