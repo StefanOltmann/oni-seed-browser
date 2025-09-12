@@ -168,22 +168,25 @@ dependencies {
 }
 
 // region write version
-tasks.register("writeVersionFileToWasm") {
+if (buildTarget != "desktop") {
 
-    description = "Writes the project version into the wasmJs distribution directory."
+    tasks.register("writeVersionFileToWasm") {
 
-    val outputFile = layout.buildDirectory.file("dist/wasmJs/productionExecutable/version.txt")
-    outputs.file(outputFile)
+        description = "Writes the project version into the wasmJs distribution directory."
 
-    doLast {
-        val versionFile = outputFile.get().asFile
-        versionFile.parentFile.mkdirs()
-        versionFile.writeText(project.version.toString())
+        val outputFile = layout.buildDirectory.file("dist/wasmJs/productionExecutable/version.txt")
+        outputs.file(outputFile)
+
+        doLast {
+            val versionFile = outputFile.get().asFile
+            versionFile.parentFile.mkdirs()
+            versionFile.writeText(project.version.toString())
+        }
     }
-}
 
-tasks.named("wasmJsBrowserDistribution") {
-    finalizedBy(tasks.named("writeVersionFileToWasm"))
+    tasks.named("wasmJsBrowserDistribution") {
+        finalizedBy(tasks.named("writeVersionFileToWasm"))
+    }
 }
 // endregion
 
