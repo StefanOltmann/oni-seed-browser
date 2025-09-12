@@ -81,12 +81,12 @@ fun main() {
         }
 
         /* Some debug values */
+        println("### ONI Seed Browser $APP_VERSION ###")
         println("Running on domain: ${document.domain}")
         println("Users language: " + Locale.current.language)
         println("Users language tag: " + Locale.current.toLanguageTag())
         println("Users region: " + Locale.current.region)
         println("Cookies: ${document.cookie}")
-        println("Parameters: $params")
 
         val urlHash = remember {
             mutableStateOf(document.location?.hash?.drop(1)?.ifBlank { null })

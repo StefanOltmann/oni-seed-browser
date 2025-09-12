@@ -21,6 +21,10 @@ gitVersioning.apply {
             version = "\${ref.version}"
         }
     }
+
+    rev {
+        version = "\${commit.short}"
+    }
 }
 
 val buildTarget: String? = System.getenv("BUILD_TARGET")
@@ -60,6 +64,10 @@ kotlin {
     }
 
     sourceSets {
+
+        sourceSets["commonMain"].kotlin.srcDirs(
+            file("build/generated/src/commonMain/kotlin/")
+        )
 
         commonMain.dependencies {
 
@@ -136,7 +144,10 @@ compose.desktop {
 
             packageName = "ONI Seed Browser"
 
-            packageVersion = version.toString()
+            if (version.toString().matches(Regex("^\\d+\\.\\d+\\.\\d+$")))
+                packageVersion = version.toString()
+            else
+                packageVersion = "1.0.0"
         }
     }
 }
@@ -155,6 +166,44 @@ dependencies {
         windowsAmd64(compose.desktop.windows_x64)
     }
 }
+
+// region write version
+tasks.register("writeVersionFileToWasm") {
+
+    description = "Writes the project version into the wasmJs distribution directory."
+
+    val outputFile = layout.buildDirectory.file("dist/wasmJs/productionExecutable/version.txt")
+    outputs.file(outputFile)
+
+    doLast {
+        val versionFile = outputFile.get().asFile
+        versionFile.parentFile.mkdirs()
+        versionFile.writeText(project.version.toString())
+    }
+}
+
+tasks.named("wasmJsBrowserDistribution") {
+    finalizedBy(tasks.named("writeVersionFileToWasm"))
+}
+// endregion
+
+// region BuildInfo.kt
+project.afterEvaluate {
+
+    logger.lifecycle("Generate BuildInfo.kt")
+
+    val outputDir = layout.buildDirectory.file("generated/src/commonMain/kotlin").get().asFile
+
+    outputDir.mkdirs()
+
+    outputDir.resolve("BuildInfo.kt").printWriter().use { writer ->
+
+        writer.println("const val APP_VERSION: String = \"$version\"")
+
+        writer.flush()
+    }
+}
+// endregion
 
 // region Work around temporary Compose bugs.
 configurations.all {

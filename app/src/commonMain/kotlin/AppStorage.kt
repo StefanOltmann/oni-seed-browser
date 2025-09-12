@@ -17,7 +17,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import model.filter.FilterQuery
 
