@@ -24,12 +24,12 @@ import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.window.ComposeViewport
 import kotlinx.browser.document
 import kotlinx.browser.window
+import kotlinx.coroutines.delay
 import org.w3c.dom.HTMLElement
 import service.DefaultWebClient
 import ui.App
 import util.getQueryParameters
 import util.getValidSteamHash
-import APP_VERSION
 
 @OptIn(ExperimentalComposeUiApi::class, ExperimentalWasmJsInterop::class)
 fun main() {
@@ -54,9 +54,21 @@ fun main() {
             /* If the latest app version and APP_VERSION do not match, perform a browser reload */
             if (latestAppVersion != APP_VERSION) {
 
-                println("Reloading browser to update app version...")
+                /* Don't reload in development / localhost environment */
+                val isLocalhost = document.domain == "localhost" || document.domain == "127.0.0.1"
 
-                window.location.reload()
+                if (!isLocalhost) {
+
+                    println("Reloading browser to update app version...")
+
+                    delay(1000)
+
+                    window.location.reload()
+
+                } else {
+
+                    println("Version mismatch detected but skipping reload in development environment")
+                }
             }
         }
 
