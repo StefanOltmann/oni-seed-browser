@@ -25,7 +25,10 @@ import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.window.ComposeViewport
 import kotlinx.browser.document
 import kotlinx.browser.window
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import org.w3c.dom.HTMLElement
+import service.DefaultWebClient
 import ui.App
 import util.getQueryParameters
 import util.getValidSteamHash
@@ -41,7 +44,20 @@ fun main() {
 
         val connectedUserId = remember { mutableStateOf<String?>(null) }
 
-        LaunchedEffect(true) {
+        /*
+         * App update check
+         */
+        LaunchedEffect(Unit) {
+
+            val latestAppVersion = DefaultWebClient.getLatestAppVersion()
+
+            println("Latest app version: $latestAppVersion")
+        }
+
+        /*
+         * Check login token
+         */
+        LaunchedEffect(Unit) {
 
             val tokenParameter = params["token"]
 

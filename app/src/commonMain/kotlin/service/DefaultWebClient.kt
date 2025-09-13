@@ -50,6 +50,9 @@ import kotlinx.serialization.decodeFromByteArray
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.protobuf.ProtoBuf
 
+/* Read from GitHub pages; Cloudflare pages can't be read due to CORS rules. */
+const val LATEST_APP_VERSION_URL = "https://stefan-oltmann.de/oni-seed-browser/version.txt"
+
 const val FIND_URL = "https://oni-data.stefanoltmann.de"
 
 const val SEARCH_INDEX_URL = "https://oni-search.stefanoltmann.de"
@@ -101,21 +104,41 @@ object DefaultWebClient : WebClient {
 
     private var currentSearchIndex: SearchIndex? = null
 
-    override suspend fun countSeeds(): Long? {
-
-        val response = httpClient.get(COUNT_URL) {
-            accept(ContentType.Text.Plain)
-        }
-
-        if (response.status != HttpStatusCode.OK)
-            return null
+    override suspend fun getLatestAppVersion(): String? {
 
         try {
 
+            val response = httpClient.get(LATEST_APP_VERSION_URL) {
+                accept(ContentType.Text.Plain)
+            }
+
+            if (response.status != HttpStatusCode.OK)
+                return null
+
             return response.body()
 
-        } catch (ex: Exception) {
-            println("Error parsing count response: ${ex.message}")
+        } catch (ex: Throwable) {
+            println("Error getting latest app version: ${ex.message}")
+        }
+
+        return null
+    }
+
+    override suspend fun countSeeds(): Long? {
+
+        try {
+
+            val response = httpClient.get(COUNT_URL) {
+                accept(ContentType.Text.Plain)
+            }
+
+            if (response.status != HttpStatusCode.OK)
+                return null
+
+            return response.body()
+
+        } catch (ex: Throwable) {
+            println("Did not receive counts: ${ex.message}")
         }
 
         return null

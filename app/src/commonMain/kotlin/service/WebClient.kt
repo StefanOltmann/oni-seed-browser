@@ -25,6 +25,8 @@ import de.stefan_oltmann.oni.model.filter.FilterQuery
 
 interface WebClient {
 
+    suspend fun getLatestAppVersion(): String?
+
     suspend fun countSeeds(): Long?
 
     suspend fun findLatestClusters(): List<String>
