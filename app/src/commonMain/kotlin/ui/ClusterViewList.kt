@@ -28,6 +28,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import de.stefan_oltmann.oni.model.Asteroid
+import de.stefan_oltmann.oni.model.Cluster
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -35,8 +37,6 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
-import de.stefan_oltmann.oni.model.Asteroid
-import de.stefan_oltmann.oni.model.Cluster
 import service.DefaultWebClient
 import ui.theme.defaultSpacing
 import ui.theme.doubleSpacing

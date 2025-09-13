@@ -1,10 +1,10 @@
 package service
 
+import de.stefan_oltmann.oni.model.ClusterType
+import de.stefan_oltmann.oni.model.search.SearchIndex
 import io.ktor.client.HttpClient
 import io.ktor.client.request.head
 import io.ktor.http.HttpStatusCode
-import de.stefan_oltmann.oni.model.ClusterType
-import de.stefan_oltmann.oni.model.search.SearchIndex
 
 expect suspend fun findSearchIndex(clusterType: ClusterType): SearchIndex
 

@@ -19,9 +19,9 @@
 
 package de.stefan_oltmann.oni.model.filter
 
+import de.stefan_oltmann.oni.model.ZoneType
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
-import de.stefan_oltmann.oni.model.ZoneType
 
 @Serializable
 data class FilterItemZoneType(

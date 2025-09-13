@@ -1,5 +1,7 @@
 package service
 
+import de.stefan_oltmann.oni.model.ClusterType
+import de.stefan_oltmann.oni.model.search.SearchIndex
 import io.ktor.client.HttpClient
 import io.ktor.client.request.get
 import io.ktor.client.statement.bodyAsBytes
@@ -10,8 +12,6 @@ import kotlinx.coroutines.withContext
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.decodeFromByteArray
 import kotlinx.serialization.protobuf.ProtoBuf
-import de.stefan_oltmann.oni.model.ClusterType
-import de.stefan_oltmann.oni.model.search.SearchIndex
 
 private val httpClient = HttpClient()
 

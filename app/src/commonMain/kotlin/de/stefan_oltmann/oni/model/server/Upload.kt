@@ -1,7 +1,7 @@
 package de.stefan_oltmann.oni.model.server
 
-import kotlinx.serialization.Serializable
 import de.stefan_oltmann.oni.model.server.upload.UploadCluster
+import kotlinx.serialization.Serializable
 
 /**
  * This is the format expected to be sent from the mod

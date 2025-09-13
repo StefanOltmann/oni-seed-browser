@@ -36,8 +36,6 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import io.github.stefanoltmann.app.generated.resources.Res
-import io.github.stefanoltmann.app.generated.resources.uiCount
 import de.stefan_oltmann.oni.model.GeyserType
 import de.stefan_oltmann.oni.model.WorldTrait
 import de.stefan_oltmann.oni.model.ZoneType
@@ -48,6 +46,8 @@ import de.stefan_oltmann.oni.model.filter.FilterItemType
 import de.stefan_oltmann.oni.model.filter.FilterItemWorldTrait
 import de.stefan_oltmann.oni.model.filter.FilterItemZoneType
 import de.stefan_oltmann.oni.model.filter.FilterQuery
+import io.github.stefanoltmann.app.generated.resources.Res
+import io.github.stefanoltmann.app.generated.resources.uiCount
 import org.jetbrains.compose.resources.stringResource
 import ui.drawableResource
 import ui.model.stringResource

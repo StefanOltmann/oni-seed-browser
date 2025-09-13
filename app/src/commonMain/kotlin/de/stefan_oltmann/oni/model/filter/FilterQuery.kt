@@ -19,12 +19,12 @@
 
 package de.stefan_oltmann.oni.model.filter
 
-import kotlinx.serialization.Serializable
 import de.stefan_oltmann.oni.model.AsteroidType
 import de.stefan_oltmann.oni.model.ClusterType
 import de.stefan_oltmann.oni.model.Dlc
 import de.stefan_oltmann.oni.model.GameModeType
 import de.stefan_oltmann.oni.model.serializer.ClusterTypePrefixSerializer
+import kotlinx.serialization.Serializable
 
 @Serializable
 data class FilterQuery(

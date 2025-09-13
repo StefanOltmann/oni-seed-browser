@@ -18,8 +18,8 @@
  */
 
 import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
 import de.stefan_oltmann.oni.model.filter.FilterQuery
+import kotlinx.serialization.json.Json
 
 private val jsonPretty = Json {
     prettyPrint = true

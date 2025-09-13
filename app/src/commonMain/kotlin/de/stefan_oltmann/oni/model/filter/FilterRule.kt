@@ -19,8 +19,8 @@
 
 package de.stefan_oltmann.oni.model.filter
 
-import kotlinx.serialization.Serializable
 import de.stefan_oltmann.oni.model.AsteroidType
+import kotlinx.serialization.Serializable
 
 @Serializable
 data class FilterRule(

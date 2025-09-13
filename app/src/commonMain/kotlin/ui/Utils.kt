@@ -30,11 +30,11 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.ColorMatrix
 import androidx.compose.ui.input.pointer.PointerEventType
 import androidx.compose.ui.input.pointer.onPointerEvent
+import de.stefan_oltmann.oni.model.GRAMS_PER_TON
+import de.stefan_oltmann.oni.model.SECONDS_PER_CYCLE
 import kotlin.math.abs
 import kotlin.math.pow
 import kotlin.math.roundToLong
-import de.stefan_oltmann.oni.model.GRAMS_PER_TON
-import de.stefan_oltmann.oni.model.SECONDS_PER_CYCLE
 
 @OptIn(ExperimentalComposeUiApi::class)
 fun Modifier.onHover(hovered: MutableState<Boolean>) = this

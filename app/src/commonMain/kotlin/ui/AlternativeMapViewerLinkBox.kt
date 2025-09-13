@@ -18,9 +18,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import de.stefan_oltmann.oni.model.AsteroidType
 import io.github.stefanoltmann.app.generated.resources.Res
 import io.github.stefanoltmann.app.generated.resources.uiShowInAlternativeViewer
-import de.stefan_oltmann.oni.model.AsteroidType
 import org.jetbrains.compose.resources.stringResource
 import ui.icons.IconExternalLink
 import ui.theme.HalfSpacer

@@ -1,5 +1,6 @@
 package ui.model
 
+import de.stefan_oltmann.oni.model.VanillaSpacePOI
 import io.github.stefanoltmann.app.generated.resources.Res
 import io.github.stefanoltmann.app.generated.resources.vanillaSpacePoiCarbonaceousAsteroid
 import io.github.stefanoltmann.app.generated.resources.vanillaSpacePoiChlorinePlanet
@@ -26,7 +27,6 @@ import io.github.stefanoltmann.app.generated.resources.vanillaSpacePoiShinyPlane
 import io.github.stefanoltmann.app.generated.resources.vanillaSpacePoiTerraPlanet
 import io.github.stefanoltmann.app.generated.resources.vanillaSpacePoiVolcanoPlanet
 import io.github.stefanoltmann.app.generated.resources.vanillaSpacePoiWormhole
-import de.stefan_oltmann.oni.model.VanillaSpacePOI
 import org.jetbrains.compose.resources.StringResource
 
 val VanillaSpacePOI.stringResource: StringResource

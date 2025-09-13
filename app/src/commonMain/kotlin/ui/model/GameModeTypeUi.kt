@@ -1,11 +1,11 @@
 package ui.model
 
+import de.stefan_oltmann.oni.model.GameModeType
 import io.github.stefanoltmann.app.generated.resources.Res
 import io.github.stefanoltmann.app.generated.resources.gameModeBaseGameStandard
 import io.github.stefanoltmann.app.generated.resources.gameModeSpacedOutClassic
 import io.github.stefanoltmann.app.generated.resources.gameModeSpacedOutSpacedOut
 import io.github.stefanoltmann.app.generated.resources.gameModeTheLab
-import de.stefan_oltmann.oni.model.GameModeType
 import org.jetbrains.compose.resources.StringResource
 
 val GameModeType.stringResource: StringResource

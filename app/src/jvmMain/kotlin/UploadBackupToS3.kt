@@ -16,6 +16,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+import de.stefan_oltmann.oni.model.Cluster
 import io.minio.ListObjectsArgs
 import io.minio.MinioClient
 import io.minio.PutObjectArgs
@@ -29,7 +30,6 @@ import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.io.decodeFromSource
-import de.stefan_oltmann.oni.model.Cluster
 
 /*
  * Work on the data export

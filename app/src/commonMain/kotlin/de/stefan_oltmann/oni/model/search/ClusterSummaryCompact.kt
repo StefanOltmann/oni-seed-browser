@@ -19,13 +19,13 @@
 
 package de.stefan_oltmann.oni.model.search
 
-import kotlinx.serialization.ExperimentalSerializationApi
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.protobuf.ProtoNumber
 import de.stefan_oltmann.oni.model.Cluster
 import de.stefan_oltmann.oni.model.Geyser
 import de.stefan_oltmann.oni.model.GeyserType
 import de.stefan_oltmann.oni.model.ZoneType
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.protobuf.ProtoNumber
 
 @Serializable
 @OptIn(ExperimentalSerializationApi::class)

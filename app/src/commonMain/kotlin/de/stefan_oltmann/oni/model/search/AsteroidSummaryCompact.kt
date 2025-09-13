@@ -19,12 +19,12 @@
 
 package de.stefan_oltmann.oni.model.search
 
+import de.stefan_oltmann.oni.model.AsteroidType
+import de.stefan_oltmann.oni.model.serializer.AsteroidTypeIdSerializer
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.protobuf.ProtoNumber
 import kotlinx.serialization.protobuf.ProtoPacked
-import de.stefan_oltmann.oni.model.AsteroidType
-import de.stefan_oltmann.oni.model.serializer.AsteroidTypeIdSerializer
 
 @Serializable
 @OptIn(ExperimentalSerializationApi::class)

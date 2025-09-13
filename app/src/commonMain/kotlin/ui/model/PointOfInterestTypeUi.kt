@@ -1,5 +1,6 @@
 package ui.model
 
+import de.stefan_oltmann.oni.model.PointOfInterestType
 import io.github.stefanoltmann.app.generated.resources.Res
 import io.github.stefanoltmann.app.generated.resources.pointOfInterestTypeAntiEntropyThermoNullifier
 import io.github.stefanoltmann.app.generated.resources.pointOfInterestTypeArtifact
@@ -19,7 +20,6 @@ import io.github.stefanoltmann.app.generated.resources.pointOfInterestTypeTelepo
 import io.github.stefanoltmann.app.generated.resources.pointOfInterestTypeTeleporterTransmitter
 import io.github.stefanoltmann.app.generated.resources.pointOfInterestTypeTemporalTearOpener
 import io.github.stefanoltmann.app.generated.resources.pointOfInterestTypeWreckedSatellite
-import de.stefan_oltmann.oni.model.PointOfInterestType
 import org.jetbrains.compose.resources.StringResource
 
 val PointOfInterestType.stringResource: StringResource

@@ -1,5 +1,6 @@
 package ui.model
 
+import de.stefan_oltmann.oni.model.SpacedOutSpacePOI
 import io.github.stefanoltmann.app.generated.resources.Res
 import io.github.stefanoltmann.app.generated.resources.artifactSpacePoiGravitasSpaceStation1
 import io.github.stefanoltmann.app.generated.resources.artifactSpacePoiGravitasSpaceStation2
@@ -111,7 +112,6 @@ import io.github.stefanoltmann.app.generated.resources.harvestableSpacePoiSandyO
 import io.github.stefanoltmann.app.generated.resources.harvestableSpacePoiSatelliteField
 import io.github.stefanoltmann.app.generated.resources.harvestableSpacePoiSwampyOreField
 import io.github.stefanoltmann.app.generated.resources.temporalTear
-import de.stefan_oltmann.oni.model.SpacedOutSpacePOI
 import org.jetbrains.compose.resources.StringResource
 
 val SpacedOutSpacePOI.stringResource: StringResource

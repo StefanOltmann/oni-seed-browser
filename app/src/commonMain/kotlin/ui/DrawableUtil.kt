@@ -20,6 +20,15 @@
 package ui
 
 import androidx.compose.runtime.Composable
+import de.stefan_oltmann.oni.model.AsteroidType
+import de.stefan_oltmann.oni.model.ClusterType
+import de.stefan_oltmann.oni.model.GameModeType
+import de.stefan_oltmann.oni.model.GeyserType
+import de.stefan_oltmann.oni.model.PointOfInterestType
+import de.stefan_oltmann.oni.model.SpacedOutSpacePOI
+import de.stefan_oltmann.oni.model.VanillaSpacePOI
+import de.stefan_oltmann.oni.model.WorldTrait
+import de.stefan_oltmann.oni.model.ZoneType
 import io.github.stefanoltmann.app.generated.resources.Res
 import io.github.stefanoltmann.app.generated.resources.asteroid_blasted_ceres
 import io.github.stefanoltmann.app.generated.resources.asteroid_blasted_ceres_spaced_out
@@ -238,15 +247,6 @@ import io.github.stefanoltmann.app.generated.resources.worldtrait_radioactive_cr
 import io.github.stefanoltmann.app.generated.resources.worldtrait_slime_splats
 import io.github.stefanoltmann.app.generated.resources.worldtrait_subsurface_ocean
 import io.github.stefanoltmann.app.generated.resources.worldtrait_volcanoes
-import de.stefan_oltmann.oni.model.AsteroidType
-import de.stefan_oltmann.oni.model.ClusterType
-import de.stefan_oltmann.oni.model.GameModeType
-import de.stefan_oltmann.oni.model.GeyserType
-import de.stefan_oltmann.oni.model.PointOfInterestType
-import de.stefan_oltmann.oni.model.SpacedOutSpacePOI
-import de.stefan_oltmann.oni.model.VanillaSpacePOI
-import de.stefan_oltmann.oni.model.WorldTrait
-import de.stefan_oltmann.oni.model.ZoneType
 import org.jetbrains.compose.resources.DrawableResource
 
 val WorldTrait.drawableResource: DrawableResource

@@ -41,6 +41,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import de.stefan_oltmann.oni.model.Geyser
 import io.github.stefanoltmann.app.generated.resources.Res
 import io.github.stefanoltmann.app.generated.resources.uiGeyserDetailActiveDetails
 import io.github.stefanoltmann.app.generated.resources.uiGeyserDetailCycles
@@ -48,7 +49,6 @@ import io.github.stefanoltmann.app.generated.resources.uiGeyserDetailEmitDetails
 import io.github.stefanoltmann.app.generated.resources.uiGeyserDetailGramPerSecond
 import io.github.stefanoltmann.app.generated.resources.uiGeyserDetailOnAverage
 import io.github.stefanoltmann.app.generated.resources.uiGeyserDetailSecondsShort
-import de.stefan_oltmann.oni.model.Geyser
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import ui.model.stringResource

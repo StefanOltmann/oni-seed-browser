@@ -37,9 +37,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import de.stefan_oltmann.oni.model.filter.FilterQuery
 import io.github.stefanoltmann.app.generated.resources.Res
 import io.github.stefanoltmann.app.generated.resources.uiRemix
-import de.stefan_oltmann.oni.model.filter.FilterQuery
 import org.jetbrains.compose.resources.stringResource
 import ui.theme.DefaultSpacer
 import ui.theme.defaultRoundedCornerShape

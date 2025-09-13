@@ -1,5 +1,6 @@
 package ui.model
 
+import de.stefan_oltmann.oni.model.ClusterType
 import io.github.stefanoltmann.app.generated.resources.Res
 import io.github.stefanoltmann.app.generated.resources.clusterTypeBaseArboria
 import io.github.stefanoltmann.app.generated.resources.clusterTypeBaseAridio
@@ -39,7 +40,6 @@ import io.github.stefanoltmann.app.generated.resources.clusterTypeDlcTheBadlands
 import io.github.stefanoltmann.app.generated.resources.clusterTypeDlcTheDesolandsMoonlet
 import io.github.stefanoltmann.app.generated.resources.clusterTypeDlcVerdante
 import io.github.stefanoltmann.app.generated.resources.clusterTypeDlcVolcanea
-import de.stefan_oltmann.oni.model.ClusterType
 import org.jetbrains.compose.resources.StringResource
 
 val ClusterType.stringResource: StringResource

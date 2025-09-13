@@ -1,9 +1,5 @@
 package de.stefan_oltmann.oni.model.search
 
-import kotlinx.serialization.ExperimentalSerializationApi
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.Transient
-import kotlinx.serialization.protobuf.ProtoNumber
 import de.stefan_oltmann.oni.model.Cluster
 import de.stefan_oltmann.oni.model.ClusterType
 import de.stefan_oltmann.oni.model.GeyserType
@@ -11,6 +7,10 @@ import de.stefan_oltmann.oni.model.WorldTrait
 import de.stefan_oltmann.oni.model.ZoneType
 import de.stefan_oltmann.oni.model.filter.FilterCondition
 import de.stefan_oltmann.oni.model.filter.FilterQuery
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
+import kotlinx.serialization.protobuf.ProtoNumber
 
 @OptIn(ExperimentalSerializationApi::class)
 @Serializable

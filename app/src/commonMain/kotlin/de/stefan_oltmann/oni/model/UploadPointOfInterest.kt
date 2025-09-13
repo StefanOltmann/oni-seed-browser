@@ -19,8 +19,8 @@
 
 package de.stefan_oltmann.oni.model.server.upload
 
-import kotlinx.serialization.Serializable
 import de.stefan_oltmann.oni.model.PointOfInterestType
+import kotlinx.serialization.Serializable
 
 @Serializable
 data class UploadPointOfInterest(

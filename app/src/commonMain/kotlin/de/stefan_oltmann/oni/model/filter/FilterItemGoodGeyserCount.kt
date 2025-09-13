@@ -19,10 +19,10 @@
 
 package de.stefan_oltmann.oni.model.filter
 
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.Transient
 import de.stefan_oltmann.oni.model.GeyserType
 import de.stefan_oltmann.oni.model.serializer.GeyserTypeStringSerializer
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 @Serializable
 data class FilterItemGoodGeyserCount(

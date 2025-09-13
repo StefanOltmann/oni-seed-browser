@@ -20,6 +20,10 @@
 package service
 
 import AppStorage
+import de.stefan_oltmann.oni.model.Cluster
+import de.stefan_oltmann.oni.model.Contributor
+import de.stefan_oltmann.oni.model.filter.FilterQuery
+import de.stefan_oltmann.oni.model.search.SearchIndex
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.plugins.compression.ContentEncoding
@@ -45,10 +49,6 @@ import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.decodeFromByteArray
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.protobuf.ProtoBuf
-import de.stefan_oltmann.oni.model.Cluster
-import de.stefan_oltmann.oni.model.Contributor
-import de.stefan_oltmann.oni.model.filter.FilterQuery
-import de.stefan_oltmann.oni.model.search.SearchIndex
 
 const val FIND_URL = "https://oni-data.stefanoltmann.de"
 

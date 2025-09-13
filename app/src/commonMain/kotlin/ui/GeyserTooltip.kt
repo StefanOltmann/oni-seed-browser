@@ -47,11 +47,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
+import de.stefan_oltmann.oni.model.GeyserType
 import io.github.stefanoltmann.app.generated.resources.Res
 import io.github.stefanoltmann.app.generated.resources.uiGeyserDetailGramPerSecond
 import io.github.stefanoltmann.app.generated.resources.uiGeyserDetailTonsPerCycle
 import io.github.stefanoltmann.app.generated.resources.uiStorageTankForDormancy
-import de.stefan_oltmann.oni.model.GeyserType
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import ui.model.stringResource

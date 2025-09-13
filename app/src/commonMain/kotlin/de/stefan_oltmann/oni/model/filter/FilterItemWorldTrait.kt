@@ -19,9 +19,9 @@
 
 package de.stefan_oltmann.oni.model.filter
 
+import de.stefan_oltmann.oni.model.WorldTrait
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
-import de.stefan_oltmann.oni.model.WorldTrait
 
 @Serializable
 data class FilterItemWorldTrait(

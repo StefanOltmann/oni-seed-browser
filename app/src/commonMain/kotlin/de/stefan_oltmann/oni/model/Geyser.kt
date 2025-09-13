@@ -19,10 +19,10 @@
 
 package de.stefan_oltmann.oni.model
 
+import de.stefan_oltmann.oni.model.serializer.GeyserTypeSerializer
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.protobuf.ProtoNumber
-import de.stefan_oltmann.oni.model.serializer.GeyserTypeSerializer
 
 @Suppress("UNUSED")
 @Serializable

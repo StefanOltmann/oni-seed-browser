@@ -46,12 +46,12 @@ import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import de.stefan_oltmann.oni.model.filter.FilterRule
 import io.github.stefanoltmann.app.generated.resources.Res
 import io.github.stefanoltmann.app.generated.resources.uiHas
 import io.github.stefanoltmann.app.generated.resources.uiHasNot
 import io.github.stefanoltmann.app.generated.resources.uiItemDescriptionCount
 import io.github.stefanoltmann.app.generated.resources.uiItemDescriptionGoodCount
-import de.stefan_oltmann.oni.model.filter.FilterRule
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import ui.drawableResource
