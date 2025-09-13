@@ -24,14 +24,11 @@ import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.window.ComposeViewport
 import kotlinx.browser.document
 import kotlinx.browser.window
-import kotlinx.coroutines.delay
-import js.date.Date
 import org.w3c.dom.HTMLElement
 import service.DefaultWebClient
 import ui.App
 import util.getQueryParameters
 import util.getValidSteamHash
-import kotlin.js.JsAny
 
 /*
  * Create cache clear message object at top level
@@ -59,21 +56,21 @@ fun main() {
             println("Latest app version: $latestAppVersion")
             println("Current app version: $APP_VERSION")
 
-            // If the latest app version and APP_VERSION do not match, perform a browser reload
+            /* If the latest app version and APP_VERSION do not match, perform a browser reload */
             if (latestAppVersion != null && latestAppVersion != APP_VERSION) {
 
                 println("Version mismatch detected. Reloading page to get latest version...")
 
-                // Clear service worker cache to ensure fresh files
+                /* Clear service worker cache to ensure fresh files */
                 if (window.navigator.serviceWorker.controller != null) {
 
                     println("Clearing service worker cache...")
 
-                    // Send message to service worker to clear cache
+                    /* Send message to service worker to clear cache */
                     window.navigator.serviceWorker.controller!!.postMessage(clearCacheMessage)
                 }
 
-                // Force reload from server (bypassing cache)
+                /* Force reload from server (bypassing cache) */
                 window.location.reload()
             }
         }
