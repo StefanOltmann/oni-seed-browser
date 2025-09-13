@@ -198,7 +198,9 @@ if (buildTarget != "desktop") {
         outputs.file(outputFile)
 
         doLast {
+
             val serviceWorkerContent = inputFile.get().asFile.readText()
+
             val processedContent = serviceWorkerContent.replace("VERSION_PLACEHOLDER", project.version.toString())
 
             val outputFileObj = outputFile.get().asFile
@@ -208,7 +210,7 @@ if (buildTarget != "desktop") {
     }
 
     tasks.named("wasmJsBrowserDistribution") {
-        dependsOn(tasks.named("processServiceWorker"))
+        finalizedBy(tasks.named("processServiceWorker"))
         finalizedBy(tasks.named("writeVersionFileToWasm"))
     }
 }
