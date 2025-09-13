@@ -25,6 +25,7 @@ import androidx.compose.ui.window.ComposeViewport
 import kotlinx.browser.document
 import kotlinx.browser.window
 import kotlinx.coroutines.delay
+import js.date.Date
 import org.w3c.dom.HTMLElement
 import service.DefaultWebClient
 import ui.App
@@ -63,7 +64,11 @@ fun main() {
 
                     delay(1000)
 
-                    window.location.reload()
+
+                    /* Force a hard refresh that bypasses cache */
+                    val timestamp = Date.now().toLong()
+
+                    window.location.replace(window.location.href.split('?')[0] + "?v=" + timestamp)
 
                 } else {
 
