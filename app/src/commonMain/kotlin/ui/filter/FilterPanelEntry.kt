@@ -182,8 +182,8 @@ fun FilterPanelEntry(
                     DefaultSpacer()
 
                     val value = when {
-                        rule.geyserCount != null -> rule.geyserCount.count
-                        rule.goodGeyserCount != null -> rule.goodGeyserCount.count
+                        rule.geyserCount != null -> rule.geyserCount!!.count
+                        rule.goodGeyserCount != null -> rule.goodGeyserCount!!.count
                         else -> 0
                     }
 
@@ -234,17 +234,17 @@ private fun getItemDescription(rule: FilterRule): String =
 
         rule.geyserCount != null ->
             stringResource(Res.string.uiItemDescriptionCount) + ": " +
-                stringResource(rule.geyserCount.geyser.stringResource)
+                stringResource(rule.geyserCount!!.geyser.stringResource)
 
         rule.goodGeyserCount != null ->
             stringResource(Res.string.uiItemDescriptionGoodCount) + ": " +
-                stringResource(rule.goodGeyserCount.geyser.stringResource)
+                stringResource(rule.goodGeyserCount!!.geyser.stringResource)
 
         rule.worldTrait != null ->
-            stringResource(rule.worldTrait.worldTrait.stringResource)
+            stringResource(rule.worldTrait!!.worldTrait.stringResource)
 
         rule.zoneType != null ->
-            stringResource(rule.zoneType.zoneType.stringResource)
+            stringResource(rule.zoneType!!.zoneType.stringResource)
 
         else -> "-/-"
     }
@@ -264,16 +264,16 @@ private fun VerticalSeparator() {
 private fun getConditionDescription(rule: FilterRule): String =
     when {
 
-        rule.geyserCount != null -> rule.geyserCount.condition.displayString
+        rule.geyserCount != null -> rule.geyserCount!!.condition.displayString
 
-        rule.goodGeyserCount != null -> rule.goodGeyserCount.condition.displayString
+        rule.goodGeyserCount != null -> rule.goodGeyserCount!!.condition.displayString
 
-        rule.worldTrait != null -> if (rule.worldTrait.has)
+        rule.worldTrait != null -> if (rule.worldTrait!!.has)
             stringResource(Res.string.uiHas)
         else
             stringResource(Res.string.uiHasNot)
 
-        rule.zoneType != null -> if (rule.zoneType.has)
+        rule.zoneType != null -> if (rule.zoneType!!.has)
             stringResource(Res.string.uiHas)
         else
             stringResource(Res.string.uiHasNot)

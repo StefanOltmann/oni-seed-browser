@@ -33,7 +33,7 @@ import ui.App
 import util.getQueryParameters
 import util.getValidSteamHash
 
-@OptIn(ExperimentalComposeUiApi::class)
+@OptIn(ExperimentalComposeUiApi::class, ExperimentalWasmJsInterop::class)
 fun main() {
 
     ComposeViewport(document.body!!) {

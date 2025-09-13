@@ -71,6 +71,8 @@ kotlin {
 
         commonMain.dependencies {
 
+            implementation(libs.oniSeedBrowserModel)
+
             /* Compose UI */
             implementation(compose.runtime)
             implementation(compose.foundation)
