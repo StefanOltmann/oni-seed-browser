@@ -29,6 +29,7 @@ import service.DefaultWebClient
 import ui.App
 import util.getQueryParameters
 import util.getValidSteamHash
+import APP_VERSION
 
 @OptIn(ExperimentalComposeUiApi::class, ExperimentalWasmJsInterop::class)
 fun main() {
@@ -49,6 +50,14 @@ fun main() {
             val latestAppVersion = DefaultWebClient.getLatestAppVersion()
 
             println("Latest app version: $latestAppVersion")
+
+            /* If the latest app version and APP_VERSION do not match, perform a browser reload */
+            if (latestAppVersion != APP_VERSION) {
+
+                println("Reloading browser to update app version...")
+
+                window.location.reload()
+            }
         }
 
         /*
