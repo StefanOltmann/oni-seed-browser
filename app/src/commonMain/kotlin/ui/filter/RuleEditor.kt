@@ -41,7 +41,7 @@ import io.github.stefanoltmann.app.generated.resources.Res
 import io.github.stefanoltmann.app.generated.resources.uiAnd
 import io.github.stefanoltmann.app.generated.resources.uiOr
 import io.github.stefanoltmann.app.generated.resources.uiSelectRule
-import model.filter.FilterQuery
+import de.stefan_oltmann.oni.model.filter.FilterQuery
 import org.jetbrains.compose.resources.stringResource
 import ui.DashedHorizontalSeparator
 import ui.theme.FillSpacer

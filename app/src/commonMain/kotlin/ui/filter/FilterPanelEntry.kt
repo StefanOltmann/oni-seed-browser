@@ -51,7 +51,7 @@ import io.github.stefanoltmann.app.generated.resources.uiHas
 import io.github.stefanoltmann.app.generated.resources.uiHasNot
 import io.github.stefanoltmann.app.generated.resources.uiItemDescriptionCount
 import io.github.stefanoltmann.app.generated.resources.uiItemDescriptionGoodCount
-import model.filter.FilterRule
+import de.stefan_oltmann.oni.model.filter.FilterRule
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import ui.drawableResource

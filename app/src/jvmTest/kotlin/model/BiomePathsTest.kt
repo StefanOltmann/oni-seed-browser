@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package model
+package de.stefan_oltmann.oni.model
 
 import kotlin.test.Test
 import kotlin.test.assertEquals

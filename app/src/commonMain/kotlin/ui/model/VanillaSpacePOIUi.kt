@@ -26,7 +26,7 @@ import io.github.stefanoltmann.app.generated.resources.vanillaSpacePoiShinyPlane
 import io.github.stefanoltmann.app.generated.resources.vanillaSpacePoiTerraPlanet
 import io.github.stefanoltmann.app.generated.resources.vanillaSpacePoiVolcanoPlanet
 import io.github.stefanoltmann.app.generated.resources.vanillaSpacePoiWormhole
-import model.VanillaSpacePOI
+import de.stefan_oltmann.oni.model.VanillaSpacePOI
 import org.jetbrains.compose.resources.StringResource
 
 val VanillaSpacePOI.stringResource: StringResource

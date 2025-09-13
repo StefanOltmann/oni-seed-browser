@@ -35,8 +35,8 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
-import model.Asteroid
-import model.Cluster
+import de.stefan_oltmann.oni.model.Asteroid
+import de.stefan_oltmann.oni.model.Cluster
 import service.DefaultWebClient
 import ui.theme.defaultSpacing
 import ui.theme.doubleSpacing

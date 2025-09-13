@@ -39,7 +39,7 @@ import io.github.stefanoltmann.app.generated.resources.clusterTypeDlcTheBadlands
 import io.github.stefanoltmann.app.generated.resources.clusterTypeDlcTheDesolandsMoonlet
 import io.github.stefanoltmann.app.generated.resources.clusterTypeDlcVerdante
 import io.github.stefanoltmann.app.generated.resources.clusterTypeDlcVolcanea
-import model.ClusterType
+import de.stefan_oltmann.oni.model.ClusterType
 import org.jetbrains.compose.resources.StringResource
 
 val ClusterType.stringResource: StringResource

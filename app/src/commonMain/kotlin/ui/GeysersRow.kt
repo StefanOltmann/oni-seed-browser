@@ -42,8 +42,8 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.min
 import androidx.compose.ui.unit.times
-import model.Geyser
-import model.GeyserType
+import de.stefan_oltmann.oni.model.Geyser
+import de.stefan_oltmann.oni.model.GeyserType
 import org.jetbrains.compose.resources.painterResource
 import ui.theme.FillSpacer
 import ui.theme.anthracite

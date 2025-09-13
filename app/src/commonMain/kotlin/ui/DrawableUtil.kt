@@ -238,15 +238,15 @@ import io.github.stefanoltmann.app.generated.resources.worldtrait_radioactive_cr
 import io.github.stefanoltmann.app.generated.resources.worldtrait_slime_splats
 import io.github.stefanoltmann.app.generated.resources.worldtrait_subsurface_ocean
 import io.github.stefanoltmann.app.generated.resources.worldtrait_volcanoes
-import model.AsteroidType
-import model.ClusterType
-import model.GameModeType
-import model.GeyserType
-import model.PointOfInterestType
-import model.SpacedOutSpacePOI
-import model.VanillaSpacePOI
-import model.WorldTrait
-import model.ZoneType
+import de.stefan_oltmann.oni.model.AsteroidType
+import de.stefan_oltmann.oni.model.ClusterType
+import de.stefan_oltmann.oni.model.GameModeType
+import de.stefan_oltmann.oni.model.GeyserType
+import de.stefan_oltmann.oni.model.PointOfInterestType
+import de.stefan_oltmann.oni.model.SpacedOutSpacePOI
+import de.stefan_oltmann.oni.model.VanillaSpacePOI
+import de.stefan_oltmann.oni.model.WorldTrait
+import de.stefan_oltmann.oni.model.ZoneType
 import org.jetbrains.compose.resources.DrawableResource
 
 val WorldTrait.drawableResource: DrawableResource

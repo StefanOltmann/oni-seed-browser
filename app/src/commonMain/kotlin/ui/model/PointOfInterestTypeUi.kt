@@ -19,7 +19,7 @@ import io.github.stefanoltmann.app.generated.resources.pointOfInterestTypeTelepo
 import io.github.stefanoltmann.app.generated.resources.pointOfInterestTypeTeleporterTransmitter
 import io.github.stefanoltmann.app.generated.resources.pointOfInterestTypeTemporalTearOpener
 import io.github.stefanoltmann.app.generated.resources.pointOfInterestTypeWreckedSatellite
-import model.PointOfInterestType
+import de.stefan_oltmann.oni.model.PointOfInterestType
 import org.jetbrains.compose.resources.StringResource
 
 val PointOfInterestType.stringResource: StringResource

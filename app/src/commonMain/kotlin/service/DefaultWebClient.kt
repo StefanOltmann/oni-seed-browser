@@ -45,10 +45,10 @@ import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.decodeFromByteArray
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.protobuf.ProtoBuf
-import model.Cluster
-import model.Contributor
-import model.filter.FilterQuery
-import model.search.SearchIndex
+import de.stefan_oltmann.oni.model.Cluster
+import de.stefan_oltmann.oni.model.Contributor
+import de.stefan_oltmann.oni.model.filter.FilterQuery
+import de.stefan_oltmann.oni.model.search.SearchIndex
 
 const val FIND_URL = "https://oni-data.stefanoltmann.de"
 

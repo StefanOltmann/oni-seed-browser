@@ -29,7 +29,7 @@ import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.io.decodeFromSource
-import model.Cluster
+import de.stefan_oltmann.oni.model.Cluster
 
 /*
  * Work on the data export

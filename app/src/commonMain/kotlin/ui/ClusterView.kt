@@ -54,8 +54,8 @@ import io.github.stefanoltmann.app.generated.resources.Res
 import io.github.stefanoltmann.app.generated.resources.uiCopiedToClipboard
 import kotlin.math.max
 import kotlinx.coroutines.delay
-import model.Asteroid
-import model.Cluster
+import de.stefan_oltmann.oni.model.Asteroid
+import de.stefan_oltmann.oni.model.Cluster
 import org.jetbrains.compose.resources.stringResource
 import ui.icons.ContentCopy
 import ui.icons.IconAuthenticated

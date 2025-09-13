@@ -50,8 +50,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import io.github.stefanoltmann.app.generated.resources.Res
 import io.github.stefanoltmann.app.generated.resources.background_space
-import model.Cluster
-import model.StarMapEntryVanilla
+import de.stefan_oltmann.oni.model.Cluster
+import de.stefan_oltmann.oni.model.StarMapEntryVanilla
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import ui.model.stringResource

@@ -51,7 +51,7 @@ import io.github.stefanoltmann.app.generated.resources.Res
 import io.github.stefanoltmann.app.generated.resources.uiGeyserDetailGramPerSecond
 import io.github.stefanoltmann.app.generated.resources.uiGeyserDetailTonsPerCycle
 import io.github.stefanoltmann.app.generated.resources.uiStorageTankForDormancy
-import model.GeyserType
+import de.stefan_oltmann.oni.model.GeyserType
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import ui.model.stringResource

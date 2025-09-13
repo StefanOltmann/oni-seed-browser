@@ -48,7 +48,7 @@ import io.github.stefanoltmann.app.generated.resources.uiGeyserDetailEmitDetails
 import io.github.stefanoltmann.app.generated.resources.uiGeyserDetailGramPerSecond
 import io.github.stefanoltmann.app.generated.resources.uiGeyserDetailOnAverage
 import io.github.stefanoltmann.app.generated.resources.uiGeyserDetailSecondsShort
-import model.Geyser
+import de.stefan_oltmann.oni.model.Geyser
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import ui.model.stringResource

@@ -20,7 +20,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import io.github.stefanoltmann.app.generated.resources.Res
 import io.github.stefanoltmann.app.generated.resources.uiShowInAlternativeViewer
-import model.AsteroidType
+import de.stefan_oltmann.oni.model.AsteroidType
 import org.jetbrains.compose.resources.stringResource
 import ui.icons.IconExternalLink
 import ui.theme.HalfSpacer

@@ -33,8 +33,8 @@ import androidx.compose.ui.input.pointer.onPointerEvent
 import kotlin.math.abs
 import kotlin.math.pow
 import kotlin.math.roundToLong
-import model.GRAMS_PER_TON
-import model.SECONDS_PER_CYCLE
+import de.stefan_oltmann.oni.model.GRAMS_PER_TON
+import de.stefan_oltmann.oni.model.SECONDS_PER_CYCLE
 
 @OptIn(ExperimentalComposeUiApi::class)
 fun Modifier.onHover(hovered: MutableState<Boolean>) = this

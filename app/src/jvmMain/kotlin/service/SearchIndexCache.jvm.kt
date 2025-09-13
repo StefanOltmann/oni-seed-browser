@@ -10,8 +10,8 @@ import kotlinx.coroutines.withContext
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.decodeFromByteArray
 import kotlinx.serialization.protobuf.ProtoBuf
-import model.ClusterType
-import model.search.SearchIndex
+import de.stefan_oltmann.oni.model.ClusterType
+import de.stefan_oltmann.oni.model.search.SearchIndex
 
 private val httpClient = HttpClient()
 

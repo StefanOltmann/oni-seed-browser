@@ -53,9 +53,9 @@ import io.github.stefanoltmann.app.generated.resources.uiTitle
 import io.github.stefanoltmann.app.generated.resources.uiUsernameLabel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
-import model.Asteroid
-import model.Cluster
-import model.filter.FilterQuery
+import de.stefan_oltmann.oni.model.Asteroid
+import de.stefan_oltmann.oni.model.Cluster
+import de.stefan_oltmann.oni.model.filter.FilterQuery
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import service.DefaultWebClient

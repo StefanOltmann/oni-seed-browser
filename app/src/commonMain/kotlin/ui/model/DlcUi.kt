@@ -6,7 +6,7 @@ import io.github.stefanoltmann.app.generated.resources.logo_frosty_planet_banner
 import io.github.stefanoltmann.app.generated.resources.logo_oni
 import io.github.stefanoltmann.app.generated.resources.logo_prehistoric_planet_banner
 import io.github.stefanoltmann.app.generated.resources.logo_spaced_out
-import model.Dlc
+import de.stefan_oltmann.oni.model.Dlc
 import org.jetbrains.compose.resources.DrawableResource
 
 val Dlc.icon: DrawableResource

@@ -31,9 +31,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.unit.dp
-import model.Dlc
-import model.GameModeType
-import model.filter.FilterQuery
+import de.stefan_oltmann.oni.model.Dlc
+import de.stefan_oltmann.oni.model.GameModeType
+import de.stefan_oltmann.oni.model.filter.FilterQuery
 import org.jetbrains.compose.resources.painterResource
 import ui.grayScaleFilter
 import ui.logoIconHeight

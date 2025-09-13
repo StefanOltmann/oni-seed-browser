@@ -19,9 +19,9 @@
 
 package service
 
-import model.Cluster
-import model.Contributor
-import model.filter.FilterQuery
+import de.stefan_oltmann.oni.model.Cluster
+import de.stefan_oltmann.oni.model.Contributor
+import de.stefan_oltmann.oni.model.filter.FilterQuery
 
 interface WebClient {
 

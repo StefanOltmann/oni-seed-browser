@@ -111,7 +111,7 @@ import io.github.stefanoltmann.app.generated.resources.harvestableSpacePoiSandyO
 import io.github.stefanoltmann.app.generated.resources.harvestableSpacePoiSatelliteField
 import io.github.stefanoltmann.app.generated.resources.harvestableSpacePoiSwampyOreField
 import io.github.stefanoltmann.app.generated.resources.temporalTear
-import model.SpacedOutSpacePOI
+import de.stefan_oltmann.oni.model.SpacedOutSpacePOI
 import org.jetbrains.compose.resources.StringResource
 
 val SpacedOutSpacePOI.stringResource: StringResource

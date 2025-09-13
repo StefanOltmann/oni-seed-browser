@@ -72,11 +72,11 @@ import io.github.stefanoltmann.app.generated.resources.uiBiomeDetails
 import io.github.stefanoltmann.app.generated.resources.uiGeyserDetails
 import kotlin.math.min
 import kotlinx.coroutines.launch
-import model.Asteroid
-import model.BiomePaths
-import model.Geyser
-import model.GeyserType
-import model.ZoneType
+import de.stefan_oltmann.oni.model.Asteroid
+import de.stefan_oltmann.oni.model.BiomePaths
+import de.stefan_oltmann.oni.model.Geyser
+import de.stefan_oltmann.oni.model.GeyserType
+import de.stefan_oltmann.oni.model.ZoneType
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import ui.model.color
