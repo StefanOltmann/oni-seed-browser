@@ -16,6 +16,27 @@ const ASSETS_TO_CACHE = [
 ];
 
 /*
+ * Message handler for cache management
+ */
+self.addEventListener('message', (event) => {
+    if (event.data && event.data.type === 'CLEAR_CACHE') {
+        console.log('Received cache clear request');
+
+        // Clear all caches
+        caches.keys().then((cacheNames) => {
+            return Promise.all(
+                cacheNames.map((cacheName) => {
+                    console.log('Deleting cache:', cacheName);
+                    return caches.delete(cacheName);
+                })
+            );
+        }).then(() => {
+            console.log('All caches cleared');
+        });
+    }
+});
+
+/*
  * Install event - cache all static assets
  */
 self.addEventListener('install', (event) => {
@@ -74,7 +95,36 @@ self.addEventListener('fetch', (event) => {
     }
 
     /*
-     * For non-navigation requests, use cache-first strategy
+     * Special handling for WASM files - use network-first strategy
+     * to ensure we always get the latest version when available
+     */
+    if (event.request.url.endsWith('.wasm')) {
+        event.respondWith(
+            fetch(event.request.clone())
+                .then((response) => {
+                    if (response && response.status === 200) {
+                        // Cache the new WASM file
+                        const responseToCache = response.clone();
+                        caches.open(CACHE_NAME)
+                            .then((cache) => {
+                                cache.put(event.request, responseToCache);
+                            });
+                        return response;
+                    }
+                    // If network fails, try cache
+                    return caches.match(event.request);
+                })
+                .catch(() => {
+                    // Network failed, try cache
+                    console.log('Network failed for WASM file, trying cache:', event.request.url);
+                    return caches.match(event.request);
+                })
+        );
+        return;
+    }
+
+    /*
+     * For non-navigation, non-WASM requests, use cache-first strategy
      */
     event.respondWith(
         caches.match(event.request)

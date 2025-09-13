@@ -32,6 +32,9 @@
 
     const unhandledError = (event, error) => {
 
+        console.error('Unhandled error:', error);
+
+        // Handle WebAssembly compile errors
         if (error instanceof WebAssembly.CompileError) {
 
             document.getElementById("warning").style.display = "initial";
@@ -40,6 +43,38 @@
             const webpackOverlay = document.getElementById("webpack-dev-server-client-overlay");
             if (webpackOverlay != null)
                 webpackOverlay.style.display = "none";
+        }
+
+        // Handle WASM loading errors (404, MIME type issues)
+        if (error instanceof TypeError && error.message.includes('unsupported MIME type')) {
+
+            console.error('WASM MIME type error detected - attempting page refresh...');
+
+            // Clear any cached service worker and reload
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.getRegistrations().then(registrations => {
+                    Promise.all(registrations.map(registration => registration.unregister()))
+                        .then(() => {
+                            console.log('Service workers cleared, reloading...');
+                            window.location.reload();
+                        });
+                });
+            } else {
+                // Fallback: hard refresh
+                window.location.reload();
+            }
+        }
+
+        // Handle fetch errors for WASM files
+        if (error.message && error.message.includes('.wasm')) {
+
+            console.error('WASM file loading error detected:', error.message);
+
+            // Try to reload the page to get fresh files
+            setTimeout(() => {
+                console.log('Attempting page reload due to WASM loading error...');
+                window.location.reload();
+            }, 2000);
         }
     }
 

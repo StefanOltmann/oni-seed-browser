@@ -31,8 +31,14 @@ import service.DefaultWebClient
 import ui.App
 import util.getQueryParameters
 import util.getValidSteamHash
+import kotlin.js.JsAny
 
-@OptIn(ExperimentalComposeUiApi::class, ExperimentalWasmJsInterop::class)
+/*
+ * Create cache clear message object at top level
+ */
+private val clearCacheMessage: JsAny = js("({ type: 'CLEAR_CACHE' })")
+
+@OptIn(ExperimentalComposeUiApi::class)
 fun main() {
 
     ComposeViewport(document.body!!) {
@@ -51,29 +57,24 @@ fun main() {
             val latestAppVersion = DefaultWebClient.getLatestAppVersion()
 
             println("Latest app version: $latestAppVersion")
+            println("Current app version: $APP_VERSION")
 
-            /* If the latest app version and APP_VERSION do not match, perform a browser reload */
-            if (latestAppVersion != APP_VERSION) {
+            // If the latest app version and APP_VERSION do not match, perform a browser reload
+            if (latestAppVersion != null && latestAppVersion != APP_VERSION) {
 
-                /* Don't reload in development / localhost environment */
-                val isLocalhost = document.domain == "localhost" || document.domain == "127.0.0.1"
+                println("Version mismatch detected. Reloading page to get latest version...")
 
-                if (!isLocalhost) {
+                // Clear service worker cache to ensure fresh files
+                if (window.navigator.serviceWorker.controller != null) {
 
-                    println("Reloading browser to update app version...")
+                    println("Clearing service worker cache...")
 
-                    delay(1000)
-
-
-                    /* Force a hard refresh that bypasses cache */
-                    val timestamp = Date.now().toLong()
-
-                    window.location.replace(window.location.href.split('?')[0] + "?v=" + timestamp)
-
-                } else {
-
-                    println("Version mismatch detected but skipping reload in development environment")
+                    // Send message to service worker to clear cache
+                    window.navigator.serviceWorker.controller!!.postMessage(clearCacheMessage)
                 }
+
+                // Force reload from server (bypassing cache)
+                window.location.reload()
             }
         }
 

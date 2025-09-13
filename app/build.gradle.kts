@@ -209,9 +209,42 @@ if (buildTarget != "desktop") {
         }
     }
 
+    tasks.register("createHeadersFile") {
+
+        description = "Creates a _headers file for Cloudflare Pages to serve WASM files with correct MIME type."
+
+        val outputFile = layout.buildDirectory.file("dist/wasmJs/productionExecutable/_headers")
+        outputs.file(outputFile)
+
+        doLast {
+            val headersContent = """
+                /*.wasm
+                  Content-Type: application/wasm
+                  Cache-Control: public, max-age=31536000, immutable
+
+                /*.js
+                  Cache-Control: public, max-age=31536000, immutable
+
+                /*.css
+                  Cache-Control: public, max-age=31536000, immutable
+
+                /index.html
+                  Cache-Control: public, max-age=300
+
+                /service-worker.js
+                  Cache-Control: public, max-age=0, must-revalidate
+            """.trimIndent()
+
+            val outputFileObj = outputFile.get().asFile
+            outputFileObj.parentFile.mkdirs()
+            outputFileObj.writeText(headersContent)
+        }
+    }
+
     tasks.named("wasmJsBrowserDistribution") {
         finalizedBy(tasks.named("processServiceWorker"))
         finalizedBy(tasks.named("writeVersionFileToWasm"))
+        finalizedBy(tasks.named("createHeadersFile"))
     }
 }
 // endregion
