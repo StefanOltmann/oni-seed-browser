@@ -70,7 +70,7 @@ fun SpacedOutStarMapView(
     writeToClipboard: (String) -> Unit
 ) {
 
-    if (cluster.starMapEntriesSpacedOut == null)
+    if (cluster.starMapEntriesSpacedOut.isEmpty())
         return
 
     Box(

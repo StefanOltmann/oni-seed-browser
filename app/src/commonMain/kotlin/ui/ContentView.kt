@@ -234,7 +234,7 @@ fun ContentView(
 
             } else {
 
-                clusters.value = emptyList<String>()
+                clusters.value = emptyList()
 
                 /* Reset */
                 likeCounts.value = null

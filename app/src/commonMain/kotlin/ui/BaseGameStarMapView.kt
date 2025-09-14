@@ -74,7 +74,7 @@ fun BaseGameStarMapView(
     writeToClipboard: (String) -> Unit
 ) {
 
-    if (cluster.starMapEntriesVanilla == null)
+    if (cluster.starMapEntriesVanilla.isEmpty())
         return
 
     val entriesPerDistance: Map<Int, List<StarMapEntryVanilla>> =
