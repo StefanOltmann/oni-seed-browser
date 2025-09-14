@@ -523,7 +523,7 @@ fun ContentView(
 
                 if (worldForStarMapView != null) {
 
-                    if (worldForStarMapView.starMapEntriesSpacedOut != null) {
+                    if (!worldForStarMapView.starMapEntriesSpacedOut.isEmpty()) {
 
                         SpacedOutStarMapView(
                             cluster = worldForStarMapView,
@@ -585,7 +585,7 @@ private fun ColumnScope.FavoritesPanel(
 
     Box(
         contentAlignment = Alignment.Center,
-        modifier = Modifier.Companion.weight(1F)
+        modifier = Modifier.weight(1F)
     ) {
 
         if (favoredCoordinates.value.isNotEmpty()) {
@@ -683,7 +683,7 @@ private fun ColumnScope.MainPanel(
 
         Box(
             contentAlignment = Alignment.Center,
-            modifier = Modifier.Companion.weight(1F)
+            modifier = Modifier.weight(1F)
         ) {
 
             Text(
@@ -699,7 +699,7 @@ private fun ColumnScope.MainPanel(
 
         Box(
             contentAlignment = Alignment.Center,
-            modifier = Modifier.Companion.weight(1F)
+            modifier = Modifier.weight(1F)
         ) {
 
             val coordinate = urlHash.value
