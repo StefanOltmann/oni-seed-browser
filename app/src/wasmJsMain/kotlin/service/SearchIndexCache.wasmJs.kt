@@ -3,6 +3,9 @@ package service
 import de.stefan_oltmann.oni.model.ClusterType
 import de.stefan_oltmann.oni.model.search.SearchIndex
 import io.ktor.client.HttpClient
+import io.ktor.client.request.get
+import io.ktor.client.statement.bodyAsBytes
+import io.ktor.client.statement.readBytes
 import js.date.Date
 import js.typedarrays.toByteArray
 import kotlin.time.Clock
@@ -75,14 +78,40 @@ actual suspend fun findSearchIndex(clusterType: ClusterType): SearchIndex {
     println("[SEARCH] Cache MISS: $searchIndexUrl")
 
     /*
-     * Download the file
+     * Download the file via caches of fall back to Ktor should that not work.
+     * We had reports of Cache API failing here.
      */
-    cache.add(searchIndexUrl)
 
-    val response = cache.match(searchIndexUrl)
-        ?: error("[SEARCH] No cache entry found at $searchIndexUrl")
+    val bytes = try {
 
-    val bytes = response.bytes().toByteArray()
+        cache.add(searchIndexUrl)
+
+        val response = cache.match(searchIndexUrl)
+            ?: error("[SEARCH] No cache entry found at $searchIndexUrl")
+
+        println("[CACHE] Downloaded search index via Cache API.")
+
+        response.bytes().toByteArray()
+
+    } catch (ex: Exception) {
+
+        ex.printStackTrace()
+
+        println("[CACHE] Error downloading search index via cache.add(): ${ex.message}.")
+
+        /*
+         * Falling back to Ktor
+         */
+
+        val response = httpClient.get(searchIndexUrl)
+
+        if (response.status.value != 200)
+            error("[SEARCH] Error downloading search index: ${response.status.value}.")
+
+        println("[CACHE] Downloaded search index via Ktor as fallback.")
+
+        response.bodyAsBytes()
+    }
 
     return ProtoBuf.decodeFromByteArray(bytes)
 }
