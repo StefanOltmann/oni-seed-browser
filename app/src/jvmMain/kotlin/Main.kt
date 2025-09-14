@@ -21,8 +21,9 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.ui.platform.LocalClipboardManager
-import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.platform.ClipEntry
+import androidx.compose.ui.platform.LocalClipboard
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Window
@@ -35,7 +36,9 @@ import io.github.stefanoltmann.app.generated.resources.Res
 import io.github.stefanoltmann.app.generated.resources.app_icon
 import io.github.stefanoltmann.app.generated.resources.uiTitle
 import io.ktor.http.HttpStatusCode
+import java.awt.datatransfer.StringSelection
 import java.net.InetSocketAddress
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -58,7 +61,8 @@ fun main() = application {
 
         this.window.minimumSize = java.awt.Dimension(800, 800)
 
-        val clipboardManager = LocalClipboardManager.current
+        val clipboard = LocalClipboard.current
+        val clipboardScope = rememberCoroutineScope()
 
         val connectedUserId = remember { mutableStateOf<String?>(null) }
 
@@ -100,8 +104,10 @@ fun main() = application {
             isMniEmbedded = false,
             connectedUserId = connectedUserId.value,
             localPort = localPort.value,
-            writeToClipboard = {
-                clipboardManager.setText(AnnotatedString(it))
+            writeToClipboard = { text ->
+                clipboardScope.launch {
+                    clipboard.setClipEntry(ClipEntry(StringSelection(text)))
+                }
             }
         )
     }

@@ -43,9 +43,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalUriHandler
-import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
@@ -113,8 +111,6 @@ fun ClusterView(
             showAsteroidMap
         )
 
-        val clipboardManager = LocalClipboardManager.current
-
         val urlWasCopied = remember { mutableStateOf(false) }
 
         val url = if (showMniUrl)
@@ -144,8 +140,7 @@ fun ClusterView(
 
             Row(
                 modifier = Modifier.noRippleClickable {
-
-                    clipboardManager.setText(AnnotatedString(url))
+                    writeToClipboard(url)
 
                     urlWasCopied.value = true
                 }
