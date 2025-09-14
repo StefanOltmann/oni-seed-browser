@@ -30,12 +30,7 @@ import ui.App
 import util.getQueryParameters
 import util.getValidSteamHash
 
-/*
- * Create cache clear message object at top level
- */
-private val clearCacheMessage: JsAny = js("({ type: 'CLEAR_CACHE' })")
-
-@OptIn(ExperimentalComposeUiApi::class)
+@OptIn(ExperimentalComposeUiApi::class, ExperimentalWasmJsInterop::class)
 fun main() {
 
     ComposeViewport(document.body!!) {
@@ -54,25 +49,6 @@ fun main() {
             val latestAppVersion = DefaultWebClient.getLatestAppVersion()
 
             println("Latest app version: $latestAppVersion")
-            println("Current app version: $APP_VERSION")
-
-            /* If the latest app version and APP_VERSION do not match, perform a browser reload */
-            if (latestAppVersion != null && latestAppVersion != APP_VERSION) {
-
-                println("Version mismatch detected. Reloading page to get latest version...")
-
-                /* Clear service worker cache to ensure fresh files */
-                if (window.navigator.serviceWorker.controller != null) {
-
-                    println("Clearing service worker cache...")
-
-                    /* Send message to service worker to clear cache */
-                    window.navigator.serviceWorker.controller!!.postMessage(clearCacheMessage)
-                }
-
-                /* Force reload from server (bypassing cache) */
-                window.location.reload()
-            }
         }
 
         /*

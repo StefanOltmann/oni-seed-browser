@@ -186,29 +186,6 @@ if (buildTarget != "desktop") {
         }
     }
 
-    tasks.register("processServiceWorker") {
-
-        description = "Processes the service worker file to inject the current version."
-        dependsOn("wasmJsProcessResources")
-
-        val inputFile = layout.buildDirectory.file("processedResources/wasmJs/main/service-worker.js")
-        val outputFile = layout.buildDirectory.file("dist/wasmJs/productionExecutable/service-worker.js")
-
-        inputs.file(inputFile)
-        outputs.file(outputFile)
-
-        doLast {
-
-            val serviceWorkerContent = inputFile.get().asFile.readText()
-
-            val processedContent = serviceWorkerContent.replace("VERSION_PLACEHOLDER", project.version.toString())
-
-            val outputFileObj = outputFile.get().asFile
-            outputFileObj.parentFile.mkdirs()
-            outputFileObj.writeText(processedContent)
-        }
-    }
-
     tasks.register("createHeadersFile") {
 
         description = "Creates a _headers file for Cloudflare Pages to serve WASM files with correct MIME type."
@@ -242,7 +219,6 @@ if (buildTarget != "desktop") {
     }
 
     tasks.named("wasmJsBrowserDistribution") {
-        finalizedBy(tasks.named("processServiceWorker"))
         finalizedBy(tasks.named("writeVersionFileToWasm"))
         finalizedBy(tasks.named("createHeadersFile"))
     }

@@ -44,106 +44,10 @@
             if (webpackOverlay != null)
                 webpackOverlay.style.display = "none";
         }
-
-        // Handle WASM loading errors (404, MIME type issues)
-        if (error instanceof TypeError && error.message.includes('unsupported MIME type')) {
-
-            console.error('WASM MIME type error detected - attempting page refresh...');
-
-            // Clear any cached service worker and reload
-            if ('serviceWorker' in navigator) {
-                navigator.serviceWorker.getRegistrations().then(registrations => {
-                    Promise.all(registrations.map(registration => registration.unregister()))
-                        .then(() => {
-                            console.log('Service workers cleared, reloading...');
-                            window.location.reload();
-                        });
-                });
-            } else {
-                // Fallback: hard refresh
-                window.location.reload();
-            }
-        }
-
-        // Handle fetch errors for WASM files
-        if (error.message && error.message.includes('.wasm')) {
-
-            console.error('WASM file loading error detected:', error.message);
-
-            // Try to reload the page to get fresh files
-            setTimeout(() => {
-                console.log('Attempting page reload due to WASM loading error...');
-                window.location.reload();
-            }, 2000);
-        }
     }
 
     addEventListener("error", (event) => unhandledError(event, event.error));
     addEventListener("unhandledrejection", (event) => unhandledError(event, event.reason));
-
-    /*
-     * Register service worker for offline functionality
-     */
-
-    if ('serviceWorker' in navigator) {
-
-        window.addEventListener('load', () => {
-
-            /*
-             * Check if we're in development mode by looking for webpack dev server
-             */
-            const isDevelopment = window.location.hostname === 'localhost' ||
-                window.location.hostname === '127.0.0.1' ||
-                window.location.port !== '';
-
-            if (isDevelopment) {
-
-                /*
-                 * In development mode, unregister any existing service workers to prevent infinite loops
-                 */
-
-                console.log('Development mode detected, not registering service worker');
-
-                navigator.serviceWorker.getRegistrations().then(registrations => {
-                    for (let registration of registrations) {
-                        registration.unregister();
-                        console.log('Unregistered service worker in development mode');
-                    }
-                });
-
-            } else {
-
-                /*
-                 * Only register service worker in production mode
-                 */
-
-                navigator.serviceWorker.register('./service-worker.js', {updateViaCache: 'none'})
-                    .then(registration => {
-
-                        console.log('Service Worker registered with scope:', registration.scope);
-
-                        /*
-                         * Check for updates on page load
-                         */
-                        registration.update();
-
-                        /*
-                         * Don't let the service worker control the page on first load
-                         * This prevents refresh loops in production mode
-                         */
-                        if (registration.active) {
-
-                            if (!navigator.serviceWorker.controller) {
-                                console.log('Service worker is active but not controlling the page');
-                            }
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Service Worker registration failed:', error);
-                    });
-            }
-        });
-    }
 
 </script>
 
