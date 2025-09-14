@@ -5,7 +5,6 @@ import de.stefan_oltmann.oni.model.search.SearchIndex
 import io.ktor.client.HttpClient
 import io.ktor.client.request.get
 import io.ktor.client.statement.bodyAsBytes
-import io.ktor.client.statement.readBytes
 import js.date.Date
 import js.typedarrays.toByteArray
 import kotlin.time.Clock
@@ -93,7 +92,11 @@ actual suspend fun findSearchIndex(clusterType: ClusterType): SearchIndex {
 
         response.bytes().toByteArray()
 
-    } catch (ex: Exception) {
+    } catch (ex: Throwable) {
+
+        /*
+         * Need to catch for Throwable, because cache.add() throws Errors.
+         */
 
         ex.printStackTrace()
 
