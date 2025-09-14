@@ -41,6 +41,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -53,14 +55,14 @@ import ui.theme.DefaultSpacer
 import ui.theme.HalfSpacer
 import ui.theme.anthraticeTransparentBackgroundColor
 import ui.theme.cardColorBackground
-import ui.theme.defaultPadding
+import ui.theme.cardPadding
 import ui.theme.defaultRoundedCornerShape
 import ui.theme.defaultSpacing
 import ui.theme.halfPadding
 import ui.theme.halfSpacing
-import ui.theme.hoverColor
 import ui.theme.lightGrayTransparentBorderColor
 import ui.theme.minimalRoundedCornerShape
+import ui.theme.primaryAccent
 
 val countBackground = Color.Black.copy(alpha = 0.3F)
 
@@ -71,30 +73,74 @@ fun AsteroidView(
     showMap: () -> Unit
 ) {
 
+    val cardHovered = remember { mutableStateOf(false) }
+
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
+            .onHover(cardHovered)
+            .shadow(
+                elevation = if (cardHovered.value) 8.dp else 3.dp,
+                shape = defaultRoundedCornerShape,
+                ambientColor = if (isStarterAsteroid) primaryAccent.copy(alpha = 0.2f) else Color.Black.copy(alpha = 0.3f)
+            )
             .background(
-                cardColorBackground,
+                Brush.horizontalGradient(
+                    colors = if (isStarterAsteroid) {
+                        listOf(
+                            cardColorBackground.copy(alpha = 0.9f),
+                            primaryAccent.copy(alpha = 0.1f)
+                        )
+                    } else {
+                        listOf(
+                            cardColorBackground.copy(alpha = 0.8f),
+                            cardColorBackground.copy(alpha = 0.6f)
+                        )
+                    }
+                ),
                 defaultRoundedCornerShape
             )
             .border(
-                if (isStarterAsteroid) 1.dp else 0.dp,
-                lightGrayTransparentBorderColor,
+                if (isStarterAsteroid) 2.dp else 1.dp,
+                if (isStarterAsteroid)
+                    primaryAccent.copy(alpha = 0.4f)
+                else
+                    lightGrayTransparentBorderColor.copy(alpha = 0.3f),
                 defaultRoundedCornerShape
             )
-            .defaultPadding()
+            .cardPadding()
             .fillMaxWidth()
     ) {
 
-        val hovered = remember { mutableStateOf(false) }
+        val mapButtonHovered = remember { mutableStateOf(false) }
 
         Box(
             contentAlignment = Alignment.Center,
             modifier = Modifier
                 .size(124.dp)
-                .background(Color.Black, defaultRoundedCornerShape)
-                .onHover(hovered)
+                .shadow(
+                    elevation = if (mapButtonHovered.value) 6.dp else 2.dp,
+                    shape = defaultRoundedCornerShape,
+                    ambientColor = primaryAccent.copy(alpha = 0.3f)
+                )
+                .background(
+                    Brush.radialGradient(
+                        colors = listOf(
+                            Color.Black.copy(alpha = 0.9f),
+                            Color.Black.copy(alpha = 1f)
+                        )
+                    ),
+                    defaultRoundedCornerShape
+                )
+                .border(
+                    1.dp,
+                    if (mapButtonHovered.value)
+                        primaryAccent.copy(alpha = 0.6f)
+                    else
+                        MaterialTheme.colorScheme.outline.copy(alpha = 0.3f),
+                    defaultRoundedCornerShape
+                )
+                .onHover(mapButtonHovered)
                 .noRippleClickable(showMap)
         ) {
 
@@ -104,26 +150,39 @@ fun AsteroidView(
                 modifier = Modifier.size(108.dp)
             )
 
-            Icon(
-                imageVector = Icons.Default.Search,
-                contentDescription = null,
-                tint = if (hovered.value)
-                    hoverColor
-                else
-                    MaterialTheme.colorScheme.onBackground,
+            // Modern search overlay
+            Box(
+                contentAlignment = Alignment.Center,
                 modifier = Modifier
-                    .halfPadding()
-                    .size(24.dp)
+                    .size(28.dp)
+                    .background(
+                        if (mapButtonHovered.value)
+                            primaryAccent.copy(alpha = 0.9f)
+                        else
+                            MaterialTheme.colorScheme.surface.copy(alpha = 0.8f),
+                        minimalRoundedCornerShape
+                    )
                     .border(
                         1.dp,
-                        if (hovered.value)
-                            hoverColor
+                        if (mapButtonHovered.value)
+                            Color.White.copy(alpha = 0.8f)
                         else
-                            MaterialTheme.colorScheme.onBackground,
-                        defaultRoundedCornerShape
+                            MaterialTheme.colorScheme.outline.copy(alpha = 0.5f),
+                        minimalRoundedCornerShape
                     )
                     .align(Alignment.BottomEnd)
-            )
+                    .padding(2.dp)
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Search,
+                    contentDescription = null,
+                    tint = if (mapButtonHovered.value)
+                        Color.White
+                    else
+                        MaterialTheme.colorScheme.onSurface,
+                    modifier = Modifier.size(16.dp)
+                )
+            }
         }
 
         DefaultSpacer()

@@ -20,6 +20,7 @@
 package ui
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Row
@@ -41,6 +42,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
@@ -65,6 +68,9 @@ import ui.theme.defaultSpacing
 import ui.theme.halfPadding
 import ui.theme.halfSpacing
 import ui.theme.hoverColor
+import ui.theme.primaryAccent
+import ui.theme.quarterSpacing
+import ui.theme.successColor
 
 @Composable
 fun CoordinateBox(
@@ -81,26 +87,59 @@ fun CoordinateBox(
     val density = LocalDensity.current.density
     val width = remember { mutableStateOf(0) }
 
+    val coordinateWasCopied = remember { mutableStateOf(false) }
+
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier
             .padding(horizontal = defaultSpacing)
             .padding(top = defaultSpacing)
             .fillMaxWidth()
-            .height(40.dp)
+            .height(48.dp)
+            .shadow(
+                elevation = 2.dp,
+                shape = defaultRoundedCornerShape,
+                ambientColor = primaryAccent.copy(alpha = 0.15f)
+            )
+            .background(
+                if (coordinateWasCopied.value) {
+                    Brush.horizontalGradient(
+                        colors = listOf(
+                            successColor.copy(alpha = 0.2f),
+                            successColor.copy(alpha = 0.1f)
+                        )
+                    )
+                } else {
+                    Brush.horizontalGradient(
+                        colors = listOf(
+                            MaterialTheme.colorScheme.surface.copy(alpha = 0.3f),
+                            MaterialTheme.colorScheme.surfaceContainer.copy(alpha = 0.2f)
+                        )
+                    )
+                },
+                defaultRoundedCornerShape
+            )
+            .border(
+                1.dp,
+                if (coordinateWasCopied.value)
+                    successColor.copy(alpha = 0.4f)
+                else
+                    MaterialTheme.colorScheme.outline.copy(alpha = 0.2f),
+                defaultRoundedCornerShape
+            )
             .onSizeChanged { width.value = (it.width / density).roundToInt() }
     ) {
 
-        val coordinateWasCopied = remember { mutableStateOf(false) }
+        val coordinateHovered = remember { mutableStateOf(false) }
 
         Row(
             verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.noRippleClickable {
-
-                writeToClipboard(coordinate)
-
-                coordinateWasCopied.value = true
-            }
+            modifier = Modifier
+                .onHover(coordinateHovered)
+                .noRippleClickable {
+                    writeToClipboard(coordinate)
+                    coordinateWasCopied.value = true
+                }
         ) {
 
             /*
@@ -126,9 +165,14 @@ fun CoordinateBox(
                 else if (width.value >= 300)
                     MaterialTheme.typography.headlineSmall
                 else
-                    MaterialTheme.typography.bodyMedium,
+                    MaterialTheme.typography.bodyLarge,
                 fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.onBackground,
+                color = if (coordinateWasCopied.value)
+                    successColor
+                else if (coordinateHovered.value)
+                    primaryAccent
+                else
+                    MaterialTheme.colorScheme.onSurface,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
             )
@@ -137,18 +181,14 @@ fun CoordinateBox(
 
                 DoubleSpacer()
 
-                val hovered = remember { mutableStateOf(false) }
-
                 Icon(
                     imageVector = ContentCopy,
                     contentDescription = null,
-                    tint = if (hovered.value)
-                        hoverColor
+                    tint = if (coordinateHovered.value)
+                        primaryAccent
                     else
-                        MaterialTheme.colorScheme.onBackground,
-                    modifier = Modifier
-                        .onHover(hovered)
-                        .size(24.dp)
+                        MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f),
+                    modifier = Modifier.size(20.dp)
                 )
             }
         }
@@ -278,19 +318,35 @@ private fun BoxScope.IndexIndicator(
                 .align(Alignment.CenterStart)
                 .padding(horizontal = halfSpacing)
                 .height(32.dp)
+                .shadow(
+                    elevation = 2.dp,
+                    shape = defaultRoundedCornerShape,
+                    ambientColor = primaryAccent.copy(alpha = 0.2f)
+                )
                 .background(
-                    MaterialTheme.colorScheme.background,
+                    Brush.horizontalGradient(
+                        colors = listOf(
+                            MaterialTheme.colorScheme.surface.copy(alpha = 0.9f),
+                            MaterialTheme.colorScheme.surfaceContainer.copy(alpha = 0.8f)
+                        )
+                    ),
+                    defaultRoundedCornerShape
+                )
+                .border(
+                    1.dp,
+                    MaterialTheme.colorScheme.outline.copy(alpha = 0.3f),
                     defaultRoundedCornerShape
                 )
         ) {
 
             Text(
                 text = "# $index / $totalCount",
-                style = MaterialTheme.typography.headlineSmall,
-                color = MaterialTheme.colorScheme.onBackground,
+                style = MaterialTheme.typography.labelLarge,
+                fontWeight = FontWeight.SemiBold,
+                color = MaterialTheme.colorScheme.onSurface,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
-                modifier = Modifier.padding(horizontal = defaultSpacing)
+                modifier = Modifier.padding(horizontal = defaultSpacing, vertical = quarterSpacing)
             )
         }
     }

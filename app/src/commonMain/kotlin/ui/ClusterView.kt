@@ -26,12 +26,11 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -43,6 +42,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.AnnotatedString
@@ -68,8 +70,10 @@ import ui.theme.defaultRoundedCornerShape
 import ui.theme.defaultSpacing
 import ui.theme.doubleSpacing
 import ui.theme.halfSpacing
-import ui.theme.hoverColor
 import ui.theme.lightGrayTransparentBorderColor
+import ui.theme.minimalRoundedCornerShape
+import ui.theme.quarterSpacing
+import ui.theme.successColor
 import util.formatDate
 
 val widthPerWorld: Dp = 380.dp
@@ -89,10 +93,30 @@ fun ClusterView(
     writeToClipboard: (String) -> Unit
 ) {
 
+    val clusterHovered = remember { mutableStateOf(false) }
+
     Column(
         modifier = Modifier
-            .background(anthraticeTransparentBackgroundColor, defaultRoundedCornerShape)
-            .border(0.dp, lightGrayTransparentBorderColor, defaultRoundedCornerShape)
+            .onHover(clusterHovered)
+            .shadow(
+                elevation = if (clusterHovered.value) 12.dp else 4.dp,
+                shape = defaultRoundedCornerShape,
+                ambientColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.15f)
+            )
+            .background(
+                Brush.verticalGradient(
+                    colors = listOf(
+                        anthraticeTransparentBackgroundColor.copy(alpha = 0.9f),
+                        anthraticeTransparentBackgroundColor.copy(alpha = 0.7f)
+                    )
+                ),
+                defaultRoundedCornerShape
+            )
+            .border(
+                1.dp,
+                lightGrayTransparentBorderColor.copy(alpha = if (clusterHovered.value) 0.4f else 0.2f),
+                defaultRoundedCornerShape
+            )
     ) {
 
         CoordinateBox(
@@ -113,166 +137,185 @@ fun ClusterView(
             showAsteroidMap
         )
 
-        val clipboardManager = LocalClipboardManager.current
-
-        val urlWasCopied = remember { mutableStateOf(false) }
-
-        val url = if (showMniUrl)
-            MNI_URL + cluster.coordinate
-        else
-            ORIGINAL_URL + cluster.coordinate
-
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.offset(y = -4.dp)
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(
+                    Brush.verticalGradient(
+                        colors = listOf(
+                            Color.Transparent,
+                            MaterialTheme.colorScheme.surface.copy(alpha = 0.2f)
+                        )
+                    )
+                )
+                .padding(horizontal = defaultSpacing, vertical = quarterSpacing)
         ) {
 
-            /*
-             * Set notice back after 3 seconds.
-             */
-            LaunchedEffect(urlWasCopied.value) {
+            val clipboardManager = LocalClipboardManager.current
+            val urlWasCopied = remember { mutableStateOf(false) }
 
-                if (!urlWasCopied.value)
-                    return@LaunchedEffect
-
-                delay(1000)
-
-                urlWasCopied.value = false
-            }
-
-            Spacer(modifier = Modifier.width(defaultSpacing + halfSpacing))
+            val url = if (showMniUrl)
+                MNI_URL + cluster.coordinate
+            else
+                ORIGINAL_URL + cluster.coordinate
 
             Row(
-                modifier = Modifier.noRippleClickable {
-
-                    clipboardManager.setText(AnnotatedString(url))
-
-                    urlWasCopied.value = true
-                }
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.offset(y = -2.dp)
             ) {
 
-                Text(
-                    text = if (urlWasCopied.value)
-                        stringResource(Res.string.uiCopiedToClipboard)
-                    else
-                        url,
-                    style = MaterialTheme.typography.bodyMedium,
-                    fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.onBackground,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
-                )
+                LaunchedEffect(urlWasCopied.value) {
 
-                DefaultSpacer()
+                    if (!urlWasCopied.value)
+                        return@LaunchedEffect
 
-                if (!urlWasCopied.value) {
+                    delay(1000)
 
-                    val copyHovered = remember { mutableStateOf(false) }
-
-                    Icon(
-                        imageVector = ContentCopy,
-                        contentDescription = null,
-                        tint = if (copyHovered.value)
-                            hoverColor
-                        else
-                            MaterialTheme.colorScheme.onBackground,
-                        modifier = Modifier
-                            .onHover(copyHovered)
-                            .size(16.dp)
-                            .offset(y = 2.dp)
-                    )
+                    urlWasCopied.value = false
                 }
-            }
 
-            HalfSpacer()
+                val urlHovered = remember { mutableStateOf(false) }
 
-            val openHovered = remember { mutableStateOf(false) }
+                Row(
+                    modifier = Modifier
+                        .onHover(urlHovered)
+                        .background(
+                            if (urlWasCopied.value)
+                                successColor.copy(alpha = 0.1f)
+                            else if (urlHovered.value)
+                                MaterialTheme.colorScheme.primary.copy(alpha = 0.1f)
+                            else Color.Transparent,
+                            minimalRoundedCornerShape
+                        )
+                        .padding(horizontal = halfSpacing, vertical = quarterSpacing)
+                        .noRippleClickable {
+                            clipboardManager.setText(AnnotatedString(url))
+                            urlWasCopied.value = true
+                        }
+                ) {
 
-            val uriHandler = LocalUriHandler.current
+                    Text(
+                        text = if (urlWasCopied.value)
+                            stringResource(Res.string.uiCopiedToClipboard)
+                        else
+                            url,
+                        style = MaterialTheme.typography.bodySmall,
+                        fontWeight = FontWeight.Medium,
+                        color = if (urlWasCopied.value)
+                            successColor
+                        else if (urlHovered.value)
+                            MaterialTheme.colorScheme.primary
+                        else
+                            MaterialTheme.colorScheme.onSurface.copy(alpha = 0.8f),
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
 
-            Icon(
-                imageVector = IconExternalLink,
-                contentDescription = null,
-                tint = if (openHovered.value)
-                    hoverColor
-                else
-                    MaterialTheme.colorScheme.onBackground,
-                modifier = Modifier
-                    .onHover(openHovered)
-                    .size(16.dp)
-                    .noRippleClickable {
-                        uriHandler.openUri(url)
+                    if (!urlWasCopied.value) {
+                        DefaultSpacer()
+
+                        Icon(
+                            imageVector = ContentCopy,
+                            contentDescription = null,
+                            tint = if (urlHovered.value)
+                                MaterialTheme.colorScheme.primary
+                            else
+                                MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
+                            modifier = Modifier.size(12.dp)
+                        )
                     }
-            )
+                }
 
-            VerticalDivider(
-                thickness = 1.dp,
-                color = MaterialTheme.colorScheme.onBackground,
-                modifier = Modifier
-                    .height(doubleSpacing)
-                    .padding(horizontal = defaultSpacing)
-            )
+                HalfSpacer()
 
-            Text(
-                text = "V " + cluster.gameVersion,
-                style = MaterialTheme.typography.bodyMedium,
-                fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.onBackground
-            )
+                val openHovered = remember { mutableStateOf(false) }
 
-            val username = steamIdToUsernameMap[cluster.uploaderSteamIdHash]
-
-            if (username != null) {
-
-                VerticalDivider(
-                    thickness = 1.dp,
-                    color = MaterialTheme.colorScheme.onBackground,
-                    modifier = Modifier
-                        .height(doubleSpacing)
-                        .padding(horizontal = defaultSpacing)
-                )
-
-                Text(
-                    text = username,
-                    style = MaterialTheme.typography.bodyMedium,
-                    fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.onBackground
-                )
-            }
-
-            val uploadDate = cluster.uploadDate
-
-            VerticalDivider(
-                thickness = 1.dp,
-                color = MaterialTheme.colorScheme.onBackground,
-                modifier = Modifier
-                    .height(doubleSpacing)
-                    .padding(horizontal = defaultSpacing)
-            )
-
-            Text(
-                text = formatDate(uploadDate),
-                style = MaterialTheme.typography.bodyMedium,
-                fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.onBackground
-            )
-
-            if (cluster.uploaderAuthenticated) {
-
-                VerticalDivider(
-                    thickness = 1.dp,
-                    color = MaterialTheme.colorScheme.onBackground,
-                    modifier = Modifier
-                        .height(doubleSpacing)
-                        .padding(horizontal = defaultSpacing)
-                )
+                val uriHandler = LocalUriHandler.current
 
                 Icon(
-                    imageVector = IconAuthenticated,
+                    imageVector = IconExternalLink,
                     contentDescription = null,
-                    tint = MaterialTheme.colorScheme.onBackground,
-                    modifier = Modifier.size(16.dp)
+                    tint = if (openHovered.value)
+                        MaterialTheme.colorScheme.primary
+                    else
+                        MaterialTheme.colorScheme.onSurface,
+                    modifier = Modifier
+                        .onHover(openHovered)
+                        .size(16.dp)
+                        .noRippleClickable {
+                            uriHandler.openUri(url)
+                        }
                 )
+
+                VerticalDivider(
+                    thickness = 1.dp,
+                    color = MaterialTheme.colorScheme.onSurface,
+                    modifier = Modifier
+                        .height(doubleSpacing)
+                        .padding(horizontal = defaultSpacing)
+                )
+
+                Text(
+                    text = "V " + cluster.gameVersion,
+                    style = MaterialTheme.typography.bodyMedium,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+
+                val username = steamIdToUsernameMap[cluster.uploaderSteamIdHash]
+
+                if (username != null) {
+
+                    VerticalDivider(
+                        thickness = 1.dp,
+                        color = MaterialTheme.colorScheme.onSurface,
+                        modifier = Modifier
+                            .height(doubleSpacing)
+                            .padding(horizontal = defaultSpacing)
+                    )
+
+                    Text(
+                        text = username,
+                        style = MaterialTheme.typography.bodyMedium,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.onSurface
+                    )
+                }
+
+                val uploadDate = cluster.uploadDate
+
+                VerticalDivider(
+                    thickness = 1.dp,
+                    color = MaterialTheme.colorScheme.onSurface,
+                    modifier = Modifier
+                        .height(doubleSpacing)
+                        .padding(horizontal = defaultSpacing)
+                )
+
+                Text(
+                    text = formatDate(uploadDate),
+                    style = MaterialTheme.typography.bodyMedium,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+
+                if (cluster.uploaderAuthenticated) {
+
+                    VerticalDivider(
+                        thickness = 1.dp,
+                        color = MaterialTheme.colorScheme.onSurface,
+                        modifier = Modifier
+                            .height(doubleSpacing)
+                            .padding(horizontal = defaultSpacing)
+                    )
+
+                    Icon(
+                        imageVector = IconAuthenticated,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.onSurface,
+                        modifier = Modifier.size(16.dp)
+                    )
+                }
             }
         }
     }

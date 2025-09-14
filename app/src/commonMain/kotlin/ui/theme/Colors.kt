@@ -22,31 +22,48 @@ package ui.theme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.ui.graphics.Color
 
-val lightGray = Color(0xFFF2F2F2)
+val lightGray = Color(0xFFE8E9ED)
 
-val anthracite = Color(0xFF222529)
-val surfaceColor = Color(0xFF383a3e)
-val surfaceVariantColor = Color(0xFF424346)
-val surfaceTint = Color(0xFF4d4d4d)
+// Modern dark theme with better contrast and depth
+val anthracite = Color(0xFF1A1C23)
+val surfaceColor = Color(0xFF2A2D36)
+val surfaceVariantColor = Color(0xFF34374A)
+val surfaceTint = Color(0xFF3B4049)
 
 val gray3 = Color(0xFF545454)
 
-//val darkRed = Color(0xFFA62D2D)
-//val darkGreen = Color(0xFF437E3D)
+// Modern accent colors
+val ctaColor = Color(0xFF5B9BD5) // Modern blue
+val primaryAccent = Color(0xFF72C7E7) // Brighter cyan
+val secondaryAccent = Color(0xFF9B59B6) // Purple accent
 
-val ctaColor = Color.Blue
+val hoverColor = Color(0xFFFFC107) // Amber for hover states
 
-val hoverColor = Color.Yellow
+// Improved transparency and border colors
+val lightGrayTransparentBorderColor = lightGray.copy(alpha = 0.12f)
+val anthraticeTransparentBackgroundColor = Color(0xFF1F2128).copy(alpha = 0.85f)
 
-val lightGrayTransparentBorderColor = lightGray.copy(alpha = 0.5f)
-val anthraticeTransparentBackgroundColor = anthracite.copy(alpha = 0.7f)
+// Enhanced card background with subtle gradient feel
+val cardColorBackground = Color(0xFF252832).copy(alpha = 0.7f)
 
-val cardColorBackground = surfaceTint.copy(alpha = 0.5f)
+// Success and error colors for modern UI
+val successColor = Color(0xFF4CAF50)
+val errorColor = Color(0xFFF44336)
+val warningColor = Color(0xFFFF9800)
 
 val appColorScheme = darkColorScheme(
     background = anthracite,
     surface = surfaceColor,
+    onSurface = lightGray,
     onSurfaceVariant = surfaceVariantColor,
     surfaceTint = surfaceTint,
-    primary = Color(0xFF72bcd4)
+    primary = primaryAccent,
+    onPrimary = Color.White,
+    secondary = secondaryAccent,
+    onSecondary = Color.White,
+    onBackground = lightGray,
+    surfaceContainer = surfaceColor,
+    surfaceContainerHigh = surfaceVariantColor,
+    outline = lightGrayTransparentBorderColor,
+    outlineVariant = lightGrayTransparentBorderColor.copy(alpha = 0.08f)
 )

@@ -40,6 +40,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import de.stefan_oltmann.oni.model.filter.FilterQuery
 import ui.HorizontalSeparator
@@ -51,6 +54,8 @@ import ui.theme.doubleSpacing
 import ui.theme.halfSpacing
 import ui.theme.lightGray
 import ui.theme.lightGrayTransparentBorderColor
+import ui.theme.primaryAccent
+import ui.theme.surfaceColor
 
 enum class FilterSelectionType {
     ASTEROID,
@@ -87,8 +92,25 @@ fun FilterPanel(
             .padding(
                 bottom = if (filterPanelOpen.value) doubleSpacing else halfSpacing
             )
-            .background(anthraticeTransparentBackgroundColor, defaultRoundedCornerShape)
-            .border(0.dp, lightGrayTransparentBorderColor, defaultRoundedCornerShape)
+            .shadow(
+                elevation = if (filterPanelOpen.value) 12.dp else 4.dp,
+                shape = defaultRoundedCornerShape,
+                ambientColor = Color.Black.copy(alpha = 0.4f)
+            )
+            .background(
+                Brush.verticalGradient(
+                    colors = listOf(
+                        anthraticeTransparentBackgroundColor.copy(alpha = 0.95f),
+                        anthraticeTransparentBackgroundColor.copy(alpha = 0.85f)
+                    )
+                ),
+                defaultRoundedCornerShape
+            )
+            .border(
+                1.dp,
+                lightGrayTransparentBorderColor.copy(alpha = 0.2f),
+                defaultRoundedCornerShape
+            )
             .then(maxSizeModifier)
     ) {
 
@@ -112,6 +134,7 @@ fun FilterPanel(
                             .fillMaxWidth()
                             .weight(1F)
                             .verticalScroll(verticalScroll)
+                            .padding(horizontal = doubleSpacing)
                     ) {
 
                         DefaultSpacer()
@@ -154,15 +177,31 @@ fun FilterPanel(
                             filterQueryState = filterQueryState,
                             filterSelection = filterSelection
                         )
+
+                        DefaultSpacer()
                     }
 
-                    HorizontalSeparator()
+                    // Controls row with modern styling
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .background(
+                                Brush.verticalGradient(
+                                    colors = listOf(
+                                        Color.Transparent,
+                                        surfaceColor.copy(alpha = 0.3f)
+                                    )
+                                )
+                            )
+                    ) {
+                        HorizontalSeparator()
 
-                    ControlsRow(
-                        filterQueryState = filterQueryState,
-                        filterPanelOpen = filterPanelOpen,
-                        onSearchButtonPressed = onSearchButtonPressed
-                    )
+                        ControlsRow(
+                            filterQueryState = filterQueryState,
+                            filterPanelOpen = filterPanelOpen,
+                            onSearchButtonPressed = onSearchButtonPressed
+                        )
+                    }
                 }
 
                 if (filterSelection.value != null) {
@@ -176,6 +215,9 @@ fun FilterPanel(
                                 filterSelection.value = null
                             }
                             .fillMaxSize()
+                            .background(
+                                Color.Black.copy(alpha = 0.5f)
+                            )
                     ) {
 
                         OverlayContent(
@@ -195,8 +237,9 @@ fun FilterPanel(
                         .fillMaxHeight()
                         .align(Alignment.CenterEnd),
                     style = defaultScrollbarStyle().copy(
-                        unhoverColor = lightGray.copy(alpha = 0.4f),
-                        hoverColor = lightGray
+                        unhoverColor = lightGray.copy(alpha = 0.2f),
+                        hoverColor = primaryAccent.copy(alpha = 0.6f),
+                        thickness = 6.dp
                     )
                 )
             }
