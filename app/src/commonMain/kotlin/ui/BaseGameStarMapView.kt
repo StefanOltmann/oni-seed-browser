@@ -77,7 +77,7 @@ fun BaseGameStarMapView(
     if (cluster.starMapEntriesVanilla.isEmpty())
         return
 
-    val entriesPerDistance: Map<Int, List<StarMapEntryVanilla>> =
+    val entriesPerDistance: Map<Byte, List<StarMapEntryVanilla>> =
         cluster.starMapEntriesVanilla.groupBy { it.distance }
 
     Box(
@@ -131,7 +131,7 @@ fun BaseGameStarMapView(
 
                     for (distance in 17 downTo 0) {
 
-                        val entries = entriesPerDistance[distance]
+                        val entries = entriesPerDistance[distance.toByte()]
 
                         Row(
                             verticalAlignment = Alignment.CenterVertically
