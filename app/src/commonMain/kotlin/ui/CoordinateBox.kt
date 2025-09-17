@@ -27,9 +27,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -41,7 +38,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
@@ -58,6 +54,8 @@ import org.jetbrains.compose.resources.stringResource
 import service.DefaultWebClient
 import ui.icons.ContentCopy
 import ui.icons.IconArrowUp
+import ui.icons.IconBookmarkFilled
+import ui.icons.IconBookmarkOutline
 import ui.theme.DefaultSpacer
 import ui.theme.DoubleSpacer
 import ui.theme.defaultRoundedCornerShape
@@ -194,12 +192,12 @@ fun CoordinateBox(
 
                 Icon(
                     imageVector = if (favorite)
-                        Icons.Filled.Favorite
+                        IconBookmarkFilled
                     else
-                        Icons.Outlined.FavoriteBorder,
+                        IconBookmarkOutline,
                     contentDescription = null,
                     tint = if (favorite)
-                        Color.Red
+                        MaterialTheme.colorScheme.onBackground
                     else
                         MaterialTheme.colorScheme.onBackground.copy(alpha = 0.3f),
                     modifier = Modifier

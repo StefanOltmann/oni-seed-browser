@@ -19,8 +19,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CheckCircle
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -60,7 +58,8 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import service.DefaultWebClient
 import ui.filter.FilterPanel
-import ui.icons.IconKofi
+import ui.icons.IconBookmarks
+import ui.icons.IconBookmarksFilled
 import ui.icons.IconLeaderboardFilled
 import ui.icons.IconLeaderboardOutlined
 import ui.theme.DefaultSpacer
@@ -273,47 +272,6 @@ fun ContentView(
 
                     FillSpacer()
 
-                    val uriHandler = LocalUriHandler.current
-
-                    Box(
-                        contentAlignment = Alignment.Center,
-                        modifier = Modifier
-                            .size(32.dp)
-                            .noRippleClickable {
-                                uriHandler.openUri("https://ko-fi.com/StefanOltmann")
-                            }
-                    ) {
-
-                        Image(
-                            imageVector = IconKofi,
-                            contentDescription = null
-                        )
-                    }
-
-                    DefaultSpacer()
-
-                    if (connectedUserId != null) {
-
-                        Icon(
-                            imageVector = if (showFavorites.value)
-                                Icons.Filled.Favorite
-                            else
-                                Icons.Outlined.FavoriteBorder,
-                            contentDescription = null,
-                            tint = MaterialTheme.colorScheme.onBackground,
-                            modifier = Modifier
-                                .halfPadding()
-                                .size(32.dp)
-                                .noRippleClickable {
-
-                                    showFavorites.value = !showFavorites.value
-
-                                    if (showFavorites.value)
-                                        showLeaderboard.value = false
-                                }
-                        )
-                    }
-
                     Icon(
                         imageVector = if (showLeaderboard.value)
                             IconLeaderboardFilled
@@ -333,8 +291,40 @@ fun ContentView(
                             }
                     )
 
+                    if (connectedUserId != null) {
+
+                        Icon(
+                            imageVector = if (showFavorites.value)
+                                IconBookmarksFilled
+                            else
+                                IconBookmarks,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.onBackground,
+                            modifier = Modifier
+                                .halfPadding()
+                                .size(32.dp)
+                                .noRippleClickable {
+
+                                    showFavorites.value = !showFavorites.value
+
+                                    if (showFavorites.value)
+                                        showLeaderboard.value = false
+                                }
+                        )
+                    }
+
+                    DefaultSpacer()
+
+                    val uriHandler = LocalUriHandler.current
+
+                    SponsorButton {
+                        uriHandler.openUri("https://github.com/sponsors/StefanOltmann")
+                    }
+
+                    DefaultSpacer()
+
                     /*
-                     * Only show the login button in the standalone version.
+                     * Only show the login button in the standalone version or if connected.
                      */
                     if (connectedUserId != null || !isMniEmbedded)
                         LoginWithSteamButton(
