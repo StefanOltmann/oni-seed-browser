@@ -31,6 +31,7 @@ import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.request.accept
 import io.ktor.client.request.delete
 import io.ktor.client.request.get
+import io.ktor.client.request.head
 import io.ktor.client.request.header
 import io.ktor.client.request.post
 import io.ktor.client.request.put
@@ -100,6 +101,9 @@ object DefaultWebClient : WebClient {
         }
     }
 
+    /* Simple version for doing HEAD calls. */
+    private val simpleHttpClient = HttpClient()
+
     private val clusterCache = LruCache<String, Cluster?>(100)
 
     private var currentSearchIndex: SearchIndex? = null
@@ -115,10 +119,14 @@ object DefaultWebClient : WebClient {
             if (response.status != HttpStatusCode.OK)
                 return null
 
-            return response.body()
+            val latestAppVersion: String? = response.body()
+
+            println("[WEBCLIENT] Latest app version: $latestAppVersion")
+
+            return latestAppVersion
 
         } catch (ex: Throwable) {
-            println("Error getting latest app version: ${ex.message}")
+            println("[WEBCLIENT] Error getting latest app version: ${ex.message}")
         }
 
         return null
@@ -135,7 +143,11 @@ object DefaultWebClient : WebClient {
             if (response.status != HttpStatusCode.OK)
                 return null
 
-            return response.body()
+            val seedCount: Long? = response.body()
+
+            println("[WEBCLIENT] Seed count: $seedCount")
+
+            return seedCount
 
         } catch (ex: Throwable) {
             println("Did not receive counts: ${ex.message}")
@@ -151,7 +163,7 @@ object DefaultWebClient : WebClient {
         }
 
         if (!response.status.isSuccess())
-            error("Requesting latest clusters failed with HTTP ${response.status}: ${response.bodyAsText()}")
+            error("[WEBCLIENT] Requesting latest clusters failed with HTTP ${response.status}: ${response.bodyAsText()}")
 
         return response.body()
     }
@@ -181,6 +193,8 @@ object DefaultWebClient : WebClient {
         val cluster = ProtoBuf.decodeFromByteArray<Cluster>(bytes)
 
         clusterCache.put(coordinate, cluster)
+
+        println("[WEBCLIENT] find(): $coordinate")
 
         return cluster
     }
@@ -214,7 +228,7 @@ object DefaultWebClient : WebClient {
         }
 
         if (!response.status.isSuccess())
-            error("Requesting favored coordinates failed with HTTP ${response.status}: ${response.bodyAsText()}")
+            error("[WEBCLIENT] Requesting favored coordinates failed with HTTP ${response.status}: ${response.bodyAsText()}")
 
         try {
 
@@ -260,7 +274,7 @@ object DefaultWebClient : WebClient {
         val success = response.status.isSuccess()
 
         if (!success)
-            println("Request failed with HTTP ${response.status}: ${response.bodyAsText()}")
+            println("[WEBCLIENT] Request failed with HTTP ${response.status}: ${response.bodyAsText()}")
 
         return success
     }
@@ -288,11 +302,15 @@ object DefaultWebClient : WebClient {
         }
 
         if (!response.status.isSuccess())
-            error("Username registry returned status ${response.status}: ${response.bodyAsText()}")
+            error("[WEBCLIENT] Username registry returned status ${response.status}: ${response.bodyAsText()}")
 
         try {
 
-            return response.body()
+            val usernameMap: Map<String, String> = response.body()
+
+            println("[WEBCLIENT] Found ${usernameMap.size} usernames.")
+
+            return usernameMap
 
         } catch (ex: Exception) {
 
@@ -316,31 +334,58 @@ object DefaultWebClient : WebClient {
         val success = response.status.isSuccess()
 
         if (!success)
-            println("Request failed with HTTP ${response.status}: ${response.bodyAsText()}")
+            println("[WEBCLIENT] Request failed with HTTP ${response.status}: ${response.bodyAsText()}")
         else
-            println("Username set to $username")
+            println("[WEBCLIENT] Username set to $username")
 
         return success
     }
 
     override suspend fun findContributors(): List<Contributor> {
 
-        println("WebClient: findContributors()")
-
         val response = httpClient.get("$INGEST_SERVER_URL/contributors") {
             accept(ContentType.Application.Json)
         }
 
         if (!response.status.isSuccess())
-            error("Requesting contributors failed with HTTP ${response.status}: ${response.bodyAsText()}")
+            error("[WEBCLIENT] Requesting contributors failed with HTTP ${response.status}: ${response.bodyAsText()}")
 
         try {
 
-            return response.body()
+            val contributors: List<Contributor> = response.body()
+
+            println("[WEBCLIENT] Found ${contributors.size} contributors.")
+
+            return contributors
 
         } catch (ex: Exception) {
 
             throw Exception("Finding contributors failed.", ex)
+        }
+    }
+
+    override suspend fun getLastModifiedMillis(url: String): Long? {
+
+        try {
+
+            val responseHead = simpleHttpClient.head(url)
+
+            if (responseHead.status != HttpStatusCode.OK)
+                return null
+
+            val lastModified = responseHead.headers.lastModifiedMillis()
+
+            println("[WEBCLIENT] Last modified date from $url is $lastModified")
+
+            return lastModified
+
+        } catch (ex: Throwable) {
+
+            println("[WEBCLIENT] Cannot get last modified date from $url")
+
+            ex.printStackTrace()
+
+            return null
         }
     }
 }

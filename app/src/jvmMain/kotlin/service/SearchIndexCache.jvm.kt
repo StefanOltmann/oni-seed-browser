@@ -46,7 +46,7 @@ actual suspend fun findSearchIndex(clusterType: ClusterType): SearchIndex {
 
     val cacheFile = File(localAppData, clusterType.prefix)
 
-    val lastModifiedMillis = getLastModifiedMillisServer(httpClient, searchIndexUrl)
+    val lastModifiedMillis = DefaultWebClient.getLastModifiedMillis(searchIndexUrl)
 
     if (lastModifiedMillis == null) {
 

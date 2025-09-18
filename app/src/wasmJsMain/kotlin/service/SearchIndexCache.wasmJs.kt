@@ -29,7 +29,7 @@ actual suspend fun findSearchIndex(clusterType: ClusterType): SearchIndex {
 
     val searchIndexUrl = SEARCH_INDEX_URL + "/" + clusterType.prefix
 
-    val lastModifiedMillis = getLastModifiedMillisServer(httpClient, searchIndexUrl)
+    val lastModifiedMillis = DefaultWebClient.getLastModifiedMillis(searchIndexUrl)
 
     if (lastModifiedMillis != null)
         println("[SEARCH] Index for ${clusterType.prefix} was last modified on $lastModifiedMillis")

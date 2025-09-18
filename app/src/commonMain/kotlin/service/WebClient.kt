@@ -51,4 +51,6 @@ interface WebClient {
 
     suspend fun findContributors(): List<Contributor>
 
+    suspend fun getLastModifiedMillis(url: String): Long?
+
 }
