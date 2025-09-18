@@ -18,7 +18,18 @@
  */
 package service
 
-import de.stefan_oltmann.oni.model.ClusterType
-import de.stefan_oltmann.oni.model.search.SearchIndex
+expect class DiskCache {
 
-expect suspend fun findSearchIndex(clusterType: ClusterType): SearchIndex
+    suspend fun open(name: String)
+
+    suspend fun save(key: String, data: ByteArray)
+
+    suspend fun load(key: String): ByteArray?
+
+    suspend fun delete(key: String)
+
+    suspend fun deleteAll()
+
+}
+
+expect val diskCache: DiskCache
