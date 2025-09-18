@@ -44,6 +44,10 @@ fun ControlsRow(
 
         FillSpacer()
 
+        SearchIndexInfoDisplay(
+            selectedCluster = filterQueryState.value.cluster
+        )
+
         DefaultSpacer()
 
         ResetButton(

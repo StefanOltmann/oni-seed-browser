@@ -20,8 +20,16 @@
 package service
 
 import de.stefan_oltmann.oni.model.Cluster
+import de.stefan_oltmann.oni.model.ClusterType
 import de.stefan_oltmann.oni.model.Contributor
 import de.stefan_oltmann.oni.model.filter.FilterQuery
+import de.stefan_oltmann.oni.model.search.SearchIndex
+
+data class SearchIndexInfo(
+    val clusterType: ClusterType,
+    val size: Long,
+    val timestamp: Long
+)
 
 interface WebClient {
 
@@ -44,6 +52,14 @@ interface WebClient {
     suspend fun rate(coordinate: String, like: Boolean): Boolean
 
     suspend fun search(filterQuery: FilterQuery): List<String>
+
+    suspend fun getCurrentSearchIndex(): SearchIndex?
+
+    suspend fun getCurrentSearchIndexSize(): Long
+
+    suspend fun getAllSearchIndexInfo(): List<SearchIndexInfo>
+
+    suspend fun downloadSearchIndex(clusterType: ClusterType): String
 
     suspend fun getUsernameMap(): Map<String, String>
 

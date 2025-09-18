@@ -19,6 +19,8 @@
 
 package util
 
+import kotlin.math.log10
+import kotlin.math.pow
 import kotlin.time.ExperimentalTime
 import kotlin.time.Instant
 import kotlinx.datetime.LocalDateTime
@@ -47,3 +49,33 @@ fun formatDate(timestamp: Long): String {
     return localDateTime.format(dateTimeFormat)
 }
 
+fun formatFileSize(bytes: Long): String {
+    if (bytes <= 0) return "0 B"
+
+    return when {
+        bytes < 1024 -> "$bytes B"
+        bytes < 1024 * 1024 -> {
+            val kb = bytes / 1024.0
+            val rounded = if (kb >= 100) kotlin.math.round(kb).toInt() else (kotlin.math.round(kb * 10) / 10.0)
+            "$rounded KB"
+        }
+
+        bytes < 1024 * 1024 * 1024 -> {
+            val mb = bytes / (1024.0 * 1024)
+            val rounded = if (mb >= 100) kotlin.math.round(mb).toInt() else (kotlin.math.round(mb * 10) / 10.0)
+            "$rounded MB"
+        }
+
+        bytes < 1024L * 1024 * 1024 * 1024 -> {
+            val gb = bytes / (1024.0 * 1024 * 1024)
+            val rounded = if (gb >= 100) kotlin.math.round(gb).toInt() else (kotlin.math.round(gb * 10) / 10.0)
+            "$rounded GB"
+        }
+
+        else -> {
+            val tb = bytes / (1024.0 * 1024 * 1024 * 1024)
+            val rounded = if (tb >= 100) kotlin.math.round(tb).toInt() else (kotlin.math.round(tb * 10) / 10.0)
+            "$rounded TB"
+        }
+    }
+}

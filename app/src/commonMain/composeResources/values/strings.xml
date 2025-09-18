@@ -1,5 +1,12 @@
 <resources>
     <!-- UI Specific -->
+    <string name="uiSearchIndexInfo">Search Index: {size} | {date}</string>
+    <string name="uiViewAllSearchIndexes">View All Search Indexes</string>
+    <string name="uiSearchIndexes">Search Indexes</string>
+    <string name="uiDownload">Download</string>
+    <string name="uiSize">Size</string>
+    <string name="uiDate">Date</string>
+    <string name="uiCluster">Cluster</string>
     <string name="uiTitle">Oxygen Not Included Seed Browser</string>
     <string name="uiFilter">Filter</string>
     <string name="uiSelectRule">Please select an cluster to define rules.</string>

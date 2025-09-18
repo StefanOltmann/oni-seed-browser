@@ -21,6 +21,7 @@ package service
 
 import AppStorage
 import de.stefan_oltmann.oni.model.Cluster
+import de.stefan_oltmann.oni.model.ClusterType
 import de.stefan_oltmann.oni.model.Contributor
 import de.stefan_oltmann.oni.model.filter.FilterQuery
 import de.stefan_oltmann.oni.model.search.SearchIndex
@@ -31,6 +32,7 @@ import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.request.accept
 import io.ktor.client.request.delete
 import io.ktor.client.request.get
+import io.ktor.client.request.head
 import io.ktor.client.request.header
 import io.ktor.client.request.post
 import io.ktor.client.request.put
@@ -103,6 +105,7 @@ object DefaultWebClient : WebClient {
     private val clusterCache = LruCache<String, Cluster?>(100)
 
     private var currentSearchIndex: SearchIndex? = null
+    private var currentSearchIndexSize: Long = 0L
 
     override suspend fun getLatestAppVersion(): String? {
 
@@ -280,6 +283,59 @@ object DefaultWebClient : WebClient {
 
             return@withContext searchIndex.match(filterQuery)
         }
+
+    override suspend fun getCurrentSearchIndex(): SearchIndex? {
+        return currentSearchIndex
+    }
+
+    override suspend fun getCurrentSearchIndexSize(): Long {
+        val currentIndex = currentSearchIndex ?: return 0L
+
+        // Get size from the server
+        try {
+            val searchIndexUrl = SEARCH_INDEX_URL + "/" + currentIndex.clusterType.prefix
+            val response = httpClient.head(searchIndexUrl)
+            return response.headers["Content-Length"]?.toLongOrNull() ?: 0L
+        } catch (ex: Throwable) {
+            return 0L
+        }
+    }
+
+    override suspend fun getAllSearchIndexInfo(): List<SearchIndexInfo> =
+        withContext(Dispatchers.Default) {
+            val allClusterTypes = ClusterType.entries
+            val searchIndexInfoList = mutableListOf<SearchIndexInfo>()
+
+            for (clusterType in allClusterTypes) {
+                try {
+                    val searchIndexUrl = SEARCH_INDEX_URL + "/" + clusterType.prefix
+                    val lastModifiedMillis = getLastModifiedMillisServer(httpClient, searchIndexUrl)
+                        ?: continue // Skip if we can't get modification time
+
+                    // Get the content-length header to determine size
+                    val response = httpClient.head(searchIndexUrl)
+                    val size = response.headers["Content-Length"]?.toLongOrNull() ?: 0L
+
+                    searchIndexInfoList.add(
+                        SearchIndexInfo(
+                            clusterType = clusterType,
+                            size = size,
+                            timestamp = lastModifiedMillis
+                        )
+                    )
+
+                } catch (ex: Throwable) {
+                    println("[SEARCH] Could not get info for ${clusterType.prefix}: ${ex.message}")
+                    // Continue with other cluster types
+                }
+            }
+
+            return@withContext searchIndexInfoList.sortedBy { it.clusterType.name }
+        }
+
+    override suspend fun downloadSearchIndex(clusterType: ClusterType): String {
+        return SEARCH_INDEX_URL + "/" + clusterType.prefix
+    }
 
     override suspend fun getUsernameMap(): Map<String, String> {
 
