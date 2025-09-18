@@ -53,7 +53,10 @@ import io.github.stefanoltmann.app.generated.resources.uiSearching
 import io.github.stefanoltmann.app.generated.resources.uiTitle
 import io.github.stefanoltmann.app.generated.resources.uiUsernameLabel
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import service.DefaultWebClient
@@ -626,13 +629,11 @@ private fun ColumnScope.MainPanel(
 
     val search: suspend () -> Unit = {
 
-        println("Searching...")
-
         try {
 
             val filterQuery = filterQueryState.value
 
-            println("Filter query: $filterQuery")
+            println("[SEARCH] $filterQuery")
 
             isGettingNewResults.value = true
 
@@ -640,13 +641,18 @@ private fun ColumnScope.MainPanel(
 
             /* Reset the data */
             clusters.value = emptyList()
+            likeCounts.value = null
 
-            val searchResultWorlds = DefaultWebClient.search(filterQuery)
+            /*
+             * Allow the UI to update.
+             */
+            delay(100)
+
+            val searchResultWorlds = withContext(Dispatchers.Default) {
+                DefaultWebClient.search(filterQuery)
+            }
 
             clusters.value = searchResultWorlds
-
-            /* Reset */
-            likeCounts.value = null
 
         } catch (ex: Exception) {
 
