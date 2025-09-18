@@ -84,4 +84,5 @@ actual class DiskCache(
     }
 }
 
-actual val searchIndexCache: DiskCache = DiskCache("search-index")
+actual val searchIndexDiskCache: DiskCache = DiskCache("oni-search-index")
+actual val clusterDiskCache: DiskCache = DiskCache("oni-cluster")

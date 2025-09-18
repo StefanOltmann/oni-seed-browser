@@ -26,11 +26,16 @@ import io.ktor.client.statement.bodyAsBytes
 import io.ktor.http.isSuccess
 import kotlin.time.measureTime
 import kotlin.time.measureTimedValue
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.decodeFromByteArray
 import kotlinx.serialization.protobuf.ProtoBuf
 
 private val httpClient = HttpClient()
+
+private val backgroundScope = CoroutineScope(Dispatchers.Default)
 
 @OptIn(ExperimentalSerializationApi::class)
 suspend fun findSearchIndex(clusterType: ClusterType): SearchIndex {
@@ -39,7 +44,7 @@ suspend fun findSearchIndex(clusterType: ClusterType): SearchIndex {
 
     val lastModifiedMillis = DefaultWebClient.getLastModifiedMillis(searchIndexUrl)
 
-    val cacheEntry = searchIndexCache.load(clusterType.prefix)
+    val cacheEntry = searchIndexDiskCache.load(clusterType.prefix)
 
     if (lastModifiedMillis == null) {
 
@@ -93,19 +98,21 @@ suspend fun findSearchIndex(clusterType: ClusterType): SearchIndex {
     println("[SEARCH] Deflated downloaded search index in $deflateTime")
 
     /*
-     * Cache the search index in the local app data directory.
+     * Async cache the search index
      */
+    backgroundScope.launch {
 
-    val cacheTime = measureTime {
+        val cacheTime = measureTime {
 
-        searchIndexCache.save(
-            key = clusterType.prefix,
-            data = bytes,
-            modifiedTime = lastModifiedMillis
-        )
+            searchIndexDiskCache.save(
+                key = clusterType.prefix,
+                data = bytes,
+                modifiedTime = lastModifiedMillis
+            )
+        }
+
+        println("[SEARCH] Saved search index bytes to cache in $cacheTime")
     }
-
-    println("[SEARCH] Saved search index bytes to cache in $cacheTime")
 
     /*
      * Return the cached search index.

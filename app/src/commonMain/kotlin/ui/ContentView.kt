@@ -646,7 +646,7 @@ private fun ColumnScope.MainPanel(
             /*
              * Allow the UI to update.
              */
-            delay(100)
+            delay(200)
 
             val searchResultWorlds = withContext(Dispatchers.Default) {
                 DefaultWebClient.search(filterQuery)

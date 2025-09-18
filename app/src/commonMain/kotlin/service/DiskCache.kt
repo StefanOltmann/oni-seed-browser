@@ -30,4 +30,5 @@ expect class DiskCache {
 
 }
 
-expect val searchIndexCache: DiskCache
+expect val searchIndexDiskCache: DiskCache
+expect val clusterDiskCache: DiskCache

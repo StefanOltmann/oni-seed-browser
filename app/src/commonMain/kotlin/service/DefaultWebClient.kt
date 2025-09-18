@@ -44,7 +44,9 @@ import io.ktor.http.contentType
 import io.ktor.http.isSuccess
 import io.ktor.serialization.kotlinx.json.json
 import io.ktor.serialization.kotlinx.protobuf.protobuf
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.decodeFromByteArray
@@ -85,6 +87,8 @@ private val json = Json {
 
     encodeDefaults = true
 }
+
+private val backgroundScope = CoroutineScope(Dispatchers.Default)
 
 object DefaultWebClient : WebClient {
 
@@ -177,6 +181,19 @@ object DefaultWebClient : WebClient {
         if (cachedCluster != null)
             return cachedCluster
 
+        val cacheEntry = clusterDiskCache.load(coordinate)
+
+        if (cacheEntry != null) {
+
+            val cluster = ProtoBuf.decodeFromByteArray<Cluster>(cacheEntry.first)
+
+            clusterCache.put(coordinate, cluster)
+
+            println("[WEBCLIENT] find(): $coordinate (Cache HIT)")
+
+            return cluster
+        }
+
         val response = httpClient.get("$FIND_URL/$coordinate") {
             accept(ContentType.Application.ProtoBuf)
         }
@@ -194,7 +211,19 @@ object DefaultWebClient : WebClient {
 
         clusterCache.put(coordinate, cluster)
 
-        println("[WEBCLIENT] find(): $coordinate")
+        println("[WEBCLIENT] find(): $coordinate (Cache MISS)")
+
+        /*
+         * Async store in cache
+         */
+
+        backgroundScope.launch {
+            clusterDiskCache.save(
+                key = cluster.coordinate,
+                data = bytes,
+                modifiedTime = cluster.uploadDate
+            )
+        }
 
         return cluster
     }
