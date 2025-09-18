@@ -294,7 +294,13 @@ object DefaultWebClient : WebClient {
     override suspend fun getCurrentSearchIndexSize(): Long {
         val currentIndex = currentSearchIndex ?: return 0L
 
-        // Get size from the server
+        // Check if we have it locally and use that size
+        val localInfo = getLocalSearchIndexInfo(currentIndex.clusterType)
+        if (localInfo != null) {
+            return localInfo.size
+        }
+
+        // Fallback to server size estimation (will be compressed size)
         try {
             val searchIndexUrl = SEARCH_INDEX_URL + "/" + currentIndex.clusterType.prefix
             val response = headClient.head(searchIndexUrl)
@@ -317,15 +323,27 @@ object DefaultWebClient : WebClient {
                     val lastModifiedMillis = getLastModifiedMillisServer(headClient, searchIndexUrl)
                         ?: continue // Skip if we can't get modification time
 
-                    // Get content length using a separate request
-                    val response = headClient.head(searchIndexUrl)
-                    val size = response.headers["Content-Length"]?.toLongOrNull() ?: 0L
+                    // Check if we have it locally
+                    val localInfo = getLocalSearchIndexInfo(clusterType)
+
+                    // Get server size by downloading a small portion or estimating from local cache
+                    val serverSize = if (localInfo != null && localInfo.timestamp == lastModifiedMillis) {
+                        // If local is up to date, use local size as server size (uncompressed)
+                        localInfo.size
+                    } else {
+                        // Try to get an estimate from Content-Length (this will be compressed size)
+                        val response = headClient.head(searchIndexUrl)
+                        response.headers["Content-Length"]?.toLongOrNull() ?: 0L
+                    }
 
                     searchIndexInfoList.add(
                         SearchIndexInfo(
                             clusterType = clusterType,
-                            size = size,
-                            timestamp = lastModifiedMillis
+                            size = serverSize,
+                            timestamp = lastModifiedMillis,
+                            isLocallyAvailable = localInfo != null,
+                            localSize = localInfo?.size ?: 0L,
+                            localTimestamp = localInfo?.timestamp ?: 0L
                         )
                     )
 
@@ -340,6 +358,10 @@ object DefaultWebClient : WebClient {
 
     override suspend fun downloadSearchIndex(clusterType: ClusterType): String {
         return SEARCH_INDEX_URL + "/" + clusterType.prefix
+    }
+
+    override suspend fun downloadSearchIndexToLocal(clusterType: ClusterType) {
+        downloadSearchIndex(clusterType)
     }
 
     override suspend fun getUsernameMap(): Map<String, String> {

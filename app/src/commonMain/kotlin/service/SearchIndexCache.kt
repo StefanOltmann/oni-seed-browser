@@ -6,7 +6,17 @@ import io.ktor.client.HttpClient
 import io.ktor.client.request.head
 import io.ktor.http.HttpStatusCode
 
+data class LocalSearchIndexInfo(
+    val clusterType: ClusterType,
+    val timestamp: Long,
+    val size: Long
+)
+
 expect suspend fun findSearchIndex(clusterType: ClusterType): SearchIndex
+
+expect suspend fun downloadSearchIndex(clusterType: ClusterType)
+
+expect suspend fun getLocalSearchIndexInfo(clusterType: ClusterType): LocalSearchIndexInfo?
 
 internal suspend fun getLastModifiedMillisServer(
     httpClient: HttpClient,

@@ -133,6 +133,12 @@ fun SearchIndexOverlayModal(
                                 modifier = Modifier.weight(2f)
                             )
                             Text(
+                                text = "Local",
+                                style = MaterialTheme.typography.bodyMedium,
+                                fontWeight = FontWeight.Bold,
+                                modifier = Modifier.weight(0.8f)
+                            )
+                            Text(
                                 text = "Size",
                                 style = MaterialTheme.typography.bodyMedium,
                                 fontWeight = FontWeight.Bold,
@@ -159,12 +165,10 @@ fun SearchIndexOverlayModal(
                                 SearchIndexRow(
                                     searchIndexInfo = searchIndexInfo,
                                     onDownload = {
-                                        // Open download URL in browser - platform specific implementation needed
-                                        val downloadUrl =
-                                            "https://oni-search.stefanoltmann.de/${searchIndexInfo.clusterType.prefix}"
-                                        // TODO: Implement platform-specific URL opening
-                                        // For now, print the URL for user to copy
-                                        println("Download URL: $downloadUrl")
+                                        // Download to local storage
+                                        // TODO: Add loading state and error handling
+                                        println("Downloading search index for ${searchIndexInfo.clusterType.prefix}")
+                                        // This should trigger a download and refresh the list
                                     }
                                 )
                             }
@@ -197,7 +201,29 @@ private fun SearchIndexRow(
         )
 
         Text(
-            text = formatFileSize(searchIndexInfo.size),
+            text = if (searchIndexInfo.isLocallyAvailable) {
+                if (searchIndexInfo.localTimestamp == searchIndexInfo.timestamp) "\u2713" else "\u2713*"
+            } else {
+                ""
+            },
+            style = MaterialTheme.typography.bodyMedium,
+            color = if (searchIndexInfo.isLocallyAvailable) {
+                if (searchIndexInfo.localTimestamp == searchIndexInfo.timestamp)
+                    MaterialTheme.colorScheme.primary
+                else
+                    MaterialTheme.colorScheme.error
+            } else {
+                MaterialTheme.colorScheme.onSurface
+            },
+            modifier = Modifier.weight(0.8f)
+        )
+
+        Text(
+            text = if (searchIndexInfo.isLocallyAvailable && searchIndexInfo.localSize > 0) {
+                formatFileSize(searchIndexInfo.localSize)
+            } else {
+                formatFileSize(searchIndexInfo.size)
+            },
             style = MaterialTheme.typography.bodyMedium,
             modifier = Modifier.weight(1f)
         )
@@ -209,17 +235,33 @@ private fun SearchIndexRow(
         )
 
         Text(
-            text = "Download",
+            text = if (searchIndexInfo.isLocallyAvailable) {
+                if (searchIndexInfo.localTimestamp == searchIndexInfo.timestamp) "Cached" else "Update"
+            } else {
+                "Download"
+            },
             style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.primary,
+            color = if (searchIndexInfo.isLocallyAvailable && searchIndexInfo.localTimestamp == searchIndexInfo.timestamp) {
+                MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
+            } else {
+                MaterialTheme.colorScheme.primary
+            },
             fontWeight = FontWeight.Medium,
             modifier = Modifier
                 .weight(1f)
-                .clickable { onDownload() }
+                .clickable {
+                    if (!searchIndexInfo.isLocallyAvailable || searchIndexInfo.localTimestamp != searchIndexInfo.timestamp) {
+                        onDownload()
+                    }
+                }
                 .padding(4.dp)
                 .border(
                     1.dp,
-                    MaterialTheme.colorScheme.primary.copy(alpha = 0.3f),
+                    if (searchIndexInfo.isLocallyAvailable && searchIndexInfo.localTimestamp == searchIndexInfo.timestamp) {
+                        MaterialTheme.colorScheme.outline.copy(alpha = 0.3f)
+                    } else {
+                        MaterialTheme.colorScheme.primary.copy(alpha = 0.3f)
+                    },
                     defaultRoundedCornerShape
                 )
                 .padding(horizontal = 8.dp, vertical = 4.dp)

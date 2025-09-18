@@ -28,7 +28,10 @@ import de.stefan_oltmann.oni.model.search.SearchIndex
 data class SearchIndexInfo(
     val clusterType: ClusterType,
     val size: Long,
-    val timestamp: Long
+    val timestamp: Long,
+    val isLocallyAvailable: Boolean = false,
+    val localSize: Long = 0L,
+    val localTimestamp: Long = 0L
 )
 
 interface WebClient {
@@ -60,6 +63,8 @@ interface WebClient {
     suspend fun getAllSearchIndexInfo(): List<SearchIndexInfo>
 
     suspend fun downloadSearchIndex(clusterType: ClusterType): String
+
+    suspend fun downloadSearchIndexToLocal(clusterType: ClusterType)
 
     suspend fun getUsernameMap(): Map<String, String>
 

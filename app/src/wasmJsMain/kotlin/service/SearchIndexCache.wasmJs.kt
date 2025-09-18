@@ -118,3 +118,64 @@ actual suspend fun findSearchIndex(clusterType: ClusterType): SearchIndex {
 
     return ProtoBuf.decodeFromByteArray(bytes)
 }
+
+actual suspend fun downloadSearchIndex(clusterType: ClusterType) {
+    val cache = caches.open(CACHE_NAME)
+    val searchIndexUrl = SEARCH_INDEX_URL + "/" + clusterType.prefix
+
+    println("[SEARCH] User requested download of search index for ${clusterType.prefix}")
+
+    try {
+        // Force download by clearing any existing cache entry
+        // Note: There's no standard way to delete specific cache entries in the Cache API
+        // So we just re-download and overwrite
+
+        cache.add(searchIndexUrl)
+
+        val response = cache.match(searchIndexUrl)
+            ?: error("[SEARCH] No cache entry found at $searchIndexUrl")
+
+        val bytes = response.bytes().toByteArray()
+        println("[SEARCH] Downloaded ${bytes.size} bytes from $searchIndexUrl for user request")
+
+    } catch (ex: Throwable) {
+        ex.printStackTrace()
+
+        println("[CACHE] Error downloading search index via cache.add(): ${ex.message}.")
+
+        // Fallback to Ktor
+        val response = httpClient.get(searchIndexUrl)
+
+        if (response.status.value != 200)
+            error("[SEARCH] Error downloading search index: ${response.status.value}.")
+
+        println("[CACHE] Downloaded search index via Ktor as fallback for user request.")
+    }
+}
+
+actual suspend fun getLocalSearchIndexInfo(clusterType: ClusterType): LocalSearchIndexInfo? {
+    val cache = caches.open(CACHE_NAME)
+    val searchIndexUrl = SEARCH_INDEX_URL + "/" + clusterType.prefix
+
+    return try {
+        val cacheResponse = cache.match(searchIndexUrl)
+
+        if (cacheResponse != null) {
+            val lastModifiedMillis = cacheResponse.headers.get("Last-Modified")?.let { Date.parse(it).toLong() }
+                ?: return null
+
+            val bytes = cacheResponse.bytes().toByteArray()
+
+            LocalSearchIndexInfo(
+                clusterType = clusterType,
+                timestamp = lastModifiedMillis,
+                size = bytes.size.toLong()
+            )
+        } else {
+            null
+        }
+    } catch (ex: Throwable) {
+        println("[SEARCH] Error checking local cache for ${clusterType.prefix}: ${ex.message}")
+        null
+    }
+}

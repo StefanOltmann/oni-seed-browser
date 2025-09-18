@@ -103,3 +103,37 @@ actual suspend fun findSearchIndex(clusterType: ClusterType): SearchIndex {
     return searchIndex
 }
 
+actual suspend fun downloadSearchIndex(clusterType: ClusterType) {
+    val searchIndexUrl = SEARCH_INDEX_URL + "/" + clusterType.prefix
+    val cacheFile = File(localAppData, clusterType.prefix)
+
+    val response = httpClient.get(searchIndexUrl)
+
+    if (!response.status.isSuccess())
+        error("[SEARCH] Search index for $clusterType not found.")
+
+    val bytes = response.bodyAsBytes()
+
+    println("[SEARCH] Downloaded ${bytes.size} bytes from $searchIndexUrl for user request")
+
+    val lastModifiedMillis = getLastModifiedMillisServer(httpClient, searchIndexUrl) ?: System.currentTimeMillis()
+
+    withContext(Dispatchers.IO) {
+        cacheFile.writeBytes(bytes)
+        cacheFile.setLastModified(lastModifiedMillis)
+    }
+}
+
+actual suspend fun getLocalSearchIndexInfo(clusterType: ClusterType): LocalSearchIndexInfo? {
+    val cacheFile = File(localAppData, clusterType.prefix)
+
+    return if (cacheFile.exists()) {
+        LocalSearchIndexInfo(
+            clusterType = clusterType,
+            timestamp = cacheFile.lastModified(),
+            size = cacheFile.length()
+        )
+    } else {
+        null
+    }
+}

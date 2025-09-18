@@ -59,6 +59,9 @@
     <string name="uiLeaderBoardUsername">使用者名稱</string>
     <string name="uiLeaderBoardCount">數量</string>
     <string name="uiStorageTankForDormancy">休眠儲存罐</string>
+    <string name="uiLocal">本地</string>
+    <string name="uiCached">已快取</string>
+    <string name="uiUpdate">更新</string>
 
     <!-- GameModes -->
     <string name="gameModeBaseGameStandard">標準</string>
