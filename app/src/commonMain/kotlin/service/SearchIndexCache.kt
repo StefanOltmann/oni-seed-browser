@@ -24,6 +24,8 @@ import io.ktor.client.HttpClient
 import io.ktor.client.request.get
 import io.ktor.client.statement.bodyAsBytes
 import io.ktor.http.isSuccess
+import kotlin.time.measureTime
+import kotlin.time.measureTimedValue
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.decodeFromByteArray
 import kotlinx.serialization.protobuf.ProtoBuf
@@ -63,29 +65,47 @@ suspend fun findSearchIndex(clusterType: ClusterType): SearchIndex {
 
         println("[SEARCH] Search index cache hit for ${clusterType.prefix} at $lastModifiedMillis")
 
-        return ProtoBuf.decodeFromByteArray(cacheEntry.first)
+        val (searchIndex, deflateTime) = measureTimedValue {
+            ProtoBuf.decodeFromByteArray<SearchIndex>(cacheEntry.first)
+        }
+
+        println("[SEARCH] Loaded search index from cache in $deflateTime")
+
+        return searchIndex
     }
 
-    val response = httpClient.get(searchIndexUrl)
+    val (bytes, downloadTime) = measureTimedValue {
 
-    if (!response.status.isSuccess())
-        error("[SEARCH] Search index for $clusterType not found.")
+        val response = httpClient.get(searchIndexUrl)
 
-    val bytes = response.bodyAsBytes()
+        if (!response.status.isSuccess())
+            error("[SEARCH] Search index for $clusterType not found.")
 
-    println("[SEARCH] Downloaded ${bytes.size} bytes from $searchIndexUrl")
+        response.bodyAsBytes()
+    }
 
-    val searchIndex: SearchIndex = ProtoBuf.decodeFromByteArray(bytes)
+    println("[SEARCH] Downloaded ${bytes.size} bytes from $searchIndexUrl in $downloadTime")
+
+    val (searchIndex, deflateTime) = measureTimedValue {
+        ProtoBuf.decodeFromByteArray<SearchIndex>(bytes)
+    }
+
+    println("[SEARCH] Loaded downloaded search index in $deflateTime")
 
     /*
      * Cache the search index in the local app data directory.
      */
 
-    searchIndexCache.save(
-        key = clusterType.prefix,
-        data = bytes,
-        modifiedTime = lastModifiedMillis
-    )
+    val cacheTime = measureTime {
+
+        searchIndexCache.save(
+            key = clusterType.prefix,
+            data = bytes,
+            modifiedTime = lastModifiedMillis
+        )
+    }
+
+    println("[SEARCH] Saved search index bytes to cache in $cacheTime")
 
     /*
      * Return the cached search index.
