@@ -69,7 +69,7 @@ suspend fun findSearchIndex(clusterType: ClusterType): SearchIndex {
             ProtoBuf.decodeFromByteArray<SearchIndex>(cacheEntry.first)
         }
 
-        println("[SEARCH] Loaded search index from cache in $deflateTime")
+        println("[SEARCH] Deflated cached search index in $deflateTime")
 
         return searchIndex
     }
@@ -90,7 +90,7 @@ suspend fun findSearchIndex(clusterType: ClusterType): SearchIndex {
         ProtoBuf.decodeFromByteArray<SearchIndex>(bytes)
     }
 
-    println("[SEARCH] Loaded downloaded search index in $deflateTime")
+    println("[SEARCH] Deflated downloaded search index in $deflateTime")
 
     /*
      * Cache the search index in the local app data directory.
