@@ -19,7 +19,7 @@
 package service
 
 import js.buffer.toArrayBuffer
-import js.date.Date
+import js.objects.unsafeJso
 import js.typedarrays.toByteArray
 import web.cache.Cache
 import web.cache.caches
@@ -28,6 +28,7 @@ import web.cache.match
 import web.cache.open
 import web.cache.put
 import web.http.BodyInit
+import web.http.Headers
 import web.http.Response
 import web.http.bytes
 
@@ -45,6 +46,7 @@ actual class DiskCache(
         this.cache = caches.open(name)
     }
 
+    @OptIn(ExperimentalWasmJsInterop::class)
     actual suspend fun save(key: String, data: ByteArray, modifiedTime: Long) {
 
         init()
@@ -55,12 +57,12 @@ actual class DiskCache(
                 body = BodyInit(
                     value = data.toArrayBuffer()
                 ),
-//                init = ResponseInit(
-//                    status = 200,
-//                    headers = Headers().apply {
-//                        set("cache-date", modifiedTime)
-//                    }
-//                )
+                init = unsafeJso {
+                    status = 200
+                    headers = Headers().apply {
+                        set("x-cache-modified-time", modifiedTime.toString())
+                    }
+                }
             )
         )
     }
@@ -71,9 +73,8 @@ actual class DiskCache(
 
         val response = cache?.match(key) ?: return null
 
-        val lastModified = response.headers.get("Last-Modified")
-            ?.let { Date.parse(it).toLong() }
-            ?: 0L
+        val lastModified = response.headers.get("x-cache-modified-time")?.toLongOrNull()
+            ?: error("Missing 'x-cache-modified-time' header in cache response.")
 
         return response.bytes().toByteArray() to lastModified
     }
