@@ -19,6 +19,7 @@
 package service
 
 import js.buffer.toArrayBuffer
+import js.buffer.toByteArray
 import js.objects.unsafeJso
 import js.typedarrays.toByteArray
 import web.cache.Cache
@@ -30,6 +31,7 @@ import web.cache.put
 import web.http.BodyInit
 import web.http.Headers
 import web.http.Response
+import web.http.byteArray
 import web.http.bytes
 
 actual class DiskCache(
@@ -44,6 +46,18 @@ actual class DiskCache(
             return
 
         this.cache = caches.open(name)
+    }
+
+    actual suspend fun load(key: String): Pair<ByteArray, Long>? {
+
+        init()
+
+        val response = cache?.match(key) ?: return null
+
+        val lastModified = response.headers.get("x-cache-modified-time")?.toLongOrNull()
+            ?: error("Missing 'x-cache-modified-time' header in cache response.")
+
+        return response.byteArray() to lastModified
     }
 
     @OptIn(ExperimentalWasmJsInterop::class)
@@ -65,18 +79,6 @@ actual class DiskCache(
                 }
             )
         )
-    }
-
-    actual suspend fun load(key: String): Pair<ByteArray, Long>? {
-
-        init()
-
-        val response = cache?.match(key) ?: return null
-
-        val lastModified = response.headers.get("x-cache-modified-time")?.toLongOrNull()
-            ?: error("Missing 'x-cache-modified-time' header in cache response.")
-
-        return response.bytes().toByteArray() to lastModified
     }
 
     actual suspend fun delete(key: String) {

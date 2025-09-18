@@ -57,14 +57,6 @@ actual class DiskCache(
             .apply { mkdirs() }
     }
 
-    actual suspend fun save(key: String, data: ByteArray, modifiedTime: Long) {
-
-        val file = File(dir, key)
-
-        file.writeBytes(data)
-        file.setLastModified(modifiedTime)
-    }
-
     actual suspend fun load(key: String): Pair<ByteArray, Long>? {
 
         val file = File(dir, key)
@@ -73,6 +65,14 @@ actual class DiskCache(
             return file.readBytes() to file.lastModified()
 
         return null
+    }
+
+    actual suspend fun save(key: String, data: ByteArray, modifiedTime: Long) {
+
+        val file = File(dir, key)
+
+        file.writeBytes(data)
+        file.setLastModified(modifiedTime)
     }
 
     actual suspend fun delete(key: String) {

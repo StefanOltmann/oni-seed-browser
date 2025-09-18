@@ -122,7 +122,7 @@ kotlin {
 
                 implementation(libs.ktor.js)
 
-                implementation("org.jetbrains.kotlin-wrappers:kotlin-browser:2025.8.20")
+                implementation("org.jetbrains.kotlin-wrappers:kotlin-browser:2025.9.8")
 
                 /* Cryptography (JWT) */
                 implementation("dev.whyoleg.cryptography:cryptography-provider-webcrypto:0.4.0")
