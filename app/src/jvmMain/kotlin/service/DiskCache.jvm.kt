@@ -45,29 +45,32 @@ private val localAppData: File by lazy {
     }
 }
 
-actual class DiskCache {
-
-    private lateinit var name: String
+actual class DiskCache(
+    name: String
+) {
 
     private lateinit var dir: File
 
-    actual suspend fun open(name: String) {
-
-        this.name = name
+    init {
 
         this.dir = File(localAppData, name)
             .apply { mkdirs() }
     }
 
-    actual suspend fun save(key: String, data: ByteArray) =
-        File(dir, key).writeBytes(data)
+    actual suspend fun save(key: String, data: ByteArray, modifiedTime: Long) {
 
-    actual suspend fun load(key: String): ByteArray? {
+        val file = File(dir, key)
+
+        file.writeBytes(data)
+        file.setLastModified(modifiedTime)
+    }
+
+    actual suspend fun load(key: String): Pair<ByteArray, Long>? {
 
         val file = File(dir, key)
 
         if (file.exists())
-            return file.readBytes()
+            return file.readBytes() to file.lastModified()
 
         return null
     }
@@ -81,4 +84,4 @@ actual class DiskCache {
     }
 }
 
-actual val diskCache: DiskCache = DiskCache()
+actual val searchIndexCache: DiskCache = DiskCache("search-index")

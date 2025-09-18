@@ -20,11 +20,9 @@ package service
 
 expect class DiskCache {
 
-    suspend fun open(name: String)
+    suspend fun load(key: String): Pair<ByteArray, Long>?
 
-    suspend fun save(key: String, data: ByteArray)
-
-    suspend fun load(key: String): ByteArray?
+    suspend fun save(key: String, data: ByteArray, modifiedTime: Long)
 
     suspend fun delete(key: String)
 
@@ -32,4 +30,4 @@ expect class DiskCache {
 
 }
 
-expect val diskCache: DiskCache
+expect val searchIndexCache: DiskCache

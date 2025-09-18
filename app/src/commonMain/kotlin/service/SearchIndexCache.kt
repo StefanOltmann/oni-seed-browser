@@ -20,5 +20,76 @@ package service
 
 import de.stefan_oltmann.oni.model.ClusterType
 import de.stefan_oltmann.oni.model.search.SearchIndex
+import io.ktor.client.HttpClient
+import io.ktor.client.request.get
+import io.ktor.client.statement.bodyAsBytes
+import io.ktor.http.isSuccess
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.decodeFromByteArray
+import kotlinx.serialization.protobuf.ProtoBuf
 
-expect suspend fun findSearchIndex(clusterType: ClusterType): SearchIndex
+private val httpClient = HttpClient()
+
+@OptIn(ExperimentalSerializationApi::class)
+suspend fun findSearchIndex(clusterType: ClusterType): SearchIndex {
+
+    val searchIndexUrl = SEARCH_INDEX_URL + "/" + clusterType.prefix
+
+    val lastModifiedMillis = DefaultWebClient.getLastModifiedMillis(searchIndexUrl)
+
+    val cacheEntry = searchIndexCache.load(clusterType.prefix)
+
+    if (lastModifiedMillis == null) {
+
+        if (cacheEntry != null) {
+
+            println("[SEARCH] Use cached file for ${clusterType.prefix} as we are offline.")
+
+            return ProtoBuf.decodeFromByteArray(cacheEntry.first)
+        }
+
+        println("[SEARCH] No cache file for ${clusterType.prefix} and we are offline.")
+
+        /*
+         * Return an empty search index as we are offline.
+         */
+        return SearchIndex(
+            clusterType = clusterType,
+            timestamp = 0
+        )
+    }
+
+    if (lastModifiedMillis == cacheEntry?.second) {
+
+        println("[SEARCH] Search index cache hit for ${clusterType.prefix} at $lastModifiedMillis")
+
+        return ProtoBuf.decodeFromByteArray(cacheEntry.first)
+    }
+
+    val response = httpClient.get(searchIndexUrl)
+
+    if (!response.status.isSuccess())
+        error("[SEARCH] Search index for $clusterType not found.")
+
+    val bytes = response.bodyAsBytes()
+
+    println("[SEARCH] Downloaded ${bytes.size} bytes from $searchIndexUrl")
+
+    val searchIndex: SearchIndex = ProtoBuf.decodeFromByteArray(bytes)
+
+    /*
+     * Cache the search index in the local app data directory.
+     */
+
+    searchIndexCache.save(
+        key = clusterType.prefix,
+        data = bytes,
+        modifiedTime = lastModifiedMillis
+    )
+
+    /*
+     * Return the cached search index.
+     */
+
+    return searchIndex
+}

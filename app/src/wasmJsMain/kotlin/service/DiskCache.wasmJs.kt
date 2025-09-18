@@ -19,6 +19,7 @@
 package service
 
 import js.buffer.toArrayBuffer
+import js.date.Date
 import js.typedarrays.toByteArray
 import web.cache.Cache
 import web.cache.caches
@@ -30,26 +31,55 @@ import web.http.BodyInit
 import web.http.Response
 import web.http.bytes
 
-actual class DiskCache {
+actual class DiskCache(
+    val name: String
+) {
 
-    private lateinit var name: String
-    private lateinit var cache: Cache
+    private var cache: Cache? = null
 
-    actual suspend fun open(name: String) {
-        this.name = name
+    suspend fun init() {
+
+        if (cache != null)
+            return
+
         this.cache = caches.open(name)
     }
 
-    actual suspend fun save(key: String, data: ByteArray) {
-        cache.put(key, Response(BodyInit(data.toArrayBuffer())))
+    actual suspend fun save(key: String, data: ByteArray, modifiedTime: Long) {
+
+        init()
+
+        cache?.put(
+            url = key,
+            response = Response(
+                body = BodyInit(
+                    value = data.toArrayBuffer()
+                ),
+//                init = ResponseInit(
+//                    status = 200,
+//                    headers = Headers().apply {
+//                        set("cache-date", modifiedTime)
+//                    }
+//                )
+            )
+        )
     }
 
-    actual suspend fun load(key: String): ByteArray? {
-        return cache.match(key)?.bytes()?.toByteArray()
+    actual suspend fun load(key: String): Pair<ByteArray, Long>? {
+
+        init()
+
+        val response = cache?.match(key) ?: return null
+
+        val lastModified = response.headers.get("Last-Modified")
+            ?.let { Date.parse(it).toLong() }
+            ?: 0L
+
+        return response.bytes().toByteArray() to lastModified
     }
 
     actual suspend fun delete(key: String) {
-        cache.delete(key)
+        cache?.delete(key)
     }
 
     actual suspend fun deleteAll() {
@@ -57,4 +87,4 @@ actual class DiskCache {
     }
 }
 
-actual val diskCache: DiskCache = DiskCache()
+actual val searchIndexCache: DiskCache = DiskCache("search-index")
