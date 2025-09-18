@@ -42,13 +42,11 @@ fun ControlsRow(
         modifier = Modifier.defaultPadding()
     ) {
 
-        FillSpacer()
-
         SearchIndexInfoDisplay(
             selectedCluster = filterQueryState.value.cluster
         )
 
-        DefaultSpacer()
+        FillSpacer()
 
         ResetButton(
             onClick = {

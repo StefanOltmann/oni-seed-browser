@@ -102,6 +102,9 @@ object DefaultWebClient : WebClient {
         }
     }
 
+    // Separate client for HEAD requests without compression to avoid EOF errors
+    private val headClient = HttpClient()
+
     private val clusterCache = LruCache<String, Cluster?>(100)
 
     private var currentSearchIndex: SearchIndex? = null
@@ -294,9 +297,10 @@ object DefaultWebClient : WebClient {
         // Get size from the server
         try {
             val searchIndexUrl = SEARCH_INDEX_URL + "/" + currentIndex.clusterType.prefix
-            val response = httpClient.head(searchIndexUrl)
+            val response = headClient.head(searchIndexUrl)
             return response.headers["Content-Length"]?.toLongOrNull() ?: 0L
         } catch (ex: Throwable) {
+            println("[SEARCH] Could not get size for ${currentIndex.clusterType.prefix}: ${ex.message}")
             return 0L
         }
     }
@@ -309,11 +313,12 @@ object DefaultWebClient : WebClient {
             for (clusterType in allClusterTypes) {
                 try {
                     val searchIndexUrl = SEARCH_INDEX_URL + "/" + clusterType.prefix
-                    val lastModifiedMillis = getLastModifiedMillisServer(httpClient, searchIndexUrl)
+
+                    val lastModifiedMillis = getLastModifiedMillisServer(headClient, searchIndexUrl)
                         ?: continue // Skip if we can't get modification time
 
-                    // Get the content-length header to determine size
-                    val response = httpClient.head(searchIndexUrl)
+                    // Get content length using a separate request
+                    val response = headClient.head(searchIndexUrl)
                     val size = response.headers["Content-Length"]?.toLongOrNull() ?: 0L
 
                     searchIndexInfoList.add(

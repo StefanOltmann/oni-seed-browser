@@ -1,5 +1,15 @@
 <resources>
     <!-- UI Specific -->
+    <string name="uiSearchIndexInfo">搜尋索引: {size} | {date}</string>
+    <string name="uiViewAllSearchIndexes">查看所有搜尋索引</string>
+    <string name="uiSearchIndexes">搜尋索引</string>
+    <string name="uiDownload">下載</string>
+    <string name="uiSize">大小</string>
+    <string name="uiDate">日期</string>
+    <string name="uiCluster">星群</string>
+    <string name="uiIndexInfo">索引: {size} | {date}</string>
+    <string name="uiViewAll">查看全部</string>
+    <string name="uiSearchIndexNotDownloaded">搜尋索引未下載</string>
     <string name="uiTitle">地圖種子瀏覽器</string>
     <string name="uiFilter">篩選</string>
     <string name="uiSelectRule">請選擇小行星類型.</string>

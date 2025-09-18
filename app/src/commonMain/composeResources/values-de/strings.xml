@@ -1,5 +1,15 @@
 <resources>
     <!-- UI Specific -->
+    <string name="uiSearchIndexInfo">Suchindex: {size} | {date}</string>
+    <string name="uiViewAllSearchIndexes">Alle Suchindexe anzeigen</string>
+    <string name="uiSearchIndexes">Suchindexe</string>
+    <string name="uiDownload">Herunterladen</string>
+    <string name="uiSize">Größe</string>
+    <string name="uiDate">Datum</string>
+    <string name="uiCluster">Cluster</string>
+    <string name="uiIndexInfo">Index: {size} | {date}</string>
+    <string name="uiViewAll">Alle anzeigen</string>
+    <string name="uiSearchIndexNotDownloaded">Suchindex nicht heruntergeladen</string>
     <string name="uiTitle">Oxygen Not Included Kartenfinder</string>
     <string name="uiFilter">Filter</string>
     <string name="uiSelectRule">Bitte wähle ein Cluster um Regeln zu definieren.</string>

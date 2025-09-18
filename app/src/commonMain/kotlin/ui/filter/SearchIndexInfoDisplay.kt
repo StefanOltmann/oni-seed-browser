@@ -54,40 +54,49 @@ fun SearchIndexInfoDisplay(
 
     LaunchedEffect(selectedCluster) {
         currentSearchIndex.value = DefaultWebClient.getCurrentSearchIndex()
-        currentIndexSize.value = DefaultWebClient.getCurrentSearchIndexSize()
+        if (currentSearchIndex.value?.clusterType == selectedCluster) {
+            currentIndexSize.value = DefaultWebClient.getCurrentSearchIndexSize()
+        }
     }
 
-    if (selectedCluster != null && currentSearchIndex.value?.clusterType == selectedCluster) {
-        val searchIndex = currentSearchIndex.value!!
-
-        Row(
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            // Search index info
-            Text(
-                text = "Index: ${formatFileSize(currentIndexSize.value)} | ${formatDate(searchIndex.timestamp)}",
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
-            )
+    Row(
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        // Search index info or not downloaded message
+        if (selectedCluster != null) {
+            if (currentSearchIndex.value?.clusterType == selectedCluster) {
+                val searchIndex = currentSearchIndex.value!!
+                Text(
+                    text = "Index: ${formatFileSize(currentIndexSize.value)} | ${formatDate(searchIndex.timestamp)}",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
+                )
+            } else {
+                Text(
+                    text = "Search index not downloaded",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
+                )
+            }
 
             Spacer(modifier = Modifier.width(8.dp))
-
-            // View all indexes button
-            Text(
-                text = "View All",
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.primary,
-                fontWeight = FontWeight.Medium,
-                modifier = Modifier
-                    .clickable { showAllIndexes.value = true }
-                    .border(
-                        1.dp,
-                        MaterialTheme.colorScheme.primary.copy(alpha = 0.3f),
-                        defaultRoundedCornerShape
-                    )
-                    .padding(horizontal = 6.dp, vertical = 2.dp)
-            )
         }
+
+        // View all indexes button - always available
+        Text(
+            text = "View All",
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.primary,
+            fontWeight = FontWeight.Medium,
+            modifier = Modifier
+                .clickable { showAllIndexes.value = true }
+                .border(
+                    1.dp,
+                    MaterialTheme.colorScheme.primary.copy(alpha = 0.3f),
+                    defaultRoundedCornerShape
+                )
+                .padding(horizontal = 6.dp, vertical = 2.dp)
+        )
     }
 
     if (showAllIndexes.value) {

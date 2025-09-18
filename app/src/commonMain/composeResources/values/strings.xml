@@ -7,6 +7,10 @@
     <string name="uiSize">Size</string>
     <string name="uiDate">Date</string>
     <string name="uiCluster">Cluster</string>
+    <string name="uiIndexInfo">Index: {size} | {date}</string>
+    <string name="uiViewAll">View All</string>
+    <string name="uiSearchIndexNotDownloaded">Search index not downloaded</string>
+    <string name="uiLoading">Loading...</string>
     <string name="uiTitle">Oxygen Not Included Seed Browser</string>
     <string name="uiFilter">Filter</string>
     <string name="uiSelectRule">Please select an cluster to define rules.</string>
@@ -51,7 +55,6 @@
     <string name="uiNoFavoredClustersFound">Your favorites will show up here.\nUse the heart icon to mark some.</string>
     <string name="uiSetUsername">Set username</string>
     <string name="uiUsernameLabel">Username</string>
-    <string name="uiLoading">Loading...</string>
     <string name="uiLeaderBoardExplainer">This is our hall of fame for all the people that contributed maps to our database by running the map collection mod. Thank you all!</string>
     <string name="uiLeaderBoardRank">Rank</string>
     <string name="uiLeaderBoardUsername">Username</string>

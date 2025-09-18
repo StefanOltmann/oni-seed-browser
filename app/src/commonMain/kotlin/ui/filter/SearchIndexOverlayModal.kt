@@ -122,10 +122,9 @@ fun SearchIndexOverlayModal(
                     } else {
                         // Table header
                         Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(vertical = 8.dp),
-                            horizontalArrangement = Arrangement.SpaceBetween
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically
                         ) {
                             Text(
                                 text = "Cluster",
@@ -160,8 +159,12 @@ fun SearchIndexOverlayModal(
                                 SearchIndexRow(
                                     searchIndexInfo = searchIndexInfo,
                                     onDownload = {
-                                        // TODO: Implement platform-specific download
-                                        println("Download ${searchIndexInfo.clusterType.prefix}")
+                                        // Open download URL in browser - platform specific implementation needed
+                                        val downloadUrl =
+                                            "https://oni-search.stefanoltmann.de/${searchIndexInfo.clusterType.prefix}"
+                                        // TODO: Implement platform-specific URL opening
+                                        // For now, print the URL for user to copy
+                                        println("Download URL: $downloadUrl")
                                     }
                                 )
                             }
