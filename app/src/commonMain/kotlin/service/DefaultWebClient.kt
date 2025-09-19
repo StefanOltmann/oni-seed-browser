@@ -44,6 +44,7 @@ import io.ktor.http.contentType
 import io.ktor.http.isSuccess
 import io.ktor.serialization.kotlinx.json.json
 import io.ktor.serialization.kotlinx.protobuf.protobuf
+import kotlin.time.measureTimedValue
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -196,43 +197,47 @@ object DefaultWebClient : WebClient {
 
             clusterCache.put(coordinate, cluster)
 
-            println("[WEBCLIENT] find(): $coordinate (Cache HIT)")
+            println("[WEBCLIENT] find(): $coordinate | Cache HIT")
 
             return cluster
         }
 
         delay(FETCH_DELAY_MS)
 
-        val response = httpClient.get("$FIND_URL/$coordinate") {
-            accept(ContentType.Application.ProtoBuf)
+        val (cluster, time) = measureTimedValue {
+
+            val response = httpClient.get("$FIND_URL/$coordinate") {
+                accept(ContentType.Application.ProtoBuf)
+            }
+
+            if (response.status != HttpStatusCode.OK)
+                return null
+
+            val bytes = response.bodyAsBytes()
+
+            /*
+             * We need to receive the bytes first and then decode them.
+             * The body<Cluster> function does not work for Protobuf.
+             */
+            val cluster = ProtoBuf.decodeFromByteArray<Cluster>(bytes)
+
+            /*
+             * Async store in disk cache
+             */
+            backgroundScope.launch {
+                clusterDiskCache.save(
+                    key = cluster.coordinate,
+                    data = bytes,
+                    modifiedTime = cluster.uploadDate
+                )
+            }
+
+            clusterCache.put(coordinate, cluster)
+
+            cluster
         }
 
-        if (response.status != HttpStatusCode.OK)
-            return null
-
-        val bytes = response.bodyAsBytes()
-
-        /*
-         * We need to receive the bytes first and then decode them.
-         * The body<Cluster> function does not work for Protobuf.
-         */
-        val cluster = ProtoBuf.decodeFromByteArray<Cluster>(bytes)
-
-        clusterCache.put(coordinate, cluster)
-
-        println("[WEBCLIENT] find(): $coordinate (Cache MISS)")
-
-        /*
-         * Async store in cache
-         */
-
-        backgroundScope.launch {
-            clusterDiskCache.save(
-                key = cluster.coordinate,
-                data = bytes,
-                modifiedTime = cluster.uploadDate
-            )
-        }
+        println("[WEBCLIENT] find(): $coordinate | DOWNLOAD in $time")
 
         return cluster
     }
