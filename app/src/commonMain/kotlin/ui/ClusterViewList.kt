@@ -32,7 +32,6 @@ import de.stefan_oltmann.oni.model.Asteroid
 import de.stefan_oltmann.oni.model.Cluster
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.map
@@ -42,7 +41,7 @@ import ui.theme.defaultSpacing
 import ui.theme.doubleSpacing
 import ui.theme.lightGray
 
-private const val SCROLL_THRESHOLD_PX = 150
+private const val SCROLL_THRESHOLD_PX = 500
 
 @Composable
 fun ClusterViewList(
