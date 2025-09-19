@@ -46,6 +46,7 @@ import io.ktor.serialization.kotlinx.json.json
 import io.ktor.serialization.kotlinx.protobuf.protobuf
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.ExperimentalSerializationApi
@@ -78,6 +79,12 @@ const val CHANGE_NAME_ENDPOINT = "https://stefanoltmann.de/steam-names"
 const val COORDINATE_FAVORITES_ENDPOINT = "https://stefanoltmann.de/oni-user-coordinate-likes"
 
 const val TOKEN_HEADER = "token"
+
+/**
+ * A short delay to avoid overloading the server, which might respond
+ * with HTTP 429 (Too Many Requests) if we request too quickly.
+ */
+private const val FETCH_DELAY_MS: Long = 200
 
 private val json = Json {
 
@@ -193,6 +200,8 @@ object DefaultWebClient : WebClient {
 
             return cluster
         }
+
+        delay(FETCH_DELAY_MS)
 
         val response = httpClient.get("$FIND_URL/$coordinate") {
             accept(ContentType.Application.ProtoBuf)

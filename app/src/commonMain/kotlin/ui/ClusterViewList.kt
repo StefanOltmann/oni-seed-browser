@@ -44,12 +44,6 @@ import ui.theme.lightGray
 
 private const val SCROLL_THRESHOLD_PX = 150
 
-/**
- * A short delay to avoid overloading the server, which might respond
- * with HTTP 429 (Too Many Requests) if we request too quickly.
- */
-private const val FETCH_DELAY_MS: Long = 250
-
 @Composable
 fun ClusterViewList(
     clusters: List<String>,
@@ -188,8 +182,6 @@ private suspend fun fetchPage(
 
     if (index >= clusters.size)
         return false
-
-    delay(FETCH_DELAY_MS)
 
     val coordinate = clusters[index]
 
