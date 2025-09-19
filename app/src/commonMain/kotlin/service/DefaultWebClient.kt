@@ -85,7 +85,7 @@ const val TOKEN_HEADER = "token"
  * A short delay to avoid overloading the server, which might respond
  * with HTTP 429 (Too Many Requests) if we request too quickly.
  */
-private const val FETCH_DELAY_MS: Long = 200
+private const val FETCH_DELAY_MS: Long = 100
 
 private val json = Json {
     ignoreUnknownKeys = false
