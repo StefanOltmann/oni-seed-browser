@@ -88,11 +88,7 @@ const val TOKEN_HEADER = "token"
 private const val FETCH_DELAY_MS: Long = 200
 
 private val json = Json {
-
-    // We drop some old fields
-    // FIXME should not happen long-term
-    ignoreUnknownKeys = true
-
+    ignoreUnknownKeys = false
     encodeDefaults = true
 }
 
