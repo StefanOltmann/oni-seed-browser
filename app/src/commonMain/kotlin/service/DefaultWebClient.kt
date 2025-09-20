@@ -324,14 +324,21 @@ object DefaultWebClient : WebClient {
 
             val cluster = filterQuery.cluster ?: return@withContext emptyList()
 
-            if (currentSearchIndex?.clusterType == cluster)
-                return@withContext currentSearchIndex!!.match(filterQuery)
+            val (results, time) = measureTimedValue {
 
-            val searchIndex = findSearchIndex(cluster)
+                if (currentSearchIndex?.clusterType == cluster)
+                    return@measureTimedValue currentSearchIndex!!.match(filterQuery)
 
-            currentSearchIndex = searchIndex
+                val searchIndex = findSearchIndex(cluster)
 
-            return@withContext searchIndex.match(filterQuery)
+                currentSearchIndex = searchIndex
+
+                return@measureTimedValue searchIndex.match(filterQuery)
+            }
+
+            println("[WEBCLIENT] Search took $time")
+
+            return@withContext results
         }
 
     override suspend fun getUsernameMap(): Map<String, String> {
