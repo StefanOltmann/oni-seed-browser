@@ -61,10 +61,10 @@ const val LATEST_APP_VERSION_URL = "https://stefan-oltmann.de/oni-seed-browser/v
 const val FIND_URL = "https://oni-data.stefanoltmann.de"
 
 const val SEARCH_INDEX_URL = "https://oni-search.stefanoltmann.de"
+const val COUNT_URL = "$SEARCH_INDEX_URL/count"
 
 const val INGEST_SERVER_URL = "https://ingest.mapsnotincluded.org"
 const val REQUEST_URL = "$INGEST_SERVER_URL/request-coordinate"
-const val COUNT_URL = "$INGEST_SERVER_URL/count"
 
 /**
  * Cloudflare-based service.
@@ -151,11 +151,11 @@ object DefaultWebClient : WebClient {
             if (response.status != HttpStatusCode.OK)
                 return null
 
-            val seedCount: Long? = response.body()
+            val seedCount: String? = response.body()
 
             println("[WEBCLIENT] Seed count: $seedCount")
 
-            return seedCount
+            return seedCount?.toLongOrNull()
 
         } catch (ex: Throwable) {
             println("Did not receive counts: ${ex.message}")
