@@ -19,9 +19,7 @@
 package service
 
 import js.buffer.toArrayBuffer
-import js.buffer.toByteArray
 import js.objects.unsafeJso
-import js.typedarrays.toByteArray
 import web.cache.Cache
 import web.cache.caches
 import web.cache.delete
@@ -32,7 +30,6 @@ import web.http.BodyInit
 import web.http.Headers
 import web.http.Response
 import web.http.byteArray
-import web.http.bytes
 
 actual class DiskCache(
     val name: String
@@ -50,35 +47,58 @@ actual class DiskCache(
 
     actual suspend fun load(key: String): Pair<ByteArray, Long>? {
 
-        init()
+        try {
 
-        val response = cache?.match(key) ?: return null
+            init()
 
-        val lastModified = response.headers.get("x-cache-modified-time")?.toLongOrNull()
-            ?: error("Missing 'x-cache-modified-time' header in cache response.")
+            val response = cache?.match(key) ?: return null
 
-        return response.byteArray() to lastModified
+            val lastModified = response.headers.get("x-cache-modified-time")?.toLongOrNull()
+                ?: error("[CACHE] Missing 'x-cache-modified-time' header in cache response.")
+
+            return response.byteArray() to lastModified
+
+        } catch (ex: Throwable) {
+
+            /*
+             * If receiving the data from the cache fails,
+             * we log the issue and treat this is as a cache miss.
+             */
+
+            println("[CACHE] Error loading $key from cache: ${ex.message}.")
+            ex.printStackTrace()
+
+            return null
+        }
     }
 
     @OptIn(ExperimentalWasmJsInterop::class)
     actual suspend fun save(key: String, data: ByteArray, modifiedTime: Long) {
 
-        init()
+        try {
 
-        cache?.put(
-            url = key,
-            response = Response(
-                body = BodyInit(
-                    value = data.toArrayBuffer()
-                ),
-                init = unsafeJso {
-                    status = 200
-                    headers = Headers().apply {
-                        set("x-cache-modified-time", modifiedTime.toString())
+            init()
+
+            cache?.put(
+                url = key,
+                response = Response(
+                    body = BodyInit(
+                        value = data.toArrayBuffer()
+                    ),
+                    init = unsafeJso {
+                        status = 200
+                        headers = Headers().apply {
+                            set("x-cache-modified-time", modifiedTime.toString())
+                        }
                     }
-                }
+                )
             )
-        )
+
+        } catch (ex: Throwable) {
+
+            println("[CACHE] Error saving $key to cache: ${ex.message}.")
+            ex.printStackTrace()
+        }
     }
 
     actual suspend fun delete(key: String) {
