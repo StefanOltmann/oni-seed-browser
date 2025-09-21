@@ -166,7 +166,7 @@ object DefaultWebClient : WebClient {
 
     override suspend fun findLatestClusters(): List<String> {
 
-        val response = httpClient.get("$INGEST_SERVER_URL/latest/v2") {
+        val response = httpClient.get("$INGEST_SERVER_URL/latest") {
             accept(ContentType.Application.Json)
         }
 
