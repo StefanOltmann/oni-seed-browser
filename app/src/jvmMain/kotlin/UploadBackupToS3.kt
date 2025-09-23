@@ -66,7 +66,7 @@ fun main() {
             existingNames.add(item.objectName())
         }
 
-        println("Existing names: ${existingNames.size}")
+        // println("Existing names: ${existingNames.size}")
 
         process(exportDataFolder) { cluster ->
 
