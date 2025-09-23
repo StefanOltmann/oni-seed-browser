@@ -68,10 +68,9 @@ const val REQUEST_URL = "$INGEST_SERVER_URL/request-coordinate"
 
 /**
  * Cloudflare-based service.
- * See https://github.com/StefanOltmann/cloudflare-steam-name-update-service
+ * See https://github.com/StefanOltmann/cloudflare-oni-user-name-service
  */
-const val ALL_USER_NAMES_URL = "https://oni-users.stefanoltmann.de/names.json"
-const val CHANGE_NAME_ENDPOINT = "https://stefanoltmann.de/steam-names"
+const val USER_NAMES_URL = "https://stefanoltmann.de/oni-user-names"
 
 /**
  * Cloudflare-based service.
@@ -343,7 +342,7 @@ object DefaultWebClient : WebClient {
 
     override suspend fun getUsernameMap(): Map<String, String> {
 
-        val response = httpClient.get(ALL_USER_NAMES_URL) {
+        val response = httpClient.get(USER_NAMES_URL) {
             accept(ContentType.Application.Json)
         }
 
@@ -366,15 +365,28 @@ object DefaultWebClient : WebClient {
 
     override suspend fun setUsername(username: String): Boolean {
 
-        val response = httpClient.post(CHANGE_NAME_ENDPOINT) {
+        val response = if (username.isBlank()) {
 
-            /* Auth */
-            AppStorage.getToken()?.let { token ->
-                header(TOKEN_HEADER, token)
+            httpClient.delete(USER_NAMES_URL) {
+
+                /* Auth */
+                AppStorage.getToken()?.let { token ->
+                    header(TOKEN_HEADER, token)
+                }
             }
 
-            contentType(ContentType.Text.Plain)
-            setBody(username.ifBlank { "null" })
+        } else {
+
+            httpClient.put(USER_NAMES_URL) {
+
+                /* Auth */
+                AppStorage.getToken()?.let { token ->
+                    header(TOKEN_HEADER, token)
+                }
+
+                contentType(ContentType.Text.Plain)
+                setBody(username)
+            }
         }
 
         val success = response.status.isSuccess()
@@ -382,7 +394,7 @@ object DefaultWebClient : WebClient {
         if (!success)
             println("[WEBCLIENT] Request failed with HTTP ${response.status}: ${response.bodyAsText()}")
         else
-            println("[WEBCLIENT] Username set to $username")
+            println("[WEBCLIENT] Username set to '$username'")
 
         return success
     }
