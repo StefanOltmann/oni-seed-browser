@@ -46,12 +46,14 @@ import de.stefan_oltmann.oni.model.Cluster
 import de.stefan_oltmann.oni.model.filter.FilterQuery
 import io.github.stefanoltmann.app.generated.resources.Res
 import io.github.stefanoltmann.app.generated.resources.background_space
-import io.github.stefanoltmann.app.generated.resources.uiCoordinateNotFound
+import io.github.stefanoltmann.app.generated.resources.uiMapNotFound
 import io.github.stefanoltmann.app.generated.resources.uiNoFavoredClustersFound
 import io.github.stefanoltmann.app.generated.resources.uiNoResults
 import io.github.stefanoltmann.app.generated.resources.uiSearching
 import io.github.stefanoltmann.app.generated.resources.uiTitle
 import io.github.stefanoltmann.app.generated.resources.uiUsernameLabel
+import io.github.stefanoltmann.app.generated.resources.uiWelcome
+import io.github.stefanoltmann.app.generated.resources.uiWelcomeInstruction
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -710,7 +712,7 @@ private fun ColumnScope.MainPanel(
                 ) {
 
                     Text(
-                        text = "This map was not found",
+                        text = stringResource(Res.string.uiMapNotFound),
                         style = MaterialTheme.typography.headlineSmall,
                         color = MaterialTheme.colorScheme.onBackground,
                         maxLines = 1,
@@ -727,7 +729,7 @@ private fun ColumnScope.MainPanel(
 
             } else if (hasPerformedSearch.value) {
                 Text(
-                    text = "No results found.",
+                    text = stringResource(Res.string.uiNoResults),
                     style = MaterialTheme.typography.headlineSmall,
                     color = MaterialTheme.colorScheme.onBackground,
                     maxLines = 1,
@@ -740,7 +742,7 @@ private fun ColumnScope.MainPanel(
                 ) {
 
                     Text(
-                        text = "Welcome to the seed browser.",
+                        text = stringResource(Res.string.uiWelcome),
                         style = MaterialTheme.typography.headlineSmall,
                         color = MaterialTheme.colorScheme.onBackground,
                         textAlign = TextAlign.Center,
@@ -748,7 +750,7 @@ private fun ColumnScope.MainPanel(
                     )
 
                     Text(
-                        text = "Use the search to find some maps!",
+                        text = stringResource(Res.string.uiWelcomeInstruction),
                         style = MaterialTheme.typography.bodyLarge,
                         color = MaterialTheme.colorScheme.onBackground,
                         textAlign = TextAlign.Center,

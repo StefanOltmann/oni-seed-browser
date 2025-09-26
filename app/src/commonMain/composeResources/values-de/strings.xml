@@ -13,6 +13,9 @@
     <string name="uiHas">hat</string>
     <string name="uiHasNot">hat nicht</string>
     <string name="uiNoResults">Keine Ergebnisse gefunden.</string>
+    <string name="uiMapNotFound">Diese Karte wurde nicht gefunden</string>
+    <string name="uiWelcome">Willkommen im Kartenfinder.</string>
+    <string name="uiWelcomeInstruction">Nutze die Suche um Karten zu finden!</string>
     <string name="uiSeedsInDatabase">Karten</string>
     <string name="uiWorldTrait">Welt-Eigenschaft</string>
     <string name="uiSpaceDestinationCount">Space Destination Count</string>

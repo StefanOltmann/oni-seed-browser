@@ -13,6 +13,9 @@
     <string name="uiHas">has</string>
     <string name="uiHasNot">hasn't</string>
     <string name="uiNoResults">No results found.</string>
+    <string name="uiMapNotFound">This map was not found</string>
+    <string name="uiWelcome">Welcome to the seed browser.</string>
+    <string name="uiWelcomeInstruction">Use the search to find some maps!</string>
     <string name="uiSeedsInDatabase">seeds</string>
     <string name="uiWorldTrait">World Trait</string>
     <string name="uiSpaceDestinationCount">Space Destination Count</string>
