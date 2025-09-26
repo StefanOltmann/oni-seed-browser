@@ -228,7 +228,8 @@ fun ContentView(
 
                     ex.printStackTrace()
 
-                    errorMessage.value = ex.stackTraceToString()
+                    // Don't show this error.
+                    // errorMessage.value = ex.stackTraceToString()
 
                 } finally {
                     isGettingNewResults.value = false
