@@ -628,6 +628,8 @@ private fun ColumnScope.MainPanel(
     writeToClipboard: (String) -> Unit
 ) {
 
+    val hasPerformedSearch = remember { mutableStateOf(false) }
+
     val search: suspend () -> Unit = {
 
         try {
@@ -654,6 +656,7 @@ private fun ColumnScope.MainPanel(
             }
 
             clusters.value = searchResultWorlds
+            hasPerformedSearch.value = true
 
         } catch (ex: Exception) {
 
@@ -701,25 +704,13 @@ private fun ColumnScope.MainPanel(
 
             val coordinate = urlHash.value
 
-            if (coordinate == null) {
-
-                Text(
-                    text = stringResource(Res.string.uiNoResults),
-                    style = MaterialTheme.typography.headlineSmall,
-                    color = MaterialTheme.colorScheme.onBackground,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
-                )
-
-            } else {
-
+            if (coordinate != null) {
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
 
                     Text(
-                        text = stringResource(Res.string.uiCoordinateNotFound)
-                            .replace("{coordinate}", coordinate),
+                        text = "This map was not found",
                         style = MaterialTheme.typography.headlineSmall,
                         color = MaterialTheme.colorScheme.onBackground,
                         maxLines = 1,
@@ -731,6 +722,38 @@ private fun ColumnScope.MainPanel(
                     RequestCoordinateButton(
                         enabled = connectedUserId != null,
                         coordinate = coordinate
+                    )
+                }
+
+            } else if (hasPerformedSearch.value) {
+                Text(
+                    text = "No results found.",
+                    style = MaterialTheme.typography.headlineSmall,
+                    color = MaterialTheme.colorScheme.onBackground,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
+                )
+
+            } else {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+
+                    Text(
+                        text = "Welcome to the seed browser.",
+                        style = MaterialTheme.typography.headlineSmall,
+                        color = MaterialTheme.colorScheme.onBackground,
+                        textAlign = TextAlign.Center,
+                        overflow = TextOverflow.Ellipsis
+                    )
+
+                    Text(
+                        text = "Use the search to find some maps!",
+                        style = MaterialTheme.typography.bodyLarge,
+                        color = MaterialTheme.colorScheme.onBackground,
+                        textAlign = TextAlign.Center,
+                        overflow = TextOverflow.Ellipsis,
+                        modifier = Modifier.padding(top = 8.dp)
                     )
                 }
             }
