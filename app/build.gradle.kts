@@ -33,7 +33,7 @@ kotlin {
 
     jvm()
 
-    jvmToolchain(jdkVersion = 17)
+    jvmToolchain(jdkVersion = 24)
 
     if (buildTarget != "desktop") {
 
