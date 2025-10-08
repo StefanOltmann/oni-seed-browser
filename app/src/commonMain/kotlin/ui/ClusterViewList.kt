@@ -53,7 +53,7 @@ fun ClusterViewList(
     showMniUrl: Boolean = false,
     showFavoriteIcon: Boolean,
     steamIdToUsernameMap: Map<String, String?>,
-    writeToClipboard: (String) -> Unit
+    writeToClipboard: suspend (String) -> Unit
 ) {
 
     val displayedClusters = remember { mutableStateListOf<Cluster?>() }

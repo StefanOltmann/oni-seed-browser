@@ -73,11 +73,13 @@ fun CoordinateBox(
     likeCount: Int?,
     showMapClicked: (() -> Unit)?,
     showFavoriteIcon: Boolean,
-    writeToClipboard: (String) -> Unit
+    writeToClipboard: suspend (String) -> Unit
 ) {
 
     val density = LocalDensity.current.density
     val width = remember { mutableStateOf(0) }
+
+    val coroutineScope = rememberCoroutineScope()
 
     Box(
         contentAlignment = Alignment.Center,
@@ -95,7 +97,9 @@ fun CoordinateBox(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.noRippleClickable {
 
-                writeToClipboard(coordinate)
+                coroutineScope.launch {
+                    writeToClipboard(coordinate)
+                }
 
                 coordinateWasCopied.value = true
             }

@@ -67,7 +67,7 @@ fun SpacedOutStarMapView(
     cluster: Cluster,
     favoriteCoordinates: MutableState<List<String>>,
     onCloseClicked: () -> Unit,
-    writeToClipboard: (String) -> Unit
+    writeToClipboard: suspend (String) -> Unit
 ) {
 
     if (cluster.starMapEntriesSpacedOut.isEmpty())

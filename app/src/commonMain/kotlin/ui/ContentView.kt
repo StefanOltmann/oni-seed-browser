@@ -88,7 +88,8 @@ fun ContentView(
      * Note: LocalClipboardManager does not work for Compose for Web
      * in all browsers for some reason. That's why we use a workaround here.
      */
-    writeToClipboard: (String) -> Unit
+    readFromClipboard: suspend () -> String?,
+    writeToClipboard: suspend (String) -> Unit
 ) {
 
     val errorMessage = remember { mutableStateOf<String?>(null) }
@@ -506,7 +507,8 @@ fun ContentView(
                         showAsteroidMap,
                         isMniEmbedded,
                         steamIdToUsernameMap.value,
-                        writeToClipboard
+                        writeToClipboard,
+                        readFromClipboard
                     )
                 }
             }
@@ -576,7 +578,7 @@ private fun ColumnScope.FavoritesPanel(
     connectedUserId: String?,
     isMniEmbedded: Boolean,
     steamIdToUsernameMap: Map<String, String>,
-    writeToClipboard: (String) -> Unit
+    writeToClipboard: suspend (String) -> Unit
 ) {
 
     Box(
@@ -627,7 +629,8 @@ private fun ColumnScope.MainPanel(
     showAsteroidMap: MutableState<Pair<Cluster, Asteroid>?>,
     isMniEmbedded: Boolean,
     steamIdToUsernameMap: Map<String, String?>,
-    writeToClipboard: (String) -> Unit
+    writeToClipboard: suspend (String) -> Unit,
+    readFromClipboard: suspend () -> String?
 ) {
 
     val hasPerformedSearch = remember { mutableStateOf(false) }
@@ -678,7 +681,8 @@ private fun ColumnScope.MainPanel(
         filterQueryState = filterQueryState,
         onSearchButtonPressed = {
             coroutineScope.launch { search() }
-        }
+        },
+        readFromClipboard = readFromClipboard
     )
 
     if (isGettingNewResults.value) {

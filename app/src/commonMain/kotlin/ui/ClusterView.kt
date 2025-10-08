@@ -41,6 +41,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalUriHandler
@@ -54,6 +55,7 @@ import io.github.stefanoltmann.app.generated.resources.Res
 import io.github.stefanoltmann.app.generated.resources.uiCopiedToClipboard
 import kotlin.math.max
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringResource
 import ui.icons.ContentCopy
 import ui.icons.IconAuthenticated
@@ -84,8 +86,10 @@ fun ClusterView(
     showMniUrl: Boolean,
     showFavoriteIcon: Boolean,
     steamIdToUsernameMap: Map<String, String?>,
-    writeToClipboard: (String) -> Unit
+    writeToClipboard: suspend (String) -> Unit
 ) {
+
+    val coroutineScope = rememberCoroutineScope()
 
     Column(
         modifier = Modifier
@@ -140,7 +144,10 @@ fun ClusterView(
 
             Row(
                 modifier = Modifier.noRippleClickable {
-                    writeToClipboard(url)
+
+                    coroutineScope.launch {
+                        writeToClipboard(url)
+                    }
 
                     urlWasCopied.value = true
                 }
