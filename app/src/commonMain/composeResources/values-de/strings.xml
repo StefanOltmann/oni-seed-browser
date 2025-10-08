@@ -57,6 +57,8 @@
     <string name="uiRemix">Remix</string>
     <string name="uiZoneType">Biom</string>
     <string name="uiGoodGeyserCount">Geyser Anzahl (gut)</string>
+    <string name="uiLoad">Laden</string>
+    <string name="uiSave">Speichern</string>
 
     <!-- GameModes -->
     <string name="gameModeBaseGameStandard">Standard</string>

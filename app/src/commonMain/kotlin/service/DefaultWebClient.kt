@@ -78,6 +78,12 @@ const val USER_NAMES_URL = "https://stefanoltmann.de/oni-user-names"
  */
 const val COORDINATE_FAVORITES_ENDPOINT = "https://stefanoltmann.de/oni-user-coordinate-likes"
 
+/**
+ * Cloudflare-based service.
+ * See https://github.com/StefanOltmann/cloudflare-oni-user-filter-queries-service
+ */
+const val SAVED_FILTER_QUERIES_ENDPOINT = "https://stefanoltmann.de/oni-user-filter-queries"
+
 const val TOKEN_HEADER = "token"
 
 /**
@@ -307,6 +313,73 @@ object DefaultWebClient : WebClient {
                 contentType(ContentType.Text.Plain)
                 setBody(coordinate)
             }
+        }
+
+        val success = response.status.isSuccess()
+
+        if (!success)
+            println("[WEBCLIENT] Request failed with HTTP ${response.status}: ${response.bodyAsText()}")
+
+        return success
+    }
+
+    override suspend fun findSavedFilterQueries(): List<FilterQuery> {
+
+        val response = httpClient.get(SAVED_FILTER_QUERIES_ENDPOINT) {
+
+            /* Auth */
+            AppStorage.getToken()?.let { token ->
+                header(TOKEN_HEADER, token)
+            }
+
+            accept(ContentType.Application.Json)
+        }
+
+        if (!response.status.isSuccess())
+            error("[WEBCLIENT] Requesting saved filter queries failed with HTTP ${response.status}: ${response.bodyAsText()}")
+
+        try {
+
+            return response.body()
+
+        } catch (ex: Exception) {
+
+            throw Exception("Finding saved filter queries failed.", ex)
+        }
+    }
+
+    override suspend fun saveFilterQuery(filterQuery: FilterQuery): Boolean {
+
+        val response = httpClient.put(SAVED_FILTER_QUERIES_ENDPOINT) {
+
+            /* Auth */
+            AppStorage.getToken()?.let { token ->
+                header(TOKEN_HEADER, token)
+            }
+
+            contentType(ContentType.Application.Json)
+            setBody(filterQuery)
+        }
+
+        val success = response.status.isSuccess()
+
+        if (!success)
+            println("[WEBCLIENT] Request failed with HTTP ${response.status}: ${response.bodyAsText()}")
+
+        return success
+    }
+
+    override suspend fun deleteFilterQuery(filterQuery: FilterQuery): Boolean {
+
+        val response = httpClient.delete(SAVED_FILTER_QUERIES_ENDPOINT) {
+
+            /* Auth */
+            AppStorage.getToken()?.let { token ->
+                header(TOKEN_HEADER, token)
+            }
+
+            contentType(ContentType.Application.Json)
+            setBody(filterQuery)
         }
 
         val success = response.status.isSuccess()

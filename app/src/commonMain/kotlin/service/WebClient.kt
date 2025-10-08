@@ -43,6 +43,12 @@ interface WebClient {
 
     suspend fun rate(coordinate: String, like: Boolean): Boolean
 
+    suspend fun findSavedFilterQueries(): List<FilterQuery>
+
+    suspend fun saveFilterQuery(filterQuery: FilterQuery): Boolean
+
+    suspend fun deleteFilterQuery(filterQuery: FilterQuery): Boolean
+
     suspend fun search(filterQuery: FilterQuery): List<String>
 
     suspend fun getUsernameMap(): Map<String, String>
