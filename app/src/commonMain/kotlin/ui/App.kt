@@ -55,8 +55,7 @@ fun App(
      * Note: LocalClipboardManager does not work for Compose for Web
      * in all browsers for some reason. That's why we use a workaround here.
      */
-    readFromClipboard: suspend () -> String?,
-    writeToClipboard: suspend (String) -> Unit
+    writeToClipboard: (String) -> Unit
 ) {
 
     MaterialTheme(
@@ -83,7 +82,6 @@ fun App(
                     isMniEmbedded,
                     connectedUserId,
                     localPort,
-                    readFromClipboard,
                     writeToClipboard
                 )
 

@@ -24,7 +24,6 @@ import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.window.ComposeViewport
 import kotlinx.browser.document
 import kotlinx.browser.window
-import kotlinx.coroutines.await
 import org.w3c.dom.HTMLElement
 import service.DefaultWebClient
 import ui.App
@@ -118,11 +117,8 @@ fun main() {
             isMniEmbedded = isMniEmbedded,
             connectedUserId = connectedUserId.value,
             localPort = null,
-            readFromClipboard = {
-                window.navigator.clipboard.readText().await()
-            },
             writeToClipboard = {
-                window.navigator.clipboard.writeText(it).await()
+                window.navigator.clipboard.writeText(it)
             }
         )
     }

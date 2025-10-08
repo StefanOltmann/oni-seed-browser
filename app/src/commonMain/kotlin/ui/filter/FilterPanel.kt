@@ -67,8 +67,7 @@ data class FilterSelection(
 fun FilterPanel(
     worldCount: Long?,
     filterQueryState: MutableState<FilterQuery>,
-    onSearchButtonPressed: () -> Unit,
-    readFromClipboard: suspend () -> String?
+    onSearchButtonPressed: () -> Unit
 ) {
 
     val filterPanelOpen = remember { mutableStateOf(false) }
@@ -162,8 +161,7 @@ fun FilterPanel(
                     ControlsRow(
                         filterQueryState = filterQueryState,
                         filterPanelOpen = filterPanelOpen,
-                        onSearchButtonPressed = onSearchButtonPressed,
-                        readFromClipboard = readFromClipboard
+                        onSearchButtonPressed = onSearchButtonPressed
                     )
                 }
 

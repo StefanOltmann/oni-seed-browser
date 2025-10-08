@@ -23,11 +23,9 @@ import AppStorage
 import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import de.stefan_oltmann.oni.model.filter.FilterQuery
-import kotlinx.coroutines.launch
 import ui.theme.DefaultSpacer
 import ui.theme.FillSpacer
 import ui.theme.defaultPadding
@@ -36,11 +34,8 @@ import ui.theme.defaultPadding
 fun ControlsRow(
     filterQueryState: MutableState<FilterQuery>,
     filterPanelOpen: MutableState<Boolean>,
-    onSearchButtonPressed: () -> Unit,
-    readFromClipboard: suspend () -> String?
+    onSearchButtonPressed: () -> Unit
 ) {
-
-    val coroutineScope = rememberCoroutineScope()
 
     Row(
         verticalAlignment = Alignment.CenterVertically,
@@ -58,11 +53,6 @@ fun ControlsRow(
 
                 /* Save the reset to the storage. */
                 AppStorage.saveFilter(FilterQuery.EMPTY)
-
-                coroutineScope.launch {
-
-                    println(readFromClipboard())
-                }
             }
         )
 

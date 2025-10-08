@@ -71,7 +71,7 @@ fun BaseGameStarMapView(
     cluster: Cluster,
     favoriteCoordinates: MutableState<List<String>>,
     onCloseClicked: () -> Unit,
-    writeToClipboard: suspend (String) -> Unit
+    writeToClipboard: (String) -> Unit
 ) {
 
     if (cluster.starMapEntriesVanilla.isEmpty())

@@ -36,14 +36,10 @@ import io.github.stefanoltmann.app.generated.resources.Res
 import io.github.stefanoltmann.app.generated.resources.app_icon
 import io.github.stefanoltmann.app.generated.resources.uiTitle
 import io.ktor.http.HttpStatusCode
-import java.awt.datatransfer.DataFlavor
 import java.awt.datatransfer.StringSelection
-import java.awt.datatransfer.Transferable
 import java.net.InetSocketAddress
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.withContext
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import ui.App
@@ -66,6 +62,7 @@ fun main() = application {
         this.window.minimumSize = java.awt.Dimension(800, 800)
 
         val clipboard = LocalClipboard.current
+        val clipboardScope = rememberCoroutineScope()
 
         val connectedUserId = remember { mutableStateOf<String?>(null) }
 
@@ -107,24 +104,12 @@ fun main() = application {
             isMniEmbedded = false,
             connectedUserId = connectedUserId.value,
             localPort = localPort.value,
-            readFromClipboard = {
-                clipboard.getClipEntry()?.getText()
-            },
             writeToClipboard = { text ->
-                clipboard.setClipEntry(ClipEntry(StringSelection(text)))
+                clipboardScope.launch {
+                    clipboard.setClipEntry(ClipEntry(StringSelection(text)))
+                }
             }
         )
-    }
-}
-
-suspend fun ClipEntry.getText(): String? = withContext(Dispatchers.IO) {
-    try {
-        val transferable = nativeClipEntry as? Transferable
-        if (transferable != null && transferable.isDataFlavorSupported(DataFlavor.stringFlavor))
-            transferable.getTransferData(DataFlavor.stringFlavor) as? String
-        else null
-    } catch (_: Exception) {
-        return@withContext null
     }
 }
 
