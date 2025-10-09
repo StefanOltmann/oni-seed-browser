@@ -38,6 +38,8 @@ fun main() {
 
     ComposeViewport(document.body!!) {
 
+        println("Called with search: ${window.location.search}")
+
         val params = remember { getQueryParameters(window.location.search) }
 
         val isMniEmbedded = remember { params["embedded"] == "mni" }
