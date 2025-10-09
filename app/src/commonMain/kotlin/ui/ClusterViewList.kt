@@ -7,6 +7,8 @@ package ui
 
 import androidx.compose.foundation.VerticalScrollbar
 import androidx.compose.foundation.defaultScrollbarStyle
+import androidx.compose.foundation.focusable
+import androidx.compose.foundation.gestures.animateScrollBy
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -24,10 +26,18 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.input.key.Key
+import androidx.compose.ui.input.key.KeyEventType
+import androidx.compose.ui.input.key.key
+import androidx.compose.ui.input.key.onKeyEvent
+import androidx.compose.ui.input.key.type
 import de.stefan_oltmann.oni.model.Asteroid
 import de.stefan_oltmann.oni.model.Cluster
 import kotlinx.coroutines.CancellationException
@@ -35,6 +45,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import service.DefaultWebClient
 import ui.theme.defaultSpacing
@@ -63,6 +74,14 @@ fun ClusterViewList(
     var isLoading by remember { mutableStateOf(false) }
 
     val scrollState = rememberScrollState()
+
+    val coroutineScope = rememberCoroutineScope()
+
+    val focusRequester = remember { FocusRequester() }
+
+    LaunchedEffect(Unit) {
+        focusRequester.requestFocus()
+    }
 
     /*
      * Initial fetch of the first cluster.
@@ -118,6 +137,44 @@ fun ClusterViewList(
             modifier = Modifier
                 .fillMaxWidth()
                 .verticalScroll(scrollState)
+                .focusable()
+                .focusRequester(focusRequester)
+                .onKeyEvent { event ->
+
+                    if (event.type == KeyEventType.KeyDown) {
+                        when (event.key) {
+                            Key.DirectionDown -> {
+                                coroutineScope.launch {
+                                    scrollState.animateScrollBy(100f)
+                                }
+                                true
+                            }
+
+                            Key.DirectionUp -> {
+                                coroutineScope.launch {
+                                    scrollState.animateScrollBy(-100f)
+                                }
+                                true
+                            }
+
+                            Key.PageDown -> {
+                                coroutineScope.launch {
+                                    scrollState.animateScrollBy(500f)
+                                }
+                                true
+                            }
+
+                            Key.PageUp -> {
+                                coroutineScope.launch {
+                                    scrollState.animateScrollBy(-500f)
+                                }
+                                true
+                            }
+
+                            else -> false
+                        }
+                    } else false
+                }
                 .padding(doubleSpacing),
             verticalArrangement = Arrangement.spacedBy(defaultSpacing)
         ) {
