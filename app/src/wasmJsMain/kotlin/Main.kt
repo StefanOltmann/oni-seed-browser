@@ -23,13 +23,13 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.window.ComposeViewport
 import de.stefan_oltmann.oni.model.filter.FilterQuery
+import kotlin.io.encoding.Base64
 import kotlinx.browser.document
 import kotlinx.browser.window
 import kotlinx.serialization.json.Json
 import org.w3c.dom.HTMLElement
 import service.DefaultWebClient
 import ui.App
-import ui.defaultBase64
 import util.getQueryParameters
 import util.getValidSteamHash
 
@@ -53,7 +53,7 @@ fun main() {
 
                 try {
 
-                    val json = defaultBase64.decode(it).decodeToString()
+                    val json = Base64.UrlSafe.decode(it).decodeToString()
 
                     Json.decodeFromString<FilterQuery>(json)
 

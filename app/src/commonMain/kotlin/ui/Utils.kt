@@ -37,10 +37,6 @@ import kotlin.math.abs
 import kotlin.math.pow
 import kotlin.math.roundToLong
 
-val defaultBase64 = Base64.UrlSafe.withPadding(
-    option = Base64.PaddingOption.PRESENT
-)
-
 @OptIn(ExperimentalComposeUiApi::class)
 fun Modifier.onHover(hovered: MutableState<Boolean>) = this
     .onPointerEvent(PointerEventType.Enter) {
