@@ -80,7 +80,7 @@ fun ClusterViewList(
     val focusRequester = remember { FocusRequester() }
 
     LaunchedEffect(Unit) {
-        focusRequester.requestFocus()
+        snapshotFlow { focusRequester }.collect { it.requestFocus() }
     }
 
     /*
@@ -137,8 +137,6 @@ fun ClusterViewList(
             modifier = Modifier
                 .fillMaxWidth()
                 .verticalScroll(scrollState)
-                .focusable()
-                .focusRequester(focusRequester)
                 .onKeyEvent { event ->
 
                     if (event.type == KeyEventType.KeyDown) {
@@ -175,6 +173,8 @@ fun ClusterViewList(
                         }
                     } else false
                 }
+                .focusable()
+                .focusRequester(focusRequester)
                 .padding(doubleSpacing),
             verticalArrangement = Arrangement.spacedBy(defaultSpacing)
         ) {
