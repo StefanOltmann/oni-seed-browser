@@ -42,6 +42,7 @@ import de.stefan_oltmann.oni.model.Asteroid
 import de.stefan_oltmann.oni.model.Cluster
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.map
@@ -80,7 +81,11 @@ fun ClusterViewList(
     val focusRequester = remember { FocusRequester() }
 
     LaunchedEffect(Unit) {
-        snapshotFlow { focusRequester }.collect { it.requestFocus() }
+
+        /* Wait a moment for the components to attach */
+        delay(1000)
+
+        focusRequester.requestFocus()
     }
 
     /*
@@ -173,8 +178,8 @@ fun ClusterViewList(
                         }
                     } else false
                 }
-                .focusable()
                 .focusRequester(focusRequester)
+                .focusable()
                 .padding(doubleSpacing),
             verticalArrangement = Arrangement.spacedBy(defaultSpacing)
         ) {
