@@ -22,11 +22,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.window.ComposeViewport
-import de.stefan_oltmann.oni.model.filter.FilterQuery
-import kotlin.io.encoding.Base64
 import kotlinx.browser.document
 import kotlinx.browser.window
-import kotlinx.serialization.json.Json
 import org.w3c.dom.HTMLElement
 import service.DefaultWebClient
 import ui.App
@@ -53,9 +50,7 @@ fun main() {
 
                 try {
 
-                    val json = Base64.UrlSafe.decode(it).decodeToString()
-
-                    Json.decodeFromString<FilterQuery>(json)
+                    createFilterQuery(it)
 
                 } catch (ex: Exception) {
 

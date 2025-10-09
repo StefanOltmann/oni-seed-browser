@@ -35,10 +35,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import de.stefan_oltmann.oni.model.filter.FilterQuery
-import kotlin.io.encoding.Base64
 import kotlinx.coroutines.launch
-import kotlinx.serialization.json.Json
 import service.DefaultWebClient
+import toBase64
 import ui.MNI_URL
 import ui.ORIGINAL_URL
 import ui.icons.ContentCopy
@@ -145,9 +144,7 @@ fun ControlsRow(
 
                                 val cleanFilterState = filterState.cleanCopy()
 
-                                val json = Json.encodeToString(cleanFilterState)
-
-                                val base64 = Base64.UrlSafe.encode(json.encodeToByteArray())
+                                val base64 = cleanFilterState.toBase64()
 
                                 val url = if (showMniUrl)
                                     "$MNI_URL?filter=$base64"
