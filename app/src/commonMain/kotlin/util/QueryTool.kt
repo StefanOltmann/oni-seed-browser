@@ -29,7 +29,13 @@ fun getQueryParameters(path: String): Map<String, String> {
         .split("&")
         .mapNotNull {
 
-            val (key, value) = it.split("=", limit = 1)
+            val index = it.indexOf('=')
+
+            if (index == -1)
+                return@mapNotNull null
+
+            val key = it.substring(0, index)
+            val value = it.substring(index + 1)
 
             if (key.isNotEmpty())
                 key to value
