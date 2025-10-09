@@ -37,10 +37,11 @@ import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import de.stefan_oltmann.oni.model.filter.FilterQuery
 import ui.theme.AppTypography
 import ui.theme.appColorScheme
 
-const val ORIGINAL_URL = "https://stefanoltmann.de/oni-seed-browser/#"
+const val ORIGINAL_URL = "https://stefanoltmann.de/oni-seed-browser/"
 const val MNI_URL = "https://mapsnotincluded.org/map-explorer/"
 
 val logoIconHeight = 80.dp
@@ -48,6 +49,7 @@ val logoIconHeight = 80.dp
 @Composable
 fun App(
     urlHash: State<String?>,
+    urlFilterQuery: FilterQuery?,
     isMniEmbedded: Boolean,
     connectedUserId: String?,
     localPort: Int?,
@@ -79,6 +81,7 @@ fun App(
 
                 ContentView(
                     urlHash,
+                    urlFilterQuery,
                     isMniEmbedded,
                     connectedUserId,
                     localPort,

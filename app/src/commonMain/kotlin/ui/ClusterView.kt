@@ -116,7 +116,7 @@ fun ClusterView(
         val url = if (showMniUrl)
             MNI_URL + cluster.coordinate
         else
-            ORIGINAL_URL + cluster.coordinate
+            ORIGINAL_URL + "#" + cluster.coordinate
 
         Row(
             verticalAlignment = Alignment.CenterVertically,

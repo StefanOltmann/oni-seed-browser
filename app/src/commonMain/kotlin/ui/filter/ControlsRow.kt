@@ -20,18 +20,33 @@
 package ui.filter
 
 import AppStorage
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import de.stefan_oltmann.oni.model.filter.FilterQuery
 import kotlinx.coroutines.launch
+import kotlinx.serialization.json.Json
 import service.DefaultWebClient
+import ui.MNI_URL
+import ui.ORIGINAL_URL
+import ui.defaultBase64
+import ui.icons.ContentCopy
+import ui.onHover
 import ui.theme.DefaultSpacer
 import ui.theme.FillSpacer
 import ui.theme.defaultPadding
+import ui.theme.hoverColor
 
 const val SHOW_LOAD_AND_SAVE_BUTTONS = false
 
@@ -39,7 +54,9 @@ const val SHOW_LOAD_AND_SAVE_BUTTONS = false
 fun ControlsRow(
     filterQueryState: MutableState<FilterQuery>,
     filterPanelOpen: MutableState<Boolean>,
-    onSearchButtonPressed: () -> Unit
+    onSearchButtonPressed: () -> Unit,
+    showMniUrl: Boolean,
+    writeToClipboard: (String) -> Unit
 ) {
 
     val coroutineScope = rememberCoroutineScope()
@@ -106,6 +123,57 @@ fun ControlsRow(
         }
 
         FillSpacer()
+
+        val contentCopyHovered = remember { mutableStateOf(false) }
+
+        Box(
+            contentAlignment = Alignment.Center,
+            modifier = Modifier
+                .size(48.dp)
+                .then(
+
+                    if (filterQueryState.value.cluster != null)
+                        Modifier
+                            .onHover(contentCopyHovered)
+                            .clickable {
+
+                                val filterState = filterQueryState.value
+
+                                /* Ignore call without cluster set. */
+                                if (filterState.cluster == null)
+                                    return@clickable
+
+                                val cleanFilterState = filterState.cleanCopy()
+
+                                val json = Json.encodeToString(cleanFilterState)
+
+                                val base64 = defaultBase64.encode(json.encodeToByteArray())
+
+                                val url = if (showMniUrl)
+                                    "$MNI_URL?filter=$base64"
+                                else
+                                    "$ORIGINAL_URL?filter=$base64"
+
+                                writeToClipboard(url)
+                            }
+                    else
+                        Modifier
+                )
+        ) {
+
+            Icon(
+                imageVector = ContentCopy,
+                contentDescription = null,
+                tint = if (filterQueryState.value.cluster == null)
+                    MaterialTheme.colorScheme.onBackground.copy(alpha = 0.3f)
+                else if (contentCopyHovered.value)
+                    hoverColor
+                else
+                    MaterialTheme.colorScheme.onBackground,
+                modifier = Modifier
+                    .size(24.dp)
+            )
+        }
 
         DefaultSpacer()
 

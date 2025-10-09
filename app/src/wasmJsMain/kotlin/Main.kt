@@ -22,11 +22,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.window.ComposeViewport
+import de.stefan_oltmann.oni.model.filter.FilterQuery
 import kotlinx.browser.document
 import kotlinx.browser.window
+import kotlinx.serialization.json.Json
 import org.w3c.dom.HTMLElement
 import service.DefaultWebClient
 import ui.App
+import ui.defaultBase64
 import util.getQueryParameters
 import util.getValidSteamHash
 
@@ -38,6 +41,29 @@ fun main() {
         val params = remember { getQueryParameters(window.location.search) }
 
         val isMniEmbedded = remember { params["embedded"] == "mni" }
+
+        val filterQuery = remember {
+
+            params["filter"]?.let {
+
+                if (it.isEmpty())
+                    return@remember null
+
+                try {
+
+                    val json = defaultBase64.decode(it).decodeToString()
+
+                    Json.decodeFromString<FilterQuery>(json)
+
+                } catch (ex: Exception) {
+
+                    println("Error parsing filter JSON.")
+                    ex.printStackTrace()
+
+                    null
+                }
+            }
+        }
 
         val connectedUserId = remember { mutableStateOf<String?>(null) }
 
@@ -93,17 +119,19 @@ fun main() {
             }
         }
 
+        val urlHash = remember {
+            mutableStateOf(document.location?.hash?.drop(1)?.ifBlank { null })
+        }
+
         /* Some debug values */
         println("### ONI Seed Browser $APP_VERSION ###")
         println("Running on domain: ${document.domain}")
+        println("URL hash: ${urlHash.value}")
+        println("URL filter query: $filterQuery")
         println("Users language: " + Locale.current.language)
         println("Users language tag: " + Locale.current.toLanguageTag())
         println("Users region: " + Locale.current.region)
         println("Cookies: ${document.cookie}")
-
-        val urlHash = remember {
-            mutableStateOf(document.location?.hash?.drop(1)?.ifBlank { null })
-        }
 
         window.onhashchange = {
 
@@ -114,6 +142,7 @@ fun main() {
 
         App(
             urlHash = urlHash,
+            urlFilterQuery = filterQuery,
             isMniEmbedded = isMniEmbedded,
             connectedUserId = connectedUserId.value,
             localPort = null,

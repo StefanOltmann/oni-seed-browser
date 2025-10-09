@@ -32,9 +32,14 @@ import androidx.compose.ui.input.pointer.PointerEventType
 import androidx.compose.ui.input.pointer.onPointerEvent
 import de.stefan_oltmann.oni.model.GRAMS_PER_TON
 import de.stefan_oltmann.oni.model.SECONDS_PER_CYCLE
+import kotlin.io.encoding.Base64
 import kotlin.math.abs
 import kotlin.math.pow
 import kotlin.math.roundToLong
+
+val defaultBase64 = Base64.UrlSafe.withPadding(
+    option = Base64.PaddingOption.PRESENT
+)
 
 @OptIn(ExperimentalComposeUiApi::class)
 fun Modifier.onHover(hovered: MutableState<Boolean>) = this

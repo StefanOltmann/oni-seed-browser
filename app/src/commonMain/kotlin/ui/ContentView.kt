@@ -81,6 +81,7 @@ import ui.theme.lightGray
 @Composable
 fun ContentView(
     urlHash: State<String?>,
+    urlFilterQuery: FilterQuery?,
     isMniEmbedded: Boolean,
     connectedUserId: String?,
     localPort: Int?,
@@ -164,7 +165,9 @@ fun ContentView(
         val coroutineScope = rememberCoroutineScope()
 
         val filterQueryState = remember {
-            mutableStateOf(AppStorage.loadFilter())
+            mutableStateOf(
+                urlFilterQuery ?: AppStorage.loadFilter()
+            )
         }
 
         val showStarMap = remember { mutableStateOf<Cluster?>(null) }
@@ -505,6 +508,7 @@ fun ContentView(
                         showStarMap,
                         showAsteroidMap,
                         isMniEmbedded,
+                        startWithFilterPanelOpen = urlFilterQuery != null,
                         steamIdToUsernameMap.value,
                         writeToClipboard
                     )
@@ -626,6 +630,7 @@ private fun ColumnScope.MainPanel(
     showStarMap: MutableState<Cluster?>,
     showAsteroidMap: MutableState<Pair<Cluster, Asteroid>?>,
     isMniEmbedded: Boolean,
+    startWithFilterPanelOpen: Boolean,
     steamIdToUsernameMap: Map<String, String?>,
     writeToClipboard: (String) -> Unit
 ) {
@@ -678,7 +683,10 @@ private fun ColumnScope.MainPanel(
         filterQueryState = filterQueryState,
         onSearchButtonPressed = {
             coroutineScope.launch { search() }
-        }
+        },
+        showMniUrl = isMniEmbedded,
+        startWithFilterPanelOpen = startWithFilterPanelOpen,
+        writeToClipboard = writeToClipboard
     )
 
     if (isGettingNewResults.value) {

@@ -19,7 +19,6 @@
 package service
 
 import java.io.File
-import kotlin.getValue
 
 /* Cross-platform local app data directory for ONI Seed Browser */
 private val localAppData: File by lazy {

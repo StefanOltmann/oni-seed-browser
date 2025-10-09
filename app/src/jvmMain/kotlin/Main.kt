@@ -101,6 +101,7 @@ fun main() = application {
 
         App(
             urlHash = remember { mutableStateOf(null) },
+            urlFilterQuery = null,
             isMniEmbedded = false,
             connectedUserId = connectedUserId.value,
             localPort = localPort.value,
