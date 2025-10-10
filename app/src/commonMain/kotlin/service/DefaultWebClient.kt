@@ -62,6 +62,7 @@ const val FIND_URL = "https://oni-data.stefanoltmann.de"
 
 const val SEARCH_INDEX_URL = "https://oni-search.stefanoltmann.de"
 const val COUNT_URL = "$SEARCH_INDEX_URL/count"
+const val CONTRIBUTORS_URL = "$SEARCH_INDEX_URL/contributors"
 
 const val INGEST_SERVER_URL = "https://ingest.mapsnotincluded.org"
 const val REQUEST_URL = "$INGEST_SERVER_URL/request-coordinate"
@@ -472,9 +473,9 @@ object DefaultWebClient : WebClient {
         return success
     }
 
-    override suspend fun findContributors(): List<Contributor> {
+    override suspend fun findContributors(): Map<String, Long> {
 
-        val response = httpClient.get("$INGEST_SERVER_URL/contributors") {
+        val response = httpClient.get(CONTRIBUTORS_URL) {
             accept(ContentType.Application.Json)
         }
 
@@ -483,7 +484,7 @@ object DefaultWebClient : WebClient {
 
         try {
 
-            val contributors: List<Contributor> = response.body()
+            val contributors: Map<String, Long> = response.body()
 
             println("[WEBCLIENT] Found ${contributors.size} contributors.")
 

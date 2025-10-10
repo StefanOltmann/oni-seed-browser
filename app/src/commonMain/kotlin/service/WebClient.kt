@@ -55,7 +55,7 @@ interface WebClient {
 
     suspend fun setUsername(username: String): Boolean
 
-    suspend fun findContributors(): List<Contributor>
+    suspend fun findContributors(): Map<String, Long>
 
     suspend fun getLastModifiedMillis(url: String): Long?
 
