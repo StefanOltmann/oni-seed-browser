@@ -21,7 +21,6 @@ package service
 
 import AppStorage
 import de.stefan_oltmann.oni.model.Cluster
-import de.stefan_oltmann.oni.model.Contributor
 import de.stefan_oltmann.oni.model.filter.FilterQuery
 import de.stefan_oltmann.oni.model.search.SearchIndex
 import io.ktor.client.HttpClient
@@ -54,9 +53,6 @@ import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.decodeFromByteArray
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.protobuf.ProtoBuf
-
-/* Read from GitHub pages; Cloudflare pages can't be read due to CORS rules. */
-const val LATEST_APP_VERSION_URL = "https://stefan-oltmann.de/oni-seed-browser/version.txt"
 
 const val FIND_URL = "https://oni-data.stefanoltmann.de"
 
@@ -121,30 +117,6 @@ object DefaultWebClient : WebClient {
     private val clusterCache = LruCache<String, Cluster?>(100)
 
     private var currentSearchIndex: SearchIndex? = null
-
-    override suspend fun getLatestAppVersion(): String? {
-
-        try {
-
-            val response = httpClient.get(LATEST_APP_VERSION_URL) {
-                accept(ContentType.Text.Plain)
-            }
-
-            if (response.status != HttpStatusCode.OK)
-                return null
-
-            val latestAppVersion: String? = response.body()
-
-            println("[WEBCLIENT] Latest app version: $latestAppVersion")
-
-            return latestAppVersion
-
-        } catch (ex: Throwable) {
-            println("[WEBCLIENT] Error getting latest app version: ${ex.message}")
-        }
-
-        return null
-    }
 
     override suspend fun countSeeds(): Long? {
 

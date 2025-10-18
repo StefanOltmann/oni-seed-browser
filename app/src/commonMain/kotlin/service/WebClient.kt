@@ -20,12 +20,9 @@
 package service
 
 import de.stefan_oltmann.oni.model.Cluster
-import de.stefan_oltmann.oni.model.Contributor
 import de.stefan_oltmann.oni.model.filter.FilterQuery
 
 interface WebClient {
-
-    suspend fun getLatestAppVersion(): String?
 
     suspend fun countSeeds(): Long?
 

@@ -25,7 +25,6 @@ import androidx.compose.ui.window.ComposeViewport
 import kotlinx.browser.document
 import kotlinx.browser.window
 import org.w3c.dom.HTMLElement
-import service.DefaultWebClient
 import ui.App
 import util.getQueryParameters
 import util.getValidSteamHash
@@ -61,16 +60,6 @@ fun main() {
         }
 
         val connectedUserId = remember { mutableStateOf<String?>(null) }
-
-        /*
-         * App update check
-         */
-        LaunchedEffect(Unit) {
-
-            val latestAppVersion = DefaultWebClient.getLatestAppVersion()
-
-            println("Latest app version: $latestAppVersion")
-        }
 
         /*
          * Check login token
