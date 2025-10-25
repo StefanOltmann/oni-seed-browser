@@ -43,9 +43,11 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import de.stefan_oltmann.oni.model.Asteroid
 import de.stefan_oltmann.oni.model.Cluster
+import de.stefan_oltmann.oni.model.ClusterType
 import de.stefan_oltmann.oni.model.filter.FilterQuery
 import io.github.stefanoltmann.app.generated.resources.Res
 import io.github.stefanoltmann.app.generated.resources.background_space
+import io.github.stefanoltmann.app.generated.resources.uiInvalidCoordinate
 import io.github.stefanoltmann.app.generated.resources.uiMapNotFound
 import io.github.stefanoltmann.app.generated.resources.uiNoFavoredClustersFound
 import io.github.stefanoltmann.app.generated.resources.uiNoResults
@@ -715,27 +717,57 @@ private fun ColumnScope.MainPanel(
             val coordinate = urlHash.value
 
             if (coordinate != null) {
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
 
-                    Text(
-                        text = stringResource(Res.string.uiMapNotFound),
-                        style = MaterialTheme.typography.headlineSmall,
-                        color = MaterialTheme.colorScheme.onBackground,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis
-                    )
+                if (ClusterType.isValidCoordinate(coordinate)) {
 
-                    DoubleSpacer()
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
 
-                    RequestCoordinateButton(
-                        enabled = connectedUserId != null,
-                        coordinate = coordinate
-                    )
+                        Text(
+                            text = stringResource(Res.string.uiMapNotFound),
+                            style = MaterialTheme.typography.headlineSmall,
+                            color = MaterialTheme.colorScheme.onBackground,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
+                        )
+
+                        DoubleSpacer()
+
+                        RequestCoordinateButton(
+                            enabled = connectedUserId != null,
+                            coordinate = coordinate
+                        )
+                    }
+
+                } else {
+
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+
+                        Text(
+                            text = stringResource(Res.string.uiInvalidCoordinate),
+                            style = MaterialTheme.typography.headlineSmall,
+                            color = MaterialTheme.colorScheme.onBackground,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
+                        )
+
+                        DoubleSpacer()
+
+                        Text(
+                            text = coordinate,
+                            style = MaterialTheme.typography.bodyLarge,
+                            color = MaterialTheme.colorScheme.onBackground,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
+                        )
+                    }
                 }
 
             } else if (hasPerformedSearch.value) {
+
                 Text(
                     text = stringResource(Res.string.uiNoResults),
                     style = MaterialTheme.typography.headlineSmall,
@@ -745,6 +777,7 @@ private fun ColumnScope.MainPanel(
                 )
 
             } else {
+
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {

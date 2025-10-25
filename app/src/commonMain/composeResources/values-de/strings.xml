@@ -59,6 +59,7 @@
     <string name="uiGoodGeyserCount">Geyser Anzahl (gut)</string>
     <string name="uiLoad">Laden</string>
     <string name="uiSave">Speichern</string>
+    <string name="uiInvalidCoordinate">Das Format der Koordinate ist ungültig</string>
 
     <!-- GameModes -->
     <string name="gameModeBaseGameStandard">Standard</string>
