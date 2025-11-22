@@ -562,6 +562,7 @@ val SpacedOutSpacePOI.drawableResource: DrawableResource
         SpacedOutSpacePOI.HarvestableSpacePOI_DLC4ImpactorDebrisField1 -> Res.drawable.spacepoi_artifact_1 // FIXME Wrong asset
         SpacedOutSpacePOI.HarvestableSpacePOI_DLC4ImpactorDebrisField2 -> Res.drawable.spacepoi_artifact_1 // FIXME Wrong asset
         SpacedOutSpacePOI.HarvestableSpacePOI_DLC4ImpactorDebrisField3 -> Res.drawable.spacepoi_artifact_1 // FIXME Wrong asset
+        SpacedOutSpacePOI.StarmapHexCellInventory -> Res.drawable.spacepoi_artifact_1 // FIXME Wrong asset
     }
 
 val VanillaSpacePOI.drawableResource: DrawableResource

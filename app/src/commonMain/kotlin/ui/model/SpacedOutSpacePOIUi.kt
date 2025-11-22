@@ -228,4 +228,5 @@ val SpacedOutSpacePOI.stringResource: StringResource
         SpacedOutSpacePOI.HarvestableSpacePOI_DLC4ImpactorDebrisField2 -> Res.string.dlc4ImpactorDebrisField2
         SpacedOutSpacePOI.HarvestableSpacePOI_DLC4ImpactorDebrisField3 -> Res.string.dlc4ImpactorDebrisField3
         SpacedOutSpacePOI.TemporalTear -> Res.string.temporalTear
+        SpacedOutSpacePOI.StarmapHexCellInventory -> Res.string.artifactSpacePoiGravitasSpaceStation1 // FIXME Wrong string
     }
