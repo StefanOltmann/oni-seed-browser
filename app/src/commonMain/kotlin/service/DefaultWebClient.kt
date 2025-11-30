@@ -54,11 +54,9 @@ import kotlinx.serialization.decodeFromByteArray
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.protobuf.ProtoBuf
 
-/* Note: This is not using HTTPS/SSL due to issues with Let's Encrypt & Cloudflare CDN. */
-const val FIND_URL = "http://oni-data.stefanoltmann.de"
+const val FIND_URL = "https://oni-data.stefanoltmann.de"
 
-/* Note: This is not using HTTPS/SSL due to issues with Let's Encrypt & Cloudflare CDN. */
-const val SEARCH_INDEX_URL = "http://oni-search.stefanoltmann.de"
+const val SEARCH_INDEX_URL = "https://oni-search.stefanoltmann.de"
 const val COUNT_URL = "$SEARCH_INDEX_URL/count"
 const val CONTRIBUTORS_URL = "$SEARCH_INDEX_URL/contributors"
 
