@@ -19,13 +19,18 @@
 
 package ui
 
+import POI_LOCATION_CHANGE_GAME_VERSION
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -40,12 +45,14 @@ import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import de.stefan_oltmann.oni.model.Cluster
 import de.stefan_oltmann.oni.model.SpacedOutSpacePOI
 import io.github.stefanoltmann.app.generated.resources.Res
 import io.github.stefanoltmann.app.generated.resources.background_space
+import io.github.stefanoltmann.app.generated.resources.uiPoiLocationsChanged
 import kotlin.math.PI
 import kotlin.math.cos
 import kotlin.math.sin
@@ -109,7 +116,7 @@ fun SpacedOutStarMapView(
 
             BoxWithConstraints(
                 contentAlignment = Alignment.Center,
-                modifier = Modifier.defaultPadding().fillMaxSize()
+                modifier = Modifier.defaultPadding().weight(1F)
             ) {
 
                 val clusterType = cluster.cluster
@@ -166,6 +173,29 @@ fun SpacedOutStarMapView(
                             )
                         }
                     }
+                }
+            }
+
+            /*
+             * Warn users that they are looking at an outdated version of the map.
+             */
+            if (cluster.gameVersion < POI_LOCATION_CHANGE_GAME_VERSION) {
+
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center,
+                    modifier = Modifier
+                        .height(24.dp)
+                        .fillMaxWidth()
+                        .background(MaterialTheme.colorScheme.errorContainer)
+                ) {
+
+                    Text(
+                        text = stringResource(Res.string.uiPoiLocationsChanged),
+                        style = MaterialTheme.typography.bodyMedium,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.onErrorContainer
+                    )
                 }
             }
         }

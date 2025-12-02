@@ -60,6 +60,7 @@
     <string name="uiLoad">Laden</string>
     <string name="uiSave">Speichern</string>
     <string name="uiInvalidCoordinate">Das Format der Koordinate ist ungültig</string>
+    <string name="uiPoiLocationsChanged">Achtung: Mit dem Update 701091 haben sich die Positionen geändert</string>
 
     <!-- GameModes -->
     <string name="gameModeBaseGameStandard">Standard</string>

@@ -60,6 +60,7 @@
     <string name="uiLoad">Load</string>
     <string name="uiSave">Save</string>
     <string name="uiInvalidCoordinate">The coordinate format is invalid</string>
+    <string name="uiPoiLocationsChanged">Note: POI locations are now different after update 701091</string>
 
     <!-- GameModes -->
     <string name="gameModeBaseGameStandard">Standard</string>
