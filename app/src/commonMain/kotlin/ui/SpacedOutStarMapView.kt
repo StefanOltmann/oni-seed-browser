@@ -43,6 +43,7 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import de.stefan_oltmann.oni.model.Cluster
+import de.stefan_oltmann.oni.model.SpacedOutSpacePOI
 import io.github.stefanoltmann.app.generated.resources.Res
 import io.github.stefanoltmann.app.generated.resources.background_space
 import kotlin.math.PI
@@ -122,6 +123,10 @@ fun SpacedOutStarMapView(
                 val qStep = (3f / 2f) * hexSize
 
                 for (entry in cluster.starMapEntriesSpacedOut) {
+
+                    /* This is debris of a mined asteroid. Ignore it. */
+                    if (entry.id == SpacedOutSpacePOI.StarmapHexCellInventory)
+                        continue
 
                     val xOffset = entry.r * rStep + (0.5f * entry.q * rStep)
 
