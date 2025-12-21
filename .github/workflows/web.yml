@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: Deploy to web
 
 on:
   push:
@@ -41,10 +41,15 @@ jobs:
         run: |
           mv app/build/dist/wasmJs/productionExecutable app/build/dist/wasmJs/oni-seed-browser
 
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
+      - name: Deploy over FTP
+        uses: modern-dev/ftp-mirror@v2
         with:
-          path: app/build/dist/wasmJs/oni-seed-browser/
+          server: ${{ secrets.FTP_SERVER }}
+          user: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local_dir: "app/build/dist/wasmJs/oni-seed-browser"
+          remote_dir: "/httpdocs/oni-seed-browser/"
+          delete: true
 
       # Deploy to Cloudflare worker (static site)
       - name: Publish to Cloudflare Pages
@@ -53,19 +58,3 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: deploy
-  
-  deploy_gh_pages:
-    name: Deploy to GitHub Pages
-    needs: build
-    permissions:
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Deploy to GitHub Pages
-        timeout-minutes: 5
-        id: deployment
-        uses: actions/deploy-pages@v4
