@@ -187,13 +187,13 @@ fun CoordinateBox(
 
                                 if (favorite) {
 
-                                    if (DefaultWebClient.rate(coordinate, like = false))
-                                        favoriteCoordinates.value -= coordinate
+                                    AppStorage.rate(coordinate, like = false)
+                                    favoriteCoordinates.value -= coordinate
 
                                 } else {
 
-                                    if (DefaultWebClient.rate(coordinate, like = true))
-                                        favoriteCoordinates.value += coordinate
+                                    AppStorage.rate(coordinate, like = true)
+                                    favoriteCoordinates.value += coordinate
                                 }
                             }
                         }

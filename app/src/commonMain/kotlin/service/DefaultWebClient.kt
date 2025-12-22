@@ -257,45 +257,6 @@ object DefaultWebClient : WebClient {
         }
     }
 
-    override suspend fun rate(coordinate: String, like: Boolean): Boolean {
-
-        println((if (like) "Like" else "Unlike") + " " + coordinate)
-
-        val response = if (like) {
-
-            httpClient.put(COORDINATE_FAVORITES_ENDPOINT) {
-
-                /* Auth */
-                AppStorage.getToken()?.let { token ->
-                    header(TOKEN_HEADER, token)
-                }
-
-                contentType(ContentType.Text.Plain)
-                setBody(coordinate)
-            }
-
-        } else {
-
-            httpClient.delete(COORDINATE_FAVORITES_ENDPOINT) {
-
-                /* Auth */
-                AppStorage.getToken()?.let { token ->
-                    header(TOKEN_HEADER, token)
-                }
-
-                contentType(ContentType.Text.Plain)
-                setBody(coordinate)
-            }
-        }
-
-        val success = response.status.isSuccess()
-
-        if (!success)
-            println("[WEBCLIENT] Request failed with HTTP ${response.status}: ${response.bodyAsText()}")
-
-        return success
-    }
-
     override suspend fun findSavedFilterQueries(): List<FilterQuery> {
 
         val response = httpClient.get(SAVED_FILTER_QUERIES_ENDPOINT) {

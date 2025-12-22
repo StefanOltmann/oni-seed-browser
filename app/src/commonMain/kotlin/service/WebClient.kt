@@ -38,8 +38,6 @@ interface WebClient {
 
     suspend fun findFavoredCoordinates(): List<String>
 
-    suspend fun rate(coordinate: String, like: Boolean): Boolean
-
     suspend fun findSavedFilterQueries(): List<FilterQuery>
 
     suspend fun saveFilterQuery(filterQuery: FilterQuery): Boolean
