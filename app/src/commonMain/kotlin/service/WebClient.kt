@@ -38,12 +38,6 @@ interface WebClient {
 
     suspend fun findFavoredCoordinates(): List<String>
 
-    suspend fun findSavedFilterQueries(): List<FilterQuery>
-
-    suspend fun saveFilterQuery(filterQuery: FilterQuery): Boolean
-
-    suspend fun deleteFilterQuery(filterQuery: FilterQuery): Boolean
-
     suspend fun search(filterQuery: FilterQuery): List<String>
 
     suspend fun getUsernameMap(): Map<String, String>

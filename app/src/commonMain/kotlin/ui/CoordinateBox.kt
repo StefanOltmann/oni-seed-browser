@@ -19,6 +19,7 @@
 
 package ui
 
+import AppStorage
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
@@ -51,7 +52,6 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
-import service.DefaultWebClient
 import ui.icons.ContentCopy
 import ui.icons.IconBookmarkFilled
 import ui.icons.IconBookmarkOutline
