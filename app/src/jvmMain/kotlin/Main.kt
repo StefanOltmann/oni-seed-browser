@@ -53,7 +53,7 @@ fun main() = application {
 
     Window(
         state = rememberWindowState(
-            size = DpSize(800.dp, 800.dp)
+            size = DpSize(1250.dp, 890.dp)
         ),
         title = stringResource(Res.string.uiTitle),
         icon = painterResource(Res.drawable.app_icon),
