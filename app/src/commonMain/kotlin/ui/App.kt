@@ -41,7 +41,6 @@ import de.stefan_oltmann.oni.model.filter.FilterQuery
 import ui.theme.AppTypography
 import ui.theme.appColorScheme
 
-const val ORIGINAL_URL = "https://stefanoltmann.de/oni-seed-browser/"
 const val MNI_URL = "https://mapsnotincluded.org/map-explorer/"
 
 val logoIconHeight = 80.dp

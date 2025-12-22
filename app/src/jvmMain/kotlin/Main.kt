@@ -32,6 +32,7 @@ import androidx.compose.ui.window.rememberWindowState
 import com.sun.net.httpserver.HttpExchange
 import com.sun.net.httpserver.HttpHandler
 import com.sun.net.httpserver.HttpServer
+import io.github.kdroidfilter.platformtools.darkmodedetector.windows.setWindowsAdaptiveTitleBar
 import io.github.stefanoltmann.app.generated.resources.Res
 import io.github.stefanoltmann.app.generated.resources.app_icon
 import io.github.stefanoltmann.app.generated.resources.uiTitle
@@ -58,6 +59,8 @@ fun main() = application {
         icon = painterResource(Res.drawable.app_icon),
         onCloseRequest = ::exitApplication
     ) {
+
+        this.window.setWindowsAdaptiveTitleBar(dark = true)
 
         this.window.minimumSize = java.awt.Dimension(800, 800)
 

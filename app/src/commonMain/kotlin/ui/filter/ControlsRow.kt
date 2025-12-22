@@ -39,7 +39,6 @@ import kotlinx.coroutines.launch
 import service.DefaultWebClient
 import toBase64
 import ui.MNI_URL
-import ui.ORIGINAL_URL
 import ui.icons.ContentCopy
 import ui.onHover
 import ui.theme.DefaultSpacer
@@ -54,7 +53,6 @@ fun ControlsRow(
     filterQueryState: MutableState<FilterQuery>,
     filterPanelOpen: MutableState<Boolean>,
     onSearchButtonPressed: () -> Unit,
-    showMniUrl: Boolean,
     writeToClipboard: (String) -> Unit
 ) {
 
@@ -146,10 +144,7 @@ fun ControlsRow(
 
                                 val base64 = cleanFilterState.toBase64()
 
-                                val url = if (showMniUrl)
-                                    "$MNI_URL?filter=$base64"
-                                else
-                                    "$ORIGINAL_URL?filter=$base64"
+                                val url = "$MNI_URL?filter=$base64"
 
                                 writeToClipboard(url)
                             }
@@ -167,8 +162,7 @@ fun ControlsRow(
                     hoverColor
                 else
                     MaterialTheme.colorScheme.onBackground,
-                modifier = Modifier
-                    .size(24.dp)
+                modifier = Modifier.size(24.dp)
             )
         }
 

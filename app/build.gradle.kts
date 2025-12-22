@@ -113,7 +113,9 @@ kotlin {
             implementation(libs.kotlinx.coroutines.swing)
             implementation(libs.ktor.java)
 
-            implementation("io.minio:minio:8.5.17")
+            /* Platform Tools */
+            implementation(libs.platformtools.core)
+            implementation(libs.platformtools.darkmodedetector)
         }
 
         if (buildTarget != "desktop") {

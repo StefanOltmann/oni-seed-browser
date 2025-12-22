@@ -81,7 +81,6 @@ fun ClusterView(
     likeCount: Int?,
     showStarMap: MutableState<Cluster?>,
     showAsteroidMap: MutableState<Pair<Cluster, Asteroid>?>,
-    showMniUrl: Boolean,
     showFavoriteIcon: Boolean,
     steamIdToUsernameMap: Map<String, String?>,
     writeToClipboard: (String) -> Unit
@@ -113,10 +112,7 @@ fun ClusterView(
 
         val urlWasCopied = remember { mutableStateOf(false) }
 
-        val url = if (showMniUrl)
-            MNI_URL + cluster.coordinate
-        else
-            ORIGINAL_URL + "#" + cluster.coordinate
+        val url = MNI_URL + cluster.coordinate
 
         Row(
             verticalAlignment = Alignment.CenterVertically,

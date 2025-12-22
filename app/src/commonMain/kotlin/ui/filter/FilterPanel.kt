@@ -165,7 +165,6 @@ fun FilterPanel(
                         filterQueryState = filterQueryState,
                         filterPanelOpen = filterPanelOpen,
                         onSearchButtonPressed = onSearchButtonPressed,
-                        showMniUrl = showMniUrl,
                         writeToClipboard = writeToClipboard
                     )
                 }

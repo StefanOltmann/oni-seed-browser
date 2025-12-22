@@ -56,7 +56,7 @@ fun Footer() {
             contentAlignment = Alignment.Center,
             modifier = Modifier
                 .clickable {
-                    uriHandler.openUri("https://github.com/StefanOltmann/oni-seed-browser")
+                    uriHandler.openUri("https://stefan-oltmann.de")
                 }
         ) {
 

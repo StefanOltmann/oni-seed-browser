@@ -199,7 +199,6 @@ fun ClusterViewList(
                         likeCount = likeCounts?.value?.get(cluster.coordinate),
                         showStarMap = showStarMap,
                         showAsteroidMap = showAsteroidMap,
-                        showMniUrl = showMniUrl,
                         showFavoriteIcon = showFavoriteIcon,
                         steamIdToUsernameMap = steamIdToUsernameMap,
                         writeToClipboard = writeToClipboard
