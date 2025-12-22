@@ -65,12 +65,6 @@ const val REQUEST_URL = "$INGEST_SERVER_URL/request-coordinate"
 
 /**
  * Cloudflare-based service.
- * See https://github.com/StefanOltmann/cloudflare-oni-user-name-service
- */
-const val USER_NAMES_URL = "https://stefanoltmann.de/oni-user-names"
-
-/**
- * Cloudflare-based service.
  * See https://github.com/StefanOltmann/cloudflare-oni-user-coordinate-like-service
  */
 const val COORDINATE_FAVORITES_ENDPOINT = "https://stefanoltmann.de/oni-user-coordinate-likes"
@@ -349,7 +343,7 @@ object DefaultWebClient : WebClient {
 
     override suspend fun getUsernameMap(): Map<String, String> {
 
-        val response = httpClient.get(USER_NAMES_URL) {
+        val response = httpClient.get("$INGEST_SERVER_URL/usernames") {
             accept(ContentType.Application.Json)
         }
 
@@ -374,7 +368,7 @@ object DefaultWebClient : WebClient {
 
         val response = if (username.isBlank()) {
 
-            httpClient.delete(USER_NAMES_URL) {
+            httpClient.delete("$INGEST_SERVER_URL/username") {
 
                 /* Auth */
                 AppStorage.getToken()?.let { token ->
@@ -384,7 +378,7 @@ object DefaultWebClient : WebClient {
 
         } else {
 
-            httpClient.put(USER_NAMES_URL) {
+            httpClient.put("$INGEST_SERVER_URL/username") {
 
                 /* Auth */
                 AppStorage.getToken()?.let { token ->
