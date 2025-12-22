@@ -44,7 +44,7 @@
     <string name="uiRequestCoordinateButton">Request to add this coordinate</string>
     <string name="uiCoordinateRequested">Coordinate requested</string>
     <string name="uiCoordinateRequestFailed">Coordinate request failed</string>
-    <string name="uiNoFavoredClustersFound">Your favorites will show up here.\nUse the heart icon to mark some.</string>
+    <string name="uiNoFavoredClustersFound">Your favorites will show up here.\nUse the bookmark icon to mark some.</string>
     <string name="uiSetUsername">Set username</string>
     <string name="uiUsernameLabel">Username</string>
     <string name="uiLoading">Loading...</string>
