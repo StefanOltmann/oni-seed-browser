@@ -293,27 +293,24 @@ fun ContentView(
                             }
                     )
 
-                    if (connectedUserId != null) {
+                    Icon(
+                        imageVector = if (showFavorites.value)
+                            IconBookmarksFilled
+                        else
+                            IconBookmarks,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.onBackground,
+                        modifier = Modifier
+                            .halfPadding()
+                            .size(32.dp)
+                            .noRippleClickable {
 
-                        Icon(
-                            imageVector = if (showFavorites.value)
-                                IconBookmarksFilled
-                            else
-                                IconBookmarks,
-                            contentDescription = null,
-                            tint = MaterialTheme.colorScheme.onBackground,
-                            modifier = Modifier
-                                .halfPadding()
-                                .size(32.dp)
-                                .noRippleClickable {
+                                showFavorites.value = !showFavorites.value
 
-                                    showFavorites.value = !showFavorites.value
-
-                                    if (showFavorites.value)
-                                        showLeaderboard.value = false
-                                }
-                        )
-                    }
+                                if (showFavorites.value)
+                                    showLeaderboard.value = false
+                            }
+                    )
 
                     DefaultSpacer()
 
@@ -587,7 +584,6 @@ private fun ColumnScope.FavoritesPanel(
                 favoriteCoordinates = favoredCoordinates,
                 showStarMap = showStarMap,
                 showAsteroidMap = showAsteroidMap,
-                showFavoriteIcon = connectedUserId != null,
                 steamIdToUsernameMap = steamIdToUsernameMap,
                 writeToClipboard = writeToClipboard
             )
@@ -799,7 +795,6 @@ private fun ColumnScope.MainPanel(
                 favoriteCoordinates = favoredCoordinates,
                 showStarMap = showStarMap,
                 showAsteroidMap = showAsteroidMap,
-                showFavoriteIcon = connectedUserId != null,
                 steamIdToUsernameMap = steamIdToUsernameMap,
                 writeToClipboard = writeToClipboard
             )

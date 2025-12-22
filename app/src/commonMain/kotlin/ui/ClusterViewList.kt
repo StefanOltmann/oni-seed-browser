@@ -61,7 +61,6 @@ fun ClusterViewList(
     favoriteCoordinates: MutableState<List<String>>,
     showStarMap: MutableState<Cluster?>,
     showAsteroidMap: MutableState<Pair<Cluster, Asteroid>?>,
-    showFavoriteIcon: Boolean,
     steamIdToUsernameMap: Map<String, String?>,
     writeToClipboard: (String) -> Unit
 ) {
@@ -196,7 +195,6 @@ fun ClusterViewList(
                         favoriteCoordinates = favoriteCoordinates,
                         showStarMap = showStarMap,
                         showAsteroidMap = showAsteroidMap,
-                        showFavoriteIcon = showFavoriteIcon,
                         steamIdToUsernameMap = steamIdToUsernameMap,
                         writeToClipboard = writeToClipboard
                     )

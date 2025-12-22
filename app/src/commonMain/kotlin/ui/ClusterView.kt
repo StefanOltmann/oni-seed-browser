@@ -80,7 +80,6 @@ fun ClusterView(
     favoriteCoordinates: MutableState<List<String>>,
     showStarMap: MutableState<Cluster?>,
     showAsteroidMap: MutableState<Pair<Cluster, Asteroid>?>,
-    showFavoriteIcon: Boolean,
     steamIdToUsernameMap: Map<String, String?>,
     writeToClipboard: (String) -> Unit
 ) {
@@ -97,7 +96,6 @@ fun ClusterView(
             coordinate = cluster.coordinate,
             favoriteCoordinates = favoriteCoordinates,
             showMapClicked = { showStarMap.value = cluster },
-            showFavoriteIcon = showFavoriteIcon,
             writeToClipboard = writeToClipboard
         )
 
