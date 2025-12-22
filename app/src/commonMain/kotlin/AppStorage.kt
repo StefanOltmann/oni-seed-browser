@@ -28,6 +28,7 @@ private val jsonPretty = Json {
 
 private const val FILTER_SETTINGS_KEY = "mni_filter"
 private const val TOKEN_SETTINGS_KEY = "mni_token"
+private const val FAVORITES_SETTINGS_KEY = "mni_favorites"
 
 object AppStorage {
 
@@ -99,6 +100,39 @@ object AppStorage {
             ex.printStackTrace()
 
             settings.remove(FILTER_SETTINGS_KEY)
+        }
+    }
+
+    fun loadFavorites(): List<String> {
+
+        val json = settings.getStringOrNull(FAVORITES_SETTINGS_KEY)
+            ?: return emptyList()
+
+        return try {
+
+            jsonPretty.decodeFromString<List<String>>(json)
+
+        } catch (ex: Throwable) {
+
+            ex.printStackTrace()
+
+            emptyList()
+        }
+    }
+
+    fun saveFavorites(favorites: List<String>) {
+
+        try {
+
+            val json = jsonPretty.encodeToString(favorites)
+
+            settings.putString(FAVORITES_SETTINGS_KEY, json)
+
+        } catch (ex: Exception) {
+
+            ex.printStackTrace()
+
+            settings.remove(FAVORITES_SETTINGS_KEY)
         }
     }
 }
