@@ -78,7 +78,6 @@ fun ClusterView(
     index: Int,
     totalCount: Int,
     favoriteCoordinates: MutableState<List<String>>,
-    likeCount: Int?,
     showStarMap: MutableState<Cluster?>,
     showAsteroidMap: MutableState<Pair<Cluster, Asteroid>?>,
     showFavoriteIcon: Boolean,
@@ -97,7 +96,6 @@ fun ClusterView(
             totalCount = totalCount,
             coordinate = cluster.coordinate,
             favoriteCoordinates = favoriteCoordinates,
-            likeCount = likeCount,
             showMapClicked = { showStarMap.value = cluster },
             showFavoriteIcon = showFavoriteIcon,
             writeToClipboard = writeToClipboard

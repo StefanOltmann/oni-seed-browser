@@ -59,10 +59,8 @@ private const val SCROLL_THRESHOLD_PX = 500
 fun ClusterViewList(
     clusters: List<String>,
     favoriteCoordinates: MutableState<List<String>>,
-    likeCounts: MutableState<Map<String, Int>?>?,
     showStarMap: MutableState<Cluster?>,
     showAsteroidMap: MutableState<Pair<Cluster, Asteroid>?>,
-    showMniUrl: Boolean = false,
     showFavoriteIcon: Boolean,
     steamIdToUsernameMap: Map<String, String?>,
     writeToClipboard: (String) -> Unit
@@ -196,7 +194,6 @@ fun ClusterViewList(
                         index = idx + 1,
                         totalCount = clusters.size,
                         favoriteCoordinates = favoriteCoordinates,
-                        likeCount = likeCounts?.value?.get(cluster.coordinate),
                         showStarMap = showStarMap,
                         showAsteroidMap = showAsteroidMap,
                         showFavoriteIcon = showFavoriteIcon,

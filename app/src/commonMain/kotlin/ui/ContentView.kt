@@ -183,8 +183,6 @@ fun ContentView(
         val showFavorites = remember { mutableStateOf(false) }
         val showLeaderboard = remember { mutableStateOf(false) }
 
-        val likeCounts: MutableState<Map<String, Int>?> = remember { mutableStateOf(null) }
-
         LaunchedEffect(urlHash.value) {
 
             val urlHashValue = urlHash.value
@@ -203,9 +201,6 @@ fun ContentView(
                         clusters.value = listOf(world.coordinate)
                     else
                         clusters.value = emptyList()
-
-                    /* Reset */
-                    likeCounts.value = null
 
                 } catch (ex: Throwable) {
 
@@ -245,9 +240,6 @@ fun ContentView(
             } else {
 
                 clusters.value = emptyList()
-
-                /* Reset */
-                likeCounts.value = null
             }
         }
 
@@ -501,7 +493,6 @@ fun ContentView(
                         isGettingNewResults,
                         errorMessage,
                         clusters,
-                        likeCounts,
                         worldCount,
                         coroutineScope,
                         urlHash,
@@ -595,11 +586,9 @@ private fun ColumnScope.FavoritesPanel(
             ClusterViewList(
                 clusters = favoredCoordinates.value,
                 favoriteCoordinates = favoredCoordinates,
-                likeCounts = null,
                 showStarMap = showStarMap,
                 showAsteroidMap = showAsteroidMap,
                 showFavoriteIcon = connectedUserId != null,
-                showMniUrl = isMniEmbedded,
                 steamIdToUsernameMap = steamIdToUsernameMap,
                 writeToClipboard = writeToClipboard
             )
@@ -623,7 +612,6 @@ private fun ColumnScope.MainPanel(
     isGettingNewResults: MutableState<Boolean>,
     errorMessage: MutableState<String?>,
     clusters: MutableState<List<String>>,
-    likeCounts: MutableState<Map<String, Int>?>,
     worldCount: State<Long?>,
     coroutineScope: CoroutineScope,
     urlHash: State<String?>,
@@ -653,7 +641,6 @@ private fun ColumnScope.MainPanel(
 
             /* Reset the data */
             clusters.value = emptyList()
-            likeCounts.value = null
 
             /*
              * Allow the UI to update.
@@ -811,11 +798,9 @@ private fun ColumnScope.MainPanel(
             ClusterViewList(
                 clusters = clusters.value,
                 favoriteCoordinates = favoredCoordinates,
-                likeCounts = likeCounts,
                 showStarMap = showStarMap,
                 showAsteroidMap = showAsteroidMap,
                 showFavoriteIcon = connectedUserId != null,
-                showMniUrl = isMniEmbedded,
                 steamIdToUsernameMap = steamIdToUsernameMap,
                 writeToClipboard = writeToClipboard
             )

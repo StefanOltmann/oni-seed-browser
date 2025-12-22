@@ -53,10 +53,8 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import service.DefaultWebClient
 import ui.icons.ContentCopy
-import ui.icons.IconArrowUp
 import ui.icons.IconBookmarkFilled
 import ui.icons.IconBookmarkOutline
-import ui.theme.DefaultSpacer
 import ui.theme.DoubleSpacer
 import ui.theme.defaultRoundedCornerShape
 import ui.theme.defaultSpacing
@@ -70,7 +68,6 @@ fun CoordinateBox(
     totalCount: Int,
     coordinate: String,
     favoriteCoordinates: MutableState<List<String>>,
-    likeCount: Int?,
     showMapClicked: (() -> Unit)?,
     showFavoriteIcon: Boolean,
     writeToClipboard: (String) -> Unit
@@ -151,34 +148,8 @@ fun CoordinateBox(
             }
         }
 
-        if (width.value >= 600) {
-
-            if (likeCount != null)
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier
-                        .align(Alignment.CenterStart)
-                        .padding(horizontal = halfSpacing)
-                        .height(32.dp)
-                ) {
-
-                    Icon(
-                        imageVector = IconArrowUp,
-                        contentDescription = null,
-                        tint = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.8f)
-                    )
-
-                    DefaultSpacer()
-
-                    Text(
-                        text = "$likeCount",
-                        style = MaterialTheme.typography.titleLarge,
-                        color = MaterialTheme.colorScheme.onBackground
-                    )
-                }
-            else
-                IndexIndicator(index, totalCount)
-        }
+        if (width.value >= 600)
+            IndexIndicator(index, totalCount)
 
         Row(
             modifier = Modifier.align(Alignment.CenterEnd)
