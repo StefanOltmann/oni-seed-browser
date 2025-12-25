@@ -154,50 +154,52 @@ fun CoordinateBox(
             modifier = Modifier.align(Alignment.CenterEnd)
         ) {
 
-            val favorite = favoriteCoordinates.value.contains(coordinate)
+            if (showMapClicked != null) {
 
-            val coroutineScope = rememberCoroutineScope()
+                val favorite = favoriteCoordinates.value.contains(coordinate)
 
-            Icon(
-                imageVector = if (favorite)
-                    IconBookmarkFilled
-                else
-                    IconBookmarkOutline,
-                contentDescription = null,
-                tint = if (favorite)
-                    MaterialTheme.colorScheme.onBackground
-                else
-                    MaterialTheme.colorScheme.onBackground.copy(alpha = 0.3f),
-                modifier = Modifier
-                    .halfPadding()
-                    .size(32.dp)
-                    .noRippleClickable {
+                val coroutineScope = rememberCoroutineScope()
 
-                        coroutineScope.launch {
+                Icon(
+                    imageVector = if (favorite)
+                        IconBookmarkFilled
+                    else
+                        IconBookmarkOutline,
+                    contentDescription = null,
+                    tint = if (favorite)
+                        MaterialTheme.colorScheme.onBackground
+                    else
+                        MaterialTheme.colorScheme.onBackground.copy(alpha = 0.3f),
+                    modifier = Modifier
+                        .halfPadding()
+                        .size(32.dp)
+                        .noRippleClickable {
 
-                            /*
-                             * Perform the operation on the backend and if that
-                             * is successful show the change in the UI.
-                             *
-                             * We want to keep backend and frontend in sync here.
-                             */
+                            coroutineScope.launch {
 
-                            if (favorite) {
+                                /*
+                                 * Perform the operation on the backend and if that
+                                 * is successful show the change in the UI.
+                                 *
+                                 * We want to keep backend and frontend in sync here.
+                                 */
 
-                                AppStorage.rate(coordinate, like = false)
-                                favoriteCoordinates.value -= coordinate
+                                if (favorite) {
 
-                            } else {
+                                    AppStorage.rate(coordinate, like = false)
+                                    favoriteCoordinates.value -= coordinate
 
-                                AppStorage.rate(coordinate, like = true)
-                                favoriteCoordinates.value += coordinate
+                                } else {
+
+                                    AppStorage.rate(coordinate, like = true)
+                                    favoriteCoordinates.value += coordinate
+                                }
                             }
                         }
-                    }
-            )
+                )
 
-            if (showMapClicked != null)
                 ShowMapButton(showMapClicked)
+            }
         }
     }
 }
