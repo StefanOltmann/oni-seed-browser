@@ -54,9 +54,9 @@ import kotlinx.serialization.decodeFromByteArray
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.protobuf.ProtoBuf
 
-const val FIND_URL = "https://oni-data.stefanoltmann.de"
+const val FIND_URL = "https://maps.mapsnotincluded.org"
 
-const val SEARCH_INDEX_URL = "https://oni-search.stefanoltmann.de"
+const val SEARCH_INDEX_URL = "https://maps.mapsnotincluded.org"
 const val COUNT_URL = "$SEARCH_INDEX_URL/count"
 const val CONTRIBUTORS_URL = "$SEARCH_INDEX_URL/contributors"
 
