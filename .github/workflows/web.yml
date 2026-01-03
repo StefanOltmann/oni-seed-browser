@@ -41,20 +41,11 @@ jobs:
         run: |
           mv app/build/dist/wasmJs/productionExecutable app/build/dist/wasmJs/oni-seed-browser
 
-      - name: Deploy over FTP
-        uses: modern-dev/ftp-mirror@v2
+      - name: Deploy to Azure Static Web Apps
+        uses: Azure/static-web-apps-deploy@v1
         with:
-          server: ${{ secrets.FTP_SERVER }}
-          user: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          local_dir: "app/build/dist/wasmJs/oni-seed-browser"
-          remote_dir: "/httpdocs/oni-seed-browser/"
-          delete: true
-
-      # Deploy to Cloudflare worker (static site)
-      - name: Publish to Cloudflare Pages
-        uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: deploy
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_SWA_DEPLOYMENT_TOKEN }}
+          action: "upload"
+          app_location: "app/build/dist/wasmJs/oni-seed-browser"
+          output_location: ""
+          skip_app_build: true
