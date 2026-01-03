@@ -36,8 +36,6 @@ interface WebClient {
      */
     suspend fun request(coordinate: String): Boolean
 
-    suspend fun findFavoredCoordinates(): List<String>
-
     suspend fun search(filterQuery: FilterQuery): List<String>
 
     suspend fun getUsernameMap(): Map<String, String>

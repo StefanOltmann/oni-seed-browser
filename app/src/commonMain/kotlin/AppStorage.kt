@@ -19,7 +19,6 @@
 
 import de.stefan_oltmann.oni.model.filter.FilterQuery
 import kotlinx.serialization.json.Json
-import service.DefaultWebClient
 
 private val jsonPretty = Json {
     prettyPrint = true
@@ -30,7 +29,6 @@ private val jsonPretty = Json {
 private const val FILTER_SETTINGS_KEY = "mni_filter"
 private const val TOKEN_SETTINGS_KEY = "mni_token"
 private const val FAVORITES_SETTINGS_KEY = "mni_favorites"
-private const val LIKES_MIGRATION_SETTINGS_KEY = "mni_likes_migration"
 
 object AppStorage {
 
@@ -105,9 +103,7 @@ object AppStorage {
         }
     }
 
-    suspend fun loadFavorites(): List<String> {
-
-        migrateLikes()
+    fun loadFavorites(): List<String> {
 
         val json = settings.getStringOrNull(FAVORITES_SETTINGS_KEY)
             ?: return emptyList()
@@ -124,52 +120,7 @@ object AppStorage {
         }
     }
 
-    private suspend fun migrateLikes() {
-
-        if (getToken() == null)
-            return
-
-        if (settings.getBoolean(LIKES_MIGRATION_SETTINGS_KEY, false))
-            return
-
-        try {
-
-            val remoteFavorites = DefaultWebClient.findFavoredCoordinates()
-
-            if (remoteFavorites.isNotEmpty()) {
-
-                val localFavorites = loadFavoritesInternal()
-                val mergedFavorites = (localFavorites + remoteFavorites).distinct()
-
-                saveFavorites(mergedFavorites)
-            }
-
-            settings.putBoolean(LIKES_MIGRATION_SETTINGS_KEY, true)
-
-        } catch (ex: Exception) {
-
-            ex.printStackTrace()
-        }
-    }
-
-    private fun loadFavoritesInternal(): List<String> {
-
-        val json = settings.getStringOrNull(FAVORITES_SETTINGS_KEY)
-            ?: return emptyList()
-
-        return try {
-
-            jsonPretty.decodeFromString<List<String>>(json)
-
-        } catch (ex: Throwable) {
-
-            ex.printStackTrace()
-
-            emptyList()
-        }
-    }
-
-    suspend fun rate(coordinate: String, like: Boolean) {
+    fun rate(coordinate: String, like: Boolean) {
 
         val favorites = loadFavorites().toMutableList()
 

@@ -63,12 +63,6 @@ const val CONTRIBUTORS_URL = "$SEARCH_INDEX_URL/contributors"
 const val INGEST_SERVER_URL = "https://ingest.mapsnotincluded.org"
 const val REQUEST_URL = "$INGEST_SERVER_URL/request-coordinate"
 
-/**
- * Cloudflare-based service.
- * See https://github.com/StefanOltmann/cloudflare-oni-user-coordinate-like-service
- */
-const val COORDINATE_FAVORITES_ENDPOINT = "https://stefanoltmann.de/oni-user-coordinate-likes"
-
 const val TOKEN_HEADER = "token"
 
 /**
@@ -218,31 +212,6 @@ object DefaultWebClient : WebClient {
         }
 
         return response.status.isSuccess()
-    }
-
-    override suspend fun findFavoredCoordinates(): List<String> {
-
-        val response = httpClient.get(COORDINATE_FAVORITES_ENDPOINT) {
-
-            /* Auth */
-            AppStorage.getToken()?.let { token ->
-                header(TOKEN_HEADER, token)
-            }
-
-            accept(ContentType.Application.Json)
-        }
-
-        if (!response.status.isSuccess())
-            error("[WEBCLIENT] Requesting favored coordinates failed with HTTP ${response.status}: ${response.bodyAsText()}")
-
-        try {
-
-            return response.body()
-
-        } catch (ex: Exception) {
-
-            throw Exception("Finding favored coordinates failed.", ex)
-        }
     }
 
     @OptIn(ExperimentalSerializationApi::class)
