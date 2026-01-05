@@ -13,6 +13,9 @@
     <string name="uiHas">有</string>
     <string name="uiHasNot">没有</string>
     <string name="uiNoResults">没有找到结果.</string>
+    <string name="uiMapNotFound">未找到此地图</string>
+    <string name="uiWelcome">欢迎使用种子浏览器</string>
+    <string name="uiWelcomeInstruction">使用搜索功能来查找地图!</string>
     <string name="uiSeedsInDatabase">个种子</string>
     <string name="uiWorldTrait">星球特质</string>
     <string name="uiSpaceDestinationCount">太空目的地数量</string>

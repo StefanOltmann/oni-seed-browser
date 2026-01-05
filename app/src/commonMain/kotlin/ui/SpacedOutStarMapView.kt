@@ -1,7 +1,7 @@
 /*
  * ONI Seed Browser
  * Copyright (C) 2025 Stefan Oltmann
- * https://stefan-oltmann.de/oni-seed-browser
+ * https://stefan-oltmann.de
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -19,13 +19,18 @@
 
 package ui
 
+import POI_LOCATION_CHANGE_GAME_VERSION
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -35,25 +40,26 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import de.stefan_oltmann.oni.model.Cluster
+import de.stefan_oltmann.oni.model.SpacedOutSpacePOI
 import io.github.stefanoltmann.app.generated.resources.Res
 import io.github.stefanoltmann.app.generated.resources.background_space
+import io.github.stefanoltmann.app.generated.resources.uiPoiLocationsChanged
 import kotlin.math.PI
 import kotlin.math.cos
 import kotlin.math.sin
 import kotlin.math.sqrt
-import model.AsteroidType
-import model.Cluster
-import model.SpacedOutSpacePOI
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
+import ui.model.stringResource
 import ui.theme.defaultPadding
 import ui.theme.defaultSpacing
 import ui.theme.halfSpacing
@@ -72,7 +78,7 @@ fun SpacedOutStarMapView(
     writeToClipboard: (String) -> Unit
 ) {
 
-    if (cluster.starMapEntriesSpacedOut == null)
+    if (cluster.starMapEntriesSpacedOut.isEmpty())
         return
 
     Box(
@@ -103,13 +109,12 @@ fun SpacedOutStarMapView(
                 coordinate = cluster.coordinate,
                 favoriteCoordinates = favoriteCoordinates,
                 showMapClicked = null,
-                showFavoriteIcon = false,
                 writeToClipboard = writeToClipboard
             )
 
             BoxWithConstraints(
                 contentAlignment = Alignment.Center,
-                modifier = Modifier.defaultPadding().fillMaxSize()
+                modifier = Modifier.defaultPadding().weight(1F)
             ) {
 
                 val clusterType = cluster.cluster
@@ -124,6 +129,10 @@ fun SpacedOutStarMapView(
 
                 for (entry in cluster.starMapEntriesSpacedOut) {
 
+                    /* This is debris of a mined asteroid. Ignore it. */
+                    if (entry.id == SpacedOutSpacePOI.StarmapHexCellInventory)
+                        continue
+
                     val xOffset = entry.r * rStep + (0.5f * entry.q * rStep)
 
                     val yOffset = entry.q * qStep
@@ -137,68 +146,54 @@ fun SpacedOutStarMapView(
                             .size(hexSize.times(LocalDensity.current.density).dp)
                     ) {
 
-                        val asteroidType = AsteroidType.entries.find { it.name == entry.id }
-
-                        val spacedOutSpacePOI = if (asteroidType == null)
-                            SpacedOutSpacePOI.entries.find { it.name == entry.id }
-                        else
-                            null
-
-                        if (asteroidType != null) {
-
-                            TooltipContainer(
-                                tooltipContent = {
-                                    GenericTooltip {
-                                        Text(
-                                            text = stringResource(asteroidType.stringResource),
-                                            style = MaterialTheme.typography.bodyLarge,
-                                            color = MaterialTheme.colorScheme.onBackground,
-                                            lineHeight = 0.sp,
-                                            modifier = Modifier.padding(
-                                                horizontal = defaultSpacing,
-                                                vertical = halfSpacing
-                                            )
+                        TooltipContainer(
+                            tooltipContent = {
+                                GenericTooltip {
+                                    Text(
+                                        text = stringResource(entry.id.stringResource),
+                                        style = MaterialTheme.typography.bodyLarge,
+                                        color = MaterialTheme.colorScheme.onBackground,
+                                        lineHeight = 0.sp,
+                                        modifier = Modifier.padding(
+                                            horizontal = defaultSpacing,
+                                            vertical = halfSpacing
                                         )
-                                    }
-                                },
-                                yOffset = 20
-                            ) {
+                                    )
+                                }
+                            },
+                            yOffset = 20
+                        ) {
 
-                                Image(
-                                    painter = painterResource(getAsteroidTypeDrawable(asteroidType)),
-                                    contentDescription = null,
-                                    modifier = Modifier.scale(1.5f)
-                                )
-                            }
-
-                        } else if (spacedOutSpacePOI != null) {
-
-                            TooltipContainer(
-                                tooltipContent = {
-                                    GenericTooltip {
-                                        Text(
-                                            text = stringResource(spacedOutSpacePOI.stringResource),
-                                            style = MaterialTheme.typography.bodyLarge,
-                                            color = MaterialTheme.colorScheme.onBackground,
-                                            lineHeight = 0.sp,
-                                            modifier = Modifier.padding(
-                                                horizontal = defaultSpacing,
-                                                vertical = halfSpacing
-                                            )
-                                        )
-                                    }
-                                },
-                                yOffset = 20
-                            ) {
-
-                                Image(
-                                    painter = painterResource(getSpacedOutSpacePOIDrawable(spacedOutSpacePOI)),
-                                    contentDescription = null,
-                                    modifier = Modifier.fillMaxSize()
-                                )
-                            }
+                            Image(
+                                painter = painterResource(entry.id.drawableResource),
+                                contentDescription = null,
+                                modifier = Modifier.fillMaxSize()
+                            )
                         }
                     }
+                }
+            }
+
+            /*
+             * Warn users that they are looking at an outdated version of the map.
+             */
+            if (cluster.gameVersion < POI_LOCATION_CHANGE_GAME_VERSION) {
+
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center,
+                    modifier = Modifier
+                        .height(24.dp)
+                        .fillMaxWidth()
+                        .background(MaterialTheme.colorScheme.errorContainer)
+                ) {
+
+                    Text(
+                        text = stringResource(Res.string.uiPoiLocationsChanged),
+                        style = MaterialTheme.typography.bodyMedium,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.onErrorContainer
+                    )
                 }
             }
         }

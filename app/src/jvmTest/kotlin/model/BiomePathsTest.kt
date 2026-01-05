@@ -1,7 +1,7 @@
 /*
  * ONI Seed Browser
  * Copyright (C) 2025 Stefan Oltmann
- * https://stefan-oltmann.de/oni-seed-browser
+ * https://stefan-oltmann.de
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package model
+package de.stefan_oltmann.oni.model
 
 import kotlin.test.Test
 import kotlin.test.assertEquals

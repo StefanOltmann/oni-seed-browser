@@ -1,7 +1,7 @@
 /*
  * ONI Seed Browser
  * Copyright (C) 2025 Stefan Oltmann
- * https://stefan-oltmann.de/oni-seed-browser
+ * https://stefan-oltmann.de
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -19,36 +19,31 @@
 
 package service
 
-import model.Cluster
-import model.Contributor
-import model.filter.FilterQuery
+import de.stefan_oltmann.oni.model.Cluster
+import de.stefan_oltmann.oni.model.filter.FilterQuery
 
 interface WebClient {
 
     suspend fun countSeeds(): Long?
 
-    suspend fun findLatestClusters(): List<Cluster>
+    suspend fun findLatestClusters(): List<String>
 
     suspend fun find(coordinate: String): Cluster?
 
     /*
-     * Requests a coordinate and returns if request was valid.
-     * Can be invalid if coordinate has wrong syntax.
+     * Requests a coordinate and returns if the request was valid.
+     * Can be invalid if coordinate has the wrong syntax.
      */
     suspend fun request(coordinate: String): Boolean
 
-    suspend fun findFavoredClusters(): List<Cluster>
+    suspend fun search(filterQuery: FilterQuery): List<String>
 
-    suspend fun findFavoredCoordinates(): List<String>
-
-    suspend fun rate(coordinate: String, like: Boolean): Boolean
-
-    suspend fun search(filterQuery: FilterQuery): List<Cluster>
-
-    suspend fun getUsername(): String?
+    suspend fun getUsernameMap(): Map<String, String>
 
     suspend fun setUsername(username: String): Boolean
 
-    suspend fun findContributors(): List<Contributor>
+    suspend fun findContributors(): Map<String, Long>
+
+    suspend fun getLastModifiedMillis(url: String): Long?
 
 }

@@ -1,7 +1,7 @@
 /*
  * ONI Seed Browser
  * Copyright (C) 2025 Stefan Oltmann
- * https://stefan-oltmann.de/oni-seed-browser
+ * https://stefan-oltmann.de
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -38,12 +38,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import model.filter.FilterQuery
-import model.filter.GameModeType
+import de.stefan_oltmann.oni.model.GameModeType
+import de.stefan_oltmann.oni.model.filter.FilterQuery
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
-import ui.getGameModeDrawable
+import ui.drawableResource
 import ui.grayScaleFilter
+import ui.model.stringResource
 import ui.noRippleClickable
 import ui.onHover
 import ui.theme.halfPadding
@@ -87,9 +88,7 @@ fun GameModeSelection(
             ) {
 
                 Image(
-                    painter = painterResource(
-                        getGameModeDrawable(gameMode)
-                    ),
+                    painter = painterResource(gameMode.drawableResource),
                     contentDescription = null,
                     colorFilter = if (modeHovered.value || isSelected)
                         null
@@ -99,7 +98,7 @@ fun GameModeSelection(
                 )
 
                 Text(
-                    text = stringResource(gameMode.nameStringResource),
+                    text = stringResource(gameMode.stringResource),
                     style = MaterialTheme.typography.bodyLarge,
                     color = if (modeHovered.value || isSelected)
                         hoverColor

@@ -1,7 +1,7 @@
 /*
  * ONI Seed Browser
  * Copyright (C) 2025 Stefan Oltmann
- * https://stefan-oltmann.de/oni-seed-browser
+ * https://stefan-oltmann.de
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -46,16 +46,16 @@ import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import de.stefan_oltmann.oni.model.filter.FilterRule
 import io.github.stefanoltmann.app.generated.resources.Res
 import io.github.stefanoltmann.app.generated.resources.uiHas
 import io.github.stefanoltmann.app.generated.resources.uiHasNot
 import io.github.stefanoltmann.app.generated.resources.uiItemDescriptionCount
-import io.github.stefanoltmann.app.generated.resources.uiItemDescriptionOutput
-import io.github.stefanoltmann.app.generated.resources.uiItemDescriptionSpaceDestination
-import model.filter.FilterRule
+import io.github.stefanoltmann.app.generated.resources.uiItemDescriptionGoodCount
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
-import ui.getAsteroidTypeDrawable
+import ui.drawableResource
+import ui.model.stringResource
 import ui.noRippleClickable
 import ui.onHover
 import ui.theme.DefaultSpacer
@@ -99,7 +99,7 @@ fun FilterPanelEntry(
                 ) {
 
                     Image(
-                        painter = painterResource(getAsteroidTypeDrawable(rule.asteroid)),
+                        painter = painterResource(rule.asteroid.drawableResource),
                         contentDescription = null,
                         modifier = Modifier.size(30.dp)
                     )
@@ -138,7 +138,7 @@ fun FilterPanelEntry(
                 }
             }
 
-            if (rule.geyserCount != null || rule.geyserOutput != null || rule.worldTrait != null) {
+            if (rule.geyserCount != null || rule.goodGeyserCount != null || rule.worldTrait != null || rule.zoneType != null) {
 
                 VerticalSeparator()
 
@@ -160,7 +160,7 @@ fun FilterPanelEntry(
 
                         Text(
                             text = getConditionDescription(rule),
-                            style = if (rule.worldTrait != null)
+                            style = if (rule.worldTrait != null || rule.zoneType != null)
                                 MaterialTheme.typography.bodyLarge
                             else
                                 MaterialTheme.typography.headlineMedium,
@@ -175,20 +175,20 @@ fun FilterPanelEntry(
                     }
                 }
 
-                if (rule.geyserCount != null || rule.geyserOutput != null) {
+                if (rule.geyserCount != null || rule.goodGeyserCount != null) {
 
                     VerticalSeparator()
 
                     DefaultSpacer()
 
                     val value = when {
-                        rule.geyserCount != null -> rule.geyserCount.count
-                        rule.geyserOutput != null -> rule.geyserOutput.outputInGramPerSecond
+                        rule.geyserCount != null -> rule.geyserCount!!.count
+                        rule.goodGeyserCount != null -> rule.goodGeyserCount!!.count
                         else -> 0
                     }
 
                     BasicTextField(
-                        value = value?.toString() ?: "",
+                        value = value.toString(),
                         onValueChange = onValueChanged,
                         cursorBrush = SolidColor(MaterialTheme.colorScheme.onBackground),
                         singleLine = true,
@@ -234,18 +234,17 @@ private fun getItemDescription(rule: FilterRule): String =
 
         rule.geyserCount != null ->
             stringResource(Res.string.uiItemDescriptionCount) + ": " +
-                stringResource(rule.geyserCount.geyser.stringResource)
+                stringResource(rule.geyserCount!!.geyser.stringResource)
 
-        rule.geyserOutput != null ->
-            stringResource(Res.string.uiItemDescriptionOutput) + ": " +
-                stringResource(rule.geyserOutput.geyser.stringResource)
+        rule.goodGeyserCount != null ->
+            stringResource(Res.string.uiItemDescriptionGoodCount) + ": " +
+                stringResource(rule.goodGeyserCount!!.geyser.stringResource)
 
         rule.worldTrait != null ->
-            stringResource(rule.worldTrait.worldTrait.stringResource)
+            stringResource(rule.worldTrait!!.worldTrait.stringResource)
 
-        rule.spaceDestinationCount != null ->
-            stringResource(Res.string.uiItemDescriptionSpaceDestination) + ": " +
-                rule.spaceDestinationCount.poi
+        rule.zoneType != null ->
+            stringResource(rule.zoneType!!.zoneType.stringResource)
 
         else -> "-/-"
     }
@@ -264,13 +263,20 @@ private fun VerticalSeparator() {
 @Composable
 private fun getConditionDescription(rule: FilterRule): String =
     when {
-        rule.geyserCount != null -> rule.geyserCount.condition.displayString
-        rule.geyserOutput != null -> rule.geyserOutput.condition.displayString
-        rule.worldTrait != null -> if (rule.worldTrait.has)
+
+        rule.geyserCount != null -> rule.geyserCount!!.condition.displayString
+
+        rule.goodGeyserCount != null -> rule.goodGeyserCount!!.condition.displayString
+
+        rule.worldTrait != null -> if (rule.worldTrait!!.has)
             stringResource(Res.string.uiHas)
         else
             stringResource(Res.string.uiHasNot)
 
-        rule.spaceDestinationCount != null -> "Space destination: ${rule.spaceDestinationCount.poi}"
+        rule.zoneType != null -> if (rule.zoneType!!.has)
+            stringResource(Res.string.uiHas)
+        else
+            stringResource(Res.string.uiHasNot)
+
         else -> "-/-"
     }

@@ -1,7 +1,7 @@
 /*
  * ONI Seed Browser
  * Copyright (C) 2025 Stefan Oltmann
- * https://stefan-oltmann.de/oni-seed-browser
+ * https://stefan-oltmann.de
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -17,9 +17,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import kotlinx.serialization.encodeToString
+import de.stefan_oltmann.oni.model.filter.FilterQuery
 import kotlinx.serialization.json.Json
-import model.filter.FilterQuery
 
 private val jsonPretty = Json {
     prettyPrint = true
@@ -29,6 +28,7 @@ private val jsonPretty = Json {
 
 private const val FILTER_SETTINGS_KEY = "mni_filter"
 private const val TOKEN_SETTINGS_KEY = "mni_token"
+private const val FAVORITES_SETTINGS_KEY = "mni_favorites"
 
 object AppStorage {
 
@@ -61,13 +61,13 @@ object AppStorage {
 
         val json = settings.getStringOrNull(FILTER_SETTINGS_KEY)
             ?: settings.getStringOrNull("filter") // Old key
-            ?: return FilterQuery.ALL
+            ?: return FilterQuery.EMPTY
 
         return try {
 
             jsonPretty.decodeFromString<FilterQuery>(json)
 
-        } catch (ex: Exception) {
+        } catch (ex: Throwable) {
 
             /*
              * If parsing a stored filter query fails for any reason,
@@ -76,7 +76,7 @@ object AppStorage {
 
             ex.printStackTrace()
 
-            FilterQuery.ALL
+            FilterQuery.EMPTY
         }
     }
 
@@ -100,6 +100,60 @@ object AppStorage {
             ex.printStackTrace()
 
             settings.remove(FILTER_SETTINGS_KEY)
+        }
+    }
+
+    fun loadFavorites(): List<String> {
+
+        val json = settings.getStringOrNull(FAVORITES_SETTINGS_KEY)
+            ?: return emptyList()
+
+        return try {
+
+            jsonPretty.decodeFromString<List<String>>(json)
+
+        } catch (ex: Throwable) {
+
+            ex.printStackTrace()
+
+            emptyList()
+        }
+    }
+
+    fun rate(coordinate: String, like: Boolean) {
+
+        val favorites = loadFavorites().toMutableList()
+
+        if (like) {
+
+            if (!favorites.contains(coordinate))
+                favorites.add(coordinate)
+
+        } else {
+            favorites.remove(coordinate)
+        }
+
+        saveFavorites(favorites)
+    }
+
+    fun saveFavorites(favorites: List<String>) {
+
+        if (favorites.isEmpty()) {
+            settings.remove(FAVORITES_SETTINGS_KEY)
+            return
+        }
+
+        try {
+
+            val json = jsonPretty.encodeToString(favorites)
+
+            settings.putString(FAVORITES_SETTINGS_KEY, json)
+
+        } catch (ex: Exception) {
+
+            ex.printStackTrace()
+
+            settings.remove(FAVORITES_SETTINGS_KEY)
         }
     }
 }

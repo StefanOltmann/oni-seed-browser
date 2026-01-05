@@ -13,12 +13,16 @@
     <string name="uiHas">has</string>
     <string name="uiHasNot">hasn't</string>
     <string name="uiNoResults">No results found.</string>
+    <string name="uiMapNotFound">This map was not found</string>
+    <string name="uiWelcome">Welcome to the ONI Seed Browser</string>
+    <string name="uiWelcomeInstruction">Use the search to find some maps!</string>
     <string name="uiSeedsInDatabase">seeds</string>
     <string name="uiWorldTrait">World Trait</string>
     <string name="uiSpaceDestinationCount">Space Destination Count</string>
     <string name="uiGeyserCount">Geyser Count</string>
     <string name="uiGeyserOutput">Geyser Output</string>
     <string name="uiItemDescriptionCount">Count</string>
+    <string name="uiItemDescriptionGoodCount">Count (good)</string>
     <string name="uiItemDescriptionOutput">Output (g/s)</string>
     <string name="uiItemDescriptionSpaceDestination">Space destination</string>
     <string name="uiOutput">output</string>
@@ -40,7 +44,7 @@
     <string name="uiRequestCoordinateButton">Request to add this coordinate</string>
     <string name="uiCoordinateRequested">Coordinate requested</string>
     <string name="uiCoordinateRequestFailed">Coordinate request failed</string>
-    <string name="uiNoFavoredClustersFound">Your favorites will show up here.\nUse the heart icon to mark some.</string>
+    <string name="uiNoFavoredClustersFound">Your favorites will show up here.\nUse the bookmark icon to mark some.</string>
     <string name="uiSetUsername">Set username</string>
     <string name="uiUsernameLabel">Username</string>
     <string name="uiLoading">Loading...</string>
@@ -49,6 +53,14 @@
     <string name="uiLeaderBoardUsername">Username</string>
     <string name="uiLeaderBoardCount">Count</string>
     <string name="uiStorageTankForDormancy">Storage tank for dormancy</string>
+    <string name="uiShowInAlternativeViewer">Show in alternative viewer</string>
+    <string name="uiRemix">Remix</string>
+    <string name="uiZoneType">Biome</string>
+    <string name="uiGoodGeyserCount">Geyser Count (good)</string>
+    <string name="uiLoad">Load</string>
+    <string name="uiSave">Save</string>
+    <string name="uiInvalidCoordinate">The coordinate format is invalid</string>
+    <string name="uiPoiLocationsChanged">Note: POI locations are now different after update 701091</string>
 
     <!-- GameModes -->
     <string name="gameModeBaseGameStandard">Standard</string>
@@ -60,6 +72,8 @@
     <string name="clusterTypeBaseTerra">Terra</string>
     <string name="clusterTypeBaseCeres">Ceres</string>
     <string name="clusterTypeBaseBlastedCeres">Blasted Ceres</string>
+    <string name="clusterTypeBaseRelica">Relica</string>
+    <string name="clusterTypeBaseRelicaLab">RelicAAAAAAAGHH</string>
     <string name="clusterTypeBaseOceania">Oceania</string>
     <string name="clusterTypeBaseRime">Rime</string>
     <string name="clusterTypeBaseVerdante">Verdante</string>
@@ -71,6 +85,8 @@
     <string name="clusterTypeDlcTerra">Terra</string>
     <string name="clusterTypeDlcCeres">Ceres</string>
     <string name="clusterTypeDlcBlastedCeres">Blasted Ceres</string>
+    <string name="clusterTypeDlcRelica">Relica</string>
+    <string name="clusterTypeDlcRelicaLab">RelicAAAAAAAGHH</string>
     <string name="clusterTypeDlcOceania">Oceania</string>
     <string name="clusterTypeDlcSquelchy">Squelchy</string>
     <string name="clusterTypeDlcRime">Rime</string>
@@ -82,6 +98,7 @@
     <string name="clusterTypeDlcOasisse">Oasisse</string>
     <string name="clusterTypeDlcTerrania">Terrania</string>
     <string name="clusterTypeDlcCeresMinor">Ceres Minor</string>
+    <string name="clusterTypeDlcRelicaMinor">Relica Minor</string>
     <string name="clusterTypeDlcFolia">Folia</string>
     <string name="clusterTypeDlcQuagmiris">Quagmiris</string>
     <string name="clusterTypeDlcMetallicSwampyMoonlet">Metallic Swampy</string>
@@ -95,6 +112,7 @@
     <string name="asteroidTypeSandstoneDefault">Terra Asteroid</string>
     <string name="asteroidTypeCeresBaseGameAsteroid">Ceres Asteroid</string>
     <string name="asteroidTypeCeresBaseGameShatteredAsteroid">Blasted Ceres Asteroid</string>
+    <string name="asteroidTypePrehistoricBaseGameAsteroid">Relica Asteroid</string>
     <string name="asteroidTypeOceania">Oceania Asteroid</string>
     <string name="asteroidTypeSandstoneFrozen">Rime Asteroid</string>
     <string name="asteroidTypeForestLush">Verdante Asteroid</string>
@@ -106,6 +124,7 @@
     <string name="asteroidTypeVanillaSandstoneDefault">Terra Asteroid</string>
     <string name="asteroidTypeMediumRadioactiveVanillaWarpPlanet">Radioactive Swamp Asteroid</string>
     <string name="asteroidTypeCeresClassicAsteroid">Ceres Asteroid</string>
+    <string name="asteroidTypePrehistoricClassicAsteroid">Relica Asteroid</string>
     <string name="asteroidTypeMediumSwampy">Stinko Swamp Asteroid</string>
     <string name="asteroidTypeVanillaOceania">Oceania Asteroid</string>
     <string name="asteroidTypeMediumForestyWasteland">Glowood Wasteland Asteroid</string>
@@ -123,8 +142,10 @@
     <string name="asteroidTypeTerraMoonlet">Terrania Asteroid</string>
     <string name="asteroidTypeIdealLandingSite">Irradiated Forest Asteroid</string>
     <string name="asteroidTypeWarpOilySwamp">Oily Swamp Asteroid</string>
+    <string name="asteroidTypeWarpOilySandySwamp">Oily Sandy Swamp Asteroid</string>
     <string name="asteroidTypeRegolithMoonlet">Regolith Asteroid</string>
     <string name="asteroidTypeCeresSpacedOutAsteroid">Ceres Minor Asteroid</string>
+    <string name="asteroidTypePrehistoricSpacedOutAsteroid">Relica Minor Asteroid</string>
     <string name="asteroidTypeSwampyLandingSite">Irradiated Swampy Asteroid</string>
     <string name="asteroidTypeOilRichWarpTarget">Rusty Oil Asteroid</string>
     <string name="asteroidTypeForestMoonlet">Folia Asteroid</string>
@@ -155,6 +176,9 @@
     <string name="asteroidTypeMiniShatteredStartAsteroid">Ceres Mantle Asteroid</string>
     <string name="asteroidTypeMiniShatteredWarpAsteroid">Sweet Ceres Asteroid</string>
     <string name="asteroidTypeMiniShatteredGeoAsteroid">Ceres Core Asteroid</string>
+    <string name="asteroidTypePrehistoricShatteredBaseGameAsteroid">RelicAAAAAAAGHH Asteroid</string>
+    <string name="asteroidTypePrehistoricShatteredClassicAsteroid">RelicAAAAAAAGHH Asteroid</string>
+    <string name="asteroidTypeMixingPrehistoricAsteroid">Relica Fragment</string>
 
     <!--  POI types -->
     <string name="pointOfInterestTypePrintingPod">Printing Pod</string>
@@ -196,12 +220,16 @@
     <string name="zoneTypeSugarWoods">Nectar</string>
     <string name="zoneTypeOilField">Oily</string>
     <string name="zoneTypeMagmaCore">Magma</string>
+    <string name="zoneTypePrehistoricGarden">Garden Biome</string>
+    <string name="zoneTypePrehistoricRaptor">Feather Biome</string>
+    <string name="zoneTypePrehistoricWetlands">Wetlands Biome</string>
 
     <!-- Geyser types -->
     <string name="geyserTypeCoolSteamVent">Cool Steam Vent</string>
     <string name="geyserTypeHydrogenVent">Hydrogen Vent</string>
     <string name="geyserTypeNaturalGasGeyser">Natural Gas Geyser</string>
     <string name="geyserTypeChlorineGasVent">Chlorine Gas Vent</string>
+    <string name="geyserTypeChlorineCoolGasVent">Chlorine Cool Gas Vent</string>
     <string name="geyserTypeSteamVent">Steam Vent</string>
     <string name="geyserTypeCarbonDioxideVent">Carbon Dioxide Vent</string>
     <string name="geyserTypeHotPollutedOxygenVent">Hot Polluted Oxygen Vent</string>
@@ -285,12 +313,18 @@
     <string name="harvestableSpacePoiSandyOreField">Sandy Ore Field</string>
     <string name="harvestableSpacePoiSatelliteField">Space Debris</string>
     <string name="harvestableSpacePoiSwampyOreField">Swampy Ore Field</string>
+    <string name="dlc4PrehistoricMixingField">Conductive Ore Field</string>
+    <string name="dlc4PrehistoricOreField">Amber Field</string>
+    <string name="dlc4ImpactorDebrisField1">Demolior Debris</string>
+    <string name="dlc4ImpactorDebrisField2">Liquid Demolior Debris</string>
+    <string name="dlc4ImpactorDebrisField3">Molten Demolior Debris</string>
     <string name="temporalTear">Temporal Tear</string>
 
     <!-- Vanilla Space POI -->
     <string name="vanillaSpacePoiCarbonaceousAsteroid">Carbonaceous Asteroid</string>
     <string name="vanillaSpacePoiChlorinePlanet">Chlorine Planet</string>
     <string name="vanillaSpacePoiDLC2CeresSpaceDestination">DLC2 Ceres Space Destination</string>
+    <string name="vanillaSpacePoiDLC4PrehistoricSpaceDestination">Prehistoric Ore Field</string>
     <string name="vanillaSpacePoiDustyMoon">Dusty Moon</string>
     <string name="vanillaSpacePoiEarth">Earth</string>
     <string name="vanillaSpacePoiForestPlanet">Forest Planet</string>

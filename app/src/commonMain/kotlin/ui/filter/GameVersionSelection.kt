@@ -1,7 +1,7 @@
 /*
  * ONI Seed Browser
  * Copyright (C) 2025 Stefan Oltmann
- * https://stefan-oltmann.de/oni-seed-browser
+ * https://stefan-oltmann.de
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -31,12 +31,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.unit.dp
-import model.Dlc
-import model.filter.FilterQuery
-import model.filter.GameModeType
+import de.stefan_oltmann.oni.model.Dlc
+import de.stefan_oltmann.oni.model.GameModeType
+import de.stefan_oltmann.oni.model.filter.FilterQuery
 import org.jetbrains.compose.resources.painterResource
 import ui.grayScaleFilter
 import ui.logoIconHeight
+import ui.model.icon
 import ui.noRippleClickable
 import ui.onHover
 import ui.theme.defaultPadding
@@ -54,8 +55,8 @@ fun GameVersionSelection(
 
         val baseGameLogoHovered = remember { mutableStateOf(false) }
         val spacedOutLogoHovered = remember { mutableStateOf(false) }
-        val spacedOutDlcSelected = filterQueryState.value.dlcs.contains(Dlc.SpacedOut);
 
+        val spacedOutDlcSelected = filterQueryState.value.dlcs.contains(Dlc.SpacedOut)
 
         Image(
             painter = painterResource(Dlc.BaseGame.icon),
@@ -72,7 +73,7 @@ fun GameVersionSelection(
                     if (!spacedOutDlcSelected)
                         return@noRippleClickable
 
-                    val mainVersionsRemoved = filterQueryState.value.dlcs.filterNot { it.isMainVersion };
+                    val mainVersionsRemoved = filterQueryState.value.dlcs.filterNot { it.isMainVersion }
 
                     filterQueryState.value = filterQueryState.value.copy(
                         dlcs = mainVersionsRemoved + Dlc.BaseGame,
@@ -99,7 +100,7 @@ fun GameVersionSelection(
                     if (spacedOutDlcSelected)
                         return@noRippleClickable
 
-                    val mainVersionsRemoved = filterQueryState.value.dlcs.filterNot { it.isMainVersion };
+                    val mainVersionsRemoved = filterQueryState.value.dlcs.filterNot { it.isMainVersion }
 
                     filterQueryState.value = filterQueryState.value.copy(
                         dlcs = mainVersionsRemoved + Dlc.SpacedOut,

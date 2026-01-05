@@ -1,7 +1,7 @@
 /*
  * ONI Seed Browser
  * Copyright (C) 2025 Stefan Oltmann
- * https://stefan-oltmann.de/oni-seed-browser
+ * https://stefan-oltmann.de
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -36,21 +36,21 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import de.stefan_oltmann.oni.model.GeyserType
+import de.stefan_oltmann.oni.model.WorldTrait
+import de.stefan_oltmann.oni.model.ZoneType
+import de.stefan_oltmann.oni.model.filter.FilterCondition
+import de.stefan_oltmann.oni.model.filter.FilterItemGeyserCount
+import de.stefan_oltmann.oni.model.filter.FilterItemGoodGeyserCount
+import de.stefan_oltmann.oni.model.filter.FilterItemType
+import de.stefan_oltmann.oni.model.filter.FilterItemWorldTrait
+import de.stefan_oltmann.oni.model.filter.FilterItemZoneType
+import de.stefan_oltmann.oni.model.filter.FilterQuery
 import io.github.stefanoltmann.app.generated.resources.Res
 import io.github.stefanoltmann.app.generated.resources.uiCount
-import io.github.stefanoltmann.app.generated.resources.uiOutput
-import model.GeyserType
-import model.WorldTrait
-import model.filter.FilterCondition
-import model.filter.FilterItemGeyserCount
-import model.filter.FilterItemGeyserOutput
-import model.filter.FilterItemType
-import model.filter.FilterItemWorldTrait
-import model.filter.FilterQuery
 import org.jetbrains.compose.resources.stringResource
-import ui.getAsteroidTypeDrawable
-import ui.getGeyserDrawable
-import ui.getWorldTraitDrawable
+import ui.drawableResource
+import ui.model.stringResource
 import ui.theme.defaultPadding
 import ui.theme.defaultRoundedCornerShape
 
@@ -85,7 +85,7 @@ fun OverlayContent(
                 for (asteroidType in cluster.asteroidTypes) {
 
                     FilterSelectionEntryItem(
-                        image = getAsteroidTypeDrawable(asteroidType),
+                        image = asteroidType.drawableResource,
                         text = stringResource(asteroidType.stringResource),
                         onClick = {
 
@@ -105,10 +105,6 @@ fun OverlayContent(
             } else if (filterSelectionValue.type == FilterSelectionType.ITEM) {
 
                 for (filterItemType in FilterItemType.entries) {
-
-                    /* TODO Add support later */
-                    if (filterItemType == FilterItemType.SPACE_DESTINATION_COUNT)
-                        continue
 
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
@@ -142,7 +138,7 @@ fun OverlayContent(
                         for (worldTrait in WorldTrait.entries) {
 
                             FilterSelectionEntryItem(
-                                image = getWorldTraitDrawable(worldTrait),
+                                image = worldTrait.drawableResource,
                                 text = stringResource(worldTrait.stringResource),
                                 onClick = {
 
@@ -162,30 +158,56 @@ fun OverlayContent(
                             )
                         }
 
+                    } else if (filterItemType == FilterItemType.ZONE_TYPE) {
+
+                        for (zoneType in ZoneType.entries) {
+
+                            FilterSelectionEntryItem(
+                                image = zoneType.drawableResource,
+                                text = stringResource(zoneType.stringResource),
+                                onClick = {
+
+                                    /* Update the query */
+                                    filterQueryState.value = filterQueryState.value.setFilterItem(
+                                        rulesIndex = filterSelectionValue.rulesIndex,
+                                        ruleIndex = filterSelectionValue.ruleIndex,
+                                        filterItem = FilterItemZoneType(
+                                            zoneType = zoneType,
+                                            has = true
+                                        )
+                                    )
+
+                                    /* Close pop-up */
+                                    filterSelection.value = null
+                                }
+                            )
+                        }
+
                     } else {
 
                         for (geyserType in GeyserType.entries) {
 
                             FilterSelectionEntryItem(
-                                image = getGeyserDrawable(geyserType),
+                                image = geyserType.drawableResource,
                                 text = stringResource(geyserType.stringResource) + when (filterItemType) {
                                     FilterItemType.GEYSER_COUNT -> " " + stringResource(Res.string.uiCount)
-                                    FilterItemType.GEYSER_OUTPUT -> " " + stringResource(Res.string.uiOutput)
+                                    FilterItemType.GOOD_GEYSER_COUNT -> " " + stringResource(Res.string.uiCount)
                                     else -> ""
                                 },
                                 onClick = {
 
                                     val filterItem = when (filterItemType) {
+
                                         FilterItemType.GEYSER_COUNT -> FilterItemGeyserCount(
                                             geyser = geyserType,
                                             condition = FilterCondition.AT_LEAST,
                                             count = 1
                                         )
 
-                                        FilterItemType.GEYSER_OUTPUT -> FilterItemGeyserOutput(
+                                        FilterItemType.GOOD_GEYSER_COUNT -> FilterItemGoodGeyserCount(
                                             geyser = geyserType,
                                             condition = FilterCondition.AT_LEAST,
-                                            outputInGramPerSecond = 1
+                                            count = 1
                                         )
 
                                         else -> error("Illegal item type for geysers: $filterItemType")

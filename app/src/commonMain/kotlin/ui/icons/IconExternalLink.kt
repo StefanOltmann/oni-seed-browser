@@ -6,6 +6,10 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.graphics.vector.path
 import androidx.compose.ui.unit.dp
 
+/*
+ * Taken from https://github.com/google/material-design-icons
+ * Licensed under Apache 2.0 License
+ */
 val IconExternalLink: ImageVector
     get() {
         if (_IconExternalLink != null) {

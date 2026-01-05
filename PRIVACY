@@ -1,0 +1,24 @@
+Privacy Policy
+
+ONI Seed Browser is a free and open-source app.
+We do not collect, store, or share any personal data by default.
+
+We do not serve ads or use any form of user tracking.
+
+Users can optionally log in with their Steam account to:
+- Mark maps as favorites
+- Set a name on the leaderboard
+- Request seeds to be added to the database
+
+When logging in, we only receive the Steam ID. We do not request or access additional profile information.
+Your Steam ID is never shown to other users and we take reasonable measures to keep it secure.
+
+We use Sentry.io as a third-party service to collect crash reports.
+These reports may include the Steam ID if it was part of the session when the crash occurred.
+
+The source code is open and publicly available for review and verification:
+- Client: https://github.com/StefanOltmann/oni-seed-browser
+- Server: https://github.com/StefanOltmann/oni-seed-browser-backend
+
+For feedback, questions, or discussions, please visit:
+https://github.com/StefanOltmann/oni-seed-browser/discussions

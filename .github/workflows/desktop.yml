@@ -1,0 +1,50 @@
+name: Build Desktop app
+
+on:
+  push:
+    tags:
+      - '*'
+
+permissions:
+  contents: write
+
+env:
+  BUILD_TARGET: 'desktop'
+
+jobs:
+  build:
+    name: Build Desktop app
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up JDK
+        uses: actions/setup-java@v5
+        with:
+          distribution: 'zulu'
+          java-version: '24'
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: List all files
+        run: find .
+      - name: Run Gradle build
+        run: |
+          chmod +x gradlew
+          ./gradlew build allTests createDistributable
+      - name: Run Conveyor
+        uses: hydraulic-software/conveyor/actions/build@v20.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          command: make site
+          signing_key: ${{ secrets.SIGNING_KEY }}
+          agree_to_license: 1
+      - name: List output files
+        run: find output
+      - name: Create Release and Upload Assets
+        uses: softprops/action-gh-release@v2
+        with:
+          # Upload only the distributable packages and zips
+          files: |
+            output/oni-seed-browser-*.zip
+            output/oni-seed-browser-*.deb
+            output/oni-seed-browser-*.msix
+            output/oni-seed-browser-*.tar.gz

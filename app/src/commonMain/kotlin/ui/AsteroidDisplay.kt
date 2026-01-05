@@ -1,7 +1,7 @@
 /*
  * ONI Seed Browser
  * Copyright (C) 2025 Stefan Oltmann
- * https://stefan-oltmann.de/oni-seed-browser
+ * https://stefan-oltmann.de
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -44,10 +44,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import model.Asteroid
-import model.WorldTrait
+import de.stefan_oltmann.oni.model.Asteroid
+import de.stefan_oltmann.oni.model.WorldTrait
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
+import ui.model.stringResource
 import ui.theme.DefaultSpacer
 import ui.theme.HalfSpacer
 import ui.theme.anthraticeTransparentBackgroundColor
@@ -67,7 +68,6 @@ val countBackground = Color.Black.copy(alpha = 0.3F)
 fun AsteroidView(
     asteroid: Asteroid,
     isStarterAsteroid: Boolean,
-    useCompactLayout: Boolean,
     showMap: () -> Unit
 ) {
 
@@ -99,7 +99,7 @@ fun AsteroidView(
         ) {
 
             Image(
-                painter = painterResource(getAsteroidTypeDrawable(asteroid.id)),
+                painter = painterResource(asteroid.id.drawableResource),
                 contentDescription = null,
                 modifier = Modifier.size(108.dp)
             )
@@ -150,56 +150,16 @@ fun AsteroidView(
                         overflow = TextOverflow.Ellipsis
                     )
 
-                    if (!useCompactLayout)
-                        WorldTraitsRow(asteroid.worldTraits)
+                    WorldTraitsRow(asteroid.getEffectiveWorldTraits())
                 }
 
-                if (!useCompactLayout) {
+                HalfSpacer()
 
-                    HalfSpacer()
+                GeysersRow(asteroid.geysers, maxWidth, isStarterAsteroid)
 
-                    GeysersRow(asteroid.geysers, maxWidth, isStarterAsteroid)
+                HalfSpacer()
 
-                    HalfSpacer()
-
-                    PointOfInterestsRow(asteroid.pointsOfInterest, maxWidth, isStarterAsteroid)
-
-                } else if (maxWidth > 100.dp) {
-
-                    HalfSpacer()
-
-                    WorldTraitsRow(asteroid.worldTraits)
-
-                    val geyserCount = asteroid.geysers.count()
-
-                    if (geyserCount > 0) {
-
-                        HalfSpacer()
-
-                        Text(
-                            text = "${geyserCount}x Geysers",
-                            style = MaterialTheme.typography.bodyLarge,
-                            color = MaterialTheme.colorScheme.onBackground,
-                            maxLines = 1,
-                            overflow = TextOverflow.Ellipsis
-                        )
-                    }
-
-                    val poiCount = asteroid.pointsOfInterest.count()
-
-                    if (poiCount > 0) {
-
-                        HalfSpacer()
-
-                        Text(
-                            text = "${poiCount}x POIs",
-                            style = MaterialTheme.typography.bodyLarge,
-                            color = MaterialTheme.colorScheme.onBackground,
-                            maxLines = 1,
-                            overflow = TextOverflow.Ellipsis
-                        )
-                    }
-                }
+                PointOfInterestsRow(asteroid.pointsOfInterest, maxWidth, isStarterAsteroid)
             }
         }
     }
@@ -238,16 +198,11 @@ private fun WorldTraitsRow(worldTraits: List<WorldTrait>) {
                             anthraticeTransparentBackgroundColor,
                             minimalRoundedCornerShape
                         )
-                        .border(
-                            2.dp,
-                            worldTrait.rating.color,
-                            minimalRoundedCornerShape
-                        )
                         .size(24.dp)
                 ) {
 
                     Image(
-                        painter = painterResource(getWorldTraitDrawable(worldTrait)),
+                        painter = painterResource(worldTrait.drawableResource),
                         contentDescription = null,
                         modifier = Modifier.halfPadding()
                     )

@@ -1,7 +1,7 @@
 /*
  * ONI Seed Browser
  * Copyright (C) 2025 Stefan Oltmann
- * https://stefan-oltmann.de/oni-seed-browser
+ * https://stefan-oltmann.de
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -41,6 +41,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import de.stefan_oltmann.oni.model.Geyser
 import io.github.stefanoltmann.app.generated.resources.Res
 import io.github.stefanoltmann.app.generated.resources.uiGeyserDetailActiveDetails
 import io.github.stefanoltmann.app.generated.resources.uiGeyserDetailCycles
@@ -48,9 +49,9 @@ import io.github.stefanoltmann.app.generated.resources.uiGeyserDetailEmitDetails
 import io.github.stefanoltmann.app.generated.resources.uiGeyserDetailGramPerSecond
 import io.github.stefanoltmann.app.generated.resources.uiGeyserDetailOnAverage
 import io.github.stefanoltmann.app.generated.resources.uiGeyserDetailSecondsShort
-import model.Geyser
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
+import ui.model.stringResource
 import ui.theme.DefaultSpacer
 import ui.theme.HalfSpacer
 import ui.theme.cardColorBackground
@@ -65,8 +66,7 @@ private val boldSpanStyle = SpanStyle(fontWeight = FontWeight.Bold)
 @Composable
 fun GeyserDetail(
     geyser: Geyser,
-    modifier: Modifier = Modifier,
-    compactLayout: Boolean
+    modifier: Modifier = Modifier
 ) {
 
     Box(
@@ -74,10 +74,7 @@ fun GeyserDetail(
         modifier = Modifier
             .padding(horizontal = doubleSpacing)
             .background(
-                if (geyser.id.rating.isNegative())
-                    badRatingBackground
-                else
-                    cardColorBackground,
+                cardColorBackground,
                 defaultRoundedCornerShape
             )
             .border(
@@ -117,168 +114,136 @@ fun GeyserDetail(
                     AvgEmitRateRatingIndicator(geyser)
 
                     Image(
-                        painter = painterResource(getGeyserDrawable(geyser.id)),
+                        painter = painterResource(geyser.id.drawableResource),
                         contentDescription = null,
                         modifier = Modifier.halfPadding()
                     )
                 }
 
-                if (!compactLayout) {
+                DefaultSpacer()
 
-                    DefaultSpacer()
-
-                    Text(
-                        text = stringResource(geyser.id.stringResource),
-                        style = MaterialTheme.typography.bodyLarge,
-                        color = MaterialTheme.colorScheme.onBackground,
-                        /* Can span two lines */
-                        maxLines = 2,
-                        overflow = TextOverflow.Ellipsis
-                    )
-                }
+                Text(
+                    text = stringResource(geyser.id.stringResource),
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = MaterialTheme.colorScheme.onBackground,
+                    /* Can span two lines */
+                    maxLines = 2,
+                    overflow = TextOverflow.Ellipsis
+                )
             }
 
-            if (compactLayout) {
+            Row(
+                verticalAlignment = Alignment.Bottom
+            ) {
 
-                Row(
-                    verticalAlignment = Alignment.Bottom
-                ) {
+                Text(
+                    text = "${geyser.avgEmitRate} " + stringResource(Res.string.uiGeyserDetailGramPerSecond),
+                    style = MaterialTheme.typography.headlineSmall,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.onBackground
+                )
 
-                    Text(
-                        text = "${geyser.avgEmitRate} " + stringResource(Res.string.uiGeyserDetailGramPerSecond),
-                        style = MaterialTheme.typography.headlineSmall,
-                        fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.onBackground,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis
-                    )
-                }
+                Text(
+                    text = " " + stringResource(Res.string.uiGeyserDetailOnAverage),
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = MaterialTheme.colorScheme.onBackground
+                )
+            }
 
-                Row(
-                    verticalAlignment = Alignment.Bottom
-                ) {
-                    Text(
-                        text = " " + stringResource(Res.string.uiGeyserDetailOnAverage),
-                        style = MaterialTheme.typography.bodyLarge,
-                        color = MaterialTheme.colorScheme.onBackground
-                    )
-                }
+            Row {
 
-            } else {
+                val template = stringResource(Res.string.uiGeyserDetailEmitDetails)
 
-                Row(
-                    verticalAlignment = Alignment.Bottom
-                ) {
+                val secondsText = stringResource(Res.string.uiGeyserDetailSecondsShort)
+                val gramPerSecondText = stringResource(Res.string.uiGeyserDetailGramPerSecond)
 
-                    Text(
-                        text = "${geyser.avgEmitRate} " + stringResource(Res.string.uiGeyserDetailGramPerSecond),
-                        style = MaterialTheme.typography.headlineSmall,
-                        fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.onBackground
-                    )
+                val formattedText = buildAnnotatedString {
 
-                    Text(
-                        text = " " + stringResource(Res.string.uiGeyserDetailOnAverage),
-                        style = MaterialTheme.typography.bodyLarge,
-                        color = MaterialTheme.colorScheme.onBackground
-                    )
-                }
+                    var currentIndex = 0
 
-                Row {
+                    val regex = "\\{(emitRate|eruptionTime|overallTime)\\}".toRegex()
 
-                    val template = stringResource(Res.string.uiGeyserDetailEmitDetails)
+                    regex.findAll(template).forEach { match ->
 
-                    val secondsText = stringResource(Res.string.uiGeyserDetailSecondsShort)
-                    val gramPerSecondText = stringResource(Res.string.uiGeyserDetailGramPerSecond)
+                        val placeholder = match.groupValues[1]
+                        val startIndex = match.range.first
 
-                    val formattedText = buildAnnotatedString {
+                        append(template.substring(currentIndex, startIndex))
 
-                        var currentIndex = 0
+                        pushStyle(boldSpanStyle)
+                        when (placeholder) {
 
-                        val regex = "\\{(emitRate|eruptionTime|overallTime)\\}".toRegex()
+                            "emitRate" ->
+                                append("${geyser.emitRate} $gramPerSecondText")
 
-                        regex.findAll(template).forEach { match ->
+                            "eruptionTime" ->
+                                append("${geyser.eruptionTime}$secondsText")
 
-                            val placeholder = match.groupValues[1]
-                            val startIndex = match.range.first
-
-                            append(template.substring(currentIndex, startIndex))
-
-                            pushStyle(boldSpanStyle)
-                            when (placeholder) {
-
-                                "emitRate" ->
-                                    append("${geyser.emitRate} $gramPerSecondText")
-
-                                "eruptionTime" ->
-                                    append("${geyser.eruptionTime}$secondsText")
-
-                                "overallTime" ->
-                                    append("${geyser.overallTime}$secondsText")
-                            }
-                            pop()
-
-                            currentIndex = match.range.last + 1
+                            "overallTime" ->
+                                append("${geyser.overallTime}$secondsText")
                         }
+                        pop()
 
-                        append(template.substring(currentIndex))
+                        currentIndex = match.range.last + 1
                     }
 
-                    Text(
-                        text = formattedText,
-                        style = if (Locale.current.language == "zh")
-                            MaterialTheme.typography.bodySmall
-                        else
-                            MaterialTheme.typography.bodyLarge,
-                        color = MaterialTheme.colorScheme.onBackground
-                    )
+                    append(template.substring(currentIndex))
                 }
 
-                Row {
+                Text(
+                    text = formattedText,
+                    style = if (Locale.current.language == "zh")
+                        MaterialTheme.typography.bodySmall
+                    else
+                        MaterialTheme.typography.bodyLarge,
+                    color = MaterialTheme.colorScheme.onBackground
+                )
+            }
 
-                    val template = stringResource(Res.string.uiGeyserDetailActiveDetails)
+            Row {
 
-                    val cyclesText = stringResource(Res.string.uiGeyserDetailCycles)
+                val template = stringResource(Res.string.uiGeyserDetailActiveDetails)
 
-                    val formattedText = buildAnnotatedString {
+                val cyclesText = stringResource(Res.string.uiGeyserDetailCycles)
 
-                        var currentIndex = 0
+                val formattedText = buildAnnotatedString {
 
-                        val regex = "\\{(activeCycles|overallCycles)\\}".toRegex()
+                    var currentIndex = 0
 
-                        regex.findAll(template).forEach { match ->
+                    val regex = "\\{(activeCycles|overallCycles)\\}".toRegex()
 
-                            val placeholder = match.groupValues[1]
-                            val startIndex = match.range.first
+                    regex.findAll(template).forEach { match ->
 
-                            append(template.substring(currentIndex, startIndex))
+                        val placeholder = match.groupValues[1]
+                        val startIndex = match.range.first
 
-                            pushStyle(boldSpanStyle)
-                            when (placeholder) {
+                        append(template.substring(currentIndex, startIndex))
 
-                                "activeCycles" ->
-                                    append("${geyser.activeCycles.toString(1)} $cyclesText")
+                        pushStyle(boldSpanStyle)
+                        when (placeholder) {
 
-                                "overallCycles" ->
-                                    append("${(geyser.activeCycles + geyser.dormancyCycles).toString(1)} $cyclesText")
-                            }
-                            pop()
+                            "activeCycles" ->
+                                append("${geyser.activeCyclesRounded} $cyclesText")
 
-                            currentIndex = match.range.last + 1
+                            "overallCycles" ->
+                                append("${(geyser.activeCyclesRounded + geyser.dormancyCyclesRounded)} $cyclesText")
                         }
+                        pop()
 
-                        append(template.substring(currentIndex))
+                        currentIndex = match.range.last + 1
                     }
 
-                    Text(
-                        text = formattedText,
-                        style = if (Locale.current.language == "zh")
-                            MaterialTheme.typography.bodySmall
-                        else
-                            MaterialTheme.typography.bodyLarge,
-                        color = MaterialTheme.colorScheme.onBackground
-                    )
+                    append(template.substring(currentIndex))
                 }
+
+                Text(
+                    text = formattedText,
+                    style = if (Locale.current.language == "zh")
+                        MaterialTheme.typography.bodySmall
+                    else
+                        MaterialTheme.typography.bodyLarge,
+                    color = MaterialTheme.colorScheme.onBackground
+                )
             }
         }
     }

@@ -1,7 +1,7 @@
 /*
  * ONI Seed Browser
  * Copyright (C) 2025 Stefan Oltmann
- * https://stefan-oltmann.de/oni-seed-browser
+ * https://stefan-oltmann.de
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -39,12 +39,13 @@ import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import model.ClusterType
-import model.filter.FilterQuery
+import de.stefan_oltmann.oni.model.ClusterType
+import de.stefan_oltmann.oni.model.filter.FilterQuery
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
-import ui.getClusterDrawable
+import ui.drawableResource
 import ui.grayScaleFilter
+import ui.model.stringResource
 import ui.noRippleClickable
 import ui.onHover
 import ui.theme.HalfSpacer
@@ -90,16 +91,17 @@ fun ClusterSelection(
                                 /* Select the cluster or deselect everything */
                                 cluster = if (isSelected) null else cluster,
 
+                                /* Reset the remix */
+                                remix = null,
+
                                 /* Reset the filter rules */
-                                rules = FilterQuery.ALL.rules
+                                rules = FilterQuery.EMPTY.rules
                             )
                     }
             ) {
 
                 Image(
-                    painter = painterResource(
-                        getClusterDrawable(cluster)
-                    ),
+                    painter = painterResource(cluster.drawableResource),
                     contentDescription = null,
                     colorFilter = if (clusterHovered.value || isSelected)
                         null
@@ -111,7 +113,7 @@ fun ClusterSelection(
                 HalfSpacer()
 
                 /*
-                 * We need more space for the chinese or korean description here.
+                 * We need more space for the Chinese or Korean description here.
                  */
                 val style = if (Locale.current.language == "zh" || Locale.current.language == "ko")
                     MaterialTheme.typography.bodySmall
@@ -119,7 +121,7 @@ fun ClusterSelection(
                     MaterialTheme.typography.bodyLarge
 
                 Text(
-                    text = stringResource(cluster.nameStringResource),
+                    text = stringResource(cluster.stringResource),
                     style = style,
                     color = if (clusterHovered.value || isSelected)
                         hoverColor
@@ -129,7 +131,7 @@ fun ClusterSelection(
                     textAlign = TextAlign.Center,
                     overflow = TextOverflow.Ellipsis,
                     maxLines = 1,
-                    modifier = Modifier.width(120.dp)
+                    modifier = Modifier.width(160.dp)
                 )
             }
         }

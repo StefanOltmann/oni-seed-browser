@@ -1,7 +1,7 @@
 /*
  * ONI Seed Browser
  * Copyright (C) 2025 Stefan Oltmann
- * https://stefan-oltmann.de/oni-seed-browser
+ * https://stefan-oltmann.de
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -41,7 +41,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.unit.dp
-import model.filter.FilterQuery
+import de.stefan_oltmann.oni.model.filter.FilterQuery
 import ui.HorizontalSeparator
 import ui.noRippleClickable
 import ui.theme.DefaultSpacer
@@ -67,10 +67,13 @@ data class FilterSelection(
 fun FilterPanel(
     worldCount: Long?,
     filterQueryState: MutableState<FilterQuery>,
-    onSearchButtonPressed: () -> Unit
+    onSearchButtonPressed: () -> Unit,
+    showMniUrl: Boolean,
+    startWithFilterPanelOpen: Boolean,
+    writeToClipboard: (String) -> Unit
 ) {
 
-    val filterPanelOpen = remember { mutableStateOf(false) }
+    val filterPanelOpen = remember { mutableStateOf(startWithFilterPanelOpen) }
 
     val filterSelection = remember { mutableStateOf<FilterSelection?>(null) }
 
@@ -140,6 +143,16 @@ fun FilterPanel(
 
                         DefaultSpacer()
 
+                        RemixSelection(
+                            filterQueryState = filterQueryState
+                        )
+
+                        DefaultSpacer()
+
+                        HorizontalSeparator()
+
+                        DefaultSpacer()
+
                         RuleEditor(
                             filterQueryState = filterQueryState,
                             filterSelection = filterSelection
@@ -151,7 +164,8 @@ fun FilterPanel(
                     ControlsRow(
                         filterQueryState = filterQueryState,
                         filterPanelOpen = filterPanelOpen,
-                        onSearchButtonPressed = onSearchButtonPressed
+                        onSearchButtonPressed = onSearchButtonPressed,
+                        writeToClipboard = writeToClipboard
                     )
                 }
 

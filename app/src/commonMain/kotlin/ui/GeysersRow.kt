@@ -1,7 +1,7 @@
 /*
  * ONI Seed Browser
  * Copyright (C) 2025 Stefan Oltmann
- * https://stefan-oltmann.de/oni-seed-browser
+ * https://stefan-oltmann.de
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -42,8 +42,8 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.min
 import androidx.compose.ui.unit.times
-import model.Geyser
-import model.GeyserType
+import de.stefan_oltmann.oni.model.Geyser
+import de.stefan_oltmann.oni.model.GeyserType
 import org.jetbrains.compose.resources.painterResource
 import ui.theme.FillSpacer
 import ui.theme.anthracite
@@ -78,7 +78,7 @@ fun GeysersRow(
 
     val sortedGeysersWithoutOilWells = sortedGeysers.filterNot { it.id == GeyserType.OIL_RESERVOIR }
 
-    val oilWellCount = sortedGeysers.size - sortedGeysersWithoutOilWells.size
+    val oilWellCount = (sortedGeysers.size - sortedGeysersWithoutOilWells.size).toByte()
 
     val geyserCount = sortedGeysersWithoutOilWells.size + oilWellCount.coerceIn(0, 1)
 
@@ -112,10 +112,7 @@ fun GeysersRow(
                     modifier = Modifier
                         .size(48.dp)
                         .background(
-                            if (geyser.id.rating.isNegative())
-                                badRatingBackground
-                            else
-                                gray3,
+                            gray3,
                             CircleShape
                         )
                         .border(
@@ -125,15 +122,10 @@ fun GeysersRow(
                         )
                 ) {
 
-                    /*
-                     * For good geysers, show the amount in they produce
-                     * with a circular progress indicator.
-                     */
-                    if (!geyser.id.rating.isNegative())
-                        AvgEmitRateRatingIndicator(geyser)
+                    AvgEmitRateRatingIndicator(geyser)
 
                     Image(
-                        painter = painterResource(getGeyserDrawable(geyser.id)),
+                        painter = painterResource(geyser.id.drawableResource),
                         contentDescription = null,
                         alignment = Alignment.BottomCenter,
                         modifier = Modifier.halfPadding()
@@ -172,7 +164,7 @@ fun GeysersRow(
                 ) {
 
                     Image(
-                        painter = painterResource(getGeyserDrawable(GeyserType.OIL_RESERVOIR)),
+                        painter = painterResource(GeyserType.OIL_RESERVOIR.drawableResource),
                         contentDescription = null,
                         alignment = Alignment.BottomCenter,
                         modifier = Modifier.halfPadding()

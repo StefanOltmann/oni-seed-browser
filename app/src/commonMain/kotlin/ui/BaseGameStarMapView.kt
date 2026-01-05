@@ -1,7 +1,7 @@
 /*
  * ONI Seed Browser
  * Copyright (C) 2025 Stefan Oltmann
- * https://stefan-oltmann.de/oni-seed-browser
+ * https://stefan-oltmann.de
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -48,12 +48,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import de.stefan_oltmann.oni.model.Cluster
+import de.stefan_oltmann.oni.model.StarMapEntryVanilla
 import io.github.stefanoltmann.app.generated.resources.Res
 import io.github.stefanoltmann.app.generated.resources.background_space
-import model.Cluster
-import model.StarMapEntryVanilla
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
+import ui.model.stringResource
 import ui.theme.DefaultSpacer
 import ui.theme.HalfSpacer
 import ui.theme.defaultPadding
@@ -73,10 +74,10 @@ fun BaseGameStarMapView(
     writeToClipboard: (String) -> Unit
 ) {
 
-    if (cluster.starMapEntriesVanilla == null)
+    if (cluster.starMapEntriesVanilla.isEmpty())
         return
 
-    val entriesPerDistance: Map<Int, List<StarMapEntryVanilla>> =
+    val entriesPerDistance: Map<Byte, List<StarMapEntryVanilla>> =
         cluster.starMapEntriesVanilla.groupBy { it.distance }
 
     Box(
@@ -107,7 +108,6 @@ fun BaseGameStarMapView(
                 coordinate = cluster.coordinate,
                 favoriteCoordinates = favoriteCoordinates,
                 showMapClicked = null,
-                showFavoriteIcon = false,
                 writeToClipboard = writeToClipboard
             )
 
@@ -129,7 +129,7 @@ fun BaseGameStarMapView(
 
                     for (distance in 17 downTo 0) {
 
-                        val entries = entriesPerDistance[distance]
+                        val entries = entriesPerDistance[distance.toByte()]
 
                         Row(
                             verticalAlignment = Alignment.CenterVertically
@@ -186,7 +186,7 @@ fun BaseGameStarMapView(
                                         ) {
 
                                             Image(
-                                                painter = painterResource(getVanillaSpacePOIDrawable(entry.id)),
+                                                painter = painterResource(entry.id.drawableResource),
                                                 contentDescription = null
                                             )
                                         }

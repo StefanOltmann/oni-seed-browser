@@ -1,7 +1,7 @@
 /*
  * ONI Seed Browser
  * Copyright (C) 2025 Stefan Oltmann
- * https://stefan-oltmann.de/oni-seed-browser
+ * https://stefan-oltmann.de
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -30,9 +30,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import model.PointOfInterestType
+import de.stefan_oltmann.oni.model.PointOfInterestType
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
+import ui.model.stringResource
 import ui.theme.DefaultSpacer
 import ui.theme.HalfSpacer
 import ui.theme.halfPadding
@@ -63,7 +64,7 @@ fun PointOfInterestTooltip(
         }
 
         Image(
-            painter = painterResource(getPointOfInterestDrawable(pointOfInterestType)),
+            painter = painterResource(pointOfInterestType.drawableResource),
             contentDescription = null,
             modifier = Modifier
                 .size(32.dp)

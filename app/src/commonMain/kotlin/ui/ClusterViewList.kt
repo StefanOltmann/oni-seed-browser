@@ -1,85 +1,225 @@
 /*
- * ONI Seed Browser
- * Copyright (C) 2025 Stefan Oltmann
- * https://stefan-oltmann.de/oni-seed-browser
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * ONI Seed Browser - Column infinite scroll (no placeholders)
+ * Improved: IO dispatcher, debug logging, retries, stable index advancement
  */
 
 package ui
 
 import androidx.compose.foundation.VerticalScrollbar
 import androidx.compose.foundation.defaultScrollbarStyle
+import androidx.compose.foundation.focusable
+import androidx.compose.foundation.gestures.animateScrollBy
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyListState
-import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.rememberScrollbarAdapter
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import model.Asteroid
-import model.Cluster
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.input.key.Key
+import androidx.compose.ui.input.key.KeyEventType
+import androidx.compose.ui.input.key.key
+import androidx.compose.ui.input.key.onKeyEvent
+import androidx.compose.ui.input.key.type
+import de.stefan_oltmann.oni.model.Asteroid
+import de.stefan_oltmann.oni.model.Cluster
+import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import service.DefaultWebClient
+import ui.theme.defaultSpacing
 import ui.theme.doubleSpacing
 import ui.theme.lightGray
 
+private const val SCROLL_THRESHOLD_PX = 500
+
 @Composable
 fun ClusterViewList(
-    lazyListState: LazyListState,
-    clusters: List<Cluster>,
-    useCompactLayout: Boolean,
+    clusters: List<String>,
     favoriteCoordinates: MutableState<List<String>>,
     showStarMap: MutableState<Cluster?>,
-    showAsteroidMap: MutableState<Asteroid?>,
-    showMniUrl: Boolean = false,
-    showFavoriteIcon: Boolean,
+    showAsteroidMap: MutableState<Pair<Cluster, Asteroid>?>,
     steamIdToUsernameMap: Map<String, String?>,
     writeToClipboard: (String) -> Unit
 ) {
 
-    Box {
+    val displayedClusters = remember { mutableStateListOf<Cluster?>() }
 
-        LazyColumn(
-            state = lazyListState,
-            verticalArrangement = Arrangement.spacedBy(doubleSpacing),
-            modifier = Modifier.padding(doubleSpacing)
+    var nextCoordinateIndex by remember { mutableStateOf(0) }
+
+    var isLoading by remember { mutableStateOf(false) }
+
+    val scrollState = rememberScrollState()
+
+    val coroutineScope = rememberCoroutineScope()
+
+    val focusRequester = remember { FocusRequester() }
+
+    LaunchedEffect(Unit) {
+
+        /* Wait a moment for the components to attach */
+        delay(1000)
+
+        focusRequester.requestFocus()
+    }
+
+    /*
+     * Initial fetch of the first cluster.
+     */
+    LaunchedEffect(clusters) {
+
+        displayedClusters.clear()
+        nextCoordinateIndex = 0
+        isLoading = false
+
+        if (clusters.isNotEmpty()) {
+
+            isLoading = true
+
+            try {
+
+                if (fetchPage(clusters, 0, displayedClusters))
+                    nextCoordinateIndex += 1
+
+            } finally {
+
+                isLoading = false
+            }
+        }
+    }
+
+    LaunchedEffect(scrollState, nextCoordinateIndex, clusters) {
+
+        snapshotFlow { scrollState.value to scrollState.maxValue }
+            .map { (value, max) -> max - value }
+            .distinctUntilChanged()
+            .filter { remaining -> remaining <= SCROLL_THRESHOLD_PX }
+            .collect { _ ->
+
+                if (!isLoading && nextCoordinateIndex < clusters.size) {
+
+                    isLoading = true
+
+                    try {
+
+                        if (fetchPage(clusters, nextCoordinateIndex, displayedClusters))
+                            nextCoordinateIndex += 1
+
+                    } finally {
+                        isLoading = false
+                    }
+                }
+            }
+    }
+
+    Box {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .verticalScroll(scrollState)
+                .onKeyEvent { event ->
+
+                    if (event.type == KeyEventType.KeyDown) {
+                        when (event.key) {
+                            Key.DirectionDown -> {
+                                coroutineScope.launch {
+                                    scrollState.animateScrollBy(100f)
+                                }
+                                true
+                            }
+
+                            Key.DirectionUp -> {
+                                coroutineScope.launch {
+                                    scrollState.animateScrollBy(-100f)
+                                }
+                                true
+                            }
+
+                            Key.PageDown -> {
+                                coroutineScope.launch {
+                                    scrollState.animateScrollBy(500f)
+                                }
+                                true
+                            }
+
+                            Key.PageUp -> {
+                                coroutineScope.launch {
+                                    scrollState.animateScrollBy(-500f)
+                                }
+                                true
+                            }
+
+                            else -> false
+                        }
+                    } else false
+                }
+                .focusRequester(focusRequester)
+                .focusable()
+                .padding(doubleSpacing),
+            verticalArrangement = Arrangement.spacedBy(defaultSpacing)
         ) {
 
-            itemsIndexed(clusters) { index, cluster ->
+            displayedClusters.forEachIndexed { idx, cluster ->
 
-                ClusterView(
-                    cluster,
-                    index + 1,
-                    clusters.size,
-                    useCompactLayout,
-                    favoriteCoordinates,
-                    showStarMap,
-                    showAsteroidMap,
-                    showMniUrl,
-                    showFavoriteIcon,
-                    steamIdToUsernameMap,
-                    writeToClipboard
-                )
+                /*
+                 * Skip removed clusters
+                 */
+                if (cluster != null) {
+
+                    ClusterView(
+                        cluster = cluster,
+                        index = idx + 1,
+                        totalCount = clusters.size,
+                        favoriteCoordinates = favoriteCoordinates,
+                        showStarMap = showStarMap,
+                        showAsteroidMap = showAsteroidMap,
+                        steamIdToUsernameMap = steamIdToUsernameMap,
+                        writeToClipboard = writeToClipboard
+                    )
+
+                } else {
+
+                    LaunchedEffect(true) {
+                        println("Skipping not found cluster at index $idx")
+                    }
+                }
             }
+
+            if (isLoading && nextCoordinateIndex < clusters.size)
+                Box(
+                    contentAlignment = Alignment.Center,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = doubleSpacing)
+                ) {
+                    CircularProgressIndicator()
+                }
         }
 
         VerticalScrollbar(
-            adapter = rememberScrollbarAdapter(lazyListState),
+            adapter = rememberScrollbarAdapter(scrollState),
             modifier = Modifier.fillMaxHeight().align(Alignment.CenterEnd),
             style = defaultScrollbarStyle().copy(
                 unhoverColor = lightGray.copy(alpha = 0.4f),
@@ -87,4 +227,32 @@ fun ClusterViewList(
             )
         )
     }
+}
+
+private suspend fun fetchPage(
+    clusters: List<String>,
+    index: Int,
+    displayed: MutableList<Cluster?>
+): Boolean {
+
+    if (index >= clusters.size)
+        return false
+
+    val coordinate = clusters[index]
+
+    try {
+
+        val cluster = withContext(Dispatchers.Default) {
+            DefaultWebClient.find(coordinate)
+        }
+
+        displayed.add(cluster)
+
+    } catch (ex: CancellationException) {
+        throw ex
+    } catch (ex: Throwable) {
+        ex.printStackTrace()
+    }
+
+    return true
 }

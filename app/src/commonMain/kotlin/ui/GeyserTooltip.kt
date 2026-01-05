@@ -1,7 +1,7 @@
 /*
  * ONI Seed Browser
  * Copyright (C) 2025 Stefan Oltmann
- * https://stefan-oltmann.de/oni-seed-browser
+ * https://stefan-oltmann.de
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -47,13 +47,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
+import de.stefan_oltmann.oni.model.GeyserType
 import io.github.stefanoltmann.app.generated.resources.Res
 import io.github.stefanoltmann.app.generated.resources.uiGeyserDetailGramPerSecond
 import io.github.stefanoltmann.app.generated.resources.uiGeyserDetailTonsPerCycle
 import io.github.stefanoltmann.app.generated.resources.uiStorageTankForDormancy
-import model.GeyserType
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
+import ui.model.stringResource
 import ui.theme.DefaultSpacer
 import ui.theme.HalfSpacer
 import ui.theme.anthracite
@@ -66,8 +67,8 @@ import ui.theme.lightGray
 @Composable
 fun GeyserTooltip(
     geyserType: GeyserType,
-    count: Int,
-    avgEmitRate: Int,
+    count: Byte,
+    avgEmitRate: Short,
     storageTankTons: Float?
 ) {
 
@@ -111,9 +112,9 @@ fun GeyserTooltip(
 
 @Composable
 private fun GeyserInfoHeaderRow(
-    count: Int,
+    count: Byte,
     geyserType: GeyserType,
-    avgEmitRate: Int,
+    avgEmitRate: Short,
     avgEmitRateColor: Color
 ) {
 
@@ -136,7 +137,7 @@ private fun GeyserInfoHeaderRow(
         }
 
         Image(
-            painter = painterResource(getGeyserDrawable(geyserType)),
+            painter = painterResource(geyserType.drawableResource),
             contentDescription = null,
             modifier = Modifier
                 .size(32.dp)
@@ -191,7 +192,7 @@ private fun GeyserInfoHeaderRow(
 @Composable
 private fun AvgEmitRateScaleRow(
     geyserType: GeyserType,
-    avgEmitRate: Int,
+    avgEmitRate: Short,
     avgEmitRateColor: Color
 ) {
 

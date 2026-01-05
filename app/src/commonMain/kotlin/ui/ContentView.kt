@@ -15,14 +15,10 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyListState
-import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CheckCircle
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -40,32 +36,37 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.layout.onSizeChanged
-import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import de.stefan_oltmann.oni.model.Asteroid
+import de.stefan_oltmann.oni.model.Cluster
+import de.stefan_oltmann.oni.model.ClusterType
+import de.stefan_oltmann.oni.model.filter.FilterQuery
 import io.github.stefanoltmann.app.generated.resources.Res
 import io.github.stefanoltmann.app.generated.resources.background_space
-import io.github.stefanoltmann.app.generated.resources.uiCoordinateNotFound
+import io.github.stefanoltmann.app.generated.resources.uiInvalidCoordinate
+import io.github.stefanoltmann.app.generated.resources.uiMapNotFound
 import io.github.stefanoltmann.app.generated.resources.uiNoFavoredClustersFound
 import io.github.stefanoltmann.app.generated.resources.uiNoResults
 import io.github.stefanoltmann.app.generated.resources.uiSearching
 import io.github.stefanoltmann.app.generated.resources.uiTitle
 import io.github.stefanoltmann.app.generated.resources.uiUsernameLabel
+import io.github.stefanoltmann.app.generated.resources.uiWelcome
+import io.github.stefanoltmann.app.generated.resources.uiWelcomeInstruction
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.serialization.json.Json
-import model.Asteroid
-import model.Cluster
-import model.Contributor
-import model.filter.FilterQuery
+import kotlinx.coroutines.withContext
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import service.DefaultWebClient
-import service.sampleWorldsJson
 import ui.filter.FilterPanel
+import ui.icons.IconBookmarks
+import ui.icons.IconBookmarksFilled
 import ui.icons.IconLeaderboardFilled
 import ui.icons.IconLeaderboardOutlined
 import ui.theme.DefaultSpacer
@@ -82,8 +83,10 @@ import ui.theme.lightGray
 @Composable
 fun ContentView(
     urlHash: State<String?>,
+    urlFilterQuery: FilterQuery?,
     isMniEmbedded: Boolean,
-    connected: Boolean,
+    connectedUserId: String?,
+    localPort: Int?,
     /**
      * Note: LocalClipboardManager does not work for Compose for Web
      * in all browsers for some reason. That's why we use a workaround here.
@@ -93,27 +96,20 @@ fun ContentView(
 
     val errorMessage = remember { mutableStateOf<String?>(null) }
 
-    val density = LocalDensity.current.density
-    val useCompactLayout = remember { mutableStateOf(false) }
-
-    val contributorsState = produceState(emptyList<Contributor>()) {
+    val steamIdToUsernameMap = produceState(emptyMap()) {
 
         try {
 
-            value = DefaultWebClient.findContributors()
+            value = DefaultWebClient.getUsernameMap()
 
-        } catch (ex: Exception) {
+        } catch (ex: Throwable) {
+
+            /* We MUST catch Throwable here to prevent UI freezes. */
 
             ex.printStackTrace()
 
             errorMessage.value = ex.stackTraceToString()
         }
-    }
-
-    val contributors = contributorsState.value
-
-    val steamIdToUsernameMap: Map<String, String?> = remember(contributors) {
-        contributors.associate { it.steamIdHash to it.username }
     }
 
     val worldCount = produceState<Long?>(null) {
@@ -134,12 +130,11 @@ fun ContentView(
 
     val favoredCoordinates = remember { mutableStateOf(emptyList<String>()) }
 
-    LaunchedEffect(connected) {
+    LaunchedEffect(connectedUserId) {
 
         try {
 
-            if (connected)
-                favoredCoordinates.value = DefaultWebClient.findFavoredCoordinates()
+            favoredCoordinates.value = AppStorage.loadFavorites()
 
         } catch (ex: Throwable) {
 
@@ -152,26 +147,37 @@ fun ContentView(
     }
 
     Box(
-        modifier = Modifier.onSizeChanged {
-            useCompactLayout.value = it.width / density < 400
-        }
+        contentAlignment = Alignment.Center,
+        modifier = Modifier
+            .fillMaxSize()
     ) {
+
+        /* Background */
+        Image(
+            painter = painterResource(Res.drawable.background_space),
+            contentDescription = null,
+            contentScale = ContentScale.Crop,
+            modifier = Modifier
+                .fillMaxSize()
+                /* Avoid the white background while the image loads. */
+                .background(Color(0xFF181828))
+        )
 
         val coroutineScope = rememberCoroutineScope()
 
         val filterQueryState = remember {
-            mutableStateOf(AppStorage.loadFilter())
+            mutableStateOf(
+                urlFilterQuery ?: AppStorage.loadFilter()
+            )
         }
-
-        val lazyListState = rememberLazyListState()
 
         val showStarMap = remember { mutableStateOf<Cluster?>(null) }
 
-        val showAsteroidMap = remember { mutableStateOf<Asteroid?>(null) }
+        val showAsteroidMap = remember { mutableStateOf<Pair<Cluster, Asteroid>?>(null) }
 
         val isGettingNewResults = remember { mutableStateOf(false) }
 
-        val clusters = remember { mutableStateOf(emptyList<Cluster>()) }
+        val clusters = remember { mutableStateOf(emptyList<String>()) }
 
         val showFavorites = remember { mutableStateOf(false) }
         val showLeaderboard = remember { mutableStateOf(false) }
@@ -191,7 +197,7 @@ fun ContentView(
                     val world = DefaultWebClient.find(urlHashValue)
 
                     if (world != null)
-                        clusters.value = listOf(world)
+                        clusters.value = listOf(world.coordinate)
                     else
                         clusters.value = emptyList()
 
@@ -213,7 +219,9 @@ fun ContentView(
 
                     isGettingNewResults.value = true
 
-                    clusters.value = DefaultWebClient.findLatestClusters()
+                    val latestClusters = DefaultWebClient.findLatestClusters()
+
+                    clusters.value = latestClusters
 
                 } catch (ex: Throwable) {
 
@@ -221,7 +229,8 @@ fun ContentView(
 
                     ex.printStackTrace()
 
-                    errorMessage.value = ex.stackTraceToString()
+                    // Don't show this error.
+                    // errorMessage.value = ex.stackTraceToString()
 
                 } finally {
                     isGettingNewResults.value = false
@@ -229,65 +238,11 @@ fun ContentView(
 
             } else {
 
-                println("Load demo data...")
-
-                val parsedClusters = Json.decodeFromString<List<Cluster>>(sampleWorldsJson)
-
-                /* DLCs first */
-                clusters.value = parsedClusters.sortedWith(compareBy({ it.cluster.isBaseGame() }, { it.cluster }))
+                clusters.value = emptyList()
             }
-        }
-
-        val worldForStarMapView = showStarMap.value
-
-        if (worldForStarMapView != null) {
-
-            if (worldForStarMapView.starMapEntriesSpacedOut != null) {
-
-                SpacedOutStarMapView(
-                    cluster = worldForStarMapView,
-                    favoriteCoordinates = favoredCoordinates,
-                    onCloseClicked = { showStarMap.value = null },
-                    writeToClipboard = writeToClipboard
-                )
-
-            } else {
-
-                BaseGameStarMapView(
-                    cluster = worldForStarMapView,
-                    favoriteCoordinates = favoredCoordinates,
-                    onCloseClicked = { showStarMap.value = null },
-                    writeToClipboard = writeToClipboard
-                )
-            }
-
-            return
-        }
-
-        val asteroidForMapView = showAsteroidMap.value
-
-        if (asteroidForMapView != null) {
-
-            AsteroidMapPopup(
-                asteroid = asteroidForMapView,
-                onCloseClicked = { showAsteroidMap.value = null }
-            )
-
-            return
         }
 
         Box {
-
-            /* Background */
-            Image(
-                painter = painterResource(Res.drawable.background_space),
-                contentDescription = null,
-                contentScale = ContentScale.Crop,
-                modifier = Modifier
-                    .fillMaxSize()
-                    /* Avoid white background while the image loads. */
-                    .background(Color(0xFF181828))
-            )
 
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
@@ -319,28 +274,6 @@ fun ContentView(
 
                     FillSpacer()
 
-                    if (connected) {
-
-                        Icon(
-                            imageVector = if (showFavorites.value)
-                                Icons.Filled.Favorite
-                            else
-                                Icons.Outlined.FavoriteBorder,
-                            contentDescription = null,
-                            tint = MaterialTheme.colorScheme.onBackground,
-                            modifier = Modifier
-                                .halfPadding()
-                                .size(32.dp)
-                                .noRippleClickable {
-
-                                    showFavorites.value = !showFavorites.value
-
-                                    if (showFavorites.value)
-                                        showLeaderboard.value = false
-                                }
-                        )
-                    }
-
                     Icon(
                         imageVector = if (showLeaderboard.value)
                             IconLeaderboardFilled
@@ -360,12 +293,42 @@ fun ContentView(
                             }
                     )
 
+                    Icon(
+                        imageVector = if (showFavorites.value)
+                            IconBookmarksFilled
+                        else
+                            IconBookmarks,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.onBackground,
+                        modifier = Modifier
+                            .halfPadding()
+                            .size(32.dp)
+                            .noRippleClickable {
+
+                                showFavorites.value = !showFavorites.value
+
+                                if (showFavorites.value)
+                                    showLeaderboard.value = false
+                            }
+                    )
+
+                    DefaultSpacer()
+
+                    val uriHandler = LocalUriHandler.current
+
+                    SponsorButton {
+                        uriHandler.openUri("https://github.com/sponsors/StefanOltmann")
+                    }
+
+                    DefaultSpacer()
+
                     /*
-                     * Only show the login button in the standalone version.
+                     * Only show the login button in the standalone version or if connected.
                      */
-                    if (connected || (!connected && !isMniEmbedded))
+                    if (connectedUserId != null || !isMniEmbedded)
                         LoginWithSteamButton(
-                            connected = connected
+                            connectedUserId = connectedUserId,
+                            localPort = localPort
                         )
 
                     DoubleSpacer()
@@ -402,10 +365,13 @@ fun ContentView(
                         modifier = Modifier.weight(1F)
                     ) {
 
-                        LeaderboardViewList(errorMessage)
+                        LeaderboardViewList(
+                            steamIdToUsernameMap = steamIdToUsernameMap.value,
+                            errorMessage = errorMessage
+                        )
                     }
 
-                    if (connected) {
+                    if (connectedUserId != null) {
 
                         /*
                          * Logged-in users can change their name.
@@ -423,7 +389,7 @@ fun ContentView(
 
                         LaunchedEffect(true) {
 
-                            val result = DefaultWebClient.getUsername() ?: ""
+                            val result = steamIdToUsernameMap.value[connectedUserId] ?: ""
 
                             username.value = result
                             usernameInDatabase.value = result
@@ -507,15 +473,12 @@ fun ContentView(
                 } else if (showFavorites.value) {
 
                     FavoritesPanel(
-                        errorMessage,
-                        lazyListState,
-                        useCompactLayout,
                         favoredCoordinates,
                         showStarMap,
                         showAsteroidMap,
-                        connected,
+                        connectedUserId,
                         isMniEmbedded,
-                        steamIdToUsernameMap,
+                        steamIdToUsernameMap.value,
                         writeToClipboard
                     )
 
@@ -529,16 +492,69 @@ fun ContentView(
                         worldCount,
                         coroutineScope,
                         urlHash,
-                        connected,
-                        lazyListState,
-                        useCompactLayout,
+                        connectedUserId,
                         favoredCoordinates,
                         showStarMap,
                         showAsteroidMap,
                         isMniEmbedded,
-                        steamIdToUsernameMap,
+                        startWithFilterPanelOpen = urlFilterQuery != null,
+                        steamIdToUsernameMap.value,
                         writeToClipboard
                     )
+                }
+            }
+
+            Box(
+                Modifier.background(Color.Black)
+            ) {
+
+                val worldForStarMapView = showStarMap.value
+
+                if (worldForStarMapView != null) {
+
+                    if (!worldForStarMapView.starMapEntriesSpacedOut.isEmpty()) {
+
+                        SpacedOutStarMapView(
+                            cluster = worldForStarMapView,
+                            favoriteCoordinates = favoredCoordinates,
+                            onCloseClicked = { showStarMap.value = null },
+                            writeToClipboard = writeToClipboard
+                        )
+
+                    } else {
+
+                        BaseGameStarMapView(
+                            cluster = worldForStarMapView,
+                            favoriteCoordinates = favoredCoordinates,
+                            onCloseClicked = { showStarMap.value = null },
+                            writeToClipboard = writeToClipboard
+                        )
+                    }
+
+                } else {
+
+                    val asteroidForMapView = showAsteroidMap.value
+
+                    if (asteroidForMapView != null) {
+
+                        Column {
+
+                            Box(
+                                modifier = Modifier.weight(1F)
+                            ) {
+
+                                AsteroidMapPopup(
+                                    asteroid = asteroidForMapView.second,
+                                    onCloseClicked = { showAsteroidMap.value = null }
+                                )
+                            }
+
+                            AlternativeMapViewerLinkBox(
+                                coordinate = asteroidForMapView.first.coordinate,
+                                asteroidType = asteroidForMapView.second.id
+                            )
+                        }
+                    }
                 }
             }
         }
@@ -547,50 +563,27 @@ fun ContentView(
 
 @Composable
 private fun ColumnScope.FavoritesPanel(
-    errorMessage: MutableState<String?>,
-    lazyListState: LazyListState,
-    useCompactLayout: MutableState<Boolean>,
     favoredCoordinates: MutableState<List<String>>,
     showStarMap: MutableState<Cluster?>,
-    showAsteroidMap: MutableState<Asteroid?>,
-    connected: Boolean,
+    showAsteroidMap: MutableState<Pair<Cluster, Asteroid>?>,
+    connectedUserId: String?,
     isMniEmbedded: Boolean,
-    steamIdToUsernameMap: Map<String, String?>,
+    steamIdToUsernameMap: Map<String, String>,
     writeToClipboard: (String) -> Unit
 ) {
 
-    val favoredClustersState = produceState(emptyList<Cluster>()) {
-
-        try {
-
-            value = DefaultWebClient.findFavoredClusters()
-
-        } catch (ex: Exception) {
-
-            ex.printStackTrace()
-
-            errorMessage.value = ex.stackTraceToString()
-        }
-    }
-
     Box(
         contentAlignment = Alignment.Center,
-        modifier = Modifier.Companion.weight(1F)
+        modifier = Modifier.weight(1F)
     ) {
 
-        val favoredClusters = favoredClustersState.value
-
-        if (favoredClusters.isNotEmpty()) {
+        if (favoredCoordinates.value.isNotEmpty()) {
 
             ClusterViewList(
-                lazyListState,
-                favoredClustersState.value,
-                useCompactLayout.value,
-                favoredCoordinates,
-                showStarMap,
-                showAsteroidMap,
-                showFavoriteIcon = connected,
-                showMniUrl = isMniEmbedded,
+                clusters = favoredCoordinates.value,
+                favoriteCoordinates = favoredCoordinates,
+                showStarMap = showStarMap,
+                showAsteroidMap = showAsteroidMap,
                 steamIdToUsernameMap = steamIdToUsernameMap,
                 writeToClipboard = writeToClipboard
             )
@@ -613,28 +606,29 @@ private fun ColumnScope.MainPanel(
     filterQueryState: MutableState<FilterQuery>,
     isGettingNewResults: MutableState<Boolean>,
     errorMessage: MutableState<String?>,
-    clusters: MutableState<List<Cluster>>,
+    clusters: MutableState<List<String>>,
     worldCount: State<Long?>,
     coroutineScope: CoroutineScope,
     urlHash: State<String?>,
-    connected: Boolean,
-    lazyListState: LazyListState,
-    useCompactLayout: MutableState<Boolean>,
+    connectedUserId: String?,
     favoredCoordinates: MutableState<List<String>>,
     showStarMap: MutableState<Cluster?>,
-    showAsteroidMap: MutableState<Asteroid?>,
+    showAsteroidMap: MutableState<Pair<Cluster, Asteroid>?>,
     isMniEmbedded: Boolean,
+    startWithFilterPanelOpen: Boolean,
     steamIdToUsernameMap: Map<String, String?>,
     writeToClipboard: (String) -> Unit
 ) {
 
-    val search: suspend () -> Unit = {
+    val hasPerformedSearch = remember { mutableStateOf(false) }
 
-        println("Searching...")
+    val search: suspend () -> Unit = {
 
         try {
 
             val filterQuery = filterQueryState.value
+
+            println("[SEARCH] $filterQuery")
 
             isGettingNewResults.value = true
 
@@ -643,11 +637,17 @@ private fun ColumnScope.MainPanel(
             /* Reset the data */
             clusters.value = emptyList()
 
-            val searchResultWorlds = DefaultWebClient.search(filterQuery)
+            /*
+             * Allow the UI to update.
+             */
+            delay(200)
 
-            val sortedWorlds = searchResultWorlds.sortedByDescending { it.getRating() }
+            val searchResultWorlds = withContext(Dispatchers.Default) {
+                DefaultWebClient.search(filterQuery)
+            }
 
-            clusters.value = sortedWorlds
+            clusters.value = searchResultWorlds
+            hasPerformedSearch.value = true
 
         } catch (ex: Exception) {
 
@@ -667,14 +667,17 @@ private fun ColumnScope.MainPanel(
         filterQueryState = filterQueryState,
         onSearchButtonPressed = {
             coroutineScope.launch { search() }
-        }
+        },
+        showMniUrl = isMniEmbedded,
+        startWithFilterPanelOpen = startWithFilterPanelOpen,
+        writeToClipboard = writeToClipboard
     )
 
     if (isGettingNewResults.value) {
 
         Box(
             contentAlignment = Alignment.Center,
-            modifier = Modifier.Companion.weight(1F)
+            modifier = Modifier.weight(1F)
         ) {
 
             Text(
@@ -690,12 +693,62 @@ private fun ColumnScope.MainPanel(
 
         Box(
             contentAlignment = Alignment.Center,
-            modifier = Modifier.Companion.weight(1F)
+            modifier = Modifier.weight(1F)
         ) {
 
             val coordinate = urlHash.value
 
-            if (coordinate == null) {
+            if (coordinate != null) {
+
+                if (ClusterType.isValidCoordinate(coordinate)) {
+
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+
+                        Text(
+                            text = stringResource(Res.string.uiMapNotFound),
+                            style = MaterialTheme.typography.headlineSmall,
+                            color = MaterialTheme.colorScheme.onBackground,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
+                        )
+
+                        DoubleSpacer()
+
+                        RequestCoordinateButton(
+                            enabled = connectedUserId != null,
+                            coordinate = coordinate
+                        )
+                    }
+
+                } else {
+
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+
+                        Text(
+                            text = stringResource(Res.string.uiInvalidCoordinate),
+                            style = MaterialTheme.typography.headlineSmall,
+                            color = MaterialTheme.colorScheme.onBackground,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
+                        )
+
+                        DoubleSpacer()
+
+                        Text(
+                            text = coordinate,
+                            style = MaterialTheme.typography.bodyLarge,
+                            color = MaterialTheme.colorScheme.onBackground,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
+                        )
+                    }
+                }
+
+            } else if (hasPerformedSearch.value) {
 
                 Text(
                     text = stringResource(Res.string.uiNoResults),
@@ -712,19 +765,20 @@ private fun ColumnScope.MainPanel(
                 ) {
 
                     Text(
-                        text = stringResource(Res.string.uiCoordinateNotFound)
-                            .replace("{coordinate}", coordinate),
+                        text = stringResource(Res.string.uiWelcome),
                         style = MaterialTheme.typography.headlineSmall,
                         color = MaterialTheme.colorScheme.onBackground,
-                        maxLines = 1,
+                        textAlign = TextAlign.Center,
                         overflow = TextOverflow.Ellipsis
                     )
 
-                    DoubleSpacer()
-
-                    RequestCoordinateButton(
-                        enabled = connected,
-                        coordinate = coordinate
+                    Text(
+                        text = stringResource(Res.string.uiWelcomeInstruction),
+                        style = MaterialTheme.typography.bodyLarge,
+                        color = MaterialTheme.colorScheme.onBackground,
+                        textAlign = TextAlign.Center,
+                        overflow = TextOverflow.Ellipsis,
+                        modifier = Modifier.padding(top = 8.dp)
                     )
                 }
             }
@@ -737,14 +791,10 @@ private fun ColumnScope.MainPanel(
         ) {
 
             ClusterViewList(
-                lazyListState,
-                clusters.value,
-                useCompactLayout.value,
-                favoredCoordinates,
-                showStarMap,
-                showAsteroidMap,
-                showFavoriteIcon = connected,
-                showMniUrl = isMniEmbedded,
+                clusters = clusters.value,
+                favoriteCoordinates = favoredCoordinates,
+                showStarMap = showStarMap,
+                showAsteroidMap = showAsteroidMap,
                 steamIdToUsernameMap = steamIdToUsernameMap,
                 writeToClipboard = writeToClipboard
             )

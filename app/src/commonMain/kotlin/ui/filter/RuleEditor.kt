@@ -1,7 +1,7 @@
 /*
  * ONI Seed Browser
  * Copyright (C) 2025 Stefan Oltmann
- * https://stefan-oltmann.de/oni-seed-browser
+ * https://stefan-oltmann.de
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -37,11 +37,11 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import de.stefan_oltmann.oni.model.filter.FilterQuery
 import io.github.stefanoltmann.app.generated.resources.Res
 import io.github.stefanoltmann.app.generated.resources.uiAnd
 import io.github.stefanoltmann.app.generated.resources.uiOr
 import io.github.stefanoltmann.app.generated.resources.uiSelectRule
-import model.filter.FilterQuery
 import org.jetbrains.compose.resources.stringResource
 import ui.DashedHorizontalSeparator
 import ui.theme.FillSpacer

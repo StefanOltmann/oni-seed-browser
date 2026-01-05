@@ -1,7 +1,7 @@
 /*
  * ONI Seed Browser
  * Copyright (C) 2025 Stefan Oltmann
- * https://stefan-oltmann.de/oni-seed-browser
+ * https://stefan-oltmann.de
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -43,21 +43,20 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalUriHandler
-import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import de.stefan_oltmann.oni.model.Asteroid
+import de.stefan_oltmann.oni.model.Cluster
 import io.github.stefanoltmann.app.generated.resources.Res
 import io.github.stefanoltmann.app.generated.resources.uiCopiedToClipboard
 import kotlin.math.max
 import kotlinx.coroutines.delay
-import model.Asteroid
-import model.Cluster
 import org.jetbrains.compose.resources.stringResource
 import ui.icons.ContentCopy
+import ui.icons.IconAuthenticated
 import ui.icons.IconExternalLink
 import ui.theme.DefaultSpacer
 import ui.theme.FillSpacer
@@ -78,12 +77,9 @@ fun ClusterView(
     cluster: Cluster,
     index: Int,
     totalCount: Int,
-    useCompactLayout: Boolean,
     favoriteCoordinates: MutableState<List<String>>,
     showStarMap: MutableState<Cluster?>,
-    showAsteroidMap: MutableState<Asteroid?>,
-    showMniUrl: Boolean,
-    showFavoriteIcon: Boolean,
+    showAsteroidMap: MutableState<Pair<Cluster, Asteroid>?>,
     steamIdToUsernameMap: Map<String, String?>,
     writeToClipboard: (String) -> Unit
 ) {
@@ -100,31 +96,19 @@ fun ClusterView(
             coordinate = cluster.coordinate,
             favoriteCoordinates = favoriteCoordinates,
             showMapClicked = { showStarMap.value = cluster },
-            showFavoriteIcon = showFavoriteIcon,
             writeToClipboard = writeToClipboard
         )
 
         HalfSpacer()
 
-        val asteroid = showAsteroidMap.value
-
-        if (asteroid == null) {
-
-            AsteroidsGrid(
-                cluster,
-                useCompactLayout,
-                showAsteroidMap
-            )
-        }
-
-        val clipboardManager = LocalClipboardManager.current
+        AsteroidsGrid(
+            cluster,
+            showAsteroidMap
+        )
 
         val urlWasCopied = remember { mutableStateOf(false) }
 
-        val url = if (showMniUrl)
-            MNI_URL + cluster.coordinate
-        else
-            ORIGINAL_URL + cluster.coordinate
+        val url = MNI_URL + cluster.coordinate
 
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -148,8 +132,7 @@ fun ClusterView(
 
             Row(
                 modifier = Modifier.noRippleClickable {
-
-                    clipboardManager.setText(AnnotatedString(url))
+                    writeToClipboard(url)
 
                     urlWasCopied.value = true
                 }
@@ -246,7 +229,22 @@ fun ClusterView(
 
             val uploadDate = cluster.uploadDate
 
-            if (uploadDate != null) {
+            VerticalDivider(
+                thickness = 1.dp,
+                color = MaterialTheme.colorScheme.onBackground,
+                modifier = Modifier
+                    .height(doubleSpacing)
+                    .padding(horizontal = defaultSpacing)
+            )
+
+            Text(
+                text = formatDate(uploadDate),
+                style = MaterialTheme.typography.bodyMedium,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.onBackground
+            )
+
+            if (cluster.uploaderAuthenticated) {
 
                 VerticalDivider(
                     thickness = 1.dp,
@@ -256,11 +254,11 @@ fun ClusterView(
                         .padding(horizontal = defaultSpacing)
                 )
 
-                Text(
-                    text = formatDate(uploadDate),
-                    style = MaterialTheme.typography.bodyMedium,
-                    fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.onBackground
+                Icon(
+                    imageVector = IconAuthenticated,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.onBackground,
+                    modifier = Modifier.size(16.dp)
                 )
             }
         }
@@ -272,8 +270,7 @@ fun ClusterView(
 @Composable
 private fun AsteroidsGrid(
     cluster: Cluster,
-    useCompactLayout: Boolean,
-    showAsteroidMap: MutableState<Asteroid?>
+    showAsteroidMap: MutableState<Pair<Cluster, Asteroid>?>
 ) {
 
     BoxWithConstraints(
@@ -301,9 +298,8 @@ private fun AsteroidsGrid(
             AsteroidView(
                 asteroid = firstAsteroid,
                 isStarterAsteroid = true,
-                useCompactLayout = useCompactLayout,
                 showMap = {
-                    showAsteroidMap.value = firstAsteroid
+                    showAsteroidMap.value = cluster to firstAsteroid
                 }
             )
 
@@ -314,9 +310,8 @@ private fun AsteroidsGrid(
                 AsteroidView(
                     asteroid = secondAsteroid,
                     isStarterAsteroid = false,
-                    useCompactLayout = useCompactLayout,
                     showMap = {
-                        showAsteroidMap.value = secondAsteroid
+                        showAsteroidMap.value = cluster to secondAsteroid
                     }
                 )
             }
@@ -340,9 +335,8 @@ private fun AsteroidsGrid(
                             AsteroidView(
                                 asteroid = asteroid,
                                 isStarterAsteroid = false,
-                                useCompactLayout = useCompactLayout,
                                 showMap = {
-                                    showAsteroidMap.value = asteroid
+                                    showAsteroidMap.value = cluster to asteroid
                                 }
                             )
                         }

@@ -1,7 +1,7 @@
 /*
  * ONI Seed Browser
  * Copyright (C) 2025 Stefan Oltmann
- * https://stefan-oltmann.de/oni-seed-browser
+ * https://stefan-oltmann.de
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -20,6 +20,15 @@
 package ui
 
 import androidx.compose.runtime.Composable
+import de.stefan_oltmann.oni.model.AsteroidType
+import de.stefan_oltmann.oni.model.ClusterType
+import de.stefan_oltmann.oni.model.GameModeType
+import de.stefan_oltmann.oni.model.GeyserType
+import de.stefan_oltmann.oni.model.PointOfInterestType
+import de.stefan_oltmann.oni.model.SpacedOutSpacePOI
+import de.stefan_oltmann.oni.model.VanillaSpacePOI
+import de.stefan_oltmann.oni.model.WorldTrait
+import de.stefan_oltmann.oni.model.ZoneType
 import io.github.stefanoltmann.app.generated.resources.Res
 import io.github.stefanoltmann.app.generated.resources.asteroid_blasted_ceres
 import io.github.stefanoltmann.app.generated.resources.asteroid_blasted_ceres_spaced_out
@@ -32,6 +41,7 @@ import io.github.stefanoltmann.app.generated.resources.asteroid_mini_shattered_g
 import io.github.stefanoltmann.app.generated.resources.asteroid_mini_shattered_start
 import io.github.stefanoltmann.app.generated.resources.asteroid_mini_shattered_warp
 import io.github.stefanoltmann.app.generated.resources.asteroid_mixing_ceres
+import io.github.stefanoltmann.app.generated.resources.asteroid_mixing_relica
 import io.github.stefanoltmann.app.generated.resources.asteroid_moo
 import io.github.stefanoltmann.app.generated.resources.asteroid_oily_swamp
 import io.github.stefanoltmann.app.generated.resources.asteroid_radioactive_forest
@@ -45,11 +55,13 @@ import io.github.stefanoltmann.app.generated.resources.asteroid_spacedout_ceres_
 import io.github.stefanoltmann.app.generated.resources.asteroid_stinko_swamp
 import io.github.stefanoltmann.app.generated.resources.asteroid_superconductive
 import io.github.stefanoltmann.app.generated.resources.asteroid_tundra
+import io.github.stefanoltmann.app.generated.resources.asteroid_warp_oily_sandy_swamp
 import io.github.stefanoltmann.app.generated.resources.asteroid_water
 import io.github.stefanoltmann.app.generated.resources.biome_barren
 import io.github.stefanoltmann.app.generated.resources.biome_carrot_quarry
 import io.github.stefanoltmann.app.generated.resources.biome_forest
 import io.github.stefanoltmann.app.generated.resources.biome_frozen
+import io.github.stefanoltmann.app.generated.resources.biome_garden
 import io.github.stefanoltmann.app.generated.resources.biome_icecaves
 import io.github.stefanoltmann.app.generated.resources.biome_jungle
 import io.github.stefanoltmann.app.generated.resources.biome_magma
@@ -59,12 +71,14 @@ import io.github.stefanoltmann.app.generated.resources.biome_moo
 import io.github.stefanoltmann.app.generated.resources.biome_ocean
 import io.github.stefanoltmann.app.generated.resources.biome_oil
 import io.github.stefanoltmann.app.generated.resources.biome_radioactive
+import io.github.stefanoltmann.app.generated.resources.biome_raptor
 import io.github.stefanoltmann.app.generated.resources.biome_rust
 import io.github.stefanoltmann.app.generated.resources.biome_sandstone
 import io.github.stefanoltmann.app.generated.resources.biome_space
 import io.github.stefanoltmann.app.generated.resources.biome_sugarwoods
 import io.github.stefanoltmann.app.generated.resources.biome_swamp
 import io.github.stefanoltmann.app.generated.resources.biome_wasteland
+import io.github.stefanoltmann.app.generated.resources.biome_wetlands
 import io.github.stefanoltmann.app.generated.resources.building_anti_entropy_thermo_nullifier
 import io.github.stefanoltmann.app.generated.resources.building_cryotank
 import io.github.stefanoltmann.app.generated.resources.building_neural_vacillator
@@ -80,6 +94,8 @@ import io.github.stefanoltmann.app.generated.resources.cluster_base_aridio
 import io.github.stefanoltmann.app.generated.resources.cluster_base_ceres
 import io.github.stefanoltmann.app.generated.resources.cluster_base_oasisse
 import io.github.stefanoltmann.app.generated.resources.cluster_base_oceania
+import io.github.stefanoltmann.app.generated.resources.cluster_base_relica
+import io.github.stefanoltmann.app.generated.resources.cluster_base_relica_lab
 import io.github.stefanoltmann.app.generated.resources.cluster_base_rime
 import io.github.stefanoltmann.app.generated.resources.cluster_base_terra
 import io.github.stefanoltmann.app.generated.resources.cluster_base_the_badlands
@@ -98,6 +114,9 @@ import io.github.stefanoltmann.app.generated.resources.cluster_spacedout_oasisse
 import io.github.stefanoltmann.app.generated.resources.cluster_spacedout_oceania
 import io.github.stefanoltmann.app.generated.resources.cluster_spacedout_quagmiris
 import io.github.stefanoltmann.app.generated.resources.cluster_spacedout_radioactive_ocean_moonlet
+import io.github.stefanoltmann.app.generated.resources.cluster_spacedout_relica
+import io.github.stefanoltmann.app.generated.resources.cluster_spacedout_relica_lab
+import io.github.stefanoltmann.app.generated.resources.cluster_spacedout_relica_minor
 import io.github.stefanoltmann.app.generated.resources.cluster_spacedout_rime
 import io.github.stefanoltmann.app.generated.resources.cluster_spacedout_squelchy
 import io.github.stefanoltmann.app.generated.resources.cluster_spacedout_terra
@@ -183,6 +202,7 @@ import io.github.stefanoltmann.app.generated.resources.spacepoi_temporal_tear
 import io.github.stefanoltmann.app.generated.resources.vanilla_spacepoi_carbonaceous_asteroid
 import io.github.stefanoltmann.app.generated.resources.vanilla_spacepoi_chlorine_planet
 import io.github.stefanoltmann.app.generated.resources.vanilla_spacepoi_dlc2_ceres_space_destination
+import io.github.stefanoltmann.app.generated.resources.vanilla_spacepoi_dlc4_prehistoric_space_destination
 import io.github.stefanoltmann.app.generated.resources.vanilla_spacepoi_dusty_moon
 import io.github.stefanoltmann.app.generated.resources.vanilla_spacepoi_earth
 import io.github.stefanoltmann.app.generated.resources.vanilla_spacepoi_forest_planet
@@ -227,19 +247,10 @@ import io.github.stefanoltmann.app.generated.resources.worldtrait_radioactive_cr
 import io.github.stefanoltmann.app.generated.resources.worldtrait_slime_splats
 import io.github.stefanoltmann.app.generated.resources.worldtrait_subsurface_ocean
 import io.github.stefanoltmann.app.generated.resources.worldtrait_volcanoes
-import model.AsteroidType
-import model.ClusterType
-import model.GeyserType
-import model.PointOfInterestType
-import model.SpacedOutSpacePOI
-import model.VanillaSpacePOI
-import model.WorldTrait
-import model.ZoneType
-import model.filter.GameModeType
 import org.jetbrains.compose.resources.DrawableResource
 
-fun getWorldTraitDrawable(worldTrait: WorldTrait): DrawableResource =
-    when (worldTrait) {
+val WorldTrait.drawableResource: DrawableResource
+    get() = when (this) {
         WorldTrait.BouldersLarge -> Res.drawable.worldtrait_boulders_large
         WorldTrait.BouldersMedium -> Res.drawable.worldtrait_boulders_medium
         WorldTrait.BouldersMixed -> Res.drawable.worldtrait_boulders_mixed
@@ -265,8 +276,8 @@ fun getWorldTraitDrawable(worldTrait: WorldTrait): DrawableResource =
         WorldTrait.RadioactiveCrust -> Res.drawable.worldtrait_radioactive_crust
     }
 
-fun getGeyserDrawable(geyserType: GeyserType): DrawableResource =
-    when (geyserType) {
+val GeyserType.drawableResource: DrawableResource
+    get() = when (this) {
         GeyserType.COOL_STEAM -> Res.drawable.geyser_cool_steam_vent
         GeyserType.HOT_STEAM -> Res.drawable.geyser_steam_vent
         GeyserType.WATER -> Res.drawable.geyser_water
@@ -282,6 +293,7 @@ fun getGeyserDrawable(geyserType: GeyserType): DrawableResource =
         GeyserType.HOT_POLLUTED_O2 -> Res.drawable.geyser_hot_polluted_oxygen_vent
         GeyserType.INFECTIOUS_POLLUTED_O2 -> Res.drawable.geyser_infectious_polluted_oxygen_vent
         GeyserType.CHLORINE -> Res.drawable.geyser_chlorine_gas_vent
+        GeyserType.CHLORINE_COOL -> Res.drawable.geyser_chlorine_gas_vent
         GeyserType.NATURAL_GAS -> Res.drawable.geyser_natural_gas_geyser
         GeyserType.COPPER_VOLCANO -> Res.drawable.geyser_copper_volcano
         GeyserType.IRON_VOLCANO -> Res.drawable.geyser_iron_volcano
@@ -295,33 +307,35 @@ fun getGeyserDrawable(geyserType: GeyserType): DrawableResource =
         GeyserType.OIL_RESERVOIR -> Res.drawable.geyser_oil_reservoir
     }
 
-fun getPointOfInterestDrawable(pointOfInterestType: PointOfInterestType): DrawableResource =
-    when (pointOfInterestType) {
-        PointOfInterestType.PRINTING_POD -> Res.drawable.building_printing_pod
-        PointOfInterestType.SUPPLY_TELEPORTER_INPUT -> Res.drawable.building_supply_teleporter_input
-        PointOfInterestType.SUPPLY_TELEPORTER_OUTPUT -> Res.drawable.building_supply_teleporter_output
-        PointOfInterestType.TELEPORTER_TRANSMITTER -> Res.drawable.building_teleporter_transmitter
-        PointOfInterestType.TELEPORTER_RECEIVER -> Res.drawable.building_teleporter_receiver
-        PointOfInterestType.NEURAL_VACILLATOR -> Res.drawable.building_neural_vacillator
-        PointOfInterestType.ANTI_ENTROPY_THERMO_NULLIFIER -> Res.drawable.building_anti_entropy_thermo_nullifier
-        PointOfInterestType.EXPERIMENT_52B -> Res.drawable.building_sap_tree
-        PointOfInterestType.ARTIFACT -> Res.drawable.poi_artifact_outline
-        PointOfInterestType.CRASHED_SATELLITE -> Res.drawable.poi_crashed_satellite
-        PointOfInterestType.WRECKED_SATELLITE -> Res.drawable.poi_wrecked_satellite
-        PointOfInterestType.CRUSHED_SATELLITE -> Res.drawable.poi_crushed_satellite
-        PointOfInterestType.TEMPORAL_TEAR_OPENER -> Res.drawable.building_temporal_tear_opener
-        PointOfInterestType.CRYOTANK -> Res.drawable.building_cryotank
+val PointOfInterestType.drawableResource: DrawableResource
+    get() = when (this) {
+        PointOfInterestType.Headquarters -> Res.drawable.building_printing_pod
+        PointOfInterestType.WarpConduitSender -> Res.drawable.building_supply_teleporter_input
+        PointOfInterestType.WarpConduitReceiver -> Res.drawable.building_supply_teleporter_output
+        PointOfInterestType.WarpPortal -> Res.drawable.building_teleporter_transmitter
+        PointOfInterestType.WarpReceiver -> Res.drawable.building_teleporter_receiver
+        PointOfInterestType.GeneShuffler -> Res.drawable.building_neural_vacillator
+        PointOfInterestType.MassiveHeatSink -> Res.drawable.building_anti_entropy_thermo_nullifier
+        PointOfInterestType.SapTree -> Res.drawable.building_sap_tree
+        PointOfInterestType.GravitasPedestal -> Res.drawable.poi_artifact_outline
+        PointOfInterestType.PropSurfaceSatellite1 -> Res.drawable.poi_crashed_satellite
+        PointOfInterestType.PropSurfaceSatellite2 -> Res.drawable.poi_wrecked_satellite
+        PointOfInterestType.PropSurfaceSatellite3 -> Res.drawable.poi_crushed_satellite
+        PointOfInterestType.TemporalTearOpener -> Res.drawable.building_temporal_tear_opener
+        PointOfInterestType.CryoTank -> Res.drawable.building_cryotank
         PointOfInterestType.PropFacilityStatue -> Res.drawable.poi_prop_facility_statue
         PointOfInterestType.GeothermalVentEntity -> Res.drawable.poi_geothermal_vent_entity
         PointOfInterestType.GeothermalControllerEntity -> Res.drawable.poi_geothermal_controller_entity
         PointOfInterestType.POICeresTechUnlock -> Res.drawable.poi_ceres_tech_unlock
     }
 
-@Composable
-fun getClusterDrawable(clusterType: ClusterType): DrawableResource =
-    when (clusterType) {
+val ClusterType.drawableResource: DrawableResource
+    @Composable
+    get() = when (this) {
         ClusterType.BASE_TERRA -> Res.drawable.cluster_base_terra
         ClusterType.BASE_CERES -> Res.drawable.cluster_base_ceres
+        ClusterType.BASE_RELICA -> Res.drawable.cluster_base_relica
+        ClusterType.BASE_RELICA_LAB -> Res.drawable.cluster_base_relica_lab
         ClusterType.BASE_BLASTED_CERES -> Res.drawable.asteroid_blasted_ceres
         ClusterType.BASE_OCEANIA -> Res.drawable.cluster_base_oceania
         ClusterType.BASE_RIME -> Res.drawable.cluster_base_rime
@@ -333,8 +347,11 @@ fun getClusterDrawable(clusterType: ClusterType): DrawableResource =
         ClusterType.BASE_OASISSE -> Res.drawable.cluster_base_oasisse
         ClusterType.DLC_TERRA -> Res.drawable.cluster_spacedout_terra
         ClusterType.DLC_CERES -> Res.drawable.asteroid_spacedout_ceres
+        ClusterType.DLC_RELICA -> Res.drawable.cluster_spacedout_relica
+        ClusterType.DLC_RELICA_LAB -> Res.drawable.cluster_spacedout_relica_lab
         ClusterType.DLC_BLASTED_CERES -> Res.drawable.asteroid_blasted_ceres_spaced_out
         ClusterType.DLC_CERES_MINOR -> Res.drawable.asteroid_spacedout_ceres_minor
+        ClusterType.DLC_RELICA_MINOR -> Res.drawable.cluster_spacedout_relica_minor
         ClusterType.DLC_OCEANIA -> Res.drawable.cluster_spacedout_oceania
         ClusterType.DLC_SQUELCHY -> Res.drawable.cluster_spacedout_squelchy
         ClusterType.DLC_RIME -> Res.drawable.cluster_spacedout_rime
@@ -355,9 +372,9 @@ fun getClusterDrawable(clusterType: ClusterType): DrawableResource =
         ClusterType.DLC_CERES_MANTLE -> Res.drawable.cluster_spacedout_ceres_mantle
     }
 
-@Composable
-fun getAsteroidTypeDrawable(asteroidType: AsteroidType): DrawableResource =
-    when (asteroidType) {
+val AsteroidType.drawableResource: DrawableResource
+    @Composable
+    get() = when (this) {
         AsteroidType.TerraMoonlet -> Res.drawable.cluster_spacedout_terrania
         AsteroidType.IdealLandingSite -> Res.drawable.asteroid_irradiated_forest
         AsteroidType.WarpOilySwamp -> Res.drawable.asteroid_oily_swamp
@@ -421,11 +438,90 @@ fun getAsteroidTypeDrawable(asteroidType: AsteroidType): DrawableResource =
         AsteroidType.MiniShatteredStartAsteroid -> Res.drawable.asteroid_mini_shattered_start
         AsteroidType.MiniShatteredWarpAsteroid -> Res.drawable.asteroid_mini_shattered_warp
         AsteroidType.MiniShatteredGeoAsteroid -> Res.drawable.asteroid_mini_shattered_geo
+        AsteroidType.WarpOilySandySwamp -> Res.drawable.asteroid_warp_oily_sandy_swamp
+        AsteroidType.PrehistoricBaseGameAsteroid -> Res.drawable.cluster_base_relica
+        AsteroidType.PrehistoricShatteredBaseGameAsteroid -> Res.drawable.cluster_base_relica_lab
+        AsteroidType.PrehistoricClassicAsteroid -> Res.drawable.cluster_spacedout_relica
+        AsteroidType.PrehistoricShatteredClassicAsteroid -> Res.drawable.cluster_spacedout_relica_lab
+        AsteroidType.PrehistoricSpacedOutAsteroid -> Res.drawable.cluster_spacedout_relica_minor
+        AsteroidType.MixingPrehistoricAsteroid -> Res.drawable.asteroid_mixing_relica
     }
 
-@Composable
-fun getSpacedOutSpacePOIDrawable(spacedOutSpacePOI: SpacedOutSpacePOI): DrawableResource =
-    when (spacedOutSpacePOI) {
+val SpacedOutSpacePOI.drawableResource: DrawableResource
+    @Composable
+    get() = when (this) {
+        /* Asteroids */
+        SpacedOutSpacePOI.TerraMoonlet -> Res.drawable.cluster_spacedout_terrania
+        SpacedOutSpacePOI.IdealLandingSite -> Res.drawable.asteroid_irradiated_forest
+        SpacedOutSpacePOI.WarpOilySwamp -> Res.drawable.asteroid_oily_swamp
+        SpacedOutSpacePOI.TundraMoonlet -> Res.drawable.asteroid_tundra
+        SpacedOutSpacePOI.MarshyMoonlet -> Res.drawable.asteroid_marshy
+        SpacedOutSpacePOI.MooMoonlet -> Res.drawable.asteroid_moo
+        SpacedOutSpacePOI.WaterMoonlet -> Res.drawable.asteroid_water
+        SpacedOutSpacePOI.NiobiumMoonlet -> Res.drawable.asteroid_superconductive
+        SpacedOutSpacePOI.RegolithMoonlet -> Res.drawable.asteroid_regolith
+        SpacedOutSpacePOI.MiniBadlandsStart -> Res.drawable.cluster_spacedout_the_desolands_moonlet
+        SpacedOutSpacePOI.MiniRadioactiveOceanWarp -> Res.drawable.cluster_spacedout_radioactive_ocean_moonlet
+        SpacedOutSpacePOI.MiniMetallicSwampy -> Res.drawable.cluster_spacedout_metallic_swampy_moonlet
+        SpacedOutSpacePOI.MiniForestFrozen -> Res.drawable.cluster_spacedout_frozen_forest_moonlet
+        SpacedOutSpacePOI.MiniFlipped -> Res.drawable.cluster_spacedout_flipped_moonlet
+        SpacedOutSpacePOI.SandstoneDefault -> Res.drawable.cluster_base_terra
+        SpacedOutSpacePOI.Badlands -> Res.drawable.cluster_base_the_badlands
+        SpacedOutSpacePOI.MiniBadlandsWarp -> Res.drawable.cluster_spacedout_the_desolands_moonlet
+        SpacedOutSpacePOI.MiniForestFrozenStart -> Res.drawable.cluster_spacedout_frozen_forest_moonlet
+        SpacedOutSpacePOI.MiniRadioactiveOcean -> Res.drawable.cluster_spacedout_radioactive_ocean_moonlet
+        SpacedOutSpacePOI.SwampMoonlet -> Res.drawable.cluster_spacedout_quagmiris
+        SpacedOutSpacePOI.MetalHeavyLandingSite -> Res.drawable.asteroid_irradiated_marsh
+        SpacedOutSpacePOI.OilRichWarpTarget -> Res.drawable.asteroid_rusty_oil
+        SpacedOutSpacePOI.VanillaForestDefault -> Res.drawable.cluster_spacedout_verdante
+        SpacedOutSpacePOI.MediumSandyRadioactiveVanillaWarpPlanet -> Res.drawable.asteroid_radioactive_terra
+        SpacedOutSpacePOI.MiniRegolithMoonlet -> Res.drawable.asteroid_regolith
+        SpacedOutSpacePOI.VanillaSandstoneDefault -> Res.drawable.cluster_spacedout_terra
+        SpacedOutSpacePOI.MediumRadioactiveVanillaWarpPlanet -> Res.drawable.asteroid_radioactive_swamp
+        SpacedOutSpacePOI.VanillaSwampDefault -> Res.drawable.cluster_spacedout_squelchy
+        SpacedOutSpacePOI.MediumForestyRadioactiveVanillaWarpPlanet -> Res.drawable.asteroid_radioactive_forest
+        SpacedOutSpacePOI.VanillaOceania -> Res.drawable.cluster_spacedout_oceania
+        SpacedOutSpacePOI.MediumForestyWasteland -> Res.drawable.asteroid_glowood_wasteland
+        SpacedOutSpacePOI.MiniBadlands -> Res.drawable.cluster_spacedout_the_desolands_moonlet
+        SpacedOutSpacePOI.MiniRadioactiveOceanStart -> Res.drawable.cluster_spacedout_radioactive_ocean_moonlet
+        SpacedOutSpacePOI.MiniFlippedWarp -> Res.drawable.cluster_spacedout_flipped_moonlet
+        SpacedOutSpacePOI.VanillaAridio -> Res.drawable.cluster_spacedout_aridio
+        SpacedOutSpacePOI.MediumSandySwamp -> Res.drawable.asteroid_radioactive_terrabog
+        SpacedOutSpacePOI.VanillaVolcanic -> Res.drawable.cluster_spacedout_volcanea
+        SpacedOutSpacePOI.MiniFlippedStart -> Res.drawable.cluster_spacedout_flipped_moonlet
+        SpacedOutSpacePOI.VanillaArboria -> Res.drawable.cluster_spacedout_arboria
+        SpacedOutSpacePOI.VanillaSandstoneFrozen -> Res.drawable.cluster_spacedout_rime
+        SpacedOutSpacePOI.MediumSwampy -> Res.drawable.asteroid_stinko_swamp
+        SpacedOutSpacePOI.MiniMetallicSwampyStart -> Res.drawable.cluster_spacedout_metallic_swampy_moonlet
+        SpacedOutSpacePOI.MiniForestFrozenWarp -> Res.drawable.cluster_spacedout_frozen_forest_moonlet
+        SpacedOutSpacePOI.ForestMoonlet -> Res.drawable.cluster_spacedout_folia
+        SpacedOutSpacePOI.SwampyLandingSite -> Res.drawable.asteroid_irradiated_swampy
+        SpacedOutSpacePOI.VanillaBadlands -> Res.drawable.cluster_spacedout_the_badlands
+        SpacedOutSpacePOI.ForestLush -> Res.drawable.cluster_base_verdante
+        SpacedOutSpacePOI.Oceania -> Res.drawable.cluster_base_oceania
+        SpacedOutSpacePOI.ForestDefault -> Res.drawable.cluster_base_arboria
+        SpacedOutSpacePOI.ForestHot -> Res.drawable.cluster_base_aridio
+        SpacedOutSpacePOI.SandstoneFrozen -> Res.drawable.cluster_base_rime
+        SpacedOutSpacePOI.Oasis -> Res.drawable.cluster_base_oasisse
+        SpacedOutSpacePOI.CeresSpacedOutAsteroid -> Res.drawable.cluster_spacedout_ceres_minor
+        SpacedOutSpacePOI.CeresClassicAsteroid -> Res.drawable.cluster_spacedout_ceres
+        SpacedOutSpacePOI.CeresBaseGameAsteroid -> Res.drawable.cluster_base_ceres
+        SpacedOutSpacePOI.Volcanic -> Res.drawable.cluster_base_volcanea
+        SpacedOutSpacePOI.VanillaOasis -> Res.drawable.cluster_spacedout_oasisse
+        SpacedOutSpacePOI.MixingCeresAsteroid -> Res.drawable.asteroid_mixing_ceres
+        SpacedOutSpacePOI.CeresClassicShatteredAsteroid -> Res.drawable.asteroid_blasted_ceres_spaced_out
+        SpacedOutSpacePOI.CeresBaseGameShatteredAsteroid -> Res.drawable.asteroid_blasted_ceres
+        SpacedOutSpacePOI.MiniShatteredStartAsteroid -> Res.drawable.asteroid_mini_shattered_start
+        SpacedOutSpacePOI.MiniShatteredWarpAsteroid -> Res.drawable.asteroid_mini_shattered_warp
+        SpacedOutSpacePOI.MiniShatteredGeoAsteroid -> Res.drawable.asteroid_mini_shattered_geo
+        SpacedOutSpacePOI.WarpOilySandySwamp -> Res.drawable.asteroid_warp_oily_sandy_swamp
+        SpacedOutSpacePOI.PrehistoricBaseGameAsteroid -> Res.drawable.cluster_base_relica
+        SpacedOutSpacePOI.PrehistoricShatteredBaseGameAsteroid -> Res.drawable.cluster_base_relica_lab
+        SpacedOutSpacePOI.PrehistoricClassicAsteroid -> Res.drawable.cluster_spacedout_relica
+        SpacedOutSpacePOI.PrehistoricShatteredClassicAsteroid -> Res.drawable.cluster_spacedout_relica_lab
+        SpacedOutSpacePOI.PrehistoricSpacedOutAsteroid -> Res.drawable.cluster_spacedout_relica_minor
+        SpacedOutSpacePOI.MixingPrehistoricAsteroid -> Res.drawable.asteroid_mixing_relica
+        /* Others */
         SpacedOutSpacePOI.ArtifactSpacePOI_GravitasSpaceStation1 -> Res.drawable.spacepoi_artifact_1
         SpacedOutSpacePOI.ArtifactSpacePOI_GravitasSpaceStation2 -> Res.drawable.spacepoi_artifact_2
         SpacedOutSpacePOI.ArtifactSpacePOI_GravitasSpaceStation3 -> Res.drawable.spacepoi_artifact_3
@@ -461,14 +557,21 @@ fun getSpacedOutSpacePOIDrawable(spacedOutSpacePOI: SpacedOutSpacePOI): Drawable
         SpacedOutSpacePOI.HarvestableSpacePOI_SatelliteField -> Res.drawable.spacepoi_satellite_field
         SpacedOutSpacePOI.HarvestableSpacePOI_SwampyOreField -> Res.drawable.spacepoi_swampy_ore_field
         SpacedOutSpacePOI.TemporalTear -> Res.drawable.spacepoi_temporal_tear
+        SpacedOutSpacePOI.HarvestableSpacePOI_DLC4PrehistoricMixingField -> Res.drawable.vanilla_spacepoi_dlc4_prehistoric_space_destination // FIXME Wrong asset
+        SpacedOutSpacePOI.HarvestableSpacePOI_DLC4PrehistoricOreField -> Res.drawable.vanilla_spacepoi_dlc4_prehistoric_space_destination // FIXME Wrong asset
+        SpacedOutSpacePOI.HarvestableSpacePOI_DLC4ImpactorDebrisField1 -> Res.drawable.spacepoi_artifact_1 // FIXME Wrong asset
+        SpacedOutSpacePOI.HarvestableSpacePOI_DLC4ImpactorDebrisField2 -> Res.drawable.spacepoi_artifact_1 // FIXME Wrong asset
+        SpacedOutSpacePOI.HarvestableSpacePOI_DLC4ImpactorDebrisField3 -> Res.drawable.spacepoi_artifact_1 // FIXME Wrong asset
+        SpacedOutSpacePOI.StarmapHexCellInventory -> Res.drawable.spacepoi_artifact_1 // FIXME Wrong asset
     }
 
-@Composable
-fun getVanillaSpacePOIDrawable(vanillaSpacePOI: VanillaSpacePOI): DrawableResource =
-    when (vanillaSpacePOI) {
+val VanillaSpacePOI.drawableResource: DrawableResource
+    @Composable
+    get() = when (this) {
         VanillaSpacePOI.CarbonaceousAsteroid -> Res.drawable.vanilla_spacepoi_carbonaceous_asteroid
         VanillaSpacePOI.ChlorinePlanet -> Res.drawable.vanilla_spacepoi_chlorine_planet
         VanillaSpacePOI.DLC2CeresSpaceDestination -> Res.drawable.vanilla_spacepoi_dlc2_ceres_space_destination
+        VanillaSpacePOI.DLC4PrehistoricSpaceDestination -> Res.drawable.vanilla_spacepoi_dlc4_prehistoric_space_destination
         VanillaSpacePOI.DustyMoon -> Res.drawable.vanilla_spacepoi_dusty_moon
         VanillaSpacePOI.Earth -> Res.drawable.vanilla_spacepoi_earth
         VanillaSpacePOI.ForestPlanet -> Res.drawable.vanilla_spacepoi_forest_planet
@@ -492,9 +595,9 @@ fun getVanillaSpacePOIDrawable(vanillaSpacePOI: VanillaSpacePOI): DrawableResour
         VanillaSpacePOI.Wormhole -> Res.drawable.vanilla_spacepoi_wormhole
     }
 
-@Composable
-fun getZoneTypeDrawable(zoneType: ZoneType): DrawableResource =
-    when (zoneType) {
+val ZoneType.drawableResource: DrawableResource
+    @Composable
+    get() = when (this) {
         ZoneType.FrozenWastes -> Res.drawable.biome_frozen
         ZoneType.BoggyMarsh -> Res.drawable.biome_marsh
         ZoneType.Sandstone -> Res.drawable.biome_sandstone
@@ -514,11 +617,14 @@ fun getZoneTypeDrawable(zoneType: ZoneType): DrawableResource =
         ZoneType.IceCaves -> Res.drawable.biome_icecaves
         ZoneType.CarrotQuarry -> Res.drawable.biome_carrot_quarry
         ZoneType.SugarWoods -> Res.drawable.biome_sugarwoods
+        ZoneType.PrehistoricGarden -> Res.drawable.biome_garden
+        ZoneType.PrehistoricRaptor -> Res.drawable.biome_raptor
+        ZoneType.PrehistoricWetlands -> Res.drawable.biome_wetlands
     }
 
-@Composable
-fun getGameModeDrawable(gameModeType: GameModeType): DrawableResource =
-    when (gameModeType) {
+val GameModeType.drawableResource: DrawableResource
+    @Composable
+    get() = when (this) {
         GameModeType.BASEGAME_STANDARD -> Res.drawable.gamemode_basegame_standard
         GameModeType.BASEGAME_THELAB -> Res.drawable.gamemode_basegame_thelab
         GameModeType.SPACEDOUT_CLASSIC -> Res.drawable.gamemode_spacedout_classic

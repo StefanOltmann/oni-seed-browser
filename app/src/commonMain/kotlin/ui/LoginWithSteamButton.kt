@@ -1,7 +1,7 @@
 /*
  * ONI Seed Browser
  * Copyright (C) 2025 Stefan Oltmann
- * https://stefan-oltmann.de/oni-seed-browser
+ * https://stefan-oltmann.de
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -45,9 +45,16 @@ import ui.theme.HalfSpacer
 import ui.theme.halfPadding
 import ui.theme.minimalRoundedCornerShape
 
+private const val LOGIN_BASE_URL: String =
+    "https://steam.auth.stefanoltmann.de/login?redirect="
+
+private const val PUBLIC_LOGIN_URL: String =
+    LOGIN_BASE_URL + "https://stefanoltmann.de/oni-seed-browser/"
+
 @Composable
 fun LoginWithSteamButton(
-    connected: Boolean
+    connectedUserId: String?,
+    localPort: Int?
 ) {
 
     val hovered = remember { mutableStateOf(false) }
@@ -59,7 +66,7 @@ fun LoginWithSteamButton(
         modifier = Modifier
             .onHover(hovered)
             .background(
-                if (!connected && hovered.value)
+                if (connectedUserId == null && hovered.value)
                     MaterialTheme.colorScheme.surface
                 else
                     MaterialTheme.colorScheme.background,
@@ -67,10 +74,13 @@ fun LoginWithSteamButton(
             )
             .noRippleClickable {
 
-                if (connected)
+                if (connectedUserId != null)
                     return@noRippleClickable
 
-                uriHandler.openUri("https://ingest.mapsnotincluded.org/connect/0")
+                if (localPort == null)
+                    uriHandler.openUri(PUBLIC_LOGIN_URL)
+                else
+                    uriHandler.openUri(LOGIN_BASE_URL + "http://localhost:$localPort")
             }
     ) {
 
@@ -87,7 +97,7 @@ fun LoginWithSteamButton(
 
         HalfSpacer()
 
-        if (!connected) {
+        if (connectedUserId == null) {
 
             Text(
                 text = stringResource(Res.string.uiLoginWithSteam),
@@ -119,7 +129,7 @@ fun LoginWithSteamButton(
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colorScheme.onBackground,
                 maxLines = 1,
-                modifier = Modifier.offset(y = -2.dp)
+                modifier = Modifier.offset(y = -1.dp)
             )
         }
 

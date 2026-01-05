@@ -1,7 +1,7 @@
 /*
  * ONI Seed Browser
  * Copyright (C) 2025 Stefan Oltmann
- * https://stefan-oltmann.de/oni-seed-browser
+ * https://stefan-oltmann.de
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -22,15 +22,18 @@ package ui.filter
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Switch
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import model.Dlc
-import model.filter.FilterQuery
+import androidx.compose.ui.unit.dp
+import de.stefan_oltmann.oni.model.Dlc
+import de.stefan_oltmann.oni.model.filter.FilterQuery
 import org.jetbrains.compose.resources.painterResource
 import ui.grayScaleFilter
+import ui.model.icon
 import ui.noRippleClickable
 import ui.theme.doubleSpacing
 
@@ -39,9 +42,8 @@ fun DlcSelection(
     filterQueryState: MutableState<FilterQuery>
 ) {
 
-    val actualDlcs = Dlc.entries.filterNot { it.isMainVersion };
+    for (dlc in Dlc.selectableDlcs) {
 
-    for (dlc in actualDlcs) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(doubleSpacing, Alignment.CenterHorizontally)
@@ -65,18 +67,20 @@ fun DlcSelection(
                 }
             }
 
+            Image(
+                painter = painterResource(dlc.icon),
+                contentDescription = null,
+                colorFilter = if (dlcActivated) null else grayScaleFilter,
+                modifier = Modifier
+                    .width(120.dp)
+                    .noRippleClickable(action)
+            )
+
             Switch(
                 checked = dlcActivated,
                 onCheckedChange = {
                     action()
                 }
-            )
-
-            Image(
-                painter = painterResource(dlc.icon),
-                contentDescription = null,
-                colorFilter = if (dlcActivated) null else grayScaleFilter,
-                modifier = Modifier.noRippleClickable(action)
             )
         }
     }

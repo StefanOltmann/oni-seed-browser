@@ -1,7 +1,7 @@
 /*
  * ONI Seed Browser
  * Copyright (C) 2025 Stefan Oltmann
- * https://stefan-oltmann.de/oni-seed-browser
+ * https://stefan-oltmann.de
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -20,21 +20,35 @@
 package ui.filter
 
 import AppStorage
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import model.filter.FilterQuery
+import androidx.compose.ui.unit.dp
+import de.stefan_oltmann.oni.model.filter.FilterQuery
+import toBase64
+import ui.MNI_URL
+import ui.icons.ContentCopy
+import ui.onHover
 import ui.theme.DefaultSpacer
 import ui.theme.FillSpacer
 import ui.theme.defaultPadding
+import ui.theme.hoverColor
 
 @Composable
 fun ControlsRow(
     filterQueryState: MutableState<FilterQuery>,
     filterPanelOpen: MutableState<Boolean>,
-    onSearchButtonPressed: () -> Unit
+    onSearchButtonPressed: () -> Unit,
+    writeToClipboard: (String) -> Unit
 ) {
 
     Row(
@@ -44,15 +58,60 @@ fun ControlsRow(
 
         FillSpacer()
 
+        val contentCopyHovered = remember { mutableStateOf(false) }
+
+        Box(
+            contentAlignment = Alignment.Center,
+            modifier = Modifier
+                .size(48.dp)
+                .then(
+
+                    if (filterQueryState.value.cluster != null)
+                        Modifier
+                            .onHover(contentCopyHovered)
+                            .clickable {
+
+                                val filterState = filterQueryState.value
+
+                                /* Ignore call without cluster set. */
+                                if (filterState.cluster == null)
+                                    return@clickable
+
+                                val cleanFilterState = filterState.cleanCopy()
+
+                                val base64 = cleanFilterState.toBase64()
+
+                                val url = "$MNI_URL?filter=$base64"
+
+                                writeToClipboard(url)
+                            }
+                    else
+                        Modifier
+                )
+        ) {
+
+            Icon(
+                imageVector = ContentCopy,
+                contentDescription = null,
+                tint = if (filterQueryState.value.cluster == null)
+                    MaterialTheme.colorScheme.onBackground.copy(alpha = 0.3f)
+                else if (contentCopyHovered.value)
+                    hoverColor
+                else
+                    MaterialTheme.colorScheme.onBackground,
+                modifier = Modifier.size(24.dp)
+            )
+        }
+
         DefaultSpacer()
 
         ResetButton(
             onClick = {
 
-                filterQueryState.value = FilterQuery.ALL
+                filterQueryState.value = FilterQuery.EMPTY
 
                 /* Save the reset to the storage. */
-                AppStorage.saveFilter(FilterQuery.ALL)
+                AppStorage.saveFilter(FilterQuery.EMPTY)
             }
         )
 

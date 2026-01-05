@@ -1,7 +1,7 @@
 /*
  * ONI Seed Browser
  * Copyright (C) 2025 Stefan Oltmann
- * https://stefan-oltmann.de/oni-seed-browser
+ * https://stefan-oltmann.de
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -40,10 +40,10 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.min
 import androidx.compose.ui.unit.times
+import de.stefan_oltmann.oni.model.PointOfInterest
+import de.stefan_oltmann.oni.model.PointOfInterestType
 import io.github.stefanoltmann.app.generated.resources.Res
 import io.github.stefanoltmann.app.generated.resources.poi_artifact_filled
-import model.PointOfInterest
-import model.PointOfInterestType
 import org.jetbrains.compose.resources.painterResource
 import ui.theme.DoubleSpacer
 import ui.theme.FillSpacer
@@ -122,10 +122,10 @@ fun PointOfInterestsRow(
                     Image(
                         painter = painterResource(
                             /* Use an alternative graphic for better contrast. */
-                            if (poiType == PointOfInterestType.ARTIFACT)
+                            if (poiType == PointOfInterestType.GravitasPedestal)
                                 Res.drawable.poi_artifact_filled
                             else
-                                getPointOfInterestDrawable(poiType)
+                                poiType.drawableResource
                         ),
                         contentDescription = null,
                         modifier = Modifier.padding(defaultSpacing)

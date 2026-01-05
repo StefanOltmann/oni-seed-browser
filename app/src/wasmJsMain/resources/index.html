@@ -1,39 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ONI Seed Browser</title>
-    <script type="application/javascript" src="app.js"></script>
-    <script defer src="https://cloud.umami.is/script.js"
-            data-website-id="c2df964d-a84d-4caa-b990-47f356719af7"></script>
-    <style>
-
-        body {
-            background-color: #181828;
-            margin: 0; /* Remove default margins */
-        }
-
-        #warning {
-            background-color: yellow;
-            font-size: small;
-            display: none;
-            padding: 1em;
-            margin: 1em;
-        }
-    </style>
+    <link rel="icon" href="icon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="icon_114.png">
+    <link rel="icon" type="image/png" sizes="256x256" href="icon_256.png">
+    <link type="text/css" rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#000000">
+    <meta name="color-scheme" content="dark">
 </head>
+
 <body>
 
 <div style="font-size: medium; text-align: center;">
     <div id="warning">⚠️ Sorry, your browser is too old. ⚠️</div>
 </div>
 
-<canvas id="ComposeTarget"></canvas>
+<div id="loader">
+    <div class="spinner"></div>
+</div>
 
 <script type="application/javascript">
 
+    /*
+     * Handle browsers that don't support WebAssembly
+     */
+
     const unhandledError = (event, error) => {
 
+        console.error('Unhandled error:', error);
+
+        // Handle WebAssembly compile errors
         if (error instanceof WebAssembly.CompileError) {
 
             document.getElementById("warning").style.display = "initial";
@@ -48,7 +49,32 @@
     addEventListener("error", (event) => unhandledError(event, event.error));
     addEventListener("unhandledrejection", (event) => unhandledError(event, event.reason));
 
+    /*
+      * Register service worker for offline functionality
+      */
+
+    if ('serviceWorker' in navigator) {
+
+        window.addEventListener('load', () => {
+
+            navigator.serviceWorker.getRegistrations().then(registrations => {
+                for (let registration of registrations) {
+                    registration.unregister();
+                    console.log('Unregistered service worker');
+                }
+            });
+        });
+    }
+
 </script>
 
 </body>
+
+<footer>
+
+    <!-- The app.js script is placed in the footer to ensure the loader displays as quickly as possible. -->
+    <script type="application/javascript" src="app.js"></script>
+
+</footer>
+
 </html>

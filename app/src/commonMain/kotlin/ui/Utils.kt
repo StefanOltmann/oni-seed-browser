@@ -1,7 +1,7 @@
 /*
  * ONI Seed Browser
  * Copyright (C) 2025 Stefan Oltmann
- * https://stefan-oltmann.de/oni-seed-browser
+ * https://stefan-oltmann.de
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -30,12 +30,11 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.ColorMatrix
 import androidx.compose.ui.input.pointer.PointerEventType
 import androidx.compose.ui.input.pointer.onPointerEvent
+import de.stefan_oltmann.oni.model.GRAMS_PER_TON
+import de.stefan_oltmann.oni.model.SECONDS_PER_CYCLE
 import kotlin.math.abs
 import kotlin.math.pow
 import kotlin.math.roundToLong
-
-const val SECONDS_PER_CYCLE: Float = 600F
-const val GRAMS_PER_TON: Float = 1_000_000F
 
 @OptIn(ExperimentalComposeUiApi::class)
 fun Modifier.onHover(hovered: MutableState<Boolean>) = this
@@ -56,7 +55,7 @@ fun Modifier.noRippleClickable(onClick: (() -> Unit)): Modifier = this
         onClick = onClick
     )
 
-fun calcTonsPerCycle(gramPerSecond: Int): Float =
+fun calcTonsPerCycle(gramPerSecond: Short): Float =
     (gramPerSecond / GRAMS_PER_TON) * SECONDS_PER_CYCLE
 
 fun Float.toString(decimals: Int): String {

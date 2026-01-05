@@ -1,10 +1,11 @@
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
+import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
-    alias(libs.plugins.jetbrainsCompose)
-    alias(libs.plugins.pluginCompose)
+    alias(libs.plugins.composeMultiplatform)
+    alias(libs.plugins.composeCompiler)
     alias(libs.plugins.kotlinSerialization)
     id("me.qoomon.git-versioning") version "6.4.3"
     id("dev.hydraulic.conveyor") version "1.12"
@@ -16,61 +17,61 @@ version = "1.0.0"
 gitVersioning.apply {
 
     refs {
-        tag("v(?<version>.*)") {
+        tag("(?<version>.*)") {
             version = "\${ref.version}"
         }
     }
+
+    rev {
+        version = "\${commit.short}"
+    }
 }
+
+val buildTarget: String? = System.getenv("BUILD_TARGET")
 
 kotlin {
 
     jvm()
 
-    @OptIn(org.jetbrains.kotlin.gradle.ExperimentalWasmDsl::class)
-    wasmJs {
+    jvmToolchain(jdkVersion = 24)
 
-        moduleName = "app"
+    if (buildTarget != "desktop") {
 
-        browser {
-            commonWebpackConfig {
-                outputFileName = "app.js"
-                devServer = (devServer ?: KotlinWebpackConfig.DevServer()).apply {
-                    static = (static ?: mutableListOf()).apply {
-                        // Serve sources to debug inside browser
-                        add(project.rootDir.path)
-                        add(project.projectDir.path)
+        @OptIn(ExperimentalWasmDsl::class)
+        wasmJs {
+
+            outputModuleName = "app"
+
+            browser {
+
+                val rootDirPath = project.rootDir.path
+                val projectDirPath = project.projectDir.path
+
+                commonWebpackConfig {
+                    outputFileName = "app.js"
+                    devServer = (devServer ?: KotlinWebpackConfig.DevServer()).apply {
+                        static = (static ?: mutableListOf()).apply {
+                            // Serve sources to debug inside the browser
+                            add(rootDirPath)
+                            add(projectDirPath)
+                        }
                     }
                 }
             }
-        }
 
-        binaries.executable()
+            binaries.executable()
+        }
     }
 
     sourceSets {
 
-        val jvmMain by getting
-
-        jvmMain.dependencies {
-
-            implementation(compose.desktop.currentOs)
-
-            implementation(libs.ktor.java)
-        }
-
-        val wasmJsMain by getting
-
-        wasmJsMain.dependencies {
-
-            implementation(libs.ktor.js)
-
-            /* Cryptography (JWT) */
-            implementation("dev.whyoleg.cryptography:cryptography-provider-webcrypto:0.4.0")
-            implementation("com.appstractive:jwt-kt-wasm-js:1.1.0")
-            implementation("com.appstractive:jwt-rsa-kt:1.1.0")
-        }
+        sourceSets["commonMain"].kotlin.srcDirs(
+            file("build/generated/src/commonMain/kotlin/")
+        )
 
         commonMain.dependencies {
+
+            implementation(libs.oniSeedBrowserModel)
 
             /* Compose UI */
             implementation(compose.runtime)
@@ -79,24 +80,56 @@ kotlin {
             implementation(compose.ui)
             implementation(compose.components.resources)
 
+            /* Icons */
+            implementation("org.jetbrains.compose.material:material-icons-core:1.7.3")
+
             /* REST */
             implementation(libs.ktor.core)
             implementation(libs.ktor.contentnegotiation)
             implementation(libs.ktor.encoding)
             implementation(libs.ktor.json)
-            implementation(libs.ktor.cbor)
+            implementation(libs.ktor.protobuf)
 
             /* Settings */
             implementation(libs.multiplatformSettings)
 
             /* Date formatting */
-            implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.6.2")
+            implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.7.1")
+
+            /* Cryptography (JWT) */
+            implementation("com.appstractive:jwt-kt:1.2.1")
+            implementation("com.appstractive:jwt-ecdsa-kt:1.2.1")
         }
 
         commonTest.dependencies {
 
             /* Unit Tests */
             implementation(libs.kotlin.test)
+        }
+
+        jvmMain.dependencies {
+
+            implementation(compose.desktop.currentOs)
+            implementation(libs.kotlinx.coroutines.swing)
+            implementation(libs.ktor.java)
+
+            /* Platform Tools */
+            implementation(libs.platformtools.core)
+            implementation(libs.platformtools.darkmodedetector)
+        }
+
+        if (buildTarget != "desktop") {
+
+            wasmJsMain.dependencies {
+
+                implementation(libs.ktor.js)
+
+                implementation("org.jetbrains.kotlin-wrappers:kotlin-browser:2025.9.8")
+
+                /* Cryptography (JWT) */
+                implementation("dev.whyoleg.cryptography:cryptography-provider-webcrypto:0.4.0")
+                implementation("com.appstractive:jwt-kt-wasm-js:1.1.0")
+            }
         }
     }
 }
@@ -108,18 +141,115 @@ compose.desktop {
         mainClass = "MainKt"
 
         nativeDistributions {
+
+            includeAllModules = true
+
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = "de.stefan-oltmann.oni-seed-browser"
-            packageVersion = version.toString()
+
+            packageName = "ONI Seed Browser"
+
+            if (version.toString().matches(Regex("^\\d+\\.\\d+\\.\\d+$")))
+                packageVersion = version.toString()
+            else
+                packageVersion = "1.0.0"
         }
     }
 }
 
-//dependencies {
-//
-//    /* Conveyor */
-//    linuxAmd64(compose.desktop.linux_x64)
-//    macAmd64(compose.desktop.macos_x64)
-//    macAarch64(compose.desktop.macos_arm64)
-//    windowsAmd64(compose.desktop.windows_x64)
-//}
+dependencies {
+
+    /*
+     * Workaround for a bug in Hydraulic Conveyor 18:
+     * It does not support wasmJS target.
+     */
+    if (buildTarget == "desktop") {
+
+        linuxAmd64(compose.desktop.linux_x64)
+        macAmd64(compose.desktop.macos_x64)
+        macAarch64(compose.desktop.macos_arm64)
+        windowsAmd64(compose.desktop.windows_x64)
+    }
+}
+
+// region write version
+if (buildTarget != "desktop") {
+
+    tasks.register("writeVersionFileToWasm") {
+
+        description = "Writes the project version into the wasmJs distribution directory."
+
+        val outputFile = layout.buildDirectory.file("dist/wasmJs/productionExecutable/version.txt")
+        outputs.file(outputFile)
+
+        doLast {
+            val versionFile = outputFile.get().asFile
+            versionFile.parentFile.mkdirs()
+            versionFile.writeText(project.version.toString())
+        }
+    }
+
+    tasks.register("createHeadersFile") {
+
+        description = "Creates a _headers file for Cloudflare Pages to serve WASM files with correct MIME type."
+
+        val outputFile = layout.buildDirectory.file("dist/wasmJs/productionExecutable/_headers")
+        outputs.file(outputFile)
+
+        doLast {
+            val headersContent = """
+                /*.wasm
+                  Content-Type: application/wasm
+                  Cache-Control: public, max-age=31536000, immutable
+
+                /*.js
+                  Cache-Control: public, max-age=31536000, immutable
+
+                /*.css
+                  Cache-Control: public, max-age=31536000, immutable
+
+                /index.html
+                  Cache-Control: public, max-age=300
+
+                /service-worker.js
+                  Cache-Control: public, max-age=0, must-revalidate
+            """.trimIndent()
+
+            val outputFileObj = outputFile.get().asFile
+            outputFileObj.parentFile.mkdirs()
+            outputFileObj.writeText(headersContent)
+        }
+    }
+
+    tasks.named("wasmJsBrowserDistribution") {
+        finalizedBy(tasks.named("writeVersionFileToWasm"))
+        finalizedBy(tasks.named("createHeadersFile"))
+    }
+}
+// endregion
+
+// region BuildInfo.kt
+project.afterEvaluate {
+
+    logger.lifecycle("Generate BuildInfo.kt")
+
+    val outputDir = layout.buildDirectory.file("generated/src/commonMain/kotlin").get().asFile
+
+    outputDir.mkdirs()
+
+    outputDir.resolve("BuildInfo.kt").printWriter().use { writer ->
+
+        writer.println("const val APP_VERSION: String = \"$version\"")
+
+        writer.flush()
+    }
+}
+// endregion
+
+// region Work around temporary Compose bugs.
+configurations.all {
+    attributes {
+        // https://github.com/JetBrains/compose-jb/issues/1404#issuecomment-1146894731
+        attribute(Attribute.of("ui", String::class.java), "awt")
+    }
+}
+// endregion
