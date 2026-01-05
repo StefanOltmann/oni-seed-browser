@@ -22,6 +22,7 @@
     <string name="uiGeyserCount">間歇泉數量</string>
     <string name="uiGeyserOutput">間歇泉產量</string>
     <string name="uiItemDescriptionCount">數量</string>
+    <string name="uiItemDescriptionGoodCount">數量(好的)</string>
     <string name="uiItemDescriptionOutput">產量(克/秒)</string>
     <string name="uiItemDescriptionSpaceDestination">太空目的地</string>
     <string name="uiOutput">產量</string>
@@ -37,9 +38,9 @@
     <string name="uiCopiedToClipboard">已複製到剪貼簿!</string>
     <string name="uiGeyserDetailEmitDetails">每{overallTime}中噴發{eruptionTime}產量{emitRate}</string>
     <string name="uiGeyserDetailActiveDetails">每{overallCycles}中活躍{activeCycles}</string>
-    <string name="uiLoginWithSteam">帳號連結 steam</string>
+    <string name="uiLoginWithSteam">帳號連結steam</string>
     <string name="uiConnected">帳號已連結</string>
-    <string name="uiCoordinateNotFound">種子碼 {coordinate} 在資料庫中沒有找到.</string>
+    <string name="uiCoordinateNotFound">種子碼{coordinate}在資料庫中沒有找到.</string>
     <string name="uiRequestCoordinateButton">請求添加此種子碼</string>
     <string name="uiCoordinateRequested">種子碼請求已提交</string>
     <string name="uiCoordinateRequestFailed">種子碼請求失敗</string>
@@ -52,6 +53,14 @@
     <string name="uiLeaderBoardUsername">使用者名稱</string>
     <string name="uiLeaderBoardCount">數量</string>
     <string name="uiStorageTankForDormancy">休眠儲存罐</string>
+    <string name="uiShowInAlternativeViewer">在新視窗中顯示</string>
+    <string name="uiRemix">DLC混搭</string>
+    <string name="uiZoneType">生態</string>
+    <string name="uiGoodGeyserCount">間歇泉數量(好的)</string>
+    <string name="uiLoad">載入</string>
+    <string name="uiSave">儲存</string>
+    <string name="uiInvalidCoordinate">座標格式無效</string>
+    <string name="uiPoiLocationsChanged">筆記:更新701091版後，POI的位置已發生變化。</string>
 
     <!-- GameModes -->
     <string name="gameModeBaseGameStandard">標準</string>
@@ -63,6 +72,8 @@
     <string name="clusterTypeBaseTerra">類地星群</string>
     <string name="clusterTypeBaseCeres">穀神星星群</string>
     <string name="clusterTypeBaseBlastedCeres">炸裂的穀神星星群</string>
+    <string name="clusterTypeBaseRelica">古蹟星星群</string>
+    <string name="clusterTypeBaseRelicaLab">古蹟阿阿阿星星群</string>
     <string name="clusterTypeBaseOceania">海洋星群</string>
     <string name="clusterTypeBaseRime">冰霜星群</string>
     <string name="clusterTypeBaseVerdante">翠綠星群</string>
@@ -74,6 +85,8 @@
     <string name="clusterTypeDlcTerra">類地星群</string>
     <string name="clusterTypeDlcCeres">穀神星星群</string>
     <string name="clusterTypeDlcBlastedCeres">炸裂的穀神星星群</string>
+    <string name="clusterTypeDlcRelica">古蹟星星群</string>
+    <string name="clusterTypeBaseRelicaLab">古蹟阿阿阿星星群</string>
     <string name="clusterTypeDlcOceania">海洋星群</string>
     <string name="clusterTypeDlcSquelchy">泥濘星群</string>
     <string name="clusterTypeDlcRime">冰霜星群</string>
@@ -85,6 +98,7 @@
     <string name="clusterTypeDlcOasisse">綠洲星群</string>
     <string name="clusterTypeDlcTerrania">砂土星群</string>
     <string name="clusterTypeDlcCeresMinor">小穀神星星群</string>
+    <string name="clusterTypeDlcRelicaMinor">小古蹟星星群</string>
     <string name="clusterTypeDlcFolia">綠葉星群</string>
     <string name="clusterTypeDlcQuagmiris">泥潭星群</string>
     <string name="clusterTypeDlcMetallicSwampyMoonlet">衛星星群-金屬沼澤</string>
@@ -98,6 +112,7 @@
     <string name="asteroidTypeSandstoneDefault">類地星體</string>
     <string name="asteroidTypeCeresBaseGameAsteroid">穀神星</string>
     <string name="asteroidTypeCeresBaseGameShatteredAsteroid">炸裂的穀神星</string>
+    <string name="asteroidTypePrehistoricBaseGameAsteroid">古蹟星</string>
     <string name="asteroidTypeOceania">海洋星體</string>
     <string name="asteroidTypeSandstoneFrozen">冰霜星體</string>
     <string name="asteroidTypeForestLush">翠綠星體</string>
@@ -109,6 +124,7 @@
     <string name="asteroidTypeVanillaSandstoneDefault">類地小行星</string>
     <string name="asteroidTypeMediumRadioactiveVanillaWarpPlanet">放射性沼澤小行星</string>
     <string name="asteroidTypeCeresClassicAsteroid">穀神星小行星</string>
+    <string name="asteroidTypePrehistoricClassicAsteroid">古蹟小行星</string>
     <string name="asteroidTypeMediumSwampy">難聞沼澤小行星</string>
     <string name="asteroidTypeVanillaOceania">海洋小行星</string>
     <string name="asteroidTypeMediumForestyWasteland">輻木荒地小行星</string>
@@ -126,8 +142,10 @@
     <string name="asteroidTypeTerraMoonlet">砂土小行星</string>
     <string name="asteroidTypeIdealLandingSite">輻照森林小行星</string>
     <string name="asteroidTypeWarpOilySwamp">油質沼澤小行星</string>
+    <string name="asteroidTypeWarpOilySandySwamp">油質多沙沼澤小行星</string>
     <string name="asteroidTypeRegolithMoonlet">浮土小行星</string>
     <string name="asteroidTypeCeresSpacedOutAsteroid">小穀神星</string>
+    <string name="asteroidTypePrehistoricSpacedOutAsteroid">小古蹟星</string>
     <string name="asteroidTypeSwampyLandingSite">輻照沼澤小行星</string>
     <string name="asteroidTypeOilRichWarpTarget">生鏽油質小行星</string>
     <string name="asteroidTypeForestMoonlet">綠葉小行星</string>
@@ -158,6 +176,9 @@
     <string name="asteroidTypeMiniShatteredStartAsteroid">穀神星地幔小行星</string>
     <string name="asteroidTypeMiniShatteredWarpAsteroid">甜蜜穀神星小行星</string>
     <string name="asteroidTypeMiniShatteredGeoAsteroid">穀神星核心小行星</string>
+    <string name="asteroidTypePrehistoricShatteredBaseGameAsteroid">古蹟阿阿阿星</string>
+    <string name="asteroidTypePrehistoricShatteredClassicAsteroid">古蹟阿阿阿星</string>
+    <string name="asteroidTypeMixingPrehistoricAsteroid">古蹟星碎片</string>
 
     <!--  POI types -->
     <string name="pointOfInterestTypePrintingPod">打印艙</string>
@@ -199,12 +220,16 @@
     <string name="zoneTypeSugarWoods">花蜜</string>
     <string name="zoneTypeOilField">油質</string>
     <string name="zoneTypeMagmaCore">岩漿</string>
+    <string name="zoneTypePrehistoricGarden">花園</string>
+    <string name="zoneTypePrehistoricRaptor">寒羽</string>
+    <string name="zoneTypePrehistoricWetlands">險沼</string>
 
     <!-- Geyser types -->
     <string name="geyserTypeCoolSteamVent">低溫蒸氣噴孔</string>
     <string name="geyserTypeHydrogenVent">氫氣噴孔</string>
     <string name="geyserTypeNaturalGasGeyser">天然氣噴孔</string>
     <string name="geyserTypeChlorineGasVent">氯氣噴孔</string>
+    <string name="geyserTypeChlorineCoolGasVent">低溫氯氣噴孔</string>
     <string name="geyserTypeSteamVent">蒸氣噴孔</string>
     <string name="geyserTypeCarbonDioxideVent">二氧化碳噴孔</string>
     <string name="geyserTypeHotPollutedOxygenVent">高溫污氧噴孔</string>
@@ -288,12 +313,18 @@
     <string name="harvestableSpacePoiSandyOreField">砂岩礦帶</string>
     <string name="harvestableSpacePoiSatelliteField">太空殘骸</string>
     <string name="harvestableSpacePoiSwampyOreField">沼澤礦帶</string>
+    <string name="dlc4PrehistoricMixingField">導電礦帶</string>
+    <string name="dlc4PrehistoricOreField">琥珀礦帶</string>
+    <string name="dlc4ImpactorDebrisField1">災星碎片</string>
+    <string name="dlc4ImpactorDebrisField2">災星液體碎片</string>
+    <string name="dlc4ImpactorDebrisField3">災星熔融碎片</string>
     <string name="temporalTear">時間裂口</string>
 
     <!-- Vanilla Space POI -->
     <string name="vanillaSpacePoiCarbonaceousAsteroid">碳質小行星</string>
     <string name="vanillaSpacePoiChlorinePlanet">氯行星</string>
     <string name="vanillaSpacePoiDLC2CeresSpaceDestination">穀神星</string>
+    <string name="vanillaSpacePoiDLC4PrehistoricSpaceDestination">史前小行星</string>
     <string name="vanillaSpacePoiDustyMoon">塵埃矮星</string>
     <string name="vanillaSpacePoiEarth">碎裂行星</string>
     <string name="vanillaSpacePoiForestPlanet">生命行星</string>

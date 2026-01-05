@@ -13,15 +13,16 @@
     <string name="uiHas">有</string>
     <string name="uiHasNot">没有</string>
     <string name="uiNoResults">没有找到结果.</string>
-    <string name="uiMapNotFound">未找到此地图</string>
-    <string name="uiWelcome">欢迎使用种子浏览器</string>
-    <string name="uiWelcomeInstruction">使用搜索功能来查找地图!</string>
+    <string name="uiMapNotFound">​​未找到此地图</string>
+    <string name="uiWelcome">欢迎使用种子浏览器.</string>
+    <string name="uiWelcomeInstruction">使用搜寻功能来查找地图!</string>
     <string name="uiSeedsInDatabase">个种子</string>
     <string name="uiWorldTrait">星球特质</string>
     <string name="uiSpaceDestinationCount">太空目的地数量</string>
     <string name="uiGeyserCount">间歇泉数量</string>
     <string name="uiGeyserOutput">间歇泉产量</string>
     <string name="uiItemDescriptionCount">数量</string>
+    <string name="uiItemDescriptionGoodCount">数量(好的)</string>
     <string name="uiItemDescriptionOutput">产量(克/秒)</string>
     <string name="uiItemDescriptionSpaceDestination">太空目的地</string>
     <string name="uiOutput">产量</string>
@@ -37,13 +38,13 @@
     <string name="uiCopiedToClipboard">已复制到剪贴簿!</string>
     <string name="uiGeyserDetailEmitDetails">每{overallTime}中喷发{eruptionTime}产量{emitRate}</string>
     <string name="uiGeyserDetailActiveDetails">每{overallCycles}中活跃{activeCycles}</string>
-    <string name="uiLoginWithSteam">帐号连结 steam</string>
+    <string name="uiLoginWithSteam">帐号连结steam</string>
     <string name="uiConnected">帐号已连结</string>
-    <string name="uiCoordinateNotFound">种子码 {coordinate} 在资料库中没有找到.</string>
+    <string name="uiCoordinateNotFound">​​种子码{coordinate}在资料库中没有找到.</string>
     <string name="uiRequestCoordinateButton">请求添加此种子码</string>
     <string name="uiCoordinateRequested">种子码请求已提交</string>
     <string name="uiCoordinateRequestFailed">种子码请求失败</string>
-    <string name="uiNoFavoredClustersFound">您的收藏将显示在这里.\n使用爱心图示标记一些.</string>
+    <string name="uiNoFavoredClustersFound">​​您的收藏将显示在这里.\n使用爱心图示标记一些.</string>
     <string name="uiSetUsername">设定使用者名称</string>
     <string name="uiUsernameLabel">使用者名称</string>
     <string name="uiLoading">载入中...</string>
@@ -52,6 +53,14 @@
     <string name="uiLeaderBoardUsername">使用者名称</string>
     <string name="uiLeaderBoardCount">数量</string>
     <string name="uiStorageTankForDormancy">休眠储存罐</string>
+    <string name="uiShowInAlternativeViewer">在新视窗中显示</string>
+    <string name="uiRemix">DLC混搭</string>
+    <string name="uiZoneType">生态</string>
+    <string name="uiGoodGeyserCount">间歇泉数量(好的)</string>
+    <string name="uiLoad">载入</string>
+    <string name="uiSave">储存</string>
+    <string name="uiInvalidCoordinate">座标格式无效</string>
+    <string name="uiPoiLocationsChanged">笔记:更新701091版后，POI的位置已发生变化。</string>
 
     <!-- GameModes -->
     <string name="gameModeBaseGameStandard">标准</string>
@@ -63,6 +72,8 @@
     <string name="clusterTypeBaseTerra">类地星群</string>
     <string name="clusterTypeBaseCeres">谷神星星群</string>
     <string name="clusterTypeBaseBlastedCeres">炸裂的谷神星星群</string>
+    <string name="clusterTypeBaseRelica">古迹星星群</string>
+    <string name="clusterTypeBaseRelicaLab">古迹阿阿阿星星群</string>
     <string name="clusterTypeBaseOceania">海洋星群</string>
     <string name="clusterTypeBaseRime">冰霜星群</string>
     <string name="clusterTypeBaseVerdante">翠绿星群</string>
@@ -74,6 +85,8 @@
     <string name="clusterTypeDlcTerra">类地星群</string>
     <string name="clusterTypeDlcCeres">谷神星星群</string>
     <string name="clusterTypeDlcBlastedCeres">炸裂的谷神星星群</string>
+    <string name="clusterTypeDlcRelica">古迹星星群</string>
+    <string name="clusterTypeBaseRelicaLab">古迹阿阿阿星星群</string>
     <string name="clusterTypeDlcOceania">海洋星群</string>
     <string name="clusterTypeDlcSquelchy">泥泞星群</string>
     <string name="clusterTypeDlcRime">冰霜星群</string>
@@ -85,6 +98,7 @@
     <string name="clusterTypeDlcOasisse">绿洲星群</string>
     <string name="clusterTypeDlcTerrania">砂土星群</string>
     <string name="clusterTypeDlcCeresMinor">小谷神星星群</string>
+    <string name="clusterTypeDlcRelicaMinor">小古迹星星群</string>
     <string name="clusterTypeDlcFolia">绿叶星群</string>
     <string name="clusterTypeDlcQuagmiris">泥潭星群</string>
     <string name="clusterTypeDlcMetallicSwampyMoonlet">卫星星群-金属沼泽</string>
@@ -98,6 +112,7 @@
     <string name="asteroidTypeSandstoneDefault">类地星体</string>
     <string name="asteroidTypeCeresBaseGameAsteroid">谷神星</string>
     <string name="asteroidTypeCeresBaseGameShatteredAsteroid">炸裂的谷神星</string>
+    <string name="asteroidTypePrehistoricBaseGameAsteroid">古迹星</string>
     <string name="asteroidTypeOceania">海洋星体</string>
     <string name="asteroidTypeSandstoneFrozen">冰霜星体</string>
     <string name="asteroidTypeForestLush">翠绿星体</string>
@@ -109,6 +124,7 @@
     <string name="asteroidTypeVanillaSandstoneDefault">类地小行星</string>
     <string name="asteroidTypeMediumRadioactiveVanillaWarpPlanet">放射性沼泽小行星</string>
     <string name="asteroidTypeCeresClassicAsteroid">谷神星小行星</string>
+    <string name="asteroidTypePrehistoricClassicAsteroid">古迹小行星</string>
     <string name="asteroidTypeMediumSwampy">难闻沼泽小行星</string>
     <string name="asteroidTypeVanillaOceania">海洋小行星</string>
     <string name="asteroidTypeMediumForestyWasteland">辐木荒地小行星</string>
@@ -126,8 +142,10 @@
     <string name="asteroidTypeTerraMoonlet">砂土小行星</string>
     <string name="asteroidTypeIdealLandingSite">辐照森林小行星</string>
     <string name="asteroidTypeWarpOilySwamp">油质沼泽小行星</string>
+    <string name="asteroidTypeWarpOilySandySwamp">油质多沙沼泽小行星</string>
     <string name="asteroidTypeRegolithMoonlet">浮土小行星</string>
     <string name="asteroidTypeCeresSpacedOutAsteroid">小谷神星</string>
+    <string name="asteroidTypePrehistoricSpacedOutAsteroid">小古迹星</string>
     <string name="asteroidTypeSwampyLandingSite">辐照沼泽小行星</string>
     <string name="asteroidTypeOilRichWarpTarget">生锈油质小行星</string>
     <string name="asteroidTypeForestMoonlet">绿叶小行星</string>
@@ -158,6 +176,9 @@
     <string name="asteroidTypeMiniShatteredStartAsteroid">谷神星地幔小行星</string>
     <string name="asteroidTypeMiniShatteredWarpAsteroid">甜蜜谷神星小行星</string>
     <string name="asteroidTypeMiniShatteredGeoAsteroid">谷神星核心小行星</string>
+    <string name="asteroidTypePrehistoricShatteredBaseGameAsteroid">古迹阿阿阿星</string>
+    <string name="asteroidTypePrehistoricShatteredClassicAsteroid">古迹阿阿阿星</string>
+    <string name="asteroidTypeMixingPrehistoricAsteroid">古迹星碎片</string>
 
     <!--  POI types -->
     <string name="pointOfInterestTypePrintingPod">打印舱</string>
@@ -199,12 +220,16 @@
     <string name="zoneTypeSugarWoods">花蜜</string>
     <string name="zoneTypeOilField">油质</string>
     <string name="zoneTypeMagmaCore">岩浆</string>
+    <string name="zoneTypePrehistoricGarden">花园</string>
+    <string name="zoneTypePrehistoricRaptor">寒羽</string>
+    <string name="zoneTypePrehistoricWetlands">险沼</string>
 
     <!-- Geyser types -->
     <string name="geyserTypeCoolSteamVent">低温蒸气喷孔</string>
     <string name="geyserTypeHydrogenVent">氢气喷孔</string>
     <string name="geyserTypeNaturalGasGeyser">天然气喷孔</string>
     <string name="geyserTypeChlorineGasVent">氯气喷孔</string>
+    <string name="geyserTypeChlorineCoolGasVent">低温氯气喷孔</string>
     <string name="geyserTypeSteamVent">蒸气喷孔</string>
     <string name="geyserTypeCarbonDioxideVent">二氧化碳喷孔</string>
     <string name="geyserTypeHotPollutedOxygenVent">高温污氧喷孔</string>
@@ -288,12 +313,18 @@
     <string name="harvestableSpacePoiSandyOreField">砂岩矿带</string>
     <string name="harvestableSpacePoiSatelliteField">太空残骸</string>
     <string name="harvestableSpacePoiSwampyOreField">沼泽矿带</string>
+    <string name="dlc4PrehistoricMixingField">导电矿带</string>
+    <string name="dlc4PrehistoricOreField">琥珀矿带</string>
+    <string name="dlc4ImpactorDebrisField1">灾星碎片</string>
+    <string name="dlc4ImpactorDebrisField2">灾星液体碎片</string>
+    <string name="dlc4ImpactorDebrisField3">灾星熔融碎片</string>
     <string name="temporalTear">时间裂口</string>
 
     <!-- Vanilla Space POI -->
     <string name="vanillaSpacePoiCarbonaceousAsteroid">碳质小行星</string>
     <string name="vanillaSpacePoiChlorinePlanet">氯行星</string>
     <string name="vanillaSpacePoiDLC2CeresSpaceDestination">谷神星</string>
+    <string name="vanillaSpacePoiDLC4PrehistoricSpaceDestination">史前小行星</string>
     <string name="vanillaSpacePoiDustyMoon">尘埃矮星</string>
     <string name="vanillaSpacePoiEarth">碎裂行星</string>
     <string name="vanillaSpacePoiForestPlanet">生命行星</string>
