@@ -44,6 +44,4 @@ interface WebClient {
 
     suspend fun findContributors(): Map<String, Long>
 
-    suspend fun getLastModifiedMillis(url: String): Long?
-
 }

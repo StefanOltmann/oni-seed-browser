@@ -23,6 +23,8 @@ import de.stefan_oltmann.oni.model.search.SearchIndex
 import io.ktor.client.HttpClient
 import io.ktor.client.request.get
 import io.ktor.client.statement.bodyAsBytes
+import io.ktor.client.statement.bodyAsText
+import io.ktor.http.HttpStatusCode
 import io.ktor.http.isSuccess
 import kotlin.time.measureTime
 import kotlin.time.measureTimedValue
@@ -42,11 +44,11 @@ suspend fun findSearchIndex(clusterType: ClusterType): SearchIndex {
 
     val searchIndexUrl = SEARCH_INDEX_URL + "/" + clusterType.prefix
 
-    val lastModifiedMillis = DefaultWebClient.getLastModifiedMillis(searchIndexUrl)
+    val lastModifiedMillisResponse = httpClient.get("$searchIndexUrl/last-modified")
 
     val cacheEntry = searchIndexDiskCache.load(clusterType.prefix)
 
-    if (lastModifiedMillis == null) {
+    if (lastModifiedMillisResponse.status != HttpStatusCode.OK) {
 
         if (cacheEntry != null) {
 
@@ -56,6 +58,21 @@ suspend fun findSearchIndex(clusterType: ClusterType): SearchIndex {
         }
 
         println("[SEARCH] No cache file for ${clusterType.prefix} and we are offline.")
+
+        /*
+         * Return an empty search index as we are offline.
+         */
+        return SearchIndex(
+            clusterType = clusterType,
+            timestamp = 0
+        )
+    }
+
+    val lastModifiedMillis = lastModifiedMillisResponse.bodyAsText().toLongOrNull()
+
+    if (lastModifiedMillis == null) {
+
+        println("[SEARCH] Failure to receive ${clusterType.prefix} search indexes.")
 
         /*
          * Return an empty search index as we are offline.

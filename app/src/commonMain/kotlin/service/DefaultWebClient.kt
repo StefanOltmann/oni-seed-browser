@@ -54,14 +54,15 @@ import kotlinx.serialization.decodeFromByteArray
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.protobuf.ProtoBuf
 
-const val FIND_URL = "https://maps.mapsnotincluded.org"
-
-const val SEARCH_INDEX_URL = "https://maps.mapsnotincluded.org"
-const val COUNT_URL = "$SEARCH_INDEX_URL/count"
-const val CONTRIBUTORS_URL = "$SEARCH_INDEX_URL/contributors"
-
 const val INGEST_SERVER_URL = "https://ingest.mapsnotincluded.org"
 const val REQUEST_URL = "$INGEST_SERVER_URL/request-coordinate"
+
+const val FIND_URL = "$INGEST_SERVER_URL/map"
+
+const val COUNT_URL = "$INGEST_SERVER_URL/count"
+const val CONTRIBUTORS_URL = "$INGEST_SERVER_URL/contributors"
+
+const val SEARCH_INDEX_URL = "$INGEST_SERVER_URL/index"
 
 const val TOKEN_HEADER = "token"
 
@@ -319,28 +320,28 @@ object DefaultWebClient : WebClient {
         }
     }
 
-    override suspend fun getLastModifiedMillis(url: String): Long? {
-
-        try {
-
-            val responseHead = simpleHttpClient.head(url)
-
-            if (responseHead.status != HttpStatusCode.OK)
-                return null
-
-            val lastModified = responseHead.headers.lastModifiedMillis()
-
-            println("[WEBCLIENT] Last modified date from $url is $lastModified")
-
-            return lastModified
-
-        } catch (ex: Throwable) {
-
-            println("[WEBCLIENT] Cannot get last modified date from $url")
-
-            ex.printStackTrace()
-
-            return null
-        }
-    }
+//    override suspend fun getLastModifiedMillis(url: String): Long? {
+//
+//        try {
+//
+//            val responseHead = simpleHttpClient.head(url)
+//
+//            if (responseHead.status != HttpStatusCode.OK)
+//                return null
+//
+//            val lastModified = responseHead.headers.lastModifiedMillis()
+//
+//            println("[WEBCLIENT] Last modified date from $url is $lastModified")
+//
+//            return lastModified
+//
+//        } catch (ex: Throwable) {
+//
+//            println("[WEBCLIENT] Cannot get last modified date from $url")
+//
+//            ex.printStackTrace()
+//
+//            return null
+//        }
+//    }
 }
