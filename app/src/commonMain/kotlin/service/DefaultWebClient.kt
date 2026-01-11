@@ -30,7 +30,6 @@ import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.request.accept
 import io.ktor.client.request.delete
 import io.ktor.client.request.get
-import io.ktor.client.request.head
 import io.ktor.client.request.header
 import io.ktor.client.request.post
 import io.ktor.client.request.put
@@ -54,15 +53,15 @@ import kotlinx.serialization.decodeFromByteArray
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.protobuf.ProtoBuf
 
-const val INGEST_SERVER_URL = "https://ingest.mapsnotincluded.org"
-const val REQUEST_URL = "$INGEST_SERVER_URL/request-coordinate"
+const val SERVER_URL = "https://mni.stefan-oltmann.de"
+const val REQUEST_URL = "$SERVER_URL/request-coordinate"
 
-const val FIND_URL = "$INGEST_SERVER_URL/map"
+const val FIND_URL = "$SERVER_URL/map"
 
-const val COUNT_URL = "$INGEST_SERVER_URL/count"
-const val CONTRIBUTORS_URL = "$INGEST_SERVER_URL/contributors"
+const val COUNT_URL = "$SERVER_URL/count"
+const val CONTRIBUTORS_URL = "$SERVER_URL/contributors"
 
-const val SEARCH_INDEX_URL = "$INGEST_SERVER_URL/index"
+const val SEARCH_INDEX_URL = "$SERVER_URL/index"
 
 const val TOKEN_HEADER = "token"
 
@@ -127,7 +126,7 @@ object DefaultWebClient : WebClient {
 
     override suspend fun findLatestClusters(): List<String> {
 
-        val response = httpClient.get("$INGEST_SERVER_URL/latest") {
+        val response = httpClient.get("$SERVER_URL/latest") {
             accept(ContentType.Application.Json)
         }
 
@@ -240,7 +239,7 @@ object DefaultWebClient : WebClient {
 
     override suspend fun getUsernameMap(): Map<String, String> {
 
-        val response = httpClient.get("$INGEST_SERVER_URL/usernames") {
+        val response = httpClient.get("$SERVER_URL/usernames") {
             accept(ContentType.Application.Json)
         }
 
@@ -265,7 +264,7 @@ object DefaultWebClient : WebClient {
 
         val response = if (username.isBlank()) {
 
-            httpClient.delete("$INGEST_SERVER_URL/username") {
+            httpClient.delete("$SERVER_URL/username") {
 
                 /* Auth */
                 AppStorage.getToken()?.let { token ->
@@ -275,7 +274,7 @@ object DefaultWebClient : WebClient {
 
         } else {
 
-            httpClient.put("$INGEST_SERVER_URL/username") {
+            httpClient.put("$SERVER_URL/username") {
 
                 /* Auth */
                 AppStorage.getToken()?.let { token ->
