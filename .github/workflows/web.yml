@@ -50,3 +50,12 @@ jobs:
           local_dir: "app/build/dist/wasmJs/oni-seed-browser"
           remote_dir: "/httpdocs/oni-seed-browser/"
           delete: true
+
+      - name: Deploy to Azure Static Web Apps
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_SWA_DEPLOYMENT_TOKEN }}
+          action: "upload"
+          app_location: "app/build/dist/wasmJs/oni-seed-browser"
+          output_location: ""
+          skip_app_build: true
