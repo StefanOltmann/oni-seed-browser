@@ -46,10 +46,10 @@ import ui.theme.halfPadding
 import ui.theme.minimalRoundedCornerShape
 
 private const val LOGIN_BASE_URL: String =
-    "https://steam.auth.stefanoltmann.de/login?redirect="
+    "https://steam.stefan-oltmann.de/login?redirect="
 
 private const val PUBLIC_LOGIN_URL: String =
-    LOGIN_BASE_URL + "https://stefanoltmann.de/oni-seed-browser/"
+    LOGIN_BASE_URL + "https://stefan-oltmann.de/oni-seed-browser/"
 
 @Composable
 fun LoginWithSteamButton(
