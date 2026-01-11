@@ -41,11 +41,12 @@ jobs:
         run: |
           mv app/build/dist/wasmJs/productionExecutable app/build/dist/wasmJs/oni-seed-browser
 
-      - name: Deploy to Azure Static Web Apps
-        uses: Azure/static-web-apps-deploy@v1
+      - name: Deploy over FTP
+        uses: modern-dev/ftp-mirror@v2
         with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_SWA_DEPLOYMENT_TOKEN }}
-          action: "upload"
-          app_location: "app/build/dist/wasmJs/oni-seed-browser"
-          output_location: ""
-          skip_app_build: true
+          server: ${{ secrets.FTP_SERVER }}
+          user: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local_dir: "app/build/dist/wasmJs/oni-seed-browser"
+          remote_dir: "/httpdocs/oni-seed-browser/"
+          delete: true
