@@ -49,7 +49,7 @@ private const val LOGIN_BASE_URL: String =
     "https://steam.stefan-oltmann.de/login?redirect="
 
 private const val PUBLIC_LOGIN_URL: String =
-    LOGIN_BASE_URL + "https://stefan-oltmann.de/oni-seed-browser/"
+    LOGIN_BASE_URL + "https://seed-browser.stefan-oltmann.de/"
 
 @Composable
 fun LoginWithSteamButton(

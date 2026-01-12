@@ -10,7 +10,7 @@ This is a game map seed browser for the game [Oxygen Not Included](https://www.k
 
 It's part of the [MapsNotIncluded.org](https://mapsnotincluded.org) initiative.
 
-Try it on https://stefan-oltmann.de/oni-seed-browser
+Try it on https://seed-browser.stefan-oltmann.de/
 
 The backend project is located here:
 https://github.com/stefanoltmann/oni-seed-browser-backend

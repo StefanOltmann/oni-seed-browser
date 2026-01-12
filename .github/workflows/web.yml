@@ -72,13 +72,3 @@ jobs:
           push: true
           tags: ${{ steps.docker_meta.outputs.tags }}
           labels: ${{ steps.docker_meta.outputs.labels }}
-
-      - name: Deploy over FTP
-        uses: modern-dev/ftp-mirror@v2
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          user: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          local_dir: "app/build/dist/wasmJs/oni-seed-browser"
-          remote_dir: "/httpdocs/oni-seed-browser/"
-          delete: true
