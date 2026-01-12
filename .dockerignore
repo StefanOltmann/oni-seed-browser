@@ -1,0 +1,10 @@
+.git
+.gradle
+.idea
+build
+**/build
+!app/build/
+!app/build/dist/
+!app/build/dist/wasmJs/
+!app/build/dist/wasmJs/oni-seed-browser/
+!app/build/dist/wasmJs/oni-seed-browser/**
