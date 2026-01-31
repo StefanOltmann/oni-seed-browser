@@ -52,7 +52,6 @@ fun App(
     isMniEmbedded: Boolean,
     connectedUserId: String?,
     localPort: Int?,
-    onLogout: () -> Unit,
     /**
      * Note: LocalClipboardManager does not work for Compose for Web
      * in all browsers for some reason. That's why we use a workaround here.
@@ -85,7 +84,6 @@ fun App(
                     isMniEmbedded,
                     connectedUserId,
                     localPort,
-                    onLogout,
                     writeToClipboard
                 )
 

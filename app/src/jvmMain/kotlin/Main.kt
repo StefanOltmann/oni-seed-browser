@@ -102,25 +102,12 @@ fun main() = application {
             }
         }
 
-        val onLogout = {
-
-            AppStorage.clearToken()
-
-            connectedUserId.value = null
-
-            if (localPort.value == null) {
-                localPort.value = startLocalWebservice(connectedUserId)
-                println("Local webservice started on port: ${localPort.value}")
-            }
-        }
-
         App(
             urlHash = remember { mutableStateOf(null) },
             urlFilterQuery = null,
             isMniEmbedded = false,
             connectedUserId = connectedUserId.value,
             localPort = localPort.value,
-            onLogout = onLogout,
             writeToClipboard = { text ->
                 clipboardScope.launch {
                     clipboard.setClipEntry(ClipEntry(StringSelection(text)))
