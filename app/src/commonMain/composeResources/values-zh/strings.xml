@@ -1,4 +1,4 @@
-<resources>
+﻿<resources>
     <!-- UI Specific -->
     <string name="uiTitle">地图种子浏览器</string>
     <string name="uiFilter">筛选</string>
@@ -44,6 +44,7 @@
     <string name="uiRequestCoordinateButton">请求添加此种子码</string>
     <string name="uiCoordinateRequested">种子码请求已提交</string>
     <string name="uiCoordinateRequestFailed">种子码请求失败</string>
+    <string name="uiRequestCoordinateLoginHint">请登录以请求添加此种子</string>
     <string name="uiNoFavoredClustersFound">​​您的收藏将显示在这里.\n使用爱心图示标记一些.</string>
     <string name="uiSetUsername">设定使用者名称</string>
     <string name="uiUsernameLabel">使用者名称</string>
@@ -347,3 +348,4 @@
     <string name="vanillaSpacePoiVolcanoPlanet">火山行星</string>
     <string name="vanillaSpacePoiWormhole">时间裂口</string>
 </resources>
+

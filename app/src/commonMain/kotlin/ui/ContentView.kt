@@ -51,6 +51,7 @@ import io.github.stefanoltmann.app.generated.resources.uiInvalidCoordinate
 import io.github.stefanoltmann.app.generated.resources.uiMapNotFound
 import io.github.stefanoltmann.app.generated.resources.uiNoFavoredClustersFound
 import io.github.stefanoltmann.app.generated.resources.uiNoResults
+import io.github.stefanoltmann.app.generated.resources.uiRequestCoordinateLoginHint
 import io.github.stefanoltmann.app.generated.resources.uiSearching
 import io.github.stefanoltmann.app.generated.resources.uiTitle
 import io.github.stefanoltmann.app.generated.resources.uiUsernameLabel
@@ -716,10 +717,23 @@ private fun ColumnScope.MainPanel(
 
                         DoubleSpacer()
 
-                        RequestCoordinateButton(
-                            enabled = connectedUserId != null,
-                            coordinate = coordinate
-                        )
+                        if (connectedUserId == null) {
+
+                            Text(
+                                text = stringResource(Res.string.uiRequestCoordinateLoginHint),
+                                style = MaterialTheme.typography.bodyLarge,
+                                color = MaterialTheme.colorScheme.onBackground,
+                                textAlign = TextAlign.Center,
+                                modifier = Modifier.padding(top = 4.dp)
+                            )
+
+                        } else {
+
+                            RequestCoordinateButton(
+                                enabled = connectedUserId != null,
+                                coordinate = coordinate
+                            )
+                        }
                     }
 
                 } else {
