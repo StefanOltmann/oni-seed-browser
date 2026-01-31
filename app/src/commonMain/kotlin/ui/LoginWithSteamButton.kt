@@ -39,10 +39,12 @@ import io.github.stefanoltmann.app.generated.resources.Res
 import io.github.stefanoltmann.app.generated.resources.uiConnected
 import io.github.stefanoltmann.app.generated.resources.uiLoginWithSteam
 import org.jetbrains.compose.resources.stringResource
+import ui.icons.IconLogout
 import ui.icons.IconSteam
 import ui.theme.DefaultSpacer
 import ui.theme.HalfSpacer
 import ui.theme.halfPadding
+import ui.theme.hoverColor
 import ui.theme.minimalRoundedCornerShape
 
 private const val LOGIN_BASE_URL: String =
@@ -54,10 +56,12 @@ private const val PUBLIC_LOGIN_URL: String =
 @Composable
 fun LoginWithSteamButton(
     connectedUserId: String?,
-    localPort: Int?
+    localPort: Int?,
+    onLogout: () -> Unit
 ) {
 
     val hovered = remember { mutableStateOf(false) }
+    val logoutHovered = remember { mutableStateOf(false) }
 
     val uriHandler = LocalUriHandler.current
 
@@ -130,6 +134,21 @@ fun LoginWithSteamButton(
                 color = MaterialTheme.colorScheme.onBackground,
                 maxLines = 1,
                 modifier = Modifier.offset(y = -1.dp)
+            )
+
+            HalfSpacer()
+
+            Icon(
+                imageVector = IconLogout,
+                contentDescription = null,
+                tint = if (logoutHovered.value)
+                    hoverColor
+                else
+                    MaterialTheme.colorScheme.onBackground,
+                modifier = Modifier
+                    .onHover(logoutHovered)
+                    .size(20.dp)
+                    .noRippleClickable(onLogout)
             )
         }
 

@@ -130,6 +130,10 @@ fun main() {
             isMniEmbedded = isMniEmbedded,
             connectedUserId = connectedUserId.value,
             localPort = null,
+            onLogout = {
+                AppStorage.clearToken()
+                connectedUserId.value = null
+            },
             writeToClipboard = {
                 window.navigator.clipboard.writeText(it)
             }
