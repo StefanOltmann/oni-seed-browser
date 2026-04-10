@@ -1,6 +1,6 @@
 <resources>
     <!-- UI Specific -->
-    <string name="uiTitle">Oxygen Not Included Kartenfinder</string>
+    <string name="uiTitle">ONI Kartenfinder</string>
     <string name="uiFilter">Filter</string>
     <string name="uiSelectRule">Bitte wähle ein Cluster um Regeln zu definieren.</string>
     <string name="uiReset">RESET</string>

@@ -1,6 +1,6 @@
 <resources>
     <!-- UI Specific -->
-    <string name="uiTitle">Oxygen Not Included Seed Browser</string>
+    <string name="uiTitle">ONI Seed Browser</string>
     <string name="uiFilter">Filter</string>
     <string name="uiSelectRule">Please select an cluster to define rules.</string>
     <string name="uiReset">RESET</string>

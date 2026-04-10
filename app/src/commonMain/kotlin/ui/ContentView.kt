@@ -38,6 +38,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -319,6 +320,20 @@ fun ContentView(
 
                     SponsorButton {
                         uriHandler.openUri("https://github.com/sponsors/StefanOltmann")
+                    }
+
+                    DefaultSpacer()
+
+                    MoreAppsButton {
+
+                        val locale = Locale.current.language
+
+                        val url = if (locale == "de")
+                            "https://stefan-oltmann.de/portfolio/de/index.html#projects"
+                        else
+                            "https://stefan-oltmann.de/portfolio/en/index.html#projects"
+
+                        uriHandler.openUri(url)
                     }
 
                     DefaultSpacer()
