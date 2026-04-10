@@ -22,6 +22,7 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.platform.ClipEntry
 import androidx.compose.ui.platform.LocalClipboard
 import androidx.compose.ui.unit.DpSize
@@ -49,6 +50,7 @@ import util.getValidSteamHash
 
 private var currentServer: HttpServer? = null
 
+@OptIn(ExperimentalComposeUiApi::class)
 fun main() = application {
 
     Window(

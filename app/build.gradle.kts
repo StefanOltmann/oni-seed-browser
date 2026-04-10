@@ -8,7 +8,6 @@ plugins {
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.kotlinSerialization)
     id("me.qoomon.git-versioning") version "6.4.3"
-    id("dev.hydraulic.conveyor") version "1.12"
 }
 
 group = "io.github.stefanoltmann"
@@ -33,7 +32,7 @@ kotlin {
 
     jvm()
 
-    jvmToolchain(jdkVersion = 24)
+    jvmToolchain(jdkVersion = 25)
 
     if (buildTarget != "desktop") {
 
@@ -156,21 +155,6 @@ compose.desktop {
     }
 }
 
-dependencies {
-
-    /*
-     * Workaround for a bug in Hydraulic Conveyor 18:
-     * It does not support wasmJS target.
-     */
-    if (buildTarget == "desktop") {
-
-        linuxAmd64(compose.desktop.linux_x64)
-        macAmd64(compose.desktop.macos_x64)
-        macAarch64(compose.desktop.macos_arm64)
-        windowsAmd64(compose.desktop.windows_x64)
-    }
-}
-
 // region write version
 if (buildTarget != "desktop") {
 
@@ -241,15 +225,6 @@ project.afterEvaluate {
         writer.println("const val APP_VERSION: String = \"$version\"")
 
         writer.flush()
-    }
-}
-// endregion
-
-// region Work around temporary Compose bugs.
-configurations.all {
-    attributes {
-        // https://github.com/JetBrains/compose-jb/issues/1404#issuecomment-1146894731
-        attribute(Attribute.of("ui", String::class.java), "awt")
     }
 }
 // endregion

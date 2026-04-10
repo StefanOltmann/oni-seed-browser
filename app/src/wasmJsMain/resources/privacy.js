@@ -1,4 +1,4 @@
-(function() {
+(function () {
     const mailUser = 'privacy';
     const mailDomain = 'stefan-oltmann';
     const mailTld = 'de';
