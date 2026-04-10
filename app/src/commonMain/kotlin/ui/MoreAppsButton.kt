@@ -32,6 +32,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import io.github.stefanoltmann.app.generated.resources.Res
+import org.jetbrains.compose.resources.stringResource
+import io.github.stefanoltmann.app.generated.resources.uiMoreApps
 import ui.icons.IconApps
 import ui.theme.defaultSpacing
 import ui.theme.minimalRoundedCornerShape
@@ -58,7 +61,7 @@ fun MoreAppsButton(
         )
 
         Text(
-            text = "More apps",
+            text = stringResource(Res.string.uiMoreApps),
             style = MaterialTheme.typography.titleMedium,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.colorScheme.onBackground,

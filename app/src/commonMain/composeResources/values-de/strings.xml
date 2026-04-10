@@ -64,6 +64,7 @@
     <string name="uiPoiLocationsChanged">Achtung: Mit dem Update 701091 haben sich die Positionen geändert</string>
     <string name="uiImprint">Impressum</string>
     <string name="uiPrivacyPolicy">Datenschutz</string>
+    <string name="uiMoreApps">Weitere Apps</string>
 
     <!-- GameModes -->
     <string name="gameModeBaseGameStandard">Standard</string>
