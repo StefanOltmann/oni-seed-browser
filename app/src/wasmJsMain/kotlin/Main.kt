@@ -122,8 +122,6 @@ fun main() {
             urlHash.value = it.newURL.substringAfter('#', "").ifBlank { null }
         }
 
-        hideLoader()
-
         App(
             urlHash = urlHash,
             urlFilterQuery = filterQuery,
@@ -135,19 +133,4 @@ fun main() {
             }
         )
     }
-}
-
-/**
- * Function to hide the loader and show the app
- */
-fun hideLoader() {
-
-    val loader = document.getElementById("loader") as? HTMLElement
-    val app = document.getElementById("app") as? HTMLElement
-
-    /* Hide the loader */
-    loader?.style?.display = "none"
-
-    /* Show the app */
-    app?.style?.display = "block"
 }

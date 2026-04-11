@@ -20,10 +20,6 @@
     <div id="warning">⚠️ Sorry, your browser is too old. ⚠️</div>
 </div>
 
-<div id="loader">
-    <div class="spinner"></div>
-</div>
-
 <script type="application/javascript">
 
     /*
@@ -48,23 +44,6 @@
 
     addEventListener("error", (event) => unhandledError(event, event.error));
     addEventListener("unhandledrejection", (event) => unhandledError(event, event.reason));
-
-    /*
-      * Register service worker for offline functionality
-      */
-
-    if ('serviceWorker' in navigator) {
-
-        window.addEventListener('load', () => {
-
-            navigator.serviceWorker.getRegistrations().then(registrations => {
-                for (let registration of registrations) {
-                    registration.unregister();
-                    console.log('Unregistered service worker');
-                }
-            });
-        });
-    }
 
 </script>
 
