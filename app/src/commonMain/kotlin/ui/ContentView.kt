@@ -318,6 +318,12 @@ fun ContentView(
 
                     val uriHandler = LocalUriHandler.current
 
+                    ProductHuntButton {
+                        uriHandler.openUri("https://www.producthunt.com/products/oni-seed-browser")
+                    }
+
+                    DefaultSpacer()
+
                     SponsorButton {
                         uriHandler.openUri("https://github.com/sponsors/StefanOltmann")
                     }

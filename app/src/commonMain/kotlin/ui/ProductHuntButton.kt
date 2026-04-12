@@ -19,6 +19,7 @@
 package ui
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
@@ -30,41 +31,39 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import io.github.stefanoltmann.app.generated.resources.Res
-import io.github.stefanoltmann.app.generated.resources.uiMoreApps
-import org.jetbrains.compose.resources.stringResource
-import ui.icons.IconApps
+import ui.icons.IconProductHunt
 import ui.theme.defaultSpacing
 import ui.theme.minimalRoundedCornerShape
 
+private val productHuntColor = Color(0xFFDA552F)
+
 @Composable
-fun MoreAppsButton(
+fun ProductHuntButton(
     onClick: () -> Unit
 ) {
-
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(6.dp),
         modifier = Modifier
-            .background(MaterialTheme.colorScheme.background, minimalRoundedCornerShape)
+            .background(Color.Black, minimalRoundedCornerShape)
+            .border(1.dp, productHuntColor, minimalRoundedCornerShape)
             .height(32.dp)
             .padding(horizontal = defaultSpacing)
             .noRippleClickable(onClick)
     ) {
-
         Icon(
-            imageVector = IconApps,
+            imageVector = IconProductHunt,
             contentDescription = null,
-            tint = MaterialTheme.colorScheme.onBackground
+            tint = productHuntColor
         )
-
         Text(
-            text = stringResource(Res.string.uiMoreApps),
+            text = "Support on Product Hunt",
             style = MaterialTheme.typography.titleMedium,
             fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colorScheme.onBackground,
+            color = productHuntColor,
             maxLines = 1,
             modifier = Modifier.offset(y = -1.dp)
         )
