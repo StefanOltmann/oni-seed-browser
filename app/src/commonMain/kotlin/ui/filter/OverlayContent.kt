@@ -192,7 +192,6 @@ fun OverlayContent(
                                 text = stringResource(geyserType.stringResource) + when (filterItemType) {
                                     FilterItemType.GEYSER_COUNT -> " " + stringResource(Res.string.uiCount)
                                     FilterItemType.GOOD_GEYSER_COUNT -> " " + stringResource(Res.string.uiCount)
-                                    else -> ""
                                 },
                                 onClick = {
 
@@ -209,8 +208,6 @@ fun OverlayContent(
                                             condition = FilterCondition.AT_LEAST,
                                             count = 1
                                         )
-
-                                        else -> error("Illegal item type for geysers: $filterItemType")
                                     }
 
                                     /* Update the query */

@@ -751,7 +751,6 @@ private fun ColumnScope.MainPanel(
                         } else {
 
                             RequestCoordinateButton(
-                                enabled = connectedUserId != null,
                                 coordinate = coordinate
                             )
                         }

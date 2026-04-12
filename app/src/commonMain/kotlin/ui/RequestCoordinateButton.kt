@@ -45,7 +45,6 @@ import ui.theme.defaultRoundedCornerShape
 
 @Composable
 fun RequestCoordinateButton(
-    enabled: Boolean,
     coordinate: String
 ) {
 
@@ -67,7 +66,7 @@ fun RequestCoordinateButton(
                 defaultRoundedCornerShape
             )
             .background(
-                if (enabled && !requestedState.value && hovered.value)
+                if (!requestedState.value && hovered.value)
                     MaterialTheme.colorScheme.surface
                 else
                     MaterialTheme.colorScheme.background,
@@ -75,7 +74,7 @@ fun RequestCoordinateButton(
             )
             .noRippleClickable {
 
-                if (enabled && !requestedState.value) {
+                if (!requestedState.value) {
 
                     requestedState.value = true
 
@@ -88,7 +87,6 @@ fun RequestCoordinateButton(
                     }
                 }
             }
-            .alpha(if (enabled) 1.0f else 0.3f)
     ) {
 
         DefaultSpacer()
