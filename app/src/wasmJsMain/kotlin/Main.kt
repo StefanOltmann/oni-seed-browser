@@ -29,7 +29,7 @@ import util.getQueryParameters
 import util.getValidSteamHash
 
 @OptIn(ExperimentalComposeUiApi::class, ExperimentalWasmJsInterop::class)
-fun main() {
+suspend fun main() {
 
     ComposeViewport(document.body!!) {
 
@@ -59,6 +59,26 @@ fun main() {
         }
 
         val connectedUserId = remember { mutableStateOf<String?>(null) }
+
+//        LaunchedEffect(Unit) {
+//
+//            val duration = measureTime { worldgenInit() }
+//
+//            println("Worldgen init took $duration")
+//
+//            val worldgenDuration = measureTime {
+//
+//                val json: String = worldgenGenerate("V-PRES-C-2053207953-0-0-V0R16")
+//
+//                println(json)
+//
+//                // TODO Convert JSON to Upload-compatible JSON
+//
+//                // Json.decodeFromString<Upload>(json)
+//            }
+//
+//            println("Worldgen generation took $worldgenDuration")
+//        }
 
         /*
          * Check login token

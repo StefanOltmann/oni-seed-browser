@@ -128,6 +128,13 @@ kotlin {
                 /* Cryptography (JWT) */
                 implementation("dev.whyoleg.cryptography:cryptography-provider-webcrypto:0.4.0")
                 implementation("com.appstractive:jwt-kt-wasm-js:1.1.0")
+
+                /*
+                 * ONI Worldgen worldgen reverse-engineered in Rust
+                 *
+                 * https://www.npmjs.com/package/@tigin-backwards/oxygen-not-included-worldgen-node
+                 */
+                implementation(npm("@tigin-backwards/oxygen-not-included-worldgen", "1.0.0"))
             }
         }
     }
