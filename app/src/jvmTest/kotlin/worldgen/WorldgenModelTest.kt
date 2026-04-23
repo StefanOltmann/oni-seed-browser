@@ -17,15 +17,26 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/**
- * Query the latest map from the database instead of showing demo data
- * if top-rated maps are disabled.
- */
-const val START_WITH_LATEST_MAPS = true
+package worldgen
 
-const val ALTERNATIVE_MAP_VIEWER_URL = "https://m45sci.xyz/u/dist/oni-view/view.html"
+import kotlin.test.Test
+import kotlin.test.assertNotNull
+import kotlinx.serialization.json.Json
 
-/*
- * Asteroid POI locations are generated differently with this update.
- */
-const val POI_LOCATION_CHANGE_GAME_VERSION = 701091
+class WorldgenModelTest {
+
+    private val jsonTestData = WorldgenModelTest::class.java.getResourceAsStream("sample.json")!!
+        .readAllBytes()
+        .decodeToString()
+
+    /*
+     * Ensure that the sample JSON can be decoded.
+     */
+    @Test
+    fun testWorldgenMapDataDecode() {
+
+        val mapData = WorldgenMapData.fromJson(jsonTestData)
+
+        assertNotNull(mapData)
+    }
+}

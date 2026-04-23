@@ -1,4 +1,4 @@
-package de.stefan_oltmann.oni.model
+package model
 
 import createFilterQuery
 import de.stefan_oltmann.oni.model.filter.FilterQuery

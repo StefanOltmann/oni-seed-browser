@@ -16,16 +16,14 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+package worldgen
 
-/**
- * Query the latest map from the database instead of showing demo data
- * if top-rated maps are disabled.
- */
-const val START_WITH_LATEST_MAPS = true
+import de.stefan_oltmann.oni.model.Cluster
 
-const val ALTERNATIVE_MAP_VIEWER_URL = "https://m45sci.xyz/u/dist/oni-view/view.html"
+object WorldgenMapDataConverter {
 
-/*
- * Asteroid POI locations are generated differently with this update.
- */
-const val POI_LOCATION_CHANGE_GAME_VERSION = 701091
+    fun convert(mapData: WorldgenMapData): Cluster {
+
+        TODO()
+    }
+}

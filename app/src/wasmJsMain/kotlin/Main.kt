@@ -22,14 +22,18 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.window.ComposeViewport
+import kotlin.time.measureTime
 import kotlinx.browser.document
 import kotlinx.browser.window
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import ui.App
 import util.getQueryParameters
 import util.getValidSteamHash
+import worldgen.WorldgenMapData
 
 @OptIn(ExperimentalComposeUiApi::class, ExperimentalWasmJsInterop::class)
-suspend fun main() {
+fun main() {
 
     ComposeViewport(document.body!!) {
 
@@ -60,25 +64,33 @@ suspend fun main() {
 
         val connectedUserId = remember { mutableStateOf<String?>(null) }
 
-//        LaunchedEffect(Unit) {
-//
-//            val duration = measureTime { worldgenInit() }
-//
-//            println("Worldgen init took $duration")
-//
-//            val worldgenDuration = measureTime {
-//
-//                val json: String = worldgenGenerate("V-PRES-C-2053207953-0-0-V0R16")
-//
-//                println(json)
-//
-//                // TODO Convert JSON to Upload-compatible JSON
-//
-//                // Json.decodeFromString<Upload>(json)
-//            }
-//
-//            println("Worldgen generation took $worldgenDuration")
-//        }
+        /*
+         * Generate world here to get benchmarks
+         */
+        LaunchedEffect(Unit) {
+
+            val doLoadingTest = true
+
+            if (!doLoadingTest)
+                return@LaunchedEffect
+
+            // FIXME This blocks the main thread and should go to a web worker
+            withContext(Dispatchers.Default) {
+
+                worldgenInit()
+
+                val duration = measureTime {
+
+                    val json: String = worldgenGenerate("CER-C-1566615869-0-0-0")
+
+                    val worldgenMapData = WorldgenMapData.fromJson(json)
+
+                    println(worldgenMapData)
+                }
+
+                println("Test world generation took ${duration.inWholeMilliseconds}ms")
+            }
+        }
 
         /*
          * Check login token

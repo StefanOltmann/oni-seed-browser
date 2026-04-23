@@ -1,5 +1,5 @@
-import kotlinx.coroutines.await
 import kotlin.js.Promise
+import kotlinx.coroutines.await
 
 /*
  * TODO FIXME Should be placed in a web worker for performance reasons.
