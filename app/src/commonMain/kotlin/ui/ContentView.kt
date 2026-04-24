@@ -492,8 +492,6 @@ fun ContentView(
                         favoredCoordinates,
                         showStarMap,
                         showAsteroidMap,
-                        connectedUserId,
-                        isMniEmbedded,
                         steamIdToUsernameMap.value,
                         writeToClipboard
                     )
@@ -582,8 +580,6 @@ private fun ColumnScope.FavoritesPanel(
     favoredCoordinates: MutableState<List<String>>,
     showStarMap: MutableState<Cluster?>,
     showAsteroidMap: MutableState<Pair<Cluster, Asteroid>?>,
-    connectedUserId: String?,
-    isMniEmbedded: Boolean,
     steamIdToUsernameMap: Map<String, String>,
     writeToClipboard: (String) -> Unit
 ) {

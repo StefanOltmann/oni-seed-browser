@@ -109,6 +109,7 @@ fun main() = application {
             urlFilterQuery = null,
             isMniEmbedded = false,
             connectedUserId = connectedUserId.value,
+            previewCluster = null,
             localPort = localPort.value,
             writeToClipboard = { text ->
                 clipboardScope.launch {

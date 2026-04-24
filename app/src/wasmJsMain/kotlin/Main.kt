@@ -22,15 +22,15 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.window.ComposeViewport
+import de.stefan_oltmann.oni.model.Cluster
 import kotlin.time.measureTime
 import kotlinx.browser.document
 import kotlinx.browser.window
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import ui.App
 import util.getQueryParameters
 import util.getValidSteamHash
 import worldgen.WorldgenMapData
+import worldgen.WorldgenMapDataConverter
 
 @OptIn(ExperimentalComposeUiApi::class, ExperimentalWasmJsInterop::class)
 fun main() {
@@ -64,32 +64,34 @@ fun main() {
 
         val connectedUserId = remember { mutableStateOf<String?>(null) }
 
+        val previewCluster = remember { mutableStateOf<Cluster?>(null) }
+
         /*
-         * Generate world here to get benchmarks
+         * Check preview token.
+         *
+         * Call the page with ?preview=CER-C-1566615869-0-0-0 to preview a cluster.
          */
         LaunchedEffect(Unit) {
 
-            val doLoadingTest = true
+            val previewCoordinate = params["preview"]
 
-            if (!doLoadingTest)
+            if (previewCoordinate.isNullOrBlank())
                 return@LaunchedEffect
 
-            // FIXME This blocks the main thread and should go to a web worker
-            withContext(Dispatchers.Default) {
+            worldgenInit()
 
-                worldgenInit()
+            val duration = measureTime {
 
-                val duration = measureTime {
+                val json: String = worldgenGenerate(previewCoordinate)
 
-                    val json: String = worldgenGenerate("CER-C-1566615869-0-0-0")
+                val worldgenMapData = WorldgenMapData.fromJson(json)
 
-                    val worldgenMapData = WorldgenMapData.fromJson(json)
+                val cluster = WorldgenMapDataConverter.convert(worldgenMapData)
 
-                    println(worldgenMapData)
-                }
-
-                println("Test world generation took ${duration.inWholeMilliseconds}ms")
+                previewCluster.value = cluster
             }
+
+            println("Test world generation took ${duration.inWholeMilliseconds}ms")
         }
 
         /*
@@ -143,6 +145,7 @@ fun main() {
         println("Running on domain: ${document.domain}")
         println("URL hash: ${urlHash.value}")
         println("URL filter query: $filterQuery")
+        println("Preview cluster: ${previewCluster.value?.coordinate}")
         println("Users language: " + Locale.current.language)
         println("Users language tag: " + Locale.current.toLanguageTag())
         println("Users region: " + Locale.current.region)
@@ -158,6 +161,7 @@ fun main() {
             urlFilterQuery = filterQuery,
             isMniEmbedded = isMniEmbedded,
             connectedUserId = connectedUserId.value,
+            previewCluster = previewCluster.value,
             localPort = null,
             writeToClipboard = {
                 window.navigator.clipboard.writeText(it)

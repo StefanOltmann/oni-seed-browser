@@ -881,7 +881,7 @@ formatting:
     autoCorrect: true
     indentSize: 4
   ImportOrdering:
-    active: false
+    active: true
     autoCorrect: true
     layout: '*,java.**,javax.**,kotlin.**,^'
   Indentation:
