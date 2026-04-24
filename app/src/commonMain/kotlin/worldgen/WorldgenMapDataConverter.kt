@@ -82,7 +82,7 @@ object WorldgenMapDataConverter {
 
         val starMapEntriesSpacedOut = starMapPOIEntries + starMapAsteroidEntries
 
-        val asteroids = mapData.worlds.mapIndexed { index, worldMapData ->
+        val asteroids = mapData.worlds.map { worldMapData ->
 
             val worldTraits = worldMapData.worldTraits.map { traitString ->
                 parseWorldTrait(traitString)
@@ -196,8 +196,10 @@ object WorldgenMapDataConverter {
                 result.append("\n")
 
             firstZone = false
+
             result.append(zoneName)
             result.append(":")
+
             var firstEntry = true
 
             for (points in pointsList) {
