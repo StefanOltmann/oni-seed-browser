@@ -4,6 +4,9 @@ const api = {
     async init() {
         await init();
     },
+    version() {
+        return worldgen.version();
+    },
     generate(coordinate) {
 
         const result = worldgen.generate(coordinate);

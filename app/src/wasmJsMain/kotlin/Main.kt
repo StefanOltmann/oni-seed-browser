@@ -80,15 +80,20 @@ fun main() {
 
             worldgenInit()
 
+            val worldgenVersion = worldgenVersion()
+
+            println("Worldgen version: $worldgenVersion")
+
             val duration = measureTime {
 
                 val json: String = worldgenGenerate(previewCoordinate)
 
-                println(json)
-
                 val worldgenMapData = WorldgenMapData.fromJson(json)
 
-                val cluster = WorldgenMapDataConverter.convert(worldgenMapData)
+                val cluster = WorldgenMapDataConverter.convert(
+                    mapData = worldgenMapData,
+                    gameVersion = worldgenVersion.substringBefore('+').toInt()
+                )
 
                 previewCluster.value = cluster
             }

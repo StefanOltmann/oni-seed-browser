@@ -17,6 +17,11 @@ private fun jsCallInit(module: JsAny): Promise<JsAny> =
 
 @Suppress("UNUSED", "UnusedParameter") // false positive
 @OptIn(ExperimentalWasmJsInterop::class)
+private fun jsCallVersion(module: JsAny): String =
+    js("module.default.version()")
+
+@Suppress("UNUSED", "UnusedParameter") // false positive
+@OptIn(ExperimentalWasmJsInterop::class)
 private fun jsCallGenerate(module: JsAny, coordinate: String): String =
     js("module.default.generate(coordinate)")
 
@@ -31,6 +36,12 @@ private suspend fun getModule(): JsAny =
 suspend fun worldgenInit() {
     val module = getModule()
     jsCallInit(module).await<JsAny>()
+}
+
+@OptIn(ExperimentalWasmJsInterop::class)
+suspend fun worldgenVersion(): String {
+    val module = getModule()
+    return jsCallVersion(module)
 }
 
 @OptIn(ExperimentalWasmJsInterop::class)
