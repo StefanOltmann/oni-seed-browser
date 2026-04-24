@@ -87,20 +87,30 @@ object WorldgenMapDataConverter {
                 worldHeight = worldHeight
             )
 
+            /* Find the relevant POIs. We use mapNotNull() to filter out the ones not interesting for us. */
+            val otherEntitiesPois = worldMapData.otherEntities.mapNotNull { entity ->
+                parsePointOfInterest(
+                    tag = entity.tag,
+                    x = entity.x,
+                    y = worldHeight - entity.y
+                )
+            }
+
+            val buildingPois = worldMapData.buildings.mapNotNull { entity ->
+                parsePointOfInterest(
+                    tag = entity.tag,
+                    x = entity.x,
+                    y = worldHeight - entity.y
+                )
+            }
+
             Asteroid(
                 id = parseAsteroidType(worldMapData.name),
                 sizeX = worldMapData.width.toShort(),
                 sizeY = worldHeight,
                 worldTraitsBitmask = WorldTrait.toMask(worldTraits),
                 biomePaths = biomePaths,
-                /* Find the relevant POIs. We use mapNotNull() to filter out the one's not interesting for us. */
-                pointsOfInterest = worldMapData.otherEntities.mapNotNull { entity ->
-                    parsePointOfInterest(
-                        tag = entity.tag,
-                        x = entity.x,
-                        y = worldHeight - entity.y
-                    )
-                },
+                pointsOfInterest = otherEntitiesPois + buildingPois,
                 geysers = worldMapData.geysers.map { geyserSpawn ->
                     convertGeyser(
                         geyserSpawn = geyserSpawn,
