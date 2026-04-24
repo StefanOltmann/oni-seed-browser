@@ -107,7 +107,7 @@ fun BaseGameStarMapView(
                 verticalAlignment = Alignment.CenterVertically
             ) {
 
-                OpenInOnimaxxingButton(
+                OpenInOnimaxxingStarmapButton(
                     coordinate = cluster.coordinate
                 )
 
