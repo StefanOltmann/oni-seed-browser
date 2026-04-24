@@ -69,7 +69,7 @@ fun main() {
         /*
          * Check preview token.
          *
-         * Call the page with ?preview=CER-C-1566615869-0-0-0 to preview a cluster.
+         * Call the page with ?preview=M-BAD-C-1484520278-0-0-0 to preview a cluster.
          */
         LaunchedEffect(Unit) {
 

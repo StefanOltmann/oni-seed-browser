@@ -115,6 +115,36 @@ object WorldgenMapDataConverter {
                 )
             }
 
+            val geysers = worldMapData.geysers.map { geyserSpawn ->
+                convertGeyser(
+                    geyserSpawn = geyserSpawn,
+                    worldHeight = worldHeight
+                )
+            }
+
+            /*
+             * Get the oil wells out of the other entities.
+             *
+             * Oil wells are not geysers, but we treat them the same for simplicity.
+             */
+            val oilWells = worldMapData.otherEntities.mapNotNull { entitySpawn ->
+
+                if (entitySpawn.tag != "OilWell")
+                    return@mapNotNull null
+
+                Geyser(
+                    id = GeyserType.OIL_RESERVOIR,
+                    x = entitySpawn.x.toShort(),
+                    y = (worldHeight - entitySpawn.y).toShort(),
+                    emitRate = 3333,
+                    avgEmitRate = 3333,
+                    idleTime = 0,
+                    eruptionTime = 1,
+                    dormancyCyclesRounded = 0,
+                    activeCyclesRounded = 1
+                )
+            }
+
             Asteroid(
                 id = parseAsteroidType(worldMapData.name),
                 sizeX = worldMapData.width.toShort(),
@@ -122,12 +152,7 @@ object WorldgenMapDataConverter {
                 worldTraitsBitmask = WorldTrait.toMask(worldTraits),
                 biomePaths = biomePaths,
                 pointsOfInterest = otherEntitiesPois + buildingPois,
-                geysers = worldMapData.geysers.map { geyserSpawn ->
-                    convertGeyser(
-                        geyserSpawn = geyserSpawn,
-                        worldHeight = worldHeight
-                    )
-                }
+                geysers = geysers + oilWells
             )
         }
 
