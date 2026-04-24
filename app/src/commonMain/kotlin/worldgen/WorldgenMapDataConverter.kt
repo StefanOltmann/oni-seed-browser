@@ -38,7 +38,17 @@ object WorldgenMapDataConverter {
 
     fun convert(mapData: WorldgenMapData): Cluster {
 
-        val clusterType = parseClusterType(mapData.clusterId)
+        check(ClusterType.isValidCoordinate(mapData.coordinate)) {
+            "Coordinate ${mapData.coordinate} is not valid/supported."
+        }
+
+        /*
+         * FIXME Hack: We get the cluster type from the coordinate.
+         *  This is not ideal, but it works for now.
+         */
+        val clusterType = ClusterType.entries.find {
+            mapData.coordinate.startsWith(it.prefix)
+        }
 
         /*
          * Create a map of the regular POIs like harvestable, etc.
@@ -139,42 +149,11 @@ object WorldgenMapDataConverter {
         )
     }
 
-    private fun parseClusterType(clusterId: String): ClusterType {
-
-        val idPart = clusterId.substringAfterLast("/")
-
-        return when (idPart) {
-            "TerraStart" -> ClusterType.BASE_TERRA
-            "CeresStart" -> ClusterType.BASE_CERES
-            "CeresSpacedOutCluster" -> ClusterType.DLC_CERES_MINOR
-            "ArboriaStart" -> ClusterType.BASE_ARBORIA
-            "ArboriaSpacedOutCluster" -> ClusterType.DLC_ARBORIA
-            "RimeStart" -> ClusterType.BASE_RIME
-            "RimeSpacedOutCluster" -> ClusterType.DLC_RIME
-            "VerdanteStart" -> ClusterType.BASE_VERDANTE
-            "VerdanteSpacedOutCluster" -> ClusterType.DLC_VERDANTE
-            "OceaniaStart" -> ClusterType.BASE_OCEANIA
-            "OceaniaSpacedOutCluster" -> ClusterType.DLC_OCEANIA
-            "VolcaneaStart" -> ClusterType.BASE_VOLCANEA
-            "VolcaneaSpacedOutCluster" -> ClusterType.DLC_VOLCANEA
-            "BadlandsStart" -> ClusterType.BASE_THE_BADLANDS
-            "BadlandsSpacedOutCluster" -> ClusterType.DLC_THE_BADLANDS
-            "AridioStart" -> ClusterType.BASE_ARIDIO
-            "AridioSpacedOutCluster" -> ClusterType.DLC_ARIDIO
-            "OasisseStart" -> ClusterType.BASE_OASISSE
-            "OasisseSpacedOutCluster" -> ClusterType.DLC_OASISSE
-            "TerraSpacedOutCluster" -> ClusterType.DLC_TERRA
-            "RelicaStart" -> ClusterType.BASE_RELICA
-            "RelicaSpacedOutCluster" -> ClusterType.DLC_RELICA
-            else -> error("Unknown cluster type: $clusterId")
-        }
-    }
-
     private fun parseAsteroidType(name: String): AsteroidType {
 
-        val clanedName = name.substringAfter("worlds/")
+        val cleanedName = name.substringAfter("worlds/")
 
-        return AsteroidType.entries.find { it.name == clanedName }
+        return AsteroidType.entries.find { it.name == cleanedName }
             ?: error("Unknown asteroid type: $name")
     }
 
