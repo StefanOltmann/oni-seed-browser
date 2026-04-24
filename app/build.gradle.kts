@@ -134,7 +134,7 @@ kotlin {
                  *
                  * https://www.npmjs.com/package/@tigin-backwards/oxygen-not-included-worldgen-node
                  */
-                implementation(npm("@tigin-backwards/oxygen-not-included-worldgen", "1.0.0"))
+                implementation(npm("@tigin-backwards/oxygen-not-included-worldgen", "2.0.0"))
             }
         }
     }

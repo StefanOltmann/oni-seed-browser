@@ -18,6 +18,7 @@
  */
 package worldgen
 
+import de.stefan_oltmann.oni.model.ZoneType
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
@@ -32,6 +33,7 @@ data class WorldgenMapData(
     val coordinate: String,
     val seed: Int,
     @SerialName("cluster_id") val clusterId: String,
+    @SerialName("coordinate_prefix") val coordinatePrefix: String,
     val starmap: List<StarmapEntry>,
     @SerialName("starmap_pois") val starmapPois: List<StarmapPoi>,
     @SerialName("vanilla_starmap") val vanillaStarmap: List<VanillaStarmapEntry>,
@@ -74,14 +76,13 @@ data class WorldMapData(
     @SerialName("biome_cells") val biomeCells: List<BiomeCell>,
     val geysers: List<GeyserSpawn>,
     val buildings: List<EntitySpawn>,
-    val pickupables: List<EntitySpawn>,
     @SerialName("other_entities") val otherEntities: List<EntitySpawn>
 )
 
 @Serializable
 data class BiomeCell(
     val id: Int,
-    val type: String,
+    @SerialName("zone_type") val zoneType: ZoneType,
     val x: Float,
     val y: Float,
     val poly: List<Float>
@@ -90,7 +91,6 @@ data class BiomeCell(
 @Serializable
 open class EntitySpawn(
     val tag: String,
-    val cell: Int,
     val x: Int,
     val y: Int
 )
@@ -98,7 +98,6 @@ open class EntitySpawn(
 @Serializable
 data class GeyserSpawn(
     val tag: String,
-    val cell: Int,
     val x: Int,
     val y: Int,
     val type: String,

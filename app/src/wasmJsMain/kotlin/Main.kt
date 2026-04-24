@@ -84,6 +84,8 @@ fun main() {
 
                 val json: String = worldgenGenerate(previewCoordinate)
 
+                println(json)
+
                 val worldgenMapData = WorldgenMapData.fromJson(json)
 
                 val cluster = WorldgenMapDataConverter.convert(worldgenMapData)

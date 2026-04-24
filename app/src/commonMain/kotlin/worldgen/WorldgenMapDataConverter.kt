@@ -31,7 +31,6 @@ import de.stefan_oltmann.oni.model.StarMapEntrySpacedOut
 import de.stefan_oltmann.oni.model.StarMapEntryVanilla
 import de.stefan_oltmann.oni.model.VanillaSpacePOI
 import de.stefan_oltmann.oni.model.WorldTrait
-import de.stefan_oltmann.oni.model.ZoneType
 import kotlin.math.round
 
 object WorldgenMapDataConverter {
@@ -42,12 +41,8 @@ object WorldgenMapDataConverter {
             "Coordinate ${mapData.coordinate} is not valid/supported."
         }
 
-        /*
-         * FIXME Hack: We get the cluster type from the coordinate.
-         *  This is not ideal, but it works for now.
-         */
         val clusterType = ClusterType.entries.find {
-            mapData.coordinate.startsWith(it.prefix)
+            mapData.coordinatePrefix == it.prefix
         } ?: error("Unknown cluster type for coordinate ${mapData.coordinate}")
 
         /*
@@ -194,9 +189,6 @@ object WorldgenMapDataConverter {
 
         for (cell in biomeCells) {
 
-            val zoneType = parseZoneType(cell.type)
-            val zoneName = zoneType.name
-
             val polyCoords = cell.poly
             val pointsBuilder = StringBuilder()
 
@@ -211,7 +203,7 @@ object WorldgenMapDataConverter {
                 pointsBuilder.append("$x,$y")
             }
 
-            zoneToPoints.getOrPut(zoneName) { mutableListOf() }.add(pointsBuilder.toString())
+            zoneToPoints.getOrPut(cell.zoneType.name) { mutableListOf() }.add(pointsBuilder.toString())
         }
 
         val result = StringBuilder()
@@ -243,18 +235,6 @@ object WorldgenMapDataConverter {
         return result.toString()
     }
 
-    private fun parseZoneType(type: String): ZoneType {
-
-        return when (type) {
-
-            "subworlds/space/Space" -> ZoneType.Space
-            "subworlds/space/SpaceNoBorder" -> ZoneType.Space
-
-            else -> return ZoneType.Barren // FIXME We need a proper mapping
-            // else -> error("Unknown zone type: $type")
-        }
-    }
-
     private fun parseWorldTrait(trait: String): WorldTrait {
 
         val cleanedTraitString = trait.substringAfter("traits/")
@@ -276,24 +256,21 @@ object WorldgenMapDataConverter {
         val scaledYearLen = geyserSpawn.scaledYearLen ?: 0.0
         val scaledYearPct = geyserSpawn.scaledYearPct ?: 0.0
 
-        val iterationLength = scaledIterLen
         val iterationPercent = scaledIterPct.coerceIn(0.0, 1.0).toFloat()
-        val onDuration = (iterationLength * iterationPercent).toFloat()
-        val offDuration = (iterationLength * (1f - iterationPercent)).toFloat()
+        val onDuration = (scaledIterLen * iterationPercent).toFloat()
+        val offDuration = (scaledIterLen * (1f - iterationPercent)).toFloat()
 
-        val massPerCycle = scaledRate
-        val emitRateNum1 = (600.0 / iterationLength).toFloat()
-        val emitRateNum2 = (massPerCycle / emitRateNum1).toFloat()
+        val emitRateNum1 = (600.0 / scaledIterLen).toFloat()
+        val emitRateNum2 = (scaledRate / emitRateNum1).toFloat()
 
         /* Guard against onDuration == 0 (permanently-dormant geyser) to avoid Infinity. */
         val emitRate = if (onDuration > 0f) (emitRateNum2 / onDuration).toFloat() else 0f
 
-        val yearLength = scaledYearLen
         val yearPercent = scaledYearPct.coerceIn(0.0, 1.0).toFloat()
-        val yearOnDuration = (yearLength * yearPercent).toFloat()
-        val yearOffDuration = (yearLength * (1f - yearPercent)).toFloat()
+        val yearOnDuration = (scaledYearLen * yearPercent).toFloat()
+        val yearOffDuration = (scaledYearLen * (1f - yearPercent)).toFloat()
 
-        val avgEmitRate = ((yearOnDuration / iterationLength) * (emitRate * onDuration) / yearLength).toFloat()
+        val avgEmitRate = ((yearOnDuration / scaledIterLen) * (emitRate * onDuration) / scaledYearLen).toFloat()
 
         return Geyser(
             id = geyserType,
