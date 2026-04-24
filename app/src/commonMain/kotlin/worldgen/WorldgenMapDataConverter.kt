@@ -1,6 +1,6 @@
 /*
  * ONI Seed Browser
- * Copyright (C) 2025 Stefan Oltmann
+ * Copyright (C) 2026 Stefan Oltmann
  * https://stefan-oltmann.de
  *
  * This program is free software: you can redistribute it and/or modify
@@ -18,7 +18,6 @@
  */
 package worldgen
 
-import androidx.compose.ui.text.buildAnnotatedString
 import de.stefan_oltmann.oni.model.Asteroid
 import de.stefan_oltmann.oni.model.AsteroidType
 import de.stefan_oltmann.oni.model.Cluster
@@ -41,7 +40,7 @@ object WorldgenMapDataConverter {
         val clusterType = parseClusterType(mapData.clusterId)
 
         /*
-         * Create a map of the regular POIs like harvestables, etc.
+         * Create a map of the regular POIs like harvestable, etc.
          */
         val starMapPOIEntries = mapData.starmapPois.map { entry ->
             StarMapEntrySpacedOut(

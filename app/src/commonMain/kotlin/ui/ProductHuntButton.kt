@@ -1,6 +1,6 @@
 /*
  * ONI Seed Browser
- * Copyright (C) 2025 Stefan Oltmann
+ * Copyright (C) 2026 Stefan Oltmann
  * https://stefan-oltmann.de
  *
  * This program is free software: you can redistribute it and/or modify
