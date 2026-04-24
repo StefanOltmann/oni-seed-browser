@@ -30,6 +30,7 @@ import de.stefan_oltmann.oni.model.SpacedOutSpacePOI
 import de.stefan_oltmann.oni.model.StarMapEntrySpacedOut
 import de.stefan_oltmann.oni.model.StarMapEntryVanilla
 import de.stefan_oltmann.oni.model.WorldTrait
+import de.stefan_oltmann.oni.model.ZoneType
 import kotlin.math.round
 
 object WorldgenMapDataConverter {
@@ -190,6 +191,10 @@ object WorldgenMapDataConverter {
         val zoneToPoints = mutableMapOf<String, MutableList<String>>()
 
         for (cell in biomeCells) {
+
+            /* Space is skipped by the mod. */
+            if (cell.zoneType == ZoneType.Space)
+                continue
 
             val polyCoords = cell.poly
             val pointsBuilder = StringBuilder()
