@@ -34,6 +34,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -82,6 +83,7 @@ import org.jetbrains.compose.resources.stringResource
 import ui.model.color
 import ui.model.stringResource
 import ui.theme.DefaultSpacer
+import ui.theme.HalfSpacer
 import ui.theme.anthraticeTransparentBackgroundColor
 import ui.theme.defaultPadding
 import ui.theme.defaultRoundedCornerShape
@@ -98,6 +100,7 @@ private val compactSidebarWidth = (17 * 8).dp
 @Composable
 fun AsteroidMapPopup(
     asteroid: Asteroid,
+    coordinate: String,
     onCloseClicked: () -> Unit
 ) {
 
@@ -121,9 +124,33 @@ fun AsteroidMapPopup(
             modifier = Modifier.fillMaxSize()
         )
 
-        CloseButton(
-            onClick = onCloseClicked
-        )
+        Box(
+            contentAlignment = Alignment.CenterEnd,
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(40.dp)
+        ) {
+
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+
+                OpenInOniViewButton(
+                    coordinate = coordinate,
+                    asteroidType = asteroid.id
+                )
+
+                HalfSpacer()
+
+                OpenInOnimaxxingButton(
+                    coordinate = coordinate
+                )
+
+                CloseButton(
+                    onClick = onCloseClicked
+                )
+            }
+        }
 
         val highlightedZoneType = remember { mutableStateOf<ZoneType?>(null) }
         val highlightedGeyser = remember { mutableStateOf<Geyser?>(null) }

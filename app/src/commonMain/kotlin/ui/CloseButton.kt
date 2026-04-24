@@ -42,27 +42,19 @@ fun CloseButton(
     onClick: () -> Unit
 ) {
 
-    Box(
-        contentAlignment = Alignment.CenterEnd,
+    val hovered = remember { mutableStateOf(false) }
+
+    Icon(
+        imageVector = Icons.Default.Close,
+        contentDescription = null,
+        tint = if (hovered.value)
+            hoverColor
+        else
+            MaterialTheme.colorScheme.onBackground,
         modifier = Modifier
-            .fillMaxWidth()
-            .height(40.dp)
-    ) {
-
-        val hovered = remember { mutableStateOf(false) }
-
-        Icon(
-            imageVector = Icons.Default.Close,
-            contentDescription = null,
-            tint = if (hovered.value)
-                hoverColor
-            else
-                MaterialTheme.colorScheme.onBackground,
-            modifier = Modifier
-                .onHover(hovered)
-                .padding(horizontal = halfSpacing)
-                .size(40.dp)
-                .noRippleClickable(onClick)
-        )
-    }
+            .onHover(hovered)
+            .padding(horizontal = halfSpacing)
+            .size(40.dp)
+            .noRippleClickable(onClick)
+    )
 }

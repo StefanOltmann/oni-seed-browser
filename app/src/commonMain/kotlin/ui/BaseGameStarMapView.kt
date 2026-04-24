@@ -96,9 +96,26 @@ fun BaseGameStarMapView(
             modifier = Modifier.fillMaxSize()
         )
 
-        CloseButton(
-            onClick = onCloseClicked
-        )
+        Box(
+            contentAlignment = Alignment.CenterEnd,
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(40.dp)
+        ) {
+
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+
+                OpenInOnimaxxingButton(
+                    coordinate = cluster.coordinate
+                )
+
+                CloseButton(
+                    onClick = onCloseClicked
+                )
+            }
+        }
 
         Column {
 

@@ -61,6 +61,7 @@ fun PreviewClusterView(
 
         AsteroidMapPopup(
             asteroid = asteroidForMapView.second,
+            coordinate = asteroidForMapView.first.coordinate,
             onCloseClicked = { showAsteroidMap.value = null }
         )
 

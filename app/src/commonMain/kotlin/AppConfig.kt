@@ -23,8 +23,6 @@
  */
 const val START_WITH_LATEST_MAPS = true
 
-const val ALTERNATIVE_MAP_VIEWER_URL = "https://m45sci.xyz/u/dist/oni-view/view.html"
-
 /*
  * Asteroid POI locations are generated differently with this update.
  */

@@ -551,23 +551,11 @@ fun ContentView(
 
                     if (asteroidForMapView != null) {
 
-                        Column {
-
-                            Box(
-                                modifier = Modifier.weight(1F)
-                            ) {
-
-                                AsteroidMapPopup(
-                                    asteroid = asteroidForMapView.second,
-                                    onCloseClicked = { showAsteroidMap.value = null }
-                                )
-                            }
-
-                            AlternativeMapViewerLinkBox(
-                                coordinate = asteroidForMapView.first.coordinate,
-                                asteroidType = asteroidForMapView.second.id
-                            )
-                        }
+                        AsteroidMapPopup(
+                            asteroid = asteroidForMapView.second,
+                            coordinate = asteroidForMapView.first.coordinate,
+                            onCloseClicked = { showAsteroidMap.value = null }
+                        )
                     }
                 }
             }
