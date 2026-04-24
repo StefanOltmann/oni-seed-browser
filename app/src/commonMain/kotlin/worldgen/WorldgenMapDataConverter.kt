@@ -32,6 +32,7 @@ import de.stefan_oltmann.oni.model.StarMapEntryVanilla
 import de.stefan_oltmann.oni.model.VanillaSpacePOI
 import de.stefan_oltmann.oni.model.WorldTrait
 import de.stefan_oltmann.oni.model.ZoneType
+import kotlin.math.round
 
 object WorldgenMapDataConverter {
 
@@ -260,16 +261,41 @@ object WorldgenMapDataConverter {
 
         val geyserType = parseGeyserType(geyserSpawn.type)
 
+        val scaledRate = geyserSpawn.scaledRate ?: 0.0
+        val scaledIterLen = geyserSpawn.scaledIterLen ?: 0.0
+        val scaledIterPct = geyserSpawn.scaledIterPct ?: 0.0
+        val scaledYearLen = geyserSpawn.scaledYearLen ?: 0.0
+        val scaledYearPct = geyserSpawn.scaledYearPct ?: 0.0
+
+        val iterationLength = scaledIterLen
+        val iterationPercent = scaledIterPct.coerceIn(0.0, 1.0).toFloat()
+        val onDuration = (iterationLength * iterationPercent).toFloat()
+        val offDuration = (iterationLength * (1f - iterationPercent)).toFloat()
+
+        val massPerCycle = scaledRate
+        val emitRateNum1 = (600.0 / iterationLength).toFloat()
+        val emitRateNum2 = (massPerCycle / emitRateNum1).toFloat()
+
+        /* Guard against onDuration == 0 (permanently-dormant geyser) to avoid Infinity. */
+        val emitRate = if (onDuration > 0f) (emitRateNum2 / onDuration).toFloat() else 0f
+
+        val yearLength = scaledYearLen
+        val yearPercent = scaledYearPct.coerceIn(0.0, 1.0).toFloat()
+        val yearOnDuration = (yearLength * yearPercent).toFloat()
+        val yearOffDuration = (yearLength * (1f - yearPercent)).toFloat()
+
+        val avgEmitRate = ((yearOnDuration / iterationLength) * (emitRate * onDuration) / yearLength).toFloat()
+
         return Geyser(
             id = geyserType,
             x = geyserSpawn.x.toShort(),
             y = (worldHeight - geyserSpawn.y).toShort(),
-            emitRate = (geyserSpawn.scaledRate ?: 0.0).toInt(),
-            avgEmitRate = (geyserSpawn.scaledRate ?: 0.0).toInt().toShort(),
-            idleTime = (geyserSpawn.scaledIterPct ?: 0.0).toInt().toShort(),
-            eruptionTime = (geyserSpawn.scaledIterLen ?: 0.0).toInt().toShort(),
-            dormancyCyclesRounded = (geyserSpawn.scaledYearLen ?: 0.0).toInt().toShort(),
-            activeCyclesRounded = (geyserSpawn.scaledYearPct ?: 0.0).toInt().toShort()
+            emitRate = round(emitRate * 1000).toInt(),
+            avgEmitRate = round(avgEmitRate * 1000).toInt().toShort(),
+            idleTime = round(offDuration).toInt().toShort(),
+            eruptionTime = round(onDuration).toInt().toShort(),
+            dormancyCyclesRounded = round(yearOffDuration / 600f).toInt().toShort(),
+            activeCyclesRounded = round(yearOnDuration / 600f).toInt().toShort()
         )
     }
 
