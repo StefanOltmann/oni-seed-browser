@@ -62,9 +62,12 @@ object WorldgenMapDataConverter {
         }
 
         /*
-         * Create a map of the asteroids.
+         * Create a map of the asteroids for Spaced Out.
+         * Ignore the base game.
          */
-        val starMapAsteroidEntries = mapData.starmap.mapIndexed { index, entry ->
+        val starMapAsteroidEntries = if (clusterType.isBaseGame())
+            emptyList()
+        else mapData.starmap.mapIndexed { index, entry ->
 
             val asteroid = mapData.worlds[index]
 
