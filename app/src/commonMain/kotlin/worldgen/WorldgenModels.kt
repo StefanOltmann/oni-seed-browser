@@ -18,9 +18,17 @@
  */
 package worldgen
 
+import de.stefan_oltmann.oni.model.ClusterType
+import de.stefan_oltmann.oni.model.GeyserType
+import de.stefan_oltmann.oni.model.SpacedOutSpacePOI
+import de.stefan_oltmann.oni.model.VanillaSpacePOI
 import de.stefan_oltmann.oni.model.ZoneType
+import de.stefan_oltmann.oni.model.serializer.ClusterTypePrefixSerializer
+import de.stefan_oltmann.oni.model.serializer.ClusterTypeSerializer
+import de.stefan_oltmann.oni.model.serializer.GeyserTypeStringSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Serializer
 import kotlinx.serialization.json.Json
 
 /*
@@ -30,15 +38,30 @@ import kotlinx.serialization.json.Json
 
 @Serializable
 data class WorldgenMapData(
+
     val coordinate: String,
+
     val seed: Int,
-    @SerialName("cluster_id") val clusterId: String,
-    @SerialName("coordinate_prefix") val coordinatePrefix: String,
+
+    @SerialName("cluster_id")
+    val clusterId: String,
+
+    @SerialName("coordinate_prefix")
+    @Serializable(with = ClusterTypePrefixSerializer::class)
+    val coordinatePrefix: ClusterType,
+
     val starmap: List<StarmapEntry>,
-    @SerialName("starmap_pois") val starmapPois: List<StarmapPoi>,
-    @SerialName("vanilla_starmap") val vanillaStarmap: List<VanillaStarmapEntry>,
+
+    @SerialName("starmap_pois")
+    val starmapPois: List<StarmapPoi>,
+
+    @SerialName("vanilla_starmap")
+    val vanillaStarmap: List<VanillaStarmapEntry>,
+
     val worlds: List<WorldMapData>,
+
     val failure: WorldgenFailure?,
+
     val telemetry: List<WorldgenEvent>
 ) {
 
@@ -97,15 +120,29 @@ open class EntitySpawn(
 
 @Serializable
 data class GeyserSpawn(
+
     val tag: String,
+
     val x: Int,
     val y: Int,
-    val type: String,
-    @SerialName("scaled_rate") val scaledRate: Double? = null,
-    @SerialName("scaled_iter_len") val scaledIterLen: Double? = null,
-    @SerialName("scaled_iter_pct") val scaledIterPct: Double? = null,
-    @SerialName("scaled_year_len") val scaledYearLen: Double? = null,
-    @SerialName("scaled_year_pct") val scaledYearPct: Double? = null
+
+    @Serializable(with = GeyserTypeStringSerializer::class)
+    val type: GeyserType,
+
+    @SerialName("scaled_rate")
+    val scaledRate: Double? = null,
+
+    @SerialName("scaled_iter_len")
+    val scaledIterLen: Double? = null,
+
+    @SerialName("scaled_iter_pct")
+    val scaledIterPct: Double? = null,
+
+    @SerialName("scaled_year_len")
+    val scaledYearLen: Double? = null,
+
+    @SerialName("scaled_year_pct")
+    val scaledYearPct: Double? = null
 )
 
 @Serializable
@@ -117,13 +154,13 @@ data class StarmapEntry(
 
 @Serializable
 data class StarmapPoi(
-    @SerialName("poi_type") val poiType: String,
+    @SerialName("poi_type") val poiType: SpacedOutSpacePOI,
     val q: Int,
     val r: Int
 )
 
 @Serializable
 data class VanillaStarmapEntry(
-    val type: String,
+    val type: VanillaSpacePOI,
     val distance: Int
 )

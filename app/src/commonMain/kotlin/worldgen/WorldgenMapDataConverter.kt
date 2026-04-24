@@ -41,16 +41,12 @@ object WorldgenMapDataConverter {
             "Coordinate ${mapData.coordinate} is not valid/supported."
         }
 
-        val clusterType = ClusterType.entries.find {
-            mapData.coordinatePrefix == it.prefix
-        } ?: error("Unknown cluster type for coordinate ${mapData.coordinate}")
-
         /*
          * Create a map of the regular POIs like harvestable, etc.
          */
         val starMapPOIEntries = mapData.starmapPois.map { entry ->
             StarMapEntrySpacedOut(
-                id = parseSpacedOutSpacePOI(entry.poiType),
+                id = entry.poiType,
                 q = entry.q.toByte(),
                 r = entry.r.toByte()
             )
@@ -60,23 +56,24 @@ object WorldgenMapDataConverter {
          * Create a map of the asteroids for Spaced Out.
          * Ignore the base game.
          */
-        val starMapAsteroidEntries = if (clusterType.isBaseGame())
+        val starMapAsteroidEntries = if (mapData.coordinatePrefix.isBaseGame())
             emptyList()
-        else mapData.starmap.mapIndexed { index, entry ->
+        else
+            mapData.starmap.mapIndexed { index, entry ->
 
-            val asteroid = mapData.worlds[index]
+                val asteroid = mapData.worlds[index]
 
-            val cleanName = asteroid.name.substringAfter("worlds/")
+                val cleanName = asteroid.name.substringAfter("worlds/")
 
-            val asteroidId = SpacedOutSpacePOI.entries.find { it.name == cleanName }
-                ?: error("Unknown asteroid type: ${asteroid.name}")
+                val asteroidId = SpacedOutSpacePOI.entries.find { it.name == cleanName }
+                    ?: error("Unknown asteroid type: ${asteroid.name}")
 
-            StarMapEntrySpacedOut(
-                id = asteroidId,
-                q = entry.q.toByte(),
-                r = entry.r.toByte()
-            )
-        }
+                StarMapEntrySpacedOut(
+                    id = asteroidId,
+                    q = entry.q.toByte(),
+                    r = entry.r.toByte()
+                )
+            }
 
         val starMapEntriesSpacedOut = starMapPOIEntries + starMapAsteroidEntries
 
@@ -160,11 +157,11 @@ object WorldgenMapDataConverter {
             uploaderAuthenticated = false,
             uploadDate = 0,
             gameVersion = 0,
-            cluster = clusterType,
+            cluster = mapData.coordinatePrefix,
             asteroids = asteroids,
             starMapEntriesVanilla = mapData.vanillaStarmap.map { entry ->
                 StarMapEntryVanilla(
-                    id = parseVanillaSpacePOI(entry.type),
+                    id = entry.type,
                     distance = entry.distance.toByte()
                 )
             },
@@ -248,7 +245,7 @@ object WorldgenMapDataConverter {
         worldHeight: Short
     ): Geyser {
 
-        val geyserType = parseGeyserType(geyserSpawn.type)
+        val geyserType = geyserSpawn.type
 
         val scaledRate = geyserSpawn.scaledRate ?: 0.0
         val scaledIterLen = geyserSpawn.scaledIterLen ?: 0.0
@@ -263,8 +260,8 @@ object WorldgenMapDataConverter {
         val emitRateNum1 = (600.0 / scaledIterLen).toFloat()
         val emitRateNum2 = (scaledRate / emitRateNum1).toFloat()
 
-        /* Guard against onDuration == 0 (permanently-dormant geyser) to avoid Infinity. */
-        val emitRate = if (onDuration > 0f) (emitRateNum2 / onDuration).toFloat() else 0f
+        /* Guard against onDuration == 0 (permanently dormant geyser) to avoid Infinity. */
+        val emitRate = if (onDuration > 0f) (emitRateNum2 / onDuration) else 0f
 
         val yearPercent = scaledYearPct.coerceIn(0.0, 1.0).toFloat()
         val yearOnDuration = (scaledYearLen * yearPercent).toFloat()
@@ -285,9 +282,6 @@ object WorldgenMapDataConverter {
         )
     }
 
-    private fun parseGeyserType(type: String): GeyserType =
-        GeyserType.entries.find { it.type == type } ?: error("Unknown geyser type: $type")
-
     private fun parsePointOfInterest(tag: String, x: Int, y: Int): PointOfInterest? {
 
         val poiType = PointOfInterestType.entries.find { it.name == tag }
@@ -299,12 +293,4 @@ object WorldgenMapDataConverter {
             y = y.toShort()
         )
     }
-
-    private fun parseVanillaSpacePOI(type: String): VanillaSpacePOI =
-        VanillaSpacePOI.entries.find { it.name == type }
-            ?: error("Unknown VanillaSpacePOI: $type")
-
-    private fun parseSpacedOutSpacePOI(type: String): SpacedOutSpacePOI =
-        SpacedOutSpacePOI.entries.find { it.name == type }
-            ?: error("Unknown SpacedOutSpacePOI: $type")
 }
