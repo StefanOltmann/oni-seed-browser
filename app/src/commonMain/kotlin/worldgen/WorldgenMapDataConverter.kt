@@ -48,7 +48,7 @@ object WorldgenMapDataConverter {
          */
         val clusterType = ClusterType.entries.find {
             mapData.coordinate.startsWith(it.prefix)
-        }
+        } ?: error("Unknown cluster type for coordinate ${mapData.coordinate}")
 
         /*
          * Create a map of the regular POIs like harvestable, etc.
