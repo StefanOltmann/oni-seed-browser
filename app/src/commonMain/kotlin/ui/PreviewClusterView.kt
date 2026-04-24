@@ -18,9 +18,13 @@
  */
 package ui
 
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 import de.stefan_oltmann.oni.model.Asteroid
 import de.stefan_oltmann.oni.model.Cluster
 
@@ -67,15 +71,24 @@ fun PreviewClusterView(
 
     } else {
 
-        ClusterView(
-            cluster = previewCluster,
-            index = 0,
-            totalCount = 1,
-            favoriteCoordinates = mutableStateOf(emptyList()),
-            showStarMap = showStarMap,
-            showAsteroidMap = showAsteroidMap,
-            steamIdToUsernameMap = emptyMap(),
-            writeToClipboard = writeToClipboard
-        )
+        val scrollState = rememberScrollState()
+
+        Box(
+            modifier = Modifier.verticalScroll(
+                state = scrollState
+            )
+        ) {
+
+            ClusterView(
+                cluster = previewCluster,
+                index = 0,
+                totalCount = 1,
+                favoriteCoordinates = mutableStateOf(emptyList()),
+                showStarMap = showStarMap,
+                showAsteroidMap = showAsteroidMap,
+                steamIdToUsernameMap = emptyMap(),
+                writeToClipboard = writeToClipboard
+            )
+        }
     }
 }
