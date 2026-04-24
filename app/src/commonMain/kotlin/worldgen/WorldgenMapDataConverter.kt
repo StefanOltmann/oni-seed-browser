@@ -48,24 +48,39 @@ object WorldgenMapDataConverter {
             cluster = clusterType,
             asteroids = mapData.worlds.mapIndexed { index, worldMapData ->
 
-                val biomePaths = buildBiomePaths(worldMapData.biomeCells)
-
                 val worldTraits = worldMapData.worldTraits.map { traitString ->
                     parseWorldTrait(traitString)
                 }
 
+                /*
+                 * The worldgen does flip the Y axis, so we need to invert it.
+                 */
+                val worldHeight = worldMapData.height.toShort()
+
+                val biomePaths = buildBiomePaths(
+                    biomeCells = worldMapData.biomeCells,
+                    worldHeight = worldHeight
+                )
+
                 Asteroid(
                     id = parseAsteroidType(worldMapData.name),
                     sizeX = worldMapData.width.toShort(),
-                    sizeY = worldMapData.height.toShort(),
+                    sizeY = worldHeight,
                     worldTraitsBitmask = WorldTrait.toMask(worldTraits),
                     biomePaths = biomePaths,
                     /* Find the relevant POIs. We use mapNotNull() to filter out the one's not interesting for us. */
                     pointsOfInterest = worldMapData.otherEntities.mapNotNull { entity ->
-                        parsePointOfInterest(entity.tag, entity.x, entity.y)
+                        parsePointOfInterest(
+                            tag = entity.tag,
+                            x = entity.x,
+                            y = worldHeight - entity.y
+                        )
                     },
                     geysers = worldMapData.geysers.map { geyserSpawn ->
-                        parseGeyser(geyserSpawn)
+                        convertGeyser(
+                            geyserSpawn = geyserSpawn,
+                            worldHeight = worldHeight
+                        )
                     }
                 )
             },
@@ -124,7 +139,10 @@ object WorldgenMapDataConverter {
             ?: error("Unknown asteroid type: $name")
     }
 
-    private fun buildBiomePaths(biomeCells: List<BiomeCell>): String {
+    private fun buildBiomePaths(
+        biomeCells: List<BiomeCell>,
+        worldHeight: Short
+    ): String {
 
         val zoneToPoints = mutableMapOf<String, MutableList<String>>()
 
@@ -136,14 +154,15 @@ object WorldgenMapDataConverter {
             val polyCoords = cell.poly
             val pointsBuilder = StringBuilder()
 
-            for (i in polyCoords.indices step 2) {
+            for (index in polyCoords.indices step 2) {
 
-                if (i > 0)
+                if (index > 0)
                     pointsBuilder.append(" ")
 
-                pointsBuilder.append(polyCoords[i].toInt())
-                pointsBuilder.append(",")
-                pointsBuilder.append(polyCoords[i + 1].toInt())
+                val x = polyCoords[index].toInt()
+                val y = worldHeight - polyCoords[index + 1].toInt()
+
+                pointsBuilder.append("$x,$y")
             }
 
             zoneToPoints.getOrPut(zoneName) { mutableListOf() }.add(pointsBuilder.toString())
@@ -179,10 +198,9 @@ object WorldgenMapDataConverter {
     private fun parseZoneType(type: String): ZoneType {
 
         return when (type) {
+
             "subworlds/space/Space" -> ZoneType.Space
             "subworlds/space/SpaceNoBorder" -> ZoneType.Space
-
-            "expansion1::subworlds/radioactive/med_FrozenUraniumFields" -> ZoneType.Radioactive
 
             else -> return ZoneType.Barren // FIXME We need a proper mapping
             // else -> error("Unknown zone type: $type")
@@ -197,14 +215,17 @@ object WorldgenMapDataConverter {
             ?: error("Unknown world trait: $trait")
     }
 
-    private fun parseGeyser(geyserSpawn: GeyserSpawn): Geyser {
+    private fun convertGeyser(
+        geyserSpawn: GeyserSpawn,
+        worldHeight: Short
+    ): Geyser {
 
         val geyserType = parseGeyserType(geyserSpawn.type)
 
         return Geyser(
             id = geyserType,
             x = geyserSpawn.x.toShort(),
-            y = geyserSpawn.y.toShort(),
+            y = (worldHeight - geyserSpawn.y).toShort(),
             emitRate = (geyserSpawn.scaledRate ?: 0.0).toInt(),
             avgEmitRate = (geyserSpawn.scaledRate ?: 0.0).toInt().toShort(),
             idleTime = (geyserSpawn.scaledIterPct ?: 0.0).toInt().toShort(),
