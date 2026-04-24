@@ -19,10 +19,24 @@
 package worldgen
 
 import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.json.Json
 
 class WorldgenMapDataConverterTest {
 
+    @OptIn(ExperimentalSerializationApi::class)
+    private val json = Json {
+        prettyPrint = true
+        prettyPrintIndent = "  "
+        ignoreUnknownKeys = false
+    }
+
     private val jsonTestData = WorldgenModelTest::class.java.getResourceAsStream("sample.json")!!
+        .readAllBytes()
+        .decodeToString()
+
+    private val jsonExpectedData = WorldgenModelTest::class.java.getResourceAsStream("sample_converted.json")!!
         .readAllBytes()
         .decodeToString()
 
@@ -31,8 +45,16 @@ class WorldgenMapDataConverterTest {
 
         val mapData = WorldgenMapData.fromJson(jsonTestData)
 
-        val cluster = WorldgenMapDataConverter.convert(mapData)
+        val cluster = WorldgenMapDataConverter.convert(
+            mapData = mapData,
+            gameVersion = 424242
+        )
 
-        println(cluster)
+        val actualJson = json.encodeToString(cluster) + "\n"
+
+        assertEquals(
+            expected = jsonExpectedData,
+            actual = actualJson
+        )
     }
 }

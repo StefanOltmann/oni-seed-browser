@@ -29,13 +29,15 @@ import de.stefan_oltmann.oni.model.PointOfInterestType
 import de.stefan_oltmann.oni.model.SpacedOutSpacePOI
 import de.stefan_oltmann.oni.model.StarMapEntrySpacedOut
 import de.stefan_oltmann.oni.model.StarMapEntryVanilla
-import de.stefan_oltmann.oni.model.VanillaSpacePOI
 import de.stefan_oltmann.oni.model.WorldTrait
 import kotlin.math.round
 
 object WorldgenMapDataConverter {
 
-    fun convert(mapData: WorldgenMapData): Cluster {
+    fun convert(
+        mapData: WorldgenMapData,
+        gameVersion: Int
+    ): Cluster {
 
         check(ClusterType.isValidCoordinate(mapData.coordinate)) {
             "Coordinate ${mapData.coordinate} is not valid/supported."
@@ -153,10 +155,13 @@ object WorldgenMapDataConverter {
 
         return Cluster(
             coordinate = mapData.coordinate,
+
+            /* These fields will be filled by the server on upload. */
             uploaderSteamIdHash = "",
             uploaderAuthenticated = false,
             uploadDate = 0,
-            gameVersion = 0,
+
+            gameVersion = gameVersion,
             cluster = mapData.coordinatePrefix,
             asteroids = asteroids,
             starMapEntriesVanilla = mapData.vanillaStarmap.map { entry ->
