@@ -18,6 +18,7 @@
  */
 package worldgen
 
+import androidx.compose.ui.text.buildAnnotatedString
 import de.stefan_oltmann.oni.model.Asteroid
 import de.stefan_oltmann.oni.model.AsteroidType
 import de.stefan_oltmann.oni.model.Cluster
@@ -39,6 +40,77 @@ object WorldgenMapDataConverter {
 
         val clusterType = parseClusterType(mapData.clusterId)
 
+        /*
+         * Create a map of the regular POIs like harvestables, etc.
+         */
+        val starMapPOIEntries = mapData.starmapPois.map { entry ->
+            StarMapEntrySpacedOut(
+                id = parseSpacedOutSpacePOI(entry.poiType),
+                q = entry.q.toByte(),
+                r = entry.r.toByte()
+            )
+        }
+
+        /*
+         * Create a map of the asteroids.
+         */
+        val starMapAsteroidEntries = mapData.starmap.mapIndexed { index, entry ->
+
+            val asteroid = mapData.worlds[index]
+
+            val cleanName = asteroid.name.substringAfter("worlds/")
+
+            val asteroidId = SpacedOutSpacePOI.entries.find { it.name == cleanName }
+                ?: error("Unknown asteroid type: ${asteroid.name}")
+
+            StarMapEntrySpacedOut(
+                id = asteroidId,
+                q = entry.q.toByte(),
+                r = entry.r.toByte()
+            )
+        }
+
+        val starMapEntriesSpacedOut = starMapPOIEntries + starMapAsteroidEntries
+
+        val asteroids = mapData.worlds.mapIndexed { index, worldMapData ->
+
+            val worldTraits = worldMapData.worldTraits.map { traitString ->
+                parseWorldTrait(traitString)
+            }
+
+            /*
+             * The worldgen does flip the Y axis, so we need to invert it.
+             */
+            val worldHeight = worldMapData.height.toShort()
+
+            val biomePaths = buildBiomePaths(
+                biomeCells = worldMapData.biomeCells,
+                worldHeight = worldHeight
+            )
+
+            Asteroid(
+                id = parseAsteroidType(worldMapData.name),
+                sizeX = worldMapData.width.toShort(),
+                sizeY = worldHeight,
+                worldTraitsBitmask = WorldTrait.toMask(worldTraits),
+                biomePaths = biomePaths,
+                /* Find the relevant POIs. We use mapNotNull() to filter out the one's not interesting for us. */
+                pointsOfInterest = worldMapData.otherEntities.mapNotNull { entity ->
+                    parsePointOfInterest(
+                        tag = entity.tag,
+                        x = entity.x,
+                        y = worldHeight - entity.y
+                    )
+                },
+                geysers = worldMapData.geysers.map { geyserSpawn ->
+                    convertGeyser(
+                        geyserSpawn = geyserSpawn,
+                        worldHeight = worldHeight
+                    )
+                }
+            )
+        }
+
         return Cluster(
             coordinate = mapData.coordinate,
             uploaderSteamIdHash = "",
@@ -46,57 +118,14 @@ object WorldgenMapDataConverter {
             uploadDate = 0,
             gameVersion = 0,
             cluster = clusterType,
-            asteroids = mapData.worlds.mapIndexed { index, worldMapData ->
-
-                val worldTraits = worldMapData.worldTraits.map { traitString ->
-                    parseWorldTrait(traitString)
-                }
-
-                /*
-                 * The worldgen does flip the Y axis, so we need to invert it.
-                 */
-                val worldHeight = worldMapData.height.toShort()
-
-                val biomePaths = buildBiomePaths(
-                    biomeCells = worldMapData.biomeCells,
-                    worldHeight = worldHeight
-                )
-
-                Asteroid(
-                    id = parseAsteroidType(worldMapData.name),
-                    sizeX = worldMapData.width.toShort(),
-                    sizeY = worldHeight,
-                    worldTraitsBitmask = WorldTrait.toMask(worldTraits),
-                    biomePaths = biomePaths,
-                    /* Find the relevant POIs. We use mapNotNull() to filter out the one's not interesting for us. */
-                    pointsOfInterest = worldMapData.otherEntities.mapNotNull { entity ->
-                        parsePointOfInterest(
-                            tag = entity.tag,
-                            x = entity.x,
-                            y = worldHeight - entity.y
-                        )
-                    },
-                    geysers = worldMapData.geysers.map { geyserSpawn ->
-                        convertGeyser(
-                            geyserSpawn = geyserSpawn,
-                            worldHeight = worldHeight
-                        )
-                    }
-                )
-            },
+            asteroids = asteroids,
             starMapEntriesVanilla = mapData.vanillaStarmap.map { entry ->
                 StarMapEntryVanilla(
                     id = parseVanillaSpacePOI(entry.type),
                     distance = entry.distance.toByte()
                 )
             },
-            starMapEntriesSpacedOut = mapData.starmapPois.map { entry ->
-                StarMapEntrySpacedOut(
-                    id = parseSpacedOutSpacePOI(entry.poiType),
-                    q = entry.q.toByte(),
-                    r = entry.r.toByte()
-                )
-            }
+            starMapEntriesSpacedOut = starMapEntriesSpacedOut
         )
     }
 
