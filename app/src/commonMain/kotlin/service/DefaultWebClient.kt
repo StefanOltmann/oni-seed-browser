@@ -341,7 +341,7 @@ object DefaultWebClient : WebClient {
             userId = "Steam-$steamId",
             installationId = AppStorage.getInstallationId(),
             gameVersion = cluster.gameVersion,
-            fileHashes = mapOf("modVersion" to "BROWSER"),
+            fileHashes = mapOf("modHash" to "onimaxxing 2.0.1"), // We don't have a hash
             cluster = UploadClusterConverter.convert(cluster)
         )
 
