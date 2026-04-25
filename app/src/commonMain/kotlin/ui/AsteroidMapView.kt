@@ -95,7 +95,6 @@ import ui.theme.lightGray
 import ui.theme.lightGrayTransparentBorderColor
 
 private val defaultSidebarWidth = (34 * 8).dp
-private val compactSidebarWidth = (17 * 8).dp
 
 @Composable
 fun AsteroidMapPopup(
@@ -105,8 +104,6 @@ fun AsteroidMapPopup(
 ) {
 
     val coroutineScope = rememberCoroutineScope()
-
-    val density = LocalDensity.current.density
 
     Box(
         modifier = Modifier
