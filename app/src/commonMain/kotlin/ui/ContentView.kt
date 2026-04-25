@@ -533,11 +533,11 @@ fun ContentView(
                         DoubleSpacer()
                     }
 
-                } else if (showMapGeneration.value) {
-
-                    MapGenerationView(
-                        isLoggedIn = connectedUserId != null
-                    )
+//                } else if (showMapGeneration.value) {
+//
+//                    MapGenerationView(
+//                        isLoggedIn = connectedUserId != null
+//                    )
 
                 } else if (showFavorites.value) {
 
