@@ -18,6 +18,8 @@
  */
 
 import de.stefan_oltmann.oni.model.filter.FilterQuery
+import kotlin.uuid.ExperimentalUuidApi
+import kotlin.uuid.Uuid
 import kotlinx.serialization.json.Json
 
 private val jsonPretty = Json {
@@ -30,19 +32,10 @@ private const val FILTER_SETTINGS_KEY = "mni_filter"
 private const val TOKEN_SETTINGS_KEY = "mni_token"
 private const val FAVORITES_SETTINGS_KEY = "mni_favorites"
 
+/* Used for contribution. */
+private const val MNI_INSTALLATION_ID_KEY = "mni_installation_id"
+
 object AppStorage {
-
-    init {
-
-        /* Remove old stuff */
-        removeClientId()
-    }
-
-    private fun removeClientId() {
-
-        settings.remove("id")
-        settings.remove("mni_client_id")
-    }
 
     fun getToken(): String? =
         settings.getStringOrNull(TOKEN_SETTINGS_KEY)
@@ -56,6 +49,25 @@ object AppStorage {
 
     fun clearToken() =
         settings.remove(TOKEN_SETTINGS_KEY)
+
+    /**
+     * Returns a unique client ID for this browser.
+     * This is used for map contributions.
+     */
+    @OptIn(ExperimentalUuidApi::class)
+    fun getInstallationId(): String {
+
+        var installationId = settings.getStringOrNull(MNI_INSTALLATION_ID_KEY)
+
+        if (installationId == null) {
+
+            installationId = Uuid.random().toString()
+
+            settings.putString(MNI_INSTALLATION_ID_KEY, installationId)
+        }
+
+        return installationId
+    }
 
     fun loadFilter(): FilterQuery {
 

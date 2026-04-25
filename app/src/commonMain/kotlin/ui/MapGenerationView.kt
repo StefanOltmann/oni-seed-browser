@@ -124,6 +124,8 @@ fun MapGenerationView(
 
             try {
 
+                println(AppStorage.getInstallationId())
+
                 val coordinate = CoordinateUtil.generateRandomCoordinate()
 
                 val cluster: Cluster = withContext(Dispatchers.Default) {
