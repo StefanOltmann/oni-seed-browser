@@ -19,15 +19,12 @@
 
 package ui
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.CircularProgressIndicator
@@ -39,7 +36,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -48,8 +44,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import de.stefan_oltmann.oni.model.Cluster
-import kotlin.time.Clock
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import service.worldgenGenerate
@@ -119,22 +113,13 @@ fun MapGenerationView() {
 
     var generatedCount by remember { mutableIntStateOf(0) }
 
-    /* Stats */
-    var startTime by remember { mutableLongStateOf(0L) }
-    var elapsedSeconds by remember { mutableLongStateOf(0L) }
-    var mapsPerMinute by remember { mutableIntStateOf(0) }
-
     LaunchedEffect(isRunning, isInitialized) {
 
         while (isRunning && isInitialized) {
 
-            delay(100)
-
             try {
 
                 val coordinate = CoordinateUtil.generateRandomCoordinate()
-
-                println("Generated random coordinate: $coordinate")
 
                 val cluster: Cluster = withContext(Dispatchers.Default) {
 
@@ -148,44 +133,17 @@ fun MapGenerationView() {
                     )
                 }
 
-                generatedCount = generatedCount + 1
+                // TODO Upload cluster
 
-                println("Map generation completed for: $coordinate")
+                generatedCount += 1
 
-                delay(100)
+                println("Generated map: $coordinate")
 
             } catch (e: Exception) {
 
                 e.printStackTrace()
                 println("Map generation failed: ${e.message}")
             }
-        }
-    }
-
-    LaunchedEffect(isRunning) {
-
-        generatedCount = 0
-        elapsedSeconds = 0L
-        mapsPerMinute = 0
-
-        if (isRunning)
-            startTime = Clock.System.now().toEpochMilliseconds()
-        else if (!isRunning)
-            startTime = 0L
-    }
-
-    LaunchedEffect(isRunning) {
-
-        while (isRunning) {
-
-            delay(500)
-
-            elapsedSeconds = (Clock.System.now().toEpochMilliseconds() - startTime) / 1000
-
-            mapsPerMinute = if (elapsedSeconds > 0)
-                ((generatedCount * 60) / elapsedSeconds).toInt()
-            else
-                0
         }
     }
 
@@ -263,45 +221,6 @@ fun MapGenerationView() {
                 style = MaterialTheme.typography.headlineLarge,
                 color = MaterialTheme.colorScheme.onBackground
             )
-
-            DoubleSpacer()
-
-            Row {
-
-                Column {
-
-                    Text(
-                        text = "Time elapsed:",
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.7f)
-                    )
-
-                    Text(
-                        text = "${elapsedSeconds / 60}m ${elapsedSeconds % 60}s",
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.7f)
-                    )
-
-                }
-
-                Spacer(
-                    modifier = Modifier.size(32.dp)
-                )
-
-                Column {
-                    Text(
-                        text = "Maps per minute:",
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.7f)
-                    )
-
-                    Text(
-                        text = "$mapsPerMinute",
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.7f)
-                    )
-                }
-            }
         }
     }
 }
