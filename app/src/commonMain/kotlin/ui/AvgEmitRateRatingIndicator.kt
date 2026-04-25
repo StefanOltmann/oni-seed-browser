@@ -19,27 +19,24 @@
 
 package ui
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import ui.theme.defaultPadding
-import ui.theme.defaultSpacing
-import ui.theme.lightGray
+import de.stefan_oltmann.oni.model.Geyser
+import de.stefan_oltmann.oni.model.GeyserType
 
 @Composable
-fun HorizontalSeparator() {
+fun AvgEmitRateRatingIndicator(geyser: Geyser) {
 
-    Box(
-        modifier = Modifier
-            .defaultPadding()
-            .padding(horizontal = defaultSpacing)
-            .background(lightGray.copy(alpha = 0.5f))
-            .fillMaxWidth()
-            .height(2.dp)
+    if (geyser.id == GeyserType.OIL_RESERVOIR)
+        return
+
+    CircularProgressIndicator(
+        progress = { geyser.avgEmitRateRating },
+        modifier = Modifier.fillMaxSize(),
+        color = getAvgEmitRateRatingColor(geyser.avgEmitRateRating).copy(alpha = 0.6F),
+        gapSize = 0.dp
     )
 }

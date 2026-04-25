@@ -24,11 +24,9 @@ import de.stefan_oltmann.oni.model.SpacedOutSpacePOI
 import de.stefan_oltmann.oni.model.VanillaSpacePOI
 import de.stefan_oltmann.oni.model.ZoneType
 import de.stefan_oltmann.oni.model.serializer.ClusterTypePrefixSerializer
-import de.stefan_oltmann.oni.model.serializer.ClusterTypeSerializer
 import de.stefan_oltmann.oni.model.serializer.GeyserTypeStringSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.Serializer
 import kotlinx.serialization.json.Json
 
 /*

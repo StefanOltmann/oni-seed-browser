@@ -36,7 +36,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
@@ -47,7 +46,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.rememberScrollbarAdapter
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -60,7 +58,6 @@ import androidx.compose.ui.Alignment.Companion.Center
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
@@ -89,7 +86,6 @@ import ui.theme.defaultPadding
 import ui.theme.defaultRoundedCornerShape
 import ui.theme.defaultSpacing
 import ui.theme.doubleSpacing
-import ui.theme.halfSpacing
 import ui.theme.hoverColor
 import ui.theme.lightGray
 import ui.theme.lightGrayTransparentBorderColor
@@ -220,8 +216,7 @@ fun AsteroidMapPopup(
                 AsteroidGeysersDetails(
                     sortedGeysers,
                     geyserListLazyListState,
-                    highlightedGeyser,
-                    geyserDrawerExpanded
+                    highlightedGeyser
                 )
             }
         }
@@ -408,36 +403,6 @@ fun AsteroidMap(
 }
 
 @Composable
-private fun DrawerButton(
-    arrowImage: ImageVector,
-    onClick: () -> Unit
-) {
-    val hovered = remember { mutableStateOf(false) }
-    Box(
-        contentAlignment = Alignment.CenterEnd,
-        modifier = Modifier
-            .fillMaxHeight()
-            .width(30.dp)
-            .noRippleClickable(onClick)
-            .border(0.dp, if (hovered.value) hoverColor else lightGrayTransparentBorderColor, defaultRoundedCornerShape)
-            .onHover(hovered)
-    ) {
-
-        Icon(
-            imageVector = arrowImage,
-            contentDescription = null,
-            tint = if (hovered.value)
-                hoverColor
-            else
-                MaterialTheme.colorScheme.onBackground,
-            modifier = Modifier
-                .padding(horizontal = halfSpacing)
-                .size(30.dp)
-        )
-    }
-}
-
-@Composable
 private fun AsteroidBiomeDetails(
     biomePaths: BiomePaths,
     highlightedZoneType: MutableState<ZoneType?>,
@@ -526,8 +491,7 @@ private fun AsteroidBiomeDetails(
 private fun AsteroidGeysersDetails(
     geysers: List<Geyser>,
     geyserListLazyListState: LazyListState,
-    highlightedGeyser: MutableState<Geyser?>,
-    geyserDrawerExpanded: MutableState<Boolean>
+    highlightedGeyser: MutableState<Geyser?>
 ) {
 
     Column(

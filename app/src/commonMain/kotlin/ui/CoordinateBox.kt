@@ -45,12 +45,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import io.github.stefanoltmann.app.generated.resources.Res
-import io.github.stefanoltmann.app.generated.resources.icon_starmap
 import io.github.stefanoltmann.app.generated.resources.uiCopiedToClipboard
 import kotlin.math.roundToInt
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import ui.icons.ContentCopy
 import ui.icons.IconBookmarkFilled
@@ -201,33 +199,6 @@ fun CoordinateBox(
                 ShowMapButton(showMapClicked)
             }
         }
-    }
-}
-
-@Composable
-private fun ShowMapButton(
-    showMapClicked: (() -> Unit)
-) {
-
-    val hovered = remember { mutableStateOf(false) }
-
-    Box(
-        contentAlignment = Alignment.Center,
-        modifier = Modifier
-            .onHover(hovered)
-            .halfPadding()
-            .size(32.dp)
-            .noRippleClickable(showMapClicked)
-    ) {
-
-        Icon(
-            painter = painterResource(Res.drawable.icon_starmap),
-            contentDescription = null,
-            tint = if (hovered.value)
-                hoverColor
-            else
-                MaterialTheme.colorScheme.onBackground
-        )
     }
 }
 

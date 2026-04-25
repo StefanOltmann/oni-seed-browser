@@ -25,12 +25,10 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -208,17 +206,3 @@ fun getAvgEmitRateRatingColor(avgEmitRateRating: Float): Color =
         mediumAvgEmitRateColor
     else
         badAvgEmitRateColor
-
-@Composable
-fun AvgEmitRateRatingIndicator(geyser: Geyser) {
-
-    if (geyser.id == GeyserType.OIL_RESERVOIR)
-        return
-
-    CircularProgressIndicator(
-        progress = { geyser.avgEmitRateRating },
-        modifier = Modifier.fillMaxSize(),
-        color = getAvgEmitRateRatingColor(geyser.avgEmitRateRating).copy(alpha = 0.6F),
-        gapSize = 0.dp
-    )
-}
