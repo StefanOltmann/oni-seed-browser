@@ -535,7 +535,9 @@ fun ContentView(
 
                 } else if (showMapGeneration.value) {
 
-                    MapGenerationView()
+                    MapGenerationView(
+                        isLoggedIn = connectedUserId != null
+                    )
 
                 } else if (showFavorites.value) {
 

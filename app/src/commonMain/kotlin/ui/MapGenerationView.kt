@@ -19,11 +19,11 @@
 
 package ui
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
@@ -41,6 +41,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import de.stefan_oltmann.oni.model.Cluster
@@ -52,15 +53,19 @@ import service.worldgenSupported
 import service.worldgenVersion
 import ui.icons.IconPauseCircleFilled
 import ui.icons.IconPlayCircleFilled
+import ui.theme.DefaultSpacer
 import ui.theme.DoubleSpacer
 import ui.theme.defaultPadding
+import ui.theme.defaultRoundedCornerShape
 import ui.theme.lightGray
 import worldgen.CoordinateUtil
 import worldgen.WorldgenMapData
 import worldgen.WorldgenMapDataConverter
 
 @Composable
-fun MapGenerationView() {
+fun MapGenerationView(
+    isLoggedIn: Boolean
+) {
 
     /*
      * Check if it's supported
@@ -164,45 +169,72 @@ fun MapGenerationView() {
                 color = MaterialTheme.colorScheme.onBackground
             )
 
+            DefaultSpacer()
+
+            Text(
+                text = "To contribute maps, just click the button below and leave this page open.",
+                style = MaterialTheme.typography.bodyLarge,
+                color = MaterialTheme.colorScheme.onBackground
+            )
+
             DoubleSpacer()
 
-            Row(
-                horizontalArrangement = Arrangement.Center,
-                verticalAlignment = Alignment.CenterVertically
+            Box(
+                contentAlignment = Alignment.Center
             ) {
 
                 Box(
                     contentAlignment = Alignment.Center,
-                    modifier = Modifier.size(64.dp)
+                    modifier = Modifier.size(108.dp)
                 ) {
 
-                    if (isRunning) {
+                    Box(
+                        modifier = Modifier
+                            .size(108.dp)
+                            .border(8.dp, lightGray.copy(alpha = 0.1f), CircleShape)
+                    )
+
+                    if (isRunning)
                         CircularProgressIndicator(
-                            modifier = Modifier.size(64.dp),
-                            strokeWidth = 4.dp,
+                            modifier = Modifier.size(108.dp),
+                            strokeWidth = 8.dp,
                             color = lightGray
                         )
-                    } else {
-                        Box(
-                            modifier = Modifier
-                                .size(64.dp)
-                                .border(4.dp, lightGray, CircleShape)
-                        )
-                    }
 
                     IconButton(
                         onClick = {
                             isRunning = !isRunning
                         },
-                        enabled = isInitialized,
-                        modifier = Modifier.size(64.dp)
+                        enabled = isInitialized && isLoggedIn,
+                        modifier = Modifier.size(96.dp)
                     ) {
 
                         Icon(
-                            imageVector = if (isRunning) IconPauseCircleFilled else IconPlayCircleFilled,
+                            imageVector = if (isRunning)
+                                IconPauseCircleFilled
+                            else
+                                IconPlayCircleFilled,
                             contentDescription = if (isRunning) "Stop" else "Start",
                             tint = MaterialTheme.colorScheme.onBackground,
-                            modifier = Modifier.size(48.dp)
+                            modifier = Modifier.size(96.dp)
+                        )
+                    }
+                }
+
+                if (!isLoggedIn) {
+
+                    Box(
+                        modifier = Modifier.background(
+                            Color.Black.copy(alpha = 0.9f),
+                            defaultRoundedCornerShape
+                        )
+                    ) {
+
+                        Text(
+                            text = "Please login to contribute maps.",
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = lightGray,
+                            modifier = Modifier.defaultPadding()
                         )
                     }
                 }
@@ -211,7 +243,7 @@ fun MapGenerationView() {
             DoubleSpacer()
 
             Text(
-                text = "Maps contribution in this session:",
+                text = "Maps contributed in this session:",
                 style = MaterialTheme.typography.bodyLarge,
                 color = MaterialTheme.colorScheme.onBackground
             )

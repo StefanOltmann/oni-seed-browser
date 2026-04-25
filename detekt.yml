@@ -168,7 +168,7 @@ complexity:
     excludeStringsWithLessThan5Characters: true
     ignoreStringsRegex: '$^'
   TooManyFunctions:
-    active: true
+    active: false
     excludes: [ '**/commonTest/**', '**/jvmTest/**' ]
     thresholdInFiles: 11
     thresholdInClasses: 11

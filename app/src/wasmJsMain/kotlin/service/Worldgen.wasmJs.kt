@@ -21,7 +21,7 @@ package service
 
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
-import kotlin.coroutines.suspendCoroutine
+import kotlinx.coroutines.suspendCancellableCoroutine
 
 @OptIn(ExperimentalWasmJsInterop::class)
 private fun jsCreateWorker(): JsAny =
@@ -67,13 +67,17 @@ private val worker: JsAny by lazy { jsCreateWorker() }
 
 private var nextId = 0
 private val pendingCallbacks = mutableMapOf<Int, (Result<String?>) -> Unit>()
+private var isListening = false
 
 @OptIn(ExperimentalWasmJsInterop::class)
 private fun ensureListening() {
     jsSetOnMessage(worker) { data ->
+
         val id = jsGetId(data)
         val type = jsGetType(data)
+
         val callback = pendingCallbacks.remove(id) ?: return@jsSetOnMessage
+
         if (type == "error")
             callback(Result.failure(Exception(jsGetError(data))))
         else
@@ -81,11 +85,9 @@ private fun ensureListening() {
     }
 }
 
-private var isListening = false
-
 @OptIn(ExperimentalWasmJsInterop::class)
 private suspend fun sendMessage(type: String, coordinate: String? = null): String? =
-    suspendCoroutine { cont ->
+    suspendCancellableCoroutine { cont ->
         if (!isListening) {
             ensureListening()
             isListening = true
@@ -109,10 +111,8 @@ actual suspend fun worldgenInit() {
     sendMessage("init")
 }
 
-actual suspend fun worldgenVersion(): String {
-    return sendMessage("version") ?: ""
-}
+actual suspend fun worldgenVersion(): String =
+    sendMessage("version") ?: ""
 
-actual suspend fun worldgenGenerate(coordinate: String): String {
-    return sendMessage("generate", coordinate) ?: ""
-}
+actual suspend fun worldgenGenerate(coordinate: String): String =
+    sendMessage("generate", coordinate) ?: ""
