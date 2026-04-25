@@ -1,3 +1,22 @@
+/*
+ * ONI Seed Browser
+ * Copyright (C) 2026 Stefan Oltmann
+ * https://stefan-oltmann.de
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package ui
 
 import AppStorage
@@ -67,6 +86,8 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import service.DefaultWebClient
 import ui.filter.FilterPanel
+import ui.icons.IconAddCircleFilled
+import ui.icons.IconAddCircleOutline
 import ui.icons.IconBookmarks
 import ui.icons.IconBookmarksFilled
 import ui.icons.IconLeaderboardFilled
@@ -181,6 +202,7 @@ fun ContentView(
 
         val clusters = remember { mutableStateOf(emptyList<String>()) }
 
+        val showMapGeneration = remember { mutableStateOf(false) }
         val showFavorites = remember { mutableStateOf(false) }
         val showLeaderboard = remember { mutableStateOf(false) }
 
@@ -277,6 +299,27 @@ fun ContentView(
                     FillSpacer()
 
                     Icon(
+                        imageVector = if (showMapGeneration.value)
+                            IconAddCircleFilled
+                        else
+                            IconAddCircleOutline,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.onBackground,
+                        modifier = Modifier
+                            .halfPadding()
+                            .size(32.dp)
+                            .noRippleClickable {
+
+                                showMapGeneration.value = !showMapGeneration.value
+
+                                if (showMapGeneration.value) {
+                                    showFavorites.value = false
+                                    showLeaderboard.value = false
+                                }
+                            }
+                    )
+
+                    Icon(
                         imageVector = if (showLeaderboard.value)
                             IconLeaderboardFilled
                         else
@@ -290,8 +333,10 @@ fun ContentView(
 
                                 showLeaderboard.value = !showLeaderboard.value
 
-                                if (showLeaderboard.value)
+                                if (showLeaderboard.value) {
+                                    showMapGeneration.value = false
                                     showFavorites.value = false
+                                }
                             }
                     )
 
@@ -309,8 +354,10 @@ fun ContentView(
 
                                 showFavorites.value = !showFavorites.value
 
-                                if (showFavorites.value)
+                                if (showFavorites.value) {
+                                    showMapGeneration.value = false
                                     showLeaderboard.value = false
+                                }
                             }
                     )
 
@@ -485,6 +532,10 @@ fun ContentView(
 
                         DoubleSpacer()
                     }
+
+                } else if (showMapGeneration.value) {
+
+                    MapGenerationView()
 
                 } else if (showFavorites.value) {
 
