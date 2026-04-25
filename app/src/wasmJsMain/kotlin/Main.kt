@@ -26,6 +26,9 @@ import de.stefan_oltmann.oni.model.Cluster
 import kotlin.time.measureTime
 import kotlinx.browser.document
 import kotlinx.browser.window
+import service.worldgenGenerate
+import service.worldgenInit
+import service.worldgenVersion
 import ui.App
 import util.getQueryParameters
 import util.getValidSteamHash

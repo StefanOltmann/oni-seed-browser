@@ -24,11 +24,61 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
+import kotlin.time.measureTime
+import service.worldgenGenerate
+import service.worldgenInit
+import service.worldgenSupported
+import service.worldgenVersion
+import worldgen.CoordinateUtil
+import worldgen.WorldgenMapData
+import worldgen.WorldgenMapDataConverter
 
 @Composable
 fun MapGenerationView() {
+
+    if (!worldgenSupported) {
+
+        Text(
+            text = "Worldgen is not supported on this platform.",
+            style = MaterialTheme.typography.bodyLarge,
+            color = MaterialTheme.colorScheme.onBackground,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.fillMaxSize()
+        )
+
+        return
+    }
+
+    LaunchedEffect(Unit) {
+
+        worldgenInit()
+
+        val worldgenVersion = worldgenVersion()
+
+        println("Worldgen version: $worldgenVersion")
+
+        val duration = measureTime {
+
+            val coordinate = CoordinateUtil.generateRandomCoordinate()
+
+            println("Generated random coordinate: $coordinate")
+
+            val json: String = worldgenGenerate(coordinate)
+
+            val worldgenMapData = WorldgenMapData.fromJson(json)
+
+            val cluster = WorldgenMapDataConverter.convert(
+                mapData = worldgenMapData,
+                gameVersion = worldgenVersion.substringBefore('+').toInt()
+            )
+        }
+
+        println("Test world generation took ${duration.inWholeMilliseconds}ms")
+    }
 
     Box(
         contentAlignment = Alignment.Center,
