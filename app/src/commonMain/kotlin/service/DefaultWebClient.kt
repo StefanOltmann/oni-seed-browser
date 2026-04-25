@@ -348,7 +348,7 @@ object DefaultWebClient : WebClient {
         val response = httpClient.post(UPLOAD_URL) {
 
             /* Auth */
-            header(TOKEN_HEADER, token)
+            header("MNI_TOKEN", token)
             header("MNI_API_KEY_BROWSER", MNI_API_KEY_BROWSER)
 
             contentType(ContentType.Application.Json)
