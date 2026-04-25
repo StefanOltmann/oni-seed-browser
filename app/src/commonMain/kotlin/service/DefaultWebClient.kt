@@ -100,9 +100,6 @@ object DefaultWebClient : WebClient {
         }
     }
 
-    /* Simple version for doing HEAD calls. */
-    private val simpleHttpClient = HttpClient()
-
     private val clusterCache = LruCache<String, Cluster?>(100)
 
     private var currentSearchIndex: SearchIndex? = null
