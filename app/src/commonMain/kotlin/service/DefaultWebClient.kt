@@ -20,9 +20,14 @@
 package service
 
 import AppStorage
+import MNI_API_KEY_BROWSER
+import com.appstractive.jwt.JWT
+import com.appstractive.jwt.from
+import com.appstractive.jwt.subject
 import de.stefan_oltmann.oni.model.Cluster
 import de.stefan_oltmann.oni.model.filter.FilterQuery
 import de.stefan_oltmann.oni.model.search.SearchIndex
+import de.stefan_oltmann.oni.model.server.Upload
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.plugins.compression.ContentEncoding
@@ -43,6 +48,7 @@ import io.ktor.http.isSuccess
 import io.ktor.serialization.kotlinx.json.json
 import io.ktor.serialization.kotlinx.protobuf.protobuf
 import kotlin.time.measureTimedValue
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -55,6 +61,7 @@ import kotlinx.serialization.protobuf.ProtoBuf
 
 const val SERVER_URL = "https://mni.stefan-oltmann.de"
 const val REQUEST_URL = "$SERVER_URL/request-coordinate"
+const val UPLOAD_URL = "$SERVER_URL/upload"
 
 const val FIND_URL = "$SERVER_URL/map"
 
@@ -117,6 +124,8 @@ object DefaultWebClient : WebClient {
 
             return seedCount?.toLongOrNull()
 
+        } catch (ex: CancellationException) {
+            throw ex
         } catch (ex: Throwable) {
             println("Did not receive counts: ${ex.message}")
         }
@@ -254,6 +263,8 @@ object DefaultWebClient : WebClient {
 
             return usernameMap
 
+        } catch (ex: CancellationException) {
+            throw ex
         } catch (ex: Exception) {
 
             throw Exception("Finding username map failed.", ex)
@@ -313,10 +324,48 @@ object DefaultWebClient : WebClient {
 
             return contributors
 
+        } catch (ex: CancellationException) {
+            throw ex
         } catch (ex: Exception) {
 
             throw Exception("Finding contributors failed.", ex)
         }
+    }
+
+    override suspend fun upload(cluster: Cluster): Boolean {
+
+        val token = AppStorage.getToken() ?: return false
+
+        val jwt: JWT = JWT.from(token)
+
+        val steamId = jwt.subject ?: jwt.claims["steamId"]
+
+        val upload = Upload(
+            userId = "Steam-$steamId",
+            installationId = AppStorage.getInstallationId(),
+            gameVersion = cluster.gameVersion,
+            fileHashes = mapOf("modVersion" to "BROWSER"),
+            cluster = UploadClusterConverter.convert(cluster)
+        )
+
+        val response = httpClient.post(UPLOAD_URL) {
+
+            /* Auth */
+            header(TOKEN_HEADER, token)
+            header("MNI_API_KEY_BROWSER", MNI_API_KEY_BROWSER)
+
+            contentType(ContentType.Application.Json)
+            setBody(upload)
+        }
+
+        val success = response.status.isSuccess()
+
+        if (!success)
+            println("[WEBCLIENT] Upload failed with HTTP ${response.status}: ${response.bodyAsText()}")
+        else
+            println("[WEBCLIENT] Upload successful: ${cluster.coordinate}")
+
+        return success
     }
 
 //    override suspend fun getLastModifiedMillis(url: String): Long? {

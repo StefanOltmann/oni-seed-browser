@@ -34,6 +34,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -45,8 +46,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import de.stefan_oltmann.oni.model.Cluster
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import service.DefaultWebClient
 import service.worldgenGenerate
 import service.worldgenInit
 import service.worldgenSupported
@@ -64,7 +67,8 @@ import worldgen.WorldgenMapDataConverter
 
 @Composable
 fun MapGenerationView(
-    isLoggedIn: Boolean
+    isLoggedIn: Boolean,
+    errorMessage: MutableState<String?>
 ) {
 
     /*
@@ -104,6 +108,8 @@ fun MapGenerationView(
 
             isInitialized = true
 
+        } catch (ex: CancellationException) {
+            throw ex
         } catch (ex: Exception) {
             println("Worldgen initialization failed.")
             ex.printStackTrace()
@@ -124,8 +130,6 @@ fun MapGenerationView(
 
             try {
 
-                println(AppStorage.getInstallationId())
-
                 val coordinate = CoordinateUtil.generateRandomCoordinate()
 
                 val cluster: Cluster = withContext(Dispatchers.Default) {
@@ -140,16 +144,44 @@ fun MapGenerationView(
                     )
                 }
 
-                // TODO Upload cluster
+                val uploadWasSuccessful = DefaultWebClient.upload(cluster)
 
-                generatedCount += 1
+                if (uploadWasSuccessful) {
 
-                println("Generated map: $coordinate")
+                    generatedCount += 1
 
-            } catch (e: Exception) {
+                    println("Generated map: $coordinate")
 
-                e.printStackTrace()
-                println("Map generation failed: ${e.message}")
+                } else {
+
+                    /* Stop uploading to prevent server spamming. */
+                    isRunning = false
+
+                    println("Map uploading failed.")
+
+                    errorMessage.value = "Map uploading failed."
+                }
+
+            } catch (ex: CancellationException) {
+
+                /*
+                 * Let the cancellation propagate.
+                 */
+                throw ex
+
+            } catch (ex: Throwable) {
+
+                /*
+                 * Catch Throwable here to prevent UI freezes and
+                 * safely stop the map generation.
+                 */
+
+                isRunning = false
+
+                println("Map generation failed: ${ex.message}")
+                ex.printStackTrace()
+
+                errorMessage.value = "Map generation failed: ${ex.message}"
             }
         }
     }
@@ -168,7 +200,7 @@ fun MapGenerationView(
             Text(
                 text = "Contribute maps to ONI Seed Browser!",
                 style = MaterialTheme.typography.headlineMedium,
-                color = MaterialTheme.colorScheme.onBackground
+                color = lightGray
             )
 
             DefaultSpacer()
@@ -176,7 +208,7 @@ fun MapGenerationView(
             Text(
                 text = "To contribute maps, just click the button below and leave this page open.",
                 style = MaterialTheme.typography.bodyLarge,
-                color = MaterialTheme.colorScheme.onBackground
+                color = lightGray
             )
 
             DoubleSpacer()
@@ -217,7 +249,7 @@ fun MapGenerationView(
                             else
                                 IconPlayCircleFilled,
                             contentDescription = if (isRunning) "Stop" else "Start",
-                            tint = MaterialTheme.colorScheme.onBackground,
+                            tint = lightGray,
                             modifier = Modifier.size(96.dp)
                         )
                     }

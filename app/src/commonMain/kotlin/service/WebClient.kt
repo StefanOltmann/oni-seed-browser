@@ -44,4 +44,6 @@ interface WebClient {
 
     suspend fun findContributors(): Map<String, Long>
 
+    suspend fun upload(cluster: Cluster): Boolean
+
 }

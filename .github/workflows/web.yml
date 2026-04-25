@@ -31,6 +31,8 @@ jobs:
         run: find .
 
       - name: Run Gradle build
+        env:
+          MNI_API_KEY_BROWSER: ${{ secrets.MNI_API_KEY_BROWSER }}
         run: |
           chmod +x gradlew
           ./gradlew build allTests wasmJsBrowserDistribution

@@ -20,6 +20,7 @@ package service
 
 import js.buffer.toArrayBuffer
 import js.objects.unsafeJso
+import kotlinx.coroutines.CancellationException
 import web.cache.Cache
 import web.cache.caches
 import web.cache.delete
@@ -58,6 +59,8 @@ actual class DiskCache(
 
             return response.byteArray() to lastModified
 
+        } catch (ex: CancellationException) {
+            throw ex
         } catch (ex: Throwable) {
 
             /*
@@ -94,6 +97,8 @@ actual class DiskCache(
                 )
             )
 
+        } catch (ex: CancellationException) {
+            throw ex
         } catch (ex: Throwable) {
 
             println("[CACHE] Error saving $key to cache: ${ex.message}.")

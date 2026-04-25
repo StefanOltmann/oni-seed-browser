@@ -77,6 +77,7 @@ import io.github.stefanoltmann.app.generated.resources.uiTitle
 import io.github.stefanoltmann.app.generated.resources.uiUsernameLabel
 import io.github.stefanoltmann.app.generated.resources.uiWelcome
 import io.github.stefanoltmann.app.generated.resources.uiWelcomeInstruction
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -125,6 +126,8 @@ fun ContentView(
 
             value = DefaultWebClient.getUsernameMap()
 
+        } catch (ex: CancellationException) {
+            throw ex
         } catch (ex: Throwable) {
 
             /* We MUST catch Throwable here to prevent UI freezes. */
@@ -141,6 +144,8 @@ fun ContentView(
 
             value = DefaultWebClient.countSeeds()
 
+        } catch (ex: CancellationException) {
+            throw ex
         } catch (ex: Throwable) {
 
             /* We MUST catch Throwable here to prevent UI freezes. */
@@ -159,6 +164,8 @@ fun ContentView(
 
             favoredCoordinates.value = AppStorage.loadFavorites()
 
+        } catch (ex: CancellationException) {
+            throw ex
         } catch (ex: Throwable) {
 
             /* We MUST catch Throwable here to prevent UI freezes. */
@@ -225,6 +232,8 @@ fun ContentView(
                     else
                         clusters.value = emptyList()
 
+                } catch (ex: CancellationException) {
+                    throw ex
                 } catch (ex: Throwable) {
 
                     /* We MUST catch Throwable here to prevent UI freezes. */
@@ -247,6 +256,8 @@ fun ContentView(
 
                     clusters.value = latestClusters
 
+                } catch (ex: CancellationException) {
+                    throw ex
                 } catch (ex: Throwable) {
 
                     /* We MUST catch Throwable here to prevent UI freezes. */
@@ -533,11 +544,12 @@ fun ContentView(
                         DoubleSpacer()
                     }
 
-//                } else if (showMapGeneration.value) {
-//
-//                    MapGenerationView(
-//                        isLoggedIn = connectedUserId != null
-//                    )
+                } else if (showMapGeneration.value) {
+
+                    MapGenerationView(
+                        isLoggedIn = connectedUserId != null,
+                        errorMessage = errorMessage
+                    )
 
                 } else if (showFavorites.value) {
 
@@ -702,6 +714,8 @@ private fun ColumnScope.MainPanel(
             clusters.value = searchResultWorlds
             hasPerformedSearch.value = true
 
+        } catch (ex: CancellationException) {
+            throw ex
         } catch (ex: Exception) {
 
             ex.printStackTrace()

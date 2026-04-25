@@ -7,10 +7,10 @@
   resolved "https://registry.yarnpkg.com/@js-joda/core/-/core-3.2.0.tgz#3e61e21b7b2b8a6be746df1335cf91d70db2a273"
   integrity sha512-PMqgJ0sw5B7FKb2d5bWYIoxjri+QlW/Pys7+Rw82jSH0QN3rB05jZ/VrrsUdh1w4+i2kw9JOejXGq/KhDOX7Kg==
 
-"@tigin-backwards/oxygen-not-included-worldgen@2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@tigin-backwards/oxygen-not-included-worldgen/-/oxygen-not-included-worldgen-2.0.0.tgz#0e44f5e3ddbfa04c2ebe31a19da8222074c0e6ac"
-  integrity sha512-q7VIP4p2iZJCbi6bgAMwBRv1SHWd7Rt2MV/niR7cd1MjUxZerKsERT5m21yPDhEr/8H2rg4CEWNDXLxEHJuAxg==
+"@tigin-backwards/oxygen-not-included-worldgen@2.0.1":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@tigin-backwards/oxygen-not-included-worldgen/-/oxygen-not-included-worldgen-2.0.1.tgz#0d077393baf353cc2578bfe425b195383b990f81"
+  integrity sha512-bHhqnIWQYaRvSpItysigP7kBri7DHHXCWXhgGVxaNRUnjqv2EGTrc0GIvYUfQAR46JcHUPlXRuDiwBsPrnR/3g==
 
 ws@8.18.3:
   version "8.18.3"

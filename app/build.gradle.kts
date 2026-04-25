@@ -134,7 +134,7 @@ kotlin {
                  *
                  * https://www.npmjs.com/package/@tigin-backwards/oxygen-not-included-worldgen-node
                  */
-                implementation(npm("@tigin-backwards/oxygen-not-included-worldgen", "2.0.0"))
+                implementation(npm("@tigin-backwards/oxygen-not-included-worldgen", "2.0.1"))
             }
         }
     }
@@ -230,6 +230,26 @@ project.afterEvaluate {
     outputDir.resolve("BuildInfo.kt").printWriter().use { writer ->
 
         writer.println("const val APP_VERSION: String = \"$version\"")
+
+        writer.flush()
+    }
+}
+// endregion
+
+// region AppApiKeys.kt
+project.afterEvaluate {
+
+    logger.lifecycle("Generate AppApiKeys.kt")
+
+    val outputDir = layout.buildDirectory.file("generated/src/commonMain/kotlin").get().asFile
+
+    outputDir.mkdirs()
+
+    outputDir.resolve("AppApiKeys.kt").printWriter().use { writer ->
+
+        val apiKey = System.getenv("MNI_API_KEY_BROWSER")
+
+        writer.println("const val MNI_API_KEY_BROWSER: String = \"$apiKey\"")
 
         writer.flush()
     }
