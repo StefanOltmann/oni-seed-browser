@@ -47,6 +47,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import de.stefan_oltmann.oni.model.Cluster
 import kotlin.time.Duration.Companion.seconds
+import kotlin.time.measureTimedValue
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -146,19 +147,21 @@ fun MapGenerationView(
                     )
                 }
 
-                val uploadWasSuccessful = DefaultWebClient.upload(cluster)
+                val (uploadWasSuccessful, duration) = measureTimedValue {
+                    DefaultWebClient.upload(cluster)
+                }
 
                 if (uploadWasSuccessful) {
 
                     generatedCount += 1
 
-                    println("Generated map: $coordinate")
+                    println("Generated map $coordinate in ${duration.inWholeMilliseconds}ms.")
 
                 } else {
 
                     println("Map uploading failed for $coordinate.")
 
-                    errorMessage.value = "Map uploading failed."
+                    errorMessage.value = "Map uploading failed after ${duration.inWholeMilliseconds}ms"
 
                     /*
                      * Stop generating maps after an error and retry 30 seconds later.
