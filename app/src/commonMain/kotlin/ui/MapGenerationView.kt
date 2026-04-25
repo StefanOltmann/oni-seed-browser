@@ -46,8 +46,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import de.stefan_oltmann.oni.model.Cluster
+import kotlin.time.Duration.Companion.seconds
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 import service.DefaultWebClient
 import service.worldgenGenerate
@@ -154,12 +156,17 @@ fun MapGenerationView(
 
                 } else {
 
-                    /* Stop uploading to prevent server spamming. */
-                    isRunning = false
-
                     println("Map uploading failed.")
 
                     errorMessage.value = "Map uploading failed."
+
+                    /*
+                     * Stop generating maps after an error and retry 30 seconds later.
+                     * This is to prevent server spamming.
+                     */
+                    isRunning = false
+                    delay(30.seconds)
+                    isRunning = true
                 }
 
             } catch (ex: CancellationException) {
@@ -172,16 +179,21 @@ fun MapGenerationView(
             } catch (ex: Throwable) {
 
                 /*
-                 * Catch Throwable here to prevent UI freezes and
-                 * safely stop the map generation.
+                 * Catch Throwable here to prevent UI freezes.
                  */
-
-                isRunning = false
 
                 println("Map generation failed: ${ex.message}")
                 ex.printStackTrace()
 
                 errorMessage.value = "Map generation failed: ${ex.message}"
+
+                /*
+                 * Stop generating maps after an error and retry 30 seconds later.
+                 * This is to prevent server spamming.
+                 */
+                isRunning = false
+                delay(30.seconds)
+                isRunning = true
             }
         }
     }
