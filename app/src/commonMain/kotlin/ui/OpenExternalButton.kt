@@ -34,14 +34,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import de.stefan_oltmann.oni.model.AsteroidType
 import ui.icons.IconExternalLink
 import ui.theme.defaultSpacing
 import ui.theme.minimalRoundedCornerShape
-
-private const val ONIMAXXING_URL = "https://onimaxxing.com/worldgen/"
-
-private const val ONI_VIEW_URL = "https://m45sci.xyz/u/dist/oni-view/view.html"
 
 @Composable
 fun OpenExternalButton(
@@ -79,44 +74,4 @@ fun OpenExternalButton(
             modifier = Modifier.size(16.dp)
         )
     }
-}
-
-@Composable
-fun OpenInOnimaxxingButton(
-    coordinate: String,
-    modifier: Modifier = Modifier
-) {
-
-    OpenExternalButton(
-        url = ONIMAXXING_URL + coordinate,
-        text = "onimaxxing",
-        modifier = modifier
-    )
-}
-
-@Composable
-fun OpenInOnimaxxingStarmapButton(
-    coordinate: String,
-    modifier: Modifier = Modifier
-) {
-
-    OpenExternalButton(
-        url = "$ONIMAXXING_URL$coordinate/Starmap",
-        text = "onimaxxing",
-        modifier = modifier
-    )
-}
-
-@Composable
-fun OpenInOniViewButton(
-    coordinate: String,
-    asteroidType: AsteroidType,
-    modifier: Modifier = Modifier
-) {
-
-    OpenExternalButton(
-        url = ONI_VIEW_URL + "?coord=" + coordinate + "&asteroid=" + asteroidType.name,
-        text = "ONI View",
-        modifier = modifier
-    )
 }
