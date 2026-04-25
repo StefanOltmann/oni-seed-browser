@@ -156,7 +156,7 @@ fun MapGenerationView(
 
                 } else {
 
-                    println("Map uploading failed.")
+                    println("Map uploading failed for $coordinate.")
 
                     errorMessage.value = "Map uploading failed."
 
