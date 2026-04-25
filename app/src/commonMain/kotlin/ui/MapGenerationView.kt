@@ -152,8 +152,7 @@ fun MapGenerationView() {
 
                 println("Map generation completed for: $coordinate")
 
-                // Refresh the UI
-                delay(200)
+                delay(100)
 
             } catch (e: Exception) {
 
@@ -165,6 +164,7 @@ fun MapGenerationView() {
 
     LaunchedEffect(isRunning) {
 
+        generatedCount = 0
         elapsedSeconds = 0L
         mapsPerMinute = 0
 
@@ -178,7 +178,7 @@ fun MapGenerationView() {
 
         while (isRunning) {
 
-            delay(1000)
+            delay(500)
 
             elapsedSeconds = (Clock.System.now().toEpochMilliseconds() - startTime) / 1000
 
