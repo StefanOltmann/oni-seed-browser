@@ -135,19 +135,17 @@ fun MapGenerationView(
 
                 val coordinate = CoordinateUtil.generateRandomCoordinate()
 
-                val cluster: Cluster = withContext(Dispatchers.Default) {
+                val (uploadWasSuccessful, duration) = measureTimedValue {
 
                     val json: String = worldgenGenerate(coordinate)
 
                     val worldgenMapData = WorldgenMapData.fromJson(json)
 
-                    WorldgenMapDataConverter.convert(
+                    val cluster = WorldgenMapDataConverter.convert(
                         mapData = worldgenMapData,
                         gameVersion = worldgenVersion.substringBefore('+').toInt()
                     )
-                }
 
-                val (uploadWasSuccessful, duration) = measureTimedValue {
                     DefaultWebClient.upload(cluster)
                 }
 
