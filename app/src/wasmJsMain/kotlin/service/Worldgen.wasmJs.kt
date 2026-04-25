@@ -17,75 +17,102 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package service/*
- * ONI Seed Browser
- * Copyright (C) 2026 Stefan Oltmann
- * https://stefan-oltmann.de
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
+package service
 
-import kotlin.js.Promise
-import kotlinx.coroutines.await
-
-/*
- * TODO FIXME Should be placed in a web worker for performance reasons.
- *  I just don't know how to do that with Kotlin/WASM.
- */
+import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
+import kotlin.coroutines.suspendCoroutine
 
 @OptIn(ExperimentalWasmJsInterop::class)
-private fun jsImportModule(): Promise<JsAny> =
-    js("import('./worldgen.mjs')")
+private fun jsCreateWorker(): JsAny =
+    js("new Worker(new URL('./worldgen.worker.mjs', import.meta.url), { type: 'module' })")
 
 @Suppress("UNUSED", "UnusedParameter") // false positive
 @OptIn(ExperimentalWasmJsInterop::class)
-private fun jsCallInit(module: JsAny): Promise<JsAny> =
-    js("module.default.init()")
+private fun jsPostMessageWithCoordinate(worker: JsAny, id: Int, type: String, coordinate: String): Unit =
+    js("worker.postMessage({ id: id, type: type, payload: { coordinate: coordinate } })")
 
 @Suppress("UNUSED", "UnusedParameter") // false positive
 @OptIn(ExperimentalWasmJsInterop::class)
-private fun jsCallVersion(module: JsAny): String =
-    js("module.default.version()")
+private fun jsPostMessageNoPayload(worker: JsAny, id: Int, type: String): Unit =
+    js("worker.postMessage({ id: id, type: type, payload: null })")
 
 @Suppress("UNUSED", "UnusedParameter") // false positive
 @OptIn(ExperimentalWasmJsInterop::class)
-private fun jsCallGenerate(module: JsAny, coordinate: String): String =
-    js("module.default.generate(coordinate)")
+private fun jsSetOnMessage(worker: JsAny, callback: (JsAny) -> Unit): Unit =
+    js("worker.onmessage = function(event) { callback(event.data) }")
+
+@Suppress("UNUSED", "UnusedParameter") // false positive
+@OptIn(ExperimentalWasmJsInterop::class)
+private fun jsGetId(data: JsAny): Int =
+    js("data.id")
+
+@Suppress("UNUSED", "UnusedParameter") // false positive
+@OptIn(ExperimentalWasmJsInterop::class)
+private fun jsGetType(data: JsAny): String =
+    js("data.type")
+
+@Suppress("UNUSED", "UnusedParameter") // false positive
+@OptIn(ExperimentalWasmJsInterop::class)
+private fun jsGetResult(data: JsAny): String? =
+    js("data.result ?? null")
+
+@Suppress("UNUSED", "UnusedParameter") // false positive
+@OptIn(ExperimentalWasmJsInterop::class)
+private fun jsGetError(data: JsAny): String =
+    js("data.error ?? 'Unknown error'")
 
 @OptIn(ExperimentalWasmJsInterop::class)
-private var cachedModule: JsAny? = null
+private val worker: JsAny by lazy { jsCreateWorker() }
+
+private var nextId = 0
+private val pendingCallbacks = mutableMapOf<Int, (Result<String?>) -> Unit>()
 
 @OptIn(ExperimentalWasmJsInterop::class)
-private suspend fun getModule(): JsAny =
-    cachedModule ?: jsImportModule().await<JsAny>().also { cachedModule = it }
+private fun ensureListening() {
+    jsSetOnMessage(worker) { data ->
+        val id = jsGetId(data)
+        val type = jsGetType(data)
+        val callback = pendingCallbacks.remove(id) ?: return@jsSetOnMessage
+        if (type == "error")
+            callback(Result.failure(Exception(jsGetError(data))))
+        else
+            callback(Result.success(jsGetResult(data)))
+    }
+}
+
+private var isListening = false
+
+@OptIn(ExperimentalWasmJsInterop::class)
+private suspend fun sendMessage(type: String, coordinate: String? = null): String? =
+    suspendCoroutine { cont ->
+        if (!isListening) {
+            ensureListening()
+            isListening = true
+        }
+        val id = nextId++
+        pendingCallbacks[id] = { result ->
+            result.fold(
+                onSuccess = { cont.resume(it) },
+                onFailure = { cont.resumeWithException(it) }
+            )
+        }
+        if (coordinate != null)
+            jsPostMessageWithCoordinate(worker, id, type, coordinate)
+        else
+            jsPostMessageNoPayload(worker, id, type)
+    }
 
 actual val worldgenSupported: Boolean = true
 
-@OptIn(ExperimentalWasmJsInterop::class)
 actual suspend fun worldgenInit() {
-    val module = getModule()
-    jsCallInit(module).await<JsAny>()
+    sendMessage("init")
 }
 
-@OptIn(ExperimentalWasmJsInterop::class)
 actual suspend fun worldgenVersion(): String {
-    val module = getModule()
-    return jsCallVersion(module)
+    return sendMessage("version") ?: ""
 }
 
-@OptIn(ExperimentalWasmJsInterop::class)
 actual suspend fun worldgenGenerate(coordinate: String): String {
-    val module = getModule()
-    return jsCallGenerate(module, coordinate)
+    return sendMessage("generate", coordinate) ?: ""
 }
