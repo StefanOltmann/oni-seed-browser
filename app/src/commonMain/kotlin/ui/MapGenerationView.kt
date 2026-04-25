@@ -47,8 +47,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import de.stefan_oltmann.oni.model.Cluster
 import kotlin.time.Clock
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import service.worldgenGenerate
 import service.worldgenInit
 import service.worldgenSupported
@@ -93,9 +96,10 @@ fun MapGenerationView() {
 
         try {
 
-            worldgenInit()
-
-            worldgenVersion = worldgenVersion()
+            worldgenVersion = withContext(Dispatchers.Default) {
+                worldgenInit()
+                worldgenVersion()
+            }
 
             println("Worldgen version initialized: $worldgenVersion")
 
@@ -132,14 +136,17 @@ fun MapGenerationView() {
 
                 println("Generated random coordinate: $coordinate")
 
-                val json: String = worldgenGenerate(coordinate)
+                val cluster: Cluster = withContext(Dispatchers.Default) {
 
-                val worldgenMapData = WorldgenMapData.fromJson(json)
+                    val json: String = worldgenGenerate(coordinate)
 
-                val cluster = WorldgenMapDataConverter.convert(
-                    mapData = worldgenMapData,
-                    gameVersion = worldgenVersion.substringBefore('+').toInt()
-                )
+                    val worldgenMapData = WorldgenMapData.fromJson(json)
+
+                    WorldgenMapDataConverter.convert(
+                        mapData = worldgenMapData,
+                        gameVersion = worldgenVersion.substringBefore('+').toInt()
+                    )
+                }
 
                 generatedCount = generatedCount + 1
 
