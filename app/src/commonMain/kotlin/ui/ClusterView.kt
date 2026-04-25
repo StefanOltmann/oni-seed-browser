@@ -21,9 +21,6 @@ package ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -52,14 +49,12 @@ import de.stefan_oltmann.oni.model.Asteroid
 import de.stefan_oltmann.oni.model.Cluster
 import io.github.stefanoltmann.app.generated.resources.Res
 import io.github.stefanoltmann.app.generated.resources.uiCopiedToClipboard
-import kotlin.math.max
 import kotlinx.coroutines.delay
 import org.jetbrains.compose.resources.stringResource
 import ui.icons.ContentCopy
 import ui.icons.IconAuthenticated
 import ui.icons.IconExternalLink
 import ui.theme.DefaultSpacer
-import ui.theme.FillSpacer
 import ui.theme.HalfSpacer
 import ui.theme.anthraticeTransparentBackgroundColor
 import ui.theme.defaultRoundedCornerShape
@@ -265,90 +260,4 @@ fun ClusterView(
     }
 
     HalfSpacer()
-}
-
-@Composable
-private fun AsteroidsGrid(
-    cluster: Cluster,
-    showAsteroidMap: MutableState<Pair<Cluster, Asteroid>?>
-) {
-
-    BoxWithConstraints(
-        modifier = Modifier.padding(
-            start = defaultSpacing,
-            end = defaultSpacing,
-            bottom = defaultSpacing
-        )
-    ) {
-
-        val gridLayoutColumnCount = max(
-            maxWidth.div(widthPerWorld).toInt(),
-            1
-        )
-
-        Column(
-            verticalArrangement = Arrangement.spacedBy(defaultSpacing)
-        ) {
-
-            val asteroidsIterator = cluster.asteroids.iterator()
-
-            val firstAsteroid = asteroidsIterator.next()
-
-            /* First Asteroid should span the whole column. */
-            AsteroidView(
-                asteroid = firstAsteroid,
-                isStarterAsteroid = true,
-                showMap = {
-                    showAsteroidMap.value = cluster to firstAsteroid
-                }
-            )
-
-            if (asteroidsIterator.hasNext()) {
-
-                val secondAsteroid = asteroidsIterator.next()
-
-                AsteroidView(
-                    asteroid = secondAsteroid,
-                    isStarterAsteroid = false,
-                    showMap = {
-                        showAsteroidMap.value = cluster to secondAsteroid
-                    }
-                )
-            }
-
-            val remainingAsteroids = asteroidsIterator.asSequence().toList()
-
-            val asteroidsPerColumn = remainingAsteroids.chunked(gridLayoutColumnCount)
-
-            for (asteroidsInColumn in asteroidsPerColumn) {
-
-                Row(
-                    horizontalArrangement = Arrangement.spacedBy(defaultSpacing)
-                ) {
-
-                    for (asteroid in asteroidsInColumn) {
-
-                        Box(
-                            modifier = Modifier.weight(1F)
-                        ) {
-
-                            AsteroidView(
-                                asteroid = asteroid,
-                                isStarterAsteroid = false,
-                                showMap = {
-                                    showAsteroidMap.value = cluster to asteroid
-                                }
-                            )
-                        }
-                    }
-
-                    val requiredSpacerCount = gridLayoutColumnCount - asteroidsInColumn.size
-
-                    repeat(requiredSpacerCount) {
-                        FillSpacer()
-                    }
-                }
-            }
-        }
-    }
 }
