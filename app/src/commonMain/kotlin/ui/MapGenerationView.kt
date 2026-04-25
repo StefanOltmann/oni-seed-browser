@@ -25,11 +25,12 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.PlayArrow
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -38,14 +39,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import kotlin.time.Clock
 import kotlinx.coroutines.delay
 import service.worldgenGenerate
 import service.worldgenInit
@@ -113,6 +115,11 @@ fun MapGenerationView() {
 
     var generatedCount by remember { mutableIntStateOf(0) }
 
+    /* Stats */
+    var startTime by remember { mutableLongStateOf(0L) }
+    var elapsedSeconds by remember { mutableLongStateOf(0L) }
+    var mapsPerMinute by remember { mutableIntStateOf(0) }
+
     LaunchedEffect(isRunning, isInitialized) {
 
         while (isRunning && isInitialized) {
@@ -139,13 +146,39 @@ fun MapGenerationView() {
                 println("Map generation completed for: $coordinate")
 
                 // Refresh the UI
-                delay(100)
+                delay(200)
 
             } catch (e: Exception) {
 
                 e.printStackTrace()
                 println("Map generation failed: ${e.message}")
             }
+        }
+    }
+
+    LaunchedEffect(isRunning) {
+
+        elapsedSeconds = 0L
+        mapsPerMinute = 0
+
+        if (isRunning)
+            startTime = Clock.System.now().toEpochMilliseconds()
+        else if (!isRunning)
+            startTime = 0L
+    }
+
+    LaunchedEffect(isRunning) {
+
+        while (isRunning) {
+
+            delay(1000)
+
+            elapsedSeconds = (Clock.System.now().toEpochMilliseconds() - startTime) / 1000
+
+            mapsPerMinute = if (elapsedSeconds > 0)
+                ((generatedCount * 60) / elapsedSeconds).toInt()
+            else
+                0
         }
     }
 
@@ -173,46 +206,95 @@ fun MapGenerationView() {
                 verticalAlignment = Alignment.CenterVertically
             ) {
 
-                IconButton(
-                    onClick = {
-                        isRunning = !isRunning
-                    },
-                    enabled = isInitialized,
-                    modifier = Modifier
-                        .size(64.dp)
-                        .border(4.dp, lightGray, CircleShape)
+                Box(
+                    contentAlignment = Alignment.Center,
+                    modifier = Modifier.size(64.dp)
                 ) {
 
-                    Icon(
-                        imageVector = if (isRunning) IconPauseCircleFilled else IconPlayCircleFilled,
-                        contentDescription = if (isRunning) "Stop" else "Start",
-                        tint = MaterialTheme.colorScheme.onBackground,
-                        modifier = Modifier.size(40.dp)
-                    )
+                    if (isRunning) {
+                        CircularProgressIndicator(
+                            modifier = Modifier.size(64.dp),
+                            strokeWidth = 4.dp,
+                            color = lightGray
+                        )
+                    } else {
+                        Box(
+                            modifier = Modifier
+                                .size(64.dp)
+                                .border(4.dp, lightGray, CircleShape)
+                        )
+                    }
+
+                    IconButton(
+                        onClick = {
+                            isRunning = !isRunning
+                        },
+                        enabled = isInitialized,
+                        modifier = Modifier.size(64.dp)
+                    ) {
+
+                        Icon(
+                            imageVector = if (isRunning) IconPauseCircleFilled else IconPlayCircleFilled,
+                            contentDescription = if (isRunning) "Stop" else "Start",
+                            tint = MaterialTheme.colorScheme.onBackground,
+                            modifier = Modifier.size(48.dp)
+                        )
+                    }
                 }
             }
 
             DoubleSpacer()
 
             Text(
-                text = "Maps generated in this session:",
+                text = "Maps contribution in this session:",
                 style = MaterialTheme.typography.bodyLarge,
                 color = MaterialTheme.colorScheme.onBackground
             )
 
             Text(
                 text = "$generatedCount",
-                style = MaterialTheme.typography.titleLarge,
+                style = MaterialTheme.typography.headlineLarge,
                 color = MaterialTheme.colorScheme.onBackground
             )
 
             DoubleSpacer()
 
-            Text(
-                text = if (isRunning) "Running..." else "Paused",
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.7f)
-            )
+            Row {
+
+                Column {
+
+                    Text(
+                        text = "Time elapsed:",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.7f)
+                    )
+
+                    Text(
+                        text = "${elapsedSeconds / 60}m ${elapsedSeconds % 60}s",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.7f)
+                    )
+
+                }
+
+                Spacer(
+                    modifier = Modifier.size(32.dp)
+                )
+
+                Column {
+                    Text(
+                        text = "Maps per minute:",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.7f)
+                    )
+
+                    Text(
+                        text = "$mapsPerMinute",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.7f)
+                    )
+                }
+            }
         }
     }
 }
