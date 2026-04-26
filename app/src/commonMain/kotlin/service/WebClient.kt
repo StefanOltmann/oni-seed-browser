@@ -21,6 +21,7 @@ package service
 
 import de.stefan_oltmann.oni.model.Cluster
 import de.stefan_oltmann.oni.model.filter.FilterQuery
+import io.ktor.http.HttpStatusCode
 
 interface WebClient {
 
@@ -44,6 +45,6 @@ interface WebClient {
 
     suspend fun findContributors(): Map<String, Long>
 
-    suspend fun upload(cluster: Cluster): Boolean
+    suspend fun upload(cluster: Cluster): HttpStatusCode
 
 }

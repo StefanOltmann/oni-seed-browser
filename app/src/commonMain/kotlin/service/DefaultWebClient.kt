@@ -329,9 +329,10 @@ object DefaultWebClient : WebClient {
         }
     }
 
-    override suspend fun upload(cluster: Cluster): Boolean {
+    override suspend fun upload(cluster: Cluster): HttpStatusCode {
 
-        val token = AppStorage.getToken() ?: return false
+        val token = AppStorage.getToken()
+            ?: error("Cannot upload cluster without a valid token.")
 
         val jwt: JWT = JWT.from(token)
 
@@ -355,14 +356,12 @@ object DefaultWebClient : WebClient {
             setBody(upload)
         }
 
-        val success = response.status.isSuccess()
-
-        if (!success)
+        if (!response.status.isSuccess())
             println("[WEBCLIENT] Upload failed with HTTP ${response.status}: ${response.bodyAsText()}")
         else
             println("[WEBCLIENT] Upload successful: ${cluster.coordinate}")
 
-        return success
+        return response.status
     }
 
 //    override suspend fun getLastModifiedMillis(url: String): Long? {

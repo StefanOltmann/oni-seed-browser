@@ -45,7 +45,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import de.stefan_oltmann.oni.model.Cluster
+import io.ktor.http.HttpStatusCode
+import io.ktor.http.isSuccess
+import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.Duration.Companion.seconds
 import kotlin.time.measureTimedValue
 import kotlinx.coroutines.CancellationException
@@ -127,15 +129,23 @@ fun MapGenerationView(
 
     var generatedCount by remember { mutableIntStateOf(0) }
 
+    var delayMillis by remember { mutableIntStateOf(100) }
+
     LaunchedEffect(isRunning, isInitialized) {
 
         while (isRunning && isInitialized) {
+
+            /*
+             * Wait a bit before generating the next map to prevent
+             * being rate limited by the server.
+             */
+            delay(delayMillis.milliseconds)
 
             try {
 
                 val coordinate = CoordinateUtil.generateRandomCoordinate()
 
-                val (uploadWasSuccessful, duration) = measureTimedValue {
+                val (statusCode, duration) = measureTimedValue {
 
                     val json: String = worldgenGenerate(coordinate)
 
@@ -149,7 +159,33 @@ fun MapGenerationView(
                     DefaultWebClient.upload(cluster)
                 }
 
-                if (uploadWasSuccessful) {
+                /*
+                 * The server returned that the map already exists.
+                 * We just skip to the next one.
+                 */
+                if (statusCode == HttpStatusCode.Conflict)
+                    continue
+
+                /*
+                 * If the server is under heavy load, we wait a second
+                 * and then continue with slower uploads.
+                 */
+                if (statusCode == HttpStatusCode.TooManyRequests) {
+
+                    /*
+                     * We increase the delay time by 100ms to
+                     * slow down uploading for this session.
+                     */
+                    delayMillis += 100
+
+                    println("Server is under heavy load. Delaying uploads by ${delayMillis}ms.")
+
+                    delay(1.seconds)
+
+                    continue
+                }
+
+                if (statusCode.isSuccess()) {
 
                     generatedCount += 1
 
