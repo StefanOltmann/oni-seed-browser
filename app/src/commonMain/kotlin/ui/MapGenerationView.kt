@@ -72,7 +72,8 @@ import worldgen.WorldgenMapDataConverter
 
 private const val DEFAULT_DELAY_MS = 500
 private const val DELAY_MS_STEP = 100
-private const val MAX_DELAY_MS = 5000
+private const val WARN_DELAY_MS = 1000
+private const val MAX_DELAY_MS = 10000
 
 @Composable
 fun MapGenerationView(
@@ -201,7 +202,11 @@ fun MapGenerationView(
 
                         println("Server is under heavy load. Upload delay is now ${delayMillis}ms.")
 
-                        delay(1.seconds)
+                        /*
+                         * Wait a bit before continuing to give the server time
+                         * to clear the queue up.
+                         */
+                        delay(duration = 2.seconds)
 
                         continue
                     }
@@ -361,7 +366,7 @@ fun MapGenerationView(
                 color = MaterialTheme.colorScheme.onBackground
             )
 
-            if (delayMillis > DEFAULT_DELAY_MS) {
+            if (delayMillis > WARN_DELAY_MS) {
 
                 DoubleSpacer()
 
