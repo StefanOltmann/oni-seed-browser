@@ -70,6 +70,10 @@ import worldgen.CoordinateUtil
 import worldgen.WorldgenMapData
 import worldgen.WorldgenMapDataConverter
 
+private const val DEFAULT_DELAY_MS = 500
+private const val DELAY_MS_STEP = 100
+private const val MAX_DELAY_MS = 5000
+
 @Composable
 fun MapGenerationView(
     isLoggedIn: Boolean,
@@ -130,11 +134,10 @@ fun MapGenerationView(
     var generatedCount by remember { mutableIntStateOf(0) }
 
     /*
-     * Map generation takes around 500ms. Together with a 300ms delay,
-     * we are still generating more than one map per second, but leave
-     * the server a bit of room to process the maps.
+     * Map generation takes around 500ms. If we delay by 500ms
+     * it generates one map per second. That's fast enough.
      */
-    var delayMillis by remember { mutableIntStateOf(300) }
+    var delayMillis by remember { mutableIntStateOf(DEFAULT_DELAY_MS) }
 
     LaunchedEffect(isRunning, isInitialized) {
 
@@ -178,16 +181,30 @@ fun MapGenerationView(
                 if (statusCode == HttpStatusCode.TooManyRequests) {
 
                     /*
-                     * We increase the delay time by 100ms to
-                     * slow down uploading for this session.
+                     * We increase the delay time by 100ms.
+                     * If we reach a 5-second delay, we stop generating maps because
+                     * it doesn't make sense to wait that long.
                      */
-                    delayMillis += 100
 
-                    println("Server is under heavy load. Delaying uploads by ${delayMillis}ms.")
+                    delayMillis += DELAY_MS_STEP
 
-                    delay(1.seconds)
+                    if (delayMillis > MAX_DELAY_MS) {
 
-                    continue
+                        println("Server is under heavy load. Stopping map generation.")
+
+                        isRunning = false
+                        delayMillis = DEFAULT_DELAY_MS
+
+                        break
+
+                    } else {
+
+                        println("Server is under heavy load. Upload delay is now ${delayMillis}ms.")
+
+                        delay(1.seconds)
+
+                        continue
+                    }
                 }
 
                 if (statusCode.isSuccess()) {
@@ -196,6 +213,8 @@ fun MapGenerationView(
 
                     println("Generated map $coordinate in ${duration.inWholeMilliseconds}ms.")
 
+                    errorMessage.value = null
+
                 } else {
 
                     println("Map uploading failed for $coordinate.")
@@ -203,15 +222,15 @@ fun MapGenerationView(
                     errorMessage.value = "Map uploading failed after ${duration.inWholeMilliseconds}ms"
 
                     /*
-                     * Stop generating maps after an error and retry 30 seconds later.
+                     * After an error, wait for 30 seconds.
                      * This is to prevent server spamming.
                      */
-                    isRunning = false
                     delay(30.seconds)
-                    isRunning = true
                 }
 
             } catch (ex: CancellationException) {
+
+                errorMessage.value = null
 
                 /*
                  * Let the cancellation propagate.
@@ -341,6 +360,17 @@ fun MapGenerationView(
                 style = MaterialTheme.typography.headlineLarge,
                 color = MaterialTheme.colorScheme.onBackground
             )
+
+            if (delayMillis > DEFAULT_DELAY_MS) {
+
+                DoubleSpacer()
+
+                Text(
+                    text = "Server is under heavy load. Uploads are delayed by $delayMillis ms.",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onBackground
+                )
+            }
         }
     }
 }
