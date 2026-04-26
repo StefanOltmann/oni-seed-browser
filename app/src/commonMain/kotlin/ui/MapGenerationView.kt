@@ -129,7 +129,12 @@ fun MapGenerationView(
 
     var generatedCount by remember { mutableIntStateOf(0) }
 
-    var delayMillis by remember { mutableIntStateOf(100) }
+    /*
+     * Map generation takes around 500ms. Together with a 300ms delay,
+     * we are still generating more than one map per second, but leave
+     * the server a bit of room to process the maps.
+     */
+    var delayMillis by remember { mutableIntStateOf(300) }
 
     LaunchedEffect(isRunning, isInitialized) {
 
