@@ -70,9 +70,9 @@ import worldgen.CoordinateUtil
 import worldgen.WorldgenMapData
 import worldgen.WorldgenMapDataConverter
 
-private const val DEFAULT_DELAY_MS = 500
+private const val DEFAULT_DELAY_MS = 100
 private const val DELAY_MS_STEP = 100
-private const val WARN_DELAY_MS = 1000
+private const val WARN_DELAY_MS = 500
 private const val MAX_DELAY_MS = 10000
 
 @Composable
@@ -206,7 +206,7 @@ fun MapGenerationView(
                          * Wait a bit before continuing to give the server time
                          * to clear the queue up.
                          */
-                        delay(duration = 2.seconds)
+                        delay(duration = 1.seconds)
 
                         continue
                     }
