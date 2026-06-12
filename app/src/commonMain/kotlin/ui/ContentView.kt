@@ -20,6 +20,7 @@
 package ui
 
 import AppStorage
+import ENABLE_MAP_GENERATION
 import START_WITH_LATEST_MAPS
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -309,26 +310,29 @@ fun ContentView(
 
                     FillSpacer()
 
-                    Icon(
-                        imageVector = if (showMapGeneration.value)
-                            IconAddCircleFilled
-                        else
-                            IconAddCircleOutline,
-                        contentDescription = null,
-                        tint = MaterialTheme.colorScheme.onBackground,
-                        modifier = Modifier
-                            .halfPadding()
-                            .size(32.dp)
-                            .noRippleClickable {
+                    if (ENABLE_MAP_GENERATION) {
 
-                                showMapGeneration.value = !showMapGeneration.value
+                        Icon(
+                            imageVector = if (showMapGeneration.value)
+                                IconAddCircleFilled
+                            else
+                                IconAddCircleOutline,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.onBackground,
+                            modifier = Modifier
+                                .halfPadding()
+                                .size(32.dp)
+                                .noRippleClickable {
 
-                                if (showMapGeneration.value) {
-                                    showFavorites.value = false
-                                    showLeaderboard.value = false
+                                    showMapGeneration.value = !showMapGeneration.value
+
+                                    if (showMapGeneration.value) {
+                                        showFavorites.value = false
+                                        showLeaderboard.value = false
+                                    }
                                 }
-                            }
-                    )
+                        )
+                    }
 
                     Icon(
                         imageVector = if (showLeaderboard.value)
