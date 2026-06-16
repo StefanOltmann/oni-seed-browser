@@ -111,6 +111,9 @@
     <string name="clusterTypeDlcFlippedMoonlet">Flipped Moonlet</string>
     <string name="clusterTypeDlcRadioactiveOceanMoonlet">Radioactive Ocean</string>
     <string name="clusterTypeDlcCeresMantle">Ceres Mantle</string>
+    <string name="clusterTypeBaseMarinea">Marinea</string>
+    <string name="clusterTypeDlcMarinea">Marinea</string>
+    <string name="clusterTypeDlcMarineaMinor">Marinea Minor</string>
 
     <!-- AsteroidType -->
     <string name="asteroidTypeSandstoneDefault">Terra Asteroid</string>
@@ -183,6 +186,10 @@
     <string name="asteroidTypePrehistoricShatteredBaseGameAsteroid">RelicAAAAAAAGHH Asteroid</string>
     <string name="asteroidTypePrehistoricShatteredClassicAsteroid">RelicAAAAAAAGHH Asteroid</string>
     <string name="asteroidTypeMixingPrehistoricAsteroid">Relica Fragment</string>
+    <string name="asteroidTypeAquaticBaseGameAsteroid">Aquatic Asteroid</string>
+    <string name="asteroidTypeMixingAquaticAsteroid">Aquatic Fragment</string>
+    <string name="asteroidTypeAquaticClassicAsteroid">Aquatic Classic Asteroid</string>
+    <string name="asteroidTypeAquaticSpacedOutAsteroid">Aquatic Minor Asteroid</string>
 
     <!--  POI types -->
     <string name="pointOfInterestTypePrintingPod">Printing Pod</string>
@@ -227,6 +234,10 @@
     <string name="zoneTypePrehistoricGarden">Garden Biome</string>
     <string name="zoneTypePrehistoricRaptor">Feather Biome</string>
     <string name="zoneTypePrehistoricWetlands">Wetlands Biome</string>
+    <string name="zoneTypeKelpForest">Kelp Forest</string>
+    <string name="zoneTypeReef">Reef</string>
+    <string name="zoneTypeAbyss">Abyss</string>
+    <string name="zoneTypeBeach">Beach</string>
 
     <!-- Geyser types -->
     <string name="geyserTypeCoolSteamVent">Cool Steam Vent</string>
@@ -323,12 +334,15 @@
     <string name="dlc4ImpactorDebrisField2">Liquid Demolior Debris</string>
     <string name="dlc4ImpactorDebrisField3">Molten Demolior Debris</string>
     <string name="temporalTear">Temporal Tear</string>
+    <string name="harvestableSpacePoiDlc5AquaticMixingField">Aquatic Mixing Field</string>
+    <string name="harvestableSpacePoiDlc5AquaticOreField">Aquatic Ore Field</string>
 
     <!-- Vanilla Space POI -->
     <string name="vanillaSpacePoiCarbonaceousAsteroid">Carbonaceous Asteroid</string>
     <string name="vanillaSpacePoiChlorinePlanet">Chlorine Planet</string>
     <string name="vanillaSpacePoiDLC2CeresSpaceDestination">DLC2 Ceres Space Destination</string>
     <string name="vanillaSpacePoiDLC4PrehistoricSpaceDestination">Prehistoric Ore Field</string>
+    <string name="vanillaSpacePoiDLC5AquaticSpaceDestination">Aquatic Space Destination</string>
     <string name="vanillaSpacePoiDustyMoon">Dusty Moon</string>
     <string name="vanillaSpacePoiEarth">Earth</string>
     <string name="vanillaSpacePoiForestPlanet">Forest Planet</string>

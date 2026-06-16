@@ -32,6 +32,9 @@ import io.github.stefanoltmann.app.generated.resources.clusterTypeDlcRadioactive
 import io.github.stefanoltmann.app.generated.resources.clusterTypeDlcRelica
 import io.github.stefanoltmann.app.generated.resources.clusterTypeDlcRelicaLab
 import io.github.stefanoltmann.app.generated.resources.clusterTypeDlcRelicaMinor
+import io.github.stefanoltmann.app.generated.resources.clusterTypeBaseMarinea
+import io.github.stefanoltmann.app.generated.resources.clusterTypeDlcMarinea
+import io.github.stefanoltmann.app.generated.resources.clusterTypeDlcMarineaMinor
 import io.github.stefanoltmann.app.generated.resources.clusterTypeDlcRime
 import io.github.stefanoltmann.app.generated.resources.clusterTypeDlcSquelchy
 import io.github.stefanoltmann.app.generated.resources.clusterTypeDlcTerra
@@ -82,4 +85,7 @@ val ClusterType.stringResource: StringResource
         ClusterType.DLC_FLIPPED_MOONLET -> Res.string.clusterTypeDlcFlippedMoonlet
         ClusterType.DLC_RADIOACTIVE_OCEAN_MOONLET -> Res.string.clusterTypeDlcRadioactiveOceanMoonlet
         ClusterType.DLC_CERES_MANTLE -> Res.string.clusterTypeDlcCeresMantle
+        ClusterType.BASE_MARINEA -> Res.string.clusterTypeBaseMarinea
+        ClusterType.DLC_MARINEA -> Res.string.clusterTypeDlcMarinea
+        ClusterType.DLC_MARINEA_MINOR -> Res.string.clusterTypeDlcMarineaMinor
     }

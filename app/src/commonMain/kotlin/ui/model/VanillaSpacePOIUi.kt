@@ -6,6 +6,7 @@ import io.github.stefanoltmann.app.generated.resources.vanillaSpacePoiCarbonaceo
 import io.github.stefanoltmann.app.generated.resources.vanillaSpacePoiChlorinePlanet
 import io.github.stefanoltmann.app.generated.resources.vanillaSpacePoiDLC2CeresSpaceDestination
 import io.github.stefanoltmann.app.generated.resources.vanillaSpacePoiDLC4PrehistoricSpaceDestination
+import io.github.stefanoltmann.app.generated.resources.vanillaSpacePoiDLC5AquaticSpaceDestination
 import io.github.stefanoltmann.app.generated.resources.vanillaSpacePoiDustyMoon
 import io.github.stefanoltmann.app.generated.resources.vanillaSpacePoiEarth
 import io.github.stefanoltmann.app.generated.resources.vanillaSpacePoiForestPlanet
@@ -56,4 +57,5 @@ val VanillaSpacePOI.stringResource: StringResource
         VanillaSpacePOI.TerraPlanet -> Res.string.vanillaSpacePoiTerraPlanet
         VanillaSpacePOI.VolcanoPlanet -> Res.string.vanillaSpacePoiVolcanoPlanet
         VanillaSpacePOI.Wormhole -> Res.string.vanillaSpacePoiWormhole
+        VanillaSpacePOI.DLC5AquaticSpaceDestination -> Res.string.vanillaSpacePoiDLC5AquaticSpaceDestination
     }

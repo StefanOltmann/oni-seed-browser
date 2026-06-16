@@ -71,6 +71,10 @@ import de.stefan_oltmann.oni.model.AsteroidType.Volcanic
 import de.stefan_oltmann.oni.model.AsteroidType.WarpOilySandySwamp
 import de.stefan_oltmann.oni.model.AsteroidType.WarpOilySwamp
 import de.stefan_oltmann.oni.model.AsteroidType.WaterMoonlet
+import de.stefan_oltmann.oni.model.AsteroidType.AquaticBaseGameAsteroid
+import de.stefan_oltmann.oni.model.AsteroidType.AquaticClassicAsteroid
+import de.stefan_oltmann.oni.model.AsteroidType.AquaticSpacedOutAsteroid
+import de.stefan_oltmann.oni.model.AsteroidType.MixingAquaticAsteroid
 import io.github.stefanoltmann.app.generated.resources.Res
 import io.github.stefanoltmann.app.generated.resources.asteroidTypeBadlands
 import io.github.stefanoltmann.app.generated.resources.asteroidTypeCeresBaseGameAsteroid
@@ -142,6 +146,10 @@ import io.github.stefanoltmann.app.generated.resources.asteroidTypeVolcanic
 import io.github.stefanoltmann.app.generated.resources.asteroidTypeWarpOilySandySwamp
 import io.github.stefanoltmann.app.generated.resources.asteroidTypeWarpOilySwamp
 import io.github.stefanoltmann.app.generated.resources.asteroidTypeWaterMoonlet
+import io.github.stefanoltmann.app.generated.resources.asteroidTypeAquaticBaseGameAsteroid
+import io.github.stefanoltmann.app.generated.resources.asteroidTypeAquaticClassicAsteroid
+import io.github.stefanoltmann.app.generated.resources.asteroidTypeAquaticSpacedOutAsteroid
+import io.github.stefanoltmann.app.generated.resources.asteroidTypeMixingAquaticAsteroid
 import org.jetbrains.compose.resources.StringResource
 
 val AsteroidType.stringResource: StringResource
@@ -216,4 +224,8 @@ val AsteroidType.stringResource: StringResource
         PrehistoricShatteredBaseGameAsteroid -> Res.string.asteroidTypePrehistoricShatteredBaseGameAsteroid
         PrehistoricShatteredClassicAsteroid -> Res.string.asteroidTypePrehistoricShatteredClassicAsteroid
         MixingPrehistoricAsteroid -> Res.string.asteroidTypeMixingPrehistoricAsteroid
+        AquaticBaseGameAsteroid -> Res.string.asteroidTypeAquaticBaseGameAsteroid
+        AquaticClassicAsteroid -> Res.string.asteroidTypeAquaticClassicAsteroid
+        AquaticSpacedOutAsteroid -> Res.string.asteroidTypeAquaticSpacedOutAsteroid
+        MixingAquaticAsteroid -> Res.string.asteroidTypeMixingAquaticAsteroid
     }

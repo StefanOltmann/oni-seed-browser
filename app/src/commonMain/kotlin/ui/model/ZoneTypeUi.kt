@@ -24,6 +24,10 @@ import de.stefan_oltmann.oni.model.ZoneType.SugarWoods
 import de.stefan_oltmann.oni.model.ZoneType.Swamp
 import de.stefan_oltmann.oni.model.ZoneType.ToxicJungle
 import de.stefan_oltmann.oni.model.ZoneType.Wasteland
+import de.stefan_oltmann.oni.model.ZoneType.KelpForest
+import de.stefan_oltmann.oni.model.ZoneType.Reef
+import de.stefan_oltmann.oni.model.ZoneType.Abyss
+import de.stefan_oltmann.oni.model.ZoneType.Beach
 import io.github.stefanoltmann.app.generated.resources.Res
 import io.github.stefanoltmann.app.generated.resources.zoneTypeBarren
 import io.github.stefanoltmann.app.generated.resources.zoneTypeBoggyMarsh
@@ -47,6 +51,10 @@ import io.github.stefanoltmann.app.generated.resources.zoneTypeSugarWoods
 import io.github.stefanoltmann.app.generated.resources.zoneTypeSwamp
 import io.github.stefanoltmann.app.generated.resources.zoneTypeToxicJungle
 import io.github.stefanoltmann.app.generated.resources.zoneTypeWasteland
+import io.github.stefanoltmann.app.generated.resources.zoneTypeKelpForest
+import io.github.stefanoltmann.app.generated.resources.zoneTypeReef
+import io.github.stefanoltmann.app.generated.resources.zoneTypeAbyss
+import io.github.stefanoltmann.app.generated.resources.zoneTypeBeach
 import org.jetbrains.compose.resources.StringResource
 
 val ZoneType.stringResource: StringResource
@@ -73,6 +81,10 @@ val ZoneType.stringResource: StringResource
         PrehistoricWetlands -> Res.string.zoneTypePrehistoricWetlands
         OilField -> Res.string.zoneTypeOilField
         MagmaCore -> Res.string.zoneTypeMagmaCore
+        KelpForest -> Res.string.zoneTypeKelpForest
+        Reef -> Res.string.zoneTypeReef
+        Abyss -> Res.string.zoneTypeAbyss
+        Beach -> Res.string.zoneTypeBeach
     }
 
 val ZoneType.color: Color
@@ -99,4 +111,8 @@ val ZoneType.color: Color
         PrehistoricWetlands -> Color(0xFF645906)
         OilField -> Color(0xFF52321D)
         MagmaCore -> Color(0xFFDE5A3B)
+        KelpForest -> Color(0xFF2E7D32)
+        Reef -> Color(0xFFFF7043)
+        Abyss -> Color(0xFF1A237E)
+        Beach -> Color(0xFFD2B48C)
     }

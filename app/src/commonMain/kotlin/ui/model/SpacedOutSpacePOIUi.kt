@@ -112,6 +112,12 @@ import io.github.stefanoltmann.app.generated.resources.harvestableSpacePoiSandyO
 import io.github.stefanoltmann.app.generated.resources.harvestableSpacePoiSatelliteField
 import io.github.stefanoltmann.app.generated.resources.harvestableSpacePoiSwampyOreField
 import io.github.stefanoltmann.app.generated.resources.temporalTear
+import io.github.stefanoltmann.app.generated.resources.harvestableSpacePoiDlc5AquaticMixingField
+import io.github.stefanoltmann.app.generated.resources.harvestableSpacePoiDlc5AquaticOreField
+import io.github.stefanoltmann.app.generated.resources.asteroidTypeAquaticBaseGameAsteroid
+import io.github.stefanoltmann.app.generated.resources.asteroidTypeAquaticClassicAsteroid
+import io.github.stefanoltmann.app.generated.resources.asteroidTypeAquaticSpacedOutAsteroid
+import io.github.stefanoltmann.app.generated.resources.asteroidTypeMixingAquaticAsteroid
 import org.jetbrains.compose.resources.StringResource
 
 val SpacedOutSpacePOI.stringResource: StringResource
@@ -229,4 +235,10 @@ val SpacedOutSpacePOI.stringResource: StringResource
         SpacedOutSpacePOI.HarvestableSpacePOI_DLC4ImpactorDebrisField3 -> Res.string.dlc4ImpactorDebrisField3
         SpacedOutSpacePOI.TemporalTear -> Res.string.temporalTear
         SpacedOutSpacePOI.StarmapHexCellInventory -> Res.string.artifactSpacePoiGravitasSpaceStation1 // FIXME Wrong string
+        SpacedOutSpacePOI.AquaticBaseGameAsteroid -> Res.string.asteroidTypeAquaticBaseGameAsteroid
+        SpacedOutSpacePOI.AquaticClassicAsteroid -> Res.string.asteroidTypeAquaticClassicAsteroid
+        SpacedOutSpacePOI.AquaticSpacedOutAsteroid -> Res.string.asteroidTypeAquaticSpacedOutAsteroid
+        SpacedOutSpacePOI.MixingAquaticAsteroid -> Res.string.asteroidTypeMixingAquaticAsteroid
+        SpacedOutSpacePOI.HarvestableSpacePOI_DLC5AquaticMixingField -> Res.string.harvestableSpacePoiDlc5AquaticMixingField
+        SpacedOutSpacePOI.HarvestableSpacePOI_DLC5AquaticOreField -> Res.string.harvestableSpacePoiDlc5AquaticOreField
     }

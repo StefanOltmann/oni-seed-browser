@@ -21,6 +21,7 @@ package ui
 
 import androidx.compose.runtime.Composable
 import de.stefan_oltmann.oni.model.AsteroidType
+import de.stefan_oltmann.oni.model.Cluster
 import de.stefan_oltmann.oni.model.ClusterType
 import de.stefan_oltmann.oni.model.GameModeType
 import de.stefan_oltmann.oni.model.GeyserType
@@ -36,6 +37,8 @@ import io.github.stefanoltmann.app.generated.resources.asteroid_glowood_wastelan
 import io.github.stefanoltmann.app.generated.resources.asteroid_irradiated_forest
 import io.github.stefanoltmann.app.generated.resources.asteroid_irradiated_marsh
 import io.github.stefanoltmann.app.generated.resources.asteroid_irradiated_swampy
+import io.github.stefanoltmann.app.generated.resources.asteroid_marinea
+import io.github.stefanoltmann.app.generated.resources.asteroid_marinea_mixing
 import io.github.stefanoltmann.app.generated.resources.asteroid_marshy
 import io.github.stefanoltmann.app.generated.resources.asteroid_mini_shattered_geo
 import io.github.stefanoltmann.app.generated.resources.asteroid_mini_shattered_start
@@ -57,13 +60,17 @@ import io.github.stefanoltmann.app.generated.resources.asteroid_superconductive
 import io.github.stefanoltmann.app.generated.resources.asteroid_tundra
 import io.github.stefanoltmann.app.generated.resources.asteroid_warp_oily_sandy_swamp
 import io.github.stefanoltmann.app.generated.resources.asteroid_water
+import io.github.stefanoltmann.app.generated.resources.biome_abyss
+import io.github.stefanoltmann.app.generated.resources.biome_aquatic
 import io.github.stefanoltmann.app.generated.resources.biome_barren
+import io.github.stefanoltmann.app.generated.resources.biome_beach
 import io.github.stefanoltmann.app.generated.resources.biome_carrot_quarry
 import io.github.stefanoltmann.app.generated.resources.biome_forest
 import io.github.stefanoltmann.app.generated.resources.biome_frozen
 import io.github.stefanoltmann.app.generated.resources.biome_garden
 import io.github.stefanoltmann.app.generated.resources.biome_icecaves
 import io.github.stefanoltmann.app.generated.resources.biome_jungle
+import io.github.stefanoltmann.app.generated.resources.biome_kelp_forest
 import io.github.stefanoltmann.app.generated.resources.biome_magma
 import io.github.stefanoltmann.app.generated.resources.biome_marsh
 import io.github.stefanoltmann.app.generated.resources.biome_metallic
@@ -72,6 +79,7 @@ import io.github.stefanoltmann.app.generated.resources.biome_ocean
 import io.github.stefanoltmann.app.generated.resources.biome_oil
 import io.github.stefanoltmann.app.generated.resources.biome_radioactive
 import io.github.stefanoltmann.app.generated.resources.biome_raptor
+import io.github.stefanoltmann.app.generated.resources.biome_reef
 import io.github.stefanoltmann.app.generated.resources.biome_rust
 import io.github.stefanoltmann.app.generated.resources.biome_sandstone
 import io.github.stefanoltmann.app.generated.resources.biome_space
@@ -92,6 +100,7 @@ import io.github.stefanoltmann.app.generated.resources.building_temporal_tear_op
 import io.github.stefanoltmann.app.generated.resources.cluster_base_arboria
 import io.github.stefanoltmann.app.generated.resources.cluster_base_aridio
 import io.github.stefanoltmann.app.generated.resources.cluster_base_ceres
+import io.github.stefanoltmann.app.generated.resources.cluster_base_marinea
 import io.github.stefanoltmann.app.generated.resources.cluster_base_oasisse
 import io.github.stefanoltmann.app.generated.resources.cluster_base_oceania
 import io.github.stefanoltmann.app.generated.resources.cluster_base_relica
@@ -109,6 +118,8 @@ import io.github.stefanoltmann.app.generated.resources.cluster_spacedout_ceres_m
 import io.github.stefanoltmann.app.generated.resources.cluster_spacedout_flipped_moonlet
 import io.github.stefanoltmann.app.generated.resources.cluster_spacedout_folia
 import io.github.stefanoltmann.app.generated.resources.cluster_spacedout_frozen_forest_moonlet
+import io.github.stefanoltmann.app.generated.resources.cluster_spacedout_marinea
+import io.github.stefanoltmann.app.generated.resources.cluster_spacedout_marinea_minor
 import io.github.stefanoltmann.app.generated.resources.cluster_spacedout_metallic_swampy_moonlet
 import io.github.stefanoltmann.app.generated.resources.cluster_spacedout_oasisse
 import io.github.stefanoltmann.app.generated.resources.cluster_spacedout_oceania
@@ -164,6 +175,8 @@ import io.github.stefanoltmann.app.generated.resources.poi_geothermal_controller
 import io.github.stefanoltmann.app.generated.resources.poi_geothermal_vent_entity
 import io.github.stefanoltmann.app.generated.resources.poi_prop_facility_statue
 import io.github.stefanoltmann.app.generated.resources.poi_wrecked_satellite
+import io.github.stefanoltmann.app.generated.resources.spacepoi_aquatic_mixing_field
+import io.github.stefanoltmann.app.generated.resources.spacepoi_aquatic_ore_field
 import io.github.stefanoltmann.app.generated.resources.spacepoi_artifact_1
 import io.github.stefanoltmann.app.generated.resources.spacepoi_artifact_2
 import io.github.stefanoltmann.app.generated.resources.spacepoi_artifact_3
@@ -203,6 +216,7 @@ import io.github.stefanoltmann.app.generated.resources.vanilla_spacepoi_carbonac
 import io.github.stefanoltmann.app.generated.resources.vanilla_spacepoi_chlorine_planet
 import io.github.stefanoltmann.app.generated.resources.vanilla_spacepoi_dlc2_ceres_space_destination
 import io.github.stefanoltmann.app.generated.resources.vanilla_spacepoi_dlc4_prehistoric_space_destination
+import io.github.stefanoltmann.app.generated.resources.vanilla_spacepoi_dlc5_aquatic_space_destination
 import io.github.stefanoltmann.app.generated.resources.vanilla_spacepoi_dusty_moon
 import io.github.stefanoltmann.app.generated.resources.vanilla_spacepoi_earth
 import io.github.stefanoltmann.app.generated.resources.vanilla_spacepoi_forest_planet
@@ -336,6 +350,7 @@ val ClusterType.drawableResource: DrawableResource
         ClusterType.BASE_CERES -> Res.drawable.cluster_base_ceres
         ClusterType.BASE_RELICA -> Res.drawable.cluster_base_relica
         ClusterType.BASE_RELICA_LAB -> Res.drawable.cluster_base_relica_lab
+        ClusterType.BASE_MARINEA -> Res.drawable.cluster_base_marinea
         ClusterType.BASE_BLASTED_CERES -> Res.drawable.asteroid_blasted_ceres
         ClusterType.BASE_OCEANIA -> Res.drawable.cluster_base_oceania
         ClusterType.BASE_RIME -> Res.drawable.cluster_base_rime
@@ -348,10 +363,12 @@ val ClusterType.drawableResource: DrawableResource
         ClusterType.DLC_TERRA -> Res.drawable.cluster_spacedout_terra
         ClusterType.DLC_CERES -> Res.drawable.asteroid_spacedout_ceres
         ClusterType.DLC_RELICA -> Res.drawable.cluster_spacedout_relica
+        ClusterType.DLC_MARINEA -> Res.drawable.cluster_spacedout_marinea
         ClusterType.DLC_RELICA_LAB -> Res.drawable.cluster_spacedout_relica_lab
         ClusterType.DLC_BLASTED_CERES -> Res.drawable.asteroid_blasted_ceres_spaced_out
         ClusterType.DLC_CERES_MINOR -> Res.drawable.asteroid_spacedout_ceres_minor
         ClusterType.DLC_RELICA_MINOR -> Res.drawable.cluster_spacedout_relica_minor
+        ClusterType.DLC_MARINEA_MINOR -> Res.drawable.cluster_spacedout_marinea_minor
         ClusterType.DLC_OCEANIA -> Res.drawable.cluster_spacedout_oceania
         ClusterType.DLC_SQUELCHY -> Res.drawable.cluster_spacedout_squelchy
         ClusterType.DLC_RIME -> Res.drawable.cluster_spacedout_rime
@@ -445,6 +462,10 @@ val AsteroidType.drawableResource: DrawableResource
         AsteroidType.PrehistoricShatteredClassicAsteroid -> Res.drawable.cluster_spacedout_relica_lab
         AsteroidType.PrehistoricSpacedOutAsteroid -> Res.drawable.cluster_spacedout_relica_minor
         AsteroidType.MixingPrehistoricAsteroid -> Res.drawable.asteroid_mixing_relica
+        AsteroidType.AquaticBaseGameAsteroid -> Res.drawable.cluster_base_marinea
+        AsteroidType.AquaticClassicAsteroid -> Res.drawable.cluster_spacedout_marinea
+        AsteroidType.AquaticSpacedOutAsteroid -> Res.drawable.asteroid_marinea
+        AsteroidType.MixingAquaticAsteroid -> Res.drawable.asteroid_marinea_mixing
     }
 
 val SpacedOutSpacePOI.drawableResource: DrawableResource
@@ -521,6 +542,11 @@ val SpacedOutSpacePOI.drawableResource: DrawableResource
         SpacedOutSpacePOI.PrehistoricShatteredClassicAsteroid -> Res.drawable.cluster_spacedout_relica_lab
         SpacedOutSpacePOI.PrehistoricSpacedOutAsteroid -> Res.drawable.cluster_spacedout_relica_minor
         SpacedOutSpacePOI.MixingPrehistoricAsteroid -> Res.drawable.asteroid_mixing_relica
+        SpacedOutSpacePOI.AquaticBaseGameAsteroid -> Res.drawable.cluster_base_marinea
+        SpacedOutSpacePOI.AquaticClassicAsteroid -> Res.drawable.cluster_spacedout_marinea
+        SpacedOutSpacePOI.AquaticSpacedOutAsteroid -> Res.drawable.asteroid_marinea
+        SpacedOutSpacePOI.MixingAquaticAsteroid -> Res.drawable.asteroid_marinea_mixing
+
         /* Others */
         SpacedOutSpacePOI.ArtifactSpacePOI_GravitasSpaceStation1 -> Res.drawable.spacepoi_artifact_1
         SpacedOutSpacePOI.ArtifactSpacePOI_GravitasSpaceStation2 -> Res.drawable.spacepoi_artifact_2
@@ -563,6 +589,8 @@ val SpacedOutSpacePOI.drawableResource: DrawableResource
         SpacedOutSpacePOI.HarvestableSpacePOI_DLC4ImpactorDebrisField2 -> Res.drawable.spacepoi_artifact_1 // FIXME Wrong asset
         SpacedOutSpacePOI.HarvestableSpacePOI_DLC4ImpactorDebrisField3 -> Res.drawable.spacepoi_artifact_1 // FIXME Wrong asset
         SpacedOutSpacePOI.StarmapHexCellInventory -> Res.drawable.spacepoi_artifact_1 // FIXME Wrong asset
+        SpacedOutSpacePOI.HarvestableSpacePOI_DLC5AquaticOreField -> Res.drawable.spacepoi_aquatic_ore_field
+        SpacedOutSpacePOI.HarvestableSpacePOI_DLC5AquaticMixingField -> Res.drawable.spacepoi_aquatic_mixing_field
     }
 
 val VanillaSpacePOI.drawableResource: DrawableResource
@@ -572,6 +600,7 @@ val VanillaSpacePOI.drawableResource: DrawableResource
         VanillaSpacePOI.ChlorinePlanet -> Res.drawable.vanilla_spacepoi_chlorine_planet
         VanillaSpacePOI.DLC2CeresSpaceDestination -> Res.drawable.vanilla_spacepoi_dlc2_ceres_space_destination
         VanillaSpacePOI.DLC4PrehistoricSpaceDestination -> Res.drawable.vanilla_spacepoi_dlc4_prehistoric_space_destination
+        VanillaSpacePOI.DLC5AquaticSpaceDestination -> Res.drawable.vanilla_spacepoi_dlc5_aquatic_space_destination
         VanillaSpacePOI.DustyMoon -> Res.drawable.vanilla_spacepoi_dusty_moon
         VanillaSpacePOI.Earth -> Res.drawable.vanilla_spacepoi_earth
         VanillaSpacePOI.ForestPlanet -> Res.drawable.vanilla_spacepoi_forest_planet
@@ -620,6 +649,10 @@ val ZoneType.drawableResource: DrawableResource
         ZoneType.PrehistoricGarden -> Res.drawable.biome_garden
         ZoneType.PrehistoricRaptor -> Res.drawable.biome_raptor
         ZoneType.PrehistoricWetlands -> Res.drawable.biome_wetlands
+        ZoneType.KelpForest -> Res.drawable.biome_kelp_forest
+        ZoneType.Reef -> Res.drawable.biome_reef
+        ZoneType.Abyss -> Res.drawable.biome_abyss
+        ZoneType.Beach -> Res.drawable.biome_beach
     }
 
 val GameModeType.drawableResource: DrawableResource
