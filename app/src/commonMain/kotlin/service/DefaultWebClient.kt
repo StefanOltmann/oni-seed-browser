@@ -19,74 +19,35 @@
 
 package service
 
-import AppStorage
-import MNI_API_KEY_BROWSER
-import com.appstractive.jwt.JWT
-import com.appstractive.jwt.from
-import com.appstractive.jwt.subject
-import de.stefan_oltmann.oni.model.Cluster
 import de.stefan_oltmann.oni.model.filter.FilterQuery
 import de.stefan_oltmann.oni.model.search.SearchIndex
-import de.stefan_oltmann.oni.model.server.Upload
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.plugins.compression.ContentEncoding
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.request.accept
-import io.ktor.client.request.delete
 import io.ktor.client.request.get
-import io.ktor.client.request.header
-import io.ktor.client.request.post
-import io.ktor.client.request.put
-import io.ktor.client.request.setBody
-import io.ktor.client.statement.bodyAsBytes
-import io.ktor.client.statement.bodyAsText
 import io.ktor.http.ContentType
 import io.ktor.http.HttpStatusCode
-import io.ktor.http.contentType
-import io.ktor.http.isSuccess
 import io.ktor.serialization.kotlinx.json.json
 import io.ktor.serialization.kotlinx.protobuf.protobuf
 import kotlin.time.measureTimedValue
 import kotlinx.coroutines.CancellationException
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.ExperimentalSerializationApi
-import kotlinx.serialization.decodeFromByteArray
 import kotlinx.serialization.json.Json
-import kotlinx.serialization.protobuf.ProtoBuf
 
 const val DATA_URL = "https://stefan-oltmann.de/oni-seed-browser/data"
 
-const val SERVER_URL = "https://mni.stefan-oltmann.de"
-const val REQUEST_URL = "$SERVER_URL/request-coordinate"
-const val UPLOAD_URL = "$SERVER_URL/upload"
-
-const val FIND_URL = "$SERVER_URL/map"
-
 const val COUNT_URL = "$DATA_URL/count"
 
-const val CONTRIBUTORS_URL = "$SERVER_URL/contributors"
-
 const val SEARCH_INDEX_URL = "$DATA_URL/index"
-
-const val TOKEN_HEADER = "token"
-
-/**
- * A short delay to avoid overloading the server, which might respond
- * with HTTP 429 (Too Many Requests) if we request too quickly.
- */
-private const val FETCH_DELAY_MS: Long = 100
 
 private val json = Json {
     ignoreUnknownKeys = false
     encodeDefaults = true
 }
-
-private val backgroundScope = CoroutineScope(Dispatchers.Default)
 
 object DefaultWebClient : WebClient {
 
@@ -102,8 +63,6 @@ object DefaultWebClient : WebClient {
             gzip(1.0f)
         }
     }
-
-    private val clusterCache = LruCache<String, Cluster?>(100)
 
     private var currentSearchIndex: SearchIndex? = null
 
@@ -133,96 +92,6 @@ object DefaultWebClient : WebClient {
         return null
     }
 
-    override suspend fun findLatestClusters(): List<String> {
-
-        val response = httpClient.get("$SERVER_URL/latest") {
-            accept(ContentType.Application.Json)
-        }
-
-        if (!response.status.isSuccess())
-            error("[WEBCLIENT] Requesting latest clusters failed with HTTP ${response.status}: ${response.bodyAsText()}")
-
-        return response.body()
-    }
-
-    @OptIn(ExperimentalSerializationApi::class)
-    override suspend fun find(coordinate: String): Cluster? {
-
-        val cachedCluster = clusterCache.get(coordinate)
-
-        /* Respond from cache when possible. */
-        if (cachedCluster != null)
-            return cachedCluster
-
-        val cacheEntry = clusterDiskCache.load(coordinate)
-
-        if (cacheEntry != null) {
-
-            val cluster = ProtoBuf.decodeFromByteArray<Cluster>(cacheEntry.first)
-
-            clusterCache.put(coordinate, cluster)
-
-            println("[WEBCLIENT] find(): $coordinate | Cache HIT")
-
-            return cluster
-        }
-
-        delay(FETCH_DELAY_MS)
-
-        val (cluster, time) = measureTimedValue {
-
-            val response = httpClient.get("$FIND_URL/$coordinate") {
-                accept(ContentType.Application.ProtoBuf)
-            }
-
-            if (response.status != HttpStatusCode.OK)
-                return null
-
-            val bytes = response.bodyAsBytes()
-
-            /*
-             * We need to receive the bytes first and then decode them.
-             * The body<Cluster> function does not work for Protobuf.
-             */
-            val cluster = ProtoBuf.decodeFromByteArray<Cluster>(bytes)
-
-            /*
-             * Async store in disk cache
-             */
-            backgroundScope.launch {
-                clusterDiskCache.save(
-                    key = cluster.coordinate,
-                    data = bytes,
-                    modifiedTime = cluster.uploadDate
-                )
-            }
-
-            clusterCache.put(coordinate, cluster)
-
-            cluster
-        }
-
-        println("[WEBCLIENT] find(): $coordinate | DOWNLOAD in $time")
-
-        return cluster
-    }
-
-    override suspend fun request(coordinate: String): Boolean {
-
-        val response = httpClient.post(REQUEST_URL) {
-
-            /* Auth */
-            AppStorage.getToken()?.let { token ->
-                header(TOKEN_HEADER, token)
-            }
-
-            contentType(ContentType.Text.Plain)
-            setBody(coordinate)
-        }
-
-        return response.status.isSuccess()
-    }
-
     @OptIn(ExperimentalSerializationApi::class)
     override suspend fun search(filterQuery: FilterQuery): List<String> =
         withContext(Dispatchers.Default) {
@@ -245,150 +114,4 @@ object DefaultWebClient : WebClient {
 
             return@withContext results
         }
-
-    override suspend fun getUsernameMap(): Map<String, String> {
-
-        val response = httpClient.get("$SERVER_URL/usernames") {
-            accept(ContentType.Application.Json)
-        }
-
-        if (!response.status.isSuccess())
-            error("[WEBCLIENT] Username registry returned status ${response.status}: ${response.bodyAsText()}")
-
-        try {
-
-            val usernameMap: Map<String, String> = response.body()
-
-            println("[WEBCLIENT] Found ${usernameMap.size} usernames.")
-
-            return usernameMap
-
-        } catch (ex: CancellationException) {
-            throw ex
-        } catch (ex: Exception) {
-
-            throw Exception("Finding username map failed.", ex)
-        }
-    }
-
-    override suspend fun setUsername(username: String): Boolean {
-
-        val response = if (username.isBlank()) {
-
-            httpClient.delete("$SERVER_URL/username") {
-
-                /* Auth */
-                AppStorage.getToken()?.let { token ->
-                    header(TOKEN_HEADER, token)
-                }
-            }
-
-        } else {
-
-            httpClient.put("$SERVER_URL/username") {
-
-                /* Auth */
-                AppStorage.getToken()?.let { token ->
-                    header(TOKEN_HEADER, token)
-                }
-
-                contentType(ContentType.Text.Plain)
-                setBody(username)
-            }
-        }
-
-        val success = response.status.isSuccess()
-
-        if (!success)
-            println("[WEBCLIENT] Request failed with HTTP ${response.status}: ${response.bodyAsText()}")
-        else
-            println("[WEBCLIENT] Username set to '$username'")
-
-        return success
-    }
-
-    override suspend fun findContributors(): Map<String, Long> {
-
-        val response = httpClient.get(CONTRIBUTORS_URL) {
-            accept(ContentType.Application.Json)
-        }
-
-        if (!response.status.isSuccess())
-            error("[WEBCLIENT] Requesting contributors failed with HTTP ${response.status}: ${response.bodyAsText()}")
-
-        try {
-
-            val contributors: Map<String, Long> = response.body()
-
-            println("[WEBCLIENT] Found ${contributors.size} contributors.")
-
-            return contributors
-
-        } catch (ex: CancellationException) {
-            throw ex
-        } catch (ex: Exception) {
-
-            throw Exception("Finding contributors failed.", ex)
-        }
-    }
-
-    override suspend fun upload(cluster: Cluster): HttpStatusCode {
-
-        val token = AppStorage.getToken()
-            ?: error("Cannot upload cluster without a valid token.")
-
-        val jwt: JWT = JWT.from(token)
-
-        val steamId = jwt.subject ?: jwt.claims["steamId"]
-
-        val upload = Upload(
-            userId = "Steam-$steamId",
-            installationId = AppStorage.getInstallationId(),
-            gameVersion = cluster.gameVersion,
-            fileHashes = mapOf("modHash" to "onimaxxing 2.0.1"), // We don't have a hash
-            cluster = UploadClusterConverter.convert(cluster)
-        )
-
-        val response = httpClient.post(UPLOAD_URL) {
-
-            /* Auth */
-            header("MNI_TOKEN", token)
-            header("MNI_API_KEY_BROWSER", MNI_API_KEY_BROWSER)
-
-            contentType(ContentType.Application.Json)
-            setBody(upload)
-        }
-
-        if (!response.status.isSuccess())
-            println("[WEBCLIENT] Upload failed with HTTP ${response.status}: ${response.bodyAsText()}")
-        else
-            println("[WEBCLIENT] Upload successful: ${cluster.coordinate}")
-
-        return response.status
-    }
-
-//    override suspend fun getLastModifiedMillis(url: String): Long? {
-//
-//        try {
-//
-//            val responseHead = simpleHttpClient.head(url)
-//
-//            if (responseHead.status != HttpStatusCode.OK)
-//                return null
-//
-//            val lastModified = responseHead.headers.lastModifiedMillis()
-//
-//            println("[WEBCLIENT] Last modified date from $url is $lastModified")
-//
-//            return lastModified
-//
-//        } catch (ex: Throwable) {
-//
-//            println("[WEBCLIENT] Cannot get last modified date from $url")
-//
-//            ex.printStackTrace()
-//
-//            return null
-//        }
-//    }
 }

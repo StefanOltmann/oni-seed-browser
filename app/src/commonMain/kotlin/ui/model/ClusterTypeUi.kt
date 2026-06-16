@@ -6,6 +6,7 @@ import io.github.stefanoltmann.app.generated.resources.clusterTypeBaseArboria
 import io.github.stefanoltmann.app.generated.resources.clusterTypeBaseAridio
 import io.github.stefanoltmann.app.generated.resources.clusterTypeBaseBlastedCeres
 import io.github.stefanoltmann.app.generated.resources.clusterTypeBaseCeres
+import io.github.stefanoltmann.app.generated.resources.clusterTypeBaseMarinea
 import io.github.stefanoltmann.app.generated.resources.clusterTypeBaseOasisse
 import io.github.stefanoltmann.app.generated.resources.clusterTypeBaseOceania
 import io.github.stefanoltmann.app.generated.resources.clusterTypeBaseRelica
@@ -24,6 +25,8 @@ import io.github.stefanoltmann.app.generated.resources.clusterTypeDlcCeresMinor
 import io.github.stefanoltmann.app.generated.resources.clusterTypeDlcFlippedMoonlet
 import io.github.stefanoltmann.app.generated.resources.clusterTypeDlcFolia
 import io.github.stefanoltmann.app.generated.resources.clusterTypeDlcFrozenForestMoonlet
+import io.github.stefanoltmann.app.generated.resources.clusterTypeDlcMarinea
+import io.github.stefanoltmann.app.generated.resources.clusterTypeDlcMarineaMinor
 import io.github.stefanoltmann.app.generated.resources.clusterTypeDlcMetallicSwampyMoonlet
 import io.github.stefanoltmann.app.generated.resources.clusterTypeDlcOasisse
 import io.github.stefanoltmann.app.generated.resources.clusterTypeDlcOceania
@@ -32,9 +35,6 @@ import io.github.stefanoltmann.app.generated.resources.clusterTypeDlcRadioactive
 import io.github.stefanoltmann.app.generated.resources.clusterTypeDlcRelica
 import io.github.stefanoltmann.app.generated.resources.clusterTypeDlcRelicaLab
 import io.github.stefanoltmann.app.generated.resources.clusterTypeDlcRelicaMinor
-import io.github.stefanoltmann.app.generated.resources.clusterTypeBaseMarinea
-import io.github.stefanoltmann.app.generated.resources.clusterTypeDlcMarinea
-import io.github.stefanoltmann.app.generated.resources.clusterTypeDlcMarineaMinor
 import io.github.stefanoltmann.app.generated.resources.clusterTypeDlcRime
 import io.github.stefanoltmann.app.generated.resources.clusterTypeDlcSquelchy
 import io.github.stefanoltmann.app.generated.resources.clusterTypeDlcTerra

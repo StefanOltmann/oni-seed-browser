@@ -20,11 +20,8 @@
 package ui
 
 import AppStorage
-import ENABLE_MAP_GENERATION
-import START_WITH_LATEST_MAPS
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
@@ -34,16 +31,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
@@ -72,10 +64,8 @@ import io.github.stefanoltmann.app.generated.resources.uiInvalidCoordinate
 import io.github.stefanoltmann.app.generated.resources.uiMapNotFound
 import io.github.stefanoltmann.app.generated.resources.uiNoFavoredClustersFound
 import io.github.stefanoltmann.app.generated.resources.uiNoResults
-import io.github.stefanoltmann.app.generated.resources.uiRequestCoordinateLoginHint
 import io.github.stefanoltmann.app.generated.resources.uiSearching
 import io.github.stefanoltmann.app.generated.resources.uiTitle
-import io.github.stefanoltmann.app.generated.resources.uiUsernameLabel
 import io.github.stefanoltmann.app.generated.resources.uiWelcome
 import io.github.stefanoltmann.app.generated.resources.uiWelcomeInstruction
 import kotlinx.coroutines.CancellationException
@@ -86,10 +76,9 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
+import service.ClusterGenerator
 import service.DefaultWebClient
 import ui.filter.FilterPanel
-import ui.icons.IconAddCircleFilled
-import ui.icons.IconAddCircleOutline
 import ui.icons.IconBookmarks
 import ui.icons.IconBookmarksFilled
 import ui.icons.IconLeaderboardFilled
@@ -100,17 +89,14 @@ import ui.theme.FillSpacer
 import ui.theme.HalfSpacer
 import ui.theme.defaultPadding
 import ui.theme.defaultRoundedCornerShape
-import ui.theme.defaultSpacing
 import ui.theme.doubleSpacing
 import ui.theme.halfPadding
-import ui.theme.lightGray
 
 @Composable
 fun ContentView(
     urlHash: State<String?>,
     urlFilterQuery: FilterQuery?,
     isMniEmbedded: Boolean,
-    connectedUserId: String?,
     localPort: Int?,
     /**
      * Note: LocalClipboardManager does not work for Compose for Web
@@ -120,24 +106,6 @@ fun ContentView(
 ) {
 
     val errorMessage = remember { mutableStateOf<String?>(null) }
-
-    val steamIdToUsernameMap = produceState(emptyMap()) {
-
-        try {
-
-            value = DefaultWebClient.getUsernameMap()
-
-        } catch (ex: CancellationException) {
-            throw ex
-        } catch (ex: Throwable) {
-
-            /* We MUST catch Throwable here to prevent UI freezes. */
-
-            ex.printStackTrace()
-
-            errorMessage.value = ex.stackTraceToString()
-        }
-    }
 
     val worldCount = produceState<Long?>(null) {
 
@@ -159,7 +127,7 @@ fun ContentView(
 
     val favoredCoordinates = remember { mutableStateOf(emptyList<String>()) }
 
-    LaunchedEffect(connectedUserId) {
+    LaunchedEffect(Unit) {
 
         try {
 
@@ -226,12 +194,20 @@ fun ContentView(
 
                     isGettingNewResults.value = true
 
-                    val world = DefaultWebClient.find(urlHashValue)
+                    try {
 
-                    if (world != null)
+                        val world = ClusterGenerator.generateCluster(urlHashValue)
+
                         clusters.value = listOf(world.coordinate)
-                    else
+
+                    } catch (ex: Exception) {
+
+                        ex.printStackTrace()
+
+                        errorMessage.value = "Wanted coordinate failed to generate: $urlHashValue"
+
                         clusters.value = emptyList()
+                    }
 
                 } catch (ex: CancellationException) {
                     throw ex
@@ -242,31 +218,6 @@ fun ContentView(
                     ex.printStackTrace()
 
                     errorMessage.value = ex.stackTraceToString()
-
-                } finally {
-                    isGettingNewResults.value = false
-                }
-
-            } else if (START_WITH_LATEST_MAPS) {
-
-                try {
-
-                    isGettingNewResults.value = true
-
-                    val latestClusters = DefaultWebClient.findLatestClusters()
-
-                    clusters.value = latestClusters
-
-                } catch (ex: CancellationException) {
-                    throw ex
-                } catch (ex: Throwable) {
-
-                    /* We MUST catch Throwable here to prevent UI freezes. */
-
-                    ex.printStackTrace()
-
-                    // Don't show this error.
-                    // errorMessage.value = ex.stackTraceToString()
 
                 } finally {
                     isGettingNewResults.value = false
@@ -309,30 +260,6 @@ fun ContentView(
                     }
 
                     FillSpacer()
-
-                    if (ENABLE_MAP_GENERATION) {
-
-                        Icon(
-                            imageVector = if (showMapGeneration.value)
-                                IconAddCircleFilled
-                            else
-                                IconAddCircleOutline,
-                            contentDescription = null,
-                            tint = MaterialTheme.colorScheme.onBackground,
-                            modifier = Modifier
-                                .halfPadding()
-                                .size(32.dp)
-                                .noRippleClickable {
-
-                                    showMapGeneration.value = !showMapGeneration.value
-
-                                    if (showMapGeneration.value) {
-                                        showFavorites.value = false
-                                        showLeaderboard.value = false
-                                    }
-                                }
-                        )
-                    }
 
                     Icon(
                         imageVector = if (showLeaderboard.value)
@@ -400,15 +327,6 @@ fun ContentView(
 
                     DefaultSpacer()
 
-                    /*
-                     * Only show the login button in the standalone version or if connected.
-                     */
-                    if (connectedUserId != null || !isMniEmbedded)
-                        LoginWithSteamButton(
-                            connectedUserId = connectedUserId,
-                            localPort = localPort
-                        )
-
                     DoubleSpacer()
                 }
 
@@ -437,131 +355,12 @@ fun ContentView(
                     }
                 }
 
-                if (showLeaderboard.value) {
-
-                    Box(
-                        modifier = Modifier.weight(1F)
-                    ) {
-
-                        LeaderboardViewList(
-                            steamIdToUsernameMap = steamIdToUsernameMap.value,
-                            errorMessage = errorMessage
-                        )
-                    }
-
-                    if (connectedUserId != null) {
-
-                        /*
-                         * Logged-in users can change their name.
-                         */
-
-                        HorizontalSeparator()
-
-                        DefaultSpacer()
-
-                        val usernameChangeSuccess = remember { mutableStateOf(false) }
-
-                        val usernameInDatabase = remember { mutableStateOf("") }
-
-                        val username = remember { mutableStateOf("") }
-
-                        LaunchedEffect(true) {
-
-                            val result = steamIdToUsernameMap.value[connectedUserId] ?: ""
-
-                            username.value = result
-                            usernameInDatabase.value = result
-                        }
-
-                        Row(
-                            horizontalArrangement = Arrangement.spacedBy(defaultSpacing),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-
-                            TextField(
-                                value = username.value,
-                                onValueChange = { newName ->
-                                    username.value = newName
-                                },
-                                label = {
-                                    Text(stringResource(Res.string.uiUsernameLabel))
-                                },
-                                placeholder = {
-                                    Text("Anonymous")
-                                },
-                                singleLine = true,
-                                textStyle = MaterialTheme.typography.bodyLarge.copy(
-                                    color = MaterialTheme.colorScheme.onBackground
-                                ),
-                                shape = defaultRoundedCornerShape,
-                                colors = TextFieldDefaults.colors().copy(
-                                    /* Background */
-                                    unfocusedContainerColor = MaterialTheme.colorScheme.background,
-                                    focusedContainerColor = MaterialTheme.colorScheme.surfaceContainer,
-                                    /* No indicators */
-                                    focusedIndicatorColor = Color.Transparent,
-                                    unfocusedIndicatorColor = Color.Transparent,
-                                    errorIndicatorColor = Color.Transparent,
-                                    disabledIndicatorColor = Color.Transparent,
-                                    /* Text colors */
-                                    focusedTextColor = lightGray,
-                                    unfocusedTextColor = lightGray,
-                                    errorTextColor = lightGray,
-                                    disabledTextColor = lightGray,
-                                    focusedLabelColor = lightGray,
-                                    unfocusedLabelColor = lightGray,
-                                    errorLabelColor = lightGray,
-                                    disabledLabelColor = lightGray,
-                                    cursorColor = lightGray
-                                ),
-                                modifier = Modifier
-                                    .height(60.dp)
-                                    .width(240.dp)
-                            )
-
-                            SetUsernameButton(
-                                /* Enable button if there is something to change. */
-                                enabled = username.value != usernameInDatabase.value,
-                                onClick = {
-
-                                    coroutineScope.launch {
-
-                                        usernameChangeSuccess.value =
-                                            DefaultWebClient.setUsername(username.value)
-
-                                        if (usernameChangeSuccess.value)
-                                            usernameInDatabase.value = username.value
-                                    }
-                                }
-                            )
-
-                            if (usernameChangeSuccess.value) {
-
-                                Icon(
-                                    imageVector = Icons.Default.CheckCircle,
-                                    contentDescription = null,
-                                    tint = Color.Green
-                                )
-                            }
-                        }
-
-                        DoubleSpacer()
-                    }
-
-                } else if (showMapGeneration.value) {
-
-                    MapGenerationView(
-                        isLoggedIn = connectedUserId != null,
-                        errorMessage = errorMessage
-                    )
-
-                } else if (showFavorites.value) {
+                if (showFavorites.value) {
 
                     FavoritesPanel(
                         favoredCoordinates,
                         showStarMap,
                         showAsteroidMap,
-                        steamIdToUsernameMap.value,
                         writeToClipboard
                     )
 
@@ -575,13 +374,11 @@ fun ContentView(
                         worldCount,
                         coroutineScope,
                         urlHash,
-                        connectedUserId,
                         favoredCoordinates,
                         showStarMap,
                         showAsteroidMap,
                         isMniEmbedded,
                         startWithFilterPanelOpen = urlFilterQuery != null,
-                        steamIdToUsernameMap.value,
                         writeToClipboard
                     )
                 }
@@ -637,7 +434,6 @@ private fun ColumnScope.FavoritesPanel(
     favoredCoordinates: MutableState<List<String>>,
     showStarMap: MutableState<Cluster?>,
     showAsteroidMap: MutableState<Pair<Cluster, Asteroid>?>,
-    steamIdToUsernameMap: Map<String, String>,
     writeToClipboard: (String) -> Unit
 ) {
 
@@ -653,7 +449,6 @@ private fun ColumnScope.FavoritesPanel(
                 favoriteCoordinates = favoredCoordinates,
                 showStarMap = showStarMap,
                 showAsteroidMap = showAsteroidMap,
-                steamIdToUsernameMap = steamIdToUsernameMap,
                 writeToClipboard = writeToClipboard
             )
 
@@ -679,13 +474,11 @@ private fun ColumnScope.MainPanel(
     worldCount: State<Long?>,
     coroutineScope: CoroutineScope,
     urlHash: State<String?>,
-    connectedUserId: String?,
     favoredCoordinates: MutableState<List<String>>,
     showStarMap: MutableState<Cluster?>,
     showAsteroidMap: MutableState<Pair<Cluster, Asteroid>?>,
     isMniEmbedded: Boolean,
     startWithFilterPanelOpen: Boolean,
-    steamIdToUsernameMap: Map<String, String?>,
     writeToClipboard: (String) -> Unit
 ) {
 
@@ -784,25 +577,6 @@ private fun ColumnScope.MainPanel(
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis
                         )
-
-                        DoubleSpacer()
-
-                        if (connectedUserId == null) {
-
-                            Text(
-                                text = stringResource(Res.string.uiRequestCoordinateLoginHint),
-                                style = MaterialTheme.typography.bodyLarge,
-                                color = MaterialTheme.colorScheme.onBackground,
-                                textAlign = TextAlign.Center,
-                                modifier = Modifier.padding(top = 4.dp)
-                            )
-
-                        } else {
-
-                            RequestCoordinateButton(
-                                coordinate = coordinate
-                            )
-                        }
                     }
 
                 } else {
@@ -878,7 +652,6 @@ private fun ColumnScope.MainPanel(
                 favoriteCoordinates = favoredCoordinates,
                 showStarMap = showStarMap,
                 showAsteroidMap = showAsteroidMap,
-                steamIdToUsernameMap = steamIdToUsernameMap,
                 writeToClipboard = writeToClipboard
             )
         }

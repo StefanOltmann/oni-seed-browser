@@ -52,7 +52,6 @@ import io.github.stefanoltmann.app.generated.resources.uiCopiedToClipboard
 import kotlinx.coroutines.delay
 import org.jetbrains.compose.resources.stringResource
 import ui.icons.ContentCopy
-import ui.icons.IconAuthenticated
 import ui.icons.IconExternalLink
 import ui.theme.DefaultSpacer
 import ui.theme.HalfSpacer
@@ -63,7 +62,6 @@ import ui.theme.doubleSpacing
 import ui.theme.halfSpacing
 import ui.theme.hoverColor
 import ui.theme.lightGrayTransparentBorderColor
-import util.formatDate
 
 val widthPerWorld: Dp = 380.dp
 
@@ -75,7 +73,6 @@ fun ClusterView(
     favoriteCoordinates: MutableState<List<String>>,
     showStarMap: MutableState<Cluster?>,
     showAsteroidMap: MutableState<Pair<Cluster, Asteroid>?>,
-    steamIdToUsernameMap: Map<String, String?>,
     writeToClipboard: (String) -> Unit
 ) {
 
@@ -201,61 +198,6 @@ fun ClusterView(
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colorScheme.onBackground
             )
-
-            val username = steamIdToUsernameMap[cluster.uploaderSteamIdHash]
-
-            if (username != null) {
-
-                VerticalDivider(
-                    thickness = 1.dp,
-                    color = MaterialTheme.colorScheme.onBackground,
-                    modifier = Modifier
-                        .height(doubleSpacing)
-                        .padding(horizontal = defaultSpacing)
-                )
-
-                Text(
-                    text = username,
-                    style = MaterialTheme.typography.bodyMedium,
-                    fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.onBackground
-                )
-            }
-
-            val uploadDate = cluster.uploadDate
-
-            VerticalDivider(
-                thickness = 1.dp,
-                color = MaterialTheme.colorScheme.onBackground,
-                modifier = Modifier
-                    .height(doubleSpacing)
-                    .padding(horizontal = defaultSpacing)
-            )
-
-            Text(
-                text = formatDate(uploadDate),
-                style = MaterialTheme.typography.bodyMedium,
-                fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.onBackground
-            )
-
-            if (cluster.uploaderAuthenticated) {
-
-                VerticalDivider(
-                    thickness = 1.dp,
-                    color = MaterialTheme.colorScheme.onBackground,
-                    modifier = Modifier
-                        .height(doubleSpacing)
-                        .padding(horizontal = defaultSpacing)
-                )
-
-                Icon(
-                    imageVector = IconAuthenticated,
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.onBackground,
-                    modifier = Modifier.size(16.dp)
-                )
-            }
         }
     }
 

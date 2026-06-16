@@ -21,7 +21,6 @@ package ui
 
 import androidx.compose.runtime.Composable
 import de.stefan_oltmann.oni.model.AsteroidType
-import de.stefan_oltmann.oni.model.Cluster
 import de.stefan_oltmann.oni.model.ClusterType
 import de.stefan_oltmann.oni.model.GameModeType
 import de.stefan_oltmann.oni.model.GeyserType
@@ -61,7 +60,6 @@ import io.github.stefanoltmann.app.generated.resources.asteroid_tundra
 import io.github.stefanoltmann.app.generated.resources.asteroid_warp_oily_sandy_swamp
 import io.github.stefanoltmann.app.generated.resources.asteroid_water
 import io.github.stefanoltmann.app.generated.resources.biome_abyss
-import io.github.stefanoltmann.app.generated.resources.biome_aquatic
 import io.github.stefanoltmann.app.generated.resources.biome_barren
 import io.github.stefanoltmann.app.generated.resources.biome_beach
 import io.github.stefanoltmann.app.generated.resources.biome_carrot_quarry

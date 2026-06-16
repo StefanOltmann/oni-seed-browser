@@ -11,6 +11,9 @@ import io.github.stefanoltmann.app.generated.resources.artifactSpacePoiGravitasS
 import io.github.stefanoltmann.app.generated.resources.artifactSpacePoiGravitasSpaceStation7
 import io.github.stefanoltmann.app.generated.resources.artifactSpacePoiGravitasSpaceStation8
 import io.github.stefanoltmann.app.generated.resources.artifactSpacePoiRussellsTeapot
+import io.github.stefanoltmann.app.generated.resources.asteroidTypeAquaticBaseGameAsteroid
+import io.github.stefanoltmann.app.generated.resources.asteroidTypeAquaticClassicAsteroid
+import io.github.stefanoltmann.app.generated.resources.asteroidTypeAquaticSpacedOutAsteroid
 import io.github.stefanoltmann.app.generated.resources.asteroidTypeBadlands
 import io.github.stefanoltmann.app.generated.resources.asteroidTypeCeresBaseGameAsteroid
 import io.github.stefanoltmann.app.generated.resources.asteroidTypeCeresBaseGameShatteredAsteroid
@@ -48,6 +51,7 @@ import io.github.stefanoltmann.app.generated.resources.asteroidTypeMiniRegolithM
 import io.github.stefanoltmann.app.generated.resources.asteroidTypeMiniShatteredGeoAsteroid
 import io.github.stefanoltmann.app.generated.resources.asteroidTypeMiniShatteredStartAsteroid
 import io.github.stefanoltmann.app.generated.resources.asteroidTypeMiniShatteredWarpAsteroid
+import io.github.stefanoltmann.app.generated.resources.asteroidTypeMixingAquaticAsteroid
 import io.github.stefanoltmann.app.generated.resources.asteroidTypeMixingCeresAsteroid
 import io.github.stefanoltmann.app.generated.resources.asteroidTypeMixingPrehistoricAsteroid
 import io.github.stefanoltmann.app.generated.resources.asteroidTypeMooMoonlet
@@ -90,6 +94,8 @@ import io.github.stefanoltmann.app.generated.resources.harvestableSpacePoiCarbon
 import io.github.stefanoltmann.app.generated.resources.harvestableSpacePoiChlorineCloud
 import io.github.stefanoltmann.app.generated.resources.harvestableSpacePoiDlc2CeresField
 import io.github.stefanoltmann.app.generated.resources.harvestableSpacePoiDlc2CeresOreField
+import io.github.stefanoltmann.app.generated.resources.harvestableSpacePoiDlc5AquaticMixingField
+import io.github.stefanoltmann.app.generated.resources.harvestableSpacePoiDlc5AquaticOreField
 import io.github.stefanoltmann.app.generated.resources.harvestableSpacePoiForestyOreField
 import io.github.stefanoltmann.app.generated.resources.harvestableSpacePoiFrozenOreField
 import io.github.stefanoltmann.app.generated.resources.harvestableSpacePoiGasGiantCloud
@@ -112,12 +118,6 @@ import io.github.stefanoltmann.app.generated.resources.harvestableSpacePoiSandyO
 import io.github.stefanoltmann.app.generated.resources.harvestableSpacePoiSatelliteField
 import io.github.stefanoltmann.app.generated.resources.harvestableSpacePoiSwampyOreField
 import io.github.stefanoltmann.app.generated.resources.temporalTear
-import io.github.stefanoltmann.app.generated.resources.harvestableSpacePoiDlc5AquaticMixingField
-import io.github.stefanoltmann.app.generated.resources.harvestableSpacePoiDlc5AquaticOreField
-import io.github.stefanoltmann.app.generated.resources.asteroidTypeAquaticBaseGameAsteroid
-import io.github.stefanoltmann.app.generated.resources.asteroidTypeAquaticClassicAsteroid
-import io.github.stefanoltmann.app.generated.resources.asteroidTypeAquaticSpacedOutAsteroid
-import io.github.stefanoltmann.app.generated.resources.asteroidTypeMixingAquaticAsteroid
 import org.jetbrains.compose.resources.StringResource
 
 val SpacedOutSpacePOI.stringResource: StringResource

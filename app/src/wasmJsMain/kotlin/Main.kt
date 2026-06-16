@@ -175,8 +175,6 @@ fun main() {
             urlHash = urlHash,
             urlFilterQuery = filterQuery,
             isMniEmbedded = isMniEmbedded,
-            connectedUserId = connectedUserId.value,
-            previewCluster = previewCluster.value,
             localPort = null,
             writeToClipboard = {
                 window.navigator.clipboard.writeText(it)

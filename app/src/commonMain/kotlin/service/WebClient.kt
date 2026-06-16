@@ -19,32 +19,12 @@
 
 package service
 
-import de.stefan_oltmann.oni.model.Cluster
 import de.stefan_oltmann.oni.model.filter.FilterQuery
-import io.ktor.http.HttpStatusCode
 
 interface WebClient {
 
     suspend fun countSeeds(): Long?
 
-    suspend fun findLatestClusters(): List<String>
-
-    suspend fun find(coordinate: String): Cluster?
-
-    /*
-     * Requests a coordinate and returns if the request was valid.
-     * Can be invalid if coordinate has the wrong syntax.
-     */
-    suspend fun request(coordinate: String): Boolean
-
     suspend fun search(filterQuery: FilterQuery): List<String>
-
-    suspend fun getUsernameMap(): Map<String, String>
-
-    suspend fun setUsername(username: String): Boolean
-
-    suspend fun findContributors(): Map<String, Long>
-
-    suspend fun upload(cluster: Cluster): HttpStatusCode
 
 }

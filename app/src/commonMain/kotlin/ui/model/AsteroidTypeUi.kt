@@ -1,6 +1,9 @@
 package ui.model
 
 import de.stefan_oltmann.oni.model.AsteroidType
+import de.stefan_oltmann.oni.model.AsteroidType.AquaticBaseGameAsteroid
+import de.stefan_oltmann.oni.model.AsteroidType.AquaticClassicAsteroid
+import de.stefan_oltmann.oni.model.AsteroidType.AquaticSpacedOutAsteroid
 import de.stefan_oltmann.oni.model.AsteroidType.Badlands
 import de.stefan_oltmann.oni.model.AsteroidType.CeresBaseGameAsteroid
 import de.stefan_oltmann.oni.model.AsteroidType.CeresBaseGameShatteredAsteroid
@@ -38,6 +41,7 @@ import de.stefan_oltmann.oni.model.AsteroidType.MiniRegolithMoonlet
 import de.stefan_oltmann.oni.model.AsteroidType.MiniShatteredGeoAsteroid
 import de.stefan_oltmann.oni.model.AsteroidType.MiniShatteredStartAsteroid
 import de.stefan_oltmann.oni.model.AsteroidType.MiniShatteredWarpAsteroid
+import de.stefan_oltmann.oni.model.AsteroidType.MixingAquaticAsteroid
 import de.stefan_oltmann.oni.model.AsteroidType.MixingCeresAsteroid
 import de.stefan_oltmann.oni.model.AsteroidType.MixingPrehistoricAsteroid
 import de.stefan_oltmann.oni.model.AsteroidType.MooMoonlet
@@ -71,11 +75,10 @@ import de.stefan_oltmann.oni.model.AsteroidType.Volcanic
 import de.stefan_oltmann.oni.model.AsteroidType.WarpOilySandySwamp
 import de.stefan_oltmann.oni.model.AsteroidType.WarpOilySwamp
 import de.stefan_oltmann.oni.model.AsteroidType.WaterMoonlet
-import de.stefan_oltmann.oni.model.AsteroidType.AquaticBaseGameAsteroid
-import de.stefan_oltmann.oni.model.AsteroidType.AquaticClassicAsteroid
-import de.stefan_oltmann.oni.model.AsteroidType.AquaticSpacedOutAsteroid
-import de.stefan_oltmann.oni.model.AsteroidType.MixingAquaticAsteroid
 import io.github.stefanoltmann.app.generated.resources.Res
+import io.github.stefanoltmann.app.generated.resources.asteroidTypeAquaticBaseGameAsteroid
+import io.github.stefanoltmann.app.generated.resources.asteroidTypeAquaticClassicAsteroid
+import io.github.stefanoltmann.app.generated.resources.asteroidTypeAquaticSpacedOutAsteroid
 import io.github.stefanoltmann.app.generated.resources.asteroidTypeBadlands
 import io.github.stefanoltmann.app.generated.resources.asteroidTypeCeresBaseGameAsteroid
 import io.github.stefanoltmann.app.generated.resources.asteroidTypeCeresBaseGameShatteredAsteroid
@@ -113,6 +116,7 @@ import io.github.stefanoltmann.app.generated.resources.asteroidTypeMiniRegolithM
 import io.github.stefanoltmann.app.generated.resources.asteroidTypeMiniShatteredGeoAsteroid
 import io.github.stefanoltmann.app.generated.resources.asteroidTypeMiniShatteredStartAsteroid
 import io.github.stefanoltmann.app.generated.resources.asteroidTypeMiniShatteredWarpAsteroid
+import io.github.stefanoltmann.app.generated.resources.asteroidTypeMixingAquaticAsteroid
 import io.github.stefanoltmann.app.generated.resources.asteroidTypeMixingCeresAsteroid
 import io.github.stefanoltmann.app.generated.resources.asteroidTypeMixingPrehistoricAsteroid
 import io.github.stefanoltmann.app.generated.resources.asteroidTypeMooMoonlet
@@ -146,10 +150,6 @@ import io.github.stefanoltmann.app.generated.resources.asteroidTypeVolcanic
 import io.github.stefanoltmann.app.generated.resources.asteroidTypeWarpOilySandySwamp
 import io.github.stefanoltmann.app.generated.resources.asteroidTypeWarpOilySwamp
 import io.github.stefanoltmann.app.generated.resources.asteroidTypeWaterMoonlet
-import io.github.stefanoltmann.app.generated.resources.asteroidTypeAquaticBaseGameAsteroid
-import io.github.stefanoltmann.app.generated.resources.asteroidTypeAquaticClassicAsteroid
-import io.github.stefanoltmann.app.generated.resources.asteroidTypeAquaticSpacedOutAsteroid
-import io.github.stefanoltmann.app.generated.resources.asteroidTypeMixingAquaticAsteroid
 import org.jetbrains.compose.resources.StringResource
 
 val AsteroidType.stringResource: StringResource

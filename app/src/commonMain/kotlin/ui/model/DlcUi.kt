@@ -3,11 +3,11 @@ package ui.model
 import androidx.compose.runtime.Composable
 import de.stefan_oltmann.oni.model.Dlc
 import io.github.stefanoltmann.app.generated.resources.Res
+import io.github.stefanoltmann.app.generated.resources.logo_aquatic_planet_banner
 import io.github.stefanoltmann.app.generated.resources.logo_frosty_planet_banner
 import io.github.stefanoltmann.app.generated.resources.logo_oni
 import io.github.stefanoltmann.app.generated.resources.logo_prehistoric_planet_banner
 import io.github.stefanoltmann.app.generated.resources.logo_spaced_out
-import io.github.stefanoltmann.app.generated.resources.logo_aquatic_planet_banner
 import org.jetbrains.compose.resources.DrawableResource
 
 val Dlc.icon: DrawableResource

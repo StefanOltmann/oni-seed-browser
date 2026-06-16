@@ -17,17 +17,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/**
- * Query the latest map from the database instead of showing demo data
- * if top-rated maps are disabled.
- */
-const val START_WITH_LATEST_MAPS: Boolean = true
-
-/**
- * Allow users to generate maps from within the browser.
- */
-const val ENABLE_MAP_GENERATION: Boolean = false
-
 /*
  * Asteroid POI locations are generated differently with this update.
  */

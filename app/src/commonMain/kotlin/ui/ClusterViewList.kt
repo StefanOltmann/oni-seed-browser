@@ -40,7 +40,6 @@ import androidx.compose.ui.input.key.onKeyEvent
 import androidx.compose.ui.input.key.type
 import de.stefan_oltmann.oni.model.Asteroid
 import de.stefan_oltmann.oni.model.Cluster
-import io.ktor.util.PlatformUtils
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -50,7 +49,6 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import service.ClusterGenerator
-import service.DefaultWebClient
 import ui.theme.defaultSpacing
 import ui.theme.doubleSpacing
 import ui.theme.lightGray
@@ -63,7 +61,6 @@ fun ClusterViewList(
     favoriteCoordinates: MutableState<List<String>>,
     showStarMap: MutableState<Cluster?>,
     showAsteroidMap: MutableState<Pair<Cluster, Asteroid>?>,
-    steamIdToUsernameMap: Map<String, String?>,
     writeToClipboard: (String) -> Unit
 ) {
 
@@ -197,7 +194,6 @@ fun ClusterViewList(
                         favoriteCoordinates = favoriteCoordinates,
                         showStarMap = showStarMap,
                         showAsteroidMap = showAsteroidMap,
-                        steamIdToUsernameMap = steamIdToUsernameMap,
                         writeToClipboard = writeToClipboard
                     )
 
@@ -245,11 +241,7 @@ private suspend fun fetchPage(
     try {
 
         val cluster = withContext(Dispatchers.Default) {
-
-            if (PlatformUtils.IS_JVM)
-                DefaultWebClient.find(coordinate)
-            else
-                ClusterGenerator.generateCluster(coordinate)
+            ClusterGenerator.generateCluster(coordinate)
         }
 
         displayed.add(cluster)

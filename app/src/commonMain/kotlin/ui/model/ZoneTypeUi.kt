@@ -2,12 +2,15 @@ package ui.model
 
 import androidx.compose.ui.graphics.Color
 import de.stefan_oltmann.oni.model.ZoneType
+import de.stefan_oltmann.oni.model.ZoneType.Abyss
 import de.stefan_oltmann.oni.model.ZoneType.Barren
+import de.stefan_oltmann.oni.model.ZoneType.Beach
 import de.stefan_oltmann.oni.model.ZoneType.BoggyMarsh
 import de.stefan_oltmann.oni.model.ZoneType.CarrotQuarry
 import de.stefan_oltmann.oni.model.ZoneType.Forest
 import de.stefan_oltmann.oni.model.ZoneType.FrozenWastes
 import de.stefan_oltmann.oni.model.ZoneType.IceCaves
+import de.stefan_oltmann.oni.model.ZoneType.KelpForest
 import de.stefan_oltmann.oni.model.ZoneType.MagmaCore
 import de.stefan_oltmann.oni.model.ZoneType.Metallic
 import de.stefan_oltmann.oni.model.ZoneType.Moo
@@ -17,6 +20,7 @@ import de.stefan_oltmann.oni.model.ZoneType.PrehistoricGarden
 import de.stefan_oltmann.oni.model.ZoneType.PrehistoricRaptor
 import de.stefan_oltmann.oni.model.ZoneType.PrehistoricWetlands
 import de.stefan_oltmann.oni.model.ZoneType.Radioactive
+import de.stefan_oltmann.oni.model.ZoneType.Reef
 import de.stefan_oltmann.oni.model.ZoneType.Rust
 import de.stefan_oltmann.oni.model.ZoneType.Sandstone
 import de.stefan_oltmann.oni.model.ZoneType.Space
@@ -24,17 +28,16 @@ import de.stefan_oltmann.oni.model.ZoneType.SugarWoods
 import de.stefan_oltmann.oni.model.ZoneType.Swamp
 import de.stefan_oltmann.oni.model.ZoneType.ToxicJungle
 import de.stefan_oltmann.oni.model.ZoneType.Wasteland
-import de.stefan_oltmann.oni.model.ZoneType.KelpForest
-import de.stefan_oltmann.oni.model.ZoneType.Reef
-import de.stefan_oltmann.oni.model.ZoneType.Abyss
-import de.stefan_oltmann.oni.model.ZoneType.Beach
 import io.github.stefanoltmann.app.generated.resources.Res
+import io.github.stefanoltmann.app.generated.resources.zoneTypeAbyss
 import io.github.stefanoltmann.app.generated.resources.zoneTypeBarren
+import io.github.stefanoltmann.app.generated.resources.zoneTypeBeach
 import io.github.stefanoltmann.app.generated.resources.zoneTypeBoggyMarsh
 import io.github.stefanoltmann.app.generated.resources.zoneTypeCarrotQuarry
 import io.github.stefanoltmann.app.generated.resources.zoneTypeForest
 import io.github.stefanoltmann.app.generated.resources.zoneTypeFrozenWastes
 import io.github.stefanoltmann.app.generated.resources.zoneTypeIceCaves
+import io.github.stefanoltmann.app.generated.resources.zoneTypeKelpForest
 import io.github.stefanoltmann.app.generated.resources.zoneTypeMagmaCore
 import io.github.stefanoltmann.app.generated.resources.zoneTypeMetallic
 import io.github.stefanoltmann.app.generated.resources.zoneTypeMoo
@@ -44,6 +47,7 @@ import io.github.stefanoltmann.app.generated.resources.zoneTypePrehistoricGarden
 import io.github.stefanoltmann.app.generated.resources.zoneTypePrehistoricRaptor
 import io.github.stefanoltmann.app.generated.resources.zoneTypePrehistoricWetlands
 import io.github.stefanoltmann.app.generated.resources.zoneTypeRadioactive
+import io.github.stefanoltmann.app.generated.resources.zoneTypeReef
 import io.github.stefanoltmann.app.generated.resources.zoneTypeRust
 import io.github.stefanoltmann.app.generated.resources.zoneTypeSandstone
 import io.github.stefanoltmann.app.generated.resources.zoneTypeSpace
@@ -51,10 +55,6 @@ import io.github.stefanoltmann.app.generated.resources.zoneTypeSugarWoods
 import io.github.stefanoltmann.app.generated.resources.zoneTypeSwamp
 import io.github.stefanoltmann.app.generated.resources.zoneTypeToxicJungle
 import io.github.stefanoltmann.app.generated.resources.zoneTypeWasteland
-import io.github.stefanoltmann.app.generated.resources.zoneTypeKelpForest
-import io.github.stefanoltmann.app.generated.resources.zoneTypeReef
-import io.github.stefanoltmann.app.generated.resources.zoneTypeAbyss
-import io.github.stefanoltmann.app.generated.resources.zoneTypeBeach
 import org.jetbrains.compose.resources.StringResource
 
 val ZoneType.stringResource: StringResource

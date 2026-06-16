@@ -29,7 +29,6 @@ import io.ktor.http.HttpStatusCode
 import io.ktor.http.isSuccess
 import kotlin.time.measureTime
 import kotlin.time.measureTimedValue
-import kotlinx.browser.window
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

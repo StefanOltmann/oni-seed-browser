@@ -14,7 +14,7 @@ permissions:
 jobs:
   
   build:
-    name: Build Kotlin/Wasm
+    name: Build Kotlin/WASM
     runs-on: ubuntu-latest
     steps:
 

@@ -37,7 +37,6 @@ import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import de.stefan_oltmann.oni.model.Cluster
 import de.stefan_oltmann.oni.model.filter.FilterQuery
 import ui.theme.AppTypography
 import ui.theme.appColorScheme
@@ -51,8 +50,6 @@ fun App(
     urlHash: State<String?>,
     urlFilterQuery: FilterQuery?,
     isMniEmbedded: Boolean,
-    connectedUserId: String?,
-    previewCluster: Cluster?,
     localPort: Int?,
     /**
      * Note: LocalClipboardManager does not work for Compose for Web
@@ -81,24 +78,13 @@ fun App(
                     }
             ) {
 
-                if (previewCluster != null) {
-
-                    PreviewClusterView(
-                        previewCluster,
-                        writeToClipboard
-                    )
-
-                } else {
-
-                    ContentView(
-                        urlHash,
-                        urlFilterQuery,
-                        isMniEmbedded,
-                        connectedUserId,
-                        localPort,
-                        writeToClipboard
-                    )
-                }
+                ContentView(
+                    urlHash,
+                    urlFilterQuery,
+                    isMniEmbedded,
+                    localPort,
+                    writeToClipboard
+                )
 
                 /*
                  * We dropped support for small screens. It never looked good.
