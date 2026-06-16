@@ -82,7 +82,6 @@ fun App(
                     urlHash,
                     urlFilterQuery,
                     isMniEmbedded,
-                    localPort,
                     writeToClipboard
                 )
 

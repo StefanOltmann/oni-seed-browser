@@ -81,8 +81,6 @@ import service.DefaultWebClient
 import ui.filter.FilterPanel
 import ui.icons.IconBookmarks
 import ui.icons.IconBookmarksFilled
-import ui.icons.IconLeaderboardFilled
-import ui.icons.IconLeaderboardOutlined
 import ui.theme.DefaultSpacer
 import ui.theme.DoubleSpacer
 import ui.theme.FillSpacer
@@ -97,7 +95,6 @@ fun ContentView(
     urlHash: State<String?>,
     urlFilterQuery: FilterQuery?,
     isMniEmbedded: Boolean,
-    localPort: Int?,
     /**
      * Note: LocalClipboardManager does not work for Compose for Web
      * in all browsers for some reason. That's why we use a workaround here.
@@ -178,9 +175,7 @@ fun ContentView(
 
         val clusters = remember { mutableStateOf(emptyList<String>()) }
 
-        val showMapGeneration = remember { mutableStateOf(false) }
         val showFavorites = remember { mutableStateOf(false) }
-        val showLeaderboard = remember { mutableStateOf(false) }
 
         LaunchedEffect(urlHash.value) {
 
@@ -262,27 +257,6 @@ fun ContentView(
                     FillSpacer()
 
                     Icon(
-                        imageVector = if (showLeaderboard.value)
-                            IconLeaderboardFilled
-                        else
-                            IconLeaderboardOutlined,
-                        contentDescription = null,
-                        tint = MaterialTheme.colorScheme.onBackground,
-                        modifier = Modifier
-                            .halfPadding()
-                            .size(32.dp)
-                            .noRippleClickable {
-
-                                showLeaderboard.value = !showLeaderboard.value
-
-                                if (showLeaderboard.value) {
-                                    showMapGeneration.value = false
-                                    showFavorites.value = false
-                                }
-                            }
-                    )
-
-                    Icon(
                         imageVector = if (showFavorites.value)
                             IconBookmarksFilled
                         else
@@ -295,11 +269,6 @@ fun ContentView(
                             .noRippleClickable {
 
                                 showFavorites.value = !showFavorites.value
-
-                                if (showFavorites.value) {
-                                    showMapGeneration.value = false
-                                    showLeaderboard.value = false
-                                }
                             }
                     )
 
