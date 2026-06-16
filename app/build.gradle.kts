@@ -87,17 +87,9 @@ kotlin {
             /* Date formatting */
             implementation(libs.kotlinx.datetime)
 
-            /* Cryptography (JWT) */
-            implementation(libs.jwt.kt)
-            implementation(libs.jwt.ecdsa.kt)
-
             implementation(libs.ktor.js)
 
             implementation(libs.kotlin.browser)
-
-            /* Cryptography (JWT) */
-            implementation(libs.cryptography.provider.webcrypto)
-            implementation(libs.jwt.kt.wasm.js)
 
             /*
              * ONI Worldgen worldgen reverse-engineered in Rust

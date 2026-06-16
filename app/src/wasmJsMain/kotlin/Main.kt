@@ -31,7 +31,6 @@ import service.worldgenInit
 import service.worldgenVersion
 import ui.App
 import util.getQueryParameters
-import util.getValidSteamHash
 import worldgen.WorldgenMapData
 import worldgen.WorldgenMapDataConverter
 
@@ -64,8 +63,6 @@ fun main() {
                 }
             }
         }
-
-        val connectedUserId = remember { mutableStateOf<String?>(null) }
 
         val previewCluster = remember { mutableStateOf<Cluster?>(null) }
 
@@ -102,48 +99,6 @@ fun main() {
             }
 
             println("Test world generation took ${duration.inWholeMilliseconds}ms")
-        }
-
-        /*
-         * Check login token
-         */
-        LaunchedEffect(Unit) {
-
-            val tokenParameter = params["token"]
-
-            val validSteamHashParameter: String? =
-                if (!tokenParameter.isNullOrBlank())
-                    getValidSteamHash(tokenParameter)
-                else
-                    null
-
-            if (!tokenParameter.isNullOrBlank() && validSteamHashParameter != null) {
-
-                /* The token was checked and can be saved to storage. */
-                AppStorage.setToken(tokenParameter)
-
-                /* Update the UI */
-                connectedUserId.value = validSteamHashParameter
-
-            } else {
-
-                /* Check for stored token */
-
-                val storedToken = AppStorage.getToken()
-
-                if (!storedToken.isNullOrBlank()) {
-
-                    val validSteamHash = getValidSteamHash(storedToken)
-
-                    /*
-                     * Set it to the UI if valid or remove it from store.
-                     */
-                    if (validSteamHash != null)
-                        connectedUserId.value = validSteamHash
-                    else
-                        AppStorage.clearToken()
-                }
-            }
         }
 
         val urlHash = remember {
