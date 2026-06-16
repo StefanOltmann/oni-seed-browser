@@ -21,7 +21,6 @@ package service
 
 import de.stefan_oltmann.oni.model.Cluster
 import kotlin.time.measureTimedValue
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import worldgen.WorldgenMapData

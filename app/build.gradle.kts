@@ -1,4 +1,3 @@
-import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 
@@ -30,36 +29,29 @@ val buildTarget: String? = System.getenv("BUILD_TARGET")
 
 kotlin {
 
-    jvm()
+    @OptIn(ExperimentalWasmDsl::class)
+    wasmJs {
 
-    jvmToolchain(jdkVersion = 25)
+        outputModuleName = "app"
 
-    if (buildTarget != "desktop") {
+        browser {
 
-        @OptIn(ExperimentalWasmDsl::class)
-        wasmJs {
+            val rootDirPath = project.rootDir.path
+            val projectDirPath = project.projectDir.path
 
-            outputModuleName = "app"
-
-            browser {
-
-                val rootDirPath = project.rootDir.path
-                val projectDirPath = project.projectDir.path
-
-                commonWebpackConfig {
-                    outputFileName = "app.js"
-                    devServer = (devServer ?: KotlinWebpackConfig.DevServer()).apply {
-                        static = (static ?: mutableListOf()).apply {
-                            // Serve sources to debug inside the browser
-                            add(rootDirPath)
-                            add(projectDirPath)
-                        }
+            commonWebpackConfig {
+                outputFileName = "app.js"
+                devServer = (devServer ?: KotlinWebpackConfig.DevServer()).apply {
+                    static = (static ?: mutableListOf()).apply {
+                        // Serve sources to debug inside the browser
+                        add(rootDirPath)
+                        add(projectDirPath)
                     }
                 }
             }
-
-            binaries.executable()
         }
+
+        binaries.executable()
     }
 
     sourceSets {
@@ -98,6 +90,21 @@ kotlin {
             /* Cryptography (JWT) */
             implementation(libs.jwt.kt)
             implementation(libs.jwt.ecdsa.kt)
+
+            implementation(libs.ktor.js)
+
+            implementation(libs.kotlin.browser)
+
+            /* Cryptography (JWT) */
+            implementation(libs.cryptography.provider.webcrypto)
+            implementation(libs.jwt.kt.wasm.js)
+
+            /*
+             * ONI Worldgen worldgen reverse-engineered in Rust
+             *
+             * https://www.npmjs.com/package/@tigin-backwards/oxygen-not-included-worldgen-node
+             */
+            implementation(npm("@tigin-backwards/oxygen-not-included-worldgen", "2.0.1"))
         }
 
         commonTest.dependencies {
@@ -105,83 +112,26 @@ kotlin {
             /* Unit Tests */
             implementation(libs.kotlin.test)
         }
-
-        jvmMain.dependencies {
-
-            implementation(compose.desktop.currentOs)
-            implementation(libs.kotlinx.coroutines.swing)
-            implementation(libs.ktor.java)
-
-            /* Platform Tools */
-            implementation(libs.platformtools.core)
-            implementation(libs.platformtools.darkmodedetector)
-        }
-
-        if (buildTarget != "desktop") {
-
-            wasmJsMain.dependencies {
-
-                implementation(libs.ktor.js)
-
-                implementation(libs.kotlin.browser)
-
-                /* Cryptography (JWT) */
-                implementation(libs.cryptography.provider.webcrypto)
-                implementation(libs.jwt.kt.wasm.js)
-
-                /*
-                 * ONI Worldgen worldgen reverse-engineered in Rust
-                 *
-                 * https://www.npmjs.com/package/@tigin-backwards/oxygen-not-included-worldgen-node
-                 */
-                implementation(npm("@tigin-backwards/oxygen-not-included-worldgen", "2.0.1"))
-            }
-        }
-    }
-}
-
-compose.desktop {
-
-    application {
-
-        mainClass = "MainKt"
-
-        nativeDistributions {
-
-            includeAllModules = true
-
-            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-
-            packageName = "ONI Seed Browser"
-
-            if (version.toString().matches(Regex("^\\d+\\.\\d+\\.\\d+$")))
-                packageVersion = version.toString()
-            else
-                packageVersion = "1.0.0"
-        }
     }
 }
 
 // region write version
-if (buildTarget != "desktop") {
+tasks.register("writeVersionFileToWasm") {
 
-    tasks.register("writeVersionFileToWasm") {
+    description = "Writes the project version into the wasmJs distribution directory."
 
-        description = "Writes the project version into the wasmJs distribution directory."
+    val outputFile = layout.buildDirectory.file("dist/wasmJs/productionExecutable/version.txt")
+    outputs.file(outputFile)
 
-        val outputFile = layout.buildDirectory.file("dist/wasmJs/productionExecutable/version.txt")
-        outputs.file(outputFile)
-
-        doLast {
-            val versionFile = outputFile.get().asFile
-            versionFile.parentFile.mkdirs()
-            versionFile.writeText(project.version.toString())
-        }
+    doLast {
+        val versionFile = outputFile.get().asFile
+        versionFile.parentFile.mkdirs()
+        versionFile.writeText(project.version.toString())
     }
+}
 
-    tasks.named("wasmJsBrowserDistribution") {
-        finalizedBy(tasks.named("writeVersionFileToWasm"))
-    }
+tasks.named("wasmJsBrowserDistribution") {
+    finalizedBy(tasks.named("writeVersionFileToWasm"))
 }
 // endregion
 
