@@ -151,11 +151,13 @@ fun main() {
         }
 
         val origin: String = document.location?.origin ?: "-/-"
+        val href: String = document.location?.href ?: "-/-"
 
         /* Some debug values */
         println("### ONI Seed Browser $APP_VERSION ###")
         println("Running on domain: ${document.domain}")
         println("Origin: $origin")
+        println("HREF: $href")
         println("URL hash: ${urlHash.value}")
         println("URL filter query: $filterQuery")
         println("Preview cluster: ${previewCluster.value?.coordinate}")

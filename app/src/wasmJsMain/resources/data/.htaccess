@@ -1,0 +1,3 @@
+<FilesMatch "^(?!count$).+">
+    Header set Content-Encoding gzip
+</FilesMatch>
