@@ -47,6 +47,16 @@ jobs:
         run: |
           mv app/build/dist/wasmJs/productionExecutable app/build/dist/wasmJs/oni-seed-browser
 
+      - name: Deploy over FTP
+        uses: modern-dev/ftp-mirror@v2
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          user: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local_dir: "app/build/dist/wasmJs/oni-seed-browser"
+          remote_dir: "/httpdocs/oni-seed-browser/"
+          delete: true
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
