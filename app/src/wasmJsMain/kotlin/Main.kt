@@ -150,11 +150,12 @@ fun main() {
             mutableStateOf(document.location?.hash?.drop(1)?.ifBlank { null })
         }
 
+        val origin: String = document.location?.origin ?: "-/-"
+
         /* Some debug values */
         println("### ONI Seed Browser $APP_VERSION ###")
         println("Running on domain: ${document.domain}")
-        println("Origin: ${window.document.origin}")
-        println("Location: ${window.document.location}")
+        println("Origin: $origin")
         println("URL hash: ${urlHash.value}")
         println("URL filter query: $filterQuery")
         println("Preview cluster: ${previewCluster.value?.coordinate}")
