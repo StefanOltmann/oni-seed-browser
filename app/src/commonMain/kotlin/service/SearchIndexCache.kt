@@ -47,11 +47,18 @@ private val backgroundScope = CoroutineScope(Dispatchers.Default)
 @OptIn(ExperimentalSerializationApi::class)
 suspend fun findSearchIndex(clusterType: ClusterType): SearchIndex {
 
-    val searchIndexUrl = SEARCH_INDEX_URL + "/" + clusterType.prefix
+    /*
+     * FIXME Local files don't have the GZIP header, so Ktor doesn't uncompress them.
+     */
+    // val urlString = kotlinx.browser.window.location.href + "/data/" + clusterType.prefix
 
-    val lastModifiedMillisResponse = httpClient.head("$searchIndexUrl")
+    val urlString = "https://stefan-oltmann.de/oni-seed-browser/data/" + clusterType.prefix
 
-    val cacheEntry = searchIndexDiskCache.load(clusterType.prefix)
+    println("[SEARCH] Checking HEAD of $urlString ...")
+
+    val lastModifiedMillisResponse = httpClient.head(urlString)
+
+    val cacheEntry = searchIndexDiskCache.load(key = clusterType.prefix)
 
     if (lastModifiedMillisResponse.status != HttpStatusCode.OK) {
 
@@ -103,7 +110,7 @@ suspend fun findSearchIndex(clusterType: ClusterType): SearchIndex {
 
     val (bytes, downloadTime) = measureTimedValue {
 
-        val response = httpClient.get(searchIndexUrl)
+        val response = httpClient.get(urlString)
 
         if (!response.status.isSuccess())
             error("[SEARCH] Search index for $clusterType not found.")
@@ -111,7 +118,7 @@ suspend fun findSearchIndex(clusterType: ClusterType): SearchIndex {
         response.bodyAsBytes()
     }
 
-    println("[SEARCH] Downloaded ${bytes.size} bytes from $searchIndexUrl in $downloadTime ($lastModifiedMillis)")
+    println("[SEARCH] Downloaded ${bytes.size} bytes from $urlString in $downloadTime ($lastModifiedMillis)")
 
     val (searchIndex, deflateTime) = measureTimedValue {
         ProtoBuf.decodeFromByteArray<SearchIndex>(bytes)

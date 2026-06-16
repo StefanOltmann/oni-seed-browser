@@ -37,12 +37,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
-
-const val DATA_URL = "https://stefan-oltmann.de/oni-seed-browser/data"
-
-const val COUNT_URL = "$DATA_URL/count"
-
-const val SEARCH_INDEX_URL = "$DATA_URL/index"
+import web.window.window
 
 private val json = Json {
     ignoreUnknownKeys = false
@@ -70,7 +65,9 @@ object DefaultWebClient : WebClient {
 
         try {
 
-            val response = httpClient.get(COUNT_URL) {
+            val url = kotlinx.browser.window.location.href + "/data/count"
+
+            val response = httpClient.get(url) {
                 accept(ContentType.Text.Plain)
             }
 

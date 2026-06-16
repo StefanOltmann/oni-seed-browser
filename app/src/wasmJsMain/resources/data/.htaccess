@@ -1,6 +1,8 @@
 Header set Access-Control-Allow-Origin "*"
+Header set X-Data-Provider "Stefan Oltmann"
 
 <FilesMatch "^(?!count$).+">
+    Header set Access-Control-Allow-Origin "*"
     Header set Content-Type "application/protobuf"
     Header set Content-Encoding gzip
 </FilesMatch>
