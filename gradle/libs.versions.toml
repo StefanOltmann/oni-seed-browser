@@ -1,12 +1,20 @@
 [versions]
-kotlin = "2.3.20"
-compose-multiplatform = "1.10.3"
-ktor = "3.4.2"
+kotlin = "2.4.0"
+compose-multiplatform = "1.11.1"
+compose-material-icons-core = "1.7.3"
+ktor = "3.5.0"
 detekt = "1.23.8"
 multiplatformSettings = "1.3.0"
-kotlinx-coroutines = "1.10.2"
+kotlinx-coroutines = "1.11.0"
+kotlinx-datetime = "0.8.0"
 platformtools = "0.7.4"
 oniSeedBrowserModel = "71715c8"
+git-versioning = "6.4.3"
+jwt-kt = "1.2.1"
+jwt-ecdsa-kt = "1.2.1"
+jwt-kt-wasm-js = "1.1.0"
+kotlin-browser = "2025.9.8"
+cryptography-provider-webcrypto = "0.4.0"
 
 [libraries]
 kotlinx-coroutines-swing = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-swing", version.ref = "kotlinx-coroutines" }
@@ -22,6 +30,13 @@ multiplatformSettings = { module = "com.russhwolf:multiplatform-settings", versi
 platformtools-core = { module = "io.github.kdroidfilter:platformtools.core", version.ref = "platformtools" }
 platformtools-darkmodedetector = { module = "io.github.kdroidfilter:platformtools.darkmodedetector", version.ref = "platformtools" }
 oniSeedBrowserModel = { module = "de.stefan-oltmann:oni-seed-browser-model", version.ref = "oniSeedBrowserModel" }
+compose-material-icons-core = { module = "org.jetbrains.compose.material:material-icons-core", version.ref = "compose-material-icons-core" }
+kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinx-datetime" }
+jwt-kt = { module = "com.appstractive:jwt-kt", version.ref = "jwt-kt" }
+jwt-ecdsa-kt = { module = "com.appstractive:jwt-ecdsa-kt", version.ref = "jwt-ecdsa-kt" }
+jwt-kt-wasm-js = { module = "com.appstractive:jwt-kt-wasm-js", version.ref = "jwt-kt-wasm-js" }
+kotlin-browser = { module = "org.jetbrains.kotlin-wrappers:kotlin-browser", version.ref = "kotlin-browser" }
+cryptography-provider-webcrypto = { module = "dev.whyoleg.cryptography:cryptography-provider-webcrypto", version.ref = "cryptography-provider-webcrypto" }
 
 [plugins]
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
@@ -29,3 +44,4 @@ composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "compose-mu
 composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
+git-versioning = { id = "me.qoomon.git-versioning", version.ref = "git-versioning" }

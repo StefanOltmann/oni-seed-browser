@@ -7,7 +7,7 @@ plugins {
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.kotlinSerialization)
-    id("me.qoomon.git-versioning") version "6.4.3"
+    alias(libs.plugins.git.versioning)
 }
 
 group = "io.github.stefanoltmann"
@@ -80,7 +80,7 @@ kotlin {
             implementation(compose.components.resources)
 
             /* Icons */
-            implementation("org.jetbrains.compose.material:material-icons-core:1.7.3")
+            implementation(libs.compose.material.icons.core)
 
             /* REST */
             implementation(libs.ktor.core)
@@ -93,11 +93,11 @@ kotlin {
             implementation(libs.multiplatformSettings)
 
             /* Date formatting */
-            implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.7.1")
+            implementation(libs.kotlinx.datetime)
 
             /* Cryptography (JWT) */
-            implementation("com.appstractive:jwt-kt:1.2.1")
-            implementation("com.appstractive:jwt-ecdsa-kt:1.2.1")
+            implementation(libs.jwt.kt)
+            implementation(libs.jwt.ecdsa.kt)
         }
 
         commonTest.dependencies {
@@ -123,11 +123,11 @@ kotlin {
 
                 implementation(libs.ktor.js)
 
-                implementation("org.jetbrains.kotlin-wrappers:kotlin-browser:2025.9.8")
+                implementation(libs.kotlin.browser)
 
                 /* Cryptography (JWT) */
-                implementation("dev.whyoleg.cryptography:cryptography-provider-webcrypto:0.4.0")
-                implementation("com.appstractive:jwt-kt-wasm-js:1.1.0")
+                implementation(libs.cryptography.provider.webcrypto)
+                implementation(libs.jwt.kt.wasm.js)
 
                 /*
                  * ONI Worldgen worldgen reverse-engineered in Rust
@@ -179,41 +179,8 @@ if (buildTarget != "desktop") {
         }
     }
 
-    tasks.register("createHeadersFile") {
-
-        description = "Creates a _headers file for Cloudflare Pages to serve WASM files with correct MIME type."
-
-        val outputFile = layout.buildDirectory.file("dist/wasmJs/productionExecutable/_headers")
-        outputs.file(outputFile)
-
-        doLast {
-            val headersContent = """
-                /*.wasm
-                  Content-Type: application/wasm
-                  Cache-Control: public, max-age=31536000, immutable
-
-                /*.js
-                  Cache-Control: public, max-age=31536000, immutable
-
-                /*.css
-                  Cache-Control: public, max-age=31536000, immutable
-
-                /index.html
-                  Cache-Control: public, max-age=300
-
-                /service-worker.js
-                  Cache-Control: public, max-age=0, must-revalidate
-            """.trimIndent()
-
-            val outputFileObj = outputFile.get().asFile
-            outputFileObj.parentFile.mkdirs()
-            outputFileObj.writeText(headersContent)
-        }
-    }
-
     tasks.named("wasmJsBrowserDistribution") {
         finalizedBy(tasks.named("writeVersionFileToWasm"))
-        finalizedBy(tasks.named("createHeadersFile"))
     }
 }
 // endregion
