@@ -22,8 +22,13 @@ const api = {
             delete world.disease_count;
             delete world.pickupables;
 
+            delete world.backwall_element_idx;
+            delete world.backwall_mass;
+            delete world.backwall_temperature;
+
             for (const cell of world.biome_cells) {
                 delete cell.type;
+                delete cell.tags;
             }
 
             for (const geyserSpawn of world.geysers) {

@@ -96,7 +96,7 @@ kotlin {
              *
              * https://www.npmjs.com/package/@tigin-backwards/oxygen-not-included-worldgen-node
              */
-            implementation(npm("@tigin-backwards/oxygen-not-included-worldgen", "2.0.1"))
+            implementation(npm("@tigin-backwards/oxygen-not-included-worldgen", "3.0.2"))
         }
 
         commonTest.dependencies {
