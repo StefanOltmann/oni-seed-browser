@@ -36,7 +36,6 @@ import io.github.stefanoltmann.app.generated.resources.asteroid_glowood_wastelan
 import io.github.stefanoltmann.app.generated.resources.asteroid_irradiated_forest
 import io.github.stefanoltmann.app.generated.resources.asteroid_irradiated_marsh
 import io.github.stefanoltmann.app.generated.resources.asteroid_irradiated_swampy
-import io.github.stefanoltmann.app.generated.resources.asteroid_marinea
 import io.github.stefanoltmann.app.generated.resources.asteroid_marinea_mixing
 import io.github.stefanoltmann.app.generated.resources.asteroid_marshy
 import io.github.stefanoltmann.app.generated.resources.asteroid_mini_shattered_geo
@@ -159,9 +158,12 @@ import io.github.stefanoltmann.app.generated.resources.geyser_minor_volcano
 import io.github.stefanoltmann.app.generated.resources.geyser_natural_gas_geyser
 import io.github.stefanoltmann.app.generated.resources.geyser_niobium_volcano
 import io.github.stefanoltmann.app.generated.resources.geyser_oil_reservoir
+import io.github.stefanoltmann.app.generated.resources.geyser_polluted_brine
 import io.github.stefanoltmann.app.generated.resources.geyser_polluted_water_vent
 import io.github.stefanoltmann.app.generated.resources.geyser_salt_water
 import io.github.stefanoltmann.app.generated.resources.geyser_steam_vent
+import io.github.stefanoltmann.app.generated.resources.geyser_thermal_gas_fissure
+import io.github.stefanoltmann.app.generated.resources.geyser_tidal_spring
 import io.github.stefanoltmann.app.generated.resources.geyser_tungsten_volcano
 import io.github.stefanoltmann.app.generated.resources.geyser_volcano
 import io.github.stefanoltmann.app.generated.resources.geyser_water
@@ -317,6 +319,9 @@ val GeyserType.drawableResource: DrawableResource
         GeyserType.TUNGSTEN_VOLCANO -> Res.drawable.geyser_tungsten_volcano
         GeyserType.NIOBIUM_VOLCANO -> Res.drawable.geyser_niobium_volcano
         GeyserType.OIL_RESERVOIR -> Res.drawable.geyser_oil_reservoir
+        GeyserType.TIDAL_SPRING -> Res.drawable.geyser_tidal_spring
+        GeyserType.POLLUTED_BRINE -> Res.drawable.geyser_polluted_brine
+        GeyserType.THERMAL_GAS_FISSURE -> Res.drawable.geyser_thermal_gas_fissure
     }
 
 val PointOfInterestType.drawableResource: DrawableResource
@@ -462,7 +467,7 @@ val AsteroidType.drawableResource: DrawableResource
         AsteroidType.MixingPrehistoricAsteroid -> Res.drawable.asteroid_mixing_relica
         AsteroidType.AquaticBaseGameAsteroid -> Res.drawable.cluster_base_marinea
         AsteroidType.AquaticClassicAsteroid -> Res.drawable.cluster_spacedout_marinea
-        AsteroidType.AquaticSpacedOutAsteroid -> Res.drawable.asteroid_marinea
+        AsteroidType.AquaticSpacedOutAsteroid -> Res.drawable.cluster_spacedout_marinea_minor
         AsteroidType.MixingAquaticAsteroid -> Res.drawable.asteroid_marinea_mixing
     }
 
@@ -542,7 +547,7 @@ val SpacedOutSpacePOI.drawableResource: DrawableResource
         SpacedOutSpacePOI.MixingPrehistoricAsteroid -> Res.drawable.asteroid_mixing_relica
         SpacedOutSpacePOI.AquaticBaseGameAsteroid -> Res.drawable.cluster_base_marinea
         SpacedOutSpacePOI.AquaticClassicAsteroid -> Res.drawable.cluster_spacedout_marinea
-        SpacedOutSpacePOI.AquaticSpacedOutAsteroid -> Res.drawable.asteroid_marinea
+        SpacedOutSpacePOI.AquaticSpacedOutAsteroid -> Res.drawable.cluster_spacedout_marinea_minor
         SpacedOutSpacePOI.MixingAquaticAsteroid -> Res.drawable.asteroid_marinea_mixing
 
         /* Others */

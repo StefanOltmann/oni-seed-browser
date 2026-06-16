@@ -125,22 +125,34 @@ object WorldgenMapDataConverter {
              *
              * Oil wells are not geysers, but we treat them the same for simplicity.
              */
-            val oilWells = worldMapData.otherEntities.mapNotNull { entitySpawn ->
+            val oilWellsAndThermalGasFissures = worldMapData.otherEntities.mapNotNull { entitySpawn ->
 
-                if (entitySpawn.tag != "OilWell")
-                    return@mapNotNull null
-
-                Geyser(
-                    id = GeyserType.OIL_RESERVOIR,
-                    x = entitySpawn.x.toShort(),
-                    y = (worldHeight - entitySpawn.y).toShort(),
-                    emitRate = 3333,
-                    avgEmitRate = 3333,
-                    idleTime = 0,
-                    eruptionTime = 1,
-                    dormancyCyclesRounded = 0,
-                    activeCyclesRounded = 1
-                )
+                if (entitySpawn.tag == "OilWell")
+                    Geyser(
+                        id = GeyserType.OIL_RESERVOIR,
+                        x = entitySpawn.x.toShort(),
+                        y = (worldHeight - entitySpawn.y).toShort(),
+                        emitRate = 3333,
+                        avgEmitRate = 3333,
+                        idleTime = 0,
+                        eruptionTime = 1,
+                        dormancyCyclesRounded = 0,
+                        activeCyclesRounded = 1
+                    )
+                else if (entitySpawn.tag == "UnderwaterVent")
+                    Geyser(
+                        id = GeyserType.THERMAL_GAS_FISSURE,
+                        x = entitySpawn.x.toShort(),
+                        y = (worldHeight - entitySpawn.y).toShort(),
+                        emitRate = 83,
+                        avgEmitRate = 83,
+                        idleTime = 0,
+                        eruptionTime = 1,
+                        dormancyCyclesRounded = 0,
+                        activeCyclesRounded = 1
+                    )
+                else
+                    null
             }
 
             Asteroid(
@@ -150,7 +162,7 @@ object WorldgenMapDataConverter {
                 worldTraitsBitmask = WorldTrait.toMask(worldTraits),
                 biomePaths = biomePaths,
                 pointsOfInterest = otherEntitiesPois + buildingPois,
-                geysers = geysers + oilWells
+                geysers = geysers + oilWellsAndThermalGasFissures
             )
         }
 

@@ -74,11 +74,17 @@ fun GeysersRow(
 
     val sortedGeysers = geysers.sortedBy { it.id }
 
-    val sortedGeysersWithoutOilWells = sortedGeysers.filterNot { it.id == GeyserType.OIL_RESERVOIR }
+    val sortedGeysersWithoutOtherEntities = sortedGeysers.filterNot {
+        it.id == GeyserType.OIL_RESERVOIR ||
+            it.id == GeyserType.TIDAL_SPRING ||
+            it.id == GeyserType.THERMAL_GAS_FISSURE
+    }
 
-    val oilWellCount = (sortedGeysers.size - sortedGeysersWithoutOilWells.size).toByte()
+    val oilWellCount = sortedGeysers.count { it.id == GeyserType.OIL_RESERVOIR }.toByte()
+    val tidalSpringCount = sortedGeysers.count { it.id == GeyserType.TIDAL_SPRING }.toByte()
+    val thermalGasFissureCount = sortedGeysers.count { it.id == GeyserType.THERMAL_GAS_FISSURE }.toByte()
 
-    val geyserCount = sortedGeysersWithoutOilWells.size + oilWellCount.coerceIn(0, 1)
+    val geyserCount = sortedGeysersWithoutOtherEntities.size + oilWellCount.coerceIn(0, 1)
 
     val spacingPerGeyser = min(
         (maxWidth - geyserCount.times(48.dp)) / (geyserCount - 1),
@@ -91,7 +97,7 @@ fun GeysersRow(
         modifier = Modifier.height(48.dp)
     ) {
 
-        for (geyser in sortedGeysersWithoutOilWells) {
+        for (geyser in sortedGeysersWithoutOtherEntities) {
 
             TooltipContainer(
                 tooltipContent = {
@@ -189,6 +195,104 @@ fun GeysersRow(
                                 modifier = Modifier.offset(y = -4.dp)
                             )
                         }
+                    }
+                }
+            }
+        }
+
+        if (tidalSpringCount > 0) {
+
+            Box(
+                contentAlignment = Alignment.Center,
+                modifier = Modifier
+                    .size(48.dp)
+                    .background(
+                        gray3,
+                        CircleShape
+                    )
+                    .border(
+                        1.dp,
+                        anthracite,
+                        CircleShape
+                    )
+            ) {
+
+                Image(
+                    painter = painterResource(GeyserType.TIDAL_SPRING.drawableResource),
+                    contentDescription = null,
+                    alignment = Alignment.BottomCenter,
+                    modifier = Modifier.halfPadding()
+                )
+
+                if (tidalSpringCount > 1) {
+
+                    Box(
+                        contentAlignment = Alignment.Center,
+                        modifier = Modifier
+                            .size(20.dp)
+                            .offset(y = 14.dp)
+                            .background(
+                                countBackground,
+                                CircleShape
+                            )
+                    ) {
+
+                        Text(
+                            text = "$tidalSpringCount",
+                            style = MaterialTheme.typography.bodyLarge,
+                            color = MaterialTheme.colorScheme.onBackground,
+                            fontWeight = FontWeight.Bold,
+                            modifier = Modifier.offset(y = -4.dp)
+                        )
+                    }
+                }
+            }
+        }
+
+        if (thermalGasFissureCount > 0) {
+
+            Box(
+                contentAlignment = Alignment.Center,
+                modifier = Modifier
+                    .size(48.dp)
+                    .background(
+                        gray3,
+                        CircleShape
+                    )
+                    .border(
+                        1.dp,
+                        anthracite,
+                        CircleShape
+                    )
+            ) {
+
+                Image(
+                    painter = painterResource(GeyserType.THERMAL_GAS_FISSURE.drawableResource),
+                    contentDescription = null,
+                    alignment = Alignment.BottomCenter,
+                    modifier = Modifier.halfPadding()
+                )
+
+                if (thermalGasFissureCount > 1) {
+
+                    Box(
+                        contentAlignment = Alignment.Center,
+                        modifier = Modifier
+                            .size(20.dp)
+                            .offset(y = 14.dp)
+                            .background(
+                                countBackground,
+                                CircleShape
+                            )
+                    ) {
+
+                        Text(
+                            text = "$thermalGasFissureCount",
+                            style = MaterialTheme.typography.bodyLarge,
+                            color = MaterialTheme.colorScheme.onBackground,
+                            fontWeight = FontWeight.Bold,
+                            modifier = Modifier.offset(y = -4.dp)
+                        )
                     }
                 }
             }

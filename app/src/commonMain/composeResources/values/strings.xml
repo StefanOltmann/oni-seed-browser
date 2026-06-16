@@ -267,6 +267,9 @@
     <string name="geyserTypeVolcano">Volcano</string>
     <string name="geyserTypeMinorVolcano">Minor Volcano</string>
     <string name="geyserTypeOilReservoir">Oil Reservoir</string>
+    <string name="geyserTypeTidalSpring">Tidal Spring</string>
+    <string name="geyserTypePollutedBrine">Polluted Brine Vent</string>
+    <string name="geyserTypeThermalGasFissure">Thermal Gas Fissure</string>
 
     <!-- World traits -->
     <string name="worldTraitBouldersLarge">Large Boulders</string>

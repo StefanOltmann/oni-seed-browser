@@ -42,6 +42,7 @@ import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import de.stefan_oltmann.oni.model.Geyser
+import de.stefan_oltmann.oni.model.GeyserType
 import io.github.stefanoltmann.app.generated.resources.Res
 import io.github.stefanoltmann.app.generated.resources.uiGeyserDetailActiveDetails
 import io.github.stefanoltmann.app.generated.resources.uiGeyserDetailCycles
@@ -68,6 +69,8 @@ fun GeyserDetail(
     geyser: Geyser,
     modifier: Modifier = Modifier
 ) {
+
+    val showDetails = geyser.id != GeyserType.TIDAL_SPRING
 
     Box(
         contentAlignment = Alignment.Center,
@@ -111,7 +114,8 @@ fun GeyserDetail(
                 ) {
 
                     /* Show it for all geyser types in detail screen. */
-                    AvgEmitRateRatingIndicator(geyser)
+                    if (showDetails && geyser.id != GeyserType.THERMAL_GAS_FISSURE)
+                        AvgEmitRateRatingIndicator(geyser)
 
                     Image(
                         painter = painterResource(geyser.id.drawableResource),
@@ -132,118 +136,121 @@ fun GeyserDetail(
                 )
             }
 
-            Row(
-                verticalAlignment = Alignment.Bottom
-            ) {
+            if (showDetails) {
 
-                Text(
-                    text = "${geyser.avgEmitRate} " + stringResource(Res.string.uiGeyserDetailGramPerSecond),
-                    style = MaterialTheme.typography.headlineSmall,
-                    fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.onBackground
-                )
+                Row(
+                    verticalAlignment = Alignment.Bottom
+                ) {
 
-                Text(
-                    text = " " + stringResource(Res.string.uiGeyserDetailOnAverage),
-                    style = MaterialTheme.typography.bodyLarge,
-                    color = MaterialTheme.colorScheme.onBackground
-                )
-            }
+                    Text(
+                        text = "${geyser.avgEmitRate} " + stringResource(Res.string.uiGeyserDetailGramPerSecond),
+                        style = MaterialTheme.typography.headlineSmall,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.onBackground
+                    )
 
-            Row {
-
-                val template = stringResource(Res.string.uiGeyserDetailEmitDetails)
-
-                val secondsText = stringResource(Res.string.uiGeyserDetailSecondsShort)
-                val gramPerSecondText = stringResource(Res.string.uiGeyserDetailGramPerSecond)
-
-                val formattedText = buildAnnotatedString {
-
-                    var currentIndex = 0
-
-                    val regex = "\\{(emitRate|eruptionTime|overallTime)\\}".toRegex()
-
-                    regex.findAll(template).forEach { match ->
-
-                        val placeholder = match.groupValues[1]
-                        val startIndex = match.range.first
-
-                        append(template.substring(currentIndex, startIndex))
-
-                        pushStyle(boldSpanStyle)
-                        when (placeholder) {
-
-                            "emitRate" ->
-                                append("${geyser.emitRate} $gramPerSecondText")
-
-                            "eruptionTime" ->
-                                append("${geyser.eruptionTime}$secondsText")
-
-                            "overallTime" ->
-                                append("${geyser.overallTime}$secondsText")
-                        }
-                        pop()
-
-                        currentIndex = match.range.last + 1
-                    }
-
-                    append(template.substring(currentIndex))
+                    Text(
+                        text = " " + stringResource(Res.string.uiGeyserDetailOnAverage),
+                        style = MaterialTheme.typography.bodyLarge,
+                        color = MaterialTheme.colorScheme.onBackground
+                    )
                 }
 
-                Text(
-                    text = formattedText,
-                    style = if (Locale.current.language == "zh")
-                        MaterialTheme.typography.bodySmall
-                    else
-                        MaterialTheme.typography.bodyLarge,
-                    color = MaterialTheme.colorScheme.onBackground
-                )
-            }
+                Row {
 
-            Row {
+                    val template = stringResource(Res.string.uiGeyserDetailEmitDetails)
 
-                val template = stringResource(Res.string.uiGeyserDetailActiveDetails)
+                    val secondsText = stringResource(Res.string.uiGeyserDetailSecondsShort)
+                    val gramPerSecondText = stringResource(Res.string.uiGeyserDetailGramPerSecond)
 
-                val cyclesText = stringResource(Res.string.uiGeyserDetailCycles)
+                    val formattedText = buildAnnotatedString {
 
-                val formattedText = buildAnnotatedString {
+                        var currentIndex = 0
 
-                    var currentIndex = 0
+                        val regex = "\\{(emitRate|eruptionTime|overallTime)\\}".toRegex()
 
-                    val regex = "\\{(activeCycles|overallCycles)\\}".toRegex()
+                        regex.findAll(template).forEach { match ->
 
-                    regex.findAll(template).forEach { match ->
+                            val placeholder = match.groupValues[1]
+                            val startIndex = match.range.first
 
-                        val placeholder = match.groupValues[1]
-                        val startIndex = match.range.first
+                            append(template.substring(currentIndex, startIndex))
 
-                        append(template.substring(currentIndex, startIndex))
+                            pushStyle(boldSpanStyle)
+                            when (placeholder) {
 
-                        pushStyle(boldSpanStyle)
-                        when (placeholder) {
+                                "emitRate" ->
+                                    append("${geyser.emitRate} $gramPerSecondText")
 
-                            "activeCycles" ->
-                                append("${geyser.activeCyclesRounded} $cyclesText")
+                                "eruptionTime" ->
+                                    append("${geyser.eruptionTime}$secondsText")
 
-                            "overallCycles" ->
-                                append("${(geyser.activeCyclesRounded + geyser.dormancyCyclesRounded)} $cyclesText")
+                                "overallTime" ->
+                                    append("${geyser.overallTime}$secondsText")
+                            }
+                            pop()
+
+                            currentIndex = match.range.last + 1
                         }
-                        pop()
 
-                        currentIndex = match.range.last + 1
+                        append(template.substring(currentIndex))
                     }
 
-                    append(template.substring(currentIndex))
+                    Text(
+                        text = formattedText,
+                        style = if (Locale.current.language == "zh")
+                            MaterialTheme.typography.bodySmall
+                        else
+                            MaterialTheme.typography.bodyLarge,
+                        color = MaterialTheme.colorScheme.onBackground
+                    )
                 }
 
-                Text(
-                    text = formattedText,
-                    style = if (Locale.current.language == "zh")
-                        MaterialTheme.typography.bodySmall
-                    else
-                        MaterialTheme.typography.bodyLarge,
-                    color = MaterialTheme.colorScheme.onBackground
-                )
+                Row {
+
+                    val template = stringResource(Res.string.uiGeyserDetailActiveDetails)
+
+                    val cyclesText = stringResource(Res.string.uiGeyserDetailCycles)
+
+                    val formattedText = buildAnnotatedString {
+
+                        var currentIndex = 0
+
+                        val regex = "\\{(activeCycles|overallCycles)\\}".toRegex()
+
+                        regex.findAll(template).forEach { match ->
+
+                            val placeholder = match.groupValues[1]
+                            val startIndex = match.range.first
+
+                            append(template.substring(currentIndex, startIndex))
+
+                            pushStyle(boldSpanStyle)
+                            when (placeholder) {
+
+                                "activeCycles" ->
+                                    append("${geyser.activeCyclesRounded} $cyclesText")
+
+                                "overallCycles" ->
+                                    append("${(geyser.activeCyclesRounded + geyser.dormancyCyclesRounded)} $cyclesText")
+                            }
+                            pop()
+
+                            currentIndex = match.range.last + 1
+                        }
+
+                        append(template.substring(currentIndex))
+                    }
+
+                    Text(
+                        text = formattedText,
+                        style = if (Locale.current.language == "zh")
+                            MaterialTheme.typography.bodySmall
+                        else
+                            MaterialTheme.typography.bodyLarge,
+                        color = MaterialTheme.colorScheme.onBackground
+                    )
+                }
             }
         }
     }

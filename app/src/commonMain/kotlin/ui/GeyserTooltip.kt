@@ -85,7 +85,11 @@ fun GeyserTooltip(
 
             GeyserInfoHeaderRow(count, geyserType, avgEmitRate, avgEmitRateColor)
 
-            if (geyserType != GeyserType.OIL_RESERVOIR) {
+            val hasVariableOutput = geyserType != GeyserType.OIL_RESERVOIR &&
+                geyserType != GeyserType.TIDAL_SPRING &&
+                geyserType != GeyserType.THERMAL_GAS_FISSURE
+
+            if (hasVariableOutput) {
 
                 AvgEmitRateScaleRow(geyserType, avgEmitRate, avgEmitRateColor)
 
