@@ -59,16 +59,19 @@ import kotlinx.serialization.decodeFromByteArray
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.protobuf.ProtoBuf
 
+const val DATA_URL = "https://stefan-oltmann.de/oni-seed-browser/data"
+
 const val SERVER_URL = "https://mni.stefan-oltmann.de"
 const val REQUEST_URL = "$SERVER_URL/request-coordinate"
 const val UPLOAD_URL = "$SERVER_URL/upload"
 
 const val FIND_URL = "$SERVER_URL/map"
 
-const val COUNT_URL = "$SERVER_URL/count"
+const val COUNT_URL = "$DATA_URL/count"
+
 const val CONTRIBUTORS_URL = "$SERVER_URL/contributors"
 
-const val SEARCH_INDEX_URL = "$SERVER_URL/index"
+const val SEARCH_INDEX_URL = "$DATA_URL/index"
 
 const val TOKEN_HEADER = "token"
 

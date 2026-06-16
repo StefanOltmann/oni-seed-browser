@@ -1,3 +1,6 @@
+Header set Access-Control-Allow-Origin "*"
+
 <FilesMatch "^(?!count$).+">
+    Header set Content-Type "application/protobuf"
     Header set Content-Encoding gzip
 </FilesMatch>
