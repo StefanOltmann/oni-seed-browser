@@ -40,6 +40,7 @@ import androidx.compose.ui.input.key.onKeyEvent
 import androidx.compose.ui.input.key.type
 import de.stefan_oltmann.oni.model.Asteroid
 import de.stefan_oltmann.oni.model.Cluster
+import io.ktor.util.PlatformUtils
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -48,6 +49,7 @@ import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import service.ClusterGenerator
 import service.DefaultWebClient
 import ui.theme.defaultSpacing
 import ui.theme.doubleSpacing
@@ -243,7 +245,11 @@ private suspend fun fetchPage(
     try {
 
         val cluster = withContext(Dispatchers.Default) {
-            DefaultWebClient.find(coordinate)
+
+            if (PlatformUtils.IS_JVM)
+                DefaultWebClient.find(coordinate)
+            else
+                ClusterGenerator.generateCluster(coordinate)
         }
 
         displayed.add(cluster)
