@@ -21,13 +21,15 @@ package service
 import de.stefan_oltmann.oni.model.ClusterType
 import de.stefan_oltmann.oni.model.search.SearchIndex
 import io.ktor.client.HttpClient
+import io.ktor.client.plugins.compression.ContentEncoding
 import io.ktor.client.request.get
+import io.ktor.client.request.head
 import io.ktor.client.statement.bodyAsBytes
-import io.ktor.client.statement.bodyAsText
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.isSuccess
 import kotlin.time.measureTime
 import kotlin.time.measureTimedValue
+import kotlinx.browser.window
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -35,7 +37,11 @@ import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.decodeFromByteArray
 import kotlinx.serialization.protobuf.ProtoBuf
 
-private val httpClient = HttpClient()
+private val httpClient = HttpClient {
+    install(ContentEncoding) {
+        gzip()
+    }
+}
 
 private val backgroundScope = CoroutineScope(Dispatchers.Default)
 
@@ -44,7 +50,7 @@ suspend fun findSearchIndex(clusterType: ClusterType): SearchIndex {
 
     val searchIndexUrl = SEARCH_INDEX_URL + "/" + clusterType.prefix
 
-    val lastModifiedMillisResponse = httpClient.get("$searchIndexUrl/last-modified")
+    val lastModifiedMillisResponse = httpClient.head("$searchIndexUrl")
 
     val cacheEntry = searchIndexDiskCache.load(clusterType.prefix)
 
@@ -68,7 +74,7 @@ suspend fun findSearchIndex(clusterType: ClusterType): SearchIndex {
         )
     }
 
-    val lastModifiedMillis = lastModifiedMillisResponse.bodyAsText().toLongOrNull()
+    val lastModifiedMillis = lastModifiedMillisResponse.headers.lastModifiedMillis()
 
     if (lastModifiedMillis == null) {
 
@@ -106,7 +112,7 @@ suspend fun findSearchIndex(clusterType: ClusterType): SearchIndex {
         response.bodyAsBytes()
     }
 
-    println("[SEARCH] Downloaded ${bytes.size} bytes from $searchIndexUrl in $downloadTime")
+    println("[SEARCH] Downloaded ${bytes.size} bytes from $searchIndexUrl in $downloadTime ($lastModifiedMillis)")
 
     val (searchIndex, deflateTime) = measureTimedValue {
         ProtoBuf.decodeFromByteArray<SearchIndex>(bytes)
