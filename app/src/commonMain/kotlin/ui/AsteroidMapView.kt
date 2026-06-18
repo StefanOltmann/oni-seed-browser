@@ -128,13 +128,6 @@ fun AsteroidMapPopup(
                 verticalAlignment = Alignment.CenterVertically
             ) {
 
-                OpenInOniViewButton(
-                    coordinate = coordinate,
-                    asteroidType = asteroid.id
-                )
-
-                HalfSpacer()
-
                 OpenInOnimaxxingButton(
                     coordinate = coordinate
                 )
