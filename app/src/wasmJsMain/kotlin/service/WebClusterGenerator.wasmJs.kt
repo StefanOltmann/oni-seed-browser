@@ -54,6 +54,9 @@ actual object ClusterGenerator {
 
             val worldgenMapData = WorldgenMapData.fromJson(json)
 
+            if (worldgenMapData.failure != null)
+                error("Worldgen failed: ${worldgenMapData.failure.message}")
+
             WorldgenMapDataConverter.convert(
                 mapData = worldgenMapData,
                 gameVersion = worldgenVersion!!.substringBefore('+').toInt()

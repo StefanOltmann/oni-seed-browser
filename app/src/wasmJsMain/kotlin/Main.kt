@@ -26,13 +26,11 @@ import de.stefan_oltmann.oni.model.Cluster
 import kotlin.time.measureTime
 import kotlinx.browser.document
 import kotlinx.browser.window
-import service.worldgenGenerate
+import service.ClusterGenerator
 import service.worldgenInit
 import service.worldgenVersion
 import ui.App
 import util.getQueryParameters
-import worldgen.WorldgenMapData
-import worldgen.WorldgenMapDataConverter
 
 @OptIn(ExperimentalComposeUiApi::class, ExperimentalWasmJsInterop::class)
 fun main() {
@@ -86,14 +84,7 @@ fun main() {
 
             val duration = measureTime {
 
-                val json: String = worldgenGenerate(previewCoordinate)
-
-                val worldgenMapData = WorldgenMapData.fromJson(json)
-
-                val cluster = WorldgenMapDataConverter.convert(
-                    mapData = worldgenMapData,
-                    gameVersion = worldgenVersion.substringBefore('+').toInt()
-                )
+                val cluster = ClusterGenerator.generateCluster(previewCoordinate)
 
                 previewCluster.value = cluster
             }
