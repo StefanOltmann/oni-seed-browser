@@ -71,9 +71,6 @@ kotlin {
             implementation(compose.ui)
             implementation(compose.components.resources)
 
-            /* Icons */
-            implementation(libs.compose.material.icons.core)
-
             /* REST */
             implementation(libs.ktor.core)
             implementation(libs.ktor.contentnegotiation)

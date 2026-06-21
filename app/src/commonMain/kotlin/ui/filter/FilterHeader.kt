@@ -26,9 +26,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.KeyboardArrowDown
-import androidx.compose.material.icons.filled.KeyboardArrowUp
+import ui.icons.IconKeyboardArrowDown
+import ui.icons.IconKeyboardArrowUp
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -91,9 +90,9 @@ fun FilterHeader(
 
         Icon(
             imageVector = if (filterPanelOpen.value)
-                Icons.Default.KeyboardArrowUp
+                IconKeyboardArrowUp
             else
-                Icons.Default.KeyboardArrowDown,
+                IconKeyboardArrowDown,
             contentDescription = null,
             tint = MaterialTheme.colorScheme.onBackground,
             modifier = Modifier.size(48.dp)

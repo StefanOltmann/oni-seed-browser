@@ -31,8 +31,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.text.BasicTextField
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Delete
+import ui.icons.IconDelete
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -216,7 +215,7 @@ fun FilterPanelEntry(
         ) {
 
             Icon(
-                imageVector = Icons.Default.Delete,
+                imageVector = IconDelete,
                 contentDescription = null,
                 tint = if (deleteButtonHovered.value)
                     Color.Red

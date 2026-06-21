@@ -49,7 +49,7 @@
     addEventListener("error", (event) => unhandledError(event, event.error));
     addEventListener("unhandledrejection", (event) => unhandledError(event, event.reason));
 
-    window.hideLoadingOverlay = function() {
+    window.hideLoadingOverlay = function () {
         loadingOverlay.style.opacity = '0';
         setTimeout(() => {
             loadingOverlay.style.display = 'none';

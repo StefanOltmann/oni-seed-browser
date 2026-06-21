@@ -21,8 +21,7 @@ package ui
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Close
+import ui.icons.IconClose
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -41,7 +40,7 @@ fun CloseButton(
     val hovered = remember { mutableStateOf(false) }
 
     Icon(
-        imageVector = Icons.Default.Close,
+        imageVector = IconClose,
         contentDescription = null,
         tint = if (hovered.value)
             hoverColor

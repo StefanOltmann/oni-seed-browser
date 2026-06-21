@@ -31,8 +31,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Search
+import ui.icons.IconSearch
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -105,7 +104,7 @@ fun AsteroidView(
             )
 
             Icon(
-                imageVector = Icons.Default.Search,
+                imageVector = IconSearch,
                 contentDescription = null,
                 tint = if (hovered.value)
                     hoverColor
