@@ -16,6 +16,8 @@
     <string name="uiMapNotFound">未找到此地圖</string>
     <string name="uiWelcome">歡迎使用種子瀏覽器.</string>
     <string name="uiWelcomeInstruction">使用搜尋功能來查找地圖!</string>
+    <string name="uiOrEnterCoordinate">或直接輸入座標</string>
+    <string name="uiShow">顯示</string>
     <string name="uiSeedsInDatabase">個種子</string>
     <string name="uiWorldTrait">星球特質</string>
     <string name="uiSpaceDestinationCount">太空目的地數量</string>

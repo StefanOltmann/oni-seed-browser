@@ -22,6 +22,8 @@ package ui
 import AppStorage
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
@@ -31,7 +33,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -47,6 +51,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.font.FontWeight
@@ -64,7 +69,9 @@ import io.github.stefanoltmann.app.generated.resources.uiInvalidCoordinate
 import io.github.stefanoltmann.app.generated.resources.uiMapNotFound
 import io.github.stefanoltmann.app.generated.resources.uiNoFavoredClustersFound
 import io.github.stefanoltmann.app.generated.resources.uiNoResults
+import io.github.stefanoltmann.app.generated.resources.uiOrEnterCoordinate
 import io.github.stefanoltmann.app.generated.resources.uiSearching
+import io.github.stefanoltmann.app.generated.resources.uiShow
 import io.github.stefanoltmann.app.generated.resources.uiTitle
 import io.github.stefanoltmann.app.generated.resources.uiWelcome
 import io.github.stefanoltmann.app.generated.resources.uiWelcomeInstruction
@@ -591,6 +598,9 @@ private fun ColumnScope.MainPanel(
 
             } else {
 
+                val seedInput = remember { mutableStateOf("SNDST-A-0-0-0-0") }
+                val showCoordinateError = remember { mutableStateOf(false) }
+
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
@@ -611,6 +621,95 @@ private fun ColumnScope.MainPanel(
                         overflow = TextOverflow.Ellipsis,
                         modifier = Modifier.padding(top = 8.dp)
                     )
+
+                    Text(
+                        text = stringResource(Res.string.uiOrEnterCoordinate),
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.7f),
+                        textAlign = TextAlign.Center,
+                        overflow = TextOverflow.Ellipsis,
+                        modifier = Modifier.padding(top = 16.dp)
+                    )
+
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.Center,
+                        modifier = Modifier.padding(top = 8.dp)
+                    ) {
+
+                        Box(
+                            modifier = Modifier
+                                .width(350.dp)
+                                .border(
+                                    1.dp,
+                                    MaterialTheme.colorScheme.onBackground.copy(alpha = 0.5f),
+                                    defaultRoundedCornerShape
+                                )
+                                .background(
+                                    Color.Black.copy(alpha = 0.3f),
+                                    defaultRoundedCornerShape
+                                )
+                                .padding(horizontal = 12.dp, vertical = 10.dp)
+                        ) {
+
+                            BasicTextField(
+                                value = seedInput.value,
+                                onValueChange = {
+                                    seedInput.value = it
+                                    showCoordinateError.value = false
+                                },
+                                cursorBrush = SolidColor(MaterialTheme.colorScheme.onBackground),
+                                singleLine = true,
+                                textStyle = MaterialTheme.typography.bodyLarge.copy(
+                                    color = MaterialTheme.colorScheme.onBackground
+                                )
+                            )
+                        }
+
+                        DefaultSpacer()
+
+                        Box(
+                            contentAlignment = Alignment.Center,
+                            modifier = Modifier
+                                .border(
+                                    1.dp,
+                                    MaterialTheme.colorScheme.onBackground.copy(alpha = 0.5f),
+                                    defaultRoundedCornerShape
+                                )
+                                .padding(horizontal = 12.dp, vertical = 10.dp)
+                                .noRippleClickable {
+
+                                    val coordinate = seedInput.value.trim()
+
+                                    if (ClusterType.isValidCoordinate(coordinate)) {
+
+                                        @Suppress("UNCHECKED_CAST")
+                                        (urlHash as MutableState<String?>).value = coordinate
+
+                                    } else {
+                                        showCoordinateError.value = true
+                                    }
+                                }
+                        ) {
+
+                            Text(
+                                text = stringResource(Res.string.uiShow),
+                                style = MaterialTheme.typography.bodyLarge,
+                                fontWeight = FontWeight.Bold,
+                                color = MaterialTheme.colorScheme.onBackground
+                            )
+                        }
+                    }
+
+                    if (showCoordinateError.value) {
+
+                        Text(
+                            text = stringResource(Res.string.uiInvalidCoordinate),
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.error,
+                            modifier = Modifier.padding(top = 8.dp)
+                        )
+                    }
                 }
             }
         }

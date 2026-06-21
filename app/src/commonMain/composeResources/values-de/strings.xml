@@ -16,6 +16,8 @@
     <string name="uiMapNotFound">Diese Karte wurde nicht gefunden</string>
     <string name="uiWelcome">Willkommen beim ONI Seed Browser</string>
     <string name="uiWelcomeInstruction">Nutze die Suche um Karten zu finden!</string>
+    <string name="uiOrEnterCoordinate">oder gib direkt eine Koordinate ein</string>
+    <string name="uiShow">Anzeigen</string>
     <string name="uiSeedsInDatabase">Karten</string>
     <string name="uiWorldTrait">Welt-Eigenschaft</string>
     <string name="uiSpaceDestinationCount">Space Destination Count</string>
