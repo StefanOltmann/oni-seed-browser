@@ -1,7 +1,6 @@
 Header set Access-Control-Allow-Origin "*"
-Header set X-Test "Apache served this."
 
-<FilesMatch "\.pb\.zst$">
+<FilesMatch "\.searchindex$">
     Header set Access-Control-Allow-Origin "*"
     Header set Content-Type "application/protobuf"
     Header set Content-Encoding zstd

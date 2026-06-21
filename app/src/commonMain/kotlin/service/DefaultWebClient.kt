@@ -64,9 +64,7 @@ object DefaultWebClient : WebClient {
 
         try {
 
-            // val url = kotlinx.browser.window.location.href + "/data/count"
-
-            val url = "https://stefan-oltmann.de/oni-seed-browser/data/count"
+            val url = "https://mnidata.stefan-oltmann.de/count"
 
             val response = httpClient.get(url) {
                 accept(ContentType.Text.Plain)

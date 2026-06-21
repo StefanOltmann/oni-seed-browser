@@ -50,12 +50,7 @@ private val backgroundScope = CoroutineScope(Dispatchers.Default)
 @OptIn(ExperimentalSerializationApi::class)
 suspend fun findSearchIndex(clusterType: ClusterType): SearchIndex {
 
-    /*
-     * FIXME Local files don't have the GZIP header, so Ktor doesn't uncompress them.
-     */
-    // val urlString = kotlinx.browser.window.location.href + "/data/" + clusterType.prefix
-
-    val urlString = "https://stefan-oltmann.de/oni-seed-browser/data/" + clusterType.prefix + ".pb.zst"
+    val urlString = "https://mnidata.stefan-oltmann.de/" + clusterType.prefix + ".searchindex"
 
     println("[SEARCH] Checking HEAD of $urlString ...")
 
