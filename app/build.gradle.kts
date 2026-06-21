@@ -125,6 +125,27 @@ tasks.register("writeVersionFileToWasm") {
 tasks.named("wasmJsBrowserDistribution") {
     finalizedBy(tasks.named("writeVersionFileToWasm"))
 }
+
+// region Remove source maps from production build
+tasks.register("removeSourceMaps") {
+
+    description = "Removes .js.map files from the production build to reduce deployment size."
+
+    val distDir = layout.buildDirectory.dir("dist/wasmJs/productionExecutable")
+    inputs.dir(distDir)
+    outputs.upToDateWhen { false }
+
+    doLast {
+        distDir.get().asFile.listFiles()?.filter { it.name.endsWith(".js.map") }?.forEach { file ->
+            println("Removing source map: ${file.name} (${file.length() / 1024} KB)")
+            file.delete()
+        }
+    }
+}
+
+tasks.named("wasmJsBrowserDistribution") {
+    finalizedBy(tasks.named("removeSourceMaps"))
+}
 // endregion
 
 // region BuildInfo.kt

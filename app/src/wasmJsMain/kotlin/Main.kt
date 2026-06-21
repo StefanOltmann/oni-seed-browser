@@ -32,10 +32,19 @@ import service.worldgenVersion
 import ui.App
 import util.getQueryParameters
 
+@OptIn(ExperimentalWasmJsInterop::class)
+private fun hideLoadingOverlay(): Unit =
+    js("window.hideLoadingOverlay?.()")
+
 @OptIn(ExperimentalComposeUiApi::class, ExperimentalWasmJsInterop::class)
 fun main() {
 
     ComposeViewport(document.body!!) {
+
+        /* Hide loading overlay when Compose app is ready */
+        LaunchedEffect(Unit) {
+            hideLoadingOverlay()
+        }
 
         val params = remember { getQueryParameters(window.location.search) }
 
