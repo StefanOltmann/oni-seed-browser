@@ -25,11 +25,9 @@ import io.ktor.client.plugins.compression.ContentEncoding
 import io.ktor.client.request.get
 import io.ktor.client.request.head
 import io.ktor.client.statement.bodyAsBytes
-import io.ktor.client.statement.bodyAsChannel
-import io.ktor.client.statement.readBytes
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.isSuccess
-import io.ktor.utils.io.readAvailable
+import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.measureTime
 import kotlin.time.measureTimedValue
 import kotlinx.coroutines.CoroutineScope
@@ -128,7 +126,8 @@ suspend fun findSearchIndex(clusterType: ClusterType): SearchIndex {
 
         SearchStatus.onDownloadingIndex()
 
-        yield()
+        /* Let UI update */
+        delay(100.milliseconds)
 
         response.bodyAsBytes()
     }
@@ -137,7 +136,8 @@ suspend fun findSearchIndex(clusterType: ClusterType): SearchIndex {
 
     SearchStatus.onInflatingIndex()
 
-    yield()
+    /* Let UI update */
+    delay(100.milliseconds)
 
     val (searchIndex, deflateTime) = measureTimedValue {
         ProtoBuf.decodeFromByteArray<SearchIndex>(bytes)
@@ -170,7 +170,8 @@ suspend fun findSearchIndex(clusterType: ClusterType): SearchIndex {
 
     SearchStatus.onFinished()
 
-    yield()
+    /* Let UI update */
+    delay(100.milliseconds)
 
     return searchIndex
 }
