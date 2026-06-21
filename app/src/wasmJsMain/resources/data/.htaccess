@@ -1,5 +1,5 @@
 Header set Access-Control-Allow-Origin "*"
-Header set X-Data-Provider "Stefan Oltmann"
+Header set X-Test "Apache served this."
 
 <FilesMatch "\.pb\.zst$">
     Header set Access-Control-Allow-Origin "*"
