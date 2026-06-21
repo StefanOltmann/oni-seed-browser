@@ -24,7 +24,9 @@ import io.ktor.client.HttpClient
 import io.ktor.client.plugins.compression.ContentEncoding
 import io.ktor.client.request.get
 import io.ktor.client.request.head
+import io.ktor.client.statement.bodyAsBytes
 import io.ktor.client.statement.bodyAsChannel
+import io.ktor.client.statement.readBytes
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.isSuccess
 import io.ktor.utils.io.readAvailable
@@ -32,7 +34,9 @@ import kotlin.time.measureTime
 import kotlin.time.measureTimedValue
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.yield
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.decodeFromByteArray
 import kotlinx.serialization.protobuf.ProtoBuf
@@ -81,6 +85,8 @@ suspend fun findSearchIndex(clusterType: ClusterType): SearchIndex {
         )
     }
 
+    yield()
+
     val lastModifiedMillis = lastModifiedMillisResponse.headers.lastModifiedMillis()
 
     if (lastModifiedMillis == null) {
@@ -96,6 +102,8 @@ suspend fun findSearchIndex(clusterType: ClusterType): SearchIndex {
         )
     }
 
+    yield()
+
     if (lastModifiedMillis == cacheEntry?.second) {
 
         println("[SEARCH] Search index cache hit for ${clusterType.prefix} at $lastModifiedMillis")
@@ -109,6 +117,8 @@ suspend fun findSearchIndex(clusterType: ClusterType): SearchIndex {
         return searchIndex
     }
 
+    yield()
+
     val (bytes, downloadTime) = measureTimedValue {
 
         val response = httpClient.get(urlString)
@@ -116,47 +126,26 @@ suspend fun findSearchIndex(clusterType: ClusterType): SearchIndex {
         if (!response.status.isSuccess())
             error("[SEARCH] Search index for $clusterType not found.")
 
-        DownloadProgress.onDownloadStarted()
+        SearchStatus.onDownloadingIndex()
 
-        val channel = response.bodyAsChannel()
+        yield()
 
-        val contentLength = response.headers["Content-Length"]?.toLongOrNull() ?: 0L
-
-        if (contentLength > 0)
-            DownloadProgress.onContentLength(contentLength)
-
-        val buffer = ByteArray(8192)
-        val byteList = mutableListOf<Byte>()
-
-        var read: Int
-
-        while (true) {
-
-            read = channel.readAvailable(buffer, 0, buffer.size)
-
-            if (read == -1)
-                break
-
-            for (i in 0 until read)
-                byteList.add(buffer[i])
-
-            println("[SEARCH] Downloaded $read bytes...")
-
-            DownloadProgress.onBytesDownloaded(read.toLong())
-        }
-
-        DownloadProgress.onDownloadComplete()
-
-        byteList.toByteArray()
+        response.bodyAsBytes()
     }
 
     println("[SEARCH] Downloaded ${bytes.size} bytes from $urlString in $downloadTime ($lastModifiedMillis)")
+
+    SearchStatus.onInflatingIndex()
+
+    yield()
 
     val (searchIndex, deflateTime) = measureTimedValue {
         ProtoBuf.decodeFromByteArray<SearchIndex>(bytes)
     }
 
     println("[SEARCH] Inflated downloaded search index in $deflateTime")
+
+    yield()
 
     /*
      * Async cache the search index
@@ -179,7 +168,9 @@ suspend fun findSearchIndex(clusterType: ClusterType): SearchIndex {
      * Return the cached search index.
      */
 
-    DownloadProgress.onFinished()
+    SearchStatus.onFinished()
+
+    yield()
 
     return searchIndex
 }

@@ -78,7 +78,7 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import service.ClusterGenerator
 import service.DefaultWebClient
-import service.DownloadProgress
+import service.SearchStatus
 import ui.filter.FilterPanel
 import ui.icons.IconBookmarks
 import ui.icons.IconBookmarksFilled
@@ -514,10 +514,9 @@ private fun ColumnScope.MainPanel(
             modifier = Modifier.weight(1F)
         ) {
 
-            val progressText = if (DownloadProgress.isLoading && DownloadProgress.statusText.isNotEmpty())
-                DownloadProgress.statusText
-            else
+            val progressText = SearchStatus.statusText.ifEmpty {
                 stringResource(Res.string.uiSearching)
+            }
 
             Text(
                 text = progressText,
