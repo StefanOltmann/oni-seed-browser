@@ -20,7 +20,6 @@
     <div class="loading-content">
         <div class="loading-spinner"></div>
         <div class="loading-text">Loading ONI Seed Browser</div>
-        <div class="loading-status" id="loading-status">Initializing...</div>
     </div>
 </div>
 
@@ -30,21 +29,17 @@
 
 <script type="application/javascript">
 
-    /*
-     * Handle browsers that don't support WebAssembly
-     */
+    const loadingOverlay = document.getElementById('loading-overlay');
 
     const unhandledError = (event, error) => {
 
         console.error('Unhandled error:', error);
 
-        // Handle WebAssembly compile errors
         if (error instanceof WebAssembly.CompileError) {
 
             document.getElementById("warning").style.display = "initial";
-            document.getElementById("loading-overlay").style.display = "none";
+            loadingOverlay.style.display = "none";
 
-            // Hide the Webpack overlay
             const webpackOverlay = document.getElementById("webpack-dev-server-client-overlay");
             if (webpackOverlay != null)
                 webpackOverlay.style.display = "none";
@@ -54,90 +49,6 @@
     addEventListener("error", (event) => unhandledError(event, event.error));
     addEventListener("unhandledrejection", (event) => unhandledError(event, event.reason));
 
-    /*
-     * Track WASM loading progress
-     */
-    const loadingStatus = document.getElementById('loading-status');
-    const loadingOverlay = document.getElementById('loading-overlay');
-
-    // Track resource loading
-    const wasmResources = [];
-    let totalWasmSize = 0;
-    let loadedWasmSize = 0;
-
-    // Intercept fetch to track WASM downloads
-    const originalFetch = window.fetch;
-    window.fetch = async function(...args) {
-        const response = await originalFetch.apply(this, args);
-        const url = typeof args[0] === 'string' ? args[0] : args[0]?.url;
-
-        if (url && url.endsWith('.wasm')) {
-
-            const contentLength = parseInt(response.headers.get('content-length') || '0');
-
-            if (contentLength > 0)
-                totalWasmSize += contentLength;
-
-            const reader = response.body?.getReader();
-            if (reader) {
-                const stream = new ReadableStream({
-                    start(controller) {
-                        function pump() {
-                            reader.read().then(({done, value}) => {
-                                if (done) {
-                                    controller.close();
-                                    return;
-                                }
-                                loadedWasmSize += value.byteLength;
-                                updateProgress();
-                                controller.enqueue(value);
-                                pump();
-                            });
-                        }
-                        pump();
-                    }
-                });
-
-                return new Response(stream, {
-                    headers: response.headers,
-                    status: response.status,
-                    statusText: response.statusText
-                });
-            }
-        }
-
-        return response;
-    };
-
-    function updateProgress() {
-        if (totalWasmSize > 0) {
-            const percent = Math.round((loadedWasmSize / totalWasmSize) * 100);
-            const loadedMB = (loadedWasmSize / (1024 * 1024)).toFixed(1);
-            const totalMB = (totalWasmSize / (1024 * 1024)).toFixed(1);
-            loadingStatus.textContent = `Loading WASM modules... ${percent}% (${loadedMB}/${totalMB} MB)`;
-        } else {
-            loadingStatus.textContent = 'Loading WASM modules...';
-        }
-    }
-
-    // Update status periodically
-    let statusMessages = [
-        'Compiling WebAssembly...',
-        'Initializing application...',
-        'Loading resources...'
-    ];
-    let messageIndex = 0;
-
-    setInterval(() => {
-        if (loadingOverlay.style.display !== 'none') {
-            if (totalWasmSize === 0) {
-                loadingStatus.textContent = statusMessages[messageIndex % statusMessages.length];
-                messageIndex++;
-            }
-        }
-    }, 3000);
-
-    // Function to hide loading overlay (called from Kotlin)
     window.hideLoadingOverlay = function() {
         loadingOverlay.style.opacity = '0';
         setTimeout(() => {

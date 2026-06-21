@@ -52,11 +52,5 @@ html, body {
 .loading-text {
     font-size: 1.5rem;
     font-weight: 500;
-    margin-bottom: 10px;
     color: #ffffff;
-}
-
-.loading-status {
-    font-size: 0.9rem;
-    color: #999;
 }
