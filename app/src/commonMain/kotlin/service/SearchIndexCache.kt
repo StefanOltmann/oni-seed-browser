@@ -24,9 +24,10 @@ import io.ktor.client.HttpClient
 import io.ktor.client.plugins.compression.ContentEncoding
 import io.ktor.client.request.get
 import io.ktor.client.request.head
-import io.ktor.client.statement.bodyAsBytes
+import io.ktor.client.statement.bodyAsChannel
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.isSuccess
+import io.ktor.utils.io.readAvailable
 import kotlin.time.measureTime
 import kotlin.time.measureTimedValue
 import kotlinx.coroutines.CoroutineScope
@@ -115,7 +116,38 @@ suspend fun findSearchIndex(clusterType: ClusterType): SearchIndex {
         if (!response.status.isSuccess())
             error("[SEARCH] Search index for $clusterType not found.")
 
-        response.bodyAsBytes()
+        DownloadProgress.onDownloadStarted()
+
+        val channel = response.bodyAsChannel()
+
+        val contentLength = response.headers["Content-Length"]?.toLongOrNull() ?: 0L
+
+        if (contentLength > 0)
+            DownloadProgress.onContentLength(contentLength)
+
+        val buffer = ByteArray(8192)
+        val byteList = mutableListOf<Byte>()
+
+        var read: Int
+
+        while (true) {
+
+            read = channel.readAvailable(buffer, 0, buffer.size)
+
+            if (read == -1)
+                break
+
+            for (i in 0 until read)
+                byteList.add(buffer[i])
+
+            println("[SEARCH] Downloaded $read bytes...")
+
+            DownloadProgress.onBytesDownloaded(read.toLong())
+        }
+
+        DownloadProgress.onDownloadComplete()
+
+        byteList.toByteArray()
     }
 
     println("[SEARCH] Downloaded ${bytes.size} bytes from $urlString in $downloadTime ($lastModifiedMillis)")
@@ -146,6 +178,8 @@ suspend fun findSearchIndex(clusterType: ClusterType): SearchIndex {
     /*
      * Return the cached search index.
      */
+
+    DownloadProgress.onFinished()
 
     return searchIndex
 }

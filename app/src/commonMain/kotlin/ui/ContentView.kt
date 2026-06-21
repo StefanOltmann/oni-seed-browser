@@ -78,6 +78,7 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import service.ClusterGenerator
 import service.DefaultWebClient
+import service.DownloadProgress
 import ui.filter.FilterPanel
 import ui.icons.IconBookmarks
 import ui.icons.IconBookmarksFilled
@@ -513,8 +514,13 @@ private fun ColumnScope.MainPanel(
             modifier = Modifier.weight(1F)
         ) {
 
+            val progressText = if (DownloadProgress.isLoading && DownloadProgress.statusText.isNotEmpty())
+                DownloadProgress.statusText
+            else
+                stringResource(Res.string.uiSearching)
+
             Text(
-                text = stringResource(Res.string.uiSearching),
+                text = progressText,
                 style = MaterialTheme.typography.headlineSmall,
                 color = MaterialTheme.colorScheme.onBackground,
                 maxLines = 1,
