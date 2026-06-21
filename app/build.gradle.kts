@@ -131,8 +131,9 @@ tasks.register("removeSourceMaps") {
 
     description = "Removes .js.map files from the production build to reduce deployment size."
 
+    dependsOn(tasks.named("writeVersionFileToWasm"))
+
     val distDir = layout.buildDirectory.dir("dist/wasmJs/productionExecutable")
-    inputs.dir(distDir)
     outputs.upToDateWhen { false }
 
     doLast {
