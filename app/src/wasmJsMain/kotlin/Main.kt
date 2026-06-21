@@ -130,7 +130,6 @@ fun main() {
             urlHash = urlHash,
             urlFilterQuery = filterQuery,
             isMniEmbedded = isMniEmbedded,
-            localPort = null,
             writeToClipboard = {
                 window.navigator.clipboard.writeText(it)
             }
