@@ -6,7 +6,7 @@ ktor = "3.5.0"
 detekt = "1.23.8"
 multiplatformSettings = "1.3.0"
 kotlinx-datetime = "0.8.0"
-oniSeedBrowserModel = "be2cbff"
+oniSeedBrowserModel = "41c71d8"
 git-versioning = "6.4.3"
 kotlin-browser = "2025.9.8"
 

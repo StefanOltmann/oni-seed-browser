@@ -47,6 +47,13 @@ jobs:
         run: |
           mv app/build/dist/wasmJs/productionExecutable app/build/dist/wasmJs/oni-seed-browser
 
+      - name: Upload ZIP archive
+        uses: actions/upload-artifact@v4
+        with:
+          if-no-files-found: error
+          name: oni-seed-browser
+          path: app/build/dist/wasmJs/oni-seed-browser
+
       - name: Deploy over FTP
         uses: modern-dev/ftp-mirror@v2
         with:
