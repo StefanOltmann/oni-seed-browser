@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import init, {worldgen} from '@tigin-backwards/oxygen-not-included-worldgen';
+import init, {worldgen} from '@onimaxxing/worldgen';
 
 let initialized = false;
 
@@ -49,6 +49,9 @@ self.onmessage = async (event) => {
             delete raw.element_table;
 
             for (const world of raw.worlds) {
+
+                delete world.remixed_from;
+                delete world.remixed_source;
 
                 delete world.element_idx;
                 delete world.mass;

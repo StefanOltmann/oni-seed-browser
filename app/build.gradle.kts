@@ -89,11 +89,11 @@ kotlin {
             implementation(libs.kotlin.browser)
 
             /*
-             * ONI Worldgen worldgen reverse-engineered in Rust
+             * ONI worldgen reverse-engineered in Rust
              *
-             * https://www.npmjs.com/package/@tigin-backwards/oxygen-not-included-worldgen-node
+             * https://www.npmjs.com/package/@onimaxxing/worldgen
              */
-            implementation(npm("@tigin-backwards/oxygen-not-included-worldgen", "3.0.2"))
+            implementation(npm("@onimaxxing/worldgen", "0.15.1"))
         }
 
         commonTest.dependencies {

@@ -31,7 +31,7 @@ import kotlinx.serialization.json.Json
 
 /*
  * This is the Kotlin data model equivalent of
- * https://www.npmjs.com/package/@tigin-backwards/oxygen-not-included-worldgen
+ * https://www.npmjs.com/package/@onimaxxing/worldgen
  */
 
 @Serializable

@@ -1,4 +1,4 @@
-import init, {worldgen} from '@tigin-backwards/oxygen-not-included-worldgen';
+import init, {worldgen} from '@onimaxxing/worldgen';
 
 const api = {
     async init() {
@@ -14,6 +14,9 @@ const api = {
         delete result.element_table;
 
         for (const world of result.worlds) {
+
+            delete world.remixed_from;
+            delete world.remixed_source;
 
             delete world.element_idx;
             delete world.mass;
