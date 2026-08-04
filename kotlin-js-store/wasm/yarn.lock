@@ -7,10 +7,10 @@
   resolved "https://registry.yarnpkg.com/@js-joda/core/-/core-3.2.0.tgz#3e61e21b7b2b8a6be746df1335cf91d70db2a273"
   integrity sha512-PMqgJ0sw5B7FKb2d5bWYIoxjri+QlW/Pys7+Rw82jSH0QN3rB05jZ/VrrsUdh1w4+i2kw9JOejXGq/KhDOX7Kg==
 
-"@onimaxxing/worldgen@0.15.2":
-  version "0.15.2"
-  resolved "https://registry.yarnpkg.com/@onimaxxing/worldgen/-/worldgen-0.15.2.tgz#0478d13e076de4cc08ddcf58a79ae15baf082bad"
-  integrity sha512-SJbpY7ehmxiXPUMboP2XC2Nkl0sQeWCX1ODxJvjfiSed//iAvus/06QK1qbocBp7vMRA9OSyfYmwrMT/I/bnqA==
+"@onimaxxing/worldgen@0.21.1":
+  version "0.21.1"
+  resolved "https://registry.yarnpkg.com/@onimaxxing/worldgen/-/worldgen-0.21.1.tgz#e574ea498b9632209351f3a495530c9a09e5f18a"
+  integrity sha512-Gnr0ahx3yvazKdGcvYF3znYZsaLJ7zPn4aPia6DYE/bP+tD1OoQsbn+gwfCY4nxdHvgqLN1Da4RmefVaoN+bXQ==
   dependencies:
     js-yaml "^4.1.0"
 

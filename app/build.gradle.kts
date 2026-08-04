@@ -93,7 +93,7 @@ kotlin {
              *
              * https://www.npmjs.com/package/@onimaxxing/worldgen
              */
-            implementation(npm("@onimaxxing/worldgen", "0.15.2"))
+            implementation(npm("@onimaxxing/worldgen", "0.21.1"))
         }
 
         commonTest.dependencies {

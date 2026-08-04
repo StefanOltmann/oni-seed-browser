@@ -29,6 +29,12 @@ const api = {
             delete world.backwall_mass;
             delete world.backwall_temperature;
 
+            delete world.subworld_table;
+            delete world.subworld_idx;
+
+            delete world.zone_table;
+            delete world.zone_idx;
+
             for (const cell of world.biome_cells) {
                 delete cell.type;
                 delete cell.tags;
