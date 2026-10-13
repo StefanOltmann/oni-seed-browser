@@ -80,7 +80,6 @@ import org.jetbrains.compose.resources.stringResource
 import ui.model.color
 import ui.model.stringResource
 import ui.theme.DefaultSpacer
-import ui.theme.HalfSpacer
 import ui.theme.anthraticeTransparentBackgroundColor
 import ui.theme.defaultPadding
 import ui.theme.defaultRoundedCornerShape

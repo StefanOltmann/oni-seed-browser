@@ -31,7 +31,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.text.BasicTextField
-import ui.icons.IconDelete
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -54,6 +53,7 @@ import io.github.stefanoltmann.app.generated.resources.uiItemDescriptionGoodCoun
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import ui.drawableResource
+import ui.icons.IconDelete
 import ui.model.stringResource
 import ui.noRippleClickable
 import ui.onHover
