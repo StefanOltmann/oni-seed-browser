@@ -70,6 +70,9 @@ self.onmessage = async (event) => {
                 delete world.zone_table;
                 delete world.zone_idx;
 
+                delete world.template_placements;
+                delete world.template_rule_outcomes;
+
                 for (const cell of world.biome_cells) {
                     delete cell.type;
                     delete cell.tags;
