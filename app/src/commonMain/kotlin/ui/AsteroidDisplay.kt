@@ -31,6 +31,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import ui.icons.IconSearch
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -46,7 +47,6 @@ import de.stefan_oltmann.oni.model.Asteroid
 import de.stefan_oltmann.oni.model.WorldTrait
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
-import ui.icons.IconSearch
 import ui.model.stringResource
 import ui.theme.DefaultSpacer
 import ui.theme.HalfSpacer

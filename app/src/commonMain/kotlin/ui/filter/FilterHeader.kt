@@ -26,6 +26,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import ui.icons.IconKeyboardArrowDown
+import ui.icons.IconKeyboardArrowUp
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -41,8 +43,6 @@ import io.github.stefanoltmann.app.generated.resources.Res
 import io.github.stefanoltmann.app.generated.resources.uiFilter
 import io.github.stefanoltmann.app.generated.resources.uiSeedsInDatabase
 import org.jetbrains.compose.resources.stringResource
-import ui.icons.IconKeyboardArrowDown
-import ui.icons.IconKeyboardArrowUp
 import ui.theme.DefaultSpacer
 import ui.theme.DoubleSpacer
 import ui.theme.defaultRoundedCornerShape
